@@ -1,4 +1,5 @@
-package config
+package app
+
 import (
 	"os"
 	"time"
@@ -9,14 +10,16 @@ type Config struct {
 	ShutdownTimeout time.Duration
 	ReadTimeout     time.Duration
 	WriteTimeout    time.Duration
+	IdleTimeout     time.Duration
 }
 
-func New() *Config {
+func NewConfig() *Config {
 	return &Config{
 		Port:            getEnv("PORT", "8080"),
 		ShutdownTimeout: getEnvAsDuration("SHUTDOWN_TIMEOUT", 15*time.Second),
 		ReadTimeout:     getEnvAsDuration("READ_TIMEOUT", 5*time.Second),
 		WriteTimeout:    getEnvAsDuration("WRITE_TIMEOUT", 10*time.Second),
+		IdleTimeout:     getEnvAsDuration("IDLE_TIMEOUT", 60*time.Second),
 	}
 }
 

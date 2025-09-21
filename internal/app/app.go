@@ -5,23 +5,20 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
-	"os"
 	"os/signal"
 	"syscall"
-	"time"
 
-	"spotify/internal/config"
 	"spotify/internal/handler"
 	"spotify/internal/router"
 )
 
 type App struct {
-	server          *http.Server
-	handlers        *handler.Handlers
-	shutdownTimeout time.Duration
+	server   *http.Server
+	handlers *handler.Handlers
+	cfg      *Config
 }
 
-func New(cfg *config.Config) *App {
+func NewApp(cfg *Config) *App {
 	handlers := handler.NewHandler()
 	muxRouter := router.NewRouter(handlers)
 
@@ -30,39 +27,40 @@ func New(cfg *config.Config) *App {
 		Handler:      muxRouter,
 		ReadTimeout:  cfg.ReadTimeout,
 		WriteTimeout: cfg.WriteTimeout,
+		IdleTimeout:  cfg.IdleTimeout,
 	}
 
 	return &App{
-		server:          server,
-		handlers:        handlers,
-		shutdownTimeout: cfg.ShutdownTimeout,
+		server:   server,
+		handlers: handlers,
+		cfg:      cfg,
 	}
 }
 
 func (a *App) Run() error {
+	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
+	defer stop()
+
 	serverErrors := make(chan error, 1)
 	go func() {
 		fmt.Println("Server is starting on port ", a.server.Addr)
 		serverErrors <- a.server.ListenAndServe()
 	}()
 
-	quit := make(chan os.Signal, 1)
-	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
-
 	select {
 	case err := <-serverErrors:
 		if !errors.Is(err, http.ErrServerClosed) {
 			return fmt.Errorf("server error: %w", err)
 		}
-	case <-quit:
+	case <-ctx.Done():
 		fmt.Println("Shutting down server...")
-	}
+		shutdownCtx, cancel := context.WithTimeout(context.Background(), a.cfg.ShutdownTimeout)
+		defer cancel()
 
-	ctx, cancel := context.WithTimeout(context.Background(), a.shutdownTimeout)
-	defer cancel()
+		if err := a.server.Shutdown(shutdownCtx); err != nil {
+			return fmt.Errorf("server forced to shutdown: %w", err)
+		}
 
-	if err := a.server.Shutdown(ctx); err != nil {
-		return fmt.Errorf("server forced to shutdown: %w", err)
 	}
 
 	fmt.Println("Server exiting")

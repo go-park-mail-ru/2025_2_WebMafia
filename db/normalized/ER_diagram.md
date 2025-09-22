@@ -1,0 +1,111 @@
+```mermaid
+erDiagram
+
+    USER {
+        UUID USER_ID PK
+        TEXT LOGIN UK "NOT NULL"
+        TEXT PASSWORD_HASH "NOT NULL"
+        TEXT EMAIL UK "NOT NULL"
+        TIMESTAMPTZ CREATED_AT "NOT NULL"
+        TIMESTAMPTZ UPDATED_AT "NOT NULL"
+    }
+
+    USER_PROFILE {
+        UUID PROFILE_ID PK
+        UUID USER_ID FK "NOT NULL, UK"
+        TEXT NICKNAME
+        TEXT AVATAR_URL
+        TIMESTAMPTZ CREATED_AT "NOT NULL"
+        TIMESTAMPTZ UPDATED_AT "NOT NULL"
+    }
+
+    ARTIST {
+        UUID ARTIST_ID PK
+        TEXT ARTIST_NAME "NOT NULL"
+        TEXT AVATAR_URL
+        TIMESTAMPTZ CREATED_AT "NOT NULL"
+        TIMESTAMPTZ UPDATED_AT "NOT NULL"
+    }
+
+    GENRE {
+        UUID GENRE_ID PK
+        TEXT GENRE_NAME UK "NOT NULL"
+        TIMESTAMPTZ CREATED_AT "NOT NULL"
+    }
+
+    TRACK {
+        UUID TRACK_ID PK
+        TEXT TITLE "NOT NULL"
+        INTEGER DURATION_MS "NOT NULL"
+        TEXT FILE_URL "NOT NULL"
+        TIMESTAMPTZ CREATED_AT "NOT NULL"
+        TIMESTAMPTZ UPDATED_AT "NOT NULL"
+    }
+
+    ALBUM {
+        UUID ALBUM_ID PK
+        TEXT TITLE "NOT NULL"
+        TEXT AVATAR_URL
+        UUID ARTIST_ID FK
+        DATE RELEASE_DATE
+        TIMESTAMPTZ CREATED_AT "NOT NULL"
+        TIMESTAMPTZ UPDATED_AT "NOT NULL"
+    }
+
+    PLAYLIST {
+        UUID PLAYLIST_ID PK
+        TEXT TITLE "NOT NULL"
+        TEXT AVATAR_URL
+        TIMESTAMPTZ CREATED_AT "NOT NULL"
+        TIMESTAMPTZ UPDATED_AT "NOT NULL"
+        UUID USER_ID FK "NOT NULL"
+    }
+
+    TRACK_ARTIST {
+        UUID TRACK_ID PK,FK
+        UUID ARTIST_ID PK,FK
+        TIMESTAMPTZ CREATED_AT "NOT NULL"
+    }
+
+    TRACK_GENRE {
+        UUID TRACK_ID PK,FK
+        UUID GENRE_ID PK,FK
+        TIMESTAMPTZ CREATED_AT "NOT NULL"
+    }
+
+    TRACK_ALBUM {
+        UUID TRACK_ID PK,FK
+        UUID ALBUM_ID PK,FK
+        TIMESTAMPTZ CREATED_AT "NOT NULL"
+    }
+
+    TRACK_PLAYLIST {
+        UUID TRACK_ID PK,FK
+        UUID PLAYLIST_ID PK,FK
+        TIMESTAMPTZ CREATED_AT "NOT NULL"
+    }
+
+    USER_LIKED_TRACKS {
+        UUID USER_ID PK,FK
+        UUID TRACK_ID PK,FK
+        TIMESTAMPTZ LIKED_AT "NOT NULL"
+    }
+
+    USER ||--o{ USER_PROFILE : has
+    USER ||--o{ PLAYLIST : creates
+    USER ||--o{ USER_LIKED_TRACKS : likes
+
+    ARTIST ||--o{ ALBUM : produces
+    ARTIST ||--o{ TRACK_ARTIST : performs
+
+    GENRE ||--o{ TRACK_GENRE : categorizes
+
+    TRACK ||--o{ TRACK_ARTIST : has_artists
+    TRACK ||--o{ TRACK_GENRE : has_genres
+    TRACK ||--o{ TRACK_ALBUM : in_albums
+    TRACK ||--o{ TRACK_PLAYLIST : in_playlists
+    TRACK ||--o{ USER_LIKED_TRACKS : liked_by_users
+
+    ALBUM ||--o{ TRACK_ALBUM : contains
+
+    PLAYLIST ||--o{ TRACK_PLAYLIST : contains

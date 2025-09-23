@@ -7,7 +7,6 @@ Backend-часть для музыкального сервиса Wave Music. П
 - [Начало работы](#начало-работы)
 - [Тестирование](#тестирование)
 - [Deploy и CI/CD](#deploy-и-ci/cd)
-- [To do](#to-do)
 
 ## Технологии
 - [Go v1.24.0.](https://tip.golang.org/doc/go1.24)

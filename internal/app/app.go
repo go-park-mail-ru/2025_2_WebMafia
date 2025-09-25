@@ -9,7 +9,9 @@ import (
 	"syscall"
 
 	"spotify/internal/handler"
+	"spotify/internal/repository"
 	"spotify/internal/router"
+	"spotify/internal/service"
 )
 
 type App struct {
@@ -19,7 +21,9 @@ type App struct {
 }
 
 func NewApp(cfg *Config) *App {
-	handlers := handler.NewHandler()
+	userRepo := repository.NewUserMemoryRepository()
+	authService := service.NewAuthService(userRepo, cfg.JWTSecretKey, cfg.AccessTokenTTL)
+	handlers := handler.NewHandler(authService)
 	muxRouter := router.NewRouter(handlers)
 
 	server := &http.Server{

@@ -11,6 +11,8 @@ type Config struct {
 	ReadTimeout     time.Duration
 	WriteTimeout    time.Duration
 	IdleTimeout     time.Duration
+	AccessTokenTTL  time.Duration
+	JWTSecretKey    string
 }
 
 func NewConfig() *Config {
@@ -20,6 +22,8 @@ func NewConfig() *Config {
 		ReadTimeout:     getEnvAsDuration("READ_TIMEOUT", 5*time.Second),
 		WriteTimeout:    getEnvAsDuration("WRITE_TIMEOUT", 10*time.Second),
 		IdleTimeout:     getEnvAsDuration("IDLE_TIMEOUT", 60*time.Second),
+		AccessTokenTTL:  getEnvAsDuration("ACCESS_TOKEN_TTL", 15*time.Minute),
+		JWTSecretKey:    getEnv("JWT_SECRET_KEY", ""),
 	}
 }
 

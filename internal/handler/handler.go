@@ -1,18 +1,15 @@
 package handler
 
 import (
-	"spotify/internal/model"
-	"sync"
+	"spotify/internal/service"
 )
 
 type Handlers struct {
-	users []model.User
-	mu    *sync.RWMutex
+	authService service.AuthService
 }
 
-func NewHandler() *Handlers {
+func NewHandler(authService service.AuthService) *Handlers {
 	return &Handlers{
-		users: make([]model.User, 0),
-		mu:    &sync.RWMutex{},
+		authService: authService,
 	}
 }

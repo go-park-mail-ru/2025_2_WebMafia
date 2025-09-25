@@ -11,6 +11,6 @@ func NewRouter(h *handler.Handlers) *mux.Router {
 
 	r.HandleFunc("/", h.HomeHandler).Methods("GET")
 	r.HandleFunc("/registration/", h.RegisterHandler).Methods("POST")
-	r.HandleFunc("/autorization/", h.AutorizationHandler).Methods("POST")
+	r.HandleFunc("/login/", h.LoginHandler).Methods("POST")
 	return r
 }

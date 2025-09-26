@@ -6,33 +6,33 @@ import (
 	"time"
 )
 
-type MockStore struct {
+type MemoryStore struct {
 	mu         sync.RWMutex
-	artists    []*model.Artist
-	tracks     []*model.Track
-	albums     []*model.Album
-	genres     []*model.Genre
+	artists    []model.Artist
+	tracks     []model.Track
+	albums     []model.Album
+	genres     []model.Genre
 	nextArtist uint64
 	nextAlbum  uint64
 	nextTrack  uint64
 	nextGenre  uint64
 }
 
-func NewMockStore() *MockStore {
-	store := &MockStore{
-		artists: make([]*model.Artist, 0),
-		tracks:  make([]*model.Track, 0),
-		albums:  make([]*model.Album, 0),
-		genres:  make([]*model.Genre, 0),
+func NewMemoryStore() *MemoryStore {
+	store := &MemoryStore{
+		artists: make([]model.Artist, 0),
+		tracks:  make([]model.Track, 0),
+		albums:  make([]model.Album, 0),
+		genres:  make([]model.Genre, 0),
 		mu:      sync.RWMutex{},
 	}
 	store.initMockData()
 	return store
 }
 
-func (ms *MockStore) initMockData() {
+func (ms *MemoryStore) initMockData() {
 
-	genres := []*model.Genre{
+	genres := []model.Genre{
 		{GenreID: 1, Name: "genre1", CreatedAt: time.Now()},
 		{GenreID: 2, Name: "genre2", CreatedAt: time.Now()},
 		{GenreID: 3, Name: "genre3", CreatedAt: time.Now()},
@@ -40,7 +40,7 @@ func (ms *MockStore) initMockData() {
 	}
 	ms.genres = append(ms.genres, genres...)
 
-	artists := []*model.Artist{
+	artists := []model.Artist{
 		{
 			ArtistID:  1,
 			Name:      "artist1",
@@ -68,7 +68,7 @@ func (ms *MockStore) initMockData() {
 	}
 	ms.artists = append(ms.artists, artists...)
 
-	albums := []*model.Album{
+	albums := []model.Album{
 		{
 			AlbumID:     1,
 			Title:       "Some Album",
@@ -104,7 +104,7 @@ func (ms *MockStore) initMockData() {
 	}
 	ms.albums = append(ms.albums, albums...)
 
-	tracks := []*model.Track{
+	tracks := []model.Track{
 		{
 			TrackID:    1,
 			Title:      "Some Track",
@@ -112,8 +112,8 @@ func (ms *MockStore) initMockData() {
 			FileURL:    "tracks/some_track",
 			CreatedAt:  time.Now(),
 			Album:      albums[0],
-			Artists:    []*model.Artist{artists[0]},
-			Genres:     []*model.Genre{genres[0]},
+			Artists:    []model.Artist{artists[0]},
+			Genres:     []model.Genre{genres[0]},
 		},
 		{
 			TrackID:    2,
@@ -122,8 +122,8 @@ func (ms *MockStore) initMockData() {
 			FileURL:    "tracks/track2",
 			CreatedAt:  time.Now(),
 			Album:      albums[0],
-			Artists:    []*model.Artist{artists[0]},
-			Genres:     []*model.Genre{genres[0]},
+			Artists:    []model.Artist{artists[0]},
+			Genres:     []model.Genre{genres[0]},
 		},
 		{
 			TrackID:    3,
@@ -132,8 +132,8 @@ func (ms *MockStore) initMockData() {
 			FileURL:    "tracks/track3",
 			CreatedAt:  time.Now(),
 			Album:      albums[1],
-			Artists:    []*model.Artist{artists[1]},
-			Genres:     []*model.Genre{genres[1]},
+			Artists:    []model.Artist{artists[1]},
+			Genres:     []model.Genre{genres[1]},
 		},
 		{
 			TrackID:    4,
@@ -142,8 +142,8 @@ func (ms *MockStore) initMockData() {
 			FileURL:    "tracks/track4",
 			CreatedAt:  time.Now(),
 			Album:      albums[2],
-			Artists:    []*model.Artist{artists[2]},
-			Genres:     []*model.Genre{genres[2]},
+			Artists:    []model.Artist{artists[2]},
+			Genres:     []model.Genre{genres[2]},
 		},
 		{
 			TrackID:    5,
@@ -152,8 +152,8 @@ func (ms *MockStore) initMockData() {
 			FileURL:    "tracks/track5",
 			CreatedAt:  time.Now(),
 			Album:      albums[3],
-			Artists:    []*model.Artist{artists[3]},
-			Genres:     []*model.Genre{genres[3]},
+			Artists:    []model.Artist{artists[3]},
+			Genres:     []model.Genre{genres[3]},
 		},
 	}
 	ms.tracks = append(ms.tracks, tracks...)
@@ -164,26 +164,20 @@ func (ms *MockStore) initMockData() {
 	ms.nextGenre = uint64(len(genres) + 1)
 }
 
-func (ms *MockStore) GetAllTracks() ([]*model.Track, error) {
+func (ms *MemoryStore) GetAllTracks() ([]model.Track, error) {
 	ms.mu.RLock()
 	defer ms.mu.RUnlock()
-	out := make([]*model.Track, len(ms.tracks))
-	copy(out, ms.tracks)
-	return out, nil
+	return ms.tracks, nil
 }
 
-func (ms *MockStore) GetAllArtists() ([]*model.Artist, error) {
+func (ms *MemoryStore) GetAllArtists() ([]model.Artist, error) {
 	ms.mu.RLock()
 	defer ms.mu.RUnlock()
-	out := make([]*model.Artist, len(ms.artists))
-	copy(out, ms.artists)
-	return out, nil
+	return ms.artists, nil
 }
 
-func (ms *MockStore) GetAllAlbums() ([]*model.Album, error) {
+func (ms *MemoryStore) GetAllAlbums() ([]model.Album, error) {
 	ms.mu.RLock()
 	defer ms.mu.RUnlock()
-	out := make([]*model.Album, len(ms.albums))
-	copy(out, ms.albums)
-	return out, nil
+	return ms.albums, nil
 }

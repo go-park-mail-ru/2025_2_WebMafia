@@ -7,9 +7,9 @@ import (
 )
 
 type HomeResponse struct {
-	Tracks  []*model.Track  `json:"tracks"`
-	Artists []*model.Artist `json:"artists"`
-	Albums  []*model.Album  `json:"albums"`
+	Tracks  []model.Track  `json:"tracks"`
+	Artists []model.Artist `json:"artists"`
+	Albums  []model.Album  `json:"albums"`
 }
 
 func (h *Handlers) HomeHandler(w http.ResponseWriter, r *http.Request) {

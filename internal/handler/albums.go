@@ -9,11 +9,11 @@ import (
 )
 
 type AlbumsResponse struct {
-	Albums []*model.Album `json:"albums"`
+	Albums []model.Album `json:"albums"`
 }
 
 type AlbumResponse struct {
-	Album *model.Album `json:"album"`
+	Album model.Album `json:"album"`
 }
 
 func (h *Handlers) GetAllAlbumsHandler(w http.ResponseWriter, r *http.Request) {

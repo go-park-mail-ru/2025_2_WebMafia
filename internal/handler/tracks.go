@@ -9,11 +9,11 @@ import (
 )
 
 type TracksResponse struct {
-	Tracks []*model.Track `json:"tracks"`
+	Tracks []model.Track `json:"tracks"`
 }
 
 type TrackResponse struct {
-	Track *model.Track `json:"track"`
+	Track model.Track `json:"track"`
 }
 
 func (h *Handlers) GetAllTracksHandler(w http.ResponseWriter, r *http.Request) {

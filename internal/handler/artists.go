@@ -9,11 +9,11 @@ import (
 )
 
 type ArtistsResponse struct {
-	Artists []*model.Artist `json:"artists"`
+	Artists []model.Artist `json:"artists"`
 }
 
 type ArtistResponse struct {
-	Artist *model.Artist `json:"artist"`
+	Artist model.Artist `json:"artist"`
 }
 
 func (h *Handlers) GetAllArtistsHandler(w http.ResponseWriter, r *http.Request) {

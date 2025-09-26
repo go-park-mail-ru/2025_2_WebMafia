@@ -1,4 +1,4 @@
-package mock_store
+package memory_store
 
 import (
 	"spotify/internal/model"
@@ -31,38 +31,36 @@ func NewMockStore() *MockStore {
 }
 
 func (ms *MockStore) initMockData() {
-	ms.mu.Lock()
-	defer ms.mu.Unlock()
 
 	genres := []*model.Genre{
-		{GenreID: "1", Name: "genre1", CreatedAt: time.Now()},
-		{GenreID: "2", Name: "genre2", CreatedAt: time.Now()},
-		{GenreID: "3", Name: "genre3", CreatedAt: time.Now()},
-		{GenreID: "4", Name: "genre4", CreatedAt: time.Now()},
+		{GenreID: 1, Name: "genre1", CreatedAt: time.Now()},
+		{GenreID: 2, Name: "genre2", CreatedAt: time.Now()},
+		{GenreID: 3, Name: "genre3", CreatedAt: time.Now()},
+		{GenreID: 4, Name: "genre4", CreatedAt: time.Now()},
 	}
 	ms.genres = append(ms.genres, genres...)
 
 	artists := []*model.Artist{
 		{
-			ArtistID:  "1",
+			ArtistID:  1,
 			Name:      "artist1",
 			AvatarURL: "/artists/artist1",
 			CreatedAt: time.Now(),
 		},
 		{
-			ArtistID:  "2",
+			ArtistID:  2,
 			Name:      "artist2",
 			AvatarURL: "/artists/artist2",
 			CreatedAt: time.Now(),
 		},
 		{
-			ArtistID:  "3",
+			ArtistID:  3,
 			Name:      "artist3",
 			AvatarURL: "/artists/artist3",
 			CreatedAt: time.Now(),
 		},
 		{
-			ArtistID:  "4",
+			ArtistID:  4,
 			Name:      "artist4",
 			AvatarURL: "/artists/artist4",
 			CreatedAt: time.Now(),
@@ -72,34 +70,34 @@ func (ms *MockStore) initMockData() {
 
 	albums := []*model.Album{
 		{
-			AlbumID:     "1",
+			AlbumID:     1,
 			Title:       "Some Album",
 			AvatarURL:   "/albums/some_album",
-			ArtistID:    "1",
+			ArtistID:    1,
 			ReleaseDate: time.Date(2025, 1, 1, 0, 0, 0, 0, time.UTC),
 			CreatedAt:   time.Now(),
 		},
 		{
-			AlbumID:     "2",
+			AlbumID:     2,
 			Title:       "Album 2",
 			AvatarURL:   "/albums/album2",
-			ArtistID:    "2",
+			ArtistID:    2,
 			ReleaseDate: time.Date(2024, 10, 20, 0, 0, 0, 0, time.UTC),
 			CreatedAt:   time.Now(),
 		},
 		{
-			AlbumID:     "3",
+			AlbumID:     3,
 			Title:       "Album 3",
 			AvatarURL:   "/albums/album3",
-			ArtistID:    "3",
+			ArtistID:    3,
 			ReleaseDate: time.Date(2024, 8, 10, 0, 0, 0, 0, time.UTC),
 			CreatedAt:   time.Now(),
 		},
 		{
-			AlbumID:     "4",
+			AlbumID:     4,
 			Title:       "Album 4",
 			AvatarURL:   "/albums/album4",
-			ArtistID:    "4",
+			ArtistID:    4,
 			ReleaseDate: time.Date(2022, 5, 2, 0, 0, 0, 0, time.UTC),
 			CreatedAt:   time.Now(),
 		},
@@ -108,7 +106,7 @@ func (ms *MockStore) initMockData() {
 
 	tracks := []*model.Track{
 		{
-			TrackID:    "1",
+			TrackID:    1,
 			Title:      "Some Track",
 			DurationMs: 0,
 			FileURL:    "tracks/some_track",
@@ -118,7 +116,7 @@ func (ms *MockStore) initMockData() {
 			Genres:     []*model.Genre{genres[0]},
 		},
 		{
-			TrackID:    "2",
+			TrackID:    2,
 			Title:      "Track 2",
 			DurationMs: 0,
 			FileURL:    "tracks/track2",
@@ -128,7 +126,7 @@ func (ms *MockStore) initMockData() {
 			Genres:     []*model.Genre{genres[0]},
 		},
 		{
-			TrackID:    "3",
+			TrackID:    3,
 			Title:      "Track 3",
 			DurationMs: 0,
 			FileURL:    "tracks/track3",
@@ -138,7 +136,7 @@ func (ms *MockStore) initMockData() {
 			Genres:     []*model.Genre{genres[1]},
 		},
 		{
-			TrackID:    "4",
+			TrackID:    4,
 			Title:      "Track 4",
 			DurationMs: 0,
 			FileURL:    "tracks/track4",
@@ -148,7 +146,7 @@ func (ms *MockStore) initMockData() {
 			Genres:     []*model.Genre{genres[2]},
 		},
 		{
-			TrackID:    "5",
+			TrackID:    5,
 			Title:      "Track 5",
 			DurationMs: 0,
 			FileURL:    "tracks/track5",
@@ -164,4 +162,28 @@ func (ms *MockStore) initMockData() {
 	ms.nextAlbum = uint64(len(albums) + 1)
 	ms.nextTrack = uint64(len(tracks) + 1)
 	ms.nextGenre = uint64(len(genres) + 1)
+}
+
+func (ms *MockStore) GetAllTracks() ([]*model.Track, error) {
+	ms.mu.RLock()
+	defer ms.mu.RUnlock()
+	out := make([]*model.Track, len(ms.tracks))
+	copy(out, ms.tracks)
+	return out, nil
+}
+
+func (ms *MockStore) GetAllArtists() ([]*model.Artist, error) {
+	ms.mu.RLock()
+	defer ms.mu.RUnlock()
+	out := make([]*model.Artist, len(ms.artists))
+	copy(out, ms.artists)
+	return out, nil
+}
+
+func (ms *MockStore) GetAllAlbums() ([]*model.Album, error) {
+	ms.mu.RLock()
+	defer ms.mu.RUnlock()
+	out := make([]*model.Album, len(ms.albums))
+	copy(out, ms.albums)
+	return out, nil
 }

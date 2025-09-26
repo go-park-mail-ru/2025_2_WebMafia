@@ -1,38 +1,37 @@
 package handler
 
 import (
+	"fmt"
 	"github.com/gorilla/mux"
 	"net/http"
-	"spotify/internal/service"
+	"spotify/internal/model"
 	"spotify/pkg/response"
 )
 
+type TracksResponse struct {
+	Tracks []*model.Track `json:"tracks"`
+}
+
+type TrackResponse struct {
+	Track *model.Track `json:"track"`
+}
+
 func (h *Handlers) GetAllTracksHandler(w http.ResponseWriter, r *http.Request) {
 	tracks, _ := h.store.GetAllTracks()
-	artistID := r.URL.Query().Get("artist_id")
-	tracks = service.FilterTracksByArtist(tracks, artistID)
-	response.JSON(w, http.StatusOK, map[string]interface{}{
-		"status": 200,
-		"body":   map[string]interface{}{"tracks": tracks},
-	})
+	response.JSON(w, http.StatusOK, TracksResponse{Tracks: tracks})
 }
 
 func (h *Handlers) GetTrackByIDHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	trackID := vars["id"]
+
 	tracks, _ := h.store.GetAllTracks()
 	for _, t := range tracks {
-		if t.TrackID == trackID {
-			response.JSON(w, http.StatusOK, map[string]interface{}{
-				"status": 200,
-				"body":   map[string]interface{}{"track": t},
-			})
+		if fmt.Sprint(t.TrackID) == trackID {
+			response.JSON(w, http.StatusOK, TrackResponse{Track: t})
 			return
 		}
 	}
-	response.JSON(w, http.StatusOK, map[string]interface{}{
-		"status": 404,
-		"body":   map[string]interface{}{},
-		"error":  "track not found",
-	})
+	response.JSON(w, http.StatusNotFound, response.ErrorResponse{Error: "track not found"})
+
 }

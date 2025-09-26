@@ -1,38 +1,37 @@
 package handler
 
 import (
+	"fmt"
 	"github.com/gorilla/mux"
 	"net/http"
-	"spotify/internal/service"
+	"spotify/internal/model"
 	"spotify/pkg/response"
 )
 
+type AlbumsResponse struct {
+	Albums []*model.Album `json:"albums"`
+}
+
+type AlbumResponse struct {
+	Album *model.Album `json:"album"`
+}
+
 func (h *Handlers) GetAllAlbumsHandler(w http.ResponseWriter, r *http.Request) {
 	albums, _ := h.store.GetAllAlbums()
-	artistID := r.URL.Query().Get("artist_id")
-	albums = service.FilterAlbumsByArtist(albums, artistID)
-	response.JSON(w, http.StatusOK, map[string]interface{}{
-		"status": 200,
-		"body":   map[string]interface{}{"albums": albums},
-	})
+	response.JSON(w, http.StatusOK, AlbumsResponse{Albums: albums})
 }
 
 func (h *Handlers) GetAlbumByIDHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	albumID := vars["id"]
+
 	albums, _ := h.store.GetAllAlbums()
 	for _, album := range albums {
-		if album.AlbumID == albumID {
-			response.JSON(w, http.StatusOK, map[string]interface{}{
-				"status": 200,
-				"body":   map[string]interface{}{"album": album},
-			})
+		if fmt.Sprint(album.AlbumID) == albumID {
+			response.JSON(w, http.StatusOK, AlbumResponse{Album: album})
 			return
 		}
 	}
-	response.JSON(w, http.StatusOK, map[string]interface{}{
-		"status": 404,
-		"body":   map[string]interface{}{},
-		"error":  "album not found",
-	})
+	response.JSON(w, http.StatusNotFound, response.ErrorResponse{Error: "album not found"})
+
 }

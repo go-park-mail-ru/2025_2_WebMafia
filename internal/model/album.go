@@ -3,10 +3,10 @@ package model
 import "time"
 
 type Album struct {
-	AlbumID     string    `json:"album_id"`
+	AlbumID     uint64    `json:"album_id"`
 	Title       string    `json:"title"`
 	AvatarURL   string    `json:"avatar_url"`
-	ArtistID    string    `json:"artist_id"`
+	ArtistID    uint64    `json:"artist_id"`
 	Artist      *Artist   `json:"artist,omitempty"`
 	ReleaseDate time.Time `json:"release_date"`
 	CreatedAt   time.Time `json:"created_at"`

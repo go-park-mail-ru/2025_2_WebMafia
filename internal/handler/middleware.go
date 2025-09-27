@@ -20,7 +20,7 @@ func (h *Handlers) AuthMiddleware(next http.Handler) http.Handler {
 			return
 		}
 		tokenString := parts[1]
-		userID, err := h.authService.ValidateToken(tokenString)
+		userID, err := h.validateToken(tokenString)
 		if err != nil {
 			response.JSON(w, http.StatusUnauthorized, response.ErrorResponse{Error: "invalid token"})
 			return

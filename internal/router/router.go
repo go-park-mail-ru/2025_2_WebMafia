@@ -9,8 +9,13 @@ import (
 func NewRouter(h *handler.Handlers) *mux.Router {
 	r := mux.NewRouter()
 
-	r.HandleFunc("/", h.HomeHandler).Methods("GET")
-	r.HandleFunc("/registration/", h.RegisterHandler).Methods("POST")
-	r.HandleFunc("/login/", h.LoginHandler).Methods("POST")
+	api := r.PathPrefix("/api/v1").Subrouter()
+
+	api.HandleFunc("/registration", h.RegisterHandler).Methods("POST")
+	api.HandleFunc("/login", h.LoginHandler).Methods("POST")
+
+	protected := api.PathPrefix("").Subrouter()
+	protected.Use(h.AuthMiddleware)
+
 	return r
 }

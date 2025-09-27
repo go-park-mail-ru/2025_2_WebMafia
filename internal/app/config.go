@@ -1,9 +1,19 @@
 package app
 
 import (
+	"github.com/joho/godotenv"
+	"log"
 	"os"
 	"time"
 )
+
+func init() {
+	if err := godotenv.Load(".env"); err != nil {
+		if err := godotenv.Load(".env.dev"); err != nil {
+			log.Println("no env file found")
+		}
+	}
+}
 
 type Config struct {
 	Port            string

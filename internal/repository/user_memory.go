@@ -2,7 +2,6 @@ package repository
 
 import (
 	"context"
-	"fmt"
 	"spotify/internal/model"
 	"sync"
 	"time"
@@ -12,23 +11,23 @@ import (
 
 type UserMemoryRepository struct {
 	mu    *sync.RWMutex
-	users map[uuid.UUID]model.User
+	users map[uuid.UUID]*model.User
 }
 
 func NewUserMemoryRepository() *UserMemoryRepository {
 	return &UserMemoryRepository{
-		users: make(map[uuid.UUID]model.User),
+		users: make(map[uuid.UUID]*model.User),
 		mu:    &sync.RWMutex{},
 	}
 }
 
-func (r *UserMemoryRepository) CreateUser(ctx context.Context, user model.User) (model.User, error) {
+func (r *UserMemoryRepository) CreateUser(ctx context.Context, user model.User) (*model.User, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
 	for _, u := range r.users {
 		if u.Login == user.Login || u.Email == user.Email {
-			return model.User{}, fmt.Errorf("%w", ErrUserAlreadyExists)
+			return &model.User{}, ErrUserAlreadyExists
 		}
 	}
 
@@ -36,12 +35,12 @@ func (r *UserMemoryRepository) CreateUser(ctx context.Context, user model.User) 
 	user.CreatedAt = time.Now()
 	user.UpdatedAt = time.Now()
 
-	r.users[user.ID] = user
+	r.users[user.ID] = &user
 
-	return user, nil
+	return &user, nil
 }
 
-func (r *UserMemoryRepository) GetUserByLogin(ctx context.Context, login string) (model.User, error) {
+func (r *UserMemoryRepository) GetUserByLogin(ctx context.Context, login string) (*model.User, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 
@@ -50,11 +49,10 @@ func (r *UserMemoryRepository) GetUserByLogin(ctx context.Context, login string)
 			return u, nil
 		}
 	}
-
-	return model.User{}, fmt.Errorf("%w", ErrUserNotFound)
+	return &model.User{}, ErrUserNotFound
 }
 
-func (r *UserMemoryRepository) GetUserByEmail(ctx context.Context, email string) (model.User, error) {
+func (r *UserMemoryRepository) GetUserByEmail(ctx context.Context, email string) (*model.User, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 
@@ -63,18 +61,16 @@ func (r *UserMemoryRepository) GetUserByEmail(ctx context.Context, email string)
 			return u, nil
 		}
 	}
-
-	return model.User{}, fmt.Errorf("%w", ErrUserNotFound)
+	return &model.User{}, ErrUserNotFound
 }
 
-func (r *UserMemoryRepository) GetUserByID(ctx context.Context, id uuid.UUID) (model.User, error) {
+func (r *UserMemoryRepository) GetUserByID(ctx context.Context, id uuid.UUID) (*model.User, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 
 	user, ok := r.users[id]
 	if !ok {
-		return model.User{}, fmt.Errorf("%w", ErrUserNotFound)
+		return &model.User{}, ErrUserNotFound
 	}
-
 	return user, nil
 }

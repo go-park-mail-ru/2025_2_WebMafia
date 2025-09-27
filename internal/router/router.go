@@ -14,10 +14,17 @@ func NewRouter(h *handler.Handlers) *mux.Router {
 
 	api.HandleFunc("/register", h.RegisterHandler).Methods(http.MethodPost)
 	api.HandleFunc("/login", h.LoginHandler).Methods(http.MethodPost)
-	api.HandleFunc("/logout", h.LogoutHandler).Methods(http.MethodPost)
 
 	protected := api.PathPrefix("").Subrouter()
 	protected.Use(h.AuthMiddleware)
-
+  
+  protected.HandleFunc("/logout", h.LogoutHandler).Methods(http.MethodPost)
+	protected.HandleFunc("/home", h.HomeHandler).Methods(http.MethodGet)
+	protected.HandleFunc("/tracks", h.GetAllTracksHandler).Methods(http.MethodGet)
+	protected.HandleFunc("/tracks/{id}", h.GetTrackByIDHandler).Methods(http.MethodGet)
+	protected.HandleFunc("/artists", h.GetAllArtistsHandler).Methods(http.MethodGet)
+	protected.HandleFunc("/artists/{id}", h.GetArtistByIDHandler).Methods(http.MethodGet)
+	protected.HandleFunc("/albums", h.GetAllAlbumsHandler).Methods(http.MethodGet)
+	protected.HandleFunc("/albums/{id}", h.GetAlbumByIDHandler).Methods(http.MethodGet)
 	return r
 }

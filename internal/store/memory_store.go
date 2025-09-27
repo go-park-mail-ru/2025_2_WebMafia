@@ -10,8 +10,7 @@ import (
 )
 
 type MemoryStore struct {
-	mu *sync.RWMutex
-
+	mu    *sync.RWMutex
 	users map[uuid.UUID]*model.User
 }
 

@@ -2,19 +2,17 @@ package handler
 
 import (
 	"spotify/internal/store"
-	"time"
+	"spotify/pkg/jwtmanager"
 )
 
 type Handlers struct {
-	store          *store.MemoryStore
-	jwtSecretKey   string
-	accessTokenTTL time.Duration
+	store      store.Store
+	jwtManager *jwtmanager.Manager
 }
 
-func NewHandler(store *store.MemoryStore, jwtSecretKey string, accessTokenTTL time.Duration) *Handlers {
+func NewHandler(store store.Store, jwtManager *jwtmanager.Manager) *Handlers {
 	return &Handlers{
-		store:          store,
-		jwtSecretKey:   jwtSecretKey,
-		accessTokenTTL: accessTokenTTL,
+		store:      store,
+		jwtManager: jwtManager,
 	}
 }

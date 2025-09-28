@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
-	"regexp"
+	"strings"
 	"time"
 
 	"spotify/internal/model"
@@ -32,8 +33,7 @@ func (i *registerRequest) validate() error {
 	if len(i.Password) < 8 {
 		return fmt.Errorf("password is too short (minimum 8 chars)")
 	}
-	var emailRegex = regexp.MustCompile(`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`)
-	if !emailRegex.MatchString(i.Email) {
+	if !strings.Contains(i.Email, "@") {
 		return fmt.Errorf("invalid email format")
 	}
 	return nil
@@ -68,30 +68,35 @@ func (h *Handlers) RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	var req registerRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		response.JSON(w, http.StatusBadRequest, fmt.Errorf("invalid request body"))
+		log.Printf("ERROR: invalid request body")
+		response.BadRequestJSON(w)
 		return
 	}
 
 	if err := req.validate(); err != nil {
-		response.JSON(w, http.StatusBadRequest, err)
+		log.Printf("ERROR: %v", err)
+		response.BadRequestJSON(w)
 		return
 	}
 
 	_, err := h.store.GetUserByEmail(r.Context(), req.Email)
 	if !errors.Is(err, store.ErrUserNotFound) {
-		response.JSON(w, http.StatusConflict, fmt.Errorf("user with this email already exists"))
+		log.Printf("ERROR: user with this email already exists")
+		response.ConflictJSON(w)
 		return
 	}
 
 	_, err = h.store.GetUserByLogin(r.Context(), req.Login)
 	if !errors.Is(err, store.ErrUserNotFound) {
-		response.JSON(w, http.StatusConflict, fmt.Errorf("user with this login already exists"))
+		log.Printf("ERROR: user with this login already exists")
+		response.ConflictJSON(w)
 		return
 	}
 
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
 	if err != nil {
-		response.JSON(w, http.StatusInternalServerError, fmt.Errorf("failed to hash password"))
+		log.Printf("ERROR: failed to hash password")
+		response.InternalErrorJSON(w)
 		return
 	}
 
@@ -102,16 +107,19 @@ func (h *Handlers) RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	})
 	if err != nil {
 		if errors.Is(err, store.ErrUserAlreadyExists) {
-			response.JSON(w, http.StatusConflict, err)
+			log.Printf("ERROR: %v", err)
+			response.ConflictJSON(w)
 			return
 		}
-		response.JSON(w, http.StatusInternalServerError, fmt.Errorf("failed to create user"))
+		log.Printf("ERROR: failed to create user")
+		response.InternalErrorJSON(w)
 		return
 	}
 
 	token, err := h.jwtManager.Generate(newUser)
 	if err != nil {
-		response.JSON(w, http.StatusInternalServerError, fmt.Errorf("failed to generate token"))
+		log.Printf("ERROR: failed to generate token")
+		response.InternalErrorJSON(w)
 		return
 	}
 
@@ -132,32 +140,38 @@ func (h *Handlers) LoginHandler(w http.ResponseWriter, r *http.Request) {
 	var req loginRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		response.JSON(w, http.StatusBadRequest, fmt.Errorf("invalid request body"))
+		log.Printf("ERROR: invalid request body")
+		response.BadRequestJSON(w)
 		return
 	}
 	if err := req.validate(); err != nil {
-		response.JSON(w, http.StatusBadRequest, err)
+		log.Printf("ERROR: %v", err)
+		response.BadRequestJSON(w)
 		return
 	}
 
 	user, err := h.store.GetUserByLogin(r.Context(), req.Login)
 	if err != nil {
 		if errors.Is(err, store.ErrUserNotFound) {
-			response.JSON(w, http.StatusUnauthorized, fmt.Errorf("invalid login or password"))
+			log.Printf("ERROR: invalid login or password")
+			response.UnauthorizedJSON(w)
 			return
 		}
-		response.JSON(w, http.StatusInternalServerError, fmt.Errorf("internal server error"))
+		log.Printf("ERROR: internal server error")
+		response.InternalErrorJSON(w)
 		return
 	}
 
 	if err := bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(req.Password)); err != nil {
-		response.JSON(w, http.StatusUnauthorized, fmt.Errorf("invalid login or password"))
+		log.Printf("ERROR: invalid login or password")
+		response.UnauthorizedJSON(w)
 		return
 	}
 
 	token, err := h.jwtManager.Generate(user)
 	if err != nil {
-		response.JSON(w, http.StatusInternalServerError, fmt.Errorf("failed to generate token"))
+		log.Printf("ERROR: failed to generate token")
+		response.InternalErrorJSON(w)
 		return
 	}
 

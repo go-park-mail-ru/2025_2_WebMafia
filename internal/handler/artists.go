@@ -2,6 +2,7 @@ package handler
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"spotify/internal/model"
 	"spotify/pkg/response"
@@ -33,5 +34,6 @@ func (h *Handlers) GetArtistByIDHandler(w http.ResponseWriter, r *http.Request) 
 			return
 		}
 	}
-	response.JSON(w, http.StatusNotFound, fmt.Errorf("artist not found"))
+	log.Printf("ERROR: artist not found")
+	response.NotFoundJSON(w)
 }

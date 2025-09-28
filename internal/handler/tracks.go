@@ -2,6 +2,7 @@ package handler
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"spotify/internal/model"
 	"spotify/pkg/response"
@@ -33,6 +34,6 @@ func (h *Handlers) GetTrackByIDHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	response.JSON(w, http.StatusNotFound, fmt.Errorf("track not found"))
-
+	log.Printf("ERROR: track not found")
+	response.NotFoundJSON(w)
 }

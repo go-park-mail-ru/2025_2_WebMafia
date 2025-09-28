@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"errors"
+	"log"
 	"net/http"
 	"spotify/pkg/response"
 )
@@ -16,10 +17,12 @@ func (h *Handlers) AuthMiddleware(next http.Handler) http.Handler {
 		cookie, err := r.Cookie(sessionTokenCookie)
 		if err != nil {
 			if errors.Is(err, http.ErrNoCookie) {
-				response.JSON(w, http.StatusUnauthorized, response.ErrorResponse{Error: "unauthorized: no token provided"})
+				log.Printf("ERROR: no token provided")
+				response.UnauthorizedJSON(w)
 				return
 			}
-			response.JSON(w, http.StatusBadRequest, response.ErrorResponse{Error: "bad request"})
+			log.Printf("ERROR: bad request")
+			response.BadRequestJSON(w)
 			return
 		}
 
@@ -27,7 +30,8 @@ func (h *Handlers) AuthMiddleware(next http.Handler) http.Handler {
 
 		claims, err := h.jwtManager.Validate(tokenString)
 		if err != nil {
-			response.JSON(w, http.StatusUnauthorized, response.ErrorResponse{Error: "invalid token"})
+			log.Printf("ERROR: invalid token")
+			response.UnauthorizedJSON(w)
 			return
 		}
 

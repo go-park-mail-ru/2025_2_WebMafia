@@ -13,6 +13,7 @@ type HomeResponse struct {
 }
 
 func (h *Handlers) HomeHandler(w http.ResponseWriter, r *http.Request) {
+
 	tracks, _ := h.store.GetAllTracks()
 	artists, _ := h.store.GetAllArtists()
 	albums, _ := h.store.GetAllAlbums()

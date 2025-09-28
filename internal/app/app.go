@@ -24,7 +24,7 @@ func NewApp(cfg *Config) *App {
 	dataStore := store.NewMemoryStore()
 	jwtManager := jwtmanager.NewManager(cfg.JWTSecretKey, cfg.AccessTokenTTL)
 	handlers := handler.NewHandler(dataStore, jwtManager)
-	muxRouter := router.NewRouter(handlers)
+	muxRouter := router.NewRouter(handlers, cfg.CORS)
 
 	server := &http.Server{
 		Addr:         ":" + cfg.Port,

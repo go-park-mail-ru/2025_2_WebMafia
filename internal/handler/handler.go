@@ -10,7 +10,7 @@ import (
 
 const sessionTokenCookie = "session_token"
 
-type storege interface {
+type storage interface {
 	CreateUser(ctx context.Context, user model.User) (*model.User, error)
 	GetUserByLogin(ctx context.Context, login string) (*model.User, error)
 	GetUserByEmail(ctx context.Context, email string) (*model.User, error)
@@ -22,11 +22,11 @@ type storege interface {
 }
 
 type Handlers struct {
-	store      storege
+	store      storage
 	jwtManager *jwtmanager.Manager
 }
 
-func NewHandler(store storege, jwtManager *jwtmanager.Manager) *Handlers {
+func NewHandler(store storage, jwtManager *jwtmanager.Manager) *Handlers {
 	return &Handlers{
 		store:      store,
 		jwtManager: jwtManager,

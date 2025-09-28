@@ -22,11 +22,7 @@ func CORS(config CORSConfig) func(next http.Handler) http.Handler {
 				if config.AllowCredentials {
 					w.Header().Set("Access-Control-Allow-Credentials", "true")
 				}
-			}
-			if len(config.AllowedMethods) > 0 {
 				w.Header().Set("Access-Control-Allow-Methods", strings.Join(config.AllowedMethods, ", "))
-			}
-			if len(config.AllowedHeaders) > 0 {
 				w.Header().Set("Access-Control-Allow-Headers", strings.Join(config.AllowedHeaders, ", "))
 			}
 			if r.Method == "OPTIONS" {

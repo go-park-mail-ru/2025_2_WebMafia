@@ -20,7 +20,7 @@ type App struct {
 
 func NewApp(cfg *Config) *App {
 	handlers := handler.NewHandler()
-	muxRouter := router.NewRouter(handlers)
+	muxRouter := router.NewRouter(handlers, cfg.CORS)
 
 	server := &http.Server{
 		Addr:         ":" + cfg.Port,

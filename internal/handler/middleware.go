@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"errors"
 	"net/http"
 	"spotify/pkg/response"
 )
@@ -12,9 +13,9 @@ const userIDKey ctxKeyUserID = "userID"
 
 func (h *Handlers) AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		cookie, err := r.Cookie("token")
+		cookie, err := r.Cookie(sessionTokenCookie)
 		if err != nil {
-			if err == http.ErrNoCookie {
+			if errors.Is(err, http.ErrNoCookie) {
 				response.JSON(w, http.StatusUnauthorized, response.ErrorResponse{Error: "unauthorized: no token provided"})
 				return
 			}
@@ -24,13 +25,13 @@ func (h *Handlers) AuthMiddleware(next http.Handler) http.Handler {
 
 		tokenString := cookie.Value
 
-		userID, err := h.jwtManager.Validate(tokenString)
+		claims, err := h.jwtManager.Validate(tokenString)
 		if err != nil {
 			response.JSON(w, http.StatusUnauthorized, response.ErrorResponse{Error: "invalid token"})
 			return
 		}
 
-		ctx := context.WithValue(r.Context(), userIDKey, userID)
+		ctx := context.WithValue(r.Context(), userIDKey, claims)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }

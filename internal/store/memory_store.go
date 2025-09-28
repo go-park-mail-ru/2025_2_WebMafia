@@ -10,9 +10,9 @@ import (
 )
 
 type MemoryStore struct {
-	mu    *sync.RWMutex
-	users map[uuid.UUID]*model.User
-  artists    []model.Artist
+	mu         *sync.RWMutex
+	users      map[uuid.UUID]*model.User
+	artists    []model.Artist
 	tracks     []model.Track
 	albums     []model.Album
 	genres     []model.Genre
@@ -24,8 +24,8 @@ type MemoryStore struct {
 
 func NewMemoryStore() *MemoryStore {
 	store := &MemoryStore{
-		mu: &sync.RWMutex{},
-		users: make(map[uuid.UUID]*model.User),
+		mu:      &sync.RWMutex{},
+		users:   make(map[uuid.UUID]*model.User),
 		artists: make([]model.Artist, 0),
 		tracks:  make([]model.Track, 0),
 		albums:  make([]model.Album, 0),
@@ -46,8 +46,8 @@ func (s *MemoryStore) CreateUser(ctx context.Context, user model.User) (*model.U
 	}
 
 	user.ID = uuid.New()
-	user.CreatedAt = time.Now()
-	user.UpdatedAt = time.Now()
+	user.CreatedAt = time.Now().UTC()
+	user.UpdatedAt = time.Now().UTC()
 
 	s.users[user.ID] = &user
 
@@ -60,7 +60,8 @@ func (s *MemoryStore) GetUserByLogin(ctx context.Context, login string) (*model.
 
 	for _, u := range s.users {
 		if u.Login == login {
-			return u, nil
+			user := *u
+			return &user, nil
 		}
 	}
 	return nil, ErrUserNotFound
@@ -72,7 +73,8 @@ func (s *MemoryStore) GetUserByEmail(ctx context.Context, email string) (*model.
 
 	for _, u := range s.users {
 		if u.Email == email {
-			return u, nil
+			user := *u
+			return &user, nil
 		}
 	}
 	return nil, ErrUserNotFound
@@ -82,11 +84,12 @@ func (s *MemoryStore) GetUserByID(ctx context.Context, id uuid.UUID) (*model.Use
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 
-	user, ok := s.users[id]
+	u, ok := s.users[id]
 	if !ok {
 		return nil, ErrUserNotFound
 	}
-	return user, nil
+	user := *u
+	return &user, nil
 }
 
 func (ms *MemoryStore) initMockData() {

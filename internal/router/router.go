@@ -17,8 +17,8 @@ func NewRouter(h *handler.Handlers) *mux.Router {
 
 	protected := api.PathPrefix("").Subrouter()
 	protected.Use(h.AuthMiddleware)
-  
-  protected.HandleFunc("/logout", h.LogoutHandler).Methods(http.MethodPost)
+
+	protected.HandleFunc("/logout", h.LogoutHandler).Methods(http.MethodPost)
 	protected.HandleFunc("/home", h.HomeHandler).Methods(http.MethodGet)
 	protected.HandleFunc("/tracks", h.GetAllTracksHandler).Methods(http.MethodGet)
 	protected.HandleFunc("/tracks/{id}", h.GetTrackByIDHandler).Methods(http.MethodGet)

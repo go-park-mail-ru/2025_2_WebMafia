@@ -7,12 +7,15 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"spotify/internal/model"
 	"strings"
 	"time"
 )
 
 type claims struct {
 	UserID string `json:"sub"`
+	Login  string `json:"login"`
+	Email  string `json:"email"`
 	Exp    int64  `json:"exp"`
 	Iat    int64  `json:"iat"`
 }
@@ -30,12 +33,14 @@ func (m *Manager) GetTTL() time.Duration {
 	return m.accessTokenTTL
 }
 
-func (m *Manager) Generate(userID string) (string, error) {
+func (m *Manager) Generate(user *model.User) (string, error) {
 	now := time.Now()
 	expiresAt := now.Add(m.accessTokenTTL)
 
 	claims := claims{
-		UserID: userID,
+		UserID: user.ID.String(),
+		Login:  user.Login,
+		Email:  user.Email,
 		Exp:    expiresAt.Unix(),
 		Iat:    now.Unix(),
 	}
@@ -65,31 +70,31 @@ func (m *Manager) createSignature(data string) string {
 	return base64.RawURLEncoding.EncodeToString(hasher.Sum(nil))
 }
 
-func (m *Manager) Validate(tokenString string) (string, error) {
+func (m *Manager) Validate(tokenString string) (*claims, error) {
 	parts := strings.Split(tokenString, ".")
 	if len(parts) != 3 {
-		return "", errors.New("invalid token format")
+		return nil, errors.New("invalid token format")
 	}
 
 	signatureInput := parts[0] + "." + parts[1]
 	expectedSignature := m.createSignature(signatureInput)
 	if !hmac.Equal([]byte(parts[2]), []byte(expectedSignature)) {
-		return "", errors.New("invalid signature")
+		return nil, errors.New("invalid signature")
 	}
 
 	payloadJSON, err := base64.RawURLEncoding.DecodeString(parts[1])
 	if err != nil {
-		return "", fmt.Errorf("failed to decode payload: %w", err)
+		return nil, fmt.Errorf("failed to decode payload: %w", err)
 	}
 
 	var claims claims
 	if err := json.Unmarshal(payloadJSON, &claims); err != nil {
-		return "", fmt.Errorf("failed to parse claims: %w", err)
+		return nil, fmt.Errorf("failed to parse claims: %w", err)
 	}
 
 	if time.Now().Unix() > claims.Exp {
-		return "", errors.New("token expired")
+		return nil, errors.New("token expired")
 	}
 
-	return claims.UserID, nil
+	return &claims, nil
 }

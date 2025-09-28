@@ -32,6 +32,6 @@ func (h *Handlers) GetAlbumByIDHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	response.JSON(w, http.StatusNotFound, response.ErrorResponse{Error: "album not found"})
+	response.JSON(w, http.StatusNotFound, fmt.Errorf("album not found"))
 
 }

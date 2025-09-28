@@ -68,30 +68,30 @@ func (h *Handlers) RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	var req registerRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		response.JSON(w, http.StatusBadRequest, response.ErrorResponse{Error: "invalid request body"})
+		response.JSON(w, http.StatusBadRequest, fmt.Errorf("invalid request body"))
 		return
 	}
 
 	if err := req.validate(); err != nil {
-		response.JSON(w, http.StatusBadRequest, response.ErrorResponse{Error: err.Error()})
+		response.JSON(w, http.StatusBadRequest, err)
 		return
 	}
 
 	_, err := h.store.GetUserByEmail(r.Context(), req.Email)
 	if !errors.Is(err, store.ErrUserNotFound) {
-		response.JSON(w, http.StatusConflict, response.ErrorResponse{Error: "user with this email already exists"})
+		response.JSON(w, http.StatusConflict, fmt.Errorf("user with this email already exists"))
 		return
 	}
 
 	_, err = h.store.GetUserByLogin(r.Context(), req.Login)
 	if !errors.Is(err, store.ErrUserNotFound) {
-		response.JSON(w, http.StatusConflict, response.ErrorResponse{Error: "user with this login already exists"})
+		response.JSON(w, http.StatusConflict, fmt.Errorf("user with this login already exists"))
 		return
 	}
 
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
 	if err != nil {
-		response.JSON(w, http.StatusInternalServerError, response.ErrorResponse{Error: "failed to hash password"})
+		response.JSON(w, http.StatusInternalServerError, fmt.Errorf("failed to hash password"))
 		return
 	}
 
@@ -102,21 +102,21 @@ func (h *Handlers) RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	})
 	if err != nil {
 		if errors.Is(err, store.ErrUserAlreadyExists) {
-			response.JSON(w, http.StatusConflict, response.ErrorResponse{Error: err.Error()})
+			response.JSON(w, http.StatusConflict, err)
 			return
 		}
-		response.JSON(w, http.StatusInternalServerError, response.ErrorResponse{Error: "failed to create user"})
+		response.JSON(w, http.StatusInternalServerError, fmt.Errorf("failed to create user"))
 		return
 	}
 
-	token, err := h.jwtManager.Generate(newUser.ID.String())
+	token, err := h.jwtManager.Generate(newUser)
 	if err != nil {
-		response.JSON(w, http.StatusInternalServerError, response.ErrorResponse{Error: "failed to generate token"})
+		response.JSON(w, http.StatusInternalServerError, fmt.Errorf("failed to generate token"))
 		return
 	}
 
 	http.SetCookie(w, &http.Cookie{
-		Name:     "token",
+		Name:     sessionTokenCookie,
 		Value:    token,
 		Expires:  time.Now().Add(h.jwtManager.GetTTL()),
 		HttpOnly: true,
@@ -132,37 +132,37 @@ func (h *Handlers) LoginHandler(w http.ResponseWriter, r *http.Request) {
 	var req loginRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		response.JSON(w, http.StatusBadRequest, response.ErrorResponse{Error: "invalid request body"})
+		response.JSON(w, http.StatusBadRequest, fmt.Errorf("invalid request body"))
 		return
 	}
 	if err := req.validate(); err != nil {
-		response.JSON(w, http.StatusBadRequest, response.ErrorResponse{Error: err.Error()})
+		response.JSON(w, http.StatusBadRequest, err)
 		return
 	}
 
 	user, err := h.store.GetUserByLogin(r.Context(), req.Login)
 	if err != nil {
 		if errors.Is(err, store.ErrUserNotFound) {
-			response.JSON(w, http.StatusUnauthorized, response.ErrorResponse{Error: "invalid login or password"})
+			response.JSON(w, http.StatusUnauthorized, fmt.Errorf("invalid login or password"))
 			return
 		}
-		response.JSON(w, http.StatusInternalServerError, response.ErrorResponse{Error: "internal server error"})
+		response.JSON(w, http.StatusInternalServerError, fmt.Errorf("internal server error"))
 		return
 	}
 
 	if err := bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(req.Password)); err != nil {
-		response.JSON(w, http.StatusUnauthorized, response.ErrorResponse{Error: "invalid login or password"})
+		response.JSON(w, http.StatusUnauthorized, fmt.Errorf("invalid login or password"))
 		return
 	}
 
-	token, err := h.jwtManager.Generate(user.ID.String())
+	token, err := h.jwtManager.Generate(user)
 	if err != nil {
-		response.JSON(w, http.StatusInternalServerError, response.ErrorResponse{Error: "failed to generate token"})
+		response.JSON(w, http.StatusInternalServerError, fmt.Errorf("failed to generate token"))
 		return
 	}
 
 	http.SetCookie(w, &http.Cookie{
-		Name:     "token",
+		Name:     sessionTokenCookie,
 		Value:    token,
 		Expires:  time.Now().Add(h.jwtManager.GetTTL()),
 		HttpOnly: true,
@@ -174,7 +174,7 @@ func (h *Handlers) LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handlers) LogoutHandler(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, &http.Cookie{
-		Name:     "token",
+		Name:     sessionTokenCookie,
 		Value:    "",
 		Expires:  time.Now().Add(-time.Hour),
 		HttpOnly: true,

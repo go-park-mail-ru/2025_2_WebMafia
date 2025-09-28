@@ -31,7 +31,7 @@ func NewConfig() *Config {
 		ReadTimeout:     getEnvAsDuration("READ_TIMEOUT", 5*time.Second),
 		WriteTimeout:    getEnvAsDuration("WRITE_TIMEOUT", 10*time.Second),
 		IdleTimeout:     getEnvAsDuration("IDLE_TIMEOUT", 60*time.Second),
-		AccessTokenTTL:  getEnvAsDuration("ACCESS_TOKEN_TTL", 24*time.Hour),
+		AccessTokenTTL:  getEnvAsDuration("ACCESS_TOKEN_TTL", 720*time.Hour),
 		JWTSecretKey:    getEnv("JWT_SECRET_KEY", ""),
 	}
 }

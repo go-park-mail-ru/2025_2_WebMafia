@@ -10,6 +10,8 @@ import (
 
 	"spotify/internal/handler"
 	"spotify/internal/router"
+	"spotify/internal/store"
+	"spotify/pkg/jwtmanager"
 )
 
 type App struct {
@@ -19,7 +21,9 @@ type App struct {
 }
 
 func NewApp(cfg *Config) *App {
-	handlers := handler.NewHandler()
+	dataStore := store.NewMemoryStore()
+	jwtManager := jwtmanager.NewManager(cfg.JWTSecretKey, cfg.AccessTokenTTL)
+	handlers := handler.NewHandler(dataStore, jwtManager)
 	muxRouter := router.NewRouter(handlers, cfg.CORS)
 
 	server := &http.Server{

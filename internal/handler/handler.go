@@ -1,21 +1,34 @@
 package handler
 
 import (
+	"context"
 	"spotify/internal/model"
-	"spotify/internal/store"
-	"sync"
+	"spotify/pkg/jwtmanager"
+
+	"github.com/google/uuid"
 )
 
-type Handlers struct {
-	users []model.User
-	mu    *sync.RWMutex
-	store *memory_store.MemoryStore
+const sessionTokenCookie = "session_token"
+
+type storage interface {
+	CreateUser(ctx context.Context, user model.User) (*model.User, error)
+	GetUserByLogin(ctx context.Context, login string) (*model.User, error)
+	GetUserByEmail(ctx context.Context, email string) (*model.User, error)
+	GetUserByID(ctx context.Context, id uuid.UUID) (*model.User, error)
+
+	GetAllTracks() ([]model.Track, error)
+	GetAllArtists() ([]model.Artist, error)
+	GetAllAlbums() ([]model.Album, error)
 }
 
-func NewHandler() *Handlers {
+type Handlers struct {
+	store      storage
+	jwtManager *jwtmanager.Manager
+}
+
+func NewHandler(store storage, jwtManager *jwtmanager.Manager) *Handlers {
 	return &Handlers{
-		users: make([]model.User, 0),
-		mu:    &sync.RWMutex{},
-		store: memory_store.NewMemoryStore(),
+		store:      store,
+		jwtManager: jwtManager,
 	}
 }

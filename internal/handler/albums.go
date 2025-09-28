@@ -2,10 +2,12 @@ package handler
 
 import (
 	"fmt"
-	"github.com/gorilla/mux"
+	"log"
 	"net/http"
 	"spotify/internal/model"
 	"spotify/pkg/response"
+
+	"github.com/gorilla/mux"
 )
 
 type AlbumsResponse struct {
@@ -32,6 +34,7 @@ func (h *Handlers) GetAlbumByIDHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	response.JSON(w, http.StatusNotFound, response.ErrorResponse{Error: "album not found"})
+	log.Printf("ERROR: album not found")
+	response.NotFoundJSON(w)
 
 }

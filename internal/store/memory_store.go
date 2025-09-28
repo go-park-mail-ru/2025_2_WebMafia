@@ -1,13 +1,17 @@
-package memory_store
+package store
 
 import (
+	"context"
 	"spotify/internal/model"
 	"sync"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 type MemoryStore struct {
-	mu         sync.RWMutex
+	mu         *sync.RWMutex
+	users      map[uuid.UUID]*model.User
 	artists    []model.Artist
 	tracks     []model.Track
 	albums     []model.Album
@@ -20,14 +24,72 @@ type MemoryStore struct {
 
 func NewMemoryStore() *MemoryStore {
 	store := &MemoryStore{
+		mu:      &sync.RWMutex{},
+		users:   make(map[uuid.UUID]*model.User),
 		artists: make([]model.Artist, 0),
 		tracks:  make([]model.Track, 0),
 		albums:  make([]model.Album, 0),
 		genres:  make([]model.Genre, 0),
-		mu:      sync.RWMutex{},
 	}
 	store.initMockData()
 	return store
+}
+
+func (s *MemoryStore) CreateUser(ctx context.Context, user model.User) (*model.User, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	for _, u := range s.users {
+		if u.Login == user.Login || u.Email == user.Email {
+			return nil, ErrUserAlreadyExists
+		}
+	}
+
+	user.ID = uuid.New()
+	user.CreatedAt = time.Now().UTC()
+	user.UpdatedAt = time.Now().UTC()
+
+	s.users[user.ID] = &user
+
+	return &user, nil
+}
+
+func (s *MemoryStore) GetUserByLogin(ctx context.Context, login string) (*model.User, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+
+	for _, u := range s.users {
+		if u.Login == login {
+			user := *u
+			return &user, nil
+		}
+	}
+	return nil, ErrUserNotFound
+}
+
+func (s *MemoryStore) GetUserByEmail(ctx context.Context, email string) (*model.User, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+
+	for _, u := range s.users {
+		if u.Email == email {
+			user := *u
+			return &user, nil
+		}
+	}
+	return nil, ErrUserNotFound
+}
+
+func (s *MemoryStore) GetUserByID(ctx context.Context, id uuid.UUID) (*model.User, error) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+
+	u, ok := s.users[id]
+	if !ok {
+		return nil, ErrUserNotFound
+	}
+	user := *u
+	return &user, nil
 }
 
 func (ms *MemoryStore) initMockData() {

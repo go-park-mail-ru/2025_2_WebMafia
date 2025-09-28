@@ -1,6 +1,7 @@
 package router
 
 import (
+	"net/http"
 	"spotify/internal/handler"
 
 	"github.com/gorilla/mux"
@@ -8,16 +9,24 @@ import (
 
 func NewRouter(h *handler.Handlers, corsConfig handler.CORSConfig) *mux.Router {
 	r := mux.NewRouter()
+
 	r.Use(handler.CORS(corsConfig))
+  
 	api := r.PathPrefix("/api/v1").Subrouter()
-	api.HandleFunc("/home", h.HomeHandler).Methods("GET")
-	api.HandleFunc("/tracks", h.GetAllTracksHandler).Methods("GET")
-	api.HandleFunc("/tracks/{id}", h.GetTrackByIDHandler).Methods("GET")
-	api.HandleFunc("/artists", h.GetAllArtistsHandler).Methods("GET")
-	api.HandleFunc("/artists/{id}", h.GetArtistByIDHandler).Methods("GET")
-	api.HandleFunc("/albums", h.GetAllAlbumsHandler).Methods("GET")
-	api.HandleFunc("/albums/{id}", h.GetAlbumByIDHandler).Methods("GET")
-	api.HandleFunc("/registration", h.RegisterHandler).Methods("POST")
-	api.HandleFunc("/autorization", h.AutorizationHandler).Methods("POST")
+
+	api.HandleFunc("/register", h.RegisterHandler).Methods(http.MethodPost)
+	api.HandleFunc("/login", h.LoginHandler).Methods(http.MethodPost)
+
+	protected := api.PathPrefix("").Subrouter()
+	protected.Use(h.AuthMiddleware)
+
+	protected.HandleFunc("/logout", h.LogoutHandler).Methods(http.MethodPost)
+	protected.HandleFunc("/home", h.HomeHandler).Methods(http.MethodGet)
+	protected.HandleFunc("/tracks", h.GetAllTracksHandler).Methods(http.MethodGet)
+	protected.HandleFunc("/tracks/{id}", h.GetTrackByIDHandler).Methods(http.MethodGet)
+	protected.HandleFunc("/artists", h.GetAllArtistsHandler).Methods(http.MethodGet)
+	protected.HandleFunc("/artists/{id}", h.GetArtistByIDHandler).Methods(http.MethodGet)
+	protected.HandleFunc("/albums", h.GetAllAlbumsHandler).Methods(http.MethodGet)
+	protected.HandleFunc("/albums/{id}", h.GetAlbumByIDHandler).Methods(http.MethodGet)
 	return r
 }

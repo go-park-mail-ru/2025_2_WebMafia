@@ -18,12 +18,37 @@ func JSON(w http.ResponseWriter, statusCode int, data interface{}) {
 
 	jsonData, err := json.Marshal(data)
 	if err != nil {
-		log.Printf("could not encode response to json: %v", err)
-		JSON(w, http.StatusInternalServerError, ErrorResponse{Error: "server error: could not encode response to json"})
+		log.Printf("ERROR: could not encode response to json: %v", err)
+		JSON(w, http.StatusInternalServerError, ErrInternalServer)
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(statusCode)
 	w.Write(jsonData)
+}
+
+// 400 Bad Request
+func BadRequestJSON(w http.ResponseWriter) {
+	JSON(w, http.StatusBadRequest, ErrBadRequest)
+}
+
+// 401 Unauthorized
+func UnauthorizedJSON(w http.ResponseWriter) {
+	JSON(w, http.StatusUnauthorized, ErrUnauthorized)
+}
+
+// 404 Not Found
+func NotFoundJSON(w http.ResponseWriter) {
+	JSON(w, http.StatusNotFound, ErrNotFound)
+}
+
+// 409 Conflict
+func ConflictJSON(w http.ResponseWriter) {
+	JSON(w, http.StatusConflict, ErrConflict)
+}
+
+// 500 Internal Server Error
+func InternalErrorJSON(w http.ResponseWriter) {
+	JSON(w, http.StatusInternalServerError, ErrInternalServer)
 }

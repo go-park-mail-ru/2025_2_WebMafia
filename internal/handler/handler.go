@@ -10,14 +10,12 @@ type Handlers struct {
 	users []model.User
 	mu    *sync.RWMutex
 	store *memory_store.MemoryStore
-	cfg   StaticURLProvider
 }
 
-func NewHandler(cfg StaticURLProvider) *Handlers {
+func NewHandler() *Handlers {
 	return &Handlers{
 		users: make([]model.User, 0),
 		mu:    &sync.RWMutex{},
 		store: memory_store.NewMemoryStore(),
-		cfg:   cfg,
 	}
 }

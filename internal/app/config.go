@@ -1,37 +1,31 @@
 package app
 
 import (
-	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
 type Config struct {
-	Port               string
-	ShutdownTimeout    time.Duration
-	ReadTimeout        time.Duration
-	WriteTimeout       time.Duration
-	IdleTimeout        time.Duration
-	DefaultFrontendURL string
+	Port            string
+	ShutdownTimeout time.Duration
+	ReadTimeout     time.Duration
+	WriteTimeout    time.Duration
+	IdleTimeout     time.Duration
+	AllowedOrigins  []string
 }
 
 func NewConfig() *Config {
 	return &Config{
-		Port:               getEnv("PORT", "8080"),
-		ShutdownTimeout:    getEnvAsDuration("SHUTDOWN_TIMEOUT", 15*time.Second),
-		ReadTimeout:        getEnvAsDuration("READ_TIMEOUT", 5*time.Second),
-		WriteTimeout:       getEnvAsDuration("WRITE_TIMEOUT", 10*time.Second),
-		IdleTimeout:        getEnvAsDuration("IDLE_TIMEOUT", 60*time.Second),
-		DefaultFrontendURL: getEnv("DEFAULT_FRONTEND_URL", "http://localhost:3000"),
+		Port:            getEnv("PORT", "8080"),
+		ShutdownTimeout: getEnvAsDuration("SHUTDOWN_TIMEOUT", 15*time.Second),
+		ReadTimeout:     getEnvAsDuration("READ_TIMEOUT", 5*time.Second),
+		WriteTimeout:    getEnvAsDuration("WRITE_TIMEOUT", 10*time.Second),
+		IdleTimeout:     getEnvAsDuration("IDLE_TIMEOUT", 60*time.Second),
+		AllowedOrigins:  getEnvAsSlice("ALLOWED_ORIGINS", []string{"http://localhost:3030"}),
 	}
 }
-func (c *Config) GetStaticBaseURL(r *http.Request) string {
-	origin := r.Header.Get("Origin")
-	if origin != "" {
-		return origin + "/static"
-	}
-	return c.DefaultFrontendURL + "/static"
-}
+
 func getEnv(key, defaultValue string) string {
 	if value, exists := os.LookupEnv(key); exists {
 		return value
@@ -48,4 +42,12 @@ func getEnvAsDuration(key string, defaultValue time.Duration) time.Duration {
 		return duration
 	}
 	return defaultValue
+}
+
+func getEnvAsSlice(key string, defaultValue []string) []string {
+	valueStr := getEnv(key, "")
+	if valueStr == "" {
+		return defaultValue
+	}
+	return strings.Split(valueStr, ",")
 }

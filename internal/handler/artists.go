@@ -18,9 +18,6 @@ type ArtistResponse struct {
 
 func (h *Handlers) GetAllArtistsHandler(w http.ResponseWriter, r *http.Request) {
 	artists, _ := h.store.GetAllArtists()
-	for i := range artists {
-		enrichArtistURLs(h.cfg, r, &artists[i])
-	}
 	response.JSON(w, http.StatusOK, ArtistsResponse{Artists: artists})
 }
 
@@ -31,7 +28,6 @@ func (h *Handlers) GetArtistByIDHandler(w http.ResponseWriter, r *http.Request) 
 	artists, _ := h.store.GetAllArtists()
 	for _, a := range artists {
 		if fmt.Sprint(a.ArtistID) == artistID {
-			enrichArtistURLs(h.cfg, r, &a)
 			response.JSON(w, http.StatusOK, ArtistResponse{Artist: a})
 			return
 		}

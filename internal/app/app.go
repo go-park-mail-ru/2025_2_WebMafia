@@ -19,8 +19,8 @@ type App struct {
 }
 
 func NewApp(cfg *Config) *App {
-	handlers := handler.NewHandler(cfg)
-	muxRouter := router.NewRouter(handlers)
+	handlers := handler.NewHandler()
+	muxRouter := router.NewRouter(handlers, cfg.AllowedOrigins)
 
 	server := &http.Server{
 		Addr:         ":" + cfg.Port,

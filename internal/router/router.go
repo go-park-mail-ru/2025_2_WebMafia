@@ -6,9 +6,9 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func NewRouter(h *handler.Handlers) *mux.Router {
+func NewRouter(h *handler.Handlers, allowedOrigins []string) *mux.Router {
 	r := mux.NewRouter()
-	r.Use(handler.CORS)
+	r.Use(handler.CORS(allowedOrigins))
 	api := r.PathPrefix("/api/v1").Subrouter()
 	api.HandleFunc("/home", h.HomeHandler).Methods("GET")
 	api.HandleFunc("/tracks", h.GetAllTracksHandler).Methods("GET")

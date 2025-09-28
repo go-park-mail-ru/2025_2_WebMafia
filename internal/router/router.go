@@ -8,6 +8,7 @@ import (
 
 func NewRouter(h *handler.Handlers) *mux.Router {
 	r := mux.NewRouter()
+	r.Use(handler.CORS)
 	api := r.PathPrefix("/api/v1").Subrouter()
 	api.HandleFunc("/home", h.HomeHandler).Methods("GET")
 	api.HandleFunc("/tracks", h.GetAllTracksHandler).Methods("GET")

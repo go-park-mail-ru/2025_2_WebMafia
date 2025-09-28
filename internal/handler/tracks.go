@@ -18,6 +18,9 @@ type TrackResponse struct {
 
 func (h *Handlers) GetAllTracksHandler(w http.ResponseWriter, r *http.Request) {
 	tracks, _ := h.store.GetAllTracks()
+	for i := range tracks {
+		enrichTrackURLs(h.cfg, r, &tracks[i])
+	}
 	response.JSON(w, http.StatusOK, TracksResponse{Tracks: tracks})
 }
 
@@ -28,6 +31,7 @@ func (h *Handlers) GetTrackByIDHandler(w http.ResponseWriter, r *http.Request) {
 	tracks, _ := h.store.GetAllTracks()
 	for _, t := range tracks {
 		if fmt.Sprint(t.TrackID) == trackID {
+			enrichTrackURLs(h.cfg, r, &t)
 			response.JSON(w, http.StatusOK, TrackResponse{Track: t})
 			return
 		}

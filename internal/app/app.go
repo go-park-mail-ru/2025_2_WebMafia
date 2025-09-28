@@ -19,7 +19,7 @@ type App struct {
 }
 
 func NewApp(cfg *Config) *App {
-	handlers := handler.NewHandler()
+	handlers := handler.NewHandler(cfg)
 	muxRouter := router.NewRouter(handlers)
 
 	server := &http.Server{

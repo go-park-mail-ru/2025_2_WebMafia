@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"net/http"
 	"net/http/httptest"
 	"spotify/internal/store"
@@ -13,26 +14,30 @@ import (
 )
 
 func TestAuthHandler(t *testing.T) {
+	//TODO: сделать функцию для подготовки тестового окружения
 	dataStore := store.NewMemoryStore()
 	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
 	handlers := NewHandler(dataStore, jwtManager)
-	reqBody := map[string]string{
-		"login":    "user_login",
-		"email":    "new_user@test.com",
-		"password": "some_password",
+
+	reqBody := registerRequest{
+		Login:    "user_login",
+		Email:    "new_user@test.com",
+		Password: "some_password",
 	}
-	body, _ := json.Marshal(reqBody)
+	body, err := json.Marshal(reqBody)
+	require.NoError(t, err)
+
 	req := httptest.NewRequest("POST", "/api/v1/register", bytes.NewBuffer(body))
 	req.Header.Set("Content-Type", "application/json")
 	rr := httptest.NewRecorder()
 	handlers.RegisterHandler(rr, req)
 	assert.Equal(t, http.StatusCreated, rr.Code)
-	var response struct {
-		ID string `json:"id"`
-	}
-	err := json.Unmarshal(rr.Body.Bytes(), &response)
+
+	var response registerResponse
+	err = json.NewDecoder(rr.Body).Decode(&response)
 	assert.NoError(t, err)
 	assert.NotEmpty(t, response.ID)
+
 	cookies := rr.Result().Cookies()
 	assert.Len(t, cookies, 1)
 	assert.Equal(t, "session_token", cookies[0].Name)
@@ -42,47 +47,50 @@ func TestRegisterHandler_ValidationErrors(t *testing.T) {
 	dataStore := store.NewMemoryStore()
 	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
 	handlers := NewHandler(dataStore, jwtManager)
+
 	testCases := []struct {
 		name    string
-		request map[string]string
+		request registerRequest
 	}{
 		{
 			name: "Short login",
-			request: map[string]string{
-				"login":    "user",
-				"email":    "new_user@test.com",
-				"password": "some_password",
+			request: registerRequest{
+				Login:    "user",
+				Email:    "new_user@test.com",
+				Password: "some_password",
 			},
 		},
 		{
 			name: "Invalid email",
-			request: map[string]string{
-				"login":    "user_login",
-				"email":    "invalid_email",
-				"password": "some_password",
+			request: registerRequest{
+				Login:    "user_login",
+				Email:    "invalid_email",
+				Password: "some_password",
 			},
 		},
 		{
 			name: "Short password",
-			request: map[string]string{
-				"login":    "user_login",
-				"email":    "new_user@test.com",
-				"password": "usr",
+			request: registerRequest{
+				Login:    "user_login",
+				Email:    "new_user@test.com",
+				Password: "usr",
 			},
 		},
 		{
 			name: "Empty login",
-			request: map[string]string{
-				"login":    "",
-				"email":    "new_user@test.com",
-				"password": "usr",
+			request: registerRequest{
+				Login:    "",
+				Email:    "new_user@test.com",
+				Password: "usr",
 			},
 		},
 	}
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			body, _ := json.Marshal(tc.request)
+			body, err := json.Marshal(tc.request)
+			require.NoError(t, err)
+
 			req := httptest.NewRequest("POST", "/api/v1/register", bytes.NewBuffer(body))
 			req.Header.Set("Content-Type", "application/json")
 			rr := httptest.NewRecorder()
@@ -96,24 +104,29 @@ func TestRegisterHandler_DuplicateUser(t *testing.T) {
 	dataStore := store.NewMemoryStore()
 	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
 	handlers := NewHandler(dataStore, jwtManager)
-	reqBody := map[string]string{
-		"login":    "user_login",
-		"email":    "new_user@test.com",
-		"password": "some_password",
+
+	reqBody := registerRequest{
+		Login:    "user_login",
+		Email:    "new_user@test.com",
+		Password: "some_password",
 	}
-	body, _ := json.Marshal(reqBody)
+	body, err := json.Marshal(reqBody)
+	require.NoError(t, err)
+
 	req := httptest.NewRequest("POST", "/api/v1/register", bytes.NewBuffer(body))
 	req.Header.Set("Content-Type", "application/json")
 	rr := httptest.NewRecorder()
 	handlers.RegisterHandler(rr, req)
 	assert.Equal(t, http.StatusCreated, rr.Code)
 
-	reqBody2 := map[string]string{
-		"login":    "user_login",
-		"email":    "new_user@test.com",
-		"password": "some_password",
+	reqBody2 := registerRequest{
+		Login:    "user_login",
+		Email:    "new_user@test.com",
+		Password: "some_password",
 	}
-	body2, _ := json.Marshal(reqBody2)
+	body2, err := json.Marshal(reqBody2)
+	require.NoError(t, err)
+
 	req2 := httptest.NewRequest("POST", "/api/v1/register", bytes.NewBuffer(body2))
 	req2.Header.Set("Content-Type", "application/json")
 	rr2 := httptest.NewRecorder()
@@ -126,32 +139,37 @@ func TestLoginHandler(t *testing.T) {
 	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
 	handlers := NewHandler(dataStore, jwtManager)
 
-	registerReq := map[string]string{
-		"login":    "user_login",
-		"email":    "new_user@test.com",
-		"password": "some_password",
+	registerReq := registerRequest{
+		Login:    "user_login",
+		Email:    "new_user@test.com",
+		Password: "some_password",
 	}
-	body, _ := json.Marshal(registerReq)
+	body, err := json.Marshal(registerReq)
+	require.NoError(t, err)
+
 	req := httptest.NewRequest("POST", "/api/v1/register", bytes.NewBuffer(body))
 	req.Header.Set("Content-Type", "application/json")
 	rr := httptest.NewRecorder()
 	handlers.RegisterHandler(rr, req)
-	loginReq := map[string]string{
-		"login":    "user_login",
-		"password": "some_password",
+
+	loginReq := loginRequest{
+		Login:    "user_login",
+		Password: "some_password",
 	}
-	body, _ = json.Marshal(loginReq)
+	body, err = json.Marshal(loginReq)
+	require.NoError(t, err)
+
 	req = httptest.NewRequest("POST", "/api/v1/login", bytes.NewBuffer(body))
 	req.Header.Set("Content-Type", "application/json")
 	rr = httptest.NewRecorder()
 	handlers.LoginHandler(rr, req)
 	assert.Equal(t, http.StatusOK, rr.Code)
-	var response struct {
-		ID string `json:"id"`
-	}
-	err := json.Unmarshal(rr.Body.Bytes(), &response)
+
+	var response loginResponse
+	err = json.NewDecoder(rr.Body).Decode(&response)
 	assert.NoError(t, err)
 	assert.NotEmpty(t, response.ID)
+
 	cookies := rr.Result().Cookies()
 	assert.Len(t, cookies, 1)
 	assert.Equal(t, "session_token", cookies[0].Name)
@@ -161,16 +179,17 @@ func TestLogoutHandler_Success(t *testing.T) {
 	dataStore := store.NewMemoryStore()
 	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
 	handlers := NewHandler(dataStore, jwtManager)
+
 	req := httptest.NewRequest("POST", "/api/v1/logout", nil)
 	rr := httptest.NewRecorder()
 	handlers.LogoutHandler(rr, req)
 	assert.Equal(t, http.StatusOK, rr.Code)
-	var response struct {
-		Status string `json:"status"`
-	}
-	err := json.Unmarshal(rr.Body.Bytes(), &response)
+
+	var response logoutResponse
+	err := json.NewDecoder(rr.Body).Decode(&response)
 	assert.NoError(t, err)
 	assert.Equal(t, "ok", response.Status)
+
 	cookies := rr.Result().Cookies()
 	assert.Len(t, cookies, 1)
 	assert.Equal(t, "session_token", cookies[0].Name)
@@ -183,12 +202,14 @@ func TestLoginHandler_InvalidCredentials(t *testing.T) {
 	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
 	handlers := NewHandler(dataStore, jwtManager)
 
-	reqBody := map[string]string{
-		"login":    "user_login",
-		"email":    "new_user@test.com",
-		"password": "some_password",
+	reqBody := registerRequest{
+		Login:    "user_login",
+		Email:    "new_user@test.com",
+		Password: "some_password",
 	}
-	body, _ := json.Marshal(reqBody)
+	body, err := json.Marshal(reqBody)
+	require.NoError(t, err)
+
 	req := httptest.NewRequest("POST", "/api/v1/register", bytes.NewBuffer(body))
 	req.Header.Set("Content-Type", "application/json")
 	rr := httptest.NewRecorder()
@@ -196,37 +217,40 @@ func TestLoginHandler_InvalidCredentials(t *testing.T) {
 
 	testCases := []struct {
 		name           string
-		request        map[string]string
+		request        loginRequest
 		expectedStatus int
 	}{
 		{
-			name: "user nit exist",
-			request: map[string]string{
-				"login":    "no_user",
-				"password": "some_password",
+			name: "user not exist",
+			request: loginRequest{
+				Login:    "no_user",
+				Password: "some_password",
 			},
 			expectedStatus: http.StatusUnauthorized,
 		},
 		{
 			name: "wrong password",
-			request: map[string]string{
-				"login":    "user_login",
-				"password": "wrong_password",
+			request: loginRequest{
+				Login:    "user_login",
+				Password: "wrong_password",
 			},
 			expectedStatus: http.StatusUnauthorized,
 		},
 		{
 			name: "empty credentials",
-			request: map[string]string{
-				"login":    "",
-				"password": "",
+			request: loginRequest{
+				Login:    "",
+				Password: "",
 			},
 			expectedStatus: http.StatusBadRequest,
 		},
 	}
+
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			body, _ := json.Marshal(tc.request)
+			body, err := json.Marshal(tc.request)
+			require.NoError(t, err)
+
 			req := httptest.NewRequest("POST", "/api/v1/login", bytes.NewBuffer(body))
 			req.Header.Set("Content-Type", "application/json")
 			rr := httptest.NewRecorder()
@@ -234,4 +258,28 @@ func TestLoginHandler_InvalidCredentials(t *testing.T) {
 			assert.Equal(t, tc.expectedStatus, rr.Code)
 		})
 	}
+}
+
+func TestRegisterHandler_InvalidJSON(t *testing.T) {
+	dataStore := store.NewMemoryStore()
+	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
+	handlers := NewHandler(dataStore, jwtManager)
+
+	req := httptest.NewRequest("POST", "/api/v1/register", bytes.NewBufferString("invalid json"))
+	req.Header.Set("Content-Type", "application/json")
+	rr := httptest.NewRecorder()
+	handlers.RegisterHandler(rr, req)
+	assert.Equal(t, http.StatusBadRequest, rr.Code)
+}
+
+func TestLoginHandler_InvalidJSON(t *testing.T) {
+	dataStore := store.NewMemoryStore()
+	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
+	handlers := NewHandler(dataStore, jwtManager)
+
+	req := httptest.NewRequest("POST", "/api/v1/login", bytes.NewBufferString("invalid json"))
+	req.Header.Set("Content-Type", "application/json")
+	rr := httptest.NewRecorder()
+	handlers.LoginHandler(rr, req)
+	assert.Equal(t, http.StatusBadRequest, rr.Code)
 }

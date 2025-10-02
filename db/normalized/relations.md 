@@ -87,14 +87,14 @@ ALBUM (
 PLAYLIST (
 
     PLAYLIST_ID UUID PRIMARY KEY, 
-    TITLE VARCHAR NOT NULL, 
+    TITLE TEXT NOT NULL, 
     AVATAR_URL TEXT, 
     CREATED_AT TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP, 
     UPDATED_AT TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP, 
     USER_ID UUID NOT NULL 
 ) <br>
 **Функциональные зависимости:** <br>
-{PLAYLIST_ID} → TITLE, COVER_ART_URL, CREATED_AT, UPDATED_AT, USER_ID <br>
+{PLAYLIST_ID} → TITLE, AVATAR_URL, CREATED_AT, UPDATED_AT, USER_ID <br>
 
 ### Связующие таблицы:
 
@@ -153,7 +153,7 @@ TRACK_PLAYLIST (
 #### Relation: 'user liked track'
 **Описание:** Хранит треки, понравившиеся пользователю <br>
 **Отношение:** <br>
-USER_LIKED_TRACKS (
+USER_LIKED_TRACK (
 
     USER_ID UUID NOT NULL, 
     TRACK_ID UUID NOT NULL, 

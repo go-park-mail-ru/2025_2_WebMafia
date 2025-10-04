@@ -6,4 +6,3 @@ CREATE TABLE genre (
 
 COMMENT ON TABLE genre IS 'Таблица хранения жанров';
 
-CREATE INDEX idx_genre_name ON genre (genre_name);

@@ -10,6 +10,3 @@ CREATE TABLE "user" (
 
 COMMENT ON TABLE "user" IS 'Таблица хранения учетных записей пользователей';
 
-CREATE INDEX idx_user_login ON "user" (login);
-CREATE INDEX idx_user_email ON "user" (email);
-CREATE INDEX idx_user_created_at ON "user" (created_at);

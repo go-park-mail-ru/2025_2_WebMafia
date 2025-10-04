@@ -13,3 +13,19 @@ coverage-html: test
 clean:
 	@echo "==> Очищаем сгенерированные файлы..."
 	@rm -f coverage.out
+
+up:
+	@echo "==> Запускаем Docker Compose в фоновом режиме..."
+	@sudo docker compose up --build -d
+
+down:
+	@echo "==> Останавливаем и удаляем контейнеры..."
+	@sudo docker compose down
+
+logs:
+	@echo "==> Просматриваем логи контейнеров..."
+	@sudo docker compose logs -f
+
+stop:
+	@echo "==> Останавливаем сервисы Docker Compose..."
+	@sudo docker compose stop

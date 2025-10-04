@@ -7,17 +7,12 @@ import (
 	"github.com/stretchr/testify/require"
 	"net/http"
 	"net/http/httptest"
-	"spotify/internal/store"
-	"spotify/pkg/jwtmanager"
 	"testing"
 	"time"
 )
 
 func TestAuthHandler(t *testing.T) {
-	//TODO: сделать функцию для подготовки тестового окружения
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	reqBody := registerRequest{
 		Login:    "user_login",
@@ -44,9 +39,7 @@ func TestAuthHandler(t *testing.T) {
 }
 
 func TestRegisterHandler_ValidationErrors(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	testCases := []struct {
 		name    string
@@ -101,9 +94,7 @@ func TestRegisterHandler_ValidationErrors(t *testing.T) {
 }
 
 func TestRegisterHandler_DuplicateUser(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	reqBody := registerRequest{
 		Login:    "user_login",
@@ -135,9 +126,7 @@ func TestRegisterHandler_DuplicateUser(t *testing.T) {
 }
 
 func TestLoginHandler(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	registerReq := registerRequest{
 		Login:    "user_login",
@@ -176,9 +165,7 @@ func TestLoginHandler(t *testing.T) {
 }
 
 func TestLogoutHandler_Success(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	req := httptest.NewRequest("POST", "/api/v1/logout", nil)
 	rr := httptest.NewRecorder()
@@ -198,9 +185,7 @@ func TestLogoutHandler_Success(t *testing.T) {
 }
 
 func TestLoginHandler_InvalidCredentials(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	reqBody := registerRequest{
 		Login:    "user_login",
@@ -261,9 +246,7 @@ func TestLoginHandler_InvalidCredentials(t *testing.T) {
 }
 
 func TestRegisterHandler_InvalidJSON(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	req := httptest.NewRequest("POST", "/api/v1/register", bytes.NewBufferString("invalid json"))
 	req.Header.Set("Content-Type", "application/json")
@@ -273,9 +256,7 @@ func TestRegisterHandler_InvalidJSON(t *testing.T) {
 }
 
 func TestLoginHandler_InvalidJSON(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	req := httptest.NewRequest("POST", "/api/v1/login", bytes.NewBufferString("invalid json"))
 	req.Header.Set("Content-Type", "application/json")

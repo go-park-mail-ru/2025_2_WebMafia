@@ -7,17 +7,12 @@ import (
 	"github.com/stretchr/testify/require"
 	"net/http"
 	"net/http/httptest"
-	"spotify/internal/store"
-	"spotify/pkg/jwtmanager"
 	"strconv"
 	"testing"
-	"time"
 )
 
 func TestGetAllTracksHandler(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	req := httptest.NewRequest("GET", "/api/v1/tracks", nil)
 	rr := httptest.NewRecorder()
@@ -37,9 +32,7 @@ func TestGetAllTracksHandler(t *testing.T) {
 }
 
 func TestGetAllArtistsHandler(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	req := httptest.NewRequest("GET", "/api/v1/artists", nil)
 	rr := httptest.NewRecorder()
@@ -58,9 +51,7 @@ func TestGetAllArtistsHandler(t *testing.T) {
 }
 
 func TestGetAllAlbumsHandler(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	req := httptest.NewRequest("GET", "/api/v1/albums", nil)
 	rr := httptest.NewRecorder()
@@ -80,9 +71,7 @@ func TestGetAllAlbumsHandler(t *testing.T) {
 }
 
 func TestGetTrackByIDHandler(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, dataStore, _ := initTestEnv(t)
 
 	tracks, err := dataStore.GetAllTracks()
 	require.NoError(t, err)
@@ -104,9 +93,7 @@ func TestGetTrackByIDHandler(t *testing.T) {
 }
 
 func TestGetArtistByIDHandler(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, dataStore, _ := initTestEnv(t)
 
 	artists, err := dataStore.GetAllArtists()
 	require.NoError(t, err)
@@ -122,9 +109,7 @@ func TestGetArtistByIDHandler(t *testing.T) {
 }
 
 func TestGetAlbumByIDHandler(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, dataStore, _ := initTestEnv(t)
 
 	albums, err := dataStore.GetAllAlbums()
 	require.NoError(t, err)
@@ -140,9 +125,7 @@ func TestGetAlbumByIDHandler(t *testing.T) {
 }
 
 func TestGetTrackByIDHandler_NotFound(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	req := httptest.NewRequest("GET", "/api/v1/tracks/9999999", nil)
 	req = mux.SetURLVars(req, map[string]string{"id": "9999999"})
@@ -153,9 +136,7 @@ func TestGetTrackByIDHandler_NotFound(t *testing.T) {
 }
 
 func TestGetArtistByIDHandler_NotFound(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	req := httptest.NewRequest("GET", "/api/v1/artists/9999999", nil)
 	req = mux.SetURLVars(req, map[string]string{"id": "9999999"})
@@ -166,9 +147,7 @@ func TestGetArtistByIDHandler_NotFound(t *testing.T) {
 }
 
 func TestGetAlbumByIDHandler_NotFound(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	req := httptest.NewRequest("GET", "/api/v1/albums/9999999", nil)
 	req = mux.SetURLVars(req, map[string]string{"id": "9999999"})

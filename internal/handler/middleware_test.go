@@ -7,16 +7,11 @@ import (
 	"github.com/stretchr/testify/require"
 	"net/http"
 	"net/http/httptest"
-	"spotify/internal/store"
-	"spotify/pkg/jwtmanager"
 	"testing"
-	"time"
 )
 
 func TestAuthMiddleware(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	registerReq := registerRequest{
 		Login:    "user_login",
@@ -59,9 +54,7 @@ func TestAuthMiddleware(t *testing.T) {
 }
 
 func TestAuthMiddleware_NoToken(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	req := httptest.NewRequest("GET", "/api/v1/protected", nil)
 	rr := httptest.NewRecorder()
@@ -77,9 +70,7 @@ func TestAuthMiddleware_NoToken(t *testing.T) {
 }
 
 func TestAuthMiddleware_InvalidToken(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	handlers, _, _ := initTestEnv(t)
 
 	req := httptest.NewRequest("GET", "/api/v1/protected", nil)
 	req.AddCookie(&http.Cookie{

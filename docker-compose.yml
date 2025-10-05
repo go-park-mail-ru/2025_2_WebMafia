@@ -12,15 +12,11 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    env_file:
-      - .env
 
   db:
     image: postgres:15-alpine
     container_name: wavemusic-db
     restart: always
-    env_file:
-      - .env
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}

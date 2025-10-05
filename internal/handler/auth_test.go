@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"bytes"
 	"encoding/json"
 	"net/http"
 	"testing"
@@ -20,13 +19,13 @@ func TestAuthHandler(t *testing.T) {
 	body, err := json.Marshal(reqBody)
 	require.NoError(t, err)
 
-	resp, err := testClient.Post(testServer.URL+"/api/v1/register", "application/json", bytes.NewBuffer(body))
-	require.NoError(t, err)
+	resp, respBody := makeRequest(t, "POST", "/api/v1/register", body)
 	defer resp.Body.Close()
+
 	assert.Equal(t, http.StatusCreated, resp.StatusCode)
 
 	var response registerResponse
-	err = json.NewDecoder(resp.Body).Decode(&response)
+	err = json.Unmarshal([]byte(respBody), &response)
 	assert.NoError(t, err)
 	assert.NotEmpty(t, response.ID)
 
@@ -79,8 +78,7 @@ func TestRegisterHandler_ValidationErrors(t *testing.T) {
 			body, err := json.Marshal(tc.request)
 			require.NoError(t, err)
 
-			resp, err := testClient.Post(testServer.URL+"/api/v1/register", "application/json", bytes.NewBuffer(body))
-			require.NoError(t, err)
+			resp, _ := makeRequest(t, "POST", "/api/v1/register", body)
 			defer resp.Body.Close()
 			assert.Equal(t, http.StatusBadRequest, resp.StatusCode)
 		})
@@ -96,13 +94,11 @@ func TestRegisterHandler_DuplicateUser(t *testing.T) {
 	body, err := json.Marshal(reqBody)
 	require.NoError(t, err)
 
-	resp, err := testClient.Post(testServer.URL+"/api/v1/register", "application/json", bytes.NewBuffer(body))
-	require.NoError(t, err)
+	resp, _ := makeRequest(t, "POST", "/api/v1/register", body)
 	resp.Body.Close()
 	assert.Equal(t, http.StatusCreated, resp.StatusCode)
 
-	resp2, err := testClient.Post(testServer.URL+"/api/v1/register", "application/json", bytes.NewBuffer(body))
-	require.NoError(t, err)
+	resp2, _ := makeRequest(t, "POST", "/api/v1/register", body)
 	defer resp2.Body.Close()
 	assert.Equal(t, http.StatusConflict, resp2.StatusCode)
 }
@@ -116,8 +112,7 @@ func TestLoginHandler(t *testing.T) {
 	body, err := json.Marshal(registerReq)
 	require.NoError(t, err)
 
-	resp, err := testClient.Post(testServer.URL+"/api/v1/register", "application/json", bytes.NewBuffer(body))
-	require.NoError(t, err)
+	resp, _ := makeRequest(t, "POST", "/api/v1/register", body)
 	resp.Body.Close()
 
 	loginReq := loginRequest{
@@ -127,13 +122,12 @@ func TestLoginHandler(t *testing.T) {
 	body, err = json.Marshal(loginReq)
 	require.NoError(t, err)
 
-	resp, err = testClient.Post(testServer.URL+"/api/v1/login", "application/json", bytes.NewBuffer(body))
-	require.NoError(t, err)
+	resp, respBody := makeRequest(t, "POST", "/api/v1/login", body)
 	defer resp.Body.Close()
 	assert.Equal(t, http.StatusOK, resp.StatusCode)
 
 	var response loginResponse
-	err = json.NewDecoder(resp.Body).Decode(&response)
+	err = json.Unmarshal([]byte(respBody), &response)
 	assert.NoError(t, err)
 	assert.NotEmpty(t, response.ID)
 
@@ -151,8 +145,7 @@ func TestLogoutHandler_Success(t *testing.T) {
 	body, err := json.Marshal(registerReq)
 	require.NoError(t, err)
 
-	resp, err := testClient.Post(testServer.URL+"/api/v1/register", "application/json", bytes.NewBuffer(body))
-	require.NoError(t, err)
+	resp, _ := makeRequest(t, "POST", "/api/v1/register", body)
 	resp.Body.Close()
 
 	loginReq := loginRequest{
@@ -162,25 +155,19 @@ func TestLogoutHandler_Success(t *testing.T) {
 	body, err = json.Marshal(loginReq)
 	require.NoError(t, err)
 
-	resp, err = testClient.Post(testServer.URL+"/api/v1/login", "application/json", bytes.NewBuffer(body))
-	require.NoError(t, err)
+	resp, _ = makeRequest(t, "POST", "/api/v1/login", body)
 	defer resp.Body.Close()
 
 	cookies := resp.Cookies()
 	require.Len(t, cookies, 1)
 	sessionCookie := cookies[0]
 
-	req, err := http.NewRequest("POST", testServer.URL+"/api/v1/logout", nil)
-	require.NoError(t, err)
-	req.AddCookie(sessionCookie)
-
-	resp, err = testClient.Do(req)
-	require.NoError(t, err)
+	resp, respBody := makeRequest(t, "POST", "/api/v1/logout", nil, sessionCookie)
 	defer resp.Body.Close()
 	assert.Equal(t, http.StatusOK, resp.StatusCode)
 
 	var response logoutResponse
-	err = json.NewDecoder(resp.Body).Decode(&response)
+	err = json.Unmarshal([]byte(respBody), &response)
 	assert.NoError(t, err)
 	assert.Equal(t, "ok", response.Status)
 
@@ -200,8 +187,7 @@ func TestLoginHandler_InvalidCredentials(t *testing.T) {
 	body, err := json.Marshal(reqBody)
 	require.NoError(t, err)
 
-	resp, err := testClient.Post(testServer.URL+"/api/v1/register", "application/json", bytes.NewBuffer(body))
-	require.NoError(t, err)
+	resp, _ := makeRequest(t, "POST", "/api/v1/register", body)
 	resp.Body.Close()
 
 	testCases := []struct {
@@ -240,8 +226,7 @@ func TestLoginHandler_InvalidCredentials(t *testing.T) {
 			body, err := json.Marshal(tc.request)
 			require.NoError(t, err)
 
-			resp, err := testClient.Post(testServer.URL+"/api/v1/login", "application/json", bytes.NewBuffer(body))
-			require.NoError(t, err)
+			resp, _ := makeRequest(t, "POST", "/api/v1/login", body)
 			defer resp.Body.Close()
 			assert.Equal(t, tc.expectedStatus, resp.StatusCode)
 		})
@@ -249,15 +234,13 @@ func TestLoginHandler_InvalidCredentials(t *testing.T) {
 }
 
 func TestRegisterHandler_InvalidJSON(t *testing.T) {
-	resp, err := testClient.Post(testServer.URL+"/api/v1/register", "application/json", bytes.NewBufferString("invalid json"))
-	require.NoError(t, err)
+	resp, _ := makeRequest(t, "POST", "/api/v1/register", []byte("invalid json"))
 	defer resp.Body.Close()
 	assert.Equal(t, http.StatusBadRequest, resp.StatusCode)
 }
 
 func TestLoginHandler_InvalidJSON(t *testing.T) {
-	resp, err := testClient.Post(testServer.URL+"/api/v1/login", "application/json", bytes.NewBufferString("invalid json"))
-	require.NoError(t, err)
+	resp, _ := makeRequest(t, "POST", "/api/v1/login", []byte("invalid json"))
 	defer resp.Body.Close()
 	assert.Equal(t, http.StatusBadRequest, resp.StatusCode)
 }

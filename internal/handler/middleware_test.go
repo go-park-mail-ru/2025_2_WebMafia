@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"bytes"
 	"encoding/json"
 	"net/http"
 	"testing"
@@ -19,8 +18,7 @@ func TestAuthMiddleware(t *testing.T) {
 	body, err := json.Marshal(registerReq)
 	require.NoError(t, err)
 
-	resp, err := testClient.Post(testServer.URL+"/api/v1/register", "application/json", bytes.NewBuffer(body))
-	require.NoError(t, err)
+	resp, _ := makeRequest(t, "POST", "/api/v1/register", body)
 	resp.Body.Close()
 
 	loginReq := loginRequest{
@@ -30,8 +28,7 @@ func TestAuthMiddleware(t *testing.T) {
 	body, err = json.Marshal(loginReq)
 	require.NoError(t, err)
 
-	resp, err = testClient.Post(testServer.URL+"/api/v1/login", "application/json", bytes.NewBuffer(body))
-	require.NoError(t, err)
+	resp, _ = makeRequest(t, "POST", "/api/v1/login", body)
 	defer resp.Body.Close()
 
 	cookies := resp.Cookies()
@@ -44,35 +41,26 @@ func TestAuthMiddleware(t *testing.T) {
 	}
 	assert.NotNil(t, authCookie)
 
-	req, err := http.NewRequest("GET", testServer.URL+"/api/v1/home", nil)
-	require.NoError(t, err)
-	req.AddCookie(authCookie)
-
-	resp, err = testClient.Do(req)
-	require.NoError(t, err)
+	resp, _ = makeRequest(t, "GET", "/api/v1/home", nil, authCookie)
 	defer resp.Body.Close()
 
 	assert.Equal(t, http.StatusOK, resp.StatusCode)
 }
 
 func TestAuthMiddleware_NoToken(t *testing.T) {
-	resp, err := testClient.Get(testServer.URL + "/api/v1/home")
-	require.NoError(t, err)
+	resp, _ := makeRequest(t, "GET", "/api/v1/home", nil)
 	defer resp.Body.Close()
 
 	assert.Equal(t, http.StatusUnauthorized, resp.StatusCode)
 }
 
 func TestAuthMiddleware_InvalidToken(t *testing.T) {
-	req, err := http.NewRequest("GET", testServer.URL+"/api/v1/home", nil)
-	require.NoError(t, err)
-	req.AddCookie(&http.Cookie{
+	invalidCookie := &http.Cookie{
 		Name:  "session_token",
 		Value: "invalid-token",
-	})
+	}
 
-	resp, err := testClient.Do(req)
-	require.NoError(t, err)
+	resp, _ := makeRequest(t, "GET", "/api/v1/home", nil, invalidCookie)
 	defer resp.Body.Close()
 
 	assert.Equal(t, http.StatusUnauthorized, resp.StatusCode)

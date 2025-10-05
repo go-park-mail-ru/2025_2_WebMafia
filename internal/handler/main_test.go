@@ -1,6 +1,9 @@
 package handler
 
 import (
+	"bytes"
+	"github.com/stretchr/testify/require"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -53,4 +56,23 @@ func setupTestRouter(h *Handlers) *mux.Router {
 	protected.HandleFunc("/albums/{id}", h.GetAlbumByIDHandler).Methods(http.MethodGet, http.MethodOptions)
 
 	return r
+}
+
+func makeRequest(t *testing.T, method, path string, body []byte, cookies ...*http.Cookie) (*http.Response, string) {
+	req, err := http.NewRequest(method, testServer.URL+path, bytes.NewBuffer(body))
+	require.NoError(t, err)
+	if body != nil {
+		req.Header.Set("Content-Type", "application/json")
+	}
+
+	for _, cookie := range cookies {
+		req.AddCookie(cookie)
+	}
+
+	resp, err := testClient.Do(req)
+	require.NoError(t, err)
+	respBody, err := io.ReadAll(resp.Body)
+	require.NoError(t, err)
+
+	return resp, string(respBody)
 }

@@ -2,30 +2,46 @@ package handler
 
 import (
 	"encoding/json"
-	"github.com/gorilla/mux"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"net/http"
-	"net/http/httptest"
-	"spotify/internal/store"
-	"spotify/pkg/jwtmanager"
 	"strconv"
 	"testing"
-	"time"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestGetAllTracksHandler(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	registerReq := registerRequest{
+		Login:    "tracks_user",
+		Email:    "tracks@test.com",
+		Password: "some_password",
+	}
+	body, err := json.Marshal(registerReq)
+	require.NoError(t, err)
 
-	req := httptest.NewRequest("GET", "/api/v1/tracks", nil)
-	rr := httptest.NewRecorder()
-	handlers.GetAllTracksHandler(rr, req)
-	assert.Equal(t, http.StatusOK, rr.Code)
+	resp, _ := makeRequest(t, "POST", "/api/v1/register", body)
+	resp.Body.Close()
+
+	loginReq := loginRequest{
+		Login:    "tracks_user",
+		Password: "some_password",
+	}
+	body, err = json.Marshal(loginReq)
+	require.NoError(t, err)
+
+	resp, _ = makeRequest(t, "POST", "/api/v1/login", body)
+	defer resp.Body.Close()
+
+	cookies := resp.Cookies()
+	require.Len(t, cookies, 1)
+	sessionCookie := cookies[0]
+
+	resp, respBody := makeRequest(t, "GET", "/api/v1/tracks", nil, sessionCookie)
+	defer resp.Body.Close()
+	assert.Equal(t, http.StatusOK, resp.StatusCode)
 
 	var response TracksResponse
-	err := json.NewDecoder(rr.Body).Decode(&response)
+	err = json.Unmarshal([]byte(respBody), &response)
 	assert.NoError(t, err)
 	assert.Greater(t, len(response.Tracks), 0)
 
@@ -37,17 +53,37 @@ func TestGetAllTracksHandler(t *testing.T) {
 }
 
 func TestGetAllArtistsHandler(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	registerReq := registerRequest{
+		Login:    "artists_user",
+		Email:    "artists@test.com",
+		Password: "some_password",
+	}
+	body, err := json.Marshal(registerReq)
+	require.NoError(t, err)
 
-	req := httptest.NewRequest("GET", "/api/v1/artists", nil)
-	rr := httptest.NewRecorder()
-	handlers.GetAllArtistsHandler(rr, req)
-	assert.Equal(t, http.StatusOK, rr.Code)
+	resp, _ := makeRequest(t, "POST", "/api/v1/register", body)
+	resp.Body.Close()
+
+	loginReq := loginRequest{
+		Login:    "artists_user",
+		Password: "some_password",
+	}
+	body, err = json.Marshal(loginReq)
+	require.NoError(t, err)
+
+	resp, _ = makeRequest(t, "POST", "/api/v1/login", body)
+	defer resp.Body.Close()
+
+	cookies := resp.Cookies()
+	require.Len(t, cookies, 1)
+	sessionCookie := cookies[0]
+
+	resp, respBody := makeRequest(t, "GET", "/api/v1/artists", nil, sessionCookie)
+	defer resp.Body.Close()
+	assert.Equal(t, http.StatusOK, resp.StatusCode)
 
 	var response ArtistsResponse
-	err := json.NewDecoder(rr.Body).Decode(&response)
+	err = json.Unmarshal([]byte(respBody), &response)
 	assert.NoError(t, err)
 	assert.Greater(t, len(response.Artists), 0)
 
@@ -58,17 +94,37 @@ func TestGetAllArtistsHandler(t *testing.T) {
 }
 
 func TestGetAllAlbumsHandler(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	registerReq := registerRequest{
+		Login:    "albums_user",
+		Email:    "albums@test.com",
+		Password: "some_password",
+	}
+	body, err := json.Marshal(registerReq)
+	require.NoError(t, err)
 
-	req := httptest.NewRequest("GET", "/api/v1/albums", nil)
-	rr := httptest.NewRecorder()
-	handlers.GetAllAlbumsHandler(rr, req)
-	assert.Equal(t, http.StatusOK, rr.Code)
+	resp, _ := makeRequest(t, "POST", "/api/v1/register", body)
+	resp.Body.Close()
+
+	loginReq := loginRequest{
+		Login:    "albums_user",
+		Password: "some_password",
+	}
+	body, err = json.Marshal(loginReq)
+	require.NoError(t, err)
+
+	resp, _ = makeRequest(t, "POST", "/api/v1/login", body)
+	defer resp.Body.Close()
+
+	cookies := resp.Cookies()
+	require.Len(t, cookies, 1)
+	sessionCookie := cookies[0]
+
+	resp, respBody := makeRequest(t, "GET", "/api/v1/albums", nil, sessionCookie)
+	defer resp.Body.Close()
+	assert.Equal(t, http.StatusOK, resp.StatusCode)
 
 	var response AlbumsResponse
-	err := json.NewDecoder(rr.Body).Decode(&response)
+	err = json.Unmarshal([]byte(respBody), &response)
 	assert.NoError(t, err)
 	assert.Greater(t, len(response.Albums), 0)
 
@@ -80,100 +136,223 @@ func TestGetAllAlbumsHandler(t *testing.T) {
 }
 
 func TestGetTrackByIDHandler(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
-
-	tracks, err := dataStore.GetAllTracks()
+	registerReq := registerRequest{
+		Login:    "track_by_id_user",
+		Email:    "track_by_id@test.com",
+		Password: "some_password",
+	}
+	body, err := json.Marshal(registerReq)
 	require.NoError(t, err)
-	assert.Greater(t, len(tracks), 0, "Should have tracks in store")
 
-	trackID := tracks[0].TrackID
-	req := httptest.NewRequest("GET", "/api/v1/tracks/"+strconv.FormatUint(uint64(trackID), 10), nil)
-	req = mux.SetURLVars(req, map[string]string{"id": strconv.FormatUint(uint64(trackID), 10)})
-	rr := httptest.NewRecorder()
+	resp, _ := makeRequest(t, "POST", "/api/v1/register", body)
+	resp.Body.Close()
 
-	handlers.GetTrackByIDHandler(rr, req)
-	assert.Equal(t, http.StatusOK, rr.Code)
+	loginReq := loginRequest{
+		Login:    "track_by_id_user",
+		Password: "some_password",
+	}
+	body, err = json.Marshal(loginReq)
+	require.NoError(t, err)
+
+	resp, _ = makeRequest(t, "POST", "/api/v1/login", body)
+	defer resp.Body.Close()
+
+	cookies := resp.Cookies()
+	require.Len(t, cookies, 1)
+	sessionCookie := cookies[0]
+
+	resp, respBody := makeRequest(t, "GET", "/api/v1/tracks", nil, sessionCookie)
+	defer resp.Body.Close()
+
+	var tracksResponse TracksResponse
+	err = json.Unmarshal([]byte(respBody), &tracksResponse)
+	require.NoError(t, err)
+	require.Greater(t, len(tracksResponse.Tracks), 0, "Should have tracks in store")
+
+	trackID := tracksResponse.Tracks[0].TrackID
+
+	resp, respBody = makeRequest(t, "GET", "/api/v1/tracks/"+strconv.FormatUint(uint64(trackID), 10), nil, sessionCookie)
+	defer resp.Body.Close()
+	assert.Equal(t, http.StatusOK, resp.StatusCode)
 
 	var response TrackResponse
-	err = json.NewDecoder(rr.Body).Decode(&response)
+	err = json.Unmarshal([]byte(respBody), &response)
 	assert.NoError(t, err)
 	assert.Equal(t, trackID, response.Track.TrackID)
 	assert.NotEmpty(t, response.Track.Title)
 }
 
 func TestGetArtistByIDHandler(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
-
-	artists, err := dataStore.GetAllArtists()
+	registerReq := registerRequest{
+		Login:    "artist_by_id_user",
+		Email:    "artist_by_id@test.com",
+		Password: "some_password",
+	}
+	body, err := json.Marshal(registerReq)
 	require.NoError(t, err)
-	assert.Greater(t, len(artists), 0, "Should have artists in store")
 
-	artistID := artists[0].ArtistID
-	req := httptest.NewRequest("GET", "/api/v1/artists/"+strconv.FormatUint(uint64(artistID), 10), nil)
-	req = mux.SetURLVars(req, map[string]string{"id": strconv.FormatUint(uint64(artistID), 10)})
-	rr := httptest.NewRecorder()
+	resp, _ := makeRequest(t, "POST", "/api/v1/register", body)
+	resp.Body.Close()
 
-	handlers.GetArtistByIDHandler(rr, req)
-	assert.Equal(t, http.StatusOK, rr.Code)
+	loginReq := loginRequest{
+		Login:    "artist_by_id_user",
+		Password: "some_password",
+	}
+	body, err = json.Marshal(loginReq)
+	require.NoError(t, err)
+
+	resp, _ = makeRequest(t, "POST", "/api/v1/login", body)
+	defer resp.Body.Close()
+
+	cookies := resp.Cookies()
+	require.Len(t, cookies, 1)
+	sessionCookie := cookies[0]
+
+	resp, respBody := makeRequest(t, "GET", "/api/v1/artists", nil, sessionCookie)
+	defer resp.Body.Close()
+
+	var artistsResponse ArtistsResponse
+	err = json.Unmarshal([]byte(respBody), &artistsResponse)
+	require.NoError(t, err)
+	require.Greater(t, len(artistsResponse.Artists), 0, "Should have artists in store")
+
+	artistID := artistsResponse.Artists[0].ArtistID
+
+	resp, _ = makeRequest(t, "GET", "/api/v1/artists/"+strconv.FormatUint(uint64(artistID), 10), nil, sessionCookie)
+	defer resp.Body.Close()
+	assert.Equal(t, http.StatusOK, resp.StatusCode)
 }
 
 func TestGetAlbumByIDHandler(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
-
-	albums, err := dataStore.GetAllAlbums()
+	registerReq := registerRequest{
+		Login:    "album_by_id_user",
+		Email:    "album_by_id@test.com",
+		Password: "some_password",
+	}
+	body, err := json.Marshal(registerReq)
 	require.NoError(t, err)
-	assert.Greater(t, len(albums), 0, "Should have albums in store")
 
-	albumID := albums[0].AlbumID
-	req := httptest.NewRequest("GET", "/api/v1/albums/"+strconv.FormatUint(uint64(albumID), 10), nil)
-	req = mux.SetURLVars(req, map[string]string{"id": strconv.FormatUint(uint64(albumID), 10)})
-	rr := httptest.NewRecorder()
+	resp, _ := makeRequest(t, "POST", "/api/v1/register", body)
+	resp.Body.Close()
 
-	handlers.GetAlbumByIDHandler(rr, req)
-	assert.Equal(t, http.StatusOK, rr.Code)
+	loginReq := loginRequest{
+		Login:    "album_by_id_user",
+		Password: "some_password",
+	}
+	body, err = json.Marshal(loginReq)
+	require.NoError(t, err)
+
+	resp, _ = makeRequest(t, "POST", "/api/v1/login", body)
+	defer resp.Body.Close()
+
+	cookies := resp.Cookies()
+	require.Len(t, cookies, 1)
+	sessionCookie := cookies[0]
+
+	resp, respBody := makeRequest(t, "GET", "/api/v1/albums", nil, sessionCookie)
+	defer resp.Body.Close()
+
+	var albumsResponse AlbumsResponse
+	err = json.Unmarshal([]byte(respBody), &albumsResponse)
+	require.NoError(t, err)
+	require.Greater(t, len(albumsResponse.Albums), 0, "Should have albums in store")
+
+	albumID := albumsResponse.Albums[0].AlbumID
+
+	resp, _ = makeRequest(t, "GET", "/api/v1/albums/"+strconv.FormatUint(uint64(albumID), 10), nil, sessionCookie)
+	defer resp.Body.Close()
+	assert.Equal(t, http.StatusOK, resp.StatusCode)
 }
 
 func TestGetTrackByIDHandler_NotFound(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	registerReq := registerRequest{
+		Login:    "track_not_found_user",
+		Email:    "track_not_found@test.com",
+		Password: "some_password",
+	}
+	body, err := json.Marshal(registerReq)
+	require.NoError(t, err)
 
-	req := httptest.NewRequest("GET", "/api/v1/tracks/9999999", nil)
-	req = mux.SetURLVars(req, map[string]string{"id": "9999999"})
-	rr := httptest.NewRecorder()
+	resp, _ := makeRequest(t, "POST", "/api/v1/register", body)
+	resp.Body.Close()
 
-	handlers.GetTrackByIDHandler(rr, req)
-	assert.Equal(t, http.StatusNotFound, rr.Code)
+	loginReq := loginRequest{
+		Login:    "track_not_found_user",
+		Password: "some_password",
+	}
+	body, err = json.Marshal(loginReq)
+	require.NoError(t, err)
+
+	resp, _ = makeRequest(t, "POST", "/api/v1/login", body)
+	defer resp.Body.Close()
+
+	cookies := resp.Cookies()
+	require.Len(t, cookies, 1)
+	sessionCookie := cookies[0]
+
+	resp, _ = makeRequest(t, "GET", "/api/v1/tracks/9999999", nil, sessionCookie)
+	defer resp.Body.Close()
+	assert.Equal(t, http.StatusNotFound, resp.StatusCode)
 }
 
 func TestGetArtistByIDHandler_NotFound(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	registerReq := registerRequest{
+		Login:    "artist_not_found_user",
+		Email:    "artist_not_found@test.com",
+		Password: "some_password",
+	}
+	body, err := json.Marshal(registerReq)
+	require.NoError(t, err)
 
-	req := httptest.NewRequest("GET", "/api/v1/artists/9999999", nil)
-	req = mux.SetURLVars(req, map[string]string{"id": "9999999"})
-	rr := httptest.NewRecorder()
+	resp, _ := makeRequest(t, "POST", "/api/v1/register", body)
+	resp.Body.Close()
 
-	handlers.GetArtistByIDHandler(rr, req)
-	assert.Equal(t, http.StatusNotFound, rr.Code)
+	loginReq := loginRequest{
+		Login:    "artist_not_found_user",
+		Password: "some_password",
+	}
+	body, err = json.Marshal(loginReq)
+	require.NoError(t, err)
+
+	resp, _ = makeRequest(t, "POST", "/api/v1/login", body)
+	defer resp.Body.Close()
+
+	cookies := resp.Cookies()
+	require.Len(t, cookies, 1)
+	sessionCookie := cookies[0]
+
+	resp, _ = makeRequest(t, "GET", "/api/v1/artists/9999999", nil, sessionCookie)
+	defer resp.Body.Close()
+	assert.Equal(t, http.StatusNotFound, resp.StatusCode)
 }
 
 func TestGetAlbumByIDHandler_NotFound(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	registerReq := registerRequest{
+		Login:    "album_not_found_user",
+		Email:    "album_not_found@test.com",
+		Password: "some_password",
+	}
+	body, err := json.Marshal(registerReq)
+	require.NoError(t, err)
 
-	req := httptest.NewRequest("GET", "/api/v1/albums/9999999", nil)
-	req = mux.SetURLVars(req, map[string]string{"id": "9999999"})
-	rr := httptest.NewRecorder()
+	resp, _ := makeRequest(t, "POST", "/api/v1/register", body)
+	resp.Body.Close()
 
-	handlers.GetAlbumByIDHandler(rr, req)
-	assert.Equal(t, http.StatusNotFound, rr.Code)
+	loginReq := loginRequest{
+		Login:    "album_not_found_user",
+		Password: "some_password",
+	}
+	body, err = json.Marshal(loginReq)
+	require.NoError(t, err)
+
+	resp, _ = makeRequest(t, "POST", "/api/v1/login", body)
+	defer resp.Body.Close()
+
+	cookies := resp.Cookies()
+	require.Len(t, cookies, 1)
+	sessionCookie := cookies[0]
+
+	resp, _ = makeRequest(t, "GET", "/api/v1/albums/9999999", nil, sessionCookie)
+	defer resp.Body.Close()
+	assert.Equal(t, http.StatusNotFound, resp.StatusCode)
 }

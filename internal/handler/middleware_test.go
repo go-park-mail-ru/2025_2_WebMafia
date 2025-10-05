@@ -1,37 +1,37 @@
 package handler
 
 import (
-	"bytes"
 	"encoding/json"
+	"net/http"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"net/http"
-	"net/http/httptest"
-	"spotify/internal/store"
-	"spotify/pkg/jwtmanager"
-	"testing"
-	"time"
 )
 
 func TestAuthMiddleware(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
-
 	registerReq := registerRequest{
-		Login:    "user_login",
-		Email:    "new_user@test.com",
+		Login:    "middleware_user",
+		Email:    "middleware@test.com",
 		Password: "some_password",
 	}
 	body, err := json.Marshal(registerReq)
 	require.NoError(t, err)
 
-	req := httptest.NewRequest("POST", "/api/v1/register", bytes.NewBuffer(body))
-	req.Header.Set("Content-Type", "application/json")
-	rr := httptest.NewRecorder()
-	handlers.RegisterHandler(rr, req)
+	resp, _ := makeRequest(t, "POST", "/api/v1/register", body)
+	resp.Body.Close()
 
-	cookies := rr.Result().Cookies()
+	loginReq := loginRequest{
+		Login:    "middleware_user",
+		Password: "some_password",
+	}
+	body, err = json.Marshal(loginReq)
+	require.NoError(t, err)
+
+	resp, _ = makeRequest(t, "POST", "/api/v1/login", body)
+	defer resp.Body.Close()
+
+	cookies := resp.Cookies()
 	var authCookie *http.Cookie
 	for _, cookie := range cookies {
 		if cookie.Name == "session_token" {
@@ -41,59 +41,27 @@ func TestAuthMiddleware(t *testing.T) {
 	}
 	assert.NotNil(t, authCookie)
 
-	req2 := httptest.NewRequest("GET", "/api/v1/protected", nil)
-	req2.AddCookie(authCookie)
-	rr2 := httptest.NewRecorder()
+	resp, _ = makeRequest(t, "GET", "/api/v1/home", nil, authCookie)
+	defer resp.Body.Close()
 
-	var userIDInContext interface{}
-	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		userIDInContext = r.Context().Value(userIDKey)
-		w.WriteHeader(http.StatusOK)
-	})
-
-	middleware := handlers.AuthMiddleware(testHandler)
-	middleware.ServeHTTP(rr2, req2)
-
-	assert.Equal(t, http.StatusOK, rr2.Code)
-	assert.NotNil(t, userIDInContext)
+	assert.Equal(t, http.StatusOK, resp.StatusCode)
 }
 
 func TestAuthMiddleware_NoToken(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
+	resp, _ := makeRequest(t, "GET", "/api/v1/home", nil)
+	defer resp.Body.Close()
 
-	req := httptest.NewRequest("GET", "/api/v1/protected", nil)
-	rr := httptest.NewRecorder()
-
-	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-	})
-
-	middleware := handlers.AuthMiddleware(testHandler)
-	middleware.ServeHTTP(rr, req)
-
-	assert.Equal(t, http.StatusUnauthorized, rr.Code)
+	assert.Equal(t, http.StatusUnauthorized, resp.StatusCode)
 }
 
 func TestAuthMiddleware_InvalidToken(t *testing.T) {
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager("super-secret-key", time.Hour)
-	handlers := NewHandler(dataStore, jwtManager)
-
-	req := httptest.NewRequest("GET", "/api/v1/protected", nil)
-	req.AddCookie(&http.Cookie{
+	invalidCookie := &http.Cookie{
 		Name:  "session_token",
 		Value: "invalid-token",
-	})
-	rr := httptest.NewRecorder()
+	}
 
-	testHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.WriteHeader(http.StatusOK)
-	})
+	resp, _ := makeRequest(t, "GET", "/api/v1/home", nil, invalidCookie)
+	defer resp.Body.Close()
 
-	middleware := handlers.AuthMiddleware(testHandler)
-	middleware.ServeHTTP(rr, req)
-
-	assert.Equal(t, http.StatusUnauthorized, rr.Code)
+	assert.Equal(t, http.StatusUnauthorized, resp.StatusCode)
 }

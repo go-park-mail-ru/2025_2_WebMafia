@@ -4,11 +4,18 @@ import (
 	"log"
 	"os"
 	"spotify/internal/handler"
+	"strconv"
 	"strings"
 	"time"
 
 	"github.com/joho/godotenv"
 )
+
+type DBConfig struct {
+	MaxOpenConns    int
+	MaxIdleConns    int
+	ConnMaxLifetime time.Duration
+}
 
 type Config struct {
 	Port            string
@@ -19,6 +26,7 @@ type Config struct {
 	AccessTokenTTL  time.Duration
 	JWTSecretKey    string
 	CORS            handler.CORSConfig
+	DB              DBConfig
 }
 
 func NewConfig() *Config {
@@ -41,6 +49,11 @@ func NewConfig() *Config {
 			AllowedMethods:   getEnvAsSlice("CORS_ALLOWED_METHODS", []string{"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"}),
 			AllowedHeaders:   getEnvAsSlice("CORS_ALLOWED_HEADERS", []string{"Content-Type", "Authorization", "X-Requested-With"}),
 			AllowCredentials: getEnvAsBool("CORS_ALLOW_CREDENTIALS", true),
+		},
+		DB: DBConfig{
+			MaxOpenConns:    getEnvAsInt("DB_MAX_OPEN_CONNS", 25),
+			MaxIdleConns:    getEnvAsInt("DB_MAX_IDLE_CONNS", 25),
+			ConnMaxLifetime: getEnvAsDuration("DB_CONN_MAX_LIFETIME", 5*time.Minute),
 		},
 	}
 }
@@ -77,4 +90,12 @@ func getEnvAsBool(key string, defaultValue bool) bool {
 		return defaultValue
 	}
 	return strings.ToLower(valueStr) == "true" || valueStr == "1"
+}
+
+func getEnvAsInt(key string, defaultValue int) int {
+	valueStr := getEnv(key, "")
+	if value, err := strconv.Atoi(valueStr); err == nil {
+		return value
+	}
+	return defaultValue
 }

@@ -4,18 +4,13 @@ import (
 	"log"
 	"os"
 	"spotify/internal/handler"
+	"spotify/pkg/postgres"
 	"strconv"
 	"strings"
 	"time"
 
 	"github.com/joho/godotenv"
 )
-
-type DBConfig struct {
-	MaxOpenConns    int
-	MaxIdleConns    int
-	ConnMaxLifetime time.Duration
-}
 
 type Config struct {
 	Port            string
@@ -26,7 +21,7 @@ type Config struct {
 	AccessTokenTTL  time.Duration
 	JWTSecretKey    string
 	CORS            handler.CORSConfig
-	DB              DBConfig
+	DB              postgres.Config
 }
 
 func NewConfig() *Config {
@@ -50,7 +45,12 @@ func NewConfig() *Config {
 			AllowedHeaders:   getEnvAsSlice("CORS_ALLOWED_HEADERS", []string{"Content-Type", "Authorization", "X-Requested-With"}),
 			AllowCredentials: getEnvAsBool("CORS_ALLOW_CREDENTIALS", true),
 		},
-		DB: DBConfig{
+		DB: postgres.Config{
+			Host:            getEnv("DB_HOST", "localhost"),
+			Port:            getEnv("DB_PORT", "5432"),
+			User:            getEnv("DB_USER", "myuser"),
+			Password:        getEnv("DB_PASSWORD", "mypassword"),
+			DBName:          getEnv("DB_NAME", "mydb"),
 			MaxOpenConns:    getEnvAsInt("DB_MAX_OPEN_CONNS", 25),
 			MaxIdleConns:    getEnvAsInt("DB_MAX_IDLE_CONNS", 25),
 			ConnMaxLifetime: getEnvAsDuration("DB_CONN_MAX_LIFETIME", 5*time.Minute),

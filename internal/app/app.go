@@ -2,6 +2,7 @@ package app
 
 import (
 	"context"
+	"database/sql"
 	"errors"
 	"fmt"
 	"net/http"
@@ -12,15 +13,22 @@ import (
 	"spotify/internal/router"
 	"spotify/internal/store"
 	"spotify/pkg/jwtmanager"
+	"spotify/pkg/postgres"
 )
 
 type App struct {
 	server   *http.Server
 	handlers *handler.Handlers
 	cfg      *Config
+	db       *sql.DB
 }
 
-func NewApp(cfg *Config) *App {
+func NewApp(cfg *Config) (*App, error) {
+	db, err := postgres.New(context.Background(), cfg.DB)
+	if err != nil {
+		return nil, fmt.Errorf("failed to connect to db: %w", err)
+	}
+
 	dataStore := store.NewMemoryStore()
 	jwtManager := jwtmanager.NewManager(cfg.JWTSecretKey, cfg.AccessTokenTTL)
 	handlers := handler.NewHandler(dataStore, jwtManager)
@@ -38,7 +46,8 @@ func NewApp(cfg *Config) *App {
 		server:   server,
 		handlers: handlers,
 		cfg:      cfg,
-	}
+		db:       db,
+	}, nil
 }
 
 func (a *App) Run() error {

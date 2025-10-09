@@ -32,6 +32,7 @@ ARTIST (
     ARTIST_ID UUID PRIMARY KEY, 
     ARTIST_NAME TEXT NOT NULL, 
     AVATAR_URL TEXT, 
+    DESCRIPTION TEXT,
     CREATED_AT TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP, 
     UPDATED_AT TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP, 
 )<br>
@@ -45,6 +46,7 @@ GENRE (
 
     GENRE_ID UUID PRIMARY KEY, 
     GENRE_NAME TEXT NOT NULL UNIQUE, 
+    DESCRIPTION TEXT,
     CREATED_AT TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP 
 ) <br>
 **Функциональные зависимости:** <br>
@@ -57,8 +59,9 @@ TRACK (
 
     TRACK_ID UUID PRIMARY KEY, 
     TITLE TEXT NOT NULL, 
-    DURATION_MS INTEGER NOT NULL, 
+    DURATION_MS INTEGER NOT NULL,
     FILE_URL TEXT NOT NULL, 
+    DESCRIPTION TEXT,
     CREATED_AT TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP, 
     UPDATED_AT TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) <br>
@@ -74,6 +77,7 @@ ALBUM (
     TITLE TEXT NOT NULL, 
     AVATAR_URL TEXT, 
     ARTIST_ID UUID NOT NULL, 
+    DESCRIPTION TEXT,
     RELEASE_DATE DATE, 
     CREATED_AT TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP, 
     UPDATED_AT TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP 
@@ -162,87 +166,6 @@ USER_LIKED_TRACK (
 ) <br>
 **Функциональные зависимости:** <br>
 {USER_ID, TRACK_ID} → LIKED_AT <br>
-
-### Redis
-
-#### Relation: "jwt:versioning:{user_id}"
-**Описание** Хранение версий JWT токенов для механизма logout/all-sessions<br>
-**Отношение**<br>
-
-    KEY: jwt:versioning:{user_id}
-
-    VALUE: {
-    "current_version": "integer",
-    "issued_at": "timestamp",
-    "user_agent": "string",
-    "ip": "string"
-    }
-
-#### Relation: "refresh:tokens:{user_id}"
-**Описание** Хранение refresh токенов<br>
-**Отношение**<br>
-
-    KEY: refresh:tokens:{user_id}:{session_id}
-
-    VALUE: {
-    "refresh_token": "hashed_token",
-    "created_at": "timestamp",
-    "expires_at": "timestamp",
-    "user_agent": "string",
-    "ip": "string",
-    "is_revoked": "boolean"
-    }
-
-
-#### Relation: "cache:popular:albums"
-**Описание** Кэш популярных альбомов<br>
-**Отношение**<br>
-
-    KEY: cache:popular:albums:{time_range}
-
-    VALUE: [
-    {
-    "album_id": "uuid",
-    "title": "string",
-    "avatar_url": "string",
-    "artist_id": "uuid",
-    "artist_name": "string",
-    "play_count": "integer"
-    }
-    ]
-
-#### Relation: "cache:popular:artists"
-**Описание** Кэш популярных исполнителей<br>
-**Отношение**<br>
-
-    KEY: cache:popular:artists:{time_range}  
-
-    VALUE: [
-    {
-    "artist_id": "uuid",
-    "artist_name": "string",
-    "avatar_url": "string",
-    "play_count": "integer",
-    "rank": "integer"
-    }
-    ]
-
-
-#### Relation: "cache:popular:tracks"
-**Описание** Кэш популярных треков<br>
-**Отношение**<br>
-
-    KEY: cache:popular:tracks:{time_range}
-
-    VALUE: [
-    {
-    "track_id": "uuid",
-    "title": "string",
-    "duration_ms": "integer",
-    "artist_names": ["string"],
-    "play_count": "integer"
-    }
-    ]
 
 
 ## Соответствие требованиям:

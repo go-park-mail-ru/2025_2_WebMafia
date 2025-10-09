@@ -8,7 +8,8 @@ CREATE TABLE playlist (
     CONSTRAINT fk_playlist_user
         FOREIGN KEY (user_id)
         REFERENCES "user"(user_id)
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT chk_title_length CHECK (length(title) >= 1)
 );
 
 COMMENT ON TABLE playlist IS 'Таблица хранения плейлистов';

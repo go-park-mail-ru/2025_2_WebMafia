@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"spotify/internal/model"
 	"spotify/internal/store"
+	"spotify/internal/user/model"
 	"spotify/pkg/response"
 
 	"golang.org/x/crypto/bcrypt"

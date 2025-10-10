@@ -3,6 +3,7 @@ package store
 import (
 	"context"
 	"spotify/internal/model"
+	model2 "spotify/internal/user/model"
 	"sync"
 	"time"
 
@@ -11,7 +12,7 @@ import (
 
 type MemoryStore struct {
 	mu         *sync.RWMutex
-	users      map[uuid.UUID]*model.User
+	users      map[uuid.UUID]*model2.User
 	artists    []model.Artist
 	tracks     []model.Track
 	albums     []model.Album
@@ -25,7 +26,7 @@ type MemoryStore struct {
 func NewMemoryStore() *MemoryStore {
 	store := &MemoryStore{
 		mu:      &sync.RWMutex{},
-		users:   make(map[uuid.UUID]*model.User),
+		users:   make(map[uuid.UUID]*model2.User),
 		artists: make([]model.Artist, 0),
 		tracks:  make([]model.Track, 0),
 		albums:  make([]model.Album, 0),
@@ -35,7 +36,7 @@ func NewMemoryStore() *MemoryStore {
 	return store
 }
 
-func (s *MemoryStore) CreateUser(ctx context.Context, user model.User) (*model.User, error) {
+func (s *MemoryStore) CreateUser(ctx context.Context, user model2.User) (*model2.User, error) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
@@ -54,7 +55,7 @@ func (s *MemoryStore) CreateUser(ctx context.Context, user model.User) (*model.U
 	return &user, nil
 }
 
-func (s *MemoryStore) GetUserByLogin(ctx context.Context, login string) (*model.User, error) {
+func (s *MemoryStore) GetUserByLogin(ctx context.Context, login string) (*model2.User, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 
@@ -67,7 +68,7 @@ func (s *MemoryStore) GetUserByLogin(ctx context.Context, login string) (*model.
 	return nil, ErrUserNotFound
 }
 
-func (s *MemoryStore) GetUserByEmail(ctx context.Context, email string) (*model.User, error) {
+func (s *MemoryStore) GetUserByEmail(ctx context.Context, email string) (*model2.User, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 
@@ -80,7 +81,7 @@ func (s *MemoryStore) GetUserByEmail(ctx context.Context, email string) (*model.
 	return nil, ErrUserNotFound
 }
 
-func (s *MemoryStore) GetUserByID(ctx context.Context, id uuid.UUID) (*model.User, error) {
+func (s *MemoryStore) GetUserByID(ctx context.Context, id uuid.UUID) (*model2.User, error) {
 	s.mu.RLock()
 	defer s.mu.RUnlock()
 

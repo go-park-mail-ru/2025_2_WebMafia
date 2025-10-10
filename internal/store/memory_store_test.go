@@ -2,7 +2,7 @@ package store
 
 import (
 	"context"
-	"spotify/internal/model"
+	model2 "spotify/internal/user/model"
 	"testing"
 	"time"
 
@@ -14,7 +14,7 @@ import (
 func TestMemoryStore_CreateUser_Success(t *testing.T) {
 	store := NewMemoryStore()
 
-	user := model.User{
+	user := model2.User{
 		Login:        "user_login",
 		Email:        "new_user@test.com",
 		PasswordHash: "some_password",
@@ -34,13 +34,13 @@ func TestMemoryStore_CreateUser_Success(t *testing.T) {
 func TestMemoryStore_CreateUser_DuplicateLogin(t *testing.T) {
 	store := NewMemoryStore()
 
-	user1 := model.User{
+	user1 := model2.User{
 		Login:        "user_login",
 		Email:        "new_user1@test.com",
 		PasswordHash: "some_password1",
 	}
 
-	user2 := model.User{
+	user2 := model2.User{
 		Login:        "user_login",
 		Email:        "new_user2@test.com",
 		PasswordHash: "some_password2",
@@ -56,13 +56,13 @@ func TestMemoryStore_CreateUser_DuplicateLogin(t *testing.T) {
 func TestMemoryStore_CreateUser_DuplicateEmail(t *testing.T) {
 	store := NewMemoryStore()
 
-	user1 := model.User{
+	user1 := model2.User{
 		Login:        "user_login1",
 		Email:        "new_user1@test.com",
 		PasswordHash: "some_password1",
 	}
 
-	user2 := model.User{
+	user2 := model2.User{
 		Login:        "user_login",
 		Email:        "new_user1@test.com",
 		PasswordHash: "some_password1",
@@ -78,7 +78,7 @@ func TestMemoryStore_CreateUser_DuplicateEmail(t *testing.T) {
 func TestMemoryStore_GetUserByLogin_Success(t *testing.T) {
 	store := NewMemoryStore()
 
-	user := model.User{
+	user := model2.User{
 		Login:        "user_login",
 		Email:        "new_user@test.com",
 		PasswordHash: "some_password",
@@ -106,7 +106,7 @@ func TestMemoryStore_GetUserByLogin_NotFound(t *testing.T) {
 func TestMemoryStore_GetUserByEmail_Success(t *testing.T) {
 	store := NewMemoryStore()
 
-	user := model.User{
+	user := model2.User{
 		Login:        "user_login",
 		Email:        "new_user@test.com",
 		PasswordHash: "some_password",
@@ -133,7 +133,7 @@ func TestMemoryStore_GetUserByEmail_NotFound(t *testing.T) {
 func TestMemoryStore_GetUserByID(t *testing.T) {
 	store := NewMemoryStore()
 
-	user := model.User{
+	user := model2.User{
 		Login:        "user_login",
 		Email:        "new_user@test.com",
 		PasswordHash: "some_password",

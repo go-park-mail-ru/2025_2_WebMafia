@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"spotify/internal/model"
+	model2 "spotify/internal/user/model"
 	"spotify/pkg/jwtmanager"
 
 	"github.com/google/uuid"
@@ -11,10 +12,10 @@ import (
 const sessionTokenCookie = "session_token"
 
 type storage interface {
-	CreateUser(ctx context.Context, user model.User) (*model.User, error)
-	GetUserByLogin(ctx context.Context, login string) (*model.User, error)
-	GetUserByEmail(ctx context.Context, email string) (*model.User, error)
-	GetUserByID(ctx context.Context, id uuid.UUID) (*model.User, error)
+	CreateUser(ctx context.Context, user model2.User) (*model2.User, error)
+	GetUserByLogin(ctx context.Context, login string) (*model2.User, error)
+	GetUserByEmail(ctx context.Context, email string) (*model2.User, error)
+	GetUserByID(ctx context.Context, id uuid.UUID) (*model2.User, error)
 
 	GetAllTracks() ([]model.Track, error)
 	GetAllArtists() ([]model.Artist, error)

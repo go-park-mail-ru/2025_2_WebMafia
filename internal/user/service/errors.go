@@ -1,28 +1,33 @@
 package service
 
-import "fmt"
+import (
+	"errors"
+)
 
 type ErrorType string
 
-const (
-	ErrValidation ErrorType = "validation_error"
-	ErrConflict   ErrorType = "conflict_error"
-	ErrInternal   ErrorType = "internal_error"
+var (
+	ErrValidation = errors.New("validation_error")
+	ErrConflict   = errors.New("conflict_error")
+	ErrInternal   = errors.New("internal_error")
 )
 
 type IsServiceError struct {
-	Type    ErrorType
 	Message string
 	Err     error
 }
 
 func (e *IsServiceError) Error() string {
 	if e.Err != nil {
-		return fmt.Sprintf("%s: %v", e.Message, e.Err)
+		return e.Message + ": " + e.Err.Error()
 	}
 	return e.Message
 }
 
-func WrapError(err error, typ ErrorType, msg string) *IsServiceError {
-	return &IsServiceError{Type: typ, Message: msg, Err: err}
+func NewServiceError(err error, msg string) *IsServiceError {
+	return &IsServiceError{Message: msg, Err: err}
+}
+
+func (e *IsServiceError) Unwrap() error {
+	return e.Err
 }

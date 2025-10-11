@@ -2,26 +2,13 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"spotify/internal/user/model"
 	"spotify/internal/user/tools"
 	"time"
 
 	"github.com/google/uuid"
 )
-
-type IRepository interface {
-	CreateUser(ctx context.Context, user model.User) error
-	GetUserByEmail(ctx context.Context, email string) (*model.User, error)
-	GetUserByLogin(ctx context.Context, login string) (*model.User, error)
-}
-
-type Service struct {
-	repo IRepository
-}
-
-func NewUserService(repo IRepository) *Service {
-	return &Service{repo: repo}
-}
 
 type RegisterRequest struct {
 	Login    string
@@ -38,7 +25,7 @@ func (s *Service) Register(ctx context.Context, req RegisterRequest) (*RegisterR
 
 	hash, err := tools.Hash(req.Password)
 	if err != nil {
-		return nil, NewServiceError(ErrInternal, "failed to hash password")
+		return nil, fmt.Errorf("failed to hash password: %w", ErrInternal)
 	}
 
 	user := model.User{
@@ -51,7 +38,7 @@ func (s *Service) Register(ctx context.Context, req RegisterRequest) (*RegisterR
 	}
 
 	if err := s.repo.CreateUser(ctx, user); err != nil {
-		return nil, err
+		return nil, mapRepositoryError(err)
 	}
 
 	return &RegisterResponse{

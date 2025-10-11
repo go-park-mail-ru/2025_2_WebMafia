@@ -1,32 +1,16 @@
 package http
 
 import (
-	"context"
 	"encoding/json"
-	"errors"
+	"fmt"
 	"log"
 	"net/http"
-	"spotify/internal/user/model"
-	"spotify/internal/user/service"
-	"spotify/pkg/jwtmanager"
 	"spotify/pkg/response"
+	"strings"
 	"time"
 )
 
-const registerLogPref = "[Register] "
 const sessionTokenCookie = "session_token"
-
-type IService interface {
-	Register(ctx context.Context, login, email, password string) (*model.User, error)
-}
-type Handler struct {
-	svc        IService
-	jwtManager *jwtmanager.Manager
-}
-
-func NewHandler(svc IService) *Handler {
-	return &Handler{svc: svc}
-}
 
 type registerRequest struct {
 	Login    string `json:"login"`
@@ -39,28 +23,19 @@ type registerResponse struct {
 }
 
 func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
+	const op = "[Register] "
 	defer r.Body.Close()
 
 	var req registerRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		log.Printf(registerLogPref+"invalid body: %v", err)
+		log.Printf(" %s invalid body: %v", op, err)
 		response.BadRequestJSON(w)
 		return
 	}
 
-	if len(req.Login) < 5 {
-		log.Printf(registerLogPref + "validation error: login too short")
-		response.BadRequestJSON(w)
-		return
-	}
-	if len(req.Password) < 8 {
-		log.Printf(registerLogPref + "validation error: password too short")
-		response.BadRequestJSON(w)
-		return
-	}
-	if !containsAt(req.Email) {
-		log.Printf(registerLogPref + "validation error: invalid email format")
+	if err := req.validate(); err != nil {
+		log.Printf("%s validation error: %v", op, err)
 		response.BadRequestJSON(w)
 		return
 	}
@@ -68,26 +43,14 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 	user, err := h.svc.Register(r.Context(), req.Login, req.Email, req.Password)
 
 	if err != nil {
-		log.Printf(registerLogPref+"service error: %v", err)
-		var svcErr *service.IsServiceError
-		if errors.As(err, &svcErr) {
-			switch {
-			case errors.Is(err, service.ErrValidation):
-				response.BadRequestJSON(w)
-			case errors.Is(err, service.ErrConflict):
-				response.ConflictJSON(w)
-			default:
-				response.InternalErrorJSON(w)
-			}
-		} else {
-			response.InternalErrorJSON(w)
-		}
+		log.Printf("%s service error: %v", op, err)
+		handleServiceError(w, err)
 		return
 	}
 
 	token, err := h.jwtManager.Generate(user)
 	if err != nil {
-		log.Printf("ERROR: failed to generate token")
+		log.Printf("%s ERROR: failed to generate token", op)
 		response.InternalErrorJSON(w)
 		return
 	}
@@ -103,11 +66,15 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 	response.JSON(w, http.StatusCreated, registerResponse{ID: user.ID.String()})
 }
 
-func containsAt(email string) bool {
-	for _, c := range email {
-		if c == '@' {
-			return true
-		}
+func (i *registerRequest) validate() error {
+	if len(i.Login) < 5 {
+		return fmt.Errorf("login is too short (minimum 5 chars)")
 	}
-	return false
+	if len(i.Password) < 8 {
+		return fmt.Errorf("password is too short (minimum 8 chars)")
+	}
+	if !strings.Contains(i.Email, "@") {
+		return fmt.Errorf("invalid email format")
+	}
+	return nil
 }

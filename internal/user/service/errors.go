@@ -2,12 +2,28 @@ package service
 
 import (
 	"errors"
+	"fmt"
+	"spotify/internal/user/repository/postgres"
 )
-
-type ErrorType string
 
 var (
 	ErrValidation = errors.New("validation_error")
+	ErrNotFound   = errors.New("not_found")
 	ErrConflict   = errors.New("conflict_error")
 	ErrInternal   = errors.New("internal_error")
 )
+
+func mapRepositoryError(err error) error {
+	if err == nil {
+		return nil
+	}
+
+	switch {
+	case errors.Is(err, postgres.ErrNotFound):
+		return fmt.Errorf("not found: %w", ErrNotFound)
+	case errors.Is(err, postgres.ErrConflict):
+		return fmt.Errorf("user already exists: %w", ErrConflict)
+	default:
+		return fmt.Errorf("internal error: %w", ErrInternal)
+	}
+}

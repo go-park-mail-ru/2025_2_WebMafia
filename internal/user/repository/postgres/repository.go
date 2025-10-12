@@ -19,12 +19,8 @@ func (m *Repository) CreateUser(ctx context.Context, user model.User) error {
 	)
 
 	if err != nil {
-		if handlePostgresError(err) {
-			return fmt.Errorf("user with this login or email already exists: %w", ErrCreateFailed)
-		}
-		return fmt.Errorf("failed to create user: %w", ErrConflict)
+		return handlePostgresError(err)
 	}
-
 	return nil
 }
 
@@ -64,16 +60,24 @@ func (m *Repository) selectUser(ctx context.Context, query string, args ...inter
 	)
 
 	if err = rows.Err(); err != nil {
-		return nil, fmt.Errorf("rows iteration failed: %w", ErrRowsIteration)
+		return nil, fmt.Errorf("rows iteration failed: %w", ErrInternal)
 	}
 
 	return user, nil
 }
 
-func handlePostgresError(err error) bool {
+func handlePostgresError(err error) error {
+	if err == nil {
+		return nil
+	}
 	var pgErr *pgconn.PgError
 	if errors.As(err, &pgErr) {
-		return pgErr.Code == "23505"
+		switch pgErr.Code {
+		case "23505":
+			return fmt.Errorf("user already exist: %w", ErrConflict)
+		default:
+			return fmt.Errorf("postgres error (%s): %s", ErrInternal, pgErr.Message)
+		}
 	}
-	return false
+	return fmt.Errorf("unknown database error: %w", ErrInternal)
 }

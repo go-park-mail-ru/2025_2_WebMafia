@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"spotify/internal/user/model"
+	"spotify/internal/model"
 )
 
 type IRepository interface {

@@ -2,10 +2,11 @@ package postgres
 
 import (
 	"context"
+	"database/sql"
 	"errors"
 	"fmt"
 	"github.com/jackc/pgconn"
-	"spotify/internal/user/model"
+	"spotify/internal/model"
 )
 
 func (m *Repository) CreateUser(ctx context.Context, user model.User) error {
@@ -58,6 +59,10 @@ func (m *Repository) selectUser(ctx context.Context, query string, args ...inter
 		&user.CreatedAt,
 		&user.UpdatedAt,
 	)
+
+	if errors.Is(err, sql.ErrNoRows) {
+		return nil, fmt.Errorf("user not found: %w", ErrNotFound)
+	}
 
 	if err = rows.Err(); err != nil {
 		return nil, fmt.Errorf("rows iteration failed: %w", ErrInternal)

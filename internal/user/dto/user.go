@@ -10,3 +10,12 @@ type RegisterResponse struct {
 	Login string
 	Email string
 }
+
+type LoginRequest struct {
+	Login    string
+	Password string
+}
+
+type LoginResponse struct {
+	ID string
+}

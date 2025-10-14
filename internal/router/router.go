@@ -2,12 +2,12 @@ package router
 
 import (
 	"net/http"
-	"spotify/internal/handler"
+	"spotify/internal/middleware"
 
 	"github.com/gorilla/mux"
 )
 
-func NewRouter(h *handler.Handlers, corsConfig handler.CORSConfig) *mux.Router {
+func NewRouter(h *handler.Handlers, corsConfig middleware.CORSConfig) *mux.Router {
 	r := mux.NewRouter()
 
 	r.Use(handler.CORS(corsConfig))

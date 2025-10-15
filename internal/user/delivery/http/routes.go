@@ -6,9 +6,7 @@ import (
 	"spotify/internal/middleware"
 )
 
-func RegisterRouter(h *Handler, auth *middleware.Auth, corsConfig middleware.CORSConfig) *mux.Router {
-	r := mux.NewRouter()
-	r.Use(middleware.CORS(corsConfig))
+func (h *Handler) RegisterRouter(r *mux.Router, auth *middleware.Auth) {
 
 	api := r.PathPrefix("/api/v1").Subrouter()
 
@@ -20,5 +18,4 @@ func RegisterRouter(h *Handler, auth *middleware.Auth, corsConfig middleware.COR
 
 	protected.HandleFunc("/logout", h.Logout).Methods(http.MethodPost, http.MethodOptions)
 
-	return r
 }

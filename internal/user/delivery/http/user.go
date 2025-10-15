@@ -154,7 +154,6 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
-	const op = "[Logout] "
 
 	http.SetCookie(w, &http.Cookie{
 		Name:     sessionTokenCookie,
@@ -164,6 +163,5 @@ func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
 		Path:     "/",
 	})
 
-	log.Printf("%s user logged out", op)
 	response.JSON(w, http.StatusOK, logoutResponse{Status: "ok"})
 }

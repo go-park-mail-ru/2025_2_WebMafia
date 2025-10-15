@@ -39,9 +39,7 @@ func (a *Auth) AuthMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
-		tokenString := cookie.Value
-
-		claims, err := a.jwt.Validate(tokenString)
+		claims, err := a.jwt.Validate(cookie.Value)
 		if err != nil {
 			log.Printf("%s invalid token", op)
 			response.UnauthorizedJSON(w)

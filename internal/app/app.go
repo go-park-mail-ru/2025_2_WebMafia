@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"github.com/gorilla/mux"
 	"net/http"
 	"os/signal"
 	"spotify/internal/middleware"
@@ -28,6 +29,9 @@ func NewApp(cfg *Config) (*App, error) {
 		return nil, fmt.Errorf("failed to connect to db: %w", err)
 	}
 
+	router := mux.NewRouter()
+	router.Use(middleware.CORS(cfg.CORS))
+
 	repo := userRepository.NewUserRepository(db)
 	svc := userService.NewUserService(repo)
 
@@ -35,11 +39,11 @@ func NewApp(cfg *Config) (*App, error) {
 	handler := httpDelivery.NewHandler(svc, jwtManager)
 
 	authMiddleware := middleware.NewAuthMiddleware(jwtManager)
-	muxRouter := httpDelivery.RegisterRouter(handler, authMiddleware, cfg.CORS)
+	handler.RegisterRouter(router, authMiddleware)
 
 	server := &http.Server{
 		Addr:         ":" + cfg.Port,
-		Handler:      muxRouter,
+		Handler:      router,
 		ReadTimeout:  cfg.ReadTimeout,
 		WriteTimeout: cfg.WriteTimeout,
 		IdleTimeout:  cfg.IdleTimeout,

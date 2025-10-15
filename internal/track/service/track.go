@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"spotify/internal/model"
 	"spotify/internal/track/dto"
-	"spotify/internal/track/model"
 	"spotify/internal/track/repository/postgres"
 
 	"github.com/google/uuid"

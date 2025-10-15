@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"spotify/internal/track/model"
+	model "spotify/internal/models"
 
 	"github.com/google/uuid"
 )

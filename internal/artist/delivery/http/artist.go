@@ -1,62 +1,69 @@
 package http
 
 import (
-	"errors"
 	"log"
 	"net/http"
-	"spotify/internal/artist/dto"
-	"spotify/internal/artist/service"
 	"spotify/pkg/response"
+	"strconv"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 )
 
-type ArtistsResponse struct {
-	Artists []dto.Artist `json:"artists"`
-}
-
-type ArtistResponse struct {
-	Artist *dto.Artist `json:"artist"`
-}
+const (
+	DefaultLimit  = 10
+	DefaultOffset = 0
+	MaxLimit      = 100
+)
 
 func (h *Handler) GetArtistByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	idStr, ok := vars["id"]
 	if !ok {
-		log.Println("ERROR: delivery.GetArtistByID: id is missing")
+		log.Println("ERROR: delivery.GetArtistByID: id is missing in URL vars")
 		response.BadRequestJSON(w)
 		return
 	}
 
 	id, err := uuid.Parse(idStr)
 	if err != nil {
-		log.Printf("ERROR: delivery.GetArtistByID: failed to parse id: %v", err)
+		log.Printf("ERROR: delivery.GetArtistByID: failed to parse id '%s': %v", idStr, err)
 		response.BadRequestJSON(w)
 		return
 	}
 
 	artist, err := h.service.GetArtistByID(r.Context(), id)
 	if err != nil {
-		log.Printf("ERROR: delivery.GetArtistByID: service error: %v", err)
-		if errors.Is(err, service.ErrNotFound) {
-			response.NotFoundJSON(w)
-			return
-		}
-		response.InternalErrorJSON(w)
+		h.handleError(w, err, "delivery.GetArtistByID: service error")
 		return
 	}
 
-	response.JSON(w, http.StatusOK, ArtistResponse{Artist: artist})
+	response.JSON(w, http.StatusOK, artist)
 }
 
 func (h *Handler) GetAllArtists(w http.ResponseWriter, r *http.Request) {
-	artists, err := h.service.GetAllArtists(r.Context())
+	query := r.URL.Query()
+	limitStr := query.Get("limit")
+	offsetStr := query.Get("offset")
+
+	limit, err := strconv.ParseUint(limitStr, 10, 64)
+	if err != nil || limit == 0 {
+		limit = DefaultLimit
+	}
+	if limit > MaxLimit {
+		limit = MaxLimit
+	}
+
+	offset, err := strconv.ParseUint(offsetStr, 10, 64)
 	if err != nil {
-		log.Printf("ERROR: delivery.GetAllArtists: service error: %v", err)
-		response.InternalErrorJSON(w)
+		offset = DefaultOffset
+	}
+
+	artists, err := h.service.GetAllArtists(r.Context(), limit, offset)
+	if err != nil {
+		h.handleError(w, err, "delivery.GetAllArtists: service error")
 		return
 	}
 
-	response.JSON(w, http.StatusOK, ArtistsResponse{Artists: artists})
+	response.JSON(w, http.StatusOK, artists)
 }

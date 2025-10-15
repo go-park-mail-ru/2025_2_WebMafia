@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"spotify/internal/track/model"
+	"spotify/internal/model"
 
 	"github.com/google/uuid"
 )

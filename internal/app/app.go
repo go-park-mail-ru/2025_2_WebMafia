@@ -7,20 +7,26 @@ import (
 	"fmt"
 	"net/http"
 	"os/signal"
+	albumDelivery "spotify/internal/album/delivery/http"
+	albumRepo "spotify/internal/album/repository/postgres"
+	albumService "spotify/internal/album/service"
 	"syscall"
 
-	"spotify/internal/handler"
+	artistDelivery "spotify/internal/artist/delivery/http"
+	artistRepo "spotify/internal/artist/repository/postgres"
+	artistService "spotify/internal/artist/service"
+
 	"spotify/internal/router"
-	"spotify/internal/store"
-	"spotify/pkg/jwtmanager"
+	trackDelivery "spotify/internal/track/delivery/http"
+	trackRepo "spotify/internal/track/repository/postgres"
+	trackService "spotify/internal/track/service"
 	"spotify/pkg/postgres"
 )
 
 type App struct {
-	server   *http.Server
-	handlers *handler.Handlers
-	cfg      *Config
-	db       *sql.DB
+	server *http.Server
+	cfg    *Config
+	db     *sql.DB
 }
 
 func NewApp(cfg *Config) (*App, error) {
@@ -29,10 +35,25 @@ func NewApp(cfg *Config) (*App, error) {
 		return nil, fmt.Errorf("failed to connect to db: %w", err)
 	}
 
-	dataStore := store.NewMemoryStore()
-	jwtManager := jwtmanager.NewManager(cfg.JWTSecretKey, cfg.AccessTokenTTL)
-	handlers := handler.NewHandler(dataStore, jwtManager)
-	muxRouter := router.NewRouter(handlers, cfg.CORS)
+	artistRepository := artistRepo.New(db)
+	albumRepository := albumRepo.New(db)
+	trackRepository := trackRepo.New(db)
+
+	artistSvc := artistService.New(artistRepository)
+	albumSvc := albumService.New(albumRepository)
+	trackSvc := trackService.New(trackRepository)
+
+	artistHandler := artistDelivery.NewHandler(artistSvc)
+	albumHandler := albumDelivery.NewHandler(albumSvc)
+	trackHandler := trackDelivery.NewHandler(trackSvc)
+
+	// jwtManager := jwtmanager.NewManager(cfg.JWTSecretKey, cfg.AccessTokenTTL)
+	muxRouter := router.NewRouter(
+		trackHandler,
+		artistHandler,
+		albumHandler,
+		cfg.CORS,
+	)
 
 	server := &http.Server{
 		Addr:         ":" + cfg.Port,
@@ -43,10 +64,9 @@ func NewApp(cfg *Config) (*App, error) {
 	}
 
 	return &App{
-		server:   server,
-		handlers: handlers,
-		cfg:      cfg,
-		db:       db,
+		server: server,
+		cfg:    cfg,
+		db:     db,
 	}, nil
 }
 

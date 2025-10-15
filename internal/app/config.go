@@ -3,11 +3,13 @@ package app
 import (
 	"log"
 	"os"
-	"spotify/internal/handler"
 	"spotify/pkg/postgres"
+
 	"strconv"
 	"strings"
 	"time"
+
+	"spotify/internal/middleware"
 
 	"github.com/joho/godotenv"
 )
@@ -20,7 +22,7 @@ type Config struct {
 	IdleTimeout     time.Duration
 	AccessTokenTTL  time.Duration
 	JWTSecretKey    string
-	CORS            handler.CORSConfig
+	CORS            middleware.CORSConfig
 	DB              postgres.Config
 }
 
@@ -39,7 +41,7 @@ func NewConfig() *Config {
 		IdleTimeout:     getEnvAsDuration("IDLE_TIMEOUT", 60*time.Second),
 		AccessTokenTTL:  getEnvAsDuration("ACCESS_TOKEN_TTL", 720*time.Hour),
 		JWTSecretKey:    getEnv("JWT_SECRET_KEY", ""),
-		CORS: handler.CORSConfig{
+		CORS: middleware.CORSConfig{
 			AllowedOrigins:   getEnvAsSlice("CORS_ALLOWED_ORIGINS", []string{"http://localhost:8090"}),
 			AllowedMethods:   getEnvAsSlice("CORS_ALLOWED_METHODS", []string{"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"}),
 			AllowedHeaders:   getEnvAsSlice("CORS_ALLOWED_HEADERS", []string{"Content-Type", "Authorization", "X-Requested-With"}),

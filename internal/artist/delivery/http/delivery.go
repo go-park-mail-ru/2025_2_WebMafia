@@ -9,7 +9,7 @@ import (
 
 type IService interface {
 	GetArtistByID(ctx context.Context, id uuid.UUID) (*dto.Artist, error)
-	GetAllArtists(ctx context.Context) ([]dto.Artist, error)
+	GetAllArtists(ctx context.Context, limit, offset uint64) ([]dto.Artist, error)
 }
 
 type Handler struct {

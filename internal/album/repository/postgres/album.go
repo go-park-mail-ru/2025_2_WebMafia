@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"spotify/internal/album/model"
+	model "spotify/internal/models"
 
 	"github.com/google/uuid"
 )

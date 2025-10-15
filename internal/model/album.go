@@ -17,11 +17,3 @@ type Album struct {
 	UpdatedAt   time.Time
 }
 
-type Artist struct {
-	ID          uuid.UUID
-	Name        string
-	AvatarURL   string
-	Description string
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
-}

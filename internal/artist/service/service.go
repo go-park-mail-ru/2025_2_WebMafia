@@ -2,14 +2,15 @@ package service
 
 import (
 	"context"
-	"spotify/internal/artist/model"
+	"spotify/internal/model"
 
 	"github.com/google/uuid"
 )
 
 type IRepository interface {
 	GetByID(ctx context.Context, id uuid.UUID) (*model.Artist, error)
-	GetAll(ctx context.Context) ([]model.Artist, error)
+	GetAll(ctx context.Context, limit, offset uint64) ([]model.Artist, error)
+	GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Artist, error)
 }
 
 type Service struct {

@@ -1,32 +1,31 @@
 package router
 
 import (
-	"net/http"
+	albumHandler "spotify/internal/album/delivery/http"
+	artistHandler "spotify/internal/artist/delivery/http"
 	"spotify/internal/middleware"
+	trackHandler "spotify/internal/track/delivery/http"
 
 	"github.com/gorilla/mux"
 )
 
-func NewRouter(h *handler.Handlers, corsConfig middleware.CORSConfig) *mux.Router {
+func NewRouter(
+	trackHandlers *trackHandler.Handler,
+	artistHandlers *artistHandler.Handler,
+	albumHandlers *albumHandler.Handler,
+	corsConfig middleware.CORSConfig,
+) *mux.Router {
 	r := mux.NewRouter()
 
-	r.Use(handler.CORS(corsConfig))
+	r.Use(middleware.CORS(corsConfig))
 
 	api := r.PathPrefix("/api/v1").Subrouter()
 
-	api.HandleFunc("/register", h.RegisterHandler).Methods(http.MethodPost, http.MethodOptions)
-	api.HandleFunc("/login", h.LoginHandler).Methods(http.MethodPost, http.MethodOptions)
-
 	protected := api.PathPrefix("").Subrouter()
-	protected.Use(h.AuthMiddleware)
 
-	protected.HandleFunc("/logout", h.LogoutHandler).Methods(http.MethodPost, http.MethodOptions)
-	protected.HandleFunc("/home", h.HomeHandler).Methods(http.MethodGet, http.MethodOptions)
-	protected.HandleFunc("/tracks", h.GetAllTracksHandler).Methods(http.MethodGet, http.MethodOptions)
-	protected.HandleFunc("/tracks/{id}", h.GetTrackByIDHandler).Methods(http.MethodGet, http.MethodOptions)
-	protected.HandleFunc("/artists", h.GetAllArtistsHandler).Methods(http.MethodGet, http.MethodOptions)
-	protected.HandleFunc("/artists/{id}", h.GetArtistByIDHandler).Methods(http.MethodGet, http.MethodOptions)
-	protected.HandleFunc("/albums", h.GetAllAlbumsHandler).Methods(http.MethodGet, http.MethodOptions)
-	protected.HandleFunc("/albums/{id}", h.GetAlbumByIDHandler).Methods(http.MethodGet, http.MethodOptions)
+	trackHandlers.RegisterRoutes(protected)
+	artistHandlers.RegisterRoutes(protected)
+	albumHandlers.RegisterRoutes(protected)
+
 	return r
 }

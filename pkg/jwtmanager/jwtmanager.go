@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	model "spotify/internal/models"
+	"spotify/internal/model"
 	"strings"
 	"time"
 )

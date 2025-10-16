@@ -5,22 +5,22 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"github.com/gorilla/mux"
 	"net/http"
 	"os/signal"
-	"syscall"
-
-	"spotify/internal/handler"
-	"spotify/internal/router"
-	"spotify/internal/store"
+	"spotify/internal/middleware"
+	httpDelivery "spotify/internal/user/delivery/http"
+	userRepository "spotify/internal/user/repository/postgres"
+	userService "spotify/internal/user/service"
 	"spotify/pkg/jwtmanager"
 	"spotify/pkg/postgres"
+	"syscall"
 )
 
 type App struct {
-	server   *http.Server
-	handlers *handler.Handlers
-	cfg      *Config
-	db       *sql.DB
+	server *http.Server
+	cfg    *Config
+	db     *sql.DB
 }
 
 func NewApp(cfg *Config) (*App, error) {
@@ -29,24 +29,30 @@ func NewApp(cfg *Config) (*App, error) {
 		return nil, fmt.Errorf("failed to connect to db: %w", err)
 	}
 
-	dataStore := store.NewMemoryStore()
+	router := mux.NewRouter()
+	router.Use(middleware.CORS(cfg.CORS))
+
+	repo := userRepository.NewUserRepository(db)
+	svc := userService.NewUserService(repo)
+
 	jwtManager := jwtmanager.NewManager(cfg.JWTSecretKey, cfg.AccessTokenTTL)
-	handlers := handler.NewHandler(dataStore, jwtManager)
-	muxRouter := router.NewRouter(handlers, cfg.CORS)
+	handler := httpDelivery.NewHandler(svc, jwtManager)
+
+	authMiddleware := middleware.NewAuthMiddleware(jwtManager)
+	handler.RegisterRouter(router, authMiddleware)
 
 	server := &http.Server{
 		Addr:         ":" + cfg.Port,
-		Handler:      muxRouter,
+		Handler:      router,
 		ReadTimeout:  cfg.ReadTimeout,
 		WriteTimeout: cfg.WriteTimeout,
 		IdleTimeout:  cfg.IdleTimeout,
 	}
 
 	return &App{
-		server:   server,
-		handlers: handlers,
-		cfg:      cfg,
-		db:       db,
+		server: server,
+		cfg:    cfg,
+		db:     db,
 	}, nil
 }
 

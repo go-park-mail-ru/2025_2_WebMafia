@@ -21,7 +21,13 @@ import (
 	trackRepo "spotify/internal/track/repository/postgres"
 	trackService "spotify/internal/track/service"
 
+	userDelivery "spotify/internal/user/delivery/http"
+	userRepo "spotify/internal/user/repository/postgres"
+	userService "spotify/internal/user/service"
+
+	"spotify/internal/middleware"
 	"spotify/internal/router"
+	"spotify/pkg/jwtmanager"
 	"spotify/pkg/postgres"
 )
 
@@ -37,24 +43,33 @@ func NewApp(cfg *Config) (*App, error) {
 		return nil, fmt.Errorf("failed to connect to db: %w", err)
 	}
 
+	userRepository := userRepo.NewUserRepository(db)
 	artistRepository := artistRepo.New(db)
 	albumRepository := albumRepo.New(db)
 	trackRepository := trackRepo.New(db)
 
+	userSvc := userService.NewUserService(userRepository)
 	artistSvc := artistService.New(artistRepository)
+
 	albumSvc := albumService.New(albumRepository, artistSvc)
 	trackSvc := trackService.New(trackRepository, albumSvc, artistSvc)
 
+	jwtManager := jwtmanager.NewManager(cfg.JWTSecretKey, cfg.AccessTokenTTL)
+	authMiddleware := middleware.NewAuthMiddleware(jwtManager)
+
+	userHandler := userDelivery.NewHandler(userSvc, jwtManager)
 	artistHandler := artistDelivery.NewHandler(artistSvc)
 	albumHandler := albumDelivery.NewHandler(albumSvc)
 	trackHandler := trackDelivery.NewHandler(trackSvc)
 
 	handlers := router.AppHandlers{
+		UserHandler:   userHandler,
 		ArtistHandler: artistHandler,
 		AlbumHandler:  albumHandler,
 		TrackHandler:  trackHandler,
 	}
-	muxRouter := router.NewRouter(handlers, cfg.CORS)
+
+	muxRouter := router.NewRouter(handlers, authMiddleware, cfg.CORS)
 
 	server := &http.Server{
 		Addr:         ":" + cfg.Port,

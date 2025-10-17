@@ -12,6 +12,7 @@ MIGRATIONS_PATH = migrations
 
 .PHONY: test coverage-html clean docker-build docker-up docker-down docker-stop docker-logs docker-restart
 
+
 # === Тестирование ===
 
 test:

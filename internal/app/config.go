@@ -3,13 +3,14 @@ package app
 import (
 	"log"
 	"os"
+
+	"spotify/internal/middleware"
+
 	"spotify/pkg/postgres"
 
 	"strconv"
 	"strings"
 	"time"
-
-	"spotify/internal/middleware"
 
 	"github.com/joho/godotenv"
 )

@@ -1,41 +1,52 @@
 package middleware
 
-// import (
-// 	"context"
-// 	"errors"
-// 	"log"
-// 	"net/http"
-// 	"spotify/pkg/response"
-// )
+import (
+	"context"
+	"errors"
+	"log"
+	"net/http"
+	"spotify/pkg/jwtmanager"
+	"spotify/pkg/response"
+)
 
-// type ctxKeyUserID string
+type ctxKeyUserID string
 
-// const userIDKey ctxKeyUserID = "userID"
+const (
+	userIDKey          ctxKeyUserID = "userID"
+	sessionTokenCookie string       = "session_token"
+)
 
-// func (h *Handlers) AuthMiddleware(next http.Handler) http.Handler {
-// 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-// 		cookie, err := r.Cookie(sessionTokenCookie)
-// 		if err != nil {
-// 			if errors.Is(err, http.ErrNoCookie) {
-// 				log.Printf("ERROR: no token provided")
-// 				response.UnauthorizedJSON(w)
-// 				return
-// 			}
-// 			log.Printf("ERROR: bad request")
-// 			response.BadRequestJSON(w)
-// 			return
-// 		}
+type Auth struct {
+	jwt *jwtmanager.Manager
+}
 
-// 		tokenString := cookie.Value
+func NewAuthMiddleware(jwt *jwtmanager.Manager) *Auth {
+	return &Auth{jwt: jwt}
+}
 
-// 		claims, err := h.jwtManager.Validate(tokenString)
-// 		if err != nil {
-// 			log.Printf("ERROR: invalid token")
-// 			response.UnauthorizedJSON(w)
-// 			return
-// 		}
+func (a *Auth) AuthMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		const op = "[AuthMiddleware] "
+		cookie, err := r.Cookie(sessionTokenCookie)
+		if err != nil {
+			if errors.Is(err, http.ErrNoCookie) {
+				log.Printf("%s no token provided", op)
+				response.UnauthorizedJSON(w)
+				return
+			}
+			log.Printf("%s ERROR: bad request", op)
+			response.BadRequestJSON(w)
+			return
+		}
 
-// 		ctx := context.WithValue(r.Context(), userIDKey, claims)
-// 		next.ServeHTTP(w, r.WithContext(ctx))
-// 	})
-// }
+		claims, err := a.jwt.Validate(cookie.Value)
+		if err != nil {
+			log.Printf("%s invalid token", op)
+			response.UnauthorizedJSON(w)
+			return
+		}
+
+		ctx := context.WithValue(r.Context(), userIDKey, claims.UserID)
+		next.ServeHTTP(w, r.WithContext(ctx))
+	})
+}

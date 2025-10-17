@@ -2,100 +2,150 @@ package postgres
 
 import (
 	"context"
-	"database/sql"
-	"errors"
-	"fmt"
-	model "spotify/internal/models"
+	"spotify/internal/model"
 
 	"github.com/google/uuid"
 )
 
-func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Album, *model.Artist, error) {
+func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Album, error) {
 	query := `
-		SELECT
-			a.album_id, a.title, a.avatar_url, a.description, a.release_date, a.created_at, a.updated_at,
-			ar.artist_id, ar.artist_name, ar.avatar_url, ar.description, ar.created_at, ar.updated_at
-		FROM albums a
-		JOIN artists ar ON a.artist_id = ar.artist_id
-		WHERE a.album_id = $1`
+		SELECT album_id, title, avatar_url, artist_id, description, release_date, created_at, updated_at
+		FROM album
+		WHERE album_id = $1`
 
 	var album model.Album
-	var artist model.Artist
-
 	err := r.db.QueryRowContext(ctx, query, id).Scan(
 		&album.ID,
 		&album.Title,
 		&album.AvatarURL,
+		&album.ArtistID,
 		&album.Description,
 		&album.ReleaseDate,
 		&album.CreatedAt,
 		&album.UpdatedAt,
-		&artist.ID,
-		&artist.Name,
-		&artist.AvatarURL,
-		&artist.Description,
-		&artist.CreatedAt,
-		&artist.UpdatedAt,
 	)
 
 	if err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
-			return nil, nil, ErrNotFound
-		}
-		return nil, nil, fmt.Errorf("repository.GetByID: queryrow or scan fail %w", err)
+		return nil, mapErrors(err, "repository.GetByID")
 	}
-	album.ArtistID = artist.ID
 
-	return &album, &artist, nil
+	return &album, nil
 }
 
-func (r *Repository) GetAll(ctx context.Context) ([]model.Album, []model.Artist, error) {
+func (r *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.Album, error) {
 	query := `
-		SELECT
-			a.album_id, a.title, a.avatar_url, a.description, a.release_date, a.created_at, a.updated_at,
-			ar.artist_id, ar.artist_name, ar.avatar_url, ar.description, ar.created_at, ar.updated_at
-		FROM albums a
-		JOIN artists ar ON a.artist_id = ar.artist_id
-		ORDER BY a.release_date DESC`
+		SELECT album_id, title, avatar_url, artist_id, description, release_date, created_at, updated_at
+		FROM album
+		ORDER BY release_date DESC
+		LIMIT $1 OFFSET $2`
 
-	rows, err := r.db.QueryContext(ctx, query)
+	rows, err := r.db.QueryContext(ctx, query, limit, offset)
 	if err != nil {
-		return nil, nil, fmt.Errorf("repository.GetAll: query fail: %w", err)
+		return nil, mapErrors(err, "repository.GetAll: query failed")
 	}
-
 	defer rows.Close()
 
-	albums := make([]model.Album, 0)
-	artists := make([]model.Artist, 0)
-
+	albums := make([]model.Album, 0, limit)
 	for rows.Next() {
 		var album model.Album
-		var artist model.Artist
 		if err := rows.Scan(
 			&album.ID,
 			&album.Title,
 			&album.AvatarURL,
+			&album.ArtistID,
 			&album.Description,
 			&album.ReleaseDate,
 			&album.CreatedAt,
 			&album.UpdatedAt,
-			&artist.ID,
-			&artist.Name,
-			&artist.AvatarURL,
-			&artist.Description,
-			&artist.CreatedAt,
-			&artist.UpdatedAt,
 		); err != nil {
-			return nil, nil, fmt.Errorf("repository.GetAll: row scan fail: %w", err)
+			return nil, mapErrors(err, "repository.GetAll: scan failed")
 		}
-		album.ArtistID = artist.ID
 		albums = append(albums, album)
-		artists = append(artists, artist)
 	}
 
 	if err := rows.Err(); err != nil {
-		return nil, nil, fmt.Errorf("repository.GetAll: rows iteration fail: %w", err)
+		return nil, mapErrors(err, "repository.GetAll: rows iteration failed")
 	}
 
-	return albums, artists, nil
+	return albums, nil
+}
+
+func (r *Repository) GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Album, error) {
+	if len(ids) == 0 {
+		return []model.Album{}, nil
+	}
+
+	query := `
+		SELECT album_id, title, avatar_url, artist_id, description, release_date, created_at, updated_at
+		FROM album
+		WHERE album_id = ANY($1)`
+
+	rows, err := r.db.QueryContext(ctx, query, ids)
+	if err != nil {
+		return nil, mapErrors(err, "repository.GetByIDs: query failed")
+	}
+	defer rows.Close()
+
+	albums := make([]model.Album, 0, len(ids))
+	for rows.Next() {
+		var album model.Album
+		if err := rows.Scan(
+			&album.ID,
+			&album.Title,
+			&album.AvatarURL,
+			&album.ArtistID,
+			&album.Description,
+			&album.ReleaseDate,
+			&album.CreatedAt,
+			&album.UpdatedAt,
+		); err != nil {
+			return nil, mapErrors(err, "repository.GetByIDs: scan failed")
+		}
+		albums = append(albums, album)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, mapErrors(err, "repository.GetByIDs: rows iteration failed")
+	}
+
+	return albums, nil
+}
+
+func (r *Repository) GetByArtistID(ctx context.Context, artistID uuid.UUID, limit, offset uint64) ([]model.Album, error) {
+	query := `
+		SELECT album_id, title, avatar_url, artist_id, description, release_date, created_at, updated_at
+		FROM album
+		WHERE artist_id = $1
+		ORDER BY release_date DESC
+		LIMIT $2 OFFSET $3`
+
+	rows, err := r.db.QueryContext(ctx, query, artistID, limit, offset)
+	if err != nil {
+		return nil, mapErrors(err, "repository.GetByArtistID: query failed")
+	}
+	defer rows.Close()
+
+	albums := make([]model.Album, 0, limit)
+	for rows.Next() {
+		var album model.Album
+		if err := rows.Scan(
+			&album.ID,
+			&album.Title,
+			&album.AvatarURL,
+			&album.ArtistID,
+			&album.Description,
+			&album.ReleaseDate,
+			&album.CreatedAt,
+			&album.UpdatedAt,
+		); err != nil {
+			return nil, mapErrors(err, "repository.GetByArtistID: scan failed")
+		}
+		albums = append(albums, album)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, mapErrors(err, "repository.GetByArtistID: rows iteration failed")
+	}
+
+	return albums, nil
 }

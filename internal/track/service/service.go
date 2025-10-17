@@ -2,25 +2,35 @@ package service
 
 import (
 	"context"
+	albumService "spotify/internal/album/service"
+	artistService "spotify/internal/artist/service"
 	"spotify/internal/model"
 
 	"github.com/google/uuid"
 )
 
 type IRepository interface {
-	GetByID(ctx context.Context, id uuid.UUID) (*model.Track, *model.Album, []model.Artist, []model.Genre, error)
-	GetAll(ctx context.Context) ([]model.Track, []model.Album, [][]model.Artist, [][]model.Genre, error)
-	GetByArtistID(ctx context.Context, artistID uuid.UUID) ([]model.Track, []model.Album, [][]model.Artist, [][]model.Genre, error)
-	GetByAlbumID(ctx context.Context, albumID uuid.UUID) ([]model.Track, []model.Album, [][]model.Artist, [][]model.Genre, error)
-	GetByGenreID(ctx context.Context, genreID uuid.UUID) ([]model.Track, []model.Album, [][]model.Artist, [][]model.Genre, error)
+	GetByID(ctx context.Context, id uuid.UUID) (*model.Track, error)
+	GetAll(ctx context.Context, limit, offset uint64) ([]model.Track, error)
+	GetByArtistID(ctx context.Context, artistID uuid.UUID, limit, offset uint64) ([]model.Track, error)
+	GetByAlbumID(ctx context.Context, albumID uuid.UUID, limit, offset uint64) ([]model.Track, error)
+	GetByGenreID(ctx context.Context, genreID uuid.UUID, limit, offset uint64) ([]model.Track, error)
+
+	GetAlbumIDsForTracks(ctx context.Context, trackIDs []uuid.UUID) (map[uuid.UUID]uuid.UUID, error)
+	GetArtistIDsForTracks(ctx context.Context, trackIDs []uuid.UUID) (map[uuid.UUID][]uuid.UUID, error)
+	GetGenresForTracks(ctx context.Context, trackIDs []uuid.UUID) (map[uuid.UUID][]model.Genre, error)
 }
 
 type Service struct {
-	repo IRepository
+	trackRepo     IRepository
+	albumService  *albumService.Service
+	artistService *artistService.Service
 }
 
-func New(repo IRepository) *Service {
+func New(repo IRepository, albumService *albumService.Service, artistService *artistService.Service) *Service {
 	return &Service{
-		repo: repo,
+		trackRepo:     repo,
+		albumService:  albumService,
+		artistService: artistService,
 	}
 }

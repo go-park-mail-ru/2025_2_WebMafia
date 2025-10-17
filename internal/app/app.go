@@ -7,19 +7,21 @@ import (
 	"fmt"
 	"net/http"
 	"os/signal"
+	"syscall"
+
 	albumDelivery "spotify/internal/album/delivery/http"
 	albumRepo "spotify/internal/album/repository/postgres"
 	albumService "spotify/internal/album/service"
-	"syscall"
 
 	artistDelivery "spotify/internal/artist/delivery/http"
 	artistRepo "spotify/internal/artist/repository/postgres"
 	artistService "spotify/internal/artist/service"
 
-	"spotify/internal/router"
 	trackDelivery "spotify/internal/track/delivery/http"
 	trackRepo "spotify/internal/track/repository/postgres"
 	trackService "spotify/internal/track/service"
+
+	"spotify/internal/router"
 	"spotify/pkg/postgres"
 )
 
@@ -40,20 +42,19 @@ func NewApp(cfg *Config) (*App, error) {
 	trackRepository := trackRepo.New(db)
 
 	artistSvc := artistService.New(artistRepository)
-	albumSvc := albumService.New(albumRepository)
-	trackSvc := trackService.New(trackRepository)
+	albumSvc := albumService.New(albumRepository, artistSvc)
+	trackSvc := trackService.New(trackRepository, albumSvc, artistSvc)
 
 	artistHandler := artistDelivery.NewHandler(artistSvc)
 	albumHandler := albumDelivery.NewHandler(albumSvc)
 	trackHandler := trackDelivery.NewHandler(trackSvc)
 
-	// jwtManager := jwtmanager.NewManager(cfg.JWTSecretKey, cfg.AccessTokenTTL)
-	muxRouter := router.NewRouter(
-		trackHandler,
-		artistHandler,
-		albumHandler,
-		cfg.CORS,
-	)
+	handlers := router.AppHandlers{
+		ArtistHandler: artistHandler,
+		AlbumHandler:  albumHandler,
+		TrackHandler:  trackHandler,
+	}
+	muxRouter := router.NewRouter(handlers, cfg.CORS)
 
 	server := &http.Server{
 		Addr:         ":" + cfg.Port,

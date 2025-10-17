@@ -1,31 +1,30 @@
 package router
 
 import (
-	albumHandler "spotify/internal/album/delivery/http"
-	artistHandler "spotify/internal/artist/delivery/http"
+	albumDelivery "spotify/internal/album/delivery/http"
+	artistDelivery "spotify/internal/artist/delivery/http"
 	"spotify/internal/middleware"
-	trackHandler "spotify/internal/track/delivery/http"
+	trackDelivery "spotify/internal/track/delivery/http"
 
 	"github.com/gorilla/mux"
 )
 
-func NewRouter(
-	trackHandlers *trackHandler.Handler,
-	artistHandlers *artistHandler.Handler,
-	albumHandlers *albumHandler.Handler,
-	corsConfig middleware.CORSConfig,
-) *mux.Router {
+type AppHandlers struct {
+	ArtistHandler *artistDelivery.Handler
+	AlbumHandler  *albumDelivery.Handler
+	TrackHandler  *trackDelivery.Handler
+}
+
+func NewRouter(handlers AppHandlers, cfg middleware.CORSConfig) *mux.Router {
 	r := mux.NewRouter()
 
-	r.Use(middleware.CORS(corsConfig))
+	r.Use(middleware.CORS(cfg))
 
 	api := r.PathPrefix("/api/v1").Subrouter()
 
-	protected := api.PathPrefix("").Subrouter()
-
-	trackHandlers.RegisterRoutes(protected)
-	artistHandlers.RegisterRoutes(protected)
-	albumHandlers.RegisterRoutes(protected)
+	handlers.ArtistHandler.RegisterRoutes(api)
+	handlers.AlbumHandler.RegisterRoutes(api)
+	handlers.TrackHandler.RegisterRoutes(api)
 
 	return r
 }

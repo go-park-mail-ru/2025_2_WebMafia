@@ -1,14 +1,16 @@
-ENV_PATH = .env
-COMPOSE_PATH = docker-compose.yml
-
-DOCKER_COMPOSE := docker compose -f $(COMPOSE_PATH) --env-file $(ENV_PATH)
+ENV_PATH = .env.local
 
 include $(ENV_PATH)
 export $(shell sed 's/=.*//' $(ENV_PATH))
-DB_URL = postgres://$(DB_USER):$(DB_PASSWORD)@localhost:5432/$(DB_NAME)?sslmode=disable
+
+COMPOSE_PATH = docker-compose.yml
+
+DOCKER_COMPOSE := docker compose -f $(COMPOSE_PATH) --env-file .env.docker
+
+DB_URL = postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable
 MIGRATIONS_PATH = migrations
 
-.PHONY: test coverage-html clean docker-build docker-up docker-down docker-stop docker-logs migrate-up migrate-downhtml clean docker-build docker-up docker-down docker-stop docker-logs
+.PHONY: test coverage-html clean docker-build docker-up docker-down docker-stop docker-logs docker-restart
 
 # === Тестирование ===
 
@@ -48,13 +50,17 @@ docker-logs:
 	@echo "==> Просматриваем логи контейнеров..."
 	@$(DOCKER_COMPOSE) logs -f
 
+docker-restart:
+	@echo "==> Пересобираем и перезапускаем сервисы..."
+	@$(DOCKER_COMPOSE) up -d --build
 
-# === Migrations ===
+
+# === Migrations === #
 
 migrate-up:
-	@echo "==> Applying migrations..."
+	@echo "==> Применяем миграции..."
 	@migrate -path $(MIGRATIONS_PATH) -database "$(DB_URL)" up
 
 migrate-down:
-	@echo "==> Reverting migrations..."
+	@echo "==> Откатываем миграции..."
 	@migrate -path $(MIGRATIONS_PATH) -database "$(DB_URL)" down

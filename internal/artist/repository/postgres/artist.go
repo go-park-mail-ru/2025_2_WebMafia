@@ -10,7 +10,7 @@ import (
 func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Artist, error) {
 	query := `
 		SELECT artist_id, artist_name, avatar_url, description, created_at, updated_at
-		FROM artists
+		FROM artist
 		WHERE artist_id = $1`
 
 	var artist model.Artist
@@ -38,7 +38,7 @@ func (r *Repository) GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Art
 
 	query := `
 		SELECT artist_id, artist_name, avatar_url, description, created_at, updated_at
-		FROM artists
+		FROM artist
 		WHERE artist_id = ANY($1)`
 
 	rows, err := r.db.QueryContext(ctx, query, ids)
@@ -73,7 +73,7 @@ func (r *Repository) GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Art
 func (r *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.Artist, error) {
 	query := `
 		SELECT artist_id, artist_name, avatar_url, description, created_at, updated_at
-		FROM artists
+		FROM artist
 		ORDER BY artist_name
 		LIMIT $1 OFFSET $2`
 

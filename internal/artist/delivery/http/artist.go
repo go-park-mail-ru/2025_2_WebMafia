@@ -11,9 +11,9 @@ import (
 )
 
 const (
-	DefaultLimit  = 10
+	DefaultLimit  = 100
 	DefaultOffset = 0
-	MaxLimit      = 100
+	MaxLimit      = 1000
 )
 
 func (h *Handler) GetArtistByID(w http.ResponseWriter, r *http.Request) {
@@ -42,6 +42,18 @@ func (h *Handler) GetArtistByID(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) GetAllArtists(w http.ResponseWriter, r *http.Request) {
+	limit, offset := parsePagination(r)
+
+	artists, err := h.service.GetAllArtists(r.Context(), limit, offset)
+	if err != nil {
+		h.handleError(w, err, "delivery.GetAllArtists: service error")
+		return
+	}
+
+	response.JSON(w, http.StatusOK, artists)
+}
+
+func parsePagination(r *http.Request) (uint64, uint64) {
 	query := r.URL.Query()
 	limitStr := query.Get("limit")
 	offsetStr := query.Get("offset")
@@ -58,12 +70,5 @@ func (h *Handler) GetAllArtists(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		offset = DefaultOffset
 	}
-
-	artists, err := h.service.GetAllArtists(r.Context(), limit, offset)
-	if err != nil {
-		h.handleError(w, err, "delivery.GetAllArtists: service error")
-		return
-	}
-
-	response.JSON(w, http.StatusOK, artists)
+	return limit, offset
 }

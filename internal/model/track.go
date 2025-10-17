@@ -1,6 +1,7 @@
 package model
 
 import (
+	"database/sql"
 	"time"
 
 	"github.com/google/uuid"
@@ -11,7 +12,7 @@ type Track struct {
 	Title       string
 	DurationMs  int
 	FileURL     string
-	Description string
+	Description sql.NullString
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 }

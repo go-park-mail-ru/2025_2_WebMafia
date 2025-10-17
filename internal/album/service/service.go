@@ -2,22 +2,27 @@ package service
 
 import (
 	"context"
-	model "spotify/internal/models"
+	artistService "spotify/internal/artist/service"
+	"spotify/internal/model"
 
 	"github.com/google/uuid"
 )
 
 type IRepository interface {
-	GetByID(ctx context.Context, id uuid.UUID) (*model.Album, *model.Artist, error)
-	GetAll(ctx context.Context) ([]model.Album, []model.Artist, error)
+	GetByID(ctx context.Context, id uuid.UUID) (*model.Album, error)
+	GetAll(ctx context.Context, limit, offset uint64) ([]model.Album, error)
+	GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Album, error)
+	GetByArtistID(ctx context.Context, artistID uuid.UUID, limit, offset uint64) ([]model.Album, error)
 }
 
 type Service struct {
-	repo IRepository
+	albumRepo     IRepository
+	artistService *artistService.Service
 }
 
-func New(repo IRepository) *Service {
+func New(repo IRepository, artistService *artistService.Service) *Service {
 	return &Service{
-		repo: repo,
+		albumRepo:     repo,
+		artistService: artistService,
 	}
 }

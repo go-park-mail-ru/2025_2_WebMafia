@@ -9,6 +9,7 @@ services:
       - "8080:8080"
     container_name: wavemusic-app
     restart: always
+    env_file: .env.docker 
     depends_on:
       db:
         condition: service_healthy

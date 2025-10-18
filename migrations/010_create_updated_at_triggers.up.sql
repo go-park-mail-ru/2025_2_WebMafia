@@ -25,8 +25,3 @@ CREATE TRIGGER update_album_updated_at
     BEFORE UPDATE ON album
     FOR EACH ROW
     EXECUTE FUNCTION update_updated_at_column();
-
-CREATE TRIGGER update_playlist_updated_at
-    BEFORE UPDATE ON playlist
-    FOR EACH ROW
-    EXECUTE FUNCTION update_updated_at_column();

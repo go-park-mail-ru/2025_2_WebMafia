@@ -2,6 +2,7 @@ package postgres
 
 import (
 	"context"
+	"fmt"
 	"spotify/internal/model"
 
 	"github.com/google/uuid"
@@ -26,7 +27,7 @@ func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Album, e
 	)
 
 	if err != nil {
-		return nil, mapErrors(err, "repository.GetByID")
+		return nil, fmt.Errorf("repository.GetByID: %w", mapErrors(err))
 	}
 
 	return &album, nil
@@ -41,7 +42,7 @@ func (r *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.
 
 	rows, err := r.db.QueryContext(ctx, query, limit, offset)
 	if err != nil {
-		return nil, mapErrors(err, "repository.GetAll: query failed")
+		return nil, fmt.Errorf("repository.GetAll: query failed: %w", mapErrors(err))
 	}
 	defer rows.Close()
 
@@ -58,13 +59,13 @@ func (r *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.
 			&album.CreatedAt,
 			&album.UpdatedAt,
 		); err != nil {
-			return nil, mapErrors(err, "repository.GetAll: scan failed")
+			return nil, fmt.Errorf("repository.GetAll: scan failed: %w", mapErrors(err))
 		}
 		albums = append(albums, album)
 	}
 
 	if err := rows.Err(); err != nil {
-		return nil, mapErrors(err, "repository.GetAll: rows iteration failed")
+		return nil, fmt.Errorf("repository.GetAll: rows iteration failed: %w", mapErrors(err))
 	}
 
 	return albums, nil
@@ -72,7 +73,7 @@ func (r *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.
 
 func (r *Repository) GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Album, error) {
 	if len(ids) == 0 {
-		return []model.Album{}, nil
+		return nil, nil
 	}
 
 	query := `
@@ -82,7 +83,7 @@ func (r *Repository) GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Alb
 
 	rows, err := r.db.QueryContext(ctx, query, ids)
 	if err != nil {
-		return nil, mapErrors(err, "repository.GetByIDs: query failed")
+		return nil, fmt.Errorf("repository.GetByIDs: query failed: %w", mapErrors(err))
 	}
 	defer rows.Close()
 
@@ -99,13 +100,13 @@ func (r *Repository) GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Alb
 			&album.CreatedAt,
 			&album.UpdatedAt,
 		); err != nil {
-			return nil, mapErrors(err, "repository.GetByIDs: scan failed")
+			return nil, fmt.Errorf("repository.GetByIDs: scan failed: %w", mapErrors(err))
 		}
 		albums = append(albums, album)
 	}
 
 	if err := rows.Err(); err != nil {
-		return nil, mapErrors(err, "repository.GetByIDs: rows iteration failed")
+		return nil, fmt.Errorf("repository.GetByIDs: rows iteration failed: %w", mapErrors(err))
 	}
 
 	return albums, nil
@@ -121,7 +122,7 @@ func (r *Repository) GetByArtistID(ctx context.Context, artistID uuid.UUID, limi
 
 	rows, err := r.db.QueryContext(ctx, query, artistID, limit, offset)
 	if err != nil {
-		return nil, mapErrors(err, "repository.GetByArtistID: query failed")
+		return nil, fmt.Errorf("repository.GetByArtistID: query failed: %w", mapErrors(err))
 	}
 	defer rows.Close()
 
@@ -138,13 +139,13 @@ func (r *Repository) GetByArtistID(ctx context.Context, artistID uuid.UUID, limi
 			&album.CreatedAt,
 			&album.UpdatedAt,
 		); err != nil {
-			return nil, mapErrors(err, "repository.GetByArtistID: scan failed")
+			return nil, fmt.Errorf("repository.GetByArtistID: scan failed: %w", mapErrors(err))
 		}
 		albums = append(albums, album)
 	}
 
 	if err := rows.Err(); err != nil {
-		return nil, mapErrors(err, "repository.GetByArtistID: rows iteration failed")
+		return nil, fmt.Errorf("repository.GetByArtistID: rows iteration failed: %w", mapErrors(err))
 	}
 
 	return albums, nil

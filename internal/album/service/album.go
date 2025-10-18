@@ -8,6 +8,10 @@ import (
 	"github.com/google/uuid"
 )
 
+const (
+	dateFormat = "2006-01-02"
+)
+
 func (s *Service) GetAlbumByID(ctx context.Context, id uuid.UUID) (*dto.Album, error) {
 	albumModel, err := s.albumRepo.GetByID(ctx, id)
 	if err != nil {
@@ -23,7 +27,7 @@ func (s *Service) GetAlbumByID(ctx context.Context, id uuid.UUID) (*dto.Album, e
 		ID:          albumModel.ID.String(),
 		Title:       albumModel.Title,
 		AvatarURL:   albumModel.AvatarURL,
-		ReleaseDate: albumModel.ReleaseDate.Format("2006-01-02"),
+		ReleaseDate: albumModel.ReleaseDate.Format(dateFormat),
 		Artists: []dto.Artist{
 			{
 				ID:        artist.ID,
@@ -75,7 +79,7 @@ func (s *Service) GetAllAlbums(ctx context.Context, limit, offset uint64) ([]dto
 			ID:          albumModel.ID.String(),
 			Title:       albumModel.Title,
 			AvatarURL:   albumModel.AvatarURL,
-			ReleaseDate: albumModel.ReleaseDate.Format("2006-01-02"),
+			ReleaseDate: albumModel.ReleaseDate.Format(dateFormat),
 			Artists: []dto.Artist{
 				{
 					ID:        artist.ID,
@@ -127,7 +131,7 @@ func (s *Service) GetAlbumsByIDs(ctx context.Context, ids []uuid.UUID) ([]dto.Al
 			ID:          albumModel.ID.String(),
 			Title:       albumModel.Title,
 			AvatarURL:   albumModel.AvatarURL,
-			ReleaseDate: albumModel.ReleaseDate.Format("2006-01-02"),
+			ReleaseDate: albumModel.ReleaseDate.Format(dateFormat),
 			Artists: []dto.Artist{{
 				ID:        artist.ID,
 				Name:      artist.Name,
@@ -159,7 +163,7 @@ func (s *Service) GetAlbumsByArtistID(ctx context.Context, artistID uuid.UUID, l
 			ID:          albumModel.ID.String(),
 			Title:       albumModel.Title,
 			AvatarURL:   albumModel.AvatarURL,
-			ReleaseDate: albumModel.ReleaseDate.Format("2006-01-02"),
+			ReleaseDate: albumModel.ReleaseDate.Format(dateFormat),
 			Artists: []dto.Artist{
 				{
 					ID:        artist.ID,

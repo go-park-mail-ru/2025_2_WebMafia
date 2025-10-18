@@ -1,8 +1,10 @@
 package http
 
 import (
+	"errors"
 	"log"
 	"net/http"
+	"spotify/internal/artist/service"
 	"spotify/pkg/response"
 	"strconv"
 
@@ -11,9 +13,11 @@ import (
 )
 
 const (
-	DefaultLimit  = 100
-	DefaultOffset = 0
-	MaxLimit      = 1000
+	defaultLimit     = 100
+	defaultOffset    = 0
+	maxLimit         = 1000
+	queryParamLimit  = "limit"
+	queryParamOffset = "offset"
 )
 
 func (h *Handler) GetArtistByID(w http.ResponseWriter, r *http.Request) {
@@ -34,7 +38,12 @@ func (h *Handler) GetArtistByID(w http.ResponseWriter, r *http.Request) {
 
 	artist, err := h.service.GetArtistByID(r.Context(), id)
 	if err != nil {
-		h.handleError(w, err, "delivery.GetArtistByID: service error")
+		if errors.Is(err, service.ErrNotFound) {
+			log.Printf("INFO: delivery.GetArtistByID: resource not found: %v", err)
+		} else {
+			log.Printf("ERROR: delivery.GetArtistByID: internal server error: %v", err)
+		}
+		h.handleError(w, err)
 		return
 	}
 
@@ -46,7 +55,12 @@ func (h *Handler) GetAllArtists(w http.ResponseWriter, r *http.Request) {
 
 	artists, err := h.service.GetAllArtists(r.Context(), limit, offset)
 	if err != nil {
-		h.handleError(w, err, "delivery.GetAllArtists: service error")
+		if errors.Is(err, service.ErrNotFound) {
+			log.Printf("INFO: delivery.GetAllArtists: resource not found: %v", err)
+		} else {
+			log.Printf("ERROR: delivery.GetAllArtists: internal server error: %v", err)
+		}
+		h.handleError(w, err)
 		return
 	}
 
@@ -55,20 +69,20 @@ func (h *Handler) GetAllArtists(w http.ResponseWriter, r *http.Request) {
 
 func parsePagination(r *http.Request) (uint64, uint64) {
 	query := r.URL.Query()
-	limitStr := query.Get("limit")
-	offsetStr := query.Get("offset")
+	limitStr := query.Get(queryParamLimit)
+	offsetStr := query.Get(queryParamOffset)
 
 	limit, err := strconv.ParseUint(limitStr, 10, 64)
 	if err != nil || limit == 0 {
-		limit = DefaultLimit
+		limit = defaultLimit
 	}
-	if limit > MaxLimit {
-		limit = MaxLimit
+	if limit > maxLimit {
+		limit = maxLimit
 	}
 
 	offset, err := strconv.ParseUint(offsetStr, 10, 64)
 	if err != nil {
-		offset = DefaultOffset
+		offset = defaultOffset
 	}
 	return limit, offset
 }

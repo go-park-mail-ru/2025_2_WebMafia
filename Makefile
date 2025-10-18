@@ -1,16 +1,17 @@
 ENV_PATH = .env.local
+DOCKER_ENV_PATH = .env.docker
 
 include $(ENV_PATH)
 export $(shell sed 's/=.*//' $(ENV_PATH))
 
 COMPOSE_PATH = docker-compose.yml
 
-DOCKER_COMPOSE := docker compose -f $(COMPOSE_PATH) --env-file .env.docker
+DOCKER_COMPOSE := docker compose -f $(COMPOSE_PATH) --env-file $(DOCKER_ENV_PATH)
 
 DB_URL = postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable
 MIGRATIONS_PATH = migrations
 
-.PHONY: test coverage-html clean docker-build docker-up docker-down docker-stop docker-logs docker-restart
+.PHONY: test coverage-html clean docker-build docker-up docker-down docker-stop docker-logs
 
 
 # === Тестирование ===
@@ -32,8 +33,8 @@ clean:
 # === Docker Compose ===
 
 docker-build:
-	@echo "==> Собираем образы Docker..."
-	@$(DOCKER_COMPOSE) build
+	@echo "==> Пересобираем и перезапускаем сервисы..."
+	@$(DOCKER_COMPOSE) up -d --build
 
 docker-up:
 	@echo "==> Запускаем Docker Compose в фоновом режиме..."
@@ -50,10 +51,6 @@ docker-stop:
 docker-logs:
 	@echo "==> Просматриваем логи контейнеров..."
 	@$(DOCKER_COMPOSE) logs -f
-
-docker-restart:
-	@echo "==> Пересобираем и перезапускаем сервисы..."
-	@$(DOCKER_COMPOSE) up -d --build
 
 
 # === Migrations === #

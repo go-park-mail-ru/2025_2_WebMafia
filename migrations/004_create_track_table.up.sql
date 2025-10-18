@@ -12,4 +12,3 @@ CREATE TABLE track (
 COMMENT ON TABLE track IS 'Таблица хранения треков';
 
 CREATE INDEX idx_track_title ON track (title);
-CREATE INDEX idx_track_created_at ON track (created_at);

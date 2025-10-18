@@ -1,1 +1,2 @@
 DROP TABLE IF EXISTS track;
+DROP INDEX IF EXISTS idx_track_title;

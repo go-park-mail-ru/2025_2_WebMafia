@@ -110,7 +110,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 	const op = "[Login] "
 	defer r.Body.Close()
 
-	var req registerRequest
+	var req loginRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		log.Printf("%s invalid body: %v", op, err)

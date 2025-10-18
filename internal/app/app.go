@@ -5,16 +5,30 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"github.com/gorilla/mux"
 	"net/http"
 	"os/signal"
-	"spotify/internal/middleware"
-	httpDelivery "spotify/internal/user/delivery/http"
-	userRepository "spotify/internal/user/repository/postgres"
+	"syscall"
+
+	albumDelivery "spotify/internal/album/delivery/http"
+	albumRepo "spotify/internal/album/repository/postgres"
+	albumService "spotify/internal/album/service"
+
+	artistDelivery "spotify/internal/artist/delivery/http"
+	artistRepo "spotify/internal/artist/repository/postgres"
+	artistService "spotify/internal/artist/service"
+
+	trackDelivery "spotify/internal/track/delivery/http"
+	trackRepo "spotify/internal/track/repository/postgres"
+	trackService "spotify/internal/track/service"
+
+	userDelivery "spotify/internal/user/delivery/http"
+	userRepo "spotify/internal/user/repository/postgres"
 	userService "spotify/internal/user/service"
+
+	"spotify/internal/middleware"
+	"spotify/internal/router"
 	"spotify/pkg/jwtmanager"
 	"spotify/pkg/postgres"
-	"syscall"
 )
 
 type App struct {
@@ -29,21 +43,37 @@ func NewApp(cfg *Config) (*App, error) {
 		return nil, fmt.Errorf("failed to connect to db: %w", err)
 	}
 
-	router := mux.NewRouter()
-	router.Use(middleware.CORS(cfg.CORS))
+	userRepository := userRepo.NewUserRepository(db)
+	artistRepository := artistRepo.New(db)
+	albumRepository := albumRepo.New(db)
+	trackRepository := trackRepo.New(db)
 
-	repo := userRepository.NewUserRepository(db)
-	svc := userService.NewUserService(repo)
+	userSvc := userService.NewUserService(userRepository)
+	artistSvc := artistService.New(artistRepository)
+
+	albumSvc := albumService.New(albumRepository, artistSvc)
+	trackSvc := trackService.New(trackRepository, albumSvc, artistSvc)
 
 	jwtManager := jwtmanager.NewManager(cfg.JWTSecretKey, cfg.AccessTokenTTL)
-	handler := httpDelivery.NewHandler(svc, jwtManager)
-
 	authMiddleware := middleware.NewAuthMiddleware(jwtManager)
-	handler.RegisterRouter(router, authMiddleware)
+
+	userHandler := userDelivery.NewHandler(userSvc, jwtManager)
+	artistHandler := artistDelivery.NewHandler(artistSvc)
+	albumHandler := albumDelivery.NewHandler(albumSvc)
+	trackHandler := trackDelivery.NewHandler(trackSvc)
+
+	handlers := router.AppHandlers{
+		UserHandler:   userHandler,
+		ArtistHandler: artistHandler,
+		AlbumHandler:  albumHandler,
+		TrackHandler:  trackHandler,
+	}
+
+	muxRouter := router.NewRouter(handlers, authMiddleware, cfg.CORS)
 
 	server := &http.Server{
 		Addr:         ":" + cfg.Port,
-		Handler:      router,
+		Handler:      muxRouter,
 		ReadTimeout:  cfg.ReadTimeout,
 		WriteTimeout: cfg.WriteTimeout,
 		IdleTimeout:  cfg.IdleTimeout,

@@ -1,21 +1,14 @@
 package http
 
 import (
-	"github.com/gorilla/mux"
 	"net/http"
-	"spotify/internal/middleware"
+
+	"github.com/gorilla/mux"
 )
 
-func (h *Handler) RegisterRouter(r *mux.Router, auth *middleware.Auth) {
-
-	api := r.PathPrefix("/api/v1").Subrouter()
-
-	api.HandleFunc("/register", h.Register).Methods(http.MethodPost, http.MethodOptions)
-	api.HandleFunc("/login", h.Login).Methods(http.MethodPost, http.MethodOptions)
-
-	protected := api.PathPrefix("").Subrouter()
-	protected.Use(auth.AuthMiddleware)
+func (h *Handler) RegisterRoutes(public, protected *mux.Router) {
+	public.HandleFunc("/register", h.Register).Methods(http.MethodPost, http.MethodOptions)
+	public.HandleFunc("/login", h.Login).Methods(http.MethodPost, http.MethodOptions)
 
 	protected.HandleFunc("/logout", h.Logout).Methods(http.MethodPost, http.MethodOptions)
-
 }

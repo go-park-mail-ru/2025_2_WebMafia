@@ -2,7 +2,6 @@ ENV_PATH = .env.local
 DOCKER_ENV_PATH = .env.docker
 
 include $(ENV_PATH)
-export $(shell sed 's/=.*//' $(ENV_PATH))
 
 COMPOSE_PATH = docker-compose.yml
 

@@ -11,7 +11,7 @@ import (
 )
 
 func (m *Repository) CreateUser(ctx context.Context, user model.User) error {
-	query := `INSERT INTO user (id, login, email, password_hash, avatar_url, created_at, updated_at)
+	query := `INSERT INTO "user" (user_id, login, email, password_hash, avatar_url, created_at, updated_at)
 		VALUES ($1, $2, $3, $4, $5, $6, $7)`
 
 	_, err := m.Conn.ExecContext(ctx,
@@ -27,8 +27,8 @@ func (m *Repository) CreateUser(ctx context.Context, user model.User) error {
 }
 
 func (m *Repository) GetUserByEmail(ctx context.Context, email string) (res *model.User, err error) {
-	query := `SELECT id, login, email, password_hash, avatar_url, created_at, updated_at 
-		FROM user WHERE email = $1`
+	query := `SELECT user_id, login, email, password_hash, avatar_url, created_at, updated_at 
+		FROM "user" WHERE email = $1`
 
 	user, err := m.selectUser(ctx, query, email)
 	if err != nil {
@@ -38,8 +38,8 @@ func (m *Repository) GetUserByEmail(ctx context.Context, email string) (res *mod
 }
 
 func (m *Repository) GetUserByLogin(ctx context.Context, login string) (res *model.User, err error) {
-	query := `SELECT id, login, email, password_hash, avatar_url, created_at, updated_at 
-		FROM user WHERE login = $1`
+	query := `SELECT user_id, login, email, password_hash, avatar_url, created_at, updated_at 
+		FROM "user" WHERE login = $1`
 
 	user, err := m.selectUser(ctx, query, login)
 	if err != nil {

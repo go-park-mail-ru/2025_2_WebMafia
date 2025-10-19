@@ -22,6 +22,7 @@ func (s *Service) Register(ctx context.Context, req dto.RegisterRequest) (*dto.R
 		Login:        req.Login,
 		Email:        req.Email,
 		PasswordHash: hash,
+		AvatarURL:    "",
 		CreatedAt:    time.Now(),
 		UpdatedAt:    time.Now(),
 	}

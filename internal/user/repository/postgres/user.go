@@ -11,6 +11,7 @@ import (
 )
 
 func (m *Repository) CreateUser(ctx context.Context, user model.User) error {
+	const op = "repository.CreateUser "
 	query := `INSERT INTO "user" (user_id, login, email, password_hash, avatar_url, created_at, updated_at)
 		VALUES ($1, $2, $3, $4, $5, $6, $7)`
 
@@ -21,29 +22,56 @@ func (m *Repository) CreateUser(ctx context.Context, user model.User) error {
 	)
 
 	if err != nil {
-		return handlePostgresError(err)
+		return fmt.Errorf("%s: %w", op, handlePostgresError(err))
 	}
 	return nil
 }
 
 func (m *Repository) GetUserByEmail(ctx context.Context, email string) (res *model.User, err error) {
+	const op = "repository.GetUserByEmail"
 	query := `SELECT user_id, login, email, password_hash, avatar_url, created_at, updated_at 
 		FROM "user" WHERE email = $1`
 
 	user, err := m.selectUser(ctx, query, email)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%s: %w", op, err)
 	}
 	return user, nil
 }
 
 func (m *Repository) GetUserByLogin(ctx context.Context, login string) (res *model.User, err error) {
+	const op = "repository.GetUserByLogin"
+
 	query := `SELECT user_id, login, email, password_hash, avatar_url, created_at, updated_at 
 		FROM "user" WHERE login = $1`
 
 	user, err := m.selectUser(ctx, query, login)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%s: %w", op, err)
+	}
+	return user, nil
+}
+
+func (m *Repository) UpdateUserAvatar(ctx context.Context, userID string, avatarPath string) error {
+	const op = "repository.UpdateUserAvatar"
+
+	query := `UPDATE "user" SET avatar_url=$1, updated_at=NOW() WHERE user_id=$2`
+	_, err := m.Conn.ExecContext(ctx, query, avatarPath, userID)
+	if err != nil {
+		return fmt.Errorf("%s: %w", op, handlePostgresError(err))
+	}
+	return nil
+}
+
+func (m *Repository) GetUserByID(ctx context.Context, userID string) (*model.User, error) {
+	const op = "repository.GetUserByID"
+
+	query := `SELECT user_id, login, email, password_hash, avatar_url, created_at, updated_at 
+			  FROM "user" WHERE user_id = $1`
+
+	user, err := m.selectUser(ctx, query, userID)
+	if err != nil {
+		return nil, fmt.Errorf("%s: %w", op, err)
 	}
 	return user, nil
 }

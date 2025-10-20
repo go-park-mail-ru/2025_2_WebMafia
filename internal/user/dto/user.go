@@ -19,3 +19,16 @@ type LoginRequest struct {
 type LoginResponse struct {
 	ID string
 }
+
+type UploadAvatarRequest struct {
+	UserID      string
+	File        []byte
+	ContentType string
+}
+type UploadAvatarResponse struct {
+	URL string `json:"avatar_url"`
+}
+
+type DeleteAvatarRequest struct {
+	UserID string
+}

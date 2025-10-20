@@ -6,8 +6,8 @@ import (
 
 	"spotify/internal/middleware"
 
+	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
-
 	"strconv"
 	"strings"
 	"time"
@@ -25,6 +25,7 @@ type Config struct {
 	JWTSecretKey    string
 	CORS            middleware.CORSConfig
 	DB              postgres.Config
+	Minio           minio.Config
 }
 
 func NewConfig() *Config {
@@ -57,6 +58,13 @@ func NewConfig() *Config {
 			MaxOpenConns:    getEnvAsInt("DB_MAX_OPEN_CONNS", 25),
 			MaxIdleConns:    getEnvAsInt("DB_MAX_IDLE_CONNS", 25),
 			ConnMaxLifetime: getEnvAsDuration("DB_CONN_MAX_LIFETIME", 5*time.Minute),
+		},
+		Minio: minio.Config{
+			Endpoint:  getEnv("MINIO_ENDPOINT", "localhost:9000"),
+			AccessKey: getEnv("MINIO_ACCESS_KEY", "miniouser"),
+			SecretKey: getEnv("MINIO_SECRET_KEY", "miniopassword"),
+			Bucket:    getEnv("MINIO_BUCKET", "avatars"),
+			UseSSL:    getEnvAsBool("MINIO_USE_SSL", false),
 		},
 	}
 }

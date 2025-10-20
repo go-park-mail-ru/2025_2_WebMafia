@@ -11,4 +11,8 @@ func (h *Handler) RegisterRoutes(public, protected *mux.Router) {
 	public.HandleFunc("/login", h.Login).Methods(http.MethodPost, http.MethodOptions)
 
 	protected.HandleFunc("/logout", h.Logout).Methods(http.MethodPost, http.MethodOptions)
+
+	protected.HandleFunc("/avatar", h.UploadAvatar).Methods(http.MethodPost, http.MethodOptions)
+	protected.HandleFunc("/avatar", h.DeleteAvatar).Methods(http.MethodDelete, http.MethodOptions)
+
 }

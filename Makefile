@@ -61,3 +61,13 @@ migrate-up:
 migrate-down:
 	@echo "==> Откатываем миграции..."
 	@migrate -path $(MIGRATIONS_PATH) -database "$(DB_URL)" down
+
+# === MinIO === #
+
+minio-up:
+	@echo "==> Запускаем MinIO..."
+	@$(DOCKER_COMPOSE) up -d minio
+
+minio-logs:
+	@echo "==> Логи MinIO..."
+	@$(DOCKER_COMPOSE) logs -f minio

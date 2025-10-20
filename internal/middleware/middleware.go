@@ -12,7 +12,7 @@ import (
 type ctxKeyUserID string
 
 const (
-	userIDKey          ctxKeyUserID = "userID"
+	UserIDKey          ctxKeyUserID = "userID"
 	sessionTokenCookie string       = "session_token"
 )
 
@@ -46,7 +46,7 @@ func (a *Auth) AuthMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
-		ctx := context.WithValue(r.Context(), userIDKey, claims.UserID)
+		ctx := context.WithValue(r.Context(), UserIDKey, claims.UserID)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }

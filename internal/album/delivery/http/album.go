@@ -2,9 +2,9 @@ package http
 
 import (
 	"errors"
-	"log"
 	"net/http"
 	"spotify/internal/album/service"
+	"spotify/internal/middleware"
 	"spotify/pkg/response"
 	"strconv"
 
@@ -21,17 +21,19 @@ const (
 )
 
 func (h *Handler) GetAlbumByID(w http.ResponseWriter, r *http.Request) {
+	log := middleware.LoggerFromContext(r.Context()).With("op", "handler.GetArtistByID")
+
 	vars := mux.Vars(r)
 	idStr, ok := vars["id"]
 	if !ok {
-		log.Println("ERROR: delivery.GetAlbumByID: id is missing in URL vars")
+		log.Errorw("id is missing in URL vars")
 		response.BadRequestJSON(w)
 		return
 	}
 
 	id, err := uuid.Parse(idStr)
 	if err != nil {
-		log.Printf("ERROR: delivery.GetAlbumByID: failed to parse id '%s': %v", idStr, err)
+		log.Warnw("Failed to parse album ID from URL", "error", err)
 		response.BadRequestJSON(w)
 		return
 	}
@@ -39,9 +41,9 @@ func (h *Handler) GetAlbumByID(w http.ResponseWriter, r *http.Request) {
 	artist, err := h.service.GetAlbumByID(r.Context(), id)
 	if err != nil {
 		if errors.Is(err, service.ErrNotFound) {
-			log.Printf("INFO: delivery.GetAlbumByID: resource not found: %v", err)
+			log.Infow("Resource not found", "error", err)
 		} else {
-			log.Printf("ERROR: delivery.GetAlbumByID: internal server error: %v", err)
+			log.Errorw("Service error", "error", err)
 		}
 		h.handleError(w, err)
 		return
@@ -51,14 +53,15 @@ func (h *Handler) GetAlbumByID(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) GetAllAlbums(w http.ResponseWriter, r *http.Request) {
+	log := middleware.LoggerFromContext(r.Context()).With("op", "handler.GetAllAlbums")
 	limit, offset := parsePagination(r)
 
 	artists, err := h.service.GetAllAlbums(r.Context(), limit, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrNotFound) {
-			log.Printf("INFO: delivery.GetAllAlbums: resource not found: %v", err)
+			log.Infow("Resource not found", "error", err)
 		} else {
-			log.Printf("ERROR: delivery.GetAllAlbums: internal server error: %v", err)
+			log.Errorw("Service error", "error", err)
 		}
 		h.handleError(w, err)
 		return
@@ -68,17 +71,19 @@ func (h *Handler) GetAllAlbums(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) GetAlbumsByArtistID(w http.ResponseWriter, r *http.Request) {
+	log := middleware.LoggerFromContext(r.Context()).With("op", "handler.GetAlbumsByArtistID")
+
 	vars := mux.Vars(r)
 	artistIDStr, ok := vars["artistId"]
 	if !ok {
-		log.Println("ERROR: delivery.GetAlbumsByArtistID: artistId is missing in URL vars")
+		log.Errorw("artistId is missing in URL vars")
 		response.BadRequestJSON(w)
 		return
 	}
 
 	artistID, err := uuid.Parse(artistIDStr)
 	if err != nil {
-		log.Printf("ERROR: delivery.GetAlbumsByArtistID: failed to parse artistId '%s': %v", artistIDStr, err)
+		log.Warnw("Failed to parse artistId from URL", "error", err)
 		response.BadRequestJSON(w)
 		return
 	}
@@ -88,9 +93,9 @@ func (h *Handler) GetAlbumsByArtistID(w http.ResponseWriter, r *http.Request) {
 	albums, err := h.service.GetAlbumsByArtistID(r.Context(), artistID, limit, offset)
 	if err != nil {
 		if errors.Is(err, service.ErrNotFound) {
-			log.Printf("INFO: delivery.GetAlbumsByArtistID: resource not found: %v", err)
+			log.Infow("Resource not found", "error", err)
 		} else {
-			log.Printf("ERROR: delivery.GetAlbumsByArtistID: internal server error: %v", err)
+			log.Errorw("Service error", "error", err)
 		}
 		h.handleError(w, err)
 		return

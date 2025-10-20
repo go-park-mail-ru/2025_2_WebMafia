@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 	"os/signal"
 	"syscall"
@@ -28,6 +29,7 @@ import (
 	"spotify/internal/middleware"
 	"spotify/internal/router"
 	"spotify/pkg/jwtmanager"
+	"spotify/pkg/logger"
 	"spotify/pkg/postgres"
 )
 
@@ -35,13 +37,22 @@ type App struct {
 	server *http.Server
 	cfg    *Config
 	db     *sql.DB
+	logger logger.ILogger
 }
 
 func NewApp(cfg *Config) (*App, error) {
+	log, err := logger.New(cfg.Logger.Level, cfg.Logger.Mode)
+	if err != nil {
+		return nil, fmt.Errorf("failed to init logger: %w", err)
+	}
+	log.Infow("Logger initialized")
+
 	db, err := postgres.New(context.Background(), cfg.DB)
 	if err != nil {
+		log.Errorw("failed to connect to db", "error", err)
 		return nil, fmt.Errorf("failed to connect to db: %w", err)
 	}
+	log.Infow("Database connection")
 
 	userRepository := userRepo.NewUserRepository(db)
 	artistRepository := artistRepo.New(db)
@@ -69,7 +80,7 @@ func NewApp(cfg *Config) (*App, error) {
 		TrackHandler:  trackHandler,
 	}
 
-	muxRouter := router.NewRouter(handlers, authMiddleware, cfg.CORS)
+	muxRouter := router.NewRouter(log, handlers, authMiddleware, cfg.CORS)
 
 	server := &http.Server{
 		Addr:         ":" + cfg.Port,
@@ -83,35 +94,47 @@ func NewApp(cfg *Config) (*App, error) {
 		server: server,
 		cfg:    cfg,
 		db:     db,
+		logger: log,
 	}, nil
 }
 
 func (a *App) Run() error {
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
-	defer stop()
+	defer func() {
+		stop()
+
+		if l, ok := a.logger.(*logger.Logger); ok {
+			if err := l.Sync(); err != nil {
+				log.Printf("ERROR: failed to sync logger: %v", err)
+			}
+		}
+	}()
 
 	serverErrors := make(chan error, 1)
 	go func() {
-		fmt.Println("Server is starting on port ", a.server.Addr)
+		a.logger.Infow("server is starting", "port", a.server.Addr)
 		serverErrors <- a.server.ListenAndServe()
 	}()
 
 	select {
 	case err := <-serverErrors:
 		if !errors.Is(err, http.ErrServerClosed) {
+			a.logger.Errorw("server error", "error", err)
 			return fmt.Errorf("server error: %w", err)
 		}
 	case <-ctx.Done():
-		fmt.Println("Shutting down server...")
+		a.logger.Infow("shutting down server gracefully...")
+
 		shutdownCtx, cancel := context.WithTimeout(context.Background(), a.cfg.ShutdownTimeout)
 		defer cancel()
 
 		if err := a.server.Shutdown(shutdownCtx); err != nil {
+			a.logger.Errorw("server forced to shutdown", "error", err)
 			return fmt.Errorf("server forced to shutdown: %w", err)
 		}
 
 	}
 
-	fmt.Println("Server exiting")
+	a.logger.Infow("server exiting")
 	return nil
 }

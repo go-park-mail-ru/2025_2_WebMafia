@@ -3,7 +3,6 @@ package middleware
 import (
 	"context"
 	"errors"
-	"log"
 	"net/http"
 	"spotify/pkg/jwtmanager"
 	"spotify/pkg/response"
@@ -26,27 +25,30 @@ func NewAuthMiddleware(jwt *jwtmanager.Manager) *Auth {
 
 func (a *Auth) AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		const op = "[AuthMiddleware] "
+		log := LoggerFromContext(r.Context()).With("op", "AuthMiddleware")
+
 		cookie, err := r.Cookie(sessionTokenCookie)
 		if err != nil {
 			if errors.Is(err, http.ErrNoCookie) {
-				log.Printf("%s no token provided", op)
+				log.Warnw("No token provided")
 				response.UnauthorizedJSON(w)
 				return
 			}
-			log.Printf("%s ERROR: bad request", op)
+			log.Errorw("Error getting cookie", "error", err)
 			response.BadRequestJSON(w)
 			return
 		}
 
 		claims, err := a.jwt.Validate(cookie.Value)
 		if err != nil {
-			log.Printf("%s invalid token", op)
+			log.Warnw("Invalid token", "error", err)
 			response.UnauthorizedJSON(w)
 			return
 		}
 
 		ctx := context.WithValue(r.Context(), userIDKey, claims.UserID)
+		ctxLogger := log.With("user_id", claims.UserID)
+		ctx = context.WithValue(ctx, Logger, ctxLogger)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }

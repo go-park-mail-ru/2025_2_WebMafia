@@ -23,11 +23,11 @@ type Config struct {
 	Mode  string
 }
 
-type Logger struct {
+type ZapLogger struct {
 	sl *zap.SugaredLogger
 }
 
-func New(level, mode string) (ILogger, error) {
+func New(level, mode string) (Logger, error) {
 	logLevel, err := zapcore.ParseLevel(level)
 	if err != nil {
 		return nil, fmt.Errorf("invalid log level: %w", err)
@@ -53,41 +53,40 @@ func New(level, mode string) (ILogger, error) {
 
 	z := zap.New(core, zap.AddCaller(), zap.AddCallerSkip(1))
 
-	return &Logger{
+	return &ZapLogger{
 		sl: z.Sugar(),
 	}, nil
 }
 
-func (l *Logger) Debugw(msg string, keysAndValues ...interface{}) {
+func (l *ZapLogger) Debugw(msg string, keysAndValues ...interface{}) {
 	l.sl.Debugw(msg, keysAndValues...)
 }
 
-func (l *Logger) Infow(msg string, keysAndValues ...interface{}) {
+func (l *ZapLogger) Infow(msg string, keysAndValues ...interface{}) {
 	l.sl.Infow(msg, keysAndValues...)
 }
 
-func (l *Logger) Warnw(msg string, keysAndValues ...interface{}) {
+func (l *ZapLogger) Warnw(msg string, keysAndValues ...interface{}) {
 	l.sl.Warnw(msg, keysAndValues...)
 }
 
-func (l *Logger) Errorw(msg string, keysAndValues ...interface{}) {
+func (l *ZapLogger) Errorw(msg string, keysAndValues ...interface{}) {
 	l.sl.Errorw(msg, keysAndValues...)
 }
 
-func (l *Logger) Fatalw(msg string, keysAndValues ...interface{}) {
+func (l *ZapLogger) Fatalw(msg string, keysAndValues ...interface{}) {
 	l.sl.Fatalw(msg, keysAndValues...)
 }
 
-func (l *Logger) Sync() error {
+func (l *ZapLogger) Sync() error {
 	if l.sl != nil {
 		return l.sl.Sync()
 	}
 	return nil
 }
 
-func (l *Logger) With(args ...interface{}) ILogger {
+func (l *ZapLogger) With(args ...interface{}) Logger {
 	newLogger := l.sl.With(args...)
 
-	return &Logger{sl: newLogger}
+	return &ZapLogger{sl: newLogger}
 }
-

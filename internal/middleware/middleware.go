@@ -48,7 +48,7 @@ func (a *Auth) AuthMiddleware(next http.Handler) http.Handler {
 
 		ctx := context.WithValue(r.Context(), userIDKey, claims.UserID)
 		ctxLogger := log.With("user_id", claims.UserID)
-		ctx = context.WithValue(ctx, Logger, ctxLogger)
+		ctx = context.WithValue(ctx, loggerKey, ctxLogger)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }

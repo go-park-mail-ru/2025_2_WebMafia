@@ -37,7 +37,7 @@ type App struct {
 	server *http.Server
 	cfg    *Config
 	db     *sql.DB
-	logger logger.ILogger
+	logger logger.Logger
 }
 
 func NewApp(cfg *Config) (*App, error) {
@@ -103,10 +103,8 @@ func (a *App) Run() error {
 	defer func() {
 		stop()
 
-		if l, ok := a.logger.(*logger.Logger); ok {
-			if err := l.Sync(); err != nil {
-				log.Printf("ERROR: failed to sync logger: %v", err)
-			}
+		if err := a.logger.Sync(); err != nil {
+			log.Printf("ERROR: failed to sync logger: %v", err)
 		}
 	}()
 

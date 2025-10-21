@@ -18,10 +18,10 @@ type AppHandlers struct {
 	TrackHandler  *trackDelivery.Handler
 }
 
-func NewRouter(logger logger.ILogger, handlers AppHandlers, auth *middleware.Auth, cfg middleware.CORSConfig) *mux.Router {
+func NewRouter(logger logger.Logger, handlers AppHandlers, auth *middleware.Auth, cfg middleware.CORSConfig) *mux.Router {
 	r := mux.NewRouter()
 
-	r.Use(middleware.RequestLogger(logger))
+	r.Use(middleware.RequestLoggerMiddleware(logger))
 	r.Use(middleware.CORS(cfg))
 
 	api := r.PathPrefix("/api/v1").Subrouter()

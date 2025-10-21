@@ -13,8 +13,8 @@ import (
 type ctxKey string
 
 const (
-	RequestIDKey ctxKey = "requestID"
-	Logger       ctxKey = "logger"
+	requestIDKey ctxKey = "requestID"
+	loggerKey    ctxKey = "logger"
 )
 
 type responseWriter struct {
@@ -22,7 +22,7 @@ type responseWriter struct {
 	statusCode int
 }
 
-func RequestLogger(log logger.ILogger) func(next http.Handler) http.Handler {
+func RequestLoggerMiddleware(log logger.Logger) func(next http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
@@ -30,8 +30,8 @@ func RequestLogger(log logger.ILogger) func(next http.Handler) http.Handler {
 			contextLogger := log.With("request_id", requestID)
 
 			ctx := r.Context()
-			ctx = context.WithValue(ctx, RequestIDKey, requestID)
-			ctx = context.WithValue(ctx, Logger, contextLogger)
+			ctx = context.WithValue(ctx, requestIDKey, requestID)
+			ctx = context.WithValue(ctx, loggerKey, contextLogger)
 
 			rw := &responseWriter{ResponseWriter: w, statusCode: http.StatusOK}
 			start := time.Now()
@@ -56,8 +56,8 @@ func (rw *responseWriter) WriteHeader(statusCode int) {
 	rw.ResponseWriter.WriteHeader(statusCode)
 }
 
-func LoggerFromContext(ctx context.Context) logger.ILogger {
-	log, ok := ctx.Value(Logger).(logger.ILogger)
+func LoggerFromContext(ctx context.Context) logger.Logger {
+	log, ok := ctx.Value(loggerKey).(logger.Logger)
 	if !ok {
 		l, _ := logger.New("error", logger.ModeDev)
 		return l

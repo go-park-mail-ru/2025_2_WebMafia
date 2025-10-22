@@ -19,9 +19,16 @@ type Config struct {
 	UseSSL    bool
 }
 
+type ObjectInfo struct {
+	Bucket      string
+	ObjectName  string
+	Reader      io.Reader
+	Size        int64
+	ContentType string
+}
+
 type Client struct {
 	minioClient *minio.Client
-	bucket      string
 }
 
 func New(cfg Config) (*Client, error) {
@@ -33,26 +40,30 @@ func New(cfg Config) (*Client, error) {
 		return nil, fmt.Errorf("init minio client: %w", err)
 	}
 
-	ctx := context.Background()
-	exists, err := mClient.BucketExists(ctx, cfg.Bucket)
-	if err != nil {
-		return nil, fmt.Errorf("check bucket: %w", err)
-	}
-
-	if !exists {
-		err = mClient.MakeBucket(ctx, cfg.Bucket, minio.MakeBucketOptions{})
-		if err != nil {
-			return nil, fmt.Errorf("create bucket: %w", err)
-		}
-		log.Printf("Bucket %s создан", cfg.Bucket)
-	}
-
-	return &Client{minioClient: mClient, bucket: cfg.Bucket}, nil
+	return &Client{minioClient: mClient}, nil
 }
 
-func (c *Client) Upload(ctx context.Context, bucket, objectName string, reader io.Reader, size int64, contentType string) error {
-	_, err := c.minioClient.PutObject(ctx, bucket, objectName, reader, size, minio.PutObjectOptions{
-		ContentType: contentType,
+func (c *Client) EnsureBucket(ctx context.Context, bucket string) error {
+	exists, err := c.minioClient.BucketExists(ctx, bucket)
+	if err != nil {
+		return fmt.Errorf("check bucket: %w", err)
+	}
+	if !exists {
+		if err := c.minioClient.MakeBucket(ctx, bucket, minio.MakeBucketOptions{}); err != nil {
+			return fmt.Errorf("create bucket: %w", err)
+		}
+		log.Printf("Bucket %s создан", bucket)
+	}
+	return nil
+}
+
+func (c *Client) Upload(ctx context.Context, obj ObjectInfo) error {
+	if err := c.EnsureBucket(ctx, obj.Bucket); err != nil {
+		return err
+	}
+
+	_, err := c.minioClient.PutObject(ctx, obj.Bucket, obj.ObjectName, obj.Reader, obj.Size, minio.PutObjectOptions{
+		ContentType: obj.ContentType,
 	})
 	if err != nil {
 		return fmt.Errorf("upload object: %w", err)
@@ -61,8 +72,7 @@ func (c *Client) Upload(ctx context.Context, bucket, objectName string, reader i
 }
 
 func (c *Client) Remove(ctx context.Context, bucket, objectName string) error {
-	err := c.minioClient.RemoveObject(ctx, bucket, objectName, minio.RemoveObjectOptions{})
-	if err != nil {
+	if err := c.minioClient.RemoveObject(ctx, bucket, objectName, minio.RemoveObjectOptions{}); err != nil {
 		return fmt.Errorf("remove object: %w", err)
 	}
 	return nil

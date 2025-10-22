@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-// Postgres
+// Register&Auth
 func (s *Service) Register(ctx context.Context, req dto.RegisterRequest) (*dto.RegisterResponse, error) {
 
 	hash, err := tools.Hash(req.Password)
@@ -55,7 +55,7 @@ func (s *Service) Login(ctx context.Context, req dto.LoginRequest) (*dto.LoginRe
 	}, nil
 }
 
-// MinIO
+// Avatar Upload
 func (s *Service) UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest) (*dto.UploadAvatarResponse, error) {
 	ext := strings.TrimPrefix(req.ContentType, "image/")
 	objectName := fmt.Sprintf("%s.%s", req.UserID, ext)

@@ -49,14 +49,14 @@ func NewApp(cfg *Config) (*App, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to init minio: %w", err)
 	}
-	storage := storageRepo.NewStorage(minioClient, cfg.Minio.Bucket)
+	avatarStorage := storageRepo.NewStorage(minioClient, "avatars")
 
 	userRepository := userRepo.NewUserRepository(db)
 	artistRepository := artistRepo.New(db)
 	albumRepository := albumRepo.New(db)
 	trackRepository := trackRepo.New(db)
 
-	userSvc := userService.NewUserService(userRepository, storage)
+	userSvc := userService.NewUserService(userRepository, avatarStorage)
 	artistSvc := artistService.New(artistRepository)
 
 	albumSvc := albumService.New(albumRepository, artistSvc)

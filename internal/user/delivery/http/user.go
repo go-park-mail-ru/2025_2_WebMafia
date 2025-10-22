@@ -198,7 +198,7 @@ func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 	const op = "[UploadAvatar] "
 
-	userID, ok := r.Context().Value(middleware.UserIDKey).(string)
+	userID, ok := middleware.GetUserID(r.Context())
 	if !ok || userID == "" {
 		response.UnauthorizedJSON(w)
 		return
@@ -247,7 +247,7 @@ func (h *Handler) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 func (h *Handler) DeleteAvatar(w http.ResponseWriter, r *http.Request) {
 	const op = "[DeleteAvatar] "
 
-	userID, ok := r.Context().Value(middleware.UserIDKey).(string)
+	userID, ok := middleware.GetUserID(r.Context())
 	if !ok || userID == "" {
 		response.UnauthorizedJSON(w)
 		return

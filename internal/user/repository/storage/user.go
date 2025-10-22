@@ -4,12 +4,19 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"spotify/pkg/minio"
 )
 
 func (s *Storage) UploadAvatar(ctx context.Context, objectName string, data []byte, contentType string) error {
-	reader := bytes.NewReader(data)
+	obj := minio.ObjectInfo{
+		Bucket:      s.bucket,
+		ObjectName:  objectName,
+		Reader:      bytes.NewReader(data),
+		Size:        int64(len(data)),
+		ContentType: contentType,
+	}
 
-	if err := s.client.Upload(ctx, s.bucket, objectName, reader, int64(len(data)), contentType); err != nil {
+	if err := s.client.Upload(ctx, obj); err != nil {
 		return fmt.Errorf("upload avatar: %w", ErrUploadFailed)
 	}
 	return nil

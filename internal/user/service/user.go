@@ -60,7 +60,7 @@ func (s *Service) UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest)
 	ext := strings.TrimPrefix(req.ContentType, "image/")
 	objectName := fmt.Sprintf("%s.%s", req.UserID, ext)
 
-	if err := s.storage.UploadAvatar(ctx, objectName, req.File, req.ContentType); err != nil {
+	if err := s.storage.UploadAvatar(ctx, objectName, req.File, req.Size, req.ContentType); err != nil {
 		return nil, ErrInternal
 	}
 
@@ -69,12 +69,7 @@ func (s *Service) UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest)
 		return nil, mapRepositoryError(err)
 	}
 
-	url, err := s.storage.GetAvatarURL(ctx, objectName)
-	if err != nil {
-		return nil, ErrInternal
-	}
-
-	return &dto.UploadAvatarResponse{URL: url}, nil
+	return &dto.UploadAvatarResponse{URL: objectName}, nil
 }
 
 func (s *Service) DeleteAvatar(ctx context.Context, req dto.DeleteAvatarRequest) error {
@@ -86,11 +81,12 @@ func (s *Service) DeleteAvatar(ctx context.Context, req dto.DeleteAvatarRequest)
 
 	if user.AvatarURL != "" {
 		if err := s.storage.DeleteAvatar(ctx, user.AvatarURL); err != nil {
-			return ErrInternal
+			return fmt.Errorf("delete avatar from storage: %w", ErrInternal)
 		}
 		if err := s.repo.UpdateUserAvatar(ctx, req.UserID, ""); err != nil {
 			return mapRepositoryError(err)
 		}
+
 	}
 
 	return nil

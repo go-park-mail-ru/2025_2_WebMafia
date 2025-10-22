@@ -1,5 +1,7 @@
 package dto
 
+import "io"
+
 type RegisterRequest struct {
 	Login    string
 	Email    string
@@ -22,7 +24,8 @@ type LoginResponse struct {
 
 type UploadAvatarRequest struct {
 	UserID      string
-	File        []byte
+	File        io.Reader
+	Size        int64
 	ContentType string
 }
 type UploadAvatarResponse struct {

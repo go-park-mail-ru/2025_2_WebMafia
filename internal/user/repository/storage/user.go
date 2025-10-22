@@ -1,18 +1,18 @@
 package storage
 
 import (
-	"bytes"
 	"context"
 	"fmt"
+	"io"
 	"spotify/pkg/minio"
 )
 
-func (s *Storage) UploadAvatar(ctx context.Context, objectName string, data []byte, contentType string) error {
+func (s *Storage) UploadAvatar(ctx context.Context, objectName string, file io.Reader, size int64, contentType string) error {
 	obj := minio.ObjectInfo{
 		Bucket:      s.bucket,
 		ObjectName:  objectName,
-		Reader:      bytes.NewReader(data),
-		Size:        int64(len(data)),
+		Reader:      file,
+		Size:        size,
 		ContentType: contentType,
 	}
 

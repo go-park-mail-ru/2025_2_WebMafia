@@ -55,7 +55,7 @@ func (m *Repository) GetUserByLogin(ctx context.Context, login string) (res *mod
 func (m *Repository) UpdateUserAvatar(ctx context.Context, userID string, avatarPath string) error {
 	const op = "repository.UpdateUserAvatar"
 
-	query := `UPDATE "user" SET avatar_url=$1, updated_at=NOW() WHERE user_id=$2`
+	query := `UPDATE "user" SET avatar_url = $1 WHERE user_id = $2`
 	_, err := m.Conn.ExecContext(ctx, query, avatarPath, userID)
 	if err != nil {
 		return fmt.Errorf("%s: %w", op, handlePostgresError(err))

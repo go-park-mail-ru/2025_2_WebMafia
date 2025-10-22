@@ -3,7 +3,6 @@ package http
 import (
 	"encoding/json"
 	"fmt"
-	"io"
 	"log"
 	"net/http"
 	"spotify/internal/middleware"
@@ -13,7 +12,10 @@ import (
 	"time"
 )
 
-const sessionTokenCookie = "session_token"
+const (
+	sessionTokenCookie = "session_token"
+	maxAvatarSize      = 5 << 20
+)
 
 type registerRequest struct {
 	Login    string `json:"login"`
@@ -65,18 +67,18 @@ type uploadAvatarRequest struct {
 	Size        int64
 }
 
-func (r *uploadAvatarRequest) validate() error {
-	if r.Size == 0 {
+func validateAvatar(contentType string, size int64) error {
+	if size == 0 {
 		return fmt.Errorf("empty file")
 	}
-	if r.Size > 5<<20 {
-		return fmt.Errorf("max 5MB")
+	if size > maxAvatarSize {
+		return fmt.Errorf("file too large (max 5MB)")
 	}
-	switch r.ContentType {
+	switch contentType {
 	case "image/png", "image/jpeg":
 		return nil
 	default:
-		return fmt.Errorf("unsupported content type: %s", r.ContentType)
+		return fmt.Errorf("unsupported content type: %s", contentType)
 	}
 }
 
@@ -212,19 +214,7 @@ func (h *Handler) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 	}
 	defer file.Close()
 
-	fileBytes, err := io.ReadAll(file)
-	if err != nil {
-		log.Printf("%s failed to read file: %v", op, err)
-		response.InternalErrorJSON(w)
-		return
-	}
-
-	req := uploadAvatarRequest{
-		ContentType: header.Header.Get("Content-Type"),
-		Size:        header.Size,
-	}
-
-	if err := req.validate(); err != nil {
+	if err := validateAvatar(header.Header.Get("Content-Type"), header.Size); err != nil {
 		log.Printf("%s validation error: %v", op, err)
 		response.BadRequestJSON(w)
 		return
@@ -232,8 +222,9 @@ func (h *Handler) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 
 	res, err := h.svc.UploadAvatar(r.Context(), dto.UploadAvatarRequest{
 		UserID:      userID,
-		File:        fileBytes,
-		ContentType: req.ContentType,
+		File:        file,
+		Size:        header.Size,
+		ContentType: header.Header.Get("Content-Type"),
 	})
 	if err != nil {
 		log.Printf("%s service error: %v", op, err)

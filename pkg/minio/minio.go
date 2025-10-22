@@ -62,7 +62,15 @@ func (c *Client) Upload(ctx context.Context, obj ObjectInfo) error {
 		return err
 	}
 
-	_, err := c.minioClient.PutObject(ctx, obj.Bucket, obj.ObjectName, obj.Reader, obj.Size, minio.PutObjectOptions{
+	_, err := c.minioClient.StatObject(ctx, obj.Bucket, obj.ObjectName, minio.StatObjectOptions{})
+	if err == nil {
+		return fmt.Errorf("object %q already exists", obj.ObjectName)
+	}
+	if respErr := minio.ToErrorResponse(err); respErr.Code != "NoSuchKey" {
+		return fmt.Errorf("check object existence: %w", err)
+	}
+
+	_, err = c.minioClient.PutObject(ctx, obj.Bucket, obj.ObjectName, obj.Reader, obj.Size, minio.PutObjectOptions{
 		ContentType: obj.ContentType,
 	})
 	if err != nil {

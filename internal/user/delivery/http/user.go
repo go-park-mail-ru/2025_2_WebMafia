@@ -59,20 +59,21 @@ type logoutResponse struct {
 }
 
 func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.Register"
 	defer r.Body.Close()
 
-	log := middleware.LoggerFromContext(r.Context()).With("op", "handler.Register")
+	log := middleware.LoggerFromContext(r.Context())
 
 	var req registerRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		log.Errorw("Invalid request body", "error", err)
+		log.Errorf("[%s]: Invalid request body: %v", op, err)
 		response.BadRequestJSON(w)
 		return
 	}
 
 	if err := req.validate(); err != nil {
-		log.Warnw("Validation error", "error", err)
+		log.Warnf("[%s]: Validation error: %v", op, err)
 		response.BadRequestJSON(w)
 		return
 	}
@@ -84,14 +85,14 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 	})
 
 	if err != nil {
-		log.Errorw("Service error", "error", err)
+		log.Errorf("[%s]: Service error: %v", op, err)
 		handleServiceError(w, err)
 		return
 	}
 
 	token, err := h.jwtManager.Generate(user.ID)
 	if err != nil {
-		log.Errorw("Failed to generate token", "error", err)
+		log.Errorf("[%s]: Failed to generate token: %v", op, err)
 		response.InternalErrorJSON(w)
 		return
 	}
@@ -104,25 +105,26 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 		Path:     "/",
 	})
 
-	log.Infow("User registered successfully", "user_id", user.ID)
+	log.Infof("[%s]: User registered successfully: %s", op, user.ID)
 	response.JSON(w, http.StatusCreated, registerResponse{ID: user.ID})
 }
 
 func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.Login"
 	defer r.Body.Close()
 
-	log := middleware.LoggerFromContext(r.Context()).With("op", "handler.Login")
+	log := middleware.LoggerFromContext(r.Context())
 
 	var req loginRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		log.Errorw("Invalid request body", "error", err)
+		log.Errorf("[%s]: Invalid request body: %v", op, err)
 		response.BadRequestJSON(w)
 		return
 	}
 
 	if err := req.validate(); err != nil {
-		log.Warnw("Validation error", "error", err)
+		log.Warnf("[%s]: Validation error: %v", op, err)
 		response.BadRequestJSON(w)
 		return
 	}
@@ -133,14 +135,14 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 	})
 
 	if err != nil {
-		log.Errorw("Service error", "error", err)
+		log.Errorf("[%s]: Service error: %v", op, err)
 		handleServiceError(w, err)
 		return
 	}
 
 	token, err := h.jwtManager.Generate(user.ID)
 	if err != nil {
-		log.Errorw("Failed to generate token", "error", err)
+		log.Errorf("[%s]: Failed to generate token: %v", op, err)
 		response.InternalErrorJSON(w)
 		return
 	}
@@ -153,12 +155,13 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		Path:     "/",
 	})
 
-	log.Infow("User login successfully", "user_id", user.ID)
+	log.Infof("[%s]: User login successfully: %s", op, user.ID)
 	response.JSON(w, http.StatusOK, loginResponse{ID: user.ID})
 }
 
 func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
-	log := middleware.LoggerFromContext(r.Context()).With("op", "handler.Logout")
+	const op = "handler.Logout"
+	log := middleware.LoggerFromContext(r.Context())
 
 	http.SetCookie(w, &http.Cookie{
 		Name:     sessionTokenCookie,
@@ -168,6 +171,6 @@ func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
 		Path:     "/",
 	})
 
-	log.Infow("User logout successfully")
+	log.Infof("[%s]: User logout successfull", op)
 	response.JSON(w, http.StatusOK, logoutResponse{Status: "ok"})
 }

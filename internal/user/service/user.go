@@ -3,18 +3,19 @@ package service
 import (
 	"context"
 	"fmt"
-	"github.com/google/uuid"
 	"spotify/internal/model"
 	"spotify/internal/user/dto"
 	"spotify/internal/user/tools"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 func (s *Service) Register(ctx context.Context, req dto.RegisterRequest) (*dto.RegisterResponse, error) {
-
+	const op = "service.Register"
 	hash, err := tools.Hash(req.Password)
 	if err != nil {
-		return nil, fmt.Errorf("failed to hash password: %w", ErrInternal)
+		return nil, fmt.Errorf("[%s]: failed to hash password: %w", op, ErrInternal)
 	}
 
 	user := model.User{
@@ -39,13 +40,14 @@ func (s *Service) Register(ctx context.Context, req dto.RegisterRequest) (*dto.R
 }
 
 func (s *Service) Login(ctx context.Context, req dto.LoginRequest) (*dto.LoginResponse, error) {
+	const op = "service.Login"
 	user, err := s.repo.GetUserByLogin(ctx, req.Login)
 	if err != nil {
 		return nil, mapRepositoryError(err)
 	}
 
 	if err := tools.Compare(user.PasswordHash, req.Password); err != nil {
-		return nil, fmt.Errorf("invalid credentials: %w", ErrValidation)
+		return nil, fmt.Errorf("[%s]: invalid credentials: %w", op, ErrValidation)
 	}
 
 	return &dto.LoginResponse{

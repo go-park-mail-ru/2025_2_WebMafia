@@ -40,12 +40,13 @@ func RequestLoggerMiddleware(log logger.Logger) func(next http.Handler) http.Han
 
 			duration := time.Since(start)
 
-			contextLogger.Infow("request completed",
-				"method", r.Method,
-				"path", r.URL.Path,
-				"status_code", rw.statusCode,
-				"duration_ms", duration.Milliseconds(),
-				"remote_addr", r.RemoteAddr,
+			contextLogger.Infof(
+				"Request Completed: Method=%s Path=%s StatusCode=%d Duration=%v RemoteAddr=%s",
+				r.Method,
+				r.URL.Path,
+				rw.statusCode,
+				duration.Milliseconds(),
+				r.RemoteAddr,
 			)
 		})
 	}

@@ -58,24 +58,24 @@ func New(level, mode string) (Logger, error) {
 	}, nil
 }
 
-func (l *ZapLogger) Debugw(msg string, keysAndValues ...interface{}) {
-	l.sl.Debugw(msg, keysAndValues...)
+func (l *ZapLogger) Debugf(template string, args ...interface{}) {
+	l.sl.Debugf(template, args...)
 }
 
-func (l *ZapLogger) Infow(msg string, keysAndValues ...interface{}) {
-	l.sl.Infow(msg, keysAndValues...)
+func (l *ZapLogger) Infof(template string, args ...interface{}) {
+	l.sl.Infof(template, args...)
 }
 
-func (l *ZapLogger) Warnw(msg string, keysAndValues ...interface{}) {
-	l.sl.Warnw(msg, keysAndValues...)
+func (l *ZapLogger) Warnf(template string, args ...interface{}) {
+	l.sl.Warnf(template, args...)
 }
 
-func (l *ZapLogger) Errorw(msg string, keysAndValues ...interface{}) {
-	l.sl.Errorw(msg, keysAndValues...)
+func (l *ZapLogger) Errorf(template string, args ...interface{}) {
+	l.sl.Errorf(template, args...)
 }
 
-func (l *ZapLogger) Fatalw(msg string, keysAndValues ...interface{}) {
-	l.sl.Fatalw(msg, keysAndValues...)
+func (l *ZapLogger) Fatalf(template string, args ...interface{}) {
+	l.sl.Fatalf(template, args...)
 }
 
 func (l *ZapLogger) Sync() error {

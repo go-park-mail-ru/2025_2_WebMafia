@@ -25,23 +25,24 @@ func NewAuthMiddleware(jwt *jwtmanager.Manager) *Auth {
 
 func (a *Auth) AuthMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		log := LoggerFromContext(r.Context()).With("op", "AuthMiddleware")
+		const op = "AuthMiddleware"
+		log := LoggerFromContext(r.Context())
 
 		cookie, err := r.Cookie(sessionTokenCookie)
 		if err != nil {
 			if errors.Is(err, http.ErrNoCookie) {
-				log.Warnw("No token provided")
+				log.Warnf("[%s]: No token provided", op)
 				response.UnauthorizedJSON(w)
 				return
 			}
-			log.Errorw("Error getting cookie", "error", err)
+			log.Errorf("[%s]: Error getting cookie: %v", op, err)
 			response.BadRequestJSON(w)
 			return
 		}
 
 		claims, err := a.jwt.Validate(cookie.Value)
 		if err != nil {
-			log.Warnw("Invalid token", "error", err)
+			log.Warnf("[%s]: Invalid token: %v", op, err)
 			response.UnauthorizedJSON(w)
 			return
 		}

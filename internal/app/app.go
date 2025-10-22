@@ -45,14 +45,14 @@ func NewApp(cfg *Config) (*App, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to init logger: %w", err)
 	}
-	log.Infow("Logger initialized")
+	log.Infof("Logger initialized")
 
 	db, err := postgres.New(context.Background(), cfg.DB)
 	if err != nil {
-		log.Errorw("failed to connect to db", "error", err)
+		log.Errorf("failed to connect to db: %v", err)
 		return nil, fmt.Errorf("failed to connect to db: %w", err)
 	}
-	log.Infow("Database connection")
+	log.Infof("Database connection")
 
 	userRepository := userRepo.NewUserRepository(db)
 	artistRepository := artistRepo.New(db)
@@ -110,29 +110,29 @@ func (a *App) Run() error {
 
 	serverErrors := make(chan error, 1)
 	go func() {
-		a.logger.Infow("server is starting", "port", a.server.Addr)
+		a.logger.Infof("server is starting on port %s", a.server.Addr)
 		serverErrors <- a.server.ListenAndServe()
 	}()
 
 	select {
 	case err := <-serverErrors:
 		if !errors.Is(err, http.ErrServerClosed) {
-			a.logger.Errorw("server error", "error", err)
+			a.logger.Errorf("server error: %v", err)
 			return fmt.Errorf("server error: %w", err)
 		}
 	case <-ctx.Done():
-		a.logger.Infow("shutting down server gracefully...")
+		a.logger.Infof("shutting down server gracefully...")
 
 		shutdownCtx, cancel := context.WithTimeout(context.Background(), a.cfg.ShutdownTimeout)
 		defer cancel()
 
 		if err := a.server.Shutdown(shutdownCtx); err != nil {
-			a.logger.Errorw("server forced to shutdown", "error", err)
+			a.logger.Errorf("server forced to shutdown: %v", err)
 			return fmt.Errorf("server forced to shutdown: %w", err)
 		}
 
 	}
 
-	a.logger.Infow("server exiting")
+	a.logger.Infof("server exiting")
 	return nil
 }

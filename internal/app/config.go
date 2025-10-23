@@ -12,6 +12,8 @@ import (
 	"strings"
 	"time"
 
+	"spotify/pkg/logger"
+
 	"github.com/joho/godotenv"
 )
 
@@ -25,6 +27,7 @@ type Config struct {
 	JWTSecretKey    string
 	CORS            middleware.CORSConfig
 	DB              postgres.Config
+	Logger          logger.Config
 }
 
 func NewConfig() *Config {
@@ -57,6 +60,10 @@ func NewConfig() *Config {
 			MaxOpenConns:    getEnvAsInt("DB_MAX_OPEN_CONNS", 25),
 			MaxIdleConns:    getEnvAsInt("DB_MAX_IDLE_CONNS", 25),
 			ConnMaxLifetime: getEnvAsDuration("DB_CONN_MAX_LIFETIME", 5*time.Minute),
+		},
+		Logger: logger.Config{
+			Level: getEnv("LOGGER_LEVEL", logger.LevelInfo),
+			Mode:  getEnv("LOGGER_MODE", logger.ModeDev),
 		},
 	}
 }

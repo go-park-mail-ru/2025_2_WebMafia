@@ -9,6 +9,7 @@ import (
 )
 
 func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Artist, error) {
+	const op = "repository.GetByID"
 	query := `
 		SELECT artist_id, artist_name, avatar_url, description, created_at, updated_at
 		FROM artist
@@ -26,13 +27,14 @@ func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Artist, 
 	)
 
 	if err != nil {
-		return nil, fmt.Errorf("repository.GetByIDs: %w", mapErrors(err))
+		return nil, fmt.Errorf("[%s]: %w", op, mapErrors(err))
 	}
 
 	return &artist, nil
 }
 
 func (r *Repository) GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Artist, error) {
+	const op = "repository.GetByIDs"
 	if len(ids) == 0 {
 		return nil, nil
 	}
@@ -44,7 +46,7 @@ func (r *Repository) GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Art
 
 	rows, err := r.db.QueryContext(ctx, query, ids)
 	if err != nil {
-		return nil, fmt.Errorf("repository.GetByIDs: query failed: %w", mapErrors(err))
+		return nil, fmt.Errorf("[%s]: query failed: %w", op, mapErrors(err))
 	}
 	defer rows.Close()
 
@@ -59,19 +61,20 @@ func (r *Repository) GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Art
 			&artist.CreatedAt,
 			&artist.UpdatedAt,
 		); err != nil {
-			return nil, fmt.Errorf("repository.GetByIDs: scan failed: %w", mapErrors(err))
+			return nil, fmt.Errorf("[%s]: scan failed: %w", op, mapErrors(err))
 		}
 		artists = append(artists, artist)
 	}
 
 	if err = rows.Err(); err != nil {
-		return nil, fmt.Errorf("repository.GetByIDs: rows iteration failed: %w", mapErrors(err))
+		return nil, fmt.Errorf("[%s]: rows iteration failed: %w", op, mapErrors(err))
 	}
 
 	return artists, nil
 }
 
 func (r *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.Artist, error) {
+	const op = "repository.GetAll"
 	query := `
 		SELECT artist_id, artist_name, avatar_url, description, created_at, updated_at
 		FROM artist
@@ -80,7 +83,7 @@ func (r *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.
 
 	rows, err := r.db.QueryContext(ctx, query, limit, offset)
 	if err != nil {
-		return nil, fmt.Errorf("repository.GetAll: query failed: %w", mapErrors(err))
+		return nil, fmt.Errorf("[%s]: query failed: %w", op, mapErrors(err))
 	}
 	defer rows.Close()
 
@@ -95,13 +98,13 @@ func (r *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.
 			&artist.CreatedAt,
 			&artist.UpdatedAt,
 		); err != nil {
-			return nil, fmt.Errorf("repository.GetAll: scan failed: %w", mapErrors(err))
+			return nil, fmt.Errorf("[%s]: scan failed: %w", op, mapErrors(err))
 		}
 		artists = append(artists, artist)
 	}
 
 	if err := rows.Err(); err != nil {
-		return nil, fmt.Errorf("repository.GetAll: rows iteration failed: %w", mapErrors(err))
+		return nil, fmt.Errorf("[%s]: rows iteration failed: %w", op, mapErrors(err))
 	}
 
 	return artists, nil

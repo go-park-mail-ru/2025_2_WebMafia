@@ -38,6 +38,11 @@ func UnauthorizedJSON(w http.ResponseWriter) {
 	JSON(w, http.StatusUnauthorized, ErrUnauthorized)
 }
 
+// 403 Forbidden
+func ForbiddenJSON(w http.ResponseWriter) {
+	JSON(w, http.StatusForbidden, ErrForbidden)
+}
+
 // 404 Not Found
 func NotFoundJSON(w http.ResponseWriter) {
 	JSON(w, http.StatusNotFound, ErrNotFound)

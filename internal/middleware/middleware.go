@@ -9,10 +9,12 @@ import (
 )
 
 type ctxKeyUserID string
+type ctxKeyClaims string
 
 const (
 	userIDKey          ctxKeyUserID = "userID"
 	sessionTokenCookie string       = "session_token"
+	ClaimsKey          ctxKeyClaims = "claims"
 )
 
 type Auth struct {
@@ -47,7 +49,7 @@ func (a *Auth) AuthMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
-		ctx := context.WithValue(r.Context(), userIDKey, claims.UserID)
+		ctx := context.WithValue(r.Context(), ClaimsKey, claims)
 		ctxLogger := log.With("user_id", claims.UserID)
 		ctx = context.WithValue(ctx, loggerKey, ctxLogger)
 		next.ServeHTTP(w, r.WithContext(ctx))

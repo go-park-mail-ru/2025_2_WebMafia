@@ -26,8 +26,11 @@ import (
 	userRepo "spotify/internal/user/repository/postgres"
 	userService "spotify/internal/user/service"
 
+	csrfDelivery "spotify/internal/csrf/delivery/http"
+
 	"spotify/internal/middleware"
 	"spotify/internal/router"
+	"spotify/pkg/csrfmanager"
 	"spotify/pkg/jwtmanager"
 	"spotify/pkg/logger"
 	"spotify/pkg/postgres"
@@ -68,19 +71,24 @@ func NewApp(cfg *Config) (*App, error) {
 	jwtManager := jwtmanager.NewManager(cfg.JWTSecretKey, cfg.AccessTokenTTL)
 	authMiddleware := middleware.NewAuthMiddleware(jwtManager)
 
+	csrfManager := csrfmanager.NewManager(cfg.CSRFSecretKey, cfg.CSRFTokenTTL)
+	csrfMiddleware := middleware.NewCSRFMiddleware(csrfManager)
+
 	userHandler := userDelivery.NewHandler(userSvc, jwtManager)
 	artistHandler := artistDelivery.NewHandler(artistSvc)
 	albumHandler := albumDelivery.NewHandler(albumSvc)
 	trackHandler := trackDelivery.NewHandler(trackSvc)
+	csrfHandler := csrfDelivery.NewHandler(csrfManager)
 
 	handlers := router.AppHandlers{
 		UserHandler:   userHandler,
 		ArtistHandler: artistHandler,
 		AlbumHandler:  albumHandler,
 		TrackHandler:  trackHandler,
+		CSRFHandler:   csrfHandler,
 	}
 
-	muxRouter := router.NewRouter(log, handlers, authMiddleware, cfg.CORS)
+	muxRouter := router.NewRouter(log, handlers, authMiddleware, csrfMiddleware, cfg.CORS)
 
 	server := &http.Server{
 		Addr:         ":" + cfg.Port,

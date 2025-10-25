@@ -18,7 +18,12 @@ type AppHandlers struct {
 	TrackHandler  *trackDelivery.Handler
 }
 
-func NewRouter(logger logger.Logger, handlers AppHandlers, auth *middleware.Auth, cfg middleware.CORSConfig) *mux.Router {
+func NewRouter(logger logger.Logger,
+	handlers AppHandlers,
+	auth *middleware.Auth,
+	csrf *middleware.CSRF,
+	cfg middleware.CORSConfig) *mux.Router {
+
 	r := mux.NewRouter()
 
 	r.Use(middleware.RequestLoggerMiddleware(logger))
@@ -31,7 +36,10 @@ func NewRouter(logger logger.Logger, handlers AppHandlers, auth *middleware.Auth
 	protected := api.PathPrefix("").Subrouter()
 	protected.Use(auth.AuthMiddleware)
 
-	handlers.UserHandler.RegisterRoutes(public, protected)
+	csrfProtected := protected.PathPrefix("").Subrouter()
+	csrfProtected.Use(csrf.CSRFMiddleware)
+
+	handlers.UserHandler.RegisterRoutes(public, protected, csrfProtected)
 
 	handlers.ArtistHandler.RegisterRoutes(public)
 	handlers.AlbumHandler.RegisterRoutes(public)

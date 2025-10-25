@@ -3,16 +3,17 @@ package middleware
 import (
 	"context"
 	"errors"
+	"fmt"
 	"net/http"
 	"spotify/pkg/jwtmanager"
 	"spotify/pkg/response"
 )
 
-type ctxKeyUserID string
+type ctxKeyClaims string
 
 const (
-	userIDKey          ctxKeyUserID = "userID"
 	sessionTokenCookie string       = "session_token"
+	claimsKey          ctxKeyClaims = "claims"
 )
 
 type Auth struct {
@@ -47,14 +48,25 @@ func (a *Auth) AuthMiddleware(next http.Handler) http.Handler {
 			return
 		}
 
-		ctx := context.WithValue(r.Context(), userIDKey, claims.UserID)
+		ctx := context.WithValue(r.Context(), claimsKey, claims)
 		ctxLogger := log.With("user_id", claims.UserID)
 		ctx = context.WithValue(ctx, loggerKey, ctxLogger)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }
 
+func ClaimsFromContext(ctx context.Context) (*jwtmanager.Claims, error) {
+	claims, ok := ctx.Value(claimsKey).(*jwtmanager.Claims)
+	if !ok {
+		return nil, fmt.Errorf("no claims found in context")
+	}
+	return claims, nil
+}
+
 func GetUserID(ctx context.Context) (string, bool) {
-	userID, ok := ctx.Value(userIDKey).(string)
-	return userID, ok
+	claims, err := ClaimsFromContext(ctx)
+	if err != nil {
+		return "", false
+	}
+	return claims.UserID, true
 }

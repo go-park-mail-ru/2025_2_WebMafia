@@ -12,14 +12,21 @@ type IService interface {
 	UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest) (*dto.UploadAvatarResponse, error)
 	DeleteAvatar(ctx context.Context, req dto.DeleteAvatarRequest) error
 }
-type Handler struct {
-	svc        IService
-	jwtManager *jwtmanager.Manager
+
+type CSRFManager interface {
+	Generate(userID, sessionID string) (string, error)
 }
 
-func NewHandler(svc IService, jwtManager *jwtmanager.Manager) *Handler {
+type Handler struct {
+	svc         IService
+	jwtManager  *jwtmanager.Manager
+	csrfManager CSRFManager
+}
+
+func NewHandler(svc IService, jwtManager *jwtmanager.Manager, csrfManager CSRFManager) *Handler {
 	return &Handler{
-		svc:        svc,
-		jwtManager: jwtManager,
+		svc:         svc,
+		jwtManager:  jwtManager,
+		csrfManager: csrfManager,
 	}
 }

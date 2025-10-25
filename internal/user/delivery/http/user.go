@@ -11,7 +11,10 @@ import (
 	"time"
 )
 
-const sessionTokenCookie = "session_token"
+const (
+	sessionTokenCookie = "session_token"
+	maxAvatarSize      = 5 << 20
+)
 
 type registerRequest struct {
 	Login    string `json:"login"`
@@ -55,6 +58,33 @@ type loginResponse struct {
 }
 
 type logoutResponse struct {
+	Status string `json:"status"`
+}
+
+type uploadAvatarRequest struct {
+	ContentType string
+	Size        int64
+}
+
+func validateAvatar(contentType string, size int64) error {
+	if size == 0 {
+		return fmt.Errorf("empty file")
+	}
+	if size > maxAvatarSize {
+		return fmt.Errorf("file too large (max 5MB)")
+	}
+	switch contentType {
+	case "image/png", "image/jpeg":
+		return nil
+	default:
+		return fmt.Errorf("unsupported content type: %s", contentType)
+	}
+}
+
+type uploadAvatarResponse struct {
+	URL string `json:"avatar_url"`
+}
+type deleteAvatarResponse struct {
 	Status string `json:"status"`
 }
 
@@ -173,4 +203,70 @@ func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
 
 	log.Infof("[%s]: User logout successfull", op)
 	response.JSON(w, http.StatusOK, logoutResponse{Status: "ok"})
+}
+
+func (h *Handler) UploadAvatar(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.UploadAvatar"
+
+	userID, ok := middleware.GetUserID(r.Context())
+	if !ok || userID == "" {
+		response.UnauthorizedJSON(w)
+		return
+	}
+
+	log := middleware.LoggerFromContext(r.Context())
+
+	file, header, err := r.FormFile("avatar")
+	if err != nil {
+		log.Errorf("[%s] failed to get file: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+	defer file.Close()
+
+	if err := validateAvatar(header.Header.Get("Content-Type"), header.Size); err != nil {
+		log.Errorf("[%s] validation error: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	res, err := h.svc.UploadAvatar(r.Context(), dto.UploadAvatarRequest{
+		UserID:      userID,
+		File:        file,
+		Size:        header.Size,
+		ContentType: header.Header.Get("Content-Type"),
+	})
+	if err != nil {
+		log.Errorf("[%s] service error: %v", op, err)
+		handleServiceError(w, err)
+		return
+	}
+
+	log.Infof("[%s]: Avatar uploaded successfully:", op)
+	response.JSON(w, http.StatusOK, uploadAvatarResponse{URL: res.URL})
+}
+
+func (h *Handler) DeleteAvatar(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.DeleteAvatar"
+
+	userID, ok := middleware.GetUserID(r.Context())
+	if !ok || userID == "" {
+		response.UnauthorizedJSON(w)
+		return
+	}
+
+	log := middleware.LoggerFromContext(r.Context())
+
+	req := dto.DeleteAvatarRequest{
+		UserID: userID,
+	}
+
+	if err := h.svc.DeleteAvatar(r.Context(), req); err != nil {
+		log.Errorf("[%s] service error: %v", op, err)
+		handleServiceError(w, err)
+		return
+	}
+
+	log.Infof("[%s]: Avatar deleted successfully:", op)
+	response.JSON(w, http.StatusOK, deleteAvatarResponse{Status: "deleted"})
 }

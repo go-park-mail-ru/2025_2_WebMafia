@@ -9,6 +9,8 @@ import (
 type IService interface {
 	Register(ctx context.Context, req dto.RegisterRequest) (*dto.RegisterResponse, error)
 	Login(ctx context.Context, req dto.LoginRequest) (*dto.LoginResponse, error)
+	UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest) (*dto.UploadAvatarResponse, error)
+	DeleteAvatar(ctx context.Context, req dto.DeleteAvatarRequest) error
 }
 
 type CSRFManager interface {

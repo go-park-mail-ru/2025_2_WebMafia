@@ -61,4 +61,11 @@ func ClaimsFromContext(ctx context.Context) (*jwtmanager.Claims, error) {
 		return nil, fmt.Errorf("no claims found in context")
 	}
 	return claims, nil
+  
+func GetUserID(ctx context.Context) (string, bool) {
+	claims, err := ClaimsFromContext(ctx)
+	if err != nil {
+		return "", false
+	}
+	return claims.UserID, true
 }

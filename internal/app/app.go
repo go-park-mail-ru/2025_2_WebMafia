@@ -31,8 +31,8 @@ import (
 	"spotify/internal/router"
 	"spotify/pkg/csrfmanager"
 	"spotify/pkg/jwtmanager"
-	"spotify/pkg/minio"
 	"spotify/pkg/logger"
+	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
 )
 

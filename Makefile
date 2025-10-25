@@ -61,3 +61,4 @@ migrate-up:
 migrate-down:
 	@echo "==> Откатываем миграции..."
 	@migrate -path $(MIGRATIONS_PATH) -database "$(DB_URL)" down
+

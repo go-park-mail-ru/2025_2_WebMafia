@@ -24,11 +24,13 @@ import (
 
 	userDelivery "spotify/internal/user/delivery/http"
 	userRepo "spotify/internal/user/repository/postgres"
+	storageRepo "spotify/internal/user/repository/storage"
 	userService "spotify/internal/user/service"
 
 	"spotify/internal/middleware"
 	"spotify/internal/router"
 	"spotify/pkg/jwtmanager"
+	"spotify/pkg/minio"
 	"spotify/pkg/logger"
 	"spotify/pkg/postgres"
 )
@@ -54,12 +56,18 @@ func NewApp(cfg *Config) (*App, error) {
 	}
 	log.Infof("Database connection")
 
+	minioClient, err := minio.New(cfg.Minio)
+	if err != nil {
+		return nil, fmt.Errorf("failed to init minio: %w", err)
+	}
+	avatarStorage := storageRepo.NewStorage(minioClient, "avatars")
+
 	userRepository := userRepo.NewUserRepository(db)
 	artistRepository := artistRepo.New(db)
 	albumRepository := albumRepo.New(db)
 	trackRepository := trackRepo.New(db)
 
-	userSvc := userService.NewUserService(userRepository)
+	userSvc := userService.NewUserService(userRepository, avatarStorage)
 	artistSvc := artistService.New(artistRepository)
 
 	albumSvc := albumService.New(albumRepository, artistSvc)

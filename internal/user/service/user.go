@@ -58,18 +58,25 @@ func (s *Service) Login(ctx context.Context, req dto.LoginRequest) (*dto.LoginRe
 // Avatar Upload
 func (s *Service) UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest) (*dto.UploadAvatarResponse, error) {
 	ext := strings.TrimPrefix(req.ContentType, "image/")
-	objectName := fmt.Sprintf("%s.%s", req.UserID, ext)
+	objectName := fmt.Sprintf("%s.%s", uuid.New().String(), ext)
 
 	if err := s.storage.UploadAvatar(ctx, objectName, req.File, req.Size, req.ContentType); err != nil {
 		return nil, ErrInternal
 	}
 
 	if err := s.repo.UpdateUserAvatar(ctx, req.UserID, objectName); err != nil {
-		_ = s.storage.DeleteAvatar(ctx, objectName)
+		if delErr := s.storage.DeleteAvatar(ctx, objectName); delErr != nil {
+			return nil, fmt.Errorf("failed to delete uploaded avatar %q): %w", objectName, delErr)
+		}
 		return nil, mapRepositoryError(err)
 	}
 
-	return &dto.UploadAvatarResponse{URL: objectName}, nil
+	url, err := s.storage.GetAvatarURL(ctx, objectName)
+	if err != nil {
+		return nil, ErrInternal
+	}
+
+	return &dto.UploadAvatarResponse{URL: url}, nil
 }
 
 func (s *Service) DeleteAvatar(ctx context.Context, req dto.DeleteAvatarRequest) error {

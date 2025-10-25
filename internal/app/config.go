@@ -63,7 +63,6 @@ func NewConfig() *Config {
 			Endpoint:  getEnv("MINIO_ENDPOINT", "localhost:9000"),
 			AccessKey: getEnv("MINIO_ACCESS_KEY", "miniouser"),
 			SecretKey: getEnv("MINIO_SECRET_KEY", "miniopassword"),
-			Bucket:    getEnv("MINIO_BUCKET", "avatars"),
 			UseSSL:    getEnvAsBool("MINIO_USE_SSL", false),
 		},
 	}

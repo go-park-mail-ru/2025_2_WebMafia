@@ -4,11 +4,18 @@ import (
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"strconv"
 	"strings"
 	"time"
 )
+
+type payload struct {
+	UserID    string `json:"sub"`
+	SessionID string `json:"jti"`
+	ExpiresAt int64  `json:"exp"`
+}
 
 type Manager struct {
 	secret []byte
@@ -20,18 +27,24 @@ func NewManager(secret string, ttl time.Duration) *Manager {
 }
 
 func (m *Manager) Generate(userID, sessionID string) (string, error) {
-	expiresAt := time.Now().Add(m.ttl).Unix()
-
-	data := fmt.Sprintf("%s:%s:%d", userID, sessionID, expiresAt)
+	p := payload{
+		UserID:    userID,
+		SessionID: sessionID,
+		ExpiresAt: time.Now().Add(m.ttl).Unix(),
+	}
+	data, err := json.Marshal(p)
+	if err != nil {
+		return "", fmt.Errorf("failed to marshal csrf payload: %w", err)
+	}
 
 	h := hmac.New(sha256.New, m.secret)
-	_, err := h.Write([]byte(data))
+	_, err = h.Write(data)
 	if err != nil {
 		return "", fmt.Errorf("failed to write data to hmac: %w", err)
 	}
 	signature := hex.EncodeToString(h.Sum(nil))
 
-	token := fmt.Sprintf("%s:%d", signature, expiresAt)
+	token := fmt.Sprintf("%s:%d", signature, p.ExpiresAt)
 
 	return token, nil
 }
@@ -53,9 +66,18 @@ func (m *Manager) Check(userID, sessionID, clientToken string) (bool, error) {
 		return false, fmt.Errorf("csrf token expired")
 	}
 
-	expectedData := fmt.Sprintf("%s:%s:%d", userID, sessionID, expiresAt)
+	expectedPayload := payload{
+		UserID:    userID,
+		SessionID: sessionID,
+		ExpiresAt: expiresAt,
+	}
+	expectedData, err := json.Marshal(expectedPayload)
+	if err != nil {
+		return false, fmt.Errorf("failed to marshal expected payload for check: %w", err)
+	}
+
 	h := hmac.New(sha256.New, m.secret)
-	_, err = h.Write([]byte(expectedData))
+	_, err = h.Write(expectedData)
 	if err != nil {
 		return false, fmt.Errorf("failed to write data to hmac for check: %w", err)
 	}

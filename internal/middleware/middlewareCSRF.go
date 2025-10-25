@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"net/http"
-	"spotify/pkg/jwtmanager"
 	"spotify/pkg/response"
 )
 
@@ -25,15 +24,9 @@ func (m *CSRF) CSRFMiddleware(next http.Handler) http.Handler {
 		const op = "middleware.CSRF"
 		log := LoggerFromContext(r.Context())
 
-		switch r.Method {
-		case http.MethodGet, http.MethodHead, http.MethodOptions:
-			next.ServeHTTP(w, r)
-			return
-		}
-
-		claims, ok := r.Context().Value(ClaimsKey).(*jwtmanager.Claims)
-		if !ok {
-			log.Errorf("[%s]: failed to get claims from context", op)
+		claims, err := ClaimsFromContext(r.Context())
+		if err != nil {
+			log.Errorf("[%s]: %v", op, err)
 			response.ForbiddenJSON(w)
 			return
 		}

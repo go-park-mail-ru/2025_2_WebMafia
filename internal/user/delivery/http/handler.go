@@ -10,14 +10,21 @@ type IService interface {
 	Register(ctx context.Context, req dto.RegisterRequest) (*dto.RegisterResponse, error)
 	Login(ctx context.Context, req dto.LoginRequest) (*dto.LoginResponse, error)
 }
-type Handler struct {
-	svc        IService
-	jwtManager *jwtmanager.Manager
+
+type CSRFManager interface {
+	Generate(userID, sessionID string) (string, error)
 }
 
-func NewHandler(svc IService, jwtManager *jwtmanager.Manager) *Handler {
+type Handler struct {
+	svc         IService
+	jwtManager  *jwtmanager.Manager
+	csrfManager CSRFManager
+}
+
+func NewHandler(svc IService, jwtManager *jwtmanager.Manager, csrfManager CSRFManager) *Handler {
 	return &Handler{
-		svc:        svc,
-		jwtManager: jwtManager,
+		svc:         svc,
+		jwtManager:  jwtManager,
+		csrfManager: csrfManager,
 	}
 }

@@ -67,6 +67,7 @@ func NewConfig() *Config {
 			AccessKey: getEnv("MINIO_ACCESS_KEY", "miniouser"),
 			SecretKey: getEnv("MINIO_SECRET_KEY", "miniopassword"),
 			UseSSL:    getEnvAsBool("MINIO_USE_SSL", false),
+		},
 		Logger: logger.Config{
 			Level: getEnv("LOGGER_LEVEL", logger.LevelInfo),
 			Mode:  getEnv("LOGGER_MODE", logger.ModeDev),

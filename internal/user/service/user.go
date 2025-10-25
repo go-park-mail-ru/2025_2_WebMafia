@@ -6,7 +6,6 @@ import (
 	"spotify/internal/model"
 	"spotify/internal/user/dto"
 	"spotify/internal/user/tools"
-	"strings"
 	"time"
 
 	"github.com/google/uuid"
@@ -59,10 +58,9 @@ func (s *Service) Login(ctx context.Context, req dto.LoginRequest) (*dto.LoginRe
 
 // Avatar Upload
 func (s *Service) UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest) (*dto.UploadAvatarResponse, error) {
-	ext := strings.TrimPrefix(req.ContentType, "image/")
-	objectName := fmt.Sprintf("%s.%s", uuid.New().String(), ext)
 
-	if err := s.storage.UploadAvatar(ctx, objectName, req.File, req.Size, req.ContentType); err != nil {
+	objectName, err := s.storage.UploadAvatar(ctx, req.File, req.Size, req.ContentType)
+	if err != nil {
 		return nil, ErrInternal
 	}
 

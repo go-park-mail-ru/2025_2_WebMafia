@@ -206,7 +206,7 @@ func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) UploadAvatar(w http.ResponseWriter, r *http.Request) {
-	const op = "[UploadAvatar] "
+	const op = "handler.UploadAvatar"
 
 	userID, ok := middleware.GetUserID(r.Context())
 	if !ok || userID == "" {
@@ -214,16 +214,18 @@ func (h *Handler) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log := middleware.LoggerFromContext(r.Context())
+
 	file, header, err := r.FormFile("avatar")
 	if err != nil {
-		log.Printf("%s failed to get file: %v", op, err)
+		log.Errorf("[%s] failed to get file: %v", op, err)
 		response.BadRequestJSON(w)
 		return
 	}
 	defer file.Close()
 
 	if err := validateAvatar(header.Header.Get("Content-Type"), header.Size); err != nil {
-		log.Printf("%s validation error: %v", op, err)
+		log.Errorf("[%s] validation error: %v", op, err)
 		response.BadRequestJSON(w)
 		return
 	}
@@ -235,16 +237,17 @@ func (h *Handler) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 		ContentType: header.Header.Get("Content-Type"),
 	})
 	if err != nil {
-		log.Printf("%s service error: %v", op, err)
+		log.Errorf("[%s] service error: %v", op, err)
 		handleServiceError(w, err)
 		return
 	}
 
+	log.Infof("[%s]: Avatar uploaded successfully:", op)
 	response.JSON(w, http.StatusOK, uploadAvatarResponse{URL: res.URL})
 }
 
 func (h *Handler) DeleteAvatar(w http.ResponseWriter, r *http.Request) {
-	const op = "[DeleteAvatar] "
+	const op = "handler.DeleteAvatar"
 
 	userID, ok := middleware.GetUserID(r.Context())
 	if !ok || userID == "" {
@@ -252,15 +255,18 @@ func (h *Handler) DeleteAvatar(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log := middleware.LoggerFromContext(r.Context())
+
 	req := dto.DeleteAvatarRequest{
 		UserID: userID,
 	}
 
 	if err := h.svc.DeleteAvatar(r.Context(), req); err != nil {
-		log.Printf("%s service error: %v", op, err)
+		log.Errorf("[%s] service error: %v", op, err)
 		handleServiceError(w, err)
 		return
 	}
 
+	log.Infof("[%s]: Avatar deleted successfully:", op)
 	response.JSON(w, http.StatusOK, deleteAvatarResponse{Status: "deleted"})
 }

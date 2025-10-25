@@ -3,11 +3,13 @@ package minio
 import (
 	"context"
 	"fmt"
+	"github.com/google/uuid"
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
 	"io"
 	"log"
 	"net/url"
+	"strings"
 	"time"
 )
 
@@ -56,19 +58,22 @@ func (c *Client) EnsureBucket(ctx context.Context, bucket string) error {
 	return nil
 }
 
-func (c *Client) Upload(ctx context.Context, obj ObjectInfo) error {
+func (c *Client) Upload(ctx context.Context, obj ObjectInfo) (string, error) {
 	if err := c.EnsureBucket(ctx, obj.Bucket); err != nil {
-		return err
+		return "", err
 	}
+
+	ext := strings.TrimPrefix(obj.ContentType, "image/")
+	objectName := fmt.Sprintf("%s.%s", uuid.New().String(), ext)
 
 	_, err := c.minioClient.PutObject(ctx, obj.Bucket, obj.ObjectName, obj.Reader, obj.Size, minio.PutObjectOptions{
 		ContentType: obj.ContentType,
 	})
 
 	if err != nil {
-		return fmt.Errorf("upload object: %w", err)
+		return "", fmt.Errorf("upload object: %w", err)
 	}
-	return nil
+	return objectName, nil
 }
 
 func (c *Client) Remove(ctx context.Context, bucket, objectName string) error {

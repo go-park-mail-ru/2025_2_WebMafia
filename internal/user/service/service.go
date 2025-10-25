@@ -15,7 +15,7 @@ type IRepository interface {
 }
 
 type IStorage interface {
-	UploadAvatar(ctx context.Context, objectName string, file io.Reader, size int64, contentType string) error
+	UploadAvatar(ctx context.Context, file io.Reader, size int64, contentType string) (string, error)
 	DeleteAvatar(ctx context.Context, objectName string) error
 	GetAvatarURL(ctx context.Context, objectName string) (string, error)
 }

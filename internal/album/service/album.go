@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"spotify/internal/album/dto"
 	artistDTO "spotify/internal/artist/dto"
 
@@ -13,14 +14,15 @@ const (
 )
 
 func (s *Service) GetAlbumByID(ctx context.Context, id uuid.UUID) (*dto.Album, error) {
+	const op = "service.GetAlbumByID"
 	albumModel, err := s.albumRepo.GetByID(ctx, id)
 	if err != nil {
-		return nil, mapError(err, "service.GetAlbumByID")
+		return nil, fmt.Errorf("[%s]: failed to get an album: %w", op, mapError(err))
 	}
 
 	artist, err := s.artistService.GetArtistByID(ctx, albumModel.ArtistID)
 	if err != nil {
-		return nil, mapError(err, "service.GetAlbumByID: failed to get an artist")
+		return nil, fmt.Errorf("[%s]: failed to get an artist: %w", op, mapError(err))
 	}
 
 	albumDTO := &dto.Album{
@@ -41,9 +43,10 @@ func (s *Service) GetAlbumByID(ctx context.Context, id uuid.UUID) (*dto.Album, e
 }
 
 func (s *Service) GetAllAlbums(ctx context.Context, limit, offset uint64) ([]dto.Album, error) {
+	const op = "service.GetAllAlbums"
 	albumModels, err := s.albumRepo.GetAll(ctx, limit, offset)
 	if err != nil {
-		return nil, mapError(err, "service.GetAllAlbums: failed to get all albums")
+		return nil, fmt.Errorf("[%s]: failed to get all albums: %w", op, mapError(err))
 	}
 	if len(albumModels) == 0 {
 		return []dto.Album{}, nil
@@ -60,7 +63,7 @@ func (s *Service) GetAllAlbums(ctx context.Context, limit, offset uint64) ([]dto
 
 	artists, err := s.artistService.GetArtistsByIDs(ctx, artistIDs)
 	if err != nil {
-		return nil, mapError(err, "service.GetAllAlbums: failed to get an artist")
+		return nil, fmt.Errorf("[%s]: failed to get an artist: %w", op, mapError(err))
 	}
 
 	artistsMap := make(map[string]artistDTO.Artist, len(artists))
@@ -94,9 +97,10 @@ func (s *Service) GetAllAlbums(ctx context.Context, limit, offset uint64) ([]dto
 }
 
 func (s *Service) GetAlbumsByIDs(ctx context.Context, ids []uuid.UUID) ([]dto.Album, error) {
+	const op = "service.GetAlbumsByIDs"
 	albumModels, err := s.albumRepo.GetByIDs(ctx, ids)
 	if err != nil {
-		return nil, mapError(err, "service.GetAlbumsByIDs: failed to get albums by ids")
+		return nil, fmt.Errorf("[%s]: failed to get albums by ids: %w", op, mapError(err))
 	}
 	if len(albumModels) == 0 {
 		return []dto.Album{}, nil
@@ -113,7 +117,7 @@ func (s *Service) GetAlbumsByIDs(ctx context.Context, ids []uuid.UUID) ([]dto.Al
 
 	artists, err := s.artistService.GetArtistsByIDs(ctx, artistIDs)
 	if err != nil {
-		return nil, mapError(err, "service.GetAlbumsByIDs: failed to get an artist")
+		return nil, fmt.Errorf("[%s]: failed to get an artist: %w", op, mapError(err))
 	}
 
 	artistsMap := make(map[string]artistDTO.Artist, len(artists))
@@ -144,9 +148,10 @@ func (s *Service) GetAlbumsByIDs(ctx context.Context, ids []uuid.UUID) ([]dto.Al
 }
 
 func (s *Service) GetAlbumsByArtistID(ctx context.Context, artistID uuid.UUID, limit, offset uint64) ([]dto.Album, error) {
+	const op = "service.GetAlbumsByArtistID"
 	albumModels, err := s.albumRepo.GetByArtistID(ctx, artistID, limit, offset)
 	if err != nil {
-		return nil, mapError(err, "service.GetAlbumsByArtistID: failed to get albums")
+		return nil, fmt.Errorf("[%s]: failed to get albums: %w", op, mapError(err))
 	}
 	if len(albumModels) == 0 {
 		return []dto.Album{}, nil
@@ -154,7 +159,7 @@ func (s *Service) GetAlbumsByArtistID(ctx context.Context, artistID uuid.UUID, l
 
 	artist, err := s.artistService.GetArtistByID(ctx, artistID)
 	if err != nil {
-		return nil, mapError(err, "service.GetAlbumsByArtistID: failed to get artist")
+		return nil, fmt.Errorf("[%s]: failed to get artist: %w", op, mapError(err))
 	}
 
 	albumDTOs := make([]dto.Album, 0, len(albumModels))

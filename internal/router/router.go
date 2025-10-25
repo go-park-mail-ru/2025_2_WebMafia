@@ -6,6 +6,7 @@ import (
 	"spotify/internal/middleware"
 	trackDelivery "spotify/internal/track/delivery/http"
 	userDelivery "spotify/internal/user/delivery/http"
+	"spotify/pkg/logger"
 
 	"github.com/gorilla/mux"
 )
@@ -17,9 +18,10 @@ type AppHandlers struct {
 	TrackHandler  *trackDelivery.Handler
 }
 
-func NewRouter(handlers AppHandlers, auth *middleware.Auth, cfg middleware.CORSConfig) *mux.Router {
+func NewRouter(logger logger.Logger, handlers AppHandlers, auth *middleware.Auth, cfg middleware.CORSConfig) *mux.Router {
 	r := mux.NewRouter()
 
+	r.Use(middleware.RequestLoggerMiddleware(logger))
 	r.Use(middleware.CORS(cfg))
 
 	api := r.PathPrefix("/api/v1").Subrouter()

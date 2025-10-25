@@ -17,6 +17,8 @@ require (
 	github.com/minio/minio-go/v7 v7.0.95
 )
 
+require go.uber.org/multierr v1.10.0 // indirect
+
 require (
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/go-ini/ini v1.67.0 // indirect
@@ -35,6 +37,7 @@ require (
 	github.com/rs/xid v1.6.0 // indirect
 	github.com/tinylib/msgp v1.3.0 // indirect
 	golang.org/x/net v0.43.0 // indirect
+	go.uber.org/zap v1.27.0
 	golang.org/x/sync v0.17.0 // indirect
 	golang.org/x/sys v0.36.0 // indirect
 	golang.org/x/text v0.29.0 // indirect

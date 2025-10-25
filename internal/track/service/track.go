@@ -164,10 +164,21 @@ func (s *Service) getAlbumsForTracks(ctx context.Context, trackIDs []uuid.UUID) 
 		if err != nil {
 			continue
 		}
+		trackDTOArtists := make([]dto.Artist, len(albumServiceDTO.Artists))
+		for i, artist := range albumServiceDTO.Artists {
+			trackDTOArtists[i] = dto.Artist{
+				ID:        artist.ID,
+				Name:      artist.Name,
+				AvatarURL: artist.AvatarURL,
+			}
+		}
+
 		albumsMapByID[albumUUID] = dto.Album{
-			ID:        albumServiceDTO.ID,
-			Title:     albumServiceDTO.Title,
-			AvatarURL: albumServiceDTO.AvatarURL,
+			ID:          albumServiceDTO.ID,
+			Title:       albumServiceDTO.Title,
+			AvatarURL:   albumServiceDTO.AvatarURL,
+			ReleaseDate: albumServiceDTO.ReleaseDate,
+			Artists:     trackDTOArtists,
 		}
 	}
 

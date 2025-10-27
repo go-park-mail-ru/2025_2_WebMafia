@@ -16,7 +16,7 @@ func (s *Service) Register(ctx context.Context, req dto.RegisterRequest) (*dto.R
 	const op = "service.Register"
 	hash, err := tools.Hash(req.Password)
 	if err != nil {
-		return nil, fmt.Errorf("[%s]: failed to hash password: %w", op, ErrInternal)
+		return nil, fmt.Errorf("[%s]: failed to hash password: %w", op, err)
 	}
 
 	user := model.User{
@@ -61,7 +61,7 @@ func (s *Service) UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest)
 
 	objectName, err := s.storage.UploadAvatar(ctx, req.File, req.Size, req.ContentType)
 	if err != nil {
-		return nil, ErrInternal
+		return nil, err
 	}
 
 	if err := s.repo.UpdateUserAvatar(ctx, req.UserID, objectName); err != nil {
@@ -73,7 +73,7 @@ func (s *Service) UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest)
 
 	url, err := s.storage.GetAvatarURL(ctx, objectName)
 	if err != nil {
-		return nil, ErrInternal
+		return nil, err
 	}
 
 	return &dto.UploadAvatarResponse{URL: url}, nil
@@ -88,7 +88,7 @@ func (s *Service) DeleteAvatar(ctx context.Context, req dto.DeleteAvatarRequest)
 
 	if user.AvatarURL != "" {
 		if err := s.storage.DeleteAvatar(ctx, user.AvatarURL); err != nil {
-			return fmt.Errorf("delete avatar from storage: %w", ErrInternal)
+			return fmt.Errorf("delete avatar from storage: %w", err)
 		}
 		if err := s.repo.UpdateUserAvatar(ctx, req.UserID, ""); err != nil {
 			return mapRepositoryError(err)

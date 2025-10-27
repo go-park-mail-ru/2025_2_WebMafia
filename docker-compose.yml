@@ -13,6 +13,19 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+
+  migrate:
+    image: migrate/migrate
+    volumes:
+      - ./migrations:/migrations
+    env_file: .env.docker
+    command: [ "-path", "/migrations", "-database", "postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}?sslmode=disable", "up" ]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: on-failure
 
   db:
     image: postgres:15-alpine

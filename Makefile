@@ -54,10 +54,6 @@ docker-logs:
 
 # === Migrations === #
 
-migrate-up:
-	@echo "==> Применяем миграции..."
-	@migrate -path $(MIGRATIONS_PATH) -database "$(DB_URL)" up
-
 migrate-down:
 	@echo "==> Откатываем миграции..."
 	@migrate -path $(MIGRATIONS_PATH) -database "$(DB_URL)" down

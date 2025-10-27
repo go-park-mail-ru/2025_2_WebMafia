@@ -10,7 +10,6 @@ var (
 	ErrValidation = errors.New("validation_error")
 	ErrNotFound   = errors.New("not_found")
 	ErrConflict   = errors.New("conflict_error")
-	ErrInternal   = errors.New("internal_error")
 )
 
 func mapRepositoryError(err error) error {
@@ -20,10 +19,10 @@ func mapRepositoryError(err error) error {
 
 	switch {
 	case errors.Is(err, postgres.ErrNotFound):
-		return fmt.Errorf("not found: %w", ErrNotFound)
+		return fmt.Errorf("not found: %w", err)
 	case errors.Is(err, postgres.ErrConflict):
-		return fmt.Errorf("user already exists: %w", ErrConflict)
+		return fmt.Errorf("user already exists: %w", err)
 	default:
-		return fmt.Errorf("internal error: %w", ErrInternal)
+		return fmt.Errorf("internal error: %w", err)
 	}
 }

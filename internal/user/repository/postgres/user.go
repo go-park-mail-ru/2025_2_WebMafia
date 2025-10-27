@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"spotify/internal/model"
 
-	"github.com/jackc/pgconn"
+	"github.com/jackc/pgx/v5/pgconn"
 )
 
 func (m *Repository) CreateUser(ctx context.Context, user model.User) error {
@@ -94,7 +94,7 @@ func (m *Repository) selectUser(ctx context.Context, query string, args ...inter
 	}
 
 	if err = rows.Err(); err != nil {
-		return nil, fmt.Errorf("rows iteration failed: %w", ErrInternal)
+		return nil, fmt.Errorf("rows iteration failed: %w", err)
 	}
 
 	return user, nil
@@ -110,8 +110,8 @@ func handlePostgresError(err error) error {
 		case "23505":
 			return fmt.Errorf("user already exist: %w", ErrConflict)
 		default:
-			return fmt.Errorf("postgres error (%s): %s", ErrInternal, pgErr.Message)
+			return fmt.Errorf("postgres error: %w", err)
 		}
 	}
-	return fmt.Errorf("unknown database error: %w", ErrInternal)
+	return fmt.Errorf("unknown database error: %w", err)
 }

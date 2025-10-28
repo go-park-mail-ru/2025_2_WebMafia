@@ -121,13 +121,13 @@ func (s *Service) enrichTracks(ctx context.Context, tracks []model.Track) ([]dto
 		}
 
 		enrichedTracks = append(enrichedTracks, dto.Track{
-			ID:         track.ID.String(),
-			Title:      track.Title,
-			DurationMs: track.DurationMs,
-			FileURL:    track.FileURL,
-			Album:      album,
-			Artists:    artists,
-			Genres:     genres,
+			ID:        track.ID.String(),
+			Title:     track.Title,
+			DurationS: track.DurationS,
+			FileURL:   track.FileURL,
+			Album:     album,
+			Artists:   artists,
+			Genres:    genres,
 		})
 	}
 

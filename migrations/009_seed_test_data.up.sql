@@ -32,7 +32,7 @@ INSERT INTO album (album_id, title, avatar_url, artist_id, release_date) VALUES
 ('44444444-4444-4444-4444-444444444445', 'Die Lit', 'image19.jpg', '99999999-9999-9999-9999-999999999999', '2018-05-11'),
 ('55555555-5555-5555-5555-555555555556', 'After Hours', 'image20.jpg', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', '2020-03-20');
 
-INSERT INTO track (track_id, title, duration_ms, file_url) VALUES
+INSERT INTO track (track_id, title, duration_s, file_url) VALUES
 ('66666666-6666-6666-6666-666666666666', 'See You Again', 180000, 'tyler_see_you_again.mp3'),
 ('77777777-7777-7777-7777-777777777777', 'Kenan vs Kel', 165000, 'peggy_kenan_vs_kel.mp3'),
 ('88888888-8888-8888-8888-888888888888', 'Rather Lie', 195000, 'carti_rather_lie.mp3'),

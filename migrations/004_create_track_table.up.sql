@@ -1,7 +1,7 @@
 CREATE TABLE track (
     track_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     title TEXT NOT NULL,
-    duration_ms INTEGER NOT NULL CHECK (duration_ms > 0),
+    duration_s INTEGER NOT NULL CHECK (duration_s > 0),
     file_url TEXT NOT NULL,
     description TEXT,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,

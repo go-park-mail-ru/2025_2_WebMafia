@@ -17,7 +17,7 @@ MIGRATIONS_PATH = migrations
 
 test:
 	@echo "==> Запускаем тесты и генерируем отчет о покрытии..."
-	@go test -coverprofile=coverage.out ./...
+	@go test -coverprofile=coverage.out $(shell go list ./... | grep -v /mocks)
 	@echo "\n==> Общее покрытие кода тестами:"
 	@go tool cover -func=coverage.out | grep total
 
@@ -53,10 +53,6 @@ docker-logs:
 
 
 # === Migrations === #
-
-migrate-up:
-	@echo "==> Применяем миграции..."
-	@migrate -path $(MIGRATIONS_PATH) -database "$(DB_URL)" up
 
 migrate-down:
 	@echo "==> Откатываем миграции..."

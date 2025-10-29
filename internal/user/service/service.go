@@ -12,6 +12,7 @@ type IRepository interface {
 	GetUserByLogin(ctx context.Context, login string) (*model.User, error)
 	GetUserByID(ctx context.Context, userID string) (*model.User, error)
 	UpdateUserAvatar(ctx context.Context, userID string, avatarPath string) error
+	UpdateUserProfile(ctx context.Context, user model.User) error
 }
 
 type IStorage interface {

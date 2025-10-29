@@ -58,6 +58,7 @@ func (s *Service) Login(ctx context.Context, req dto.LoginRequest) (*dto.LoginRe
 
 // Avatar Upload
 func (s *Service) UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest) (*dto.UploadAvatarResponse, error) {
+	const op = "service.UpdateAvatar"
 
 	objectName, err := s.storage.UploadAvatar(ctx, req.File, req.Size, req.ContentType)
 	if err != nil {
@@ -66,7 +67,7 @@ func (s *Service) UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest)
 
 	if err := s.repo.UpdateUserAvatar(ctx, req.UserID, objectName); err != nil {
 		if delErr := s.storage.DeleteAvatar(ctx, objectName); delErr != nil {
-			return nil, fmt.Errorf("failed to delete uploaded avatar %q): %w", objectName, delErr)
+			return nil, fmt.Errorf("[%s]: failed to delete uploaded avatar %q): %w", op, objectName, delErr)
 		}
 		return nil, mapRepositoryError(err)
 	}
@@ -80,6 +81,7 @@ func (s *Service) UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest)
 }
 
 func (s *Service) DeleteAvatar(ctx context.Context, req dto.DeleteAvatarRequest) error {
+	const op = "service.DeleteAvatar"
 
 	user, err := s.repo.GetUserByID(ctx, req.UserID)
 	if err != nil {
@@ -88,7 +90,7 @@ func (s *Service) DeleteAvatar(ctx context.Context, req dto.DeleteAvatarRequest)
 
 	if user.AvatarURL != "" {
 		if err := s.storage.DeleteAvatar(ctx, user.AvatarURL); err != nil {
-			return fmt.Errorf("delete avatar from storage: %w", err)
+			return fmt.Errorf("[%s]: delete avatar from storage: %w", op, err)
 		}
 		if err := s.repo.UpdateUserAvatar(ctx, req.UserID, ""); err != nil {
 			return mapRepositoryError(err)
@@ -97,4 +99,34 @@ func (s *Service) DeleteAvatar(ctx context.Context, req dto.DeleteAvatarRequest)
 	}
 
 	return nil
+}
+
+func (s *Service) UpdateProfile(ctx context.Context, req dto.UpdateProfileRequest) (*dto.UpdateProfileResponse, error) {
+	const op = "service.UpdateProfile"
+
+	user, err := s.repo.GetUserByID(ctx, req.UserID)
+	if err != nil {
+		return nil, mapRepositoryError(err)
+	}
+
+	user.Login = req.Login
+	user.Email = req.Email
+
+	if req.Password != "" {
+		hash, err := tools.Hash(req.Password)
+		if err != nil {
+			return nil, fmt.Errorf("[%s]: failed to hash password: %w", op, err)
+		}
+		user.PasswordHash = hash
+	}
+
+	if err := s.repo.UpdateUserProfile(ctx, *user); err != nil {
+		return nil, mapRepositoryError(err)
+	}
+
+	return &dto.UpdateProfileResponse{
+		ID:    user.ID.String(),
+		Login: user.Login,
+		Email: user.Email,
+	}, nil
 }

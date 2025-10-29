@@ -15,4 +15,5 @@ func (h *Handler) RegisterRoutes(public, protected *mux.Router) {
 	protected.HandleFunc("/avatar", h.UploadAvatar).Methods(http.MethodPost, http.MethodOptions)
 	protected.HandleFunc("/avatar", h.DeleteAvatar).Methods(http.MethodDelete, http.MethodOptions)
 
+	protected.HandleFunc("/profile", h.UpdateProfile).Methods(http.MethodPut, http.MethodOptions)
 }

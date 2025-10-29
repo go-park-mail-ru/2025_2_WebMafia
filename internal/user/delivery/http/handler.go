@@ -11,6 +11,7 @@ type IService interface {
 	Login(ctx context.Context, req dto.LoginRequest) (*dto.LoginResponse, error)
 	UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest) (*dto.UploadAvatarResponse, error)
 	DeleteAvatar(ctx context.Context, req dto.DeleteAvatarRequest) error
+	UpdateProfile(ctx context.Context, req dto.UpdateProfileRequest) (*dto.UpdateProfileResponse, error)
 }
 type Handler struct {
 	svc        IService

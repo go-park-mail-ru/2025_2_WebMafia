@@ -104,13 +104,16 @@ func (s *Service) DeleteAvatar(ctx context.Context, req dto.DeleteAvatarRequest)
 func (s *Service) UpdateProfile(ctx context.Context, req dto.UpdateProfileRequest) (*dto.UpdateProfileResponse, error) {
 	const op = "service.UpdateProfile"
 
-	user, err := s.repo.GetUserByID(ctx, req.UserID)
+	id, err := uuid.Parse(req.UserID)
 	if err != nil {
-		return nil, mapRepositoryError(err)
+		return nil, fmt.Errorf("[%s]: invalid user ID: %w", op, err)
 	}
 
-	user.Login = req.Login
-	user.Email = req.Email
+	user := model.User{
+		ID:    id,
+		Login: req.Login,
+		Email: req.Email,
+	}
 
 	if req.Password != "" {
 		hash, err := tools.Hash(req.Password)
@@ -120,7 +123,7 @@ func (s *Service) UpdateProfile(ctx context.Context, req dto.UpdateProfileReques
 		user.PasswordHash = hash
 	}
 
-	if err := s.repo.UpdateUserProfile(ctx, *user); err != nil {
+	if err := s.repo.UpdateUserProfile(ctx, user); err != nil {
 		return nil, mapRepositoryError(err)
 	}
 

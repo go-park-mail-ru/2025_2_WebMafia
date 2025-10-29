@@ -83,15 +83,13 @@ func (m *Repository) UpdateUserProfile(ctx context.Context, user model.User) err
 		UPDATE "user"
 		SET login = $1,
 			email = $2,
-			password_hash = $3,
-			updated_at = $4
-		WHERE user_id = $5`
+			password_hash = $3
+		WHERE user_id = $4`
 
 	_, err := m.Conn.ExecContext(ctx, query,
 		user.Login,
 		user.Email,
 		user.PasswordHash,
-		user.UpdatedAt,
 		user.ID,
 	)
 

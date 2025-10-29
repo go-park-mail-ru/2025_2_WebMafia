@@ -29,9 +29,10 @@ import (
 
 	"spotify/internal/middleware"
 	"spotify/internal/router"
+	"spotify/pkg/csrfmanager"
 	"spotify/pkg/jwtmanager"
-	"spotify/pkg/minio"
 	"spotify/pkg/logger"
+	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
 )
 
@@ -76,7 +77,10 @@ func NewApp(cfg *Config) (*App, error) {
 	jwtManager := jwtmanager.NewManager(cfg.JWTSecretKey, cfg.AccessTokenTTL)
 	authMiddleware := middleware.NewAuthMiddleware(jwtManager)
 
-	userHandler := userDelivery.NewHandler(userSvc, jwtManager)
+	csrfManager := csrfmanager.NewManager(cfg.CSRFSecretKey, cfg.CSRFTokenTTL)
+	csrfMiddleware := middleware.NewCSRFMiddleware(csrfManager)
+
+	userHandler := userDelivery.NewHandler(userSvc, jwtManager, csrfManager)
 	artistHandler := artistDelivery.NewHandler(artistSvc)
 	albumHandler := albumDelivery.NewHandler(albumSvc)
 	trackHandler := trackDelivery.NewHandler(trackSvc)
@@ -88,7 +92,7 @@ func NewApp(cfg *Config) (*App, error) {
 		TrackHandler:  trackHandler,
 	}
 
-	muxRouter := router.NewRouter(log, handlers, authMiddleware, cfg.CORS)
+	muxRouter := router.NewRouter(log, handlers, authMiddleware, csrfMiddleware, cfg.CORS)
 
 	server := &http.Server{
 		Addr:         ":" + cfg.Port,

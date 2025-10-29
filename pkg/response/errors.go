@@ -6,4 +6,5 @@ var (
 	ErrNotFound       = ErrorResponse{Error: "not found"}
 	ErrConflict       = ErrorResponse{Error: "resource conflict"}
 	ErrInternalServer = ErrorResponse{Error: "internal server error"}
+	ErrForbidden      = ErrorResponse{Error: "forbidden"}
 )

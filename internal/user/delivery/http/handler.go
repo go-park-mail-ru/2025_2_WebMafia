@@ -13,14 +13,21 @@ type IService interface {
 	DeleteAvatar(ctx context.Context, req dto.DeleteAvatarRequest) error
 	UpdateProfile(ctx context.Context, req dto.UpdateProfileRequest) (*dto.UpdateProfileResponse, error)
 }
-type Handler struct {
-	svc        IService
-	jwtManager *jwtmanager.Manager
+
+type CSRFManager interface {
+	Generate(userID, sessionID string) (string, error)
 }
 
-func NewHandler(svc IService, jwtManager *jwtmanager.Manager) *Handler {
+type Handler struct {
+	svc         IService
+	jwtManager  *jwtmanager.Manager
+	csrfManager CSRFManager
+}
+
+func NewHandler(svc IService, jwtManager *jwtmanager.Manager, csrfManager CSRFManager) *Handler {
 	return &Handler{
-		svc:        svc,
-		jwtManager: jwtManager,
+		svc:         svc,
+		jwtManager:  jwtManager,
+		csrfManager: csrfManager,
 	}
 }

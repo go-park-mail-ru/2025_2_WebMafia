@@ -9,12 +9,15 @@ import (
 	"fmt"
 	"strings"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 type Claims struct {
-	UserID string `json:"sub"`
-	Exp    int64  `json:"exp"`
-	Iat    int64  `json:"iat"`
+	UserID    string `json:"sub"`
+	SessionID string `json:"jti"`
+	Exp       int64  `json:"exp"`
+	Iat       int64  `json:"iat"`
 }
 
 type Manager struct {
@@ -35,9 +38,10 @@ func (m *Manager) Generate(userID string) (string, error) {
 	expiresAt := now.Add(m.accessTokenTTL)
 
 	claims := Claims{
-		UserID: userID,
-		Exp:    expiresAt.Unix(),
-		Iat:    now.Unix(),
+		UserID:    userID,
+		SessionID: uuid.New().String(),
+		Exp:       expiresAt.Unix(),
+		Iat:       now.Unix(),
 	}
 
 	header := map[string]string{"alg": "HS256", "typ": "JWT"}

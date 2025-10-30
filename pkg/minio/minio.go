@@ -66,7 +66,7 @@ func (c *Client) Upload(ctx context.Context, obj ObjectInfo) (string, error) {
 	ext := strings.TrimPrefix(obj.ContentType, "image/")
 	objectName := fmt.Sprintf("%s.%s", uuid.New().String(), ext)
 
-	_, err := c.minioClient.PutObject(ctx, obj.Bucket, obj.ObjectName, obj.Reader, obj.Size, minio.PutObjectOptions{
+	_, err := c.minioClient.PutObject(ctx, obj.Bucket, objectName, obj.Reader, obj.Size, minio.PutObjectOptions{
 		ContentType: obj.ContentType,
 	})
 

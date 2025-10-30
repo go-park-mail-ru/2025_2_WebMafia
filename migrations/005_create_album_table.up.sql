@@ -5,7 +5,7 @@ CREATE TABLE album (
     artist_id UUID NOT NULL,
     description TEXT,
     release_date DATE,
-    type TEXT,
+    type TEXT NOT NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_album_artist

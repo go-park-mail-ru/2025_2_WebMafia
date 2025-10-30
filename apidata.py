@@ -2,6 +2,11 @@ import os
 from ytmusicapi import YTMusic
 from datetime import datetime
 import random
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+
+client_id = "e2f9643cd6c24e50964226ebd093ac88"
+client_secret = "723c43d6f74d445e8e5e592eed9a5833"
 
 OUTPUT_DIR = "migrations"
 output_file = os.path.join(OUTPUT_DIR, "010_insert_API_data.up.sql")
@@ -9,13 +14,15 @@ output_file = os.path.join(OUTPUT_DIR, "010_insert_API_data.up.sql")
 # --- Подключение к YTMusic ---
 yt = YTMusic(language='ru')
 
+# --- Подключение к спотику ---
+auth_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
+sp = spotipy.Spotify(auth_manager=auth_manager)
+
 artist_ids = [
     'UCS8-ccff2oGbG0Mx7UOuKYw',
     'UCCHDdiih5D__dDi2V3nboPw',
     'UCabtR67_U5O72yRXF7hiI-g',
     'UCgzshmpXAc1T30PHQ3Yw2lw',
-]
-"""
     'UCSrA5JaXpR21z_E1FDA03RA',
     'UCPQPjvs4xHLIShnJMXY7GlQ',
     'UCUAa1fv7JsIFuBUWtH0ZaOA',
@@ -29,6 +36,8 @@ artist_ids = [
     'UC48vpdaG8NDvEGLj11XPPZQ',
     'UCvpredjG93ifbCP1Y77JyFA',
     'UCbb9FsCRA83-6vdgXn2KSyA',
+]
+"""
     'UCbcXadHgtd1pWzTAWoI6loA',
     'UCvJLQlVdWiIU0qYmowdKh6g',
     'UCNpdKmV1hHFuKM6DUxGMOBw',
@@ -103,14 +112,19 @@ for artist_id in artist_ids:
         artist_info = yt.get_artist(artist_id)
         artist_name = artist_info.get('name').replace("'", "''")
         print(f"=== Обрабатывается артист {artist_name} ===")
+
+        results = sp.search(q=artist_name, type="artist", limit=1)
+        spotify_artist = results['artists']['items'][0]
+        artist_avatar_url = spotify_artist['images'][2]['url'] if spotify_artist else ''
+
         artist_description = (artist_info.get('description', '-') or '').replace("'", "''")
         artist_thumbnails = artist_info.get('thumbnails', [])
-        artist_avatar_url = artist_thumbnails[-1]['url'] if artist_thumbnails else ''
+        artist_header_url = artist_thumbnails[-1]['url'] if artist_thumbnails else ''
 
         sql_statements.append(f"-- Артист: {artist_name}\n")
         sql_statements.append(
-            f"INSERT INTO artist (artist_name, description, avatar_url)\n"
-            f"VALUES ('{artist_name}', '{artist_description}', '{artist_avatar_url}')\n"
+            f"INSERT INTO artist (artist_name, description, avatar_url, header_url)\n"
+            f"VALUES ('{artist_name}', '{artist_description}', '{artist_avatar_url}', '{artist_header_url}')\n"
             f"RETURNING artist_id INTO v_artist_id;\n"
         )
 
@@ -148,7 +162,7 @@ for artist_id in artist_ids:
             release_year = alb.get('year')
             alb_type = alb.get('type')
 
-            # --- определяем тип альбома (ШИЗА) ---
+            # --- определяем тип альбома ---
             if alb_type and not str(alb_type).isdigit():
                 alb_type = alb_type
             elif release_year and not str(release_year).isdigit():
@@ -175,8 +189,8 @@ for artist_id in artist_ids:
 
             sql_statements.append(
                 f"\n-- Альбом/сингл: {title}\n"
-                f"INSERT INTO album (title, avatar_url, artist_id, description, release_date)\n"
-                f"VALUES ('{title}', '{avatar_url}', v_artist_id, '', '{release_year}-01-01')\n"
+                f"INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)\n"
+                f"VALUES ('{title}', '{avatar_url}', v_artist_id, '', '{release_year}-01-01', '{alb_type}')\n"
                 f"RETURNING album_id INTO v_album_id;\n"
             )
 

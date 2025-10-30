@@ -3,6 +3,7 @@ package dto
 type Album struct {
 	ID          string   `json:"id"`
 	Title       string   `json:"title"`
+	Type        string   `json:"type"`
 	AvatarURL   string   `json:"avatar_url,omitempty"`
 	ReleaseDate string   `json:"release_date"`
 	Artists     []Artist `json:"artists"`

@@ -11,7 +11,7 @@ import (
 func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Artist, error) {
 	const op = "repository.GetByID"
 	query := `
-		SELECT artist_id, artist_name, avatar_url, description, created_at, updated_at
+		SELECT artist_id, artist_name, header_url, description, created_at, updated_at
 		FROM artist
 		WHERE artist_id = $1`
 

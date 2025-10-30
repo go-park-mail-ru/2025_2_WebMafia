@@ -11,7 +11,6 @@ type Track struct {
 	ID          uuid.UUID
 	Title       string
 	DurationS   int
-	Plays       int
 	FileURL     string
 	Description sql.NullString
 	CreatedAt   time.Time

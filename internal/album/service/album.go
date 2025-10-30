@@ -28,6 +28,7 @@ func (s *Service) GetAlbumByID(ctx context.Context, id uuid.UUID) (*dto.Album, e
 	albumDTO := &dto.Album{
 		ID:          albumModel.ID.String(),
 		Title:       albumModel.Title,
+		Type:        albumModel.Type,
 		AvatarURL:   albumModel.AvatarURL,
 		ReleaseDate: albumModel.ReleaseDate.Format(dateFormat),
 		Artists: []dto.Artist{
@@ -81,6 +82,7 @@ func (s *Service) GetAllAlbums(ctx context.Context, limit, offset uint64) ([]dto
 		albumDTOs = append(albumDTOs, dto.Album{
 			ID:          albumModel.ID.String(),
 			Title:       albumModel.Title,
+			Type:        albumModel.Type,
 			AvatarURL:   albumModel.AvatarURL,
 			ReleaseDate: albumModel.ReleaseDate.Format(dateFormat),
 			Artists: []dto.Artist{
@@ -134,6 +136,7 @@ func (s *Service) GetAlbumsByIDs(ctx context.Context, ids []uuid.UUID) ([]dto.Al
 		albumDTOs = append(albumDTOs, dto.Album{
 			ID:          albumModel.ID.String(),
 			Title:       albumModel.Title,
+			Type:        albumModel.Type,
 			AvatarURL:   albumModel.AvatarURL,
 			ReleaseDate: albumModel.ReleaseDate.Format(dateFormat),
 			Artists: []dto.Artist{{
@@ -167,6 +170,7 @@ func (s *Service) GetAlbumsByArtistID(ctx context.Context, artistID uuid.UUID, l
 		albumDTOs = append(albumDTOs, dto.Album{
 			ID:          albumModel.ID.String(),
 			Title:       albumModel.Title,
+			Type:        albumModel.Type,
 			AvatarURL:   albumModel.AvatarURL,
 			ReleaseDate: albumModel.ReleaseDate.Format(dateFormat),
 			Artists: []dto.Artist{

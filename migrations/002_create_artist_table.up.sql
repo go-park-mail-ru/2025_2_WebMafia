@@ -2,6 +2,7 @@ CREATE TABLE artist (
     artist_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     artist_name TEXT NOT NULL,
     avatar_url TEXT,
+    header_url TEXT,
     description TEXT,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,

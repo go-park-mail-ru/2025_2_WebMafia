@@ -74,7 +74,7 @@ func validateAvatar(contentType string, size int64) error {
 		return fmt.Errorf("file too large (max 5MB)")
 	}
 	switch contentType {
-	case "image/png", "image/jpeg":
+	case "image/png", "image/jpeg", "image/webp":
 		return nil
 	default:
 		return fmt.Errorf("unsupported content type: %s", contentType)

@@ -66,19 +66,19 @@ type uploadAvatarRequest struct {
 	Size        int64
 }
 
-func validateAvatar(contentType string, size int64) error {
+func (h *Handler) validateAvatar(contentType string, size int64) error {
 	if size == 0 {
 		return fmt.Errorf("empty file")
 	}
 	if size > maxAvatarSize {
 		return fmt.Errorf("file too large (max 5MB)")
 	}
-	switch contentType {
-	case "image/png", "image/jpeg", "image/webp":
-		return nil
-	default:
-		return fmt.Errorf("unsupported content type: %s", contentType)
+	for _, allowed := range h.allowedAvatarTypes {
+		if contentType == allowed {
+			return nil
+		}
 	}
+	return fmt.Errorf("unsupported content type: %s", contentType)
 }
 
 type uploadAvatarResponse struct {
@@ -224,7 +224,7 @@ func (h *Handler) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 	}
 	defer file.Close()
 
-	if err := validateAvatar(header.Header.Get("Content-Type"), header.Size); err != nil {
+	if err := h.validateAvatar(header.Header.Get("Content-Type"), header.Size); err != nil {
 		log.Errorf("[%s] validation error: %v", op, err)
 		response.BadRequestJSON(w)
 		return

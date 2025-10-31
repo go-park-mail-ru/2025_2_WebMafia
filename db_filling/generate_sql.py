@@ -1,15 +1,28 @@
 import os
+import json
 from ytmusicapi import YTMusic
 from datetime import datetime
 import random
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+from minio import Minio
+from upload_avatars import upload_avatar
+
+minio_client = Minio(
+    "localhost:8099",
+    access_key="miniouser",
+    secret_key="miniopassword",
+    secure=False
+)
+bucket_name = "avatars"
+if not minio_client.bucket_exists(bucket_name):
+    minio_client.make_bucket(bucket_name)
 
 client_id = "e2f9643cd6c24e50964226ebd093ac88"
 client_secret = "723c43d6f74d445e8e5e592eed9a5833"
 
-OUTPUT_DIR = "migrations"
-output_file = os.path.join(OUTPUT_DIR, "010_insert_API_data.up.sql")
+base_dir = os.path.dirname(os.path.abspath(__file__))
+output_file = os.path.join(base_dir, "..", "migrations", "010_insert_API_data.up.sql")
 
 # --- Подключение к YTMusic ---
 yt = YTMusic(language='ru')
@@ -29,6 +42,8 @@ artist_ids = [
     'UCZU9T1ceaOgwfLRq7OKFU4Q',
     'UCEuOwB9vSL1oPKGNdONB4ig',
     'UCeMsJJOE6avjyvbqP4Kf24g',
+]
+"""
     'UCDVnp5x53g5L-kBvQsGOW9w',
     'UCWfAZudbGLAyrrEBaGuslNA',
     'UCrx-X329UKv0Y06VhfpFVvw',
@@ -36,8 +51,6 @@ artist_ids = [
     'UC48vpdaG8NDvEGLj11XPPZQ',
     'UCvpredjG93ifbCP1Y77JyFA',
     'UCbb9FsCRA83-6vdgXn2KSyA',
-]
-"""
     'UCbcXadHgtd1pWzTAWoI6loA',
     'UCvJLQlVdWiIU0qYmowdKh6g',
     'UCNpdKmV1hHFuKM6DUxGMOBw',
@@ -106,6 +119,8 @@ sql_statements = [
     "BEGIN\n"
 ]
 
+tracks_for_upload = []
+
 for artist_id in artist_ids:
     try:
         # --- Получаем информацию об артисте ---
@@ -115,11 +130,13 @@ for artist_id in artist_ids:
 
         results = sp.search(q=artist_name, type="artist", limit=1)
         spotify_artist = results['artists']['items'][0]
-        artist_avatar_url = spotify_artist['images'][2]['url'] if spotify_artist else ''
+        artist_avatar_url = upload_avatar(spotify_artist['images'][2]['url'], f"artists/{artist_name}_avatar.webp",
+                                          bucket_name, minio_client)
 
         artist_description = (artist_info.get('description', '-') or '').replace("'", "''")
         artist_thumbnails = artist_info.get('thumbnails', [])
-        artist_header_url = artist_thumbnails[-1]['url'] if artist_thumbnails else ''
+        artist_header_url = upload_avatar(artist_thumbnails[-1]['url'], f"artists/{artist_name}_header.webp",
+                                          bucket_name, minio_client)
 
         sql_statements.append(f"-- Артист: {artist_name}\n")
         sql_statements.append(
@@ -158,7 +175,7 @@ for artist_id in artist_ids:
         for alb in albums_list:
             title = alb.get('title', '—').replace("'", "''")
             thumbnails = alb.get('thumbnails', [])
-            avatar_url = thumbnails[-1]['url'] if thumbnails else ''
+            avatar_url = upload_avatar(thumbnails[-1]['url'], f"albums/{title}.webp", bucket_name, minio_client)
             release_year = alb.get('year')
             alb_type = alb.get('type')
 
@@ -209,7 +226,13 @@ for artist_id in artist_ids:
             for track in tracks:
                 track_title = track.get('title', '—').replace("'", "''")
                 duration_s = int(track.get('duration_seconds', 0))
-                file_url = track.get('videoId', '')
+                videoId = track.get('videoId', '')
+                file_url = f"http://localhost:8080/api/v1/track/{videoId}"
+
+                tracks_for_upload.append({
+                    "videoId": videoId,
+                    "title": track_title,
+                })
 
                 sql_statements.append(
                     f"INSERT INTO track (title, duration_s, file_url, description)\n"
@@ -231,5 +254,8 @@ sql_statements.append("END $$;\n")
 # --- Сохраняем SQL ---
 with open(output_file, "w", encoding="utf-8") as f:
     f.writelines(sql_statements)
+
+with open("tracks_to_upload.json", "w", encoding="utf-8") as f:
+    json.dump(tracks_for_upload, f, ensure_ascii=False, indent=2)
 
 print(f"\nSQL-скрипт успешно создан: {output_file}")

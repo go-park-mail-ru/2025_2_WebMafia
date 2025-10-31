@@ -1,5 +1,5 @@
 -- SQL миграция для вставки данных из YouTube Music
--- Генерация: 2025-10-31T21:05:04.784439
+-- Генерация: 2025-11-01T00:24:10.580199
 
 DO $$
 DECLARE
@@ -980,7 +980,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: We Rule the Waves
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('We Rule the Waves', 'http://localhost:8099/avatars/albums/We Rule the Waves.webp', v_artist_id, '', '2010-01-01', 'Сингл')
+VALUES ('We Rule the Waves', 'http://localhost:8099/avatars/albums/We Rule the Waves.webp', v_artist_id, '', '2012-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -991,7 +991,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Heidrun
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Heidrun', 'http://localhost:8099/avatars/albums/Heidrun.webp', v_artist_id, '', '2014-01-01', 'EP')
+VALUES ('Heidrun', 'http://localhost:8099/avatars/albums/Heidrun.webp', v_artist_id, '', '2000-01-01', 'EP')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 4
 INSERT INTO track (title, duration_s, file_url, description)
@@ -1017,7 +1017,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: The Great Heathen Army
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('The Great Heathen Army', 'http://localhost:8099/avatars/albums/The Great Heathen Army.webp', v_artist_id, '', '2001-01-01', 'Сингл')
+VALUES ('The Great Heathen Army', 'http://localhost:8099/avatars/albums/The Great Heathen Army.webp', v_artist_id, '', '1998-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -1028,7 +1028,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Get in the Ring
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Get in the Ring', 'http://localhost:8099/avatars/albums/Get in the Ring.webp', v_artist_id, '', '2017-01-01', 'Сингл')
+VALUES ('Get in the Ring', 'http://localhost:8099/avatars/albums/Get in the Ring.webp', v_artist_id, '', '2005-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -1039,7 +1039,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Put Your Back Into The Oar
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Put Your Back Into The Oar', 'http://localhost:8099/avatars/albums/Put Your Back Into The Oar.webp', v_artist_id, '', '2014-01-01', 'Сингл')
+VALUES ('Put Your Back Into The Oar', 'http://localhost:8099/avatars/albums/Put Your Back Into The Oar.webp', v_artist_id, '', '2012-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -1050,7 +1050,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Masters of War
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Masters of War', 'http://localhost:8099/avatars/albums/Masters of War.webp', v_artist_id, '', '2005-01-01', 'Сингл')
+VALUES ('Masters of War', 'http://localhost:8099/avatars/albums/Masters of War.webp', v_artist_id, '', '2021-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -1061,7 +1061,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Under the Influence - EP
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Under the Influence - EP', 'http://localhost:8099/avatars/albums/Under the Influence - EP.webp', v_artist_id, '', '2008-01-01', 'EP')
+VALUES ('Under the Influence - EP', 'http://localhost:8099/avatars/albums/Under the Influence - EP.webp', v_artist_id, '', '1999-01-01', 'EP')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 4
 INSERT INTO track (title, duration_s, file_url, description)
@@ -1905,7 +1905,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: The Reincarnation of Ódinn
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('The Reincarnation of Ódinn', 'http://localhost:8099/avatars/albums/The Reincarnation of Ódinn.webp', v_artist_id, '', '2007-01-01', 'Сингл')
+VALUES ('The Reincarnation of Ódinn', 'http://localhost:8099/avatars/albums/The Reincarnation of Ódinn.webp', v_artist_id, '', '2019-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -1916,7 +1916,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Thulean Mysteries
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Thulean Mysteries', 'http://localhost:8099/avatars/albums/Thulean Mysteries.webp', v_artist_id, '', '2002-01-01', 'Сингл')
+VALUES ('Thulean Mysteries', 'http://localhost:8099/avatars/albums/Thulean Mysteries.webp', v_artist_id, '', '2016-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -1927,7 +1927,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Forgotten Realms
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Forgotten Realms', 'http://localhost:8099/avatars/albums/Forgotten Realms.webp', v_artist_id, '', '2016-01-01', 'Сингл')
+VALUES ('Forgotten Realms', 'http://localhost:8099/avatars/albums/Forgotten Realms.webp', v_artist_id, '', '1996-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -1938,7 +1938,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Mythic Dawn
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Mythic Dawn', 'http://localhost:8099/avatars/albums/Mythic Dawn.webp', v_artist_id, '', '1996-01-01', 'Сингл')
+VALUES ('Mythic Dawn', 'http://localhost:8099/avatars/albums/Mythic Dawn.webp', v_artist_id, '', '1998-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -1949,7 +1949,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Daudi Baldrs
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Daudi Baldrs', 'http://localhost:8099/avatars/albums/Daudi Baldrs.webp', v_artist_id, '', '2012-01-01', 'EP')
+VALUES ('Daudi Baldrs', 'http://localhost:8099/avatars/albums/Daudi Baldrs.webp', v_artist_id, '', '1996-01-01', 'EP')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 6
 INSERT INTO track (title, duration_s, file_url, description)
@@ -1985,7 +1985,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Jesu Død (Cover)
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Jesu Død (Cover)', 'http://localhost:8099/avatars/albums/Jesu Død (Cover).webp', v_artist_id, '', '1997-01-01', 'Сингл')
+VALUES ('Jesu Død (Cover)', 'http://localhost:8099/avatars/albums/Jesu Død (Cover).webp', v_artist_id, '', '2011-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -2243,7 +2243,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Решится Само Собой
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Решится Само Собой', 'http://localhost:8099/avatars/albums/Решится Само Собой.webp', v_artist_id, '', '2013-01-01', 'Сингл')
+VALUES ('Решится Само Собой', 'http://localhost:8099/avatars/albums/Решится Само Собой.webp', v_artist_id, '', '2016-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -4359,6 +4359,155 @@ VALUES ('Следы на спине (Tsucore-Neopop Remix)', 184, 'http://localh
 RETURNING track_id INTO v_track_id;
 INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
 INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Люди с автоматами
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Люди с автоматами', 'http://localhost:8099/avatars/albums/Люди с автоматами.webp', v_artist_id, '', '2018-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Люди с автоматами', 193, 'http://localhost:8080/api/v1/track/l7dogXP9Lmc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: No Comments
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('No Comments', 'http://localhost:8099/avatars/albums/No Comments.webp', v_artist_id, '', '2017-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 4
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('В темноте', 207, 'http://localhost:8080/api/v1/track/CAZWpTtMHsk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Детка, послушай', 219, 'http://localhost:8080/api/v1/track/LTjJ43ZAq1s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Зубы мудрости', 189, 'http://localhost:8080/api/v1/track/YUvMP9DYiuc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('В темноте (Brodsky Version)', 207, 'http://localhost:8080/api/v1/track/oMseWzx4qHY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Коррозия хип-хопа
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Коррозия хип-хопа', 'http://localhost:8099/avatars/albums/Коррозия хип-хопа.webp', v_artist_id, '', '2017-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 4
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Коррозия хип-хопа', 240, 'http://localhost:8080/api/v1/track/rLxoaeI8n0g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Коррозия хип-хопа (Инструментал)', 240, 'http://localhost:8080/api/v1/track/1xJ-kYXGb5I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Коррозия хип-хопа (Акапелла)', 226, 'http://localhost:8080/api/v1/track/C3vx88YT7KQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Коррозия хип-хопа (Цензурная версия)', 240, 'http://localhost:8080/api/v1/track/rLxoaeI8n0g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Лето в столице (feat. SunSay и MC FAME)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Лето в столице (feat. SunSay и MC FAME)', 'http://localhost:8099/avatars/albums/Лето в столице (feat. SunSay и MC FAME).webp', v_artist_id, '', '2017-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Лето в столице (feat. SunSay и MC FAME)', 204, 'http://localhost:8080/api/v1/track/ah5yBKSrYCQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Make Some Noize
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Make Some Noize', 'http://localhost:8099/avatars/albums/Make Some Noize.webp', v_artist_id, '', '2016-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 5
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Make Some Noize (Single Edit)', 214, 'http://localhost:8080/api/v1/track/yfsfDP0svf8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Make Some Noize (Acoustic Version)', 203, 'http://localhost:8080/api/v1/track/s6gTym3sbww', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Make Some Noize (Live in Minsk)', 251, 'http://localhost:8080/api/v1/track/3guUFQtLb38', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Make Some Noize (Instrumental)', 214, 'http://localhost:8080/api/v1/track/AFLUWiNk1mE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Make Some Noize (Acapella)', 195, 'http://localhost:8080/api/v1/track/3dwRn3yb5UI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Lenin Has Risen
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Lenin Has Risen', 'http://localhost:8099/avatars/albums/Lenin Has Risen.webp', v_artist_id, '', '2016-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lenin Has Risen', 262, 'http://localhost:8080/api/v1/track/HBQR-oI5PjI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Jingle Bellz
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Jingle Bellz', 'http://localhost:8099/avatars/albums/Jingle Bellz.webp', v_artist_id, '', '2015-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jingle Bellz', 234, 'http://localhost:8080/api/v1/track/GYGUYGcJJ1Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: 12 Обезьян
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('12 Обезьян', 'http://localhost:8099/avatars/albums/12 Обезьян.webp', v_artist_id, '', '2014-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('12 Обезьян', 164, 'http://localhost:8080/api/v1/track/q3saTXDaj9o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Voyager 1 (Live in New York)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Voyager 1 (Live in New York)', 'http://localhost:8099/avatars/albums/Voyager 1 (Live in New York).webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Voyager 1 (Live in New York)', 257, 'http://localhost:8080/api/v1/track/cEm0o5jfftY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
 -- Артист: Ramones
 INSERT INTO artist (artist_name, description, avatar_url, header_url)
 VALUES ('Ramones', 'Ramones — американская панк-рок-группа, образованная в Нью-Йорке в 1974 году. Одни из самых первых исполнителей панк-рока, оказавшие влияние как в целом на этот жанр, так и на многие другие течения альтернативного рока.
@@ -5599,7 +5748,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Goin'' Out West (Legendary 1979 KSAN Broadcast)
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Goin'' Out West (Legendary 1979 KSAN Broadcast)', 'http://localhost:8099/avatars/albums/Goin'' Out West (Legendary 1979 KSAN Broadcast).webp', v_artist_id, '', '2020-01-01', 'Альбом')
+VALUES ('Goin'' Out West (Legendary 1979 KSAN Broadcast)', 'http://localhost:8099/avatars/albums/Goin Out West (Legendary 1979 KSAN Broadcast).webp', v_artist_id, '', '2020-01-01', 'Альбом')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 31
 INSERT INTO track (title, duration_s, file_url, description)
@@ -5896,7 +6045,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: It''s Alive (Live; 40th Anniversary Deluxe Edition)
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('It''s Alive (Live; 40th Anniversary Deluxe Edition)', 'http://localhost:8099/avatars/albums/It''s Alive (Live; 40th Anniversary Deluxe Edition).webp', v_artist_id, '', '2019-01-01', 'Альбом')
+VALUES ('It''s Alive (Live; 40th Anniversary Deluxe Edition)', 'http://localhost:8099/avatars/albums/Its Alive (Live; 40th Anniversary Deluxe Edition).webp', v_artist_id, '', '2019-01-01', 'Альбом')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 109
 INSERT INTO track (title, duration_s, file_url, description)
@@ -6447,7 +6596,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Live in Australia ''80
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Live in Australia ''80', 'http://localhost:8099/avatars/albums/Live in Australia ''80.webp', v_artist_id, '', '2018-01-01', 'Альбом')
+VALUES ('Live in Australia ''80', 'http://localhost:8099/avatars/albums/Live in Australia 80.webp', v_artist_id, '', '2018-01-01', 'Альбом')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 17
 INSERT INTO track (title, duration_s, file_url, description)
@@ -6891,7 +7040,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Live at My Father''s Place, 1982 (FM Radio Broadcast)
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Live at My Father''s Place, 1982 (FM Radio Broadcast)', 'http://localhost:8099/avatars/albums/Live at My Father''s Place, 1982 (FM Radio Broadcast).webp', v_artist_id, '', '2016-01-01', 'Альбом')
+VALUES ('Live at My Father''s Place, 1982 (FM Radio Broadcast)', 'http://localhost:8099/avatars/albums/Live at My Fathers Place, 1982 (FM Radio Broadcast).webp', v_artist_id, '', '2016-01-01', 'Альбом')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 18
 INSERT INTO track (title, duration_s, file_url, description)
@@ -7846,7 +7995,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: It''s Alive
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('It''s Alive', 'http://localhost:8099/avatars/albums/It''s Alive.webp', v_artist_id, '', '1979-01-01', 'Альбом')
+VALUES ('It''s Alive', 'http://localhost:8099/avatars/albums/Its Alive.webp', v_artist_id, '', '1979-01-01', 'Альбом')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 28
 INSERT INTO track (title, duration_s, file_url, description)
@@ -10463,7 +10612,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Don''t Come Close (40th Anniversary Road Revisited Mix)
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Don''t Come Close (40th Anniversary Road Revisited Mix)', 'http://localhost:8099/avatars/albums/Don''t Come Close (40th Anniversary Road Revisited Mix).webp', v_artist_id, '', '2018-01-01', 'Сингл')
+VALUES ('Don''t Come Close (40th Anniversary Road Revisited Mix)', 'http://localhost:8099/avatars/albums/Dont Come Close (40th Anniversary Road Revisited Mix).webp', v_artist_id, '', '2018-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -10496,7 +10645,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Hey Ho Let''s Go
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Hey Ho Let''s Go', 'http://localhost:8099/avatars/albums/Hey Ho Let''s Go.webp', v_artist_id, '', '2017-01-01', 'Сингл')
+VALUES ('Hey Ho Let''s Go', 'http://localhost:8099/avatars/albums/Hey Ho Lets Go.webp', v_artist_id, '', '2017-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 2
 INSERT INTO track (title, duration_s, file_url, description)
@@ -10522,204 +10671,6 @@ INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) 
 INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
 INSERT INTO track (title, duration_s, file_url, description)
 VALUES ('Pinhead (Sundragon Rough Mixes)', 150, 'http://localhost:8080/api/v1/track/8Sk3LfxKlOU', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-
--- Альбом/сингл: Judy Is a Punk (Lost 1975 Demo Versions)
-INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Judy Is a Punk (Lost 1975 Demo Versions)', 'http://localhost:8099/avatars/albums/Judy Is a Punk (Lost 1975 Demo Versions).webp', v_artist_id, '', '2016-01-01', 'Сингл')
-RETURNING album_id INTO v_album_id;
--- Найдено треков: 2
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Judy Is a Punk (Punk Side)', 92, 'http://localhost:8080/api/v1/track/MqU_7WKNi5k', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Judy Is a Punk (Runt Side)', 93, 'http://localhost:8080/api/v1/track/joFz9ZjsXlM', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-
--- Альбом/сингл: Pet Sematary (feat. George Dalton)
-INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Pet Sematary (feat. George Dalton)', 'http://localhost:8099/avatars/albums/Pet Sematary (feat. George Dalton).webp', v_artist_id, '', '2015-01-01', 'Сингл')
-RETURNING album_id INTO v_album_id;
--- Найдено треков: 1
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Pet Sematary (feat. George Dalton)', 203, 'http://localhost:8080/api/v1/track/K0dNORvuxuc', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-
--- Альбом/сингл: Leathers from New York
-INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Leathers from New York', 'http://localhost:8099/avatars/albums/Leathers from New York.webp', v_artist_id, '', '1997-01-01', 'EP')
-RETURNING album_id INTO v_album_id;
--- Найдено треков: 4
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Carbona Not Glue', 114, 'http://localhost:8080/api/v1/track/Y6CUgyBNDQ0', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Blitzkrieg Bop', 134, 'http://localhost:8080/api/v1/track/FGO6EdlSxN8', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Chop Suey', 237, 'http://localhost:8080/api/v1/track/Nyvh47vIZPY', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('The Wonderful Widow of Eighteen Springs', 142, 'http://localhost:8080/api/v1/track/dF5obIUPAnE', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-
--- Альбом/сингл: I Wanna Be Your Boyfriend (1975 Demos)
-INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('I Wanna Be Your Boyfriend (1975 Demos)', 'http://localhost:8099/avatars/albums/I Wanna Be Your Boyfriend (1975 Demos).webp', v_artist_id, '', '1997-01-01', 'Сингл')
-RETURNING album_id INTO v_album_id;
--- Найдено треков: 2
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('I Wanna Be Your Boyfriend (1975 Demo)', 143, 'http://localhost:8080/api/v1/track/SOI6R8dUT-8', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Judy Is A Punk (1975 Demo)', 96, 'http://localhost:8080/api/v1/track/S4K_JJVdSck', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-
--- Альбом/сингл: Do You Wanna Dance? (Tracking Mix)
-INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Do You Wanna Dance? (Tracking Mix)', 'http://localhost:8099/avatars/albums/Do You Wanna Dance? (Tracking Mix).webp', v_artist_id, '', '1978-01-01', 'Сингл')
-RETURNING album_id INTO v_album_id;
--- Найдено треков: 1
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Do You Wanna Dance? (Tracking Mix)', 115, 'http://localhost:8080/api/v1/track/pBgdrsIVDYY', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-
--- Альбом/сингл: Live Broadcasts
-INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Live Broadcasts', 'http://localhost:8099/avatars/albums/Live Broadcasts.webp', v_artist_id, '', '2019-01-01', 'EP')
-RETURNING album_id INTO v_album_id;
--- Найдено треков: 7
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Chinese Rocks (Live TV Broadcast California 1982)', 129, 'http://localhost:8080/api/v1/track/2syCq0EIvzA', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Teenage Lobotomy (Live TV Broadcast, California 1982)', 115, 'http://localhost:8080/api/v1/track/Waz-TceH5K4', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Pet Sematary (Live On the Letterman Show 1991)', 200, 'http://localhost:8080/api/v1/track/1ocGFyIBEW8', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Censorshit (Live On the Tonight Show 1992)', 221, 'http://localhost:8080/api/v1/track/FjvrOJF7Ehg', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Take It As It Comes (Live On the Tonight Show 1992)', 120, 'http://localhost:8080/api/v1/track/GS2GyreBWg0', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('I Wanna Be Sedated (Live On theTonight Show 1992)', 148, 'http://localhost:8080/api/v1/track/Vg48sC2G0hc', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('I Don''t Wanna Grow Up (Live On the Letterman Show 1995)', 154, 'http://localhost:8080/api/v1/track/7tOamKhzofc', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-
--- Альбом/сингл: Here Today, Gone Tomorrow (Live at Victoria Hall, Stoke-On-Trent, Staffordshire, 12/29/77)
-INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Here Today, Gone Tomorrow (Live at Victoria Hall, Stoke-On-Trent, Staffordshire, 12/29/77)', 'http://localhost:8099/avatars/albums/Here Today, Gone Tomorrow (Live at Victoria Hall, Stoke-On-Trent, Staffordshire, 12/29/77).webp', v_artist_id, '', '2019-01-01', 'Сингл')
-RETURNING album_id INTO v_album_id;
--- Найдено треков: 1
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Here Today, Gone Tomorrow (Live at Victoria Hall, Stoke-On-Trent, Staffordshire, 12/29/77)', 178, 'http://localhost:8080/api/v1/track/bsszn11zkKI', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-
--- Альбом/сингл: Gimme Gimme Shock Treatment (Live at The Palladium, New York, NY 12/31/79)
-INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Gimme Gimme Shock Treatment (Live at The Palladium, New York, NY 12/31/79)', 'http://localhost:8099/avatars/albums/Gimme Gimme Shock Treatment (Live at The Palladium, New York, NY 12/31/79).webp', v_artist_id, '', '2018-01-01', 'Сингл')
-RETURNING album_id INTO v_album_id;
--- Найдено треков: 1
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Gimme Gimme Shock Treatment (Live at the Palladium, New York, NY, 12/31/79)', 89, 'http://localhost:8080/api/v1/track/IFLrPeMCzWU', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-
--- Альбом/сингл: Rockaway Beach (Live at Apollo Centre, Glasgow, Scotland, 12/19/1977)
-INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Rockaway Beach (Live at Apollo Centre, Glasgow, Scotland, 12/19/1977)', 'http://localhost:8099/avatars/albums/Rockaway Beach (Live at Apollo Centre, Glasgow, Scotland, 12/19/1977).webp', v_artist_id, '', '2017-01-01', 'Сингл')
-RETURNING album_id INTO v_album_id;
--- Найдено треков: 1
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Rockaway Beach (Live at Apollo Centre, Glasgow, Scotland, 12/19/1977)', 181, 'http://localhost:8080/api/v1/track/QFCuFDnzDJo', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-
--- Альбом/сингл: Rockaway Beach (Live at Friars, Aylesbury, Buckinghamshire, 12/30/77)
-INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Rockaway Beach (Live at Friars, Aylesbury, Buckinghamshire, 12/30/77)', 'http://localhost:8099/avatars/albums/Rockaway Beach (Live at Friars, Aylesbury, Buckinghamshire, 12/30/77).webp', v_artist_id, '', '2017-01-01', 'Сингл')
-RETURNING album_id INTO v_album_id;
--- Найдено треков: 1
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Rockaway Beach (Live at Friars, Aylesbury, Buckinghamshire, 12/30/77)', 148, 'http://localhost:8080/api/v1/track/5CTxm-rY_JI', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-
--- Альбом/сингл: Sheena Is a Punk Rocker (Live at The Palladium, New York, NY 12/31/79)
-INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Sheena Is a Punk Rocker (Live at The Palladium, New York, NY 12/31/79)', 'http://localhost:8099/avatars/albums/Sheena Is a Punk Rocker (Live at The Palladium, New York, NY 12/31/79).webp', v_artist_id, '', '2017-01-01', 'Сингл')
-RETURNING album_id INTO v_album_id;
--- Найдено треков: 1
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Sheena Is a Punk Rocker (Live at the Palladium, New York, NY, 12/31/79)', 133, 'http://localhost:8080/api/v1/track/Lr53e56qvuc', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-
--- Альбом/сингл: Blitzkrieg Bop (Live at Top Rank, Birmingham, Warwickshire, 12/28/77)
-INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Blitzkrieg Bop (Live at Top Rank, Birmingham, Warwickshire, 12/28/77)', 'http://localhost:8099/avatars/albums/Blitzkrieg Bop (Live at Top Rank, Birmingham, Warwickshire, 12/28/77).webp', v_artist_id, '', '1976-01-01', 'Сингл')
-RETURNING album_id INTO v_album_id;
--- Найдено треков: 1
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('Blitzkrieg Bop (Live at Top Rank, Birmingham, Warwickshire, 12/28/77)', 127, 'http://localhost:8080/api/v1/track/FoGkwK3LWCM', '')
-RETURNING track_id INTO v_track_id;
-INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
-INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
-
--- Альбом/сингл: I Wanna Be Sedated (Take 2; Basic Rough Mix)
-INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('I Wanna Be Sedated (Take 2; Basic Rough Mix)', 'http://localhost:8099/avatars/albums/I Wanna Be Sedated (Take 2; Basic Rough Mix).webp', v_artist_id, '', '2018-01-01', 'Сингл')
-RETURNING album_id INTO v_album_id;
--- Найдено треков: 1
-INSERT INTO track (title, duration_s, file_url, description)
-VALUES ('I Wanna Be Sedated (Take 2) [Basic Rough Mix] (Take 2; Basic Rough Mix)', 146, 'http://localhost:8080/api/v1/track/083i_meiBfI', '')
 RETURNING track_id INTO v_track_id;
 INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
 INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
@@ -12047,7 +11998,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Kill The Poor (2022 Mix)
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Kill The Poor (2022 Mix)', 'http://localhost:8099/avatars/albums/Kill The Poor (2022 Mix).webp', v_artist_id, '', '2022-01-01', 'Сингл')
+VALUES ('Kill The Poor (2022 Mix)', 'http://localhost:8099/avatars/albums/Kill The Poor (2022 Mix).webp', v_artist_id, '', '2006-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -12058,7 +12009,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Kill the Poor
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Kill the Poor', 'http://localhost:8099/avatars/albums/Kill the Poor.webp', v_artist_id, '', '2012-01-01', 'Сингл')
+VALUES ('Kill the Poor', 'http://localhost:8099/avatars/albums/Kill the Poor.webp', v_artist_id, '', '2018-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -12069,7 +12020,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Holiday in Cambodia
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Holiday in Cambodia', 'http://localhost:8099/avatars/albums/Holiday in Cambodia.webp', v_artist_id, '', '2006-01-01', 'Сингл')
+VALUES ('Holiday in Cambodia', 'http://localhost:8099/avatars/albums/Holiday in Cambodia.webp', v_artist_id, '', '2008-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -12080,7 +12031,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Chemical Warfare (2020 Mix)
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Chemical Warfare (2020 Mix)', 'http://localhost:8099/avatars/albums/Chemical Warfare (2020 Mix).webp', v_artist_id, '', '2004-01-01', 'Сингл')
+VALUES ('Chemical Warfare (2020 Mix)', 'http://localhost:8099/avatars/albums/Chemical Warfare (2020 Mix).webp', v_artist_id, '', '1989-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -12098,7 +12049,7 @@ RETURNING artist_id INTO v_artist_id;
 
 -- Альбом/сингл: Mommy''s Dream
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Mommy''s Dream', 'http://localhost:8099/avatars/albums/Mommy''s Dream.webp', v_artist_id, '', '2024-01-01', 'Альбом')
+VALUES ('Mommy''s Dream', 'http://localhost:8099/avatars/albums/Mommys Dream.webp', v_artist_id, '', '2024-01-01', 'Альбом')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 21
 INSERT INTO track (title, duration_s, file_url, description)
@@ -12467,7 +12418,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: The Devil''s Rain
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('The Devil''s Rain', 'http://localhost:8099/avatars/albums/The Devil''s Rain.webp', v_artist_id, '', '2011-01-01', 'Альбом')
+VALUES ('The Devil''s Rain', 'http://localhost:8099/avatars/albums/The Devils Rain.webp', v_artist_id, '', '2011-01-01', 'Альбом')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 16
 INSERT INTO track (title, duration_s, file_url, description)
@@ -13848,7 +13799,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Friday The 13th
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Friday The 13th', 'http://localhost:8099/avatars/albums/Friday The 13th.webp', v_artist_id, '', '2017-01-01', 'EP')
+VALUES ('Friday The 13th', 'http://localhost:8099/avatars/albums/Friday The 13th.webp', v_artist_id, '', '2013-01-01', 'EP')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 4
 INSERT INTO track (title, duration_s, file_url, description)
@@ -13874,7 +13825,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Vampire Girl
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Vampire Girl', 'http://localhost:8099/avatars/albums/Vampire Girl.webp', v_artist_id, '', '1995-01-01', 'Сингл')
+VALUES ('Vampire Girl', 'http://localhost:8099/avatars/albums/Vampire Girl.webp', v_artist_id, '', '2004-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 2
 INSERT INTO track (title, duration_s, file_url, description)
@@ -13890,7 +13841,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Horror Xmas
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Horror Xmas', 'http://localhost:8099/avatars/albums/Horror Xmas.webp', v_artist_id, '', '1987-01-01', 'Сингл')
+VALUES ('Horror Xmas', 'http://localhost:8099/avatars/albums/Horror Xmas.webp', v_artist_id, '', '1994-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 3
 INSERT INTO track (title, duration_s, file_url, description)
@@ -13911,7 +13862,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Descending Angel / Science Fiction/Double Feature
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Descending Angel / Science Fiction/Double Feature', 'http://localhost:8099/avatars/albums/Descending Angel / Science Fiction/Double Feature.webp', v_artist_id, '', '1983-01-01', 'Сингл')
+VALUES ('Descending Angel / Science Fiction/Double Feature', 'http://localhost:8099/avatars/albums/Descending Angel / Science Fiction/Double Feature.webp', v_artist_id, '', '2009-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 2
 INSERT INTO track (title, duration_s, file_url, description)
@@ -13927,7 +13878,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Land of the Dead
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Land of the Dead', 'http://localhost:8099/avatars/albums/Land of the Dead.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+VALUES ('Land of the Dead', 'http://localhost:8099/avatars/albums/Land of the Dead.webp', v_artist_id, '', '1997-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 2
 INSERT INTO track (title, duration_s, file_url, description)
@@ -13943,7 +13894,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Day the Earth Caught Fire
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Day the Earth Caught Fire', 'http://localhost:8099/avatars/albums/Day the Earth Caught Fire.webp', v_artist_id, '', '2000-01-01', 'Сингл')
+VALUES ('Day the Earth Caught Fire', 'http://localhost:8099/avatars/albums/Day the Earth Caught Fire.webp', v_artist_id, '', '2002-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -15793,6 +15744,628 @@ VALUES ('Unshatter', 197, 'http://localhost:8080/api/v1/track/_B3ONO5nh6g', '')
 RETURNING track_id INTO v_track_id;
 INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
 INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Up From the Bottom
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Up From the Bottom', 'http://localhost:8099/avatars/albums/Up From the Bottom.webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Up From the Bottom', 184, 'http://localhost:8080/api/v1/track/97Mj6pXYMd8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Two Faced
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Two Faced', 'http://localhost:8099/avatars/albums/Two Faced.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Two Faced', 184, 'http://localhost:8080/api/v1/track/kivUsDGWojU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Over Each Other
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Over Each Other', 'http://localhost:8099/avatars/albums/Over Each Other.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Over Each Other', 171, 'http://localhost:8080/api/v1/track/fSHoePrnmMw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Heavy Is the Crown
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Heavy Is the Crown', 'http://localhost:8099/avatars/albums/Heavy Is the Crown.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heavy Is the Crown', 168, 'http://localhost:8080/api/v1/track/2OPwoN28s5c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: The Emptiness Machine
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('The Emptiness Machine', 'http://localhost:8099/avatars/albums/The Emptiness Machine.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Emptiness Machine', 191, 'http://localhost:8080/api/v1/track/SRXH9AbT280', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Friendly Fire: A Cappella + Instrumental
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Friendly Fire: A Cappella + Instrumental', 'http://localhost:8099/avatars/albums/Friendly Fire: A Cappella + Instrumental.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Friendly Fire (A Cappella)', 179, 'http://localhost:8080/api/v1/track/QMDmMO6ICWE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Friendly Fire (Instrumental)', 177, 'http://localhost:8080/api/v1/track/peK5Wj6XFwY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Friendly Fire
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Friendly Fire', 'http://localhost:8099/avatars/albums/Friendly Fire.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Friendly Fire', 177, 'http://localhost:8080/api/v1/track/HMluqSGag5E', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Lost (PLZ Tethered Version)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Lost (PLZ Tethered Version)', 'http://localhost:8099/avatars/albums/Lost (PLZ Tethered Version).webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lost (PLZ Tethered Version)', 203, 'http://localhost:8080/api/v1/track/TShzcty120Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lost', 200, 'http://localhost:8080/api/v1/track/7NK_JOkuSVY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Fighting Myself
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Fighting Myself', 'http://localhost:8099/avatars/albums/Fighting Myself.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Fighting Myself', 202, 'http://localhost:8080/api/v1/track/iKBCVZqqooY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Lost
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Lost', 'http://localhost:8099/avatars/albums/Lost.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lost', 200, 'http://localhost:8080/api/v1/track/7NK_JOkuSVY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: She Couldn''t
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('She Couldn''t', 'http://localhost:8099/avatars/albums/She Couldnt.webp', v_artist_id, '', '2020-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('She Couldn''t', 306, 'http://localhost:8080/api/v1/track/OplU67FMw5U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Invisible
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Invisible', 'http://localhost:8099/avatars/albums/Invisible.webp', v_artist_id, '', '2017-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Invisible', 215, 'http://localhost:8080/api/v1/track/n9_gWiwAWrA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Good Goodbye (feat. Pusha T and Stormzy)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Good Goodbye (feat. Pusha T and Stormzy)', 'http://localhost:8099/avatars/albums/Good Goodbye (feat. Pusha T and Stormzy).webp', v_artist_id, '', '2017-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Good Goodbye (feat. Pusha T)', 212, 'http://localhost:8080/api/v1/track/phVQZrb2AdA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Battle Symphony
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Battle Symphony', 'http://localhost:8099/avatars/albums/Battle Symphony.webp', v_artist_id, '', '2017-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Battle Symphony', 217, 'http://localhost:8080/api/v1/track/D7ab595h0AU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Until It''s Gone
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Until It''s Gone', 'http://localhost:8099/avatars/albums/Until Its Gone.webp', v_artist_id, '', '2014-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Until It''s Gone', 234, 'http://localhost:8080/api/v1/track/oM-XJD4J36U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Guilty All the Same (feat. Rakim)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Guilty All the Same (feat. Rakim)', 'http://localhost:8099/avatars/albums/Guilty All the Same (feat. Rakim).webp', v_artist_id, '', '2014-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Guilty All the Same (feat. Rakim)', 356, 'http://localhost:8080/api/v1/track/IfnhGW2Q_y0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: A LIGHT THAT NEVER COMES
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('A LIGHT THAT NEVER COMES', 'http://localhost:8099/avatars/albums/A LIGHT THAT NEVER COMES.webp', v_artist_id, '', '2013-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('A LIGHT THAT NEVER COMES', 230, 'http://localhost:8080/api/v1/track/ToHo29kD9Go', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: CASTLE OF GLASS
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('CASTLE OF GLASS', 'http://localhost:8099/avatars/albums/CASTLE OF GLASS.webp', v_artist_id, '', '2012-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 4
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('CASTLE OF GLASS', 206, 'http://localhost:8080/api/v1/track/ScNNfyq3d_w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('LOST IN THE ECHO (KillSonik Remix)', 310, 'http://localhost:8080/api/v1/track/hesGjN2r_5c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('BURN IT DOWN (Live)', 241, 'http://localhost:8080/api/v1/track/W8i-lqx33y4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('LIES GREED MISERY (Live)', 151, 'http://localhost:8080/api/v1/track/YjxQyetQnT8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: BURN IT DOWN
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('BURN IT DOWN', 'http://localhost:8099/avatars/albums/BURN IT DOWN.webp', v_artist_id, '', '2012-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 4
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('BURN IT DOWN', 231, 'http://localhost:8080/api/v1/track/dxytyRy-O1k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('NEW DIVIDE (Live)', 270, 'http://localhost:8080/api/v1/track/YZne_MkYJmk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('IN THE END (Live)', 220, 'http://localhost:8080/api/v1/track/sltVZgbM2M4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('WHAT I''VE DONE (Live)', 245, 'http://localhost:8080/api/v1/track/1ksMM-bt0ts', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Not Alone
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Not Alone', 'http://localhost:8099/avatars/albums/Not Alone.webp', v_artist_id, '', '2011-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Not Alone', 253, 'http://localhost:8080/api/v1/track/lrbL1s9qwBs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Waiting for the End
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Waiting for the End', 'http://localhost:8099/avatars/albums/Waiting for the End.webp', v_artist_id, '', '2010-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Waiting for the End', 232, 'http://localhost:8080/api/v1/track/5qF_qbaWt3Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Waiting for the End (The Glitch Mob Remix)', 295, 'http://localhost:8080/api/v1/track/3Q1PuQHfdXM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Wretches And Kings
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Wretches And Kings', 'http://localhost:8099/avatars/albums/Wretches And Kings.webp', v_artist_id, '', '2010-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wretches And Kings', 251, 'http://localhost:8080/api/v1/track/er-TinIKvCw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: The Catalyst
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('The Catalyst', 'http://localhost:8099/avatars/albums/The Catalyst.webp', v_artist_id, '', '2010-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Catalyst', 340, 'http://localhost:8080/api/v1/track/51iquRYKPbs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Catalyst (Guitarmagedon) [Does It Offend You, Yeah? Remix] (Guitarmagedon; Does It Offend You, Yeah? Remix)', 187, 'http://localhost:8080/api/v1/track/SxI8pJoxLJw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: The Catalyst
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('The Catalyst', 'http://localhost:8099/avatars/albums/The Catalyst.webp', v_artist_id, '', '2010-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 5
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Catalyst', 340, 'http://localhost:8080/api/v1/track/51iquRYKPbs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Catalyst (Guitarmagedon) [Does It Offend You, Yeah? Remix] (Guitarmagedon; Does It Offend You, Yeah? Remix)', 187, 'http://localhost:8080/api/v1/track/pVUffIzF07I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Catalyst (King Fantastic Remix)', 245, 'http://localhost:8080/api/v1/track/pg4fISZSgn0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Catalyst (feat. DJ Endorphin)', 301, 'http://localhost:8080/api/v1/track/6qAPceeU1Z8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Catalyst (feat. Cale Pellick)', 212, 'http://localhost:8080/api/v1/track/fPBVVwB9KqQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: New Divide (Int''l DMD Maxi)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('New Divide (Int''l DMD Maxi)', 'http://localhost:8099/avatars/albums/New Divide (Intl DMD Maxi).webp', v_artist_id, '', '2009-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 3
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('New Divide', 269, 'http://localhost:8080/api/v1/track/ysSxxIqKNN0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('New Divide (Instrumental)', 270, 'http://localhost:8080/api/v1/track/tBv5PIVwzvo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('New Divide (Acapella)', 236, 'http://localhost:8080/api/v1/track/VcFMFOhVAuA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Leave out All the Rest
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Leave out All the Rest', 'http://localhost:8099/avatars/albums/Leave out All the Rest.webp', v_artist_id, '', '2008-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 3
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Leave Out All The Rest', 200, 'http://localhost:8080/api/v1/track/yZIummTz9mM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('In Pieces (Live from the Nissan Pavilion, Bristow, VA, 8/19/2007 - Projekt Revolution)', 228, 'http://localhost:8080/api/v1/track/GXGhRGoJB_0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Leave Out All The Rest (Live at the DTE Energy Music Theatre, Clarkston, MI, 8/22/2007 - Projekt Revolution)', 207, 'http://localhost:8080/api/v1/track/ZDUIcsLXUkQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Given Up
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Given Up', 'http://localhost:8099/avatars/albums/Given Up.webp', v_artist_id, '', '2008-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 3
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Given Up', 190, 'http://localhost:8080/api/v1/track/0xyxtzD54rM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Valentine''s Day (Live at Festhalle, Frankfurt, DE, 1/20/2008)', 204, 'http://localhost:8080/api/v1/track/None', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('In Between (Live at the O2 Arena, London, England, 1/29/2008)', 206, 'http://localhost:8080/api/v1/track/None', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Shadow Of The Day (Int''l DMD Single)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Shadow Of The Day (Int''l DMD Single)', 'http://localhost:8099/avatars/albums/Shadow Of The Day (Intl DMD Single).webp', v_artist_id, '', '2007-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Shadow Of The Day', 291, 'http://localhost:8080/api/v1/track/n1PCW0C1aiM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Bleed It Out (Int''l DMD Single)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Bleed It Out (Int''l DMD Single)', 'http://localhost:8099/avatars/albums/Bleed It Out (Intl DMD Single).webp', v_artist_id, '', '2007-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Bleed It Out', 165, 'http://localhost:8080/api/v1/track/OnuuYcqhzCE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: What I''ve Done (Int''l 2-Track)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('What I''ve Done (Int''l 2-Track)', 'http://localhost:8099/avatars/albums/What Ive Done (Intl 2-Track).webp', v_artist_id, '', '2007-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('What I''ve Done', 206, 'http://localhost:8080/api/v1/track/8sgycukafqQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Faint (Live In Japan)', 167, 'http://localhost:8080/api/v1/track/aM_0ja3smrU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Numb / Encore: MTV Ultimate Mash-Ups Presents Collision Course
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Numb / Encore: MTV Ultimate Mash-Ups Presents Collision Course', 'http://localhost:8099/avatars/albums/Numb / Encore: MTV Ultimate Mash-Ups Presents Collision Course.webp', v_artist_id, '', '2004-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Numb / Encore', 206, 'http://localhost:8080/api/v1/track/_1oO4wzPCmE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Numb / Encore', 206, 'http://localhost:8080/api/v1/track/_1oO4wzPCmE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Dirt Off Your Shoulder / Lying From You (MTV Ultimate Mash-Ups Presents Collision Course)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Dirt Off Your Shoulder / Lying From You (MTV Ultimate Mash-Ups Presents Collision Course)', 'http://localhost:8099/avatars/albums/Dirt Off Your Shoulder / Lying From You (MTV Ultimate Mash-Ups Presents Collision Course).webp', v_artist_id, '', '2004-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Dirt Off Your Shoulder / Lying From You', 245, 'http://localhost:8080/api/v1/track/MG2S0ns8Dj8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Dirt Off Your Shoulder / Lying From You', 245, 'http://localhost:8080/api/v1/track/MG2S0ns8Dj8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: In the End (Demo)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('In the End (Demo)', 'http://localhost:8099/avatars/albums/In the End (Demo).webp', v_artist_id, '', '2001-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('In the End (Demo)', 229, 'http://localhost:8080/api/v1/track/AhqEeZaGOLk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: One Step Closer (100 gecs Reanimation)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('One Step Closer (100 gecs Reanimation)', 'http://localhost:8099/avatars/albums/One Step Closer (100 gecs Reanimation).webp', v_artist_id, '', '2000-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('One Step Closer (100 gecs Reanimation)', 142, 'http://localhost:8080/api/v1/track/PSsjsqeYX_Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: QWERTY (Live in Tokyo, 2006)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('QWERTY (Live in Tokyo, 2006)', 'http://localhost:8099/avatars/albums/QWERTY (Live in Tokyo, 2006).webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 3
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('QWERTY (Live in Tokyo, 2006)', 235, 'http://localhost:8080/api/v1/track/ZTNtxNgB-3U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('QWERTY (Instrumental)', 202, 'http://localhost:8080/api/v1/track/wfXXsp-lEHA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('QWERTY', 202, 'http://localhost:8080/api/v1/track/Obu-R8kuz3w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Sharp Edges (One More Light Live)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Sharp Edges (One More Light Live)', 'http://localhost:8099/avatars/albums/Sharp Edges (One More Light Live).webp', v_artist_id, '', '2017-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sharp Edges (One More Light Live)', 288, 'http://localhost:8080/api/v1/track/4W_YgNW7gs0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Crawling (One More Light) [Live]
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Crawling (One More Light) [Live]', 'http://localhost:8099/avatars/albums/Crawling (One More Light) [Live].webp', v_artist_id, '', '2017-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Crawling (Live)', 210, 'http://localhost:8080/api/v1/track/sjN-NGsRg9g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: One More Light (Steve Aoki Chester Forever Remix)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('One More Light (Steve Aoki Chester Forever Remix)', 'http://localhost:8099/avatars/albums/One More Light (Steve Aoki Chester Forever Remix).webp', v_artist_id, '', '2017-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('One More Light (Steve Aoki Chester Forever Remix)', 251, 'http://localhost:8080/api/v1/track/Tah0bAZuRuc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Darker Than The Light That Never Bleeds (Chester Forever Steve Aoki Remix)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Darker Than The Light That Never Bleeds (Chester Forever Steve Aoki Remix)', 'http://localhost:8099/avatars/albums/Darker Than The Light That Never Bleeds (Chester Forever Steve Aoki Remix).webp', v_artist_id, '', '2017-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Darker Than The Light That Never Bleeds (Chester Forever Steve Aoki Remix)', 244, 'http://localhost:8080/api/v1/track/OzM5d9OszTE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Heavy (Disero Remix) (feat. Kiiara)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Heavy (Disero Remix) (feat. Kiiara)', 'http://localhost:8099/avatars/albums/Heavy (Disero Remix) (feat. Kiiara).webp', v_artist_id, '', '2017-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heavy [Disero Remix] (feat. Kiiara)', 209, 'http://localhost:8080/api/v1/track/ochCXpS55tw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Waiting for the End (Remix)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Waiting for the End (Remix)', 'http://localhost:8099/avatars/albums/Waiting for the End (Remix).webp', v_artist_id, '', '2010-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 3
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Waiting for the End', 232, 'http://localhost:8080/api/v1/track/5qF_qbaWt3Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Catalyst (Guitarmagedon) [Does It Offend You, Yeah? Remix] (Guitarmagedon; Does It Offend You, Yeah? Remix)', 187, 'http://localhost:8080/api/v1/track/MdX1tD3X4b0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Waiting for the End (The Glitch Mob Remix)', 295, 'http://localhost:8080/api/v1/track/2hO6sSZ75_4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Collision Course
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Collision Course', 'http://localhost:8099/avatars/albums/Collision Course.webp', v_artist_id, '', '2004-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 6
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Dirt Off Your Shoulder / Lying From You', 245, 'http://localhost:8080/api/v1/track/MG2S0ns8Dj8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Big Pimpin'' / Papercut', 157, 'http://localhost:8080/api/v1/track/TbFw880dpUU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jigga What / Faint', 212, 'http://localhost:8080/api/v1/track/BqmCLf_G724', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Numb / Encore', 206, 'http://localhost:8080/api/v1/track/_1oO4wzPCmE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Izzo / In the End', 165, 'http://localhost:8080/api/v1/track/oWXEUoS6Qtg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Points of Authority / 99 Problems / One Step Closer', 296, 'http://localhost:8080/api/v1/track/CwQibd1C76I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
 -- Артист: Red Hot Chili Peppers
 INSERT INTO artist (artist_name, description, avatar_url, header_url)
 VALUES ('Red Hot Chili Peppers', 'Red Hot Chili Peppers — американская рок-группа, образованная в 1983 году в Калифорнии вокалистом Энтони Кидисом, басистом Майклом Бэлзари, гитаристом Хиллелом Словаком и барабанщиком Джеком Айронсом. Обладает 7 премиями «Грэмми». Во всём мире проданы более 80 миллионов копий их альбомов. По версии VH1 «100 Greatest Artists of Hard Rock» заняли 30-е место. 14 апреля 2012 года группа была включена в Зал славы рок-н-ролла. Группа заняла третье место в символическом списке «Лучшие исполнители за 10 лет скробблинга» портала Last.fm.
@@ -16314,7 +16887,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: I''m with You
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('I''m with You', 'http://localhost:8099/avatars/albums/I''m with You.webp', v_artist_id, '', '2011-01-01', 'Альбом')
+VALUES ('I''m with You', 'http://localhost:8099/avatars/albums/Im with You.webp', v_artist_id, '', '2011-01-01', 'Альбом')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 14
 INSERT INTO track (title, duration_s, file_url, description)
@@ -16870,7 +17443,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Mother''s Milk
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Mother''s Milk', 'http://localhost:8099/avatars/albums/Mother''s Milk.webp', v_artist_id, '', '1989-01-01', 'Альбом')
+VALUES ('Mother''s Milk', 'http://localhost:8099/avatars/albums/Mothers Milk.webp', v_artist_id, '', '1989-01-01', 'Альбом')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 19
 INSERT INTO track (title, duration_s, file_url, description)
@@ -17596,7 +18169,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Live in Woodstock ''94
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Live in Woodstock ''94', 'http://localhost:8099/avatars/albums/Live in Woodstock ''94.webp', v_artist_id, '', '2019-01-01', 'Альбом')
+VALUES ('Live in Woodstock ''94', 'http://localhost:8099/avatars/albums/Live in Woodstock 94.webp', v_artist_id, '', '2019-01-01', 'Альбом')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 15
 INSERT INTO track (title, duration_s, file_url, description)
@@ -18684,7 +19257,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: The Shape I''m Takin''
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('The Shape I''m Takin''', 'http://localhost:8099/avatars/albums/The Shape I''m Takin''.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+VALUES ('The Shape I''m Takin''', 'http://localhost:8099/avatars/albums/The Shape Im Takin.webp', v_artist_id, '', '2022-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -22499,7 +23072,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: И вновь продолжается бой
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('И вновь продолжается бой', 'http://localhost:8099/avatars/albums/И вновь продолжается бой.webp', v_artist_id, '', '1988-01-01', 'Сингл')
+VALUES ('И вновь продолжается бой', 'http://localhost:8099/avatars/albums/И вновь продолжается бой.webp', v_artist_id, '', '2000-01-01', 'Сингл')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 1
 INSERT INTO track (title, duration_s, file_url, description)
@@ -22510,7 +23083,7 @@ INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON 
 
 -- Альбом/сингл: Репетиции в Ленинграде
 INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
-VALUES ('Репетиции в Ленинграде', 'http://localhost:8099/avatars/albums/Репетиции в Ленинграде.webp', v_artist_id, '', '1999-01-01', 'EP')
+VALUES ('Репетиции в Ленинграде', 'http://localhost:8099/avatars/albums/Репетиции в Ленинграде.webp', v_artist_id, '', '2007-01-01', 'EP')
 RETURNING album_id INTO v_album_id;
 -- Найдено треков: 6
 INSERT INTO track (title, duration_s, file_url, description)
@@ -22540,6 +23113,9280 @@ INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) 
 INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
 INSERT INTO track (title, duration_s, file_url, description)
 VALUES ('Против', 31, 'http://localhost:8080/api/v1/track/-uiab7Ir_Vo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+-- Артист: Пошлая Молли
+INSERT INTO artist (artist_name, description, avatar_url, header_url)
+VALUES ('Пошлая Молли', '«Пошлая Молли» — украинская рок-группа, основанная музыкантом Кириллом Тимошенко, более известным под псевдонимом Кирилл Бледный. Группа является одним из самых ярких представителей синти-панка на Украине, совмещая поп-панк с электронной музыкой. «Пошлая Молли» набрала свою популярность в 2017 году, в частности в социальной сети «ВКонтакте»
+
+Источник: Wikipedia (', 'http://localhost:8099/avatars/artists/Пошлая Молли_avatar.webp', 'http://localhost:8099/avatars/artists/Пошлая Молли_header.webp')
+RETURNING artist_id INTO v_artist_id;
+
+-- Альбом/сингл: 8 способов как бросить...
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('8 способов как бросить...', 'http://localhost:8099/avatars/albums/8 способов как бросить....webp', v_artist_id, '', '2017-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 8
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Любимая песня твоей сестры', 188, 'http://localhost:8080/api/v1/track/SWL-ZbpCi_U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Даже моя бэйби не знает', 208, 'http://localhost:8080/api/v1/track/Lp_euDcDQ40', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Нон стоп', 214, 'http://localhost:8080/api/v1/track/x7FGjJ6xk9Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ханнамонтана', 191, 'http://localhost:8080/api/v1/track/q6iafAecXeA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Супермаркет', 215, 'http://localhost:8080/api/v1/track/WmC66JLxYYw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Паки пуси', 144, 'http://localhost:8080/api/v1/track/Q-wb3fG_sCE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Молли', 230, 'http://localhost:8080/api/v1/track/9VJmsGWuWw4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Тмстс', 161, 'http://localhost:8080/api/v1/track/og5k3cro3F4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: МЕГАТЕКСТ
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('МЕГАТЕКСТ', 'http://localhost:8099/avatars/albums/МЕГАТЕКСТ.webp', v_artist_id, '', '2025-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 4
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('СНГ', 111, 'http://localhost:8080/api/v1/track/I3bb-4Lykj8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('TBILISI DRIFT', 103, 'http://localhost:8080/api/v1/track/-aSoUjiAXvc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('БАШКЁРТОСТАН (feat. Дмитрий Уткин)', 119, 'http://localhost:8080/api/v1/track/XLutzMEf1vg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('PIKME', 88, 'http://localhost:8080/api/v1/track/ndToomvmuZU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: НОЛЬ МУЖСКОГО
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('НОЛЬ МУЖСКОГО', 'http://localhost:8099/avatars/albums/НОЛЬ МУЖСКОГО.webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('НОЛЬ МУЖСКОГО', 183, 'http://localhost:8080/api/v1/track/sZf_9w2Sijw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: RATT#WHORE
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('RATT#WHORE', 'http://localhost:8099/avatars/albums/RATT#WHORE.webp', v_artist_id, '', '2024-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 6
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Прокля Табыла', 142, 'http://localhost:8080/api/v1/track/mYwV2w2LqmI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Не обижай господина министра', 173, 'http://localhost:8080/api/v1/track/H0vMnpSbRgg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Радио Жажда', 183, 'http://localhost:8080/api/v1/track/F-6S4SOhcOk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Банда Крыс', 189, 'http://localhost:8080/api/v1/track/0I6Y7PDeyyo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Адская колыбельная', 179, 'http://localhost:8080/api/v1/track/U-xw6e-62fw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('To Hell and Back', 225, 'http://localhost:8080/api/v1/track/Db16oQg530w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Адская колыбельная
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Адская колыбельная', 'http://localhost:8099/avatars/albums/Адская колыбельная.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Адская колыбельная', 179, 'http://localhost:8080/api/v1/track/U-xw6e-62fw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: DON’T PLAY BAE (Metal Version by MIRASCREAM & Artur Matur)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('DON’T PLAY BAE (Metal Version by MIRASCREAM & Artur Matur)', 'http://localhost:8099/avatars/albums/DON’T PLAY BAE (Metal Version by MIRASCREAM & Artur Matur).webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('DON’T PLAY BAE (Metal Version by MIRASCREAM & Artur Matur)', 156, 'http://localhost:8080/api/v1/track/OIDx0Fu9ptE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: #HABIBATI
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('#HABIBATI', 'http://localhost:8099/avatars/albums/#HABIBATI.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('#HABIBATI', 154, 'http://localhost:8080/api/v1/track/oNr5-rQnhiM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: DON''T PLAY, BAE
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('DON''T PLAY, BAE', 'http://localhost:8099/avatars/albums/DONT PLAY, BAE.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('DON''T PLAY, BAE', 182, 'http://localhost:8080/api/v1/track/euXAv2aeOhs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Уу-хуу
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Уу-хуу', 'http://localhost:8099/avatars/albums/Уу-хуу.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Уу-хуу', 138, 'http://localhost:8080/api/v1/track/ufNF_plnH7k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: ШКОЛЬНИК
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('ШКОЛЬНИК', 'http://localhost:8099/avatars/albums/ШКОЛЬНИК.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ШКОЛЬНИК', 134, 'http://localhost:8080/api/v1/track/SudhnmhD2LQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Чупа Чупс
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Чупа Чупс', 'http://localhost:8099/avatars/albums/Чупа Чупс.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Чупа Чупс', 137, 'http://localhost:8080/api/v1/track/ksBHfqnYQoc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Дом Периньон
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Дом Периньон', 'http://localhost:8099/avatars/albums/Дом Периньон.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Дом Периньон', 175, 'http://localhost:8080/api/v1/track/AIRc2TWfNzk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Из ладони в ладонь
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Из ладони в ладонь', 'http://localhost:8099/avatars/albums/Из ладони в ладонь.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Из ладони в ладонь', 143, 'http://localhost:8080/api/v1/track/yz3dxP1kzl8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Контракт
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Контракт', 'http://localhost:8099/avatars/albums/Контракт.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Контракт', 205, 'http://localhost:8080/api/v1/track/kPkft7RLX9s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: PAYCHECK
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('PAYCHECK', 'http://localhost:8099/avatars/albums/PAYCHECK.webp', v_artist_id, '', '2020-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 6
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Самый лучший эмо панк', 209, 'http://localhost:8080/api/v1/track/SR7dmQqlU5A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Беспечный рыцарь тьмы', 234, 'http://localhost:8080/api/v1/track/qPhEtFbQqE4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Стрип клаб', 146, 'http://localhost:8080/api/v1/track/0MaH5-AuCrw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Клеопатри', 186, 'http://localhost:8080/api/v1/track/HFA-GrJMU9c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Мишка (feat. KATERINA)', 159, 'http://localhost:8080/api/v1/track/KN_ZRC_ESmE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ты разбила папину машину', 213, 'http://localhost:8080/api/v1/track/8o7YOiYcNbU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3, Ч. 1
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3, Ч. 1', 'http://localhost:8099/avatars/albums/ОЧЕНЬ СТРАШНАЯ МОЛЛИ 3, Ч. 1.webp', v_artist_id, '', '2018-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 4
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ЛОЛ', 159, 'http://localhost:8080/api/v1/track/UDiOCgjYZhw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('CTRL+Zzz', 185, 'http://localhost:8080/api/v1/track/c1mkb3HHmog', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ПОРНХАБ КРИСМАС КЛАБ', 247, 'http://localhost:8080/api/v1/track/e9c5V0MXSb0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ВСЕ ХОТЯТ МЕНЯ ПОЦЕЛОВАТЬ (Ver. 2)', 226, 'http://localhost:8080/api/v1/track/d2ad_t55Wyk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Грустная девчонка с глазами как у собаки
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Грустная девчонка с глазами как у собаки', 'http://localhost:8099/avatars/albums/Грустная девчонка с глазами как у собаки.webp', v_artist_id, '', '2018-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 6
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Значит дружба', 89, 'http://localhost:8080/api/v1/track/f3CcFenEEvM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Все хотят меня поцеловать', 144, 'http://localhost:8080/api/v1/track/aWzfLSrpp9s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Райские цветы', 139, 'http://localhost:8080/api/v1/track/gWU-75-O6QQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Типичная вечеринка с бассейном', 274, 'http://localhost:8080/api/v1/track/ccdHspHSJQ8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Гласс', 165, 'http://localhost:8080/api/v1/track/iA5qBcqT4Q8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Буду твоим пёсиком', 197, 'http://localhost:8080/api/v1/track/6cHVdvRoJ2w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+-- Артист: The Clash
+INSERT INTO artist (artist_name, description, avatar_url, header_url)
+VALUES ('The Clash', 'The Clash — британская музыкальная группа, образованная в 1976 году в Лондоне. The Clash являются одной из первых и наиболее известных групп — исполнителей панк-рока. Несмотря на большую популярность, которую коллектив обрёл на панк-сцене, он также экспериментировал с различными музыкальными стилями от регги до хип-хопа. Такая широта музыкального диапазона, политическая бескомпромиссность, полные энергии и провокаций концерты принесли The Clash нехарактерный для панка крупный успех у себя на родине и за рубежом.
+Начав свою карьеру с выступлений в андеграундных лондонских клубах, группа добилась большого успеха на мировой рок-сцене, собирая на своих концертах целые стадионы зрителей и участвуя в крупнейших музыкальных фестивалях всего мира. Несмотря на такую популярность, The Clash до самого распада оставались верны панк-традициям и своим левым взглядам; музыканты требовали от промоутеров дешёвые билеты на концерты для поклонников, подолгу общаясь с ними после выступлений, и продавали двойной и тройной альбомы по цене одного, компенсируя убыток лейблу за собственный счёт.
+В 2003 году The Clash были включены в американский Зал славы рок-н-ролла.
+
+Источник: Wikipedia (', 'http://localhost:8099/avatars/artists/The Clash_avatar.webp', 'http://localhost:8099/avatars/artists/The Clash_header.webp')
+RETURNING artist_id INTO v_artist_id;
+
+-- Альбом/сингл: Combat Rock + The People''s Hall
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Combat Rock + The People''s Hall', 'http://localhost:8099/avatars/albums/Combat Rock + The Peoples Hall.webp', v_artist_id, '', '2022-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 24
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Know Your Rights', 220, 'http://localhost:8080/api/v1/track/1EKCAE1vDzY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Car Jamming', 240, 'http://localhost:8080/api/v1/track/euWnjq8-i8I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Should I Stay or Should I Go', 189, 'http://localhost:8080/api/v1/track/e7tWqyM3r-g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock the Casbah', 223, 'http://localhost:8080/api/v1/track/LJTk64tzduQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Red Angel Dragnet', 225, 'http://localhost:8080/api/v1/track/8v-VM9fT08E', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Straight to Hell', 331, 'http://localhost:8080/api/v1/track/t7SvtikTkrM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Overpowered by Funk', 293, 'http://localhost:8080/api/v1/track/9LyTWtjYHHA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Atom Tan', 151, 'http://localhost:8080/api/v1/track/iKzd7p0fyxg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sean Flynn', 272, 'http://localhost:8080/api/v1/track/jMFd6xQR7HM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ghetto Defendant', 284, 'http://localhost:8080/api/v1/track/9dBh8H2c2JE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Inoculated City', 162, 'http://localhost:8080/api/v1/track/0Sx1nZ3ARmI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Death is a Star', 195, 'http://localhost:8080/api/v1/track/aC8cNZy6aSc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Outside Bonds', 262, 'http://localhost:8080/api/v1/track/zjXWZ5W8Oqc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('This is Radio Clash (Different Lyrics)', 251, 'http://localhost:8080/api/v1/track/QuF8aEPy2jA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Futura 2000', 355, 'http://localhost:8080/api/v1/track/PEhN4T8vbow', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('First Night Back in London', 132, 'http://localhost:8080/api/v1/track/byYrpCvknZ0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Radio One', 378, 'http://localhost:8080/api/v1/track/EAXwCE5GVFU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('He Who Dares or Is Tired', 174, 'http://localhost:8080/api/v1/track/k0Qg-TYigXo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Long Time Jerk', 310, 'http://localhost:8080/api/v1/track/F2VpO4X5v2Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Fulham Connection (Outtake)', 225, 'http://localhost:8080/api/v1/track/BbDAGX8eeoA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Midnight to Stevens (Outtake)', 277, 'http://localhost:8080/api/v1/track/9suQJthS6to', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sean Flynn (Extended ''Marcus Music'' Version)', 443, 'http://localhost:8080/api/v1/track/8AF3102YtYM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Idle in Kangaroo Court', 305, 'http://localhost:8080/api/v1/track/i8xrAxI9L0Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Know Your Rights', 203, 'http://localhost:8080/api/v1/track/XxDERhWLDJQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Raw and Unfiltered: The Interviews
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Raw and Unfiltered: The Interviews', 'http://localhost:8099/avatars/albums/Raw and Unfiltered: The Interviews.webp', v_artist_id, '', '1988-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 14
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('5% of the Audience Understands', 47, 'http://localhost:8080/api/v1/track/V3En4uNTg5s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Being Duped by an Industrialized Society', 49, 'http://localhost:8080/api/v1/track/5YO8Cnrfwvw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Categorizing Music', 77, 'http://localhost:8080/api/v1/track/DptLElrEEXw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Desiring to Make People Think', 70, 'http://localhost:8080/api/v1/track/QWrDRlS16Xw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Have and Have Nots', 39, 'http://localhost:8080/api/v1/track/LVHY0WW-hQM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Having an Image', 40, 'http://localhost:8080/api/v1/track/tovoEloNUeM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Having Fans Backstage', 41, 'http://localhost:8080/api/v1/track/mSLxk6Fb6Sk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Image Working for and Against You', 42, 'http://localhost:8080/api/v1/track/GBH0dmlFV4E', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Not Having Guts to Fight the System', 48, 'http://localhost:8080/api/v1/track/XldnbymAp74', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Punk and Rock', 40, 'http://localhost:8080/api/v1/track/Eubie-Am1f4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Punk Being Played by Youths', 56, 'http://localhost:8080/api/v1/track/iUAj4J21D00', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Requiring an Image', 61, 'http://localhost:8080/api/v1/track/OMbRFTLnpBk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Salvador Dalí Being an Individual', 42, 'http://localhost:8080/api/v1/track/kEh0N62HExA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Saving Grace of the System', 72, 'http://localhost:8080/api/v1/track/qzSjnyRXCYM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Cut The Crap
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Cut The Crap', 'http://localhost:8099/avatars/albums/Cut The Crap.webp', v_artist_id, '', '1985-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 12
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Dictator', 181, 'http://localhost:8080/api/v1/track/SC61BdLbQMg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Dirty Punk', 190, 'http://localhost:8080/api/v1/track/NSdEjFBKchw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('We are the Clash', 183, 'http://localhost:8080/api/v1/track/gnGolF10XRE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Are You Red..Y', 182, 'http://localhost:8080/api/v1/track/8-_sL8KVM8M', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cool under Heat', 203, 'http://localhost:8080/api/v1/track/EpXqbhQwKbI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Movers and Shakers', 182, 'http://localhost:8080/api/v1/track/a_V44HdZkvo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('This is England', 231, 'http://localhost:8080/api/v1/track/qkj0wUcbUeE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Three Card Trick', 190, 'http://localhost:8080/api/v1/track/2zN1hVy0kEQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Play to Win', 188, 'http://localhost:8080/api/v1/track/OzqO9FtXmKI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Fingerpoppin''', 206, 'http://localhost:8080/api/v1/track/MK5hpKhTnuI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('North and South', 213, 'http://localhost:8080/api/v1/track/LTVXshMKFgE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Life is Wild', 160, 'http://localhost:8080/api/v1/track/xhHU6liaWxg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Combat Rock
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Combat Rock', 'http://localhost:8099/avatars/albums/Combat Rock.webp', v_artist_id, '', '1982-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 12
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Know Your Rights', 221, 'http://localhost:8080/api/v1/track/1EKCAE1vDzY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Car Jamming', 240, 'http://localhost:8080/api/v1/track/euWnjq8-i8I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Should I Stay or Should I Go', 189, 'http://localhost:8080/api/v1/track/e7tWqyM3r-g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock the Casbah', 223, 'http://localhost:8080/api/v1/track/LJTk64tzduQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Red Angel Dragnet', 225, 'http://localhost:8080/api/v1/track/8v-VM9fT08E', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Straight to Hell', 331, 'http://localhost:8080/api/v1/track/t7SvtikTkrM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Overpowered by Funk', 293, 'http://localhost:8080/api/v1/track/9LyTWtjYHHA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Atom Tan', 150, 'http://localhost:8080/api/v1/track/iKzd7p0fyxg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sean Flynn', 272, 'http://localhost:8080/api/v1/track/TkeW80R-51I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ghetto Defendant', 284, 'http://localhost:8080/api/v1/track/9dBh8H2c2JE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Inoculated City', 162, 'http://localhost:8080/api/v1/track/0Sx1nZ3ARmI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Death is a Star', 196, 'http://localhost:8080/api/v1/track/aC8cNZy6aSc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Sandinista!
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Sandinista!', 'http://localhost:8099/avatars/albums/Sandinista!.webp', v_artist_id, '', '1980-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 36
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Magnificent Seven', 334, 'http://localhost:8080/api/v1/track/WD5N0rTsulQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hitsville U.K.', 262, 'http://localhost:8080/api/v1/track/kFGKm_bJ5Uw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Junco Partner', 293, 'http://localhost:8080/api/v1/track/PtBDXzaPgWM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ivan Meets G.I. Joe', 186, 'http://localhost:8080/api/v1/track/i70zREBdvss', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Leader', 103, 'http://localhost:8080/api/v1/track/VxgWtbMnKfs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Something About England', 224, 'http://localhost:8080/api/v1/track/_TwDOO_RJ8Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rebel Waltz', 207, 'http://localhost:8080/api/v1/track/9PCtKQ6xsyA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Look Here', 166, 'http://localhost:8080/api/v1/track/_QsQFoqagnM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Crooked Beat', 329, 'http://localhost:8080/api/v1/track/wIf5DF-PoDo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Somebody Got Murdered', 215, 'http://localhost:8080/api/v1/track/NrODxCsR4og', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('One More Time', 212, 'http://localhost:8080/api/v1/track/Xu5D0STdIcg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('One More Dub', 218, 'http://localhost:8080/api/v1/track/zWiSqeCnnVA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lightning Strikes (Not Once but Twice)', 292, 'http://localhost:8080/api/v1/track/FY1QjMDlMCc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Up In Heaven (Not Only Here)', 273, 'http://localhost:8080/api/v1/track/sc7NlVpNx8k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Corner Soul', 163, 'http://localhost:8080/api/v1/track/IYCRMME7x7o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Let''s Go Crazy', 265, 'http://localhost:8080/api/v1/track/_m7_nPzG0E4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('If Music Could Talk', 277, 'http://localhost:8080/api/v1/track/EMgSWG3WOzo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Sound of Sinners', 242, 'http://localhost:8080/api/v1/track/dJLcrLRtT0M', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Police On My Back', 197, 'http://localhost:8080/api/v1/track/0tCx11ITaiY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Midnight Log', 130, 'http://localhost:8080/api/v1/track/pUyLhxU5AwA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Equaliser', 347, 'http://localhost:8080/api/v1/track/2Bw00AWplAQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Call Up', 329, 'http://localhost:8080/api/v1/track/-ScaGjwkg2Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Washington Bullets', 232, 'http://localhost:8080/api/v1/track/mkoWjhZOKWo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Broadway', 351, 'http://localhost:8080/api/v1/track/sgnlSJGFO5E', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lose This Skin', 310, 'http://localhost:8080/api/v1/track/Cw6e1AB60fw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Charlie Don''t Surf', 295, 'http://localhost:8080/api/v1/track/fFYLCj-hCsc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Mensforth Hill', 223, 'http://localhost:8080/api/v1/track/euPRweGdALQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Junkie Slip', 169, 'http://localhost:8080/api/v1/track/nO5PGg1H66o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Kingston Advice', 158, 'http://localhost:8080/api/v1/track/P9_d6DsSigA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Street Parade', 208, 'http://localhost:8080/api/v1/track/2Fh4aCVHDUA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Version City', 263, 'http://localhost:8080/api/v1/track/nKtuOdOvEXo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Living In Fame', 293, 'http://localhost:8080/api/v1/track/x74Ojz41G4w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Silicone On Sapphire', 255, 'http://localhost:8080/api/v1/track/FU0Lo4gqRPU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Version Pardner', 324, 'http://localhost:8080/api/v1/track/YhHRv5mbvNs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Career Opportunities', 151, 'http://localhost:8080/api/v1/track/pvTFu6SjJ7Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Shepherds Delight', 211, 'http://localhost:8080/api/v1/track/GmT0qjseO5A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: London Calling
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('London Calling', 'http://localhost:8099/avatars/albums/London Calling.webp', v_artist_id, '', '1979-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 19
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London Calling', 201, 'http://localhost:8080/api/v1/track/a3XqMtam1I0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Brand New Cadillac', 129, 'http://localhost:8080/api/v1/track/uqTpZXcTc_s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jimmy Jazz', 235, 'http://localhost:8080/api/v1/track/_X2SjNpwZaY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hateful', 164, 'http://localhost:8080/api/v1/track/BQjoayRUvTs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rudie Can''t Fail', 209, 'http://localhost:8080/api/v1/track/uEK9oK02D1M', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Spanish Bombs', 199, 'http://localhost:8080/api/v1/track/Ul0uJfhywW8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Right Profile', 235, 'http://localhost:8080/api/v1/track/ssFiUE-T2OA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lost in the Supermarket', 227, 'http://localhost:8080/api/v1/track/hZw23sWlyG0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clampdown', 230, 'http://localhost:8080/api/v1/track/_lt4O-EHNnw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Guns of Brixton', 193, 'http://localhost:8080/api/v1/track/JcW8VNwYvL0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wrong ''Em Boyo', 192, 'http://localhost:8080/api/v1/track/uWqopsILSdQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Death or Glory', 235, 'http://localhost:8080/api/v1/track/Td6I5l9UnSg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Koka Kola', 108, 'http://localhost:8080/api/v1/track/yqIsh9Vdnuc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Card Cheat', 230, 'http://localhost:8080/api/v1/track/nhbSYP8cyD8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lover''s Rock', 244, 'http://localhost:8080/api/v1/track/bsmBnB0rrdI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Four Horsemen', 176, 'http://localhost:8080/api/v1/track/2vp49UoVnYU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I''m Not Down', 187, 'http://localhost:8080/api/v1/track/uV6-vY4O5us', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Revolution Rock', 334, 'http://localhost:8080/api/v1/track/i2euERguX9o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Train in Vain (Stand by Me)', 195, 'http://localhost:8080/api/v1/track/aUzBgeI5dpc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Give ''Em Enough Rope
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Give ''Em Enough Rope', 'http://localhost:8099/avatars/albums/Give Em Enough Rope.webp', v_artist_id, '', '1978-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 10
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Safe European Home', 231, 'http://localhost:8080/api/v1/track/1xgwXkULDCs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('English Civil War', 156, 'http://localhost:8080/api/v1/track/fTnqwKqVj_0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Tommy Gun', 198, 'http://localhost:8080/api/v1/track/vl18LGd_zt8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Julie''s Been Working for the Drug Squad', 184, 'http://localhost:8080/api/v1/track/VsGnYHXGtAU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Last Gang in Town', 314, 'http://localhost:8080/api/v1/track/H8oAzO0H198', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Guns on the Roof', 196, 'http://localhost:8080/api/v1/track/viuf4B8GZl4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Drug-Stabbing Time', 224, 'http://localhost:8080/api/v1/track/B2QGqzO-gTI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Stay Free', 221, 'http://localhost:8080/api/v1/track/jDa8T9EM4Tg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cheapskates', 205, 'http://localhost:8080/api/v1/track/Dn9ihX4SBeA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('All the Young Punks (New Boots and Contracts)', 299, 'http://localhost:8080/api/v1/track/gD_AyGGhuCA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: The Clash
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('The Clash', 'http://localhost:8099/avatars/albums/The Clash.webp', v_artist_id, '', '1977-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 14
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Janie Jones', 129, 'http://localhost:8080/api/v1/track/GsVjWd1mh4w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Remote Control', 184, 'http://localhost:8080/api/v1/track/eLZ-TPRZzrk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I''m so Bored with the U.S.A.', 145, 'http://localhost:8080/api/v1/track/2D-l1MauBmM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('White Riot', 117, 'http://localhost:8080/api/v1/track/IvG3is7Bm1w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hate & War', 127, 'http://localhost:8080/api/v1/track/a445pvCRyzo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('What''s My Name', 102, 'http://localhost:8080/api/v1/track/D_9BvISV6Lc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Deny', 187, 'http://localhost:8080/api/v1/track/2zvJJnwE2cc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London''s Burning', 132, 'http://localhost:8080/api/v1/track/I6XijqjtJoA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Career Opportunities', 115, 'http://localhost:8080/api/v1/track/ihPenaGJ6P4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cheat', 127, 'http://localhost:8080/api/v1/track/Hhn1CXKUE4A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Protex Blue', 108, 'http://localhost:8080/api/v1/track/4ZJ-P5P7sD0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Police & Thieves', 364, 'http://localhost:8080/api/v1/track/N3A8uNG3GH4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('48 Hours', 97, 'http://localhost:8080/api/v1/track/qBr6y3bhhCU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Garageland', 195, 'http://localhost:8080/api/v1/track/UpapNzYkxNE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Live in New York 1979
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Live in New York 1979', 'http://localhost:8099/avatars/albums/Live in New York 1979.webp', v_artist_id, '', '2022-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 23
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Safe European Home', 195, 'http://localhost:8080/api/v1/track/RUb48ONeQdk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Im So Bored With The U.S.A.', 163, 'http://localhost:8080/api/v1/track/RZnWt_PRb1A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Complete Control', 212, 'http://localhost:8080/api/v1/track/BOfaEPv3iV8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London Calling', 219, 'http://localhost:8080/api/v1/track/ppBSuJ6so-g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('White Man) in Hammersmith Palais', 254, 'http://localhost:8080/api/v1/track/QgEdMvf0aIk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Koka Kola', 90, 'http://localhost:8080/api/v1/track/KxWoFaGyGVA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I Fought The Law', 153, 'http://localhost:8080/api/v1/track/9N0JDrosKlU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jail Guitar Doors', 197, 'http://localhost:8080/api/v1/track/T6UMI3xe5c8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Guns Of Brixton', 173, 'http://localhost:8080/api/v1/track/jyl3_hTXbfc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('English Civil War', 179, 'http://localhost:8080/api/v1/track/bmbGPjTxySA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clash City Rockers', 211, 'http://localhost:8080/api/v1/track/_SGR_nhx_mY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Stay Free', 204, 'http://localhost:8080/api/v1/track/lM72ZD5JgVM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clampdown', 254, 'http://localhost:8080/api/v1/track/oN_9NvKP_N4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Police &Thieves', 308, 'http://localhost:8080/api/v1/track/Q-_5v4AreV8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Capital Radio', 201, 'http://localhost:8080/api/v1/track/Zpe1X7d-FgU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Tommy Gun', 181, 'http://localhost:8080/api/v1/track/1q7ZLDXWst8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wrong ''Em Boyo', 190, 'http://localhost:8080/api/v1/track/-n_sbIKX7WA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Janie Jones', 122, 'http://localhost:8080/api/v1/track/w6TflmIJvRI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Garageland', 191, 'http://localhost:8080/api/v1/track/gMADTyzCHCo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Armagideon Time', 272, 'http://localhost:8080/api/v1/track/0JVvi2sn0_Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Career Opportunities', 110, 'http://localhost:8080/api/v1/track/IQu1XDF8fpw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('What''s My Name', 94, 'http://localhost:8080/api/v1/track/unlYZGXniqA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('White Riot', 127, 'http://localhost:8080/api/v1/track/ZEz0AdzEPpg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: The Magnificent Seven
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('The Magnificent Seven', 'http://localhost:8099/avatars/albums/The Magnificent Seven.webp', v_artist_id, '', '2020-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 18
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sombody Got Murdered', 312, 'http://localhost:8080/api/v1/track/8L76OOcxoZo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock The Casbah', 103, 'http://localhost:8080/api/v1/track/Es6jyAGUY3s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Guns Of Brixton', 180, 'http://localhost:8080/api/v1/track/0lp-kFSay0I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Know Your Rights', 225, 'http://localhost:8080/api/v1/track/2dyGfhMhbfI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Koka Kola', 105, 'http://localhost:8080/api/v1/track/D37itFzp5L4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hate And War', 136, 'http://localhost:8080/api/v1/track/B21XAZ65k4I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Armagideon Time', 383, 'http://localhost:8080/api/v1/track/0TWY3hfYGkA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Sound Of Sinners', 216, 'http://localhost:8080/api/v1/track/eaFoU5sZfk8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Safe European Home', 198, 'http://localhost:8080/api/v1/track/YCfV9wklVqw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Police On My Back', 156, 'http://localhost:8080/api/v1/track/uK028ceVoPs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Brand New Cadillac', 126, 'http://localhost:8080/api/v1/track/SsxwCeT8GsI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I Fought The Law', 161, 'http://localhost:8080/api/v1/track/8a4Op-3HaXk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I''m So Bored With The USA', 139, 'http://localhost:8080/api/v1/track/Zc3M9m6rS_c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Train In Vain', 224, 'http://localhost:8080/api/v1/track/YPDKwlslY14', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Magnificent Seven', 357, 'http://localhost:8080/api/v1/track/DdQT2v5Le_o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Straight To Hell', 411, 'http://localhost:8080/api/v1/track/2EL2wscGP1M', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Shoud I Stay Or Should I Go', 184, 'http://localhost:8080/api/v1/track/iZj12iRK_fw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clampdown', 333, 'http://localhost:8080/api/v1/track/uJn0SjKjqzg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Live in Tokyo
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Live in Tokyo', 'http://localhost:8099/avatars/albums/Live in Tokyo.webp', v_artist_id, '', '2020-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 13
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London Calling (Live)', 207, 'http://localhost:8080/api/v1/track/l6opV_19jJM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Safe European Home (Live)', 289, 'http://localhost:8080/api/v1/track/4OJ3svlrWhQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('(White Man) in Hammersmith Palais (Live)', 282, 'http://localhost:8080/api/v1/track/OgjAWY7R-80', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Brand New Cadillac (Live)', 128, 'http://localhost:8080/api/v1/track/OF32ueBQbyg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Charlie Don''t Surf (Live)', 375, 'http://localhost:8080/api/v1/track/daRDcNVcL78', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clampdown (Live)', 278, 'http://localhost:8080/api/v1/track/RlsFz8X4g_g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('This is Radio Clash (Live)', 297, 'http://localhost:8080/api/v1/track/0XvhdKsVDSw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Armagidean Time (Live)', 304, 'http://localhost:8080/api/v1/track/sd5PBRKw-4g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jimmy Jazz (Live)', 366, 'http://localhost:8080/api/v1/track/UiqHRz-dlSQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Tommy Gun (Live)', 245, 'http://localhost:8080/api/v1/track/R12J6sB3K1c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Fujiyama Mama (With Pearl Harbour) (Live)', 125, 'http://localhost:8080/api/v1/track/haPQ8fN8wVU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Police on my Back (Live)', 195, 'http://localhost:8080/api/v1/track/a0xmBAV3htg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('White Riot (Live)', 126, 'http://localhost:8080/api/v1/track/SstxlBiTSDI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Live in New Jersey
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Live in New Jersey', 'http://localhost:8099/avatars/albums/Live in New Jersey.webp', v_artist_id, '', '2020-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 21
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clash City Rockers (Live)', 226, 'http://localhost:8080/api/v1/track/4A8wTDZmjFA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Brand New Cadillac (Live)', 143, 'http://localhost:8080/api/v1/track/8xWg-URDeT8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Safe European Home (Live)', 196, 'http://localhost:8080/api/v1/track/Iq6GBlK4_rk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jimmy Jazz (Live)', 247, 'http://localhost:8080/api/v1/track/ph_aV4mkglo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London Calling (Live)', 214, 'http://localhost:8080/api/v1/track/5cG1h9yF3f8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Guns of Brixton (Live)', 179, 'http://localhost:8080/api/v1/track/HROFgF2XDdk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Train in Vain (Live)', 207, 'http://localhost:8080/api/v1/track/ZvJb6BlN_nI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('(White Man) in Hammersmith Palais (Live)', 252, 'http://localhost:8080/api/v1/track/zac7VQNFOvc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Kola Kola/I Fought the Law (Live)', 271, 'http://localhost:8080/api/v1/track/7ytb9eUOAOU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Spanish Bombs (Live)', 189, 'http://localhost:8080/api/v1/track/IccidCpxJfI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Police and Theives (Live)', 311, 'http://localhost:8080/api/v1/track/VNbWoBPGq4g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Stay Free (Live)', 213, 'http://localhost:8080/api/v1/track/0mwTj1xexNE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Julie''s Been Working for the Drug Squad (Live)', 205, 'http://localhost:8080/api/v1/track/TqEsJ08Z2eY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wrong ''em Boyo (Live)', 195, 'http://localhost:8080/api/v1/track/TlAv3-fjBDE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Janie Jones (Live)', 124, 'http://localhost:8080/api/v1/track/6WHd7fvPzc8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Complete Control (Live)', 217, 'http://localhost:8080/api/v1/track/UBZmowJVdKo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Armagideion Time (Live)', 286, 'http://localhost:8080/api/v1/track/Q6YVxcrB10Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('English Civil War (Live)', 157, 'http://localhost:8080/api/v1/track/xARKirKmK4k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Garageland (Live)', 211, 'http://localhost:8080/api/v1/track/cwpSFUVkV9w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Bankrobber (Live)', 220, 'http://localhost:8080/api/v1/track/K_lE_Pu6XFA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Tommy Gun (Live)', 184, 'http://localhost:8080/api/v1/track/GhgVSxLbt-8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Live in New York
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Live in New York', 'http://localhost:8099/avatars/albums/Live in New York.webp', v_artist_id, '', '2020-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 23
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Safe European Home (Live)', 197, 'http://localhost:8080/api/v1/track/Vn9-KB0ueEM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I''m So Bored with The USA (Live)', 163, 'http://localhost:8080/api/v1/track/j9lsP72Qn-U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Complete Control (Live)', 212, 'http://localhost:8080/api/v1/track/tDkT5OW4p-A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London Calling (Live)', 219, 'http://localhost:8080/api/v1/track/TvsDM6KqEUE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('(White Man) in Hammersmith Palais (Live)', 254, 'http://localhost:8080/api/v1/track/OeXUkgPabPk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Koka Kola (Live)', 90, 'http://localhost:8080/api/v1/track/Ix10frC6A7M', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I Fought the Law (Live)', 153, 'http://localhost:8080/api/v1/track/YD9ho0iueVE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jail Guitar Doors (Live)', 197, 'http://localhost:8080/api/v1/track/VkdTbPLeB_Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Guns of Brixton (Live)', 173, 'http://localhost:8080/api/v1/track/XgI8pdJ4Rho', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('English Civil War (Live)', 179, 'http://localhost:8080/api/v1/track/a8JDvDfsdok', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clash City Rockers (Live)', 211, 'http://localhost:8080/api/v1/track/GXRBrtRSkqs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Stay Free (Live)', 204, 'http://localhost:8080/api/v1/track/1ATrjwBYy8c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clampdown (Live)', 254, 'http://localhost:8080/api/v1/track/zzX7LmmDIsI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Police and Theives (Live)', 308, 'http://localhost:8080/api/v1/track/xLPswhvlvws', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Capital Radio (Live)', 201, 'http://localhost:8080/api/v1/track/-efO1b3YqCY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Tommy Gun (Live)', 181, 'http://localhost:8080/api/v1/track/w4anqL1BfcU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wrong ''em Boyo (Live)', 191, 'http://localhost:8080/api/v1/track/P5gfxvD9yk8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Janie Jones (Live)', 122, 'http://localhost:8080/api/v1/track/TIlVSs9tYro', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Garageland (Live)', 192, 'http://localhost:8080/api/v1/track/bFnUwG3gBOI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Armagideon Time (Live)', 272, 'http://localhost:8080/api/v1/track/96E04xa9Ne4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Career Opportunities (Live)', 110, 'http://localhost:8080/api/v1/track/bBeQuZ1AOWI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('What''s My Name (Live)', 94, 'http://localhost:8080/api/v1/track/01Q_QsaBioU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('White Riot (Live)', 126, 'http://localhost:8080/api/v1/track/5pQweV7Za6o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Live at Shea Stadium
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Live at Shea Stadium', 'http://localhost:8099/avatars/albums/Live at Shea Stadium.webp', v_artist_id, '', '2008-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 16
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Kosmo Vinyl Introduction (Live at Shea Stadium)', 71, 'http://localhost:8080/api/v1/track/58IWLTEZECc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London Calling (Live at Shea Stadium)', 210, 'http://localhost:8080/api/v1/track/6vnltySrJ5U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Police on My Back (Live at Shea Stadium)', 209, 'http://localhost:8080/api/v1/track/hR3L5zAOsic', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Guns of Brixton (Live at Shea Stadium)', 248, 'http://localhost:8080/api/v1/track/LrI2I8BZ4gk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Tommy Gun (Live at Shea Stadium)', 200, 'http://localhost:8080/api/v1/track/UyWuqksNHkE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Magnificent Seven (Live at Shea Stadium)', 154, 'http://localhost:8080/api/v1/track/pLWfa_QYg9U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Armagideon Time (Live at Shea Stadium)', 176, 'http://localhost:8080/api/v1/track/0NfbCvNCr5E', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Magnificent Seven (Return) (Live at Shea Stadium)', 144, 'http://localhost:8080/api/v1/track/5Yxm4tCnynA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock the Casbah (Live at Shea Stadium)', 202, 'http://localhost:8080/api/v1/track/Kyx3xXYT4RY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Train in Vain (Stand by Me) (Live at Shea Stadium)', 226, 'http://localhost:8080/api/v1/track/XjqxfdoSLxc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Career Opportunities (Live at Shea Stadium)', 127, 'http://localhost:8080/api/v1/track/THvYXN0fJF4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Spanish Bombs (Live at Shea Stadium)', 199, 'http://localhost:8080/api/v1/track/BOtNYVrLFqc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clampdown (Live at Shea Stadium)', 267, 'http://localhost:8080/api/v1/track/ZPZug6-rVLs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('English Civil War (Live at Shea Stadium)', 160, 'http://localhost:8080/api/v1/track/WL5iVNnA9Mw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Should I Stay or Should I Go (Live at Shea Stadium)', 165, 'http://localhost:8080/api/v1/track/8-cjjzNbg70', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I Fought the Law (Live at Shea Stadium)', 204, 'http://localhost:8080/api/v1/track/P-O71j87UQc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: From Here to Eternity (Live)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('From Here to Eternity (Live)', 'http://localhost:8099/avatars/albums/From Here to Eternity (Live).webp', v_artist_id, '', '1999-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 19
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Complete Control (Live)', 227, 'http://localhost:8080/api/v1/track/JeTw_p_WglY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London''s Burning (Live)', 123, 'http://localhost:8080/api/v1/track/Q3OdQcEACrY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('What''s My Name (Live)', 106, 'http://localhost:8080/api/v1/track/9RIncSieVlg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clash City Rockers (Live)', 210, 'http://localhost:8080/api/v1/track/AXrVbFJi4Zs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Career Opportunities (Live)', 127, 'http://localhost:8080/api/v1/track/_4NFOWJmhOE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('(White Man) in Hammersmith Palais (Live)', 266, 'http://localhost:8080/api/v1/track/0gFNJKUniEY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Capital Radio (Live)', 181, 'http://localhost:8080/api/v1/track/zRp1zLvoiKM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('City of the Dead (Live)', 168, 'http://localhost:8080/api/v1/track/2zC5Z8bzhN0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I Fought the Law (Live)', 156, 'http://localhost:8080/api/v1/track/9Ldp3Lxrff0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London Calling (Live)', 210, 'http://localhost:8080/api/v1/track/rwYXD6kXc7g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Armagideon Time (Live)', 305, 'http://localhost:8080/api/v1/track/r1jPRO4ZbgM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Train in Vain (Stand by Me)', 283, 'http://localhost:8080/api/v1/track/WRP69W_pJJo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Guns of Brixton (Live)', 216, 'http://localhost:8080/api/v1/track/0Jqx5DSnPek', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Magnificent Seven (Live)', 370, 'http://localhost:8080/api/v1/track/uadnR0Y9kBA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Know Your Rights (Live)', 246, 'http://localhost:8080/api/v1/track/Y2w7OUtx45k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Should I Stay or Should I Go (Live)', 196, 'http://localhost:8080/api/v1/track/tKOu_ZCtEng', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Straight to Hell (Live)', 429, 'http://localhost:8080/api/v1/track/wPjGlrMtzpA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Drug-Stabbing Time (Live)', 214, 'http://localhost:8080/api/v1/track/jAZjqifovYY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Janie Jones (Live)', 170, 'http://localhost:8080/api/v1/track/2nKzaSwL1gU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Sound System
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Sound System', 'http://localhost:8099/avatars/albums/Sound System.webp', v_artist_id, '', '2013-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 143
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Janie Jones', 129, 'http://localhost:8080/api/v1/track/GsVjWd1mh4w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Remote Control', 184, 'http://localhost:8080/api/v1/track/eLZ-TPRZzrk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I''m so Bored with the U.S.A.', 145, 'http://localhost:8080/api/v1/track/2D-l1MauBmM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('White Riot', 117, 'http://localhost:8080/api/v1/track/IvG3is7Bm1w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hate & War', 127, 'http://localhost:8080/api/v1/track/a445pvCRyzo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('What''s My Name', 102, 'http://localhost:8080/api/v1/track/D_9BvISV6Lc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Deny', 187, 'http://localhost:8080/api/v1/track/2zvJJnwE2cc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London''s Burning', 132, 'http://localhost:8080/api/v1/track/I6XijqjtJoA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Career Opportunities', 115, 'http://localhost:8080/api/v1/track/daHhZHI03BI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cheat', 127, 'http://localhost:8080/api/v1/track/Hhn1CXKUE4A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Protex Blue', 108, 'http://localhost:8080/api/v1/track/4ZJ-P5P7sD0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Police & Thieves', 364, 'http://localhost:8080/api/v1/track/N3A8uNG3GH4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('48 Hours', 97, 'http://localhost:8080/api/v1/track/qBr6y3bhhCU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Garageland', 195, 'http://localhost:8080/api/v1/track/UpapNzYkxNE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Safe European Home', 231, 'http://localhost:8080/api/v1/track/1xgwXkULDCs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('English Civil War', 156, 'http://localhost:8080/api/v1/track/fTnqwKqVj_0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Tommy Gun', 198, 'http://localhost:8080/api/v1/track/2lVMHCLEAeQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Julie''s Been Working for the Drug Squad', 184, 'http://localhost:8080/api/v1/track/VsGnYHXGtAU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Last Gang in Town', 314, 'http://localhost:8080/api/v1/track/H8oAzO0H198', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Guns on the Roof', 196, 'http://localhost:8080/api/v1/track/viuf4B8GZl4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Drug-Stabbing Time', 224, 'http://localhost:8080/api/v1/track/B2QGqzO-gTI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Stay Free', 221, 'http://localhost:8080/api/v1/track/jDa8T9EM4Tg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cheapskates', 205, 'http://localhost:8080/api/v1/track/Dn9ihX4SBeA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('All the Young Punks (New Boots and Contracts)', 299, 'http://localhost:8080/api/v1/track/gD_AyGGhuCA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London Calling', 201, 'http://localhost:8080/api/v1/track/a3XqMtam1I0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Brand New Cadillac', 129, 'http://localhost:8080/api/v1/track/uqTpZXcTc_s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jimmy Jazz', 235, 'http://localhost:8080/api/v1/track/_X2SjNpwZaY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hateful', 164, 'http://localhost:8080/api/v1/track/BQjoayRUvTs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rudie Can''t Fail', 209, 'http://localhost:8080/api/v1/track/uEK9oK02D1M', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Spanish Bombs', 199, 'http://localhost:8080/api/v1/track/Ul0uJfhywW8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Right Profile', 235, 'http://localhost:8080/api/v1/track/ssFiUE-T2OA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lost in the Supermarket', 227, 'http://localhost:8080/api/v1/track/hZw23sWlyG0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clampdown', 230, 'http://localhost:8080/api/v1/track/_lt4O-EHNnw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Guns of Brixton', 193, 'http://localhost:8080/api/v1/track/JcW8VNwYvL0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wrong ''Em Boyo', 192, 'http://localhost:8080/api/v1/track/uWqopsILSdQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Death or Glory', 235, 'http://localhost:8080/api/v1/track/Td6I5l9UnSg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Koka Kola', 108, 'http://localhost:8080/api/v1/track/yqIsh9Vdnuc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Card Cheat', 230, 'http://localhost:8080/api/v1/track/nhbSYP8cyD8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lover''s Rock', 244, 'http://localhost:8080/api/v1/track/bsmBnB0rrdI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Four Horsemen', 176, 'http://localhost:8080/api/v1/track/2vp49UoVnYU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I''m Not Down', 187, 'http://localhost:8080/api/v1/track/uV6-vY4O5us', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Revolution Rock', 334, 'http://localhost:8080/api/v1/track/i2euERguX9o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Train in Vain (Stand by Me)', 195, 'http://localhost:8080/api/v1/track/aUzBgeI5dpc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Magnificent Seven', 334, 'http://localhost:8080/api/v1/track/WD5N0rTsulQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hitsville U.K.', 262, 'http://localhost:8080/api/v1/track/kFGKm_bJ5Uw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Junco Partner', 293, 'http://localhost:8080/api/v1/track/PtBDXzaPgWM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ivan Meets G.I. Joe', 186, 'http://localhost:8080/api/v1/track/i70zREBdvss', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Leader', 103, 'http://localhost:8080/api/v1/track/VxgWtbMnKfs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Something About England', 224, 'http://localhost:8080/api/v1/track/_TwDOO_RJ8Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rebel Waltz', 207, 'http://localhost:8080/api/v1/track/9PCtKQ6xsyA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Look Here', 166, 'http://localhost:8080/api/v1/track/_QsQFoqagnM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Crooked Beat', 329, 'http://localhost:8080/api/v1/track/wIf5DF-PoDo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Somebody Got Murdered', 215, 'http://localhost:8080/api/v1/track/NrODxCsR4og', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('One More Time', 212, 'http://localhost:8080/api/v1/track/Xu5D0STdIcg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('One More Dub', 218, 'http://localhost:8080/api/v1/track/zWiSqeCnnVA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lightning Strikes (Not Once but Twice)', 292, 'http://localhost:8080/api/v1/track/FY1QjMDlMCc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Up In Heaven (Not Only Here)', 273, 'http://localhost:8080/api/v1/track/sc7NlVpNx8k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Corner Soul', 163, 'http://localhost:8080/api/v1/track/IYCRMME7x7o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Let''s Go Crazy', 265, 'http://localhost:8080/api/v1/track/_m7_nPzG0E4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('If Music Could Talk', 277, 'http://localhost:8080/api/v1/track/EMgSWG3WOzo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Sound of Sinners', 242, 'http://localhost:8080/api/v1/track/dJLcrLRtT0M', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Police On My Back', 197, 'http://localhost:8080/api/v1/track/0tCx11ITaiY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Midnight Log', 130, 'http://localhost:8080/api/v1/track/pUyLhxU5AwA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Equaliser', 347, 'http://localhost:8080/api/v1/track/2Bw00AWplAQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Call Up', 329, 'http://localhost:8080/api/v1/track/-ScaGjwkg2Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Washington Bullets', 232, 'http://localhost:8080/api/v1/track/mkoWjhZOKWo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Broadway', 351, 'http://localhost:8080/api/v1/track/sgnlSJGFO5E', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lose This Skin', 310, 'http://localhost:8080/api/v1/track/Cw6e1AB60fw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Charlie Don''t Surf', 295, 'http://localhost:8080/api/v1/track/fFYLCj-hCsc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Mensforth Hill', 223, 'http://localhost:8080/api/v1/track/euPRweGdALQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Junkie Slip', 169, 'http://localhost:8080/api/v1/track/nO5PGg1H66o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Kingston Advice', 158, 'http://localhost:8080/api/v1/track/P9_d6DsSigA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Street Parade', 208, 'http://localhost:8080/api/v1/track/2Fh4aCVHDUA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Version City', 263, 'http://localhost:8080/api/v1/track/nKtuOdOvEXo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Living In Fame', 293, 'http://localhost:8080/api/v1/track/x74Ojz41G4w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Silicone On Sapphire', 255, 'http://localhost:8080/api/v1/track/FU0Lo4gqRPU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Version Pardner', 324, 'http://localhost:8080/api/v1/track/YhHRv5mbvNs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Career Opportunities', 151, 'http://localhost:8080/api/v1/track/pvTFu6SjJ7Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Shepherds Delight', 211, 'http://localhost:8080/api/v1/track/GmT0qjseO5A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Know Your Rights', 221, 'http://localhost:8080/api/v1/track/1EKCAE1vDzY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Car Jamming', 240, 'http://localhost:8080/api/v1/track/euWnjq8-i8I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Should I Stay or Should I Go', 189, 'http://localhost:8080/api/v1/track/e7tWqyM3r-g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock the Casbah', 223, 'http://localhost:8080/api/v1/track/LJTk64tzduQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Red Angel Dragnet', 225, 'http://localhost:8080/api/v1/track/8v-VM9fT08E', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Straight to Hell', 331, 'http://localhost:8080/api/v1/track/t7SvtikTkrM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Overpowered by Funk', 293, 'http://localhost:8080/api/v1/track/9LyTWtjYHHA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Atom Tan', 150, 'http://localhost:8080/api/v1/track/iKzd7p0fyxg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sean Flynn', 272, 'http://localhost:8080/api/v1/track/6bY3jKL2-Lk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ghetto Defendant', 284, 'http://localhost:8080/api/v1/track/9dBh8H2c2JE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Inoculated City', 162, 'http://localhost:8080/api/v1/track/0Sx1nZ3ARmI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Death is a Star', 196, 'http://localhost:8080/api/v1/track/aC8cNZy6aSc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('White Riot', 121, 'http://localhost:8080/api/v1/track/t6cF3ayJgM4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('1977', 101, 'http://localhost:8080/api/v1/track/6b2EDMyRN6s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Listen / Interviews', 669, 'http://localhost:8080/api/v1/track/3vMcCGzjRWY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Capital Radio (Edit)', 129, 'http://localhost:8080/api/v1/track/mmS5J6pyayQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London''s Burning (Live)', 132, 'http://localhost:8080/api/v1/track/F53WxwkHlhs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Complete Control', 194, 'http://localhost:8080/api/v1/track/i50iEHXLKkk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('City of the Dead', 143, 'http://localhost:8080/api/v1/track/WrTnOH3rSNE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clash City Rockers', 238, 'http://localhost:8080/api/v1/track/jMzNtXRtWlY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jail Guitar Doors', 185, 'http://localhost:8080/api/v1/track/jTA5GxhAsFM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('(White Man) in Hammersmith Palais', 242, 'http://localhost:8080/api/v1/track/96UtZPLiT90', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Prisoner', 184, 'http://localhost:8080/api/v1/track/TQj_L5DRw4Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('1-2 Crush on You', 180, 'http://localhost:8080/api/v1/track/5opmz6ao1xM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Time is Tight', 245, 'http://localhost:8080/api/v1/track/r_tZIOdonoY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Pressure Drop', 206, 'http://localhost:8080/api/v1/track/UL3WOxjubnA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I Fought the Law', 164, 'http://localhost:8080/api/v1/track/AL8chWFuM-s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Groovy Times', 206, 'http://localhost:8080/api/v1/track/FbViWlEILXY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Gates of the West', 206, 'http://localhost:8080/api/v1/track/8zij7SkmEM4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Capital Radio', 201, 'http://localhost:8080/api/v1/track/nGPlnVLWGt8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Armagideon Time', 233, 'http://localhost:8080/api/v1/track/PcFGeDGZhfQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Bankrobber', 274, 'http://localhost:8080/api/v1/track/T-uxC0CmKBA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rockers Galore...UK Tour (feat. Mikey Dread)', 283, 'http://localhost:8080/api/v1/track/KekdXgBhyYE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Magnificent Dance', 338, 'http://localhost:8080/api/v1/track/hFGKqNQnnrE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Midnight to Stevens (Outtake)', 277, 'http://localhost:8080/api/v1/track/9suQJthS6to', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Radio One', 378, 'http://localhost:8080/api/v1/track/EAXwCE5GVFU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Stop the World', 153, 'http://localhost:8080/api/v1/track/YUk_C55x_6s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Cool Out', 234, 'http://localhost:8080/api/v1/track/fR2a8liyH10', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('This is Radio Clash', 252, 'http://localhost:8080/api/v1/track/krl-2hgFrJU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('This is Radio Clash (Different Lyrics)', 252, 'http://localhost:8080/api/v1/track/QuF8aEPy2jA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('First Night Back in London', 180, 'http://localhost:8080/api/v1/track/v1Ql1zuI6KE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock the Casbah (Bob Clearmountain Mix)', 223, 'http://localhost:8080/api/v1/track/ZCb6sHeC7ac', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Long Time Jerk', 309, 'http://localhost:8080/api/v1/track/F2VpO4X5v2Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Beautiful People Are Ugly Too (Outtake)', 227, 'http://localhost:8080/api/v1/track/BbDAGX8eeoA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Idle in Kangaroo Court', 305, 'http://localhost:8080/api/v1/track/i8xrAxI9L0Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ghetto Defendant (Extended Unedited Version)', 374, 'http://localhost:8080/api/v1/track/Wlv1fle74UU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cool Confusion', 193, 'http://localhost:8080/api/v1/track/Fju-JwnFYOY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sean Flynn (Extended ''Marcus Music'' Version)', 443, 'http://localhost:8080/api/v1/track/8AF3102YtYM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Straight to Hell (Extended Unedited Version)', 415, 'http://localhost:8080/api/v1/track/t7SvtikTkrM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I''m so Bored With the U.S.A. (Beaconsfield Film School Session)', 144, 'http://localhost:8080/api/v1/track/a3QlaEntujo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London''s Burning (Beaconsfield Film School Session)', 118, 'http://localhost:8080/api/v1/track/Z-TE0Go3Qb0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('White Riot (Beaconsfield Film School Session)', 114, 'http://localhost:8080/api/v1/track/ifBhPRpUYMc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('1977 (Beaconsfield Film School Session)', 111, 'http://localhost:8080/api/v1/track/fC2i2f06G1Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Janie Jones (Polydor Demos)', 126, 'http://localhost:8080/api/v1/track/None', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Career Opportunities (Polydor Demos)', 114, 'http://localhost:8080/api/v1/track/None', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London''s Burning (Polydor Demos)', 119, 'http://localhost:8080/api/v1/track/None', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('1977 (Polydor Demos)', 101, 'http://localhost:8080/api/v1/track/None', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('White Riot (Polydor Demos)', 119, 'http://localhost:8080/api/v1/track/None', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('City of the Dead (Live at the Lyceum)', 176, 'http://localhost:8080/api/v1/track/igA8UnTQQ8c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jail Guitar Doors (Live at the Lyceum)', 185, 'http://localhost:8080/api/v1/track/V2g5tIQkowY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('English Civil War (Live at the Lyceum)', 151, 'http://localhost:8080/api/v1/track/aKd-QPKaBDQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Stay Free (Live at the Lyceum)', 207, 'http://localhost:8080/api/v1/track/sMOVZNiYFbo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cheapskates (Live at the Lyceum)', 195, 'http://localhost:8080/api/v1/track/aVrR266dfAk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I Fought the Law (Live at the Lyceum)', 145, 'http://localhost:8080/api/v1/track/v8U8WvM_XOQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Hits Back
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Hits Back', 'http://localhost:8099/avatars/albums/Hits Back.webp', v_artist_id, '', '2013-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 32
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London Calling (2012 Mix)', 200, 'http://localhost:8080/api/v1/track/a3XqMtam1I0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Safe European Home', 230, 'http://localhost:8080/api/v1/track/1xgwXkULDCs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Know Your Rights', 221, 'http://localhost:8080/api/v1/track/1EKCAE1vDzY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('(White Man) in Hammersmith Palais', 241, 'http://localhost:8080/api/v1/track/96UtZPLiT90', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Janie Jones', 126, 'http://localhost:8080/api/v1/track/GsVjWd1mh4w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Guns of Brixton', 190, 'http://localhost:8080/api/v1/track/JcW8VNwYvL0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Train in Vain (Stand by Me)', 190, 'http://localhost:8080/api/v1/track/aUzBgeI5dpc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Bankrobber', 275, 'http://localhost:8080/api/v1/track/mk-4dcdgKQo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wrong ''Em Boyo', 191, 'http://localhost:8080/api/v1/track/uWqopsILSdQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Magnificent Seven', 333, 'http://localhost:8080/api/v1/track/WD5N0rTsulQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Police On My Back', 196, 'http://localhost:8080/api/v1/track/0tCx11ITaiY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock the Casbah (Bob Clearmountain Mix)', 223, 'http://localhost:8080/api/v1/track/ZCb6sHeC7ac', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Career Opportunities', 114, 'http://localhost:8080/api/v1/track/cTOqdQwW2qA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Police & Thieves', 360, 'http://localhost:8080/api/v1/track/N3A8uNG3GH4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Somebody Got Murdered', 215, 'http://localhost:8080/api/v1/track/NrODxCsR4og', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Brand New Cadillac', 129, 'http://localhost:8080/api/v1/track/uqTpZXcTc_s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clampdown', 231, 'http://localhost:8080/api/v1/track/_lt4O-EHNnw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ghetto Defendant', 283, 'http://localhost:8080/api/v1/track/9dBh8H2c2JE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Armagideon Time', 232, 'http://localhost:8080/api/v1/track/PdRL6qH3YRM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Stay Free', 219, 'http://localhost:8080/api/v1/track/jDa8T9EM4Tg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I Fought the Law', 164, 'http://localhost:8080/api/v1/track/AL8chWFuM-s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Straight to Hell', 329, 'http://localhost:8080/api/v1/track/t7SvtikTkrM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Should I Stay or Should I Go', 189, 'http://localhost:8080/api/v1/track/e7tWqyM3r-g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Garageland', 195, 'http://localhost:8080/api/v1/track/UpapNzYkxNE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('White Riot', 134, 'http://localhost:8080/api/v1/track/34PY1ojI0Lo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Complete Control', 193, 'http://localhost:8080/api/v1/track/u6ZWV7cCK5A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clash City Rockers', 237, 'http://localhost:8080/api/v1/track/lvmoVYGUQKQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Tommy Gun', 195, 'http://localhost:8080/api/v1/track/67oBk49x_bg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('English Civil War', 156, 'http://localhost:8080/api/v1/track/fTnqwKqVj_0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Call Up', 326, 'http://localhost:8080/api/v1/track/-ScaGjwkg2Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hitsville U.K.', 261, 'http://localhost:8080/api/v1/track/kFGKm_bJ5Uw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('This is Radio Clash', 253, 'http://localhost:8080/api/v1/track/krl-2hgFrJU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Early Demo Tracks
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Early Demo Tracks', 'http://localhost:8099/avatars/albums/Early Demo Tracks.webp', v_artist_id, '', '2010-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 7
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Carrer Opportunities', 121, 'http://localhost:8080/api/v1/track/eBXf4zal7yY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('White Riot', 124, 'http://localhost:8080/api/v1/track/c7SWKVZySaQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Janie Jones', 134, 'http://localhost:8080/api/v1/track/yQaw7VZRPRQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London''s Burning', 127, 'http://localhost:8080/api/v1/track/w2I3bFa6DdE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('1977', 109, 'http://localhost:8080/api/v1/track/4Luq-ldIBe0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Listen', 230, 'http://localhost:8080/api/v1/track/rbA0d7ZZkT4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('1, 2 Crush on You', 187, 'http://localhost:8080/api/v1/track/s0Pg22V8wXE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: The Clash (UK Version) - London Calling - Combat Rock
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('The Clash (UK Version) - London Calling - Combat Rock', 'http://localhost:8099/avatars/albums/The Clash (UK Version) - London Calling - Combat Rock.webp', v_artist_id, '', '2003-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 45
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Janie Jones', 126, 'http://localhost:8080/api/v1/track/GsVjWd1mh4w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Remote Control', 181, 'http://localhost:8080/api/v1/track/eLZ-TPRZzrk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I''m so Bored with the U.S.A.', 145, 'http://localhost:8080/api/v1/track/2D-l1MauBmM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('White Riot', 116, 'http://localhost:8080/api/v1/track/IvG3is7Bm1w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hate & War', 125, 'http://localhost:8080/api/v1/track/a445pvCRyzo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('What''s My Name', 101, 'http://localhost:8080/api/v1/track/D_9BvISV6Lc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Deny', 184, 'http://localhost:8080/api/v1/track/2zvJJnwE2cc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London''s Burning', 131, 'http://localhost:8080/api/v1/track/I6XijqjtJoA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Career Opportunities', 112, 'http://localhost:8080/api/v1/track/B-s-3hGRWDk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cheat', 127, 'http://localhost:8080/api/v1/track/Hhn1CXKUE4A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Protex Blue', 105, 'http://localhost:8080/api/v1/track/4ZJ-P5P7sD0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Police & Thieves', 361, 'http://localhost:8080/api/v1/track/N3A8uNG3GH4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('48 Hours', 95, 'http://localhost:8080/api/v1/track/qBr6y3bhhCU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Garageland', 193, 'http://localhost:8080/api/v1/track/UpapNzYkxNE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London Calling', 200, 'http://localhost:8080/api/v1/track/a3XqMtam1I0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Brand New Cadillac', 129, 'http://localhost:8080/api/v1/track/uqTpZXcTc_s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jimmy Jazz', 235, 'http://localhost:8080/api/v1/track/_X2SjNpwZaY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hateful', 165, 'http://localhost:8080/api/v1/track/BQjoayRUvTs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rudie Can''t Fail', 210, 'http://localhost:8080/api/v1/track/uEK9oK02D1M', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Spanish Bombs', 199, 'http://localhost:8080/api/v1/track/Ul0uJfhywW8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Right Profile', 235, 'http://localhost:8080/api/v1/track/ssFiUE-T2OA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lost in the Supermarket', 228, 'http://localhost:8080/api/v1/track/hZw23sWlyG0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clampdown', 230, 'http://localhost:8080/api/v1/track/_lt4O-EHNnw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Guns of Brixton', 190, 'http://localhost:8080/api/v1/track/JcW8VNwYvL0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wrong ''Em Boyo', 191, 'http://localhost:8080/api/v1/track/uWqopsILSdQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Death or Glory', 236, 'http://localhost:8080/api/v1/track/Td6I5l9UnSg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Koka Kola', 108, 'http://localhost:8080/api/v1/track/yqIsh9Vdnuc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Card Cheat', 230, 'http://localhost:8080/api/v1/track/nhbSYP8cyD8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lover''s Rock', 244, 'http://localhost:8080/api/v1/track/bsmBnB0rrdI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Four Horsemen', 176, 'http://localhost:8080/api/v1/track/2vp49UoVnYU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I''m Not Down', 187, 'http://localhost:8080/api/v1/track/uV6-vY4O5us', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Revolution Rock', 334, 'http://localhost:8080/api/v1/track/i2euERguX9o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Train in Vain (Stand by Me)', 191, 'http://localhost:8080/api/v1/track/aUzBgeI5dpc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Know Your Rights', 221, 'http://localhost:8080/api/v1/track/1EKCAE1vDzY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Car Jamming', 241, 'http://localhost:8080/api/v1/track/euWnjq8-i8I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Should I Stay or Should I Go', 188, 'http://localhost:8080/api/v1/track/e7tWqyM3r-g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock the Casbah', 221, 'http://localhost:8080/api/v1/track/LJTk64tzduQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Red Angel Dragnet', 226, 'http://localhost:8080/api/v1/track/8v-VM9fT08E', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Straight to Hell', 330, 'http://localhost:8080/api/v1/track/t7SvtikTkrM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Overpowered by Funk', 293, 'http://localhost:8080/api/v1/track/9LyTWtjYHHA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Atom Tan', 149, 'http://localhost:8080/api/v1/track/iKzd7p0fyxg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sean Flynn', 272, 'http://localhost:8080/api/v1/track/GfGLKUQmHqk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ghetto Defendant', 285, 'http://localhost:8080/api/v1/track/9dBh8H2c2JE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Inoculated City', 162, 'http://localhost:8080/api/v1/track/0Sx1nZ3ARmI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Death is a Star', 194, 'http://localhost:8080/api/v1/track/aC8cNZy6aSc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: The Ultimate Collection
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('The Ultimate Collection', 'http://localhost:8099/avatars/albums/The Ultimate Collection.webp', v_artist_id, '', '2000-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 41
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('White Riot (Single Version)', 120, 'http://localhost:8080/api/v1/track/bV6VPhn9HBw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('1977', 100, 'http://localhost:8080/api/v1/track/lhWSsjEMftY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London''s Burning', 130, 'http://localhost:8080/api/v1/track/I6XijqjtJoA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Complete Control', 194, 'http://localhost:8080/api/v1/track/3S_XGsUGkwg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clash City Rockers', 228, 'http://localhost:8080/api/v1/track/vn4vqWSYsqE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I''m so Bored with the U.S.A.', 145, 'http://localhost:8080/api/v1/track/2D-l1MauBmM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Career Opportunities', 112, 'http://localhost:8080/api/v1/track/FwhL2LP8Jxc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hate & War', 125, 'http://localhost:8080/api/v1/track/a445pvCRyzo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cheat', 126, 'http://localhost:8080/api/v1/track/Hhn1CXKUE4A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Police & Thieves', 361, 'http://localhost:8080/api/v1/track/N3A8uNG3GH4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Janie Jones', 126, 'http://localhost:8080/api/v1/track/GsVjWd1mh4w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Garageland', 193, 'http://localhost:8080/api/v1/track/UpapNzYkxNE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Capital Radio One', 129, 'http://localhost:8080/api/v1/track/ard9gYxaJ4A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('(White Man) in Hammersmith Palais', 240, 'http://localhost:8080/api/v1/track/96UtZPLiT90', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('English Civil War', 156, 'http://localhost:8080/api/v1/track/fTnqwKqVj_0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Tommy Gun', 196, 'http://localhost:8080/api/v1/track/umo4ZAkMuWs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Safe European Home', 230, 'http://localhost:8080/api/v1/track/1xgwXkULDCs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Julie''s Been Working for the Drug Squad', 184, 'http://localhost:8080/api/v1/track/VsGnYHXGtAU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Stay Free', 219, 'http://localhost:8080/api/v1/track/jDa8T9EM4Tg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Groovy Times', 209, 'http://localhost:8080/api/v1/track/FbViWlEILXY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I Fought the Law', 162, 'http://localhost:8080/api/v1/track/AL8chWFuM-s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('London Calling', 200, 'http://localhost:8080/api/v1/track/a3XqMtam1I0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Guns of Brixton', 190, 'http://localhost:8080/api/v1/track/JcW8VNwYvL0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Clampdown', 229, 'http://localhost:8080/api/v1/track/_lt4O-EHNnw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rudie Can''t Fail', 208, 'http://localhost:8080/api/v1/track/uEK9oK02D1M', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lost in the Supermarket', 227, 'http://localhost:8080/api/v1/track/hZw23sWlyG0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jimmy Jazz', 235, 'http://localhost:8080/api/v1/track/_X2SjNpwZaY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Train in Vain (Stand by Me)', 190, 'http://localhost:8080/api/v1/track/aUzBgeI5dpc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Bankrobber', 273, 'http://localhost:8080/api/v1/track/5suFog3KisA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Magnificent Seven', 333, 'http://localhost:8080/api/v1/track/WD5N0rTsulQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ivan Meets G.I. Joe', 191, 'http://localhost:8080/api/v1/track/i70zREBdvss', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Stop the World', 152, 'http://localhost:8080/api/v1/track/DlXX7pR4-7k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Somebody Got Murdered', 215, 'http://localhost:8080/api/v1/track/NrODxCsR4og', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Street Parade', 208, 'http://localhost:8080/api/v1/track/2Fh4aCVHDUA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Broadway', 296, 'http://localhost:8080/api/v1/track/sgnlSJGFO5E', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('This is Radio Clash', 250, 'http://localhost:8080/api/v1/track/krl-2hgFrJU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ghetto Defendant', 284, 'http://localhost:8080/api/v1/track/9dBh8H2c2JE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock the Casbah', 221, 'http://localhost:8080/api/v1/track/LJTk64tzduQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Straight to Hell', 330, 'http://localhost:8080/api/v1/track/t7SvtikTkrM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Should I Stay or Should I Go', 188, 'http://localhost:8080/api/v1/track/e7tWqyM3r-g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('This is England', 232, 'http://localhost:8080/api/v1/track/KVgTo-QMYz8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Raw and Unfiltered
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Raw and Unfiltered', 'http://localhost:8099/avatars/albums/Raw and Unfiltered.webp', v_artist_id, '', '1988-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 14
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('5% of the Audience Understands', 47, 'http://localhost:8080/api/v1/track/LXQxcvsPhO8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Being Duped by an Industrialized Society', 49, 'http://localhost:8080/api/v1/track/vEQvTMT91Yc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Categorizing Music', 77, 'http://localhost:8080/api/v1/track/QtjTfuQZjeQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Desiring to Make People Think', 70, 'http://localhost:8080/api/v1/track/1TBzoNAQ4iw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Have and Have Nots', 39, 'http://localhost:8080/api/v1/track/yxSUKvJni2I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Having an Image', 40, 'http://localhost:8080/api/v1/track/FIeUEcEYDmg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Having Fans Backstage', 41, 'http://localhost:8080/api/v1/track/SHU7uPxtKkw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Image Working For and Against You', 42, 'http://localhost:8080/api/v1/track/STs8rhjp3jI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Not Having Guts to Fight The System', 48, 'http://localhost:8080/api/v1/track/qhVhZCM68zk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Punk and Rock', 40, 'http://localhost:8080/api/v1/track/xqd1XRW19y4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Punk Being Played by Youths', 56, 'http://localhost:8080/api/v1/track/gwKhgAwFYz0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Requiring an Image', 61, 'http://localhost:8080/api/v1/track/8ehyUYGdUKk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Salvador Dali Being an Individual', 42, 'http://localhost:8080/api/v1/track/hUtasMsCHiU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Saving Grace of the System', 72, 'http://localhost:8080/api/v1/track/S7vj3xK8bWY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Rock The Casbah (Ranking Roger)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Rock The Casbah (Ranking Roger)', 'http://localhost:8099/avatars/albums/Rock The Casbah (Ranking Roger).webp', v_artist_id, '', '2018-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock the Casbah (Ranking Roger)', 261, 'http://localhost:8080/api/v1/track/69zglj8jYNA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Red Angel Dragnet (Ranking Roger)', 271, 'http://localhost:8080/api/v1/track/w6LwhvZJtR4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: The Cost of Living E.P.
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('The Cost of Living E.P.', 'http://localhost:8099/avatars/albums/The Cost of Living E.P..webp', v_artist_id, '', '1986-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 4
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I Fought the Law', 164, 'http://localhost:8080/api/v1/track/AL8chWFuM-s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Groovy Times', 206, 'http://localhost:8080/api/v1/track/FbViWlEILXY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Gates of the West', 206, 'http://localhost:8080/api/v1/track/8zij7SkmEM4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Capital Radio', 201, 'http://localhost:8080/api/v1/track/nGPlnVLWGt8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Having Words
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Having Words', 'http://localhost:8099/avatars/albums/Having Words.webp', v_artist_id, '', '1993-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 3
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('No Love for Punk', 87, 'http://localhost:8080/api/v1/track/ZMw9ePlcC-o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Touring Europe', 55, 'http://localhost:8080/api/v1/track/i_gFH9BsaWc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Saving Sid', 61, 'http://localhost:8080/api/v1/track/8Twhq4rXYTA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+-- Артист: Black Sabbath
+INSERT INTO artist (artist_name, description, avatar_url, header_url)
+VALUES ('Black Sabbath', 'Black Sabbath — британская рок-группа, образованная в Бирмингеме, Англия, в 1968 году и оказавшая значительное влияние на развитие рок-музыки, прежде всего, хеви-метала. Дебютный альбом Black Sabbath считается одним из первых хеви-метал-альбомов, заложившим, кроме того, фундамент и для последующего развития дум-метала. Десять альбомов группы входили в первую десятку UK Albums Chart. К 2012 году общий тираж альбомов Black Sabbath приблизился к 70 миллионам.
+Лидером и основным композитором Black Sabbath был гитарист Тони Айомми, вторым почти неизменным участником и соавтором песен — басист Гизер Батлер. Остальной состав группы неоднократно менялся. Альбомы до 1980 года записаны классическим составом с вокалистом Оззи Осборном. После расставания с ним на записях различных альбомах группы пели Ронни Дио, Тони Мартин и другие вокалисты. В 2011 году группа воссоединилась в классическом составе, а в 2017 году после прощального тура завершила выступления окончательно. Участники Black Sabbath, в особенности Оззи и Дио, также сделали успешные сольные карьеры после ухода из группы.
+
+Источник: Wikipedia (', 'http://localhost:8099/avatars/artists/Black Sabbath_avatar.webp', 'http://localhost:8099/avatars/artists/Black Sabbath_header.webp')
+RETURNING artist_id INTO v_artist_id;
+
+-- Альбом/сингл: Ontario Motor Speedway, California, April ''74
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Ontario Motor Speedway, California, April ''74', 'http://localhost:8099/avatars/albums/Ontario Motor Speedway, California, April 74.webp', v_artist_id, '', '2025-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 9
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Up', 303, 'http://localhost:8080/api/v1/track/DD5hQFWHQDQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Mutants of the Monster', 373, 'http://localhost:8080/api/v1/track/9wz0GVAdXD0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('When Electricity Came to Arkansas', 222, 'http://localhost:8080/api/v1/track/TBnUC8p2wgw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Dixie', 221, 'http://localhost:8080/api/v1/track/TBnUC8p2wgw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jim Dandy', 152, 'http://localhost:8080/api/v1/track/XjO4B3bBT2Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('War Pigs', 434, 'http://localhost:8080/api/v1/track/GjiT9CLj_E4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Killing Yourself to Live', 324, 'http://localhost:8080/api/v1/track/VDm8ZGd2bEQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Children of the Grave', 253, 'http://localhost:8080/api/v1/track/2l0LrUXjIFY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Paranoid', 156, 'http://localhost:8080/api/v1/track/a_uY4aV92Q8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Headless Cross (2024 Remaster)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Headless Cross (2024 Remaster)', 'http://localhost:8099/avatars/albums/Headless Cross (2024 Remaster).webp', v_artist_id, '', '2024-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 9
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Gates of Hell (2024 Remaster)', 67, 'http://localhost:8080/api/v1/track/pwNKW6B10PI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Headless Cross (2024 Remaster)', 390, 'http://localhost:8080/api/v1/track/uu51dTqeJaM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Devil & Daughter (2024 Remaster)', 285, 'http://localhost:8080/api/v1/track/ZMJylu5ADEs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('When Death Calls (2024 Remaster)', 416, 'http://localhost:8080/api/v1/track/SNIeaytly_k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Kill In the Spirit World (2024 Remaster)', 312, 'http://localhost:8080/api/v1/track/B3_GTXTDTLU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Call of the Wild (2024 Remaster)', 319, 'http://localhost:8080/api/v1/track/_7JHBNTdqic', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Black Moon (2024 Remaster)', 247, 'http://localhost:8080/api/v1/track/azHmZNLCfNQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Nightwing (2024 Remaster)', 397, 'http://localhost:8080/api/v1/track/lVl-UgaQ1Yw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cloak and Dagger (2024 Remaster)', 280, 'http://localhost:8080/api/v1/track/AId0MbsWoFw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Cross Purposes (2024 Remaster)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Cross Purposes (2024 Remaster)', 'http://localhost:8099/avatars/albums/Cross Purposes (2024 Remaster).webp', v_artist_id, '', '2024-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 11
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I Witness (2024 Remaster)', 296, 'http://localhost:8080/api/v1/track/txng7SIKG8E', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cross of Thorns (2024 Remaster)', 274, 'http://localhost:8080/api/v1/track/SVPUFnpC-38', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Psychophobia (2024 Remaster)', 193, 'http://localhost:8080/api/v1/track/_5nBv4io7rU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Virtual Death (2024 Remaster)', 349, 'http://localhost:8080/api/v1/track/0nv46KoslTY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Immaculate Deception (2024 Remaster)', 254, 'http://localhost:8080/api/v1/track/xmSjxuZxvaM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Dying for Love (2024 Remaster)', 351, 'http://localhost:8080/api/v1/track/PCSYhfr_t4E', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Back to Eden (2024 Remaster)', 235, 'http://localhost:8080/api/v1/track/WJ9OWHFmCsY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Hand That Rocks the Cradle (2024 Remaster)', 269, 'http://localhost:8080/api/v1/track/dULQ-PF9syE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cardinal Sin (2024 Remaster)', 259, 'http://localhost:8080/api/v1/track/NUWn5s_8Yuo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Evil Eye (2024 Remaster)', 360, 'http://localhost:8080/api/v1/track/KGg6_Iz_ljk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('What''s the Use (2024 Remaster)', 185, 'http://localhost:8080/api/v1/track/qM7y75ckcxI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Tyr (2024 Remaster)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Tyr (2024 Remaster)', 'http://localhost:8099/avatars/albums/Tyr (2024 Remaster).webp', v_artist_id, '', '2024-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 9
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Anno Mundi (2024 Remaster)', 373, 'http://localhost:8080/api/v1/track/9Rz0AIVJSy4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Law Maker (2024 Remaster)', 235, 'http://localhost:8080/api/v1/track/wZRtzIhBJIc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jerusalem (2024 Remaster)', 240, 'http://localhost:8080/api/v1/track/C2XIDowhcd4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Sabbath Stones (2024 Remaster)', 409, 'http://localhost:8080/api/v1/track/9xRZCMe1EvE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Battle of Tyr (2024 Remaster)', 69, 'http://localhost:8080/api/v1/track/iBX1-j9ul_k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Odin''s Court (2024 Remaster)', 163, 'http://localhost:8080/api/v1/track/HYPrS7R49sg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Valhalla (2024 Remaster)', 283, 'http://localhost:8080/api/v1/track/rlyBR_GUAhk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Feels Good to Me (2024 Remaster)', 345, 'http://localhost:8080/api/v1/track/qEb-bj3bulc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heaven In Black (2024 Remaster)', 246, 'http://localhost:8080/api/v1/track/vLj77H-99dw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Live Evil (40th Anniversary Edition)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Live Evil (40th Anniversary Edition)', 'http://localhost:8099/avatars/albums/Live Evil (40th Anniversary Edition).webp', v_artist_id, '', '2023-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 28
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('E5150 (Live; 2023 Remaster)', 140, 'http://localhost:8080/api/v1/track/D6yQcR-qekM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Neon Knights (Live; 2023 Remaster)', 277, 'http://localhost:8080/api/v1/track/k1WaSNhoIJ0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('N.I.B. (Live; 2023 Remaster)', 309, 'http://localhost:8080/api/v1/track/hQyFG12iXHc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Children of the Sea (Live; 2023 Remaster)', 368, 'http://localhost:8080/api/v1/track/TbJ9edarp_U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Voodoo (Live; 2023 Remaster)', 352, 'http://localhost:8080/api/v1/track/Ch33CDA2h6U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Black Sabbath (Live; 2023 Remaster)', 519, 'http://localhost:8080/api/v1/track/3OkiLNFNtmI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('War Pigs (Live; 2023 Remaster)', 559, 'http://localhost:8080/api/v1/track/bXWa3bYTHf0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Iron Man (Live; 2023 Remaster)', 454, 'http://localhost:8080/api/v1/track/_FnxHOm0jDA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Mob Rules (Live; 2023 Remaster)', 252, 'http://localhost:8080/api/v1/track/B7FgUh7alG8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heaven and Hell (Live; 2023 Remaster)', 729, 'http://localhost:8080/api/v1/track/wdPVUtOBuo8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Sign of the Southern Cross / Heaven and Hell (Continued) (Live; 2023 Remaster)', 436, 'http://localhost:8080/api/v1/track/qZ9qW2YlxME', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Paranoid (Live; 2023 Remaster)', 227, 'http://localhost:8080/api/v1/track/f4wZdRP2Wwc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Children of the Grave (Live; 2023 Remaster)', 327, 'http://localhost:8080/api/v1/track/CFZKuzD_9iE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Fluff (Live; 2023 Remaster)', 76, 'http://localhost:8080/api/v1/track/wj1JvVi4UvA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('E5150 (Live in Seattle, April 24th 1982;2023 Remix)', 195, 'http://localhost:8080/api/v1/track/-iMrWlQdc4w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Neon Knights (Live in Seattle, April 24th 1982;2023 Remix)', 276, 'http://localhost:8080/api/v1/track/UdBLZDc-zJk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('N.I.B. (Live in San Antonio, May 13th 1982;2023 Remix)', 352, 'http://localhost:8080/api/v1/track/IQexFAlTX0E', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Children of the Sea (Live in San Antonio, May 13th 1982;2023 Remix)', 394, 'http://localhost:8080/api/v1/track/5RwSUMA_vjE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Voodoo (Live in San Antonio, May 13th 1982;2023 Remix)', 367, 'http://localhost:8080/api/v1/track/LMpQWvvCgUU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Black Sabbath (Live in Dallas, May 12th 1982;2023 Remix)', 554, 'http://localhost:8080/api/v1/track/DWXXkBWmNl8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('War Pigs (Live in San Antonio, May 13th 1982;2023 Remix)', 560, 'http://localhost:8080/api/v1/track/vSDX3pk4QxI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Iron Man (Live in San Antonio, May 13th 1982;2023 Remix)', 456, 'http://localhost:8080/api/v1/track/Wu-Z95P8qZk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Mob Rules (Live in Seattle, April 24th 1982;2023 Remix)', 204, 'http://localhost:8080/api/v1/track/oropv2ywoP0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heaven and Hell (Live in San Antonio, May 13th 1982;2023 Remix)', 718, 'http://localhost:8080/api/v1/track/T2CprQ3EyY4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Sign of the Southern Cross / Heaven and Hell (Continued) (Live in San Antonio, May 13th 1982;2023 Remix)', 439, 'http://localhost:8080/api/v1/track/dJXjDQrRNgk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Paranoid (Live in San Antonio, May 13th 1982;2023 Remix)', 264, 'http://localhost:8080/api/v1/track/NilAUF6MP8w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Children of the Grave (Live in Fresno, April 18th 1982;2023 Remix)', 328, 'http://localhost:8080/api/v1/track/o_mB2nKITIo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Fluff (Live in Fresno, April 18th 1982;2023 Remix)', 84, 'http://localhost:8080/api/v1/track/miYP3faNHW8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Mob Rules (Remastered and Expanded Version)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Mob Rules (Remastered and Expanded Version)', 'http://localhost:8099/avatars/albums/Mob Rules (Remastered and Expanded Version).webp', v_artist_id, '', '2022-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 31
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Turn Up the Night (2021 Remaster)', 223, 'http://localhost:8080/api/v1/track/y70FM_xDOtY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Voodoo (2021 Remaster)', 273, 'http://localhost:8080/api/v1/track/HdUUsL14a_g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Sign of the Southern Cross (2021 Remaster)', 470, 'http://localhost:8080/api/v1/track/PAl468o1F8s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('E5150 (2021 Remaster)', 170, 'http://localhost:8080/api/v1/track/uriLQM6ZZ1g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Mob Rules (2021 Remaster)', 196, 'http://localhost:8080/api/v1/track/efuFB5x_Lfk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Country Girl (2021 Remaster)', 243, 'http://localhost:8080/api/v1/track/t_p5PEfQ82s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Slipping Away (2021 Remaster)', 226, 'http://localhost:8080/api/v1/track/j9R87NYrbKE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Falling Off the Edge of the World (2021 Remaster)', 304, 'http://localhost:8080/api/v1/track/IuLAFZLNbZU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Over and Over (2021 Remaster)', 331, 'http://localhost:8080/api/v1/track/QWTNXWtrp7o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Mob Rules (Heavy Metal Soundtrack Version)', 194, 'http://localhost:8080/api/v1/track/LgxFjWE6ZuQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Die Young (Live B-Side of Mob Rules 7 inch)', 244, 'http://localhost:8080/api/v1/track/JWrSZDImNps', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Mob Rules (2021 Mix)', 205, 'http://localhost:8080/api/v1/track/_Pv_6wefepU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Country Girl (Live at the Hammersmith Odeon London) (31/12/81 - 2/1/82)', 240, 'http://localhost:8080/api/v1/track/xDK8-feqTEs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Slipping Away (Live at the Hammersmith Odeon London) (31/12/81 - 2/1/82)', 196, 'http://localhost:8080/api/v1/track/4uQvp9b8owg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Mob Rules (Live at the Hammersmith Odeon London) (31/12/81 - 2/1/82)', 202, 'http://localhost:8080/api/v1/track/wo27QXt3WcU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Voodoo (Live at the Hammersmith Odeon London) (31/12/81 - 2/1/82)', 347, 'http://localhost:8080/api/v1/track/P3q6XLGM-io', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Intro (Live at Portland Memorial Coliseum, Portland, OR, USA 22nd April 1982)', 60, 'http://localhost:8080/api/v1/track/KNTDnfoDel8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Neon Knights (Live at Portland Memorial Coliseum, Portland, OR, USA 22nd April 1982)', 267, 'http://localhost:8080/api/v1/track/6MXIxtD2YQo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('N.I.B. (Live at Portland Memorial Coliseum, Portland, OR, USA 22nd April 1982)', 364, 'http://localhost:8080/api/v1/track/SW-ijuReCG0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Children of the Sea (Live at Portland Memorial Coliseum, Portland, OR, USA 22nd April 1982)', 434, 'http://localhost:8080/api/v1/track/ymZeZapKQF0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Voodoo (Live at Portland Memorial Coliseum, Portland, OR, USA 22nd April 1982)', 353, 'http://localhost:8080/api/v1/track/cJogbskS-do', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Black Sabbath (Live at Portland Memorial Coliseum, Portland, OR, USA 22nd April 1982)', 451, 'http://localhost:8080/api/v1/track/eiD94dEMpCw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('War Pigs (Live at Portland Memorial Coliseum, Portland, OR, USA 22nd April 1982)', 440, 'http://localhost:8080/api/v1/track/fphuLEBTlRk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Drum Solo (Live at Portland Memorial Coliseum, Portland, OR, USA 22nd April 1982)', 187, 'http://localhost:8080/api/v1/track/hVGMM58vVOU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Iron Man (Live at Portland Memorial Coliseum, Portland, OR, USA 22nd April 1982)', 490, 'http://localhost:8080/api/v1/track/Mqi1czdCgKI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Mob Rules (Live at Portland Memorial Coliseum, Portland, OR, USA 22nd April 1982)', 217, 'http://localhost:8080/api/v1/track/mlZj4gMxF7A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heaven and Hell (Live at Portland Memorial Coliseum, Portland, OR, USA 22nd April 1982)', 585, 'http://localhost:8080/api/v1/track/pIwZ2SF2o4I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Guitar Solo (Live at Portland Memorial Coliseum, Portland, OR, USA 22nd April 1982)', 191, 'http://localhost:8080/api/v1/track/NJMCmAq5b6I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sign of the Southern Cross / Heaven and Hell (Live at Portland Memorial Coliseum, Portland, OR, USA 22nd April 1982)', 450, 'http://localhost:8080/api/v1/track/pwx1jE9Us6g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Paranoid (Live at Portland Memorial Coliseum, Portland, OR, USA 22nd April 1982)', 210, 'http://localhost:8080/api/v1/track/WystmsMEDUM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Children of the Grave (Live at Portland Memorial Coliseum, Portland, OR, USA 22nd April 1982)', 329, 'http://localhost:8080/api/v1/track/LUib8jLveC0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Heaven and Hell (Remastered and Expanded Edition)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Heaven and Hell (Remastered and Expanded Edition)', 'http://localhost:8099/avatars/albums/Heaven and Hell (Remastered and Expanded Edition).webp', v_artist_id, '', '2022-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 19
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Neon Knights (2021 Remaster)', 232, 'http://localhost:8080/api/v1/track/8pXLQF7Tdkc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Children of the Sea (2021 Remaster)', 334, 'http://localhost:8080/api/v1/track/XB8yCC3O_-c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lady Evil (2021 Remaster)', 265, 'http://localhost:8080/api/v1/track/fXp3rLy_9o4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heaven and Hell (2021 Remaster)', 418, 'http://localhost:8080/api/v1/track/O51pOYh_rNI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wishing Well (2021 Remaster)', 247, 'http://localhost:8080/api/v1/track/DdUpNQpBv_E', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Die Young (2021 Remaster)', 284, 'http://localhost:8080/api/v1/track/R8VFpGhP0JU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Walk Away (2021 Remaster)', 265, 'http://localhost:8080/api/v1/track/OPslDugWAlo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lonely Is the Word (2021 Remaster)', 348, 'http://localhost:8080/api/v1/track/YxRjJ2GxkCU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Children of the Sea (Live B-Side of Neon Knights)', 387, 'http://localhost:8080/api/v1/track/2Nfpq8IoiYY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heaven and Hell (Live B-Side of Die Young)', 439, 'http://localhost:8080/api/v1/track/0BfgGENh8Rw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lady Evil (7'''' Mono Edit)', 237, 'http://localhost:8080/api/v1/track/fXp3rLy_9o4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Neon Knights (Live at Hartford Civic Center, Hartford, CT, USA: August 10, 1980)', 312, 'http://localhost:8080/api/v1/track/aHC3Yvjyd7I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Children of the Sea (Live at Hartford Civic Center, Hartford, CT, USA: August 10, 1980)', 355, 'http://localhost:8080/api/v1/track/eK2SQjtn4xs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heaven and Hell (Live at Hartford Civic Center, Hartford, CT, USA: August 10, 1980)', 740, 'http://localhost:8080/api/v1/track/0BfgGENh8Rw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Die Young (Live at Hartford Civic Center, Hartford, CT, USA: August 10, 1980)', 277, 'http://localhost:8080/api/v1/track/HJiug07KZH4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('E5150 (Live at the Hammersmith Odeon, London, UK: Dec 31, 1981- Jan 2, 1982)', 77, 'http://localhost:8080/api/v1/track/_6fxxQ_itlM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Neon Knights (Live at the Hammersmith Odeon, London, UK: Dec 31, 1981- Jan 2, 1982)', 277, 'http://localhost:8080/api/v1/track/wmF49_Wu3TY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Children of the Sea (Live at the Hammersmith Odeon, London, UK: Dec 31, 1981- Jan 2, 1982)', 361, 'http://localhost:8080/api/v1/track/4q0M_gPVpTc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heaven and Hell (Live at the Hammersmith Odeon, London, UK: Dec 31, 1981- Jan 2, 1982)', 871, 'http://localhost:8080/api/v1/track/yXlvL9FfhGc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Lausanne 1970
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Lausanne 1970', 'http://localhost:8099/avatars/albums/Lausanne 1970.webp', v_artist_id, '', '2022-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 8
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Behind The Wall Of Sleep', 340, 'http://localhost:8080/api/v1/track/5cmbsjSt3K0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('N.I.B.', 314, 'http://localhost:8080/api/v1/track/f2HKYxAdukI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Black Sabbath', 569, 'http://localhost:8080/api/v1/track/BsUIzfFjapk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sleeping Village', 243, 'http://localhost:8080/api/v1/track/3fIT0S6QQ8k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Warning', 1921, 'http://localhost:8080/api/v1/track/LA9Uzx2szcg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Fairies Wear Boots', 424, 'http://localhost:8080/api/v1/track/uV3EpZZff-A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('War Pigs', 480, 'http://localhost:8080/api/v1/track/u49ISime5mk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Blue Coat Man', 467, 'http://localhost:8080/api/v1/track/sgaqazEQ9pE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: 13
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('13', 'http://localhost:8099/avatars/albums/13.webp', v_artist_id, '', '2013-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 8
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('End Of The Beginning', 487, 'http://localhost:8080/api/v1/track/Y1MVogBNKhw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('God Is Dead?', 533, 'http://localhost:8080/api/v1/track/OhhOU5FUPBE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Loner', 300, 'http://localhost:8080/api/v1/track/20aMTampRsE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Zeitgeist', 278, 'http://localhost:8080/api/v1/track/3ccL585-6Jk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Age Of Reason', 422, 'http://localhost:8080/api/v1/track/YRIvDcOccAc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Live Forever', 287, 'http://localhost:8080/api/v1/track/JCFl0PffvXI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Damaged Soul', 472, 'http://localhost:8080/api/v1/track/jJANz3jEjZA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Dear Father', 441, 'http://localhost:8080/api/v1/track/7GEzSBxRVNw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Dehumanizer
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Dehumanizer', 'http://localhost:8099/avatars/albums/Dehumanizer.webp', v_artist_id, '', '1992-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 10
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Computer God', 376, 'http://localhost:8080/api/v1/track/T8bvi1gewB8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('After All (The Dead)', 342, 'http://localhost:8080/api/v1/track/xuhYXwSSUWw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('TV Crimes', 243, 'http://localhost:8080/api/v1/track/KdWnr_zxvnM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Letters From Earth', 258, 'http://localhost:8080/api/v1/track/uqU0mhiYKdk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Master Of Insanity', 356, 'http://localhost:8080/api/v1/track/E6Bwamy4sU8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Time Machine', 256, 'http://localhost:8080/api/v1/track/RFB_PZzg0_o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sins Of The Father', 287, 'http://localhost:8080/api/v1/track/dRI-kpde9gc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Too Late', 416, 'http://localhost:8080/api/v1/track/cnRHs2TgasM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I', 314, 'http://localhost:8080/api/v1/track/i7qPf894PP4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Buried Alive', 291, 'http://localhost:8080/api/v1/track/GM3n3DlxKz4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+-- Артист: Kanye West
+INSERT INTO artist (artist_name, description, avatar_url, header_url)
+VALUES ('Kanye West', 'Йе, более известный под бывшим юридическим именем Канье Уэст, — американский рэпер, музыкальный продюсер, автор песен, звукорежиссёр, бывший долларовый миллиардер и дизайнер. Вырос в Чикаго, где с юных лет был связан с музыкой. В конце 1990-х — начале 2000-х годов он получил известность как продюсер, приняв участие в создании хитов для таких исполнителей, как Jay-Z, Ludacris, Талиб Квели и Алиша Киз. Бросив обучение в университете, чтобы сосредоточиться на музыке, он решил стать рэпером, выпустив дебютный альбом, The College Dropout, в 2004 году. За ним последовали альбомы Late Registration, Graduation, 808s & Heartbreak, My Beautiful Dark Twisted Fantasy, совместный с Jay-Z альбом Watch the Throne, Yeezus, The Life of Pablo, Ye, совместный с Kid Cudi альбом Kids See Ghosts, Jesus is King, Donda и его сиквел, выпущенный в 2022 году, совместные с Ty Dolla $ign альбомы Vultures 1, и Vultures 2.
+Канье Уэст известен своими прямыми высказываниями на различных церемониях и в социальных медиа, что не раз приводило к скандалам. В качестве дизайнера он работал с такими компаниями, как Nike и Louis Vuitton, а в 2013 году запустил совместно с Adidas линию одежды Yeezy.
+
+Источник: Wikipedia (', 'http://localhost:8099/avatars/artists/Kanye West_avatar.webp', 'http://localhost:8099/avatars/artists/Kanye West_header.webp')
+RETURNING artist_id INTO v_artist_id;
+
+-- Альбом/сингл: DONDA 2
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('DONDA 2', 'http://localhost:8099/avatars/albums/DONDA 2.webp', v_artist_id, '', '2025-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 21
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('TRUE LOVE', 138, 'http://localhost:8080/api/v1/track/132CLvyeJos', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('BROKEN ROAD', 101, 'http://localhost:8080/api/v1/track/4cm-8RlSWJM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('GET LOST', 155, 'http://localhost:8080/api/v1/track/f0UQ3X2nBhY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('KEEP THE FLOWERS', 171, 'http://localhost:8080/api/v1/track/2cLuyQyyhDI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('JESSE', 128, 'http://localhost:8080/api/v1/track/f0tQQJ63_HY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('TOO EASY', 178, 'http://localhost:8080/api/v1/track/UX85xH-OxaU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('PABLO', 181, 'http://localhost:8080/api/v1/track/EvCRZ7duhdw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('MR MIYAGI', 178, 'http://localhost:8080/api/v1/track/wXHSUyuCfZs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('HAPPY', 212, 'http://localhost:8080/api/v1/track/8sn2tk0t1wI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('SECURITY', 139, 'http://localhost:8080/api/v1/track/xzmFTCDnxYs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('CITY OF GOD', 256, 'http://localhost:8080/api/v1/track/0yVdBlGSgRw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('530', 122, 'http://localhost:8080/api/v1/track/uM-gmAM8fvM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('CITY OF CHI', 163, 'http://localhost:8080/api/v1/track/sFIVeXloZOw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('SCIFI', 240, 'http://localhost:8080/api/v1/track/1oA_rDdsp6k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('SUZY', 85, 'http://localhost:8080/api/v1/track/0LoVe_C4HVk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('BURN EVERYTHING', 121, 'http://localhost:8080/api/v1/track/RgO-262oWzg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('LOUIE BAGS', 306, 'http://localhost:8080/api/v1/track/iYlGf6TCF8I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('WE DID IT', 235, 'http://localhost:8080/api/v1/track/23-sXMuvSIg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('MAINTENANCE', 74, 'http://localhost:8080/api/v1/track/JL7EPw4Nbtc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('LORD LIFT ME UP', 130, 'http://localhost:8080/api/v1/track/BYPuwZ5cHH8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('FIRST TIME IN A LONG TIME', 186, 'http://localhost:8080/api/v1/track/cWmwZCLYACQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: VULTURES 2
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('VULTURES 2', 'http://localhost:8099/avatars/albums/VULTURES 2.webp', v_artist_id, '', '2024-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 16
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('SLIDE', 198, 'http://localhost:8080/api/v1/track/IAh3r5egwzA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('TIME MOVING SLOW', 160, 'http://localhost:8080/api/v1/track/TMEIoUR3t1Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('FIELD TRIP', 164, 'http://localhost:8080/api/v1/track/BWyOqO90Ue8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('FRIED', 167, 'http://localhost:8080/api/v1/track/C8v7e4MUreA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ISABELLA', 9, 'http://localhost:8080/api/v1/track/_1ll0eK_lA0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('PROMOTION', 159, 'http://localhost:8080/api/v1/track/QDMHozupzJs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('530', 288, 'http://localhost:8080/api/v1/track/h3130iA7O98', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('DEAD', 264, 'http://localhost:8080/api/v1/track/yp6rnEPq2tM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('FOREVER ROLLING', 195, 'http://localhost:8080/api/v1/track/SxwFvC2NK-8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('BOMB', 152, 'http://localhost:8080/api/v1/track/qeWutl38TQw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('RIVER', 215, 'http://localhost:8080/api/v1/track/LE_MtLGQXKE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('FOREVER', 136, 'http://localhost:8080/api/v1/track/iREsvkj12Hw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('HUSBAND', 138, 'http://localhost:8080/api/v1/track/KdpB9BY4Wl4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('LIFESTYLE', 204, 'http://localhost:8080/api/v1/track/i5Po1gYsBsA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('SKY CITY', 263, 'http://localhost:8080/api/v1/track/LCupFBaJt-c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('MY SOUL', 238, 'http://localhost:8080/api/v1/track/q6XqeAeqRAE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: VULTURES 1
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('VULTURES 1', 'http://localhost:8099/avatars/albums/VULTURES 1.webp', v_artist_id, '', '2024-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 15
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('STARS', 116, 'http://localhost:8080/api/v1/track/j1BkA7KXV3c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('KEYS TO MY LIFE', 175, 'http://localhost:8080/api/v1/track/kX3ivxNp9PY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('PAID', 196, 'http://localhost:8080/api/v1/track/oG1xb5KOcN4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('TALKING', 186, 'http://localhost:8080/api/v1/track/Tqlw87XV4kU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('BACK TO ME', 296, 'http://localhost:8080/api/v1/track/MiTIhSb-b2k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('HOODRAT', 224, 'http://localhost:8080/api/v1/track/eHHwQMxvVOU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('DO IT', 226, 'http://localhost:8080/api/v1/track/G0hxhn7-Hps', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('PAPERWORK', 146, 'http://localhost:8080/api/v1/track/FmrXYkfv2eU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('BURN', 112, 'http://localhost:8080/api/v1/track/oAbX14IadBo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('FUK SUMN', 210, 'http://localhost:8080/api/v1/track/xd2SEKy6HIM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('VULTURES', 277, 'http://localhost:8080/api/v1/track/kCMz7HW6O-g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('CARNIVAL', 265, 'http://localhost:8080/api/v1/track/pEskP0ulPlA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('BEG FORGIVENESS', 369, 'http://localhost:8080/api/v1/track/EXmMiBNDVz4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('PROBLEMATIC', 195, 'http://localhost:8080/api/v1/track/xcprkHw4cd8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('KING', 157, 'http://localhost:8080/api/v1/track/g6vAQpxo35g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Donda
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Donda', 'http://localhost:8099/avatars/albums/Donda.webp', v_artist_id, '', '2021-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 27
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Donda Chant', 53, 'http://localhost:8080/api/v1/track/6_Y6tThuw9I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jail', 297, 'http://localhost:8080/api/v1/track/IviYsgJXG5k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('God Breathed', 334, 'http://localhost:8080/api/v1/track/aIhdYj4tfFo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Off The Grid', 340, 'http://localhost:8080/api/v1/track/EbDMNjT-QpI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hurricane (feat. Lil Baby)', 244, 'http://localhost:8080/api/v1/track/VRJiK-kdDb4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Praise God', 227, 'http://localhost:8080/api/v1/track/9sJZOGxRxwM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jonah', 196, 'http://localhost:8080/api/v1/track/txion5seTBA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ok Ok', 205, 'http://localhost:8080/api/v1/track/nQ94QQinn5o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Junya', 148, 'http://localhost:8080/api/v1/track/uZET6hpfV-4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Believe What I Say', 243, 'http://localhost:8080/api/v1/track/Qp-O4eIUgf0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('24', 198, 'http://localhost:8080/api/v1/track/Np2IqqJ5otg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Remote Control', 199, 'http://localhost:8080/api/v1/track/0Rtek05tOKU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Moon', 157, 'http://localhost:8080/api/v1/track/fMjasXiIhiQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heaven and Hell', 146, 'http://localhost:8080/api/v1/track/XKWcAsT8Sqc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Donda', 129, 'http://localhost:8080/api/v1/track/ofIluxP1nEU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Keep My Spirit Alive', 222, 'http://localhost:8080/api/v1/track/V5VYKkx7N-g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jesus Lord', 539, 'http://localhost:8080/api/v1/track/Fmz2IjrQiWM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('New Again', 184, 'http://localhost:8080/api/v1/track/X74OxXravDo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Tell The Vision', 105, 'http://localhost:8080/api/v1/track/5Z2NpIh1gV0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lord I Need You', 163, 'http://localhost:8080/api/v1/track/U1JLaEBl7ik', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Pure Souls', 359, 'http://localhost:8080/api/v1/track/i1nindf1meE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Come to Life', 311, 'http://localhost:8080/api/v1/track/7SsrVGHJvaA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('No Child Left Behind', 179, 'http://localhost:8080/api/v1/track/sDJBhQv85K0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jail pt 2', 297, 'http://localhost:8080/api/v1/track/IviYsgJXG5k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ok Ok pt 2', 205, 'http://localhost:8080/api/v1/track/nQ94QQinn5o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Junya pt 2', 183, 'http://localhost:8080/api/v1/track/uZET6hpfV-4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jesus Lord pt 2', 691, 'http://localhost:8080/api/v1/track/Fmz2IjrQiWM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: JESUS IS KING
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('JESUS IS KING', 'http://localhost:8099/avatars/albums/JESUS IS KING.webp', v_artist_id, '', '2019-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 11
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Every Hour (feat. Sunday Service Choir)', 113, 'http://localhost:8080/api/v1/track/T58tRXzjC7c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Selah', 165, 'http://localhost:8080/api/v1/track/6CNPg2IQoC0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Follow God', 105, 'http://localhost:8080/api/v1/track/ivCY3Ec4iaU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Closed On Sunday', 152, 'http://localhost:8080/api/v1/track/MKM90u7pf3U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('On God', 137, 'http://localhost:8080/api/v1/track/AOBQkHy8_p8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Everything We Need (feat. Ty Dolla $ign и Ant Clemons)', 117, 'http://localhost:8080/api/v1/track/Mrfu0FBB110', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Water (feat. Ant Clemons)', 169, 'http://localhost:8080/api/v1/track/-YfG1Xbo4OA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('God Is', 204, 'http://localhost:8080/api/v1/track/G8u3P7Xqlvo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hands On (feat. Fred Hammond)', 204, 'http://localhost:8080/api/v1/track/dojATOk1GHA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Use This Gospel (feat. Clipse и Kenny G)', 214, 'http://localhost:8080/api/v1/track/8yQVcGkbpAc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jesus Is Lord', 50, 'http://localhost:8080/api/v1/track/rns_n82HiMo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: KIDS SEE GHOSTS
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('KIDS SEE GHOSTS', 'http://localhost:8099/avatars/albums/KIDS SEE GHOSTS.webp', v_artist_id, '', '2018-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 7
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Feel The Love (feat. Pusha T)', 166, 'http://localhost:8080/api/v1/track/rnZQvgWhM5s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Fire', 141, 'http://localhost:8080/api/v1/track/ZBIzL1OdKMI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('4th Dimension (feat. Louis Prima)', 154, 'http://localhost:8080/api/v1/track/6Hj5tucYv1Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Freeee (Ghost Town Pt. 2) (feat. Ty Dolla $ign)', 207, 'http://localhost:8080/api/v1/track/5bZqAfJBsSk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Reborn', 325, 'http://localhost:8080/api/v1/track/hQC8COGQ4BM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Kids See Ghosts (feat. Yasiin Bey)', 246, 'http://localhost:8080/api/v1/track/cHFzyFMT0pw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cudi Montage', 198, 'http://localhost:8080/api/v1/track/RaTAlvbC_T4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: ye
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('ye', 'http://localhost:8099/avatars/albums/ye.webp', v_artist_id, '', '2018-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 7
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I Thought About Killing You', 275, 'http://localhost:8080/api/v1/track/no1YszVVybo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Yikes', 189, 'http://localhost:8080/api/v1/track/kPPyUO6m3-4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('All Mine', 146, 'http://localhost:8080/api/v1/track/TrQ7w1bdNvY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wouldn''t Leave (feat. PARTYNEXTDOOR)', 206, 'http://localhost:8080/api/v1/track/nMkXJohQiuQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('No Mistakes', 124, 'http://localhost:8080/api/v1/track/4I8gDpuvZt4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ghost Town (feat. PARTYNEXTDOOR)', 272, 'http://localhost:8080/api/v1/track/5S6az6odzPI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Violent Crimes', 216, 'http://localhost:8080/api/v1/track/DSY7u8Jg9c0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: The Life Of Pablo
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('The Life Of Pablo', 'http://localhost:8099/avatars/albums/The Life Of Pablo.webp', v_artist_id, '', '2016-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 20
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ultralight Beam', 321, 'http://localhost:8080/api/v1/track/6oHdAA3AqnE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Father Stretch My Hands Pt. 1', 136, 'http://localhost:8080/api/v1/track/wuO4_P_8p-Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Pt. 2', 131, 'http://localhost:8080/api/v1/track/xp8z7pconzw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Famous', 197, 'http://localhost:8080/api/v1/track/Lq2TmRzg19k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Feedback', 148, 'http://localhost:8080/api/v1/track/Q-fluWQ6zW8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Low Lights', 132, 'http://localhost:8080/api/v1/track/wj0C2oet2r0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Highlights', 200, 'http://localhost:8080/api/v1/track/AXz78NYL4r4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Freestyle 4', 124, 'http://localhost:8080/api/v1/track/yt3rfHIijZQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I Love Kanye', 45, 'http://localhost:8080/api/v1/track/ch8g-sJb6ow', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Waves', 182, 'http://localhost:8080/api/v1/track/ML8Yq1Rd6I0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('FML', 237, 'http://localhost:8080/api/v1/track/SHfB5HBFeTc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Real Friends', 252, 'http://localhost:8080/api/v1/track/fWD9GF-Ogf4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wolves', 302, 'http://localhost:8080/api/v1/track/LsA84bXrBZw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Frank''s Track', 39, 'http://localhost:8080/api/v1/track/6oaaKNXuUv4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Siiiiiiiiilver Surffffeeeeer Intermission', 57, 'http://localhost:8080/api/v1/track/SeeP7YhFy0Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('30 Hours', 324, 'http://localhost:8080/api/v1/track/OH3bNgA1rkE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('No More Parties In LA', 375, 'http://localhost:8080/api/v1/track/NnMuFqsmYSE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Facts (Charlie Heat Version)', 201, 'http://localhost:8080/api/v1/track/yiwDWKg9AMA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Fade', 194, 'http://localhost:8080/api/v1/track/IxGvm6btP1A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Saint Pablo', 373, 'http://localhost:8080/api/v1/track/w9rzz4pDFwA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Yeezus
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Yeezus', 'http://localhost:8099/avatars/albums/Yeezus.webp', v_artist_id, '', '2013-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 10
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('On Sight', 157, 'http://localhost:8080/api/v1/track/uU9Fe-WXew4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Black Skinhead', 189, 'http://localhost:8080/api/v1/track/q604eed4ad0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I Am a God', 232, 'http://localhost:8080/api/v1/track/KuQoQgL63Xo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('New Slaves', 257, 'http://localhost:8080/api/v1/track/vQ0u09mFodw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hold My Liquor', 327, 'http://localhost:8080/api/v1/track/bvBfiRWLj_0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I''m in It', 235, 'http://localhost:8080/api/v1/track/_jZuz3NEr18', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Blood on the Leaves', 360, 'http://localhost:8080/api/v1/track/KEA0btSNkpw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Guilt Trip', 244, 'http://localhost:8080/api/v1/track/5hthMeEqf40', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Send It Up', 179, 'http://localhost:8080/api/v1/track/vUFiVwa6U_c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Bound 2', 230, 'http://localhost:8080/api/v1/track/BBAtAM7vtgc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: My Beautiful Dark Twisted Fantasy
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('My Beautiful Dark Twisted Fantasy', 'http://localhost:8099/avatars/albums/My Beautiful Dark Twisted Fantasy.webp', v_artist_id, '', '2010-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 13
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Dark Fantasy', 281, 'http://localhost:8080/api/v1/track/UTH1VNHLjng', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Gorgeous (feat. Kid Cudi и Raekwon)', 358, 'http://localhost:8080/api/v1/track/miJAfs7jhak', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('POWER', 293, 'http://localhost:8080/api/v1/track/L53gjP-TtGE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('All Of The Lights (Interlude)', 63, 'http://localhost:8080/api/v1/track/WHxRd_va950', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('All Of The Lights', 300, 'http://localhost:8080/api/v1/track/HAfFfqiYLp0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Monster (feat. JAY-Z, Rick Ross, Nicki Minaj и Bon Iver)', 379, 'http://localhost:8080/api/v1/track/pS6HRKZQLFA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('So Appalled (feat. Kanye West, JAY-Z, Pusha T и Prynce Cy Hi)', 398, 'http://localhost:8080/api/v1/track/0o9HzQ3zAcE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Devil In A New Dress (feat. Rick Ross)', 352, 'http://localhost:8080/api/v1/track/sk3rpYkiHe8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Runaway (feat. Pusha T)', 548, 'http://localhost:8080/api/v1/track/Bm5iA4Zupek', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hell Of A Life', 328, 'http://localhost:8080/api/v1/track/tJKNcI6jC6A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Blame Game (feat. John Legend)', 470, 'http://localhost:8080/api/v1/track/6mp72xUirfs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lost In The World (feat. Bon Iver)', 257, 'http://localhost:8080/api/v1/track/ofaRvNOV4SI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Who Will Survive In America', 99, 'http://localhost:8080/api/v1/track/UB6sXiZ1ldw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: 808s & Heartbreak
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('808s & Heartbreak', 'http://localhost:8099/avatars/albums/808s & Heartbreak.webp', v_artist_id, '', '2008-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 12
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Say You Will', 378, 'http://localhost:8080/api/v1/track/d9BMPmfxaoM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Welcome To Heartbreak (feat. Kid Cudi)', 263, 'http://localhost:8080/api/v1/track/wMH0e8kIZtE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heartless', 211, 'http://localhost:8080/api/v1/track/Co0tTeuUVhU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Amazing (feat. Young Jeezy)', 239, 'http://localhost:8080/api/v1/track/PH4JPgVD2SM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Love Lockdown', 271, 'http://localhost:8080/api/v1/track/HZwMX6T5Jhk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Paranoid (feat. Mr Hudson)', 278, 'http://localhost:8080/api/v1/track/CiY8-LYkCEk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('RoboCop', 275, 'http://localhost:8080/api/v1/track/kVl__NgDAdw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Street Lights', 190, 'http://localhost:8080/api/v1/track/TUfuDKKGQxU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Bad News', 239, 'http://localhost:8080/api/v1/track/1BlH1JZBeXI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('See You In My Nightmares (feat. Lil Wayne)', 259, 'http://localhost:8080/api/v1/track/T5e-nhk4HTQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Coldest Winter', 165, 'http://localhost:8080/api/v1/track/tpT7H7qIHIo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Pinocchio Story', 362, 'http://localhost:8080/api/v1/track/OeCdG0Mzrkw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Graduation
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Graduation', 'http://localhost:8099/avatars/albums/Graduation.webp', v_artist_id, '', '2007-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 14
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Good Morning', 196, 'http://localhost:8080/api/v1/track/6CHs4x2uqcQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Champion', 168, 'http://localhost:8080/api/v1/track/jKT4ArZCkso', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Stronger', 312, 'http://localhost:8080/api/v1/track/PsO6ZnUZI0g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I Wonder', 244, 'http://localhost:8080/api/v1/track/MxEjnYdfLXU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Good Life (feat. T-Pain)', 207, 'http://localhost:8080/api/v1/track/FEKEjpTzB0Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Can''t Tell Me Nothing', 272, 'http://localhost:8080/api/v1/track/hqvcww4ydh8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Barry Bonds (feat. Lil Wayne)', 205, 'http://localhost:8080/api/v1/track/LYa5q2AjWNQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Drunk and Hot Girls (feat. Mos Def)', 314, 'http://localhost:8080/api/v1/track/9uOg6LyIAUo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Flashing Lights (feat. Dwele)', 238, 'http://localhost:8080/api/v1/track/ila-hAUXR5U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Everything I Am (feat. DJ Premier)', 228, 'http://localhost:8080/api/v1/track/ZtkNfC5Oymw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Glory', 213, 'http://localhost:8080/api/v1/track/e-IAGmTuUmw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Homecoming (feat. Chris Martin)', 204, 'http://localhost:8080/api/v1/track/LQ488QrqGE4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Big Brother', 288, 'http://localhost:8080/api/v1/track/HInIGGXhJHs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Good Night (feat. Mos Def и Al Be Back)', 186, 'http://localhost:8080/api/v1/track/_J-OaFVdTKE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Late Registration
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Late Registration', 'http://localhost:8099/avatars/albums/Late Registration.webp', v_artist_id, '', '2005-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 21
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wake Up Mr. West', 42, 'http://localhost:8080/api/v1/track/Bwyu-SZ7g_E', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heard ''Em Say (feat. Adam Levine)', 204, 'http://localhost:8080/api/v1/track/elVF7oG0pQs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Touch The Sky (feat. Lupe Fiasco)', 237, 'http://localhost:8080/api/v1/track/YkwQbuAGLj4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Gold Digger (feat. Jamie Foxx)', 208, 'http://localhost:8080/api/v1/track/6vwNcNOTVzY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Skit #1', 34, 'http://localhost:8080/api/v1/track/G4qTNRbAp-c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Drive Slow (feat. Kanye West и Paul Wall)', 273, 'http://localhost:8080/api/v1/track/Q1ViJEYNki4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('My Way Home (feat. Common)', 104, 'http://localhost:8080/api/v1/track/TgAomHGqKUM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Crack Music (feat. The Game)', 271, 'http://localhost:8080/api/v1/track/2tmPSK-w90o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Roses', 246, 'http://localhost:8080/api/v1/track/Qxlnb1lEdEs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Bring Me Down (feat. Brandy)', 199, 'http://localhost:8080/api/v1/track/CZ_-O31R3p4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Addiction', 268, 'http://localhost:8080/api/v1/track/YuCwP-NbY0s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Skit #2', 32, 'http://localhost:8080/api/v1/track/vRBOIbTyTnU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Diamonds From Sierra Leone (Remix) (feat. JAY-Z)', 234, 'http://localhost:8080/api/v1/track/4q7OpvvfjWs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('We Major (feat. Kanye West и Really Doe)', 448, 'http://localhost:8080/api/v1/track/_fr4SV4fGAw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Skit #3', 25, 'http://localhost:8080/api/v1/track/HyXEzp85RGE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hey Mama', 306, 'http://localhost:8080/api/v1/track/B3NmMKfl3Ic', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Celebration', 199, 'http://localhost:8080/api/v1/track/FZjlP-N7Hl4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Skit #4', 79, 'http://localhost:8080/api/v1/track/Y4r6lS04RpQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Gone (feat. Kanye West)', 334, 'http://localhost:8080/api/v1/track/TwPCaWQIJME', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Diamonds From Sierra Leone (Bonus Track)', 239, 'http://localhost:8080/api/v1/track/92FCRmggNqQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Late', 231, 'http://localhost:8080/api/v1/track/YRwTaWWK3dI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: The College Dropout
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('The College Dropout', 'http://localhost:8099/avatars/albums/The College Dropout.webp', v_artist_id, '', '2004-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 21
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Intro', 20, 'http://localhost:8080/api/v1/track/OTZzjAU0Kg0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('We Don''t Care', 240, 'http://localhost:8080/api/v1/track/0Tdpq3FRGhY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Graduation Day', 82, 'http://localhost:8080/api/v1/track/tbmNuB7spmA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('All Falls Down (feat. Syleena Johnson)', 224, 'http://localhost:8080/api/v1/track/8kyWDhB_QeI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I''ll Fly Away', 70, 'http://localhost:8080/api/v1/track/psb2dFToHLA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Spaceship (feat. GLC и Consequence)', 325, 'http://localhost:8080/api/v1/track/mn77gzjBl1U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jesus Walks', 194, 'http://localhost:8080/api/v1/track/MYF7H_fpc-g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Never Let Me Down (feat. JAY-Z и J. Ivy)', 325, 'http://localhost:8080/api/v1/track/p4NvOKy7GOU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Get Em High (feat. Talib Kweli и Common)', 290, 'http://localhost:8080/api/v1/track/UHpaLbhk8vM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Workout Plan', 47, 'http://localhost:8080/api/v1/track/hLeS2By_zPE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The New Workout Plan', 323, 'http://localhost:8080/api/v1/track/ylT16QB6Uig', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Slow Jamz', 317, 'http://localhost:8080/api/v1/track/pwkYUhePecQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Breathe In Breathe Out (feat. Ludacris)', 247, 'http://localhost:8080/api/v1/track/E3dWKq3s6u0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('School Spirit Skit 1', 79, 'http://localhost:8080/api/v1/track/g9xopViBKOQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('School Spirit', 183, 'http://localhost:8080/api/v1/track/-MOIPnu50O4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('School Spirit Skit 2', 44, 'http://localhost:8080/api/v1/track/7xL9VLARq8k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lil Jimmy Skit', 54, 'http://localhost:8080/api/v1/track/ufN8MxyMlEQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Two Words (feat. Mos Def, Freeway и The Boys Choir Of Harlem)', 267, 'http://localhost:8080/api/v1/track/tkFOBx6j0l8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Through The Wire', 222, 'http://localhost:8080/api/v1/track/AE8y25CcE6s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Family Business', 279, 'http://localhost:8080/api/v1/track/JwAjANmjajc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Last Call', 761, 'http://localhost:8080/api/v1/track/cpbeS15sHZ0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Late Orchestration
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Late Orchestration', 'http://localhost:8099/avatars/albums/Late Orchestration.webp', v_artist_id, '', '2006-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 13
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Diamonds From Sierra Leone (Live At Abbey Road Studios)', 248, 'http://localhost:8080/api/v1/track/Aa5rhrUo2ms', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Touch The Sky (Live At Abbey Road Studios) (feat. Lupe Fiasco)', 247, 'http://localhost:8080/api/v1/track/8hUTT_w7fvU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Crack Music (Live At Abbey Road Studios)', 168, 'http://localhost:8080/api/v1/track/MkvxbuTIpQw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Drive Slow (Live At Abbey Road Studios) (feat. Paul Wall и GLC)', 274, 'http://localhost:8080/api/v1/track/nu1wg4Z8Xbg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Through The Wire (Live At Abbey Road Studios)', 213, 'http://localhost:8080/api/v1/track/su6wyAxLlyg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Workout Plan (Live At Abbey Road Studios)', 172, 'http://localhost:8080/api/v1/track/Tba_P6rvC98', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heard ''Em Say (Live At Abbey Road Studios) (feat. Adam Levine)', 250, 'http://localhost:8080/api/v1/track/oQZqqGhcnsc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('All Falls Down (Live At Abbey Road Studios) (feat. Syleena Johnson)', 194, 'http://localhost:8080/api/v1/track/DQZj4eX-Bqo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Bring Me Down (Live At Abbey Road Studios) (feat. Brandy)', 201, 'http://localhost:8080/api/v1/track/boNjrwOuc2w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Gone (Live At Abbey Road Studios) (feat. Consequence и Cam''Ron)', 255, 'http://localhost:8080/api/v1/track/EV_5qGkHswc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Late (Live At Abbey Road Studios)', 235, 'http://localhost:8080/api/v1/track/ht_xS8k5dd0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jesus Walks (Live At Abbey Road Studios)', 194, 'http://localhost:8080/api/v1/track/Nao9oGVqOM8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Gold Digger (AOL Sessions) (feat. Jamie Foxx)', 198, 'http://localhost:8080/api/v1/track/mgJAG65osVc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Wouldn''t You Like to Ride (S&S Remixes)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Wouldn''t You Like to Ride (S&S Remixes)', 'http://localhost:8099/avatars/albums/Wouldnt You Like to Ride (S&S Remixes).webp', v_artist_id, '', '2005-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 6
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wouldn''t You Like to Ride (S&S Remixes) (Nick Ahrén Remix)', 325, 'http://localhost:8080/api/v1/track/vPM0sMSahPQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wouldn''t You Like to Ride (S&S Remixes) (KitSch 2.0 & Stephane B Remix)', 426, 'http://localhost:8080/api/v1/track/574h4LDR8qY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wouldn''t You Like to Ride (S&S Remixes) (Jez Pereira & Madoc Remix)', 332, 'http://localhost:8080/api/v1/track/8PETKKwYJhU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wouldn''t You Like to Ride (S&S Remixes) (Paul Anthony & ZXX Remix)', 441, 'http://localhost:8080/api/v1/track/7CGDLb3JACA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wouldn''t You Like to Ride (S&S Remixes) (Nick Ahrén Remix Instrumental)', 325, 'http://localhost:8080/api/v1/track/FiNZ22nx72k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wouldn''t You Like to Ride (S&S Remixes) (The House Moguls Remix)', 434, 'http://localhost:8080/api/v1/track/jJZMK51ibUo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: BULLY
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('BULLY', 'http://localhost:8099/avatars/albums/BULLY.webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('LAST BREATH', 143, 'http://localhost:8080/api/v1/track/oiRkspnrcCQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('LOSING YOUR MIND', 207, 'http://localhost:8080/api/v1/track/WHl1TbhJ2-0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: SLIDE
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('SLIDE', 'http://localhost:8099/avatars/albums/SLIDE.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('SLIDE', 199, 'http://localhost:8080/api/v1/track/IAh3r5egwzA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: No Apologies
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('No Apologies', 'http://localhost:8099/avatars/albums/No Apologies.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('No Apologies', 158, 'http://localhost:8080/api/v1/track/huoWnDvdUNU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Gimme A Second 2 (feat. Peso Pluma и Ty Dolla $ign)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Gimme A Second 2 (feat. Peso Pluma и Ty Dolla $ign)', 'http://localhost:8099/avatars/albums/Gimme A Second 2 (feat. Peso Pluma и Ty Dolla $ign).webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Gimme A Second 2 (feat. Peso Pluma и Ty Dolla $ign)', 172, 'http://localhost:8080/api/v1/track/Qa8l_vFtfFg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: No Face
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('No Face', 'http://localhost:8099/avatars/albums/No Face.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('No Face', 276, 'http://localhost:8080/api/v1/track/D9mF9jsovvs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: CARNIVAL (feat. Playboi Carti и Rich The Kid)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('CARNIVAL (feat. Playboi Carti и Rich The Kid)', 'http://localhost:8099/avatars/albums/CARNIVAL (feat. Playboi Carti и Rich The Kid).webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('CARNIVAL (feat. Playboi Carti и Rich The Kid)', 265, 'http://localhost:8080/api/v1/track/pEskP0ulPlA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: CARNIVAL (INSTRUMENTAL)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('CARNIVAL (INSTRUMENTAL)', 'http://localhost:8099/avatars/albums/CARNIVAL (INSTRUMENTAL).webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('CARNIVAL (INSTRUMENTAL)', 265, 'http://localhost:8080/api/v1/track/_s3j_CZFBuk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: CARNIVAL (feat. Playboi Carti и Rich The Kid)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('CARNIVAL (feat. Playboi Carti и Rich The Kid)', 'http://localhost:8099/avatars/albums/CARNIVAL (feat. Playboi Carti и Rich The Kid).webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('CARNIVAL (feat. Playboi Carti и Rich The Kid)', 263, 'http://localhost:8080/api/v1/track/pEskP0ulPlA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: CARNIVAL PACK (feat. Rich The Kid, Playboi Carti)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('CARNIVAL PACK (feat. Rich The Kid, Playboi Carti)', 'http://localhost:8099/avatars/albums/CARNIVAL PACK (feat. Rich The Kid, Playboi Carti).webp', v_artist_id, '', '2024-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 5
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('CARNIVAL (feat. Rich The Kid и Playboi Carti)', 265, 'http://localhost:8080/api/v1/track/pEskP0ulPlA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('CARNIVAL (feat. Rich The Kid и Playboi Carti)', 263, 'http://localhost:8080/api/v1/track/pEskP0ulPlA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('CARNIVAL (HOOLIGANS VERSION)', 260, 'http://localhost:8080/api/v1/track/-r8-Ipi17Uk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('CARNIVAL (INSTRUMENTAL)', 265, 'http://localhost:8080/api/v1/track/3TX6xZ0TMCQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('CARNIVAL (ACAPELLA) (feat. Playboi Carti и Rich The Kid)', 265, 'http://localhost:8080/api/v1/track/IS8xCRxARrI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: CARNIVAL - HOOLIGANS VERSION
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('CARNIVAL - HOOLIGANS VERSION', 'http://localhost:8099/avatars/albums/CARNIVAL - HOOLIGANS VERSION.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('CARNIVAL - HOOLIGANS VERSION', 260, 'http://localhost:8080/api/v1/track/i9ANERVHEqs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: TALKING (feat. North West)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('TALKING (feat. North West)', 'http://localhost:8099/avatars/albums/TALKING (feat. North West).webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('TALKING (feat. North West)', 186, 'http://localhost:8080/api/v1/track/Tqlw87XV4kU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: VULTURES PACK
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('VULTURES PACK', 'http://localhost:8099/avatars/albums/VULTURES PACK.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 3
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('VULTURES - Havoc Version (feat. Bump J и Lil Durk)', 265, 'http://localhost:8080/api/v1/track/GQEcxrY0CWA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('VULTURES (feat. Bump J и Lil Durk)', 277, 'http://localhost:8080/api/v1/track/kCMz7HW6O-g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('VULTURES (feat. Bump J)', 238, 'http://localhost:8080/api/v1/track/kCMz7HW6O-g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: VULTURES (feat. Bump J)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('VULTURES (feat. Bump J)', 'http://localhost:8099/avatars/albums/VULTURES (feat. Bump J).webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('VULTURES (feat. Bump J)', 238, 'http://localhost:8080/api/v1/track/kCMz7HW6O-g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: VULTURES (feat. Bump J)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('VULTURES (feat. Bump J)', 'http://localhost:8099/avatars/albums/VULTURES (feat. Bump J).webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('VULTURES (feat. Bump J)', 238, 'http://localhost:8080/api/v1/track/kCMz7HW6O-g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: VULTURES (feat. Bump J и Lil Durk)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('VULTURES (feat. Bump J и Lil Durk)', 'http://localhost:8099/avatars/albums/VULTURES (feat. Bump J и Lil Durk).webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('VULTURES (feat. Bump J и Lil Durk)', 277, 'http://localhost:8080/api/v1/track/kCMz7HW6O-g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: VULTURES (feat. Bump J и Lil Durk)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('VULTURES (feat. Bump J и Lil Durk)', 'http://localhost:8099/avatars/albums/VULTURES (feat. Bump J и Lil Durk).webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('VULTURES (feat. Bump J и Lil Durk)', 277, 'http://localhost:8080/api/v1/track/kCMz7HW6O-g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Stand United (feat. Buju Banton)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Stand United (feat. Buju Banton)', 'http://localhost:8099/avatars/albums/Stand United (feat. Buju Banton).webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Stand United (feat. Buju Banton)', 164, 'http://localhost:8080/api/v1/track/fP-k3Kft50U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Where They At
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Where They At', 'http://localhost:8099/avatars/albums/Where They At.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Where They At', 174, 'http://localhost:8080/api/v1/track/InIqdZH19ek', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Through The Valley
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Through The Valley', 'http://localhost:8099/avatars/albums/Through The Valley.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Through The Valley', 172, 'http://localhost:8080/api/v1/track/Rjwq4J8U7fw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Freestyle 4 RT Now
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Freestyle 4 RT Now', 'http://localhost:8099/avatars/albums/Freestyle 4 RT Now.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Freestyle 4 RT Now', 184, 'http://localhost:8080/api/v1/track/6KyQXvq7wjY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: True Love
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('True Love', 'http://localhost:8099/avatars/albums/True Love.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('True Love', 149, 'http://localhost:8080/api/v1/track/k7H2C5L8X7I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: City of Gods
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('City of Gods', 'http://localhost:8099/avatars/albums/City of Gods.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('City of Gods', 256, 'http://localhost:8080/api/v1/track/0yVdBlGSgRw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Eazy
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Eazy', 'http://localhost:8099/avatars/albums/Eazy.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Eazy', 235, 'http://localhost:8080/api/v1/track/qy7sci2az88', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Hurricane (feat. Lil Baby)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Hurricane (feat. Lil Baby)', 'http://localhost:8099/avatars/albums/Hurricane (feat. Lil Baby).webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hurricane (feat. Lil Baby)', 239, 'http://localhost:8080/api/v1/track/VRJiK-kdDb4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Life Of The Party
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Life Of The Party', 'http://localhost:8099/avatars/albums/Life Of The Party.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Life Of The Party', 392, 'http://localhost:8080/api/v1/track/401hZy6Hipw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Wash Us In The Blood (feat. Travis Scott)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Wash Us In The Blood (feat. Travis Scott)', 'http://localhost:8099/avatars/albums/Wash Us In The Blood (feat. Travis Scott).webp', v_artist_id, '', '2020-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wash Us In The Blood (feat. Travis Scott)', 190, 'http://localhost:8080/api/v1/track/h0U2QUGKbSE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: I Love It
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('I Love It', 'http://localhost:8099/avatars/albums/I Love It.webp', v_artist_id, '', '2018-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I Love It', 128, 'http://localhost:8080/api/v1/track/cwQgjq0mCdE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: XTCY
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('XTCY', 'http://localhost:8099/avatars/albums/XTCY.webp', v_artist_id, '', '2018-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('XTCY', 177, 'http://localhost:8080/api/v1/track/x_z3oahqCLA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Lift Yourself
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Lift Yourself', 'http://localhost:8099/avatars/albums/Lift Yourself.webp', v_artist_id, '', '2018-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lift Yourself', 148, 'http://localhost:8080/api/v1/track/8fbyfDbi-MI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Ye vs. the People (starring TI as the People)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Ye vs. the People (starring TI as the People)', 'http://localhost:8099/avatars/albums/Ye vs. the People (starring TI as the People).webp', v_artist_id, '', '2018-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ye vs. the People (starring TI as the People) (feat. T.I.)', 203, 'http://localhost:8080/api/v1/track/qc_8jcHYBis', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: All Day (feat. Theophilus London, Allan Kingdom и Paul McCartney)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('All Day (feat. Theophilus London, Allan Kingdom и Paul McCartney)', 'http://localhost:8099/avatars/albums/All Day (feat. Theophilus London, Allan Kingdom и Paul McCartney).webp', v_artist_id, '', '2015-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('All Day (feat. Theophilus London, Allan Kingdom и Paul McCartney)', 311, 'http://localhost:8080/api/v1/track/mc-ccZXsIm4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: FourFiveSeconds
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('FourFiveSeconds', 'http://localhost:8099/avatars/albums/FourFiveSeconds.webp', v_artist_id, '', '2015-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('FourFiveSeconds', 189, 'http://localhost:8080/api/v1/track/kt0g4dWxEBo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Only One (feat. Paul McCartney)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Only One (feat. Paul McCartney)', 'http://localhost:8099/avatars/albums/Only One (feat. Paul McCartney).webp', v_artist_id, '', '2014-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Only One (feat. Paul McCartney)', 281, 'http://localhost:8080/api/v1/track/WibQR0tQ0P8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Cold (feat. DJ Khaled)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Cold (feat. DJ Khaled)', 'http://localhost:8099/avatars/albums/Cold (feat. DJ Khaled).webp', v_artist_id, '', '2012-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cold (feat. DJ Khaled)', 220, 'http://localhost:8080/api/v1/track/o0ADLHIlopE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: New God Flow
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('New God Flow', 'http://localhost:8099/avatars/albums/New God Flow.webp', v_artist_id, '', '2012-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('New God Flow', 295, 'http://localhost:8080/api/v1/track/GjuhKczCgSI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Mercy (feat. Big Sean, Pusha T и 2 Chainz)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Mercy (feat. Big Sean, Pusha T и 2 Chainz)', 'http://localhost:8099/avatars/albums/Mercy (feat. Big Sean, Pusha T и 2 Chainz).webp', v_artist_id, '', '2012-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Mercy (feat. Big Sean, Pusha T и 2 Chainz)', 330, 'http://localhost:8080/api/v1/track/7Dqgr0wNyPo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Christmas In Harlem (feat. Prynce Cy Hi и Teyana Taylor)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Christmas In Harlem (feat. Prynce Cy Hi и Teyana Taylor)', 'http://localhost:8099/avatars/albums/Christmas In Harlem (feat. Prynce Cy Hi и Teyana Taylor).webp', v_artist_id, '', '2010-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Christmas In Harlem (feat. Prynce Cy Hi и Teyana Taylor)', 237, 'http://localhost:8080/api/v1/track/Emz2ciGhsXM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Runaway (feat. Pusha T)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Runaway (feat. Pusha T)', 'http://localhost:8099/avatars/albums/Runaway (feat. Pusha T).webp', v_artist_id, '', '2010-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Runaway (feat. Pusha T)', 340, 'http://localhost:8080/api/v1/track/Bm5iA4Zupek', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Alors On Danse
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Alors On Danse', 'http://localhost:8099/avatars/albums/Alors On Danse.webp', v_artist_id, '', '2009-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Alors on danse (Radio Edit)', 208, 'http://localhost:8080/api/v1/track/VHoT4N43jK8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Alors On Danse (Extended Mix)', 259, 'http://localhost:8080/api/v1/track/VHoT4N43jK8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Paranoid
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Paranoid', 'http://localhost:8099/avatars/albums/Paranoid.webp', v_artist_id, '', '2009-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Paranoid (feat. Mr Hudson)', 286, 'http://localhost:8080/api/v1/track/irBP5FnksKc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Love Lockdown (Essential 5 EP)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Love Lockdown (Essential 5 EP)', 'http://localhost:8099/avatars/albums/Love Lockdown (Essential 5 EP).webp', v_artist_id, '', '2008-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 5
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Love Lockdown', 272, 'http://localhost:8080/api/v1/track/HZwMX6T5Jhk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Homecoming (feat. Chris Martin)', 204, 'http://localhost:8080/api/v1/track/LQ488QrqGE4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Stronger', 313, 'http://localhost:8080/api/v1/track/PsO6ZnUZI0g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Gold Digger (feat. Jamie Foxx)', 210, 'http://localhost:8080/api/v1/track/6vwNcNOTVzY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Good Life (feat. T-Pain)', 208, 'http://localhost:8080/api/v1/track/FEKEjpTzB0Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Flashing Lights
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Flashing Lights', 'http://localhost:8099/avatars/albums/Flashing Lights.webp', v_artist_id, '', '2007-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Flashing Lights', 238, 'http://localhost:8080/api/v1/track/ila-hAUXR5U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Stronger (AD Remix Main)', 286, 'http://localhost:8080/api/v1/track/zzz2nbxpW_M', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Good Life
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Good Life', 'http://localhost:8099/avatars/albums/Good Life.webp', v_artist_id, '', '2007-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Good Life (feat. T-Pain)', 208, 'http://localhost:8080/api/v1/track/FEKEjpTzB0Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Can''t Tell Me Nothing (Remix feat. Young Jeezy) (feat. Young Jeezy)', 248, 'http://localhost:8080/api/v1/track/GF5w9YdcpHU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Stronger
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Stronger', 'http://localhost:8099/avatars/albums/Stronger.webp', v_artist_id, '', '2007-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Stronger', 313, 'http://localhost:8080/api/v1/track/PsO6ZnUZI0g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Can''t Tell Me Nothing', 273, 'http://localhost:8080/api/v1/track/2DRqi_HSj24', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Homecoming (Germany 2-track eSingle) (feat. Chris Martin)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Homecoming (Germany 2-track eSingle) (feat. Chris Martin)', 'http://localhost:8099/avatars/albums/Homecoming (Germany 2-track eSingle) (feat. Chris Martin).webp', v_artist_id, '', '2007-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Homecoming (feat. Крис Мартин и Chris Martin)', 204, 'http://localhost:8080/api/v1/track/LQ488QrqGE4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Good Night (feat. Chris Martin)', 187, 'http://localhost:8080/api/v1/track/XDTIz_ncls8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Impossible (Radio Edit) (feat. Twista, Keyshia Cole и BJ)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Impossible (Radio Edit) (feat. Twista, Keyshia Cole и BJ)', 'http://localhost:8099/avatars/albums/Impossible (Radio Edit) (feat. Twista, Keyshia Cole и BJ).webp', v_artist_id, '', '2006-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Impossible (Radio Edit) (feat. Twista, Кейша Коул и Би)', 203, 'http://localhost:8080/api/v1/track/YU62UnpsoSo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Heard ''Em Say (iTunes Germany) (feat. Adam Levine)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Heard ''Em Say (iTunes Germany) (feat. Adam Levine)', 'http://localhost:8099/avatars/albums/Heard Em Say (iTunes Germany) (feat. Adam Levine).webp', v_artist_id, '', '2005-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heard ''Em Say (feat. Adam Levine)', 207, 'http://localhost:8080/api/v1/track/elVF7oG0pQs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('We Can Make It Better (feat. Talib Kweli, Q-Tip, Common и Rhymefest)', 232, 'http://localhost:8080/api/v1/track/GZMFwolnsSI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Touch The Sky (Live)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Touch The Sky (Live)', 'http://localhost:8099/avatars/albums/Touch The Sky (Live).webp', v_artist_id, '', '2005-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Touch The Sky (Live: Abbey Road Studios) (feat. Lupe Fiasco)', 243, 'http://localhost:8080/api/v1/track/8TFMKQftk1I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Hold On
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Hold On', 'http://localhost:8099/avatars/albums/Hold On.webp', v_artist_id, '', '2004-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hold On (Radio Edit) (feat. Kanye West)', 208, 'http://localhost:8080/api/v1/track/or0N5EjJ17s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Selfish
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Selfish', 'http://localhost:8099/avatars/albums/Selfish.webp', v_artist_id, '', '2004-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Selfish', 228, 'http://localhost:8080/api/v1/track/8LHuzs4MmcU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: The New Workout Plan (UK E-single)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('The New Workout Plan (UK E-single)', 'http://localhost:8099/avatars/albums/The New Workout Plan (UK E-single).webp', v_artist_id, '', '2004-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The New Workout Plan (Remastered Explicit Version)', 324, 'http://localhost:8080/api/v1/track/ylT16QB6Uig', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: All Falls Down
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('All Falls Down', 'http://localhost:8099/avatars/albums/All Falls Down.webp', v_artist_id, '', '2004-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('All Falls Down (feat. Syleena Johnson)', 222, 'http://localhost:8080/api/v1/track/8kyWDhB_QeI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Through The Wire (Live - From the House Of Blues)', 252, 'http://localhost:8080/api/v1/track/yfeDkp67hPo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Send It Up (Them Lost Boys X Nomster Remix)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Send It Up (Them Lost Boys X Nomster Remix)', 'http://localhost:8099/avatars/albums/Send It Up (Them Lost Boys X Nomster Remix).webp', v_artist_id, '', '2013-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Send It Up (Them Lost Boys X Nomster Remix)', 205, 'http://localhost:8080/api/v1/track/MVpMUpNWqJw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Diamonds from Sierra Leone (Remix) (feat. JAY-Z)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Diamonds from Sierra Leone (Remix) (feat. JAY-Z)', 'http://localhost:8099/avatars/albums/Diamonds from Sierra Leone (Remix) (feat. JAY-Z).webp', v_artist_id, '', '2005-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Diamonds From Sierra Leone (Remix) (feat. JAY-Z)', 216, 'http://localhost:8080/api/v1/track/D6H6uaw4NFM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+-- Артист: Judas Priest
+INSERT INTO artist (artist_name, description, avatar_url, header_url)
+VALUES ('Judas Priest', 'Judas Priest — британская хэви-метал-группа, которая наряду с такими коллективами, как Black Sabbath, Deep Purple, Led Zeppelin и Uriah Heep определила звучание хэви-метала 1970-х годов, а также оказала огромное влияние на дальнейшее развитие этого стиля в целом. За 50 лет своей карьеры музыканты продали около 50 миллионов экземпляров альбомов по всему миру. В 2022 году коллектив был включён в Зал славы рок-н-ролла.
+Основателями группы являются вокалист Эл Аткинс, гитарист Кеннет Даунинг и бас-гитарист Иэн Хилл, единственный бессменный участник. «Классический» состав Judas Priest, который также включает вокалиста Роба Хэлфорда и гитариста Гленна Типтона, с перерывом в 1993—2003 годах, когда группу покинул Хэлфорд, просуществовал 25 лет. Относительно нестабильным звеном коллектива всегда являлось место барабанщика; в настоящее время и с 1989 года в составе Judas Priest играет барабанщик Скотт Трэвис.
+Название группы является каламбуром эмоционального восклицания «Jesus Christ!». Идея назвать коллектив именно так появилась благодаря песне Боба Дилана «The Ballad of Frankie Lee and Judas Priest».
+
+Источник: Wikipedia (', 'http://localhost:8099/avatars/artists/Judas Priest_avatar.webp', 'http://localhost:8099/avatars/artists/Judas Priest_header.webp')
+RETURNING artist_id INTO v_artist_id;
+
+-- Альбом/сингл: Invincible Shield (Deluxe Edition)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Invincible Shield (Deluxe Edition)', 'http://localhost:8099/avatars/albums/Invincible Shield (Deluxe Edition).webp', v_artist_id, '', '2024-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 14
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Panic Attack', 326, 'http://localhost:8080/api/v1/track/zLPaGqGzdY0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Serpent and the King', 260, 'http://localhost:8080/api/v1/track/7HGCbuSKIeM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Invincible Shield', 382, 'http://localhost:8080/api/v1/track/HwMZ20ZVZeE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Devil in Disguise', 287, 'http://localhost:8080/api/v1/track/iF4jmH-yWz4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Gates of Hell', 279, 'http://localhost:8080/api/v1/track/Kne7SNuRwv8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Crown of Horns', 346, 'http://localhost:8080/api/v1/track/dMlvMsGRouM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('As God is my Witness', 277, 'http://localhost:8080/api/v1/track/h0xRT9edjnQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Trial By Fire', 262, 'http://localhost:8080/api/v1/track/2YqZuo1WKk4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Escape From Reality', 265, 'http://localhost:8080/api/v1/track/OuUmLMVUs3w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sons of Thunder', 179, 'http://localhost:8080/api/v1/track/LphBtQiv-QI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Giants in the Sky', 304, 'http://localhost:8080/api/v1/track/B_OboG6cL-I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Fight of Your Life', 260, 'http://localhost:8080/api/v1/track/FdZBZ66rtCU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Vicious Circle', 182, 'http://localhost:8080/api/v1/track/OaiqexLz9Fw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Lodger', 233, 'http://localhost:8080/api/v1/track/6OHTvgJeBZQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Reflections: 50 Heavy Metal Years of Music
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Reflections: 50 Heavy Metal Years of Music', 'http://localhost:8099/avatars/albums/Reflections: 50 Heavy Metal Years of Music.webp', v_artist_id, '', '2021-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 16
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Let Us Prey / Call for the Priest', 375, 'http://localhost:8080/api/v1/track/8MQyI-JTkRM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('You Don''t Have to Be Old to Be Wise', 304, 'http://localhost:8080/api/v1/track/GbB4xnfI9G4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Fever', 322, 'http://localhost:8080/api/v1/track/MXB6rHTkDfM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Eat Me Alive', 216, 'http://localhost:8080/api/v1/track/l7wYGjLvgJw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('All Guns Blazing', 238, 'http://localhost:8080/api/v1/track/Wfyupe_412I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Never the Heroes', 265, 'http://localhost:8080/api/v1/track/V0J3u3_800c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Dissident Aggressor (Live)', 184, 'http://localhost:8080/api/v1/track/jlE1zFfTlRc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Out in the Cold (Live)', 387, 'http://localhost:8080/api/v1/track/gJeLkUqLHXQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Running Wild (Live)', 184, 'http://localhost:8080/api/v1/track/v5f4GHOd78Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Victim of Changes (Live at the Agora Theatre, Cleveland, 1978)', 462, 'http://localhost:8080/api/v1/track/YfMdAu2S2wo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Green Manalishi (With the Two Pronged Crown) (Live from Hammersmith, London, 1981)', 278, 'http://localhost:8080/api/v1/track/Z6Gy2AP_OkQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Bloodstone (Live at The Omni, Atlanta, 1982)', 241, 'http://localhost:8080/api/v1/track/Jd98JIkci2k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Ripper (Live at Irvine Meadows Amphitheatre, Irvine, 1991)', 186, 'http://localhost:8080/api/v1/track/jiFVPvb-9RM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Beyond the Realms of Death (Live at The Mudd Club, New York, 1979)', 427, 'http://localhost:8080/api/v1/track/E9twjza1Q98', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Hellion / Electric Eye (Live at The Summit, Houston, 1986)', 257, 'http://localhost:8080/api/v1/track/d91HmWxzup8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sinner (Live at New Haven Veterans Memorial Coliseum, New Haven, 1988)', 463, 'http://localhost:8080/api/v1/track/sa_-DFztHCs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Firepower
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Firepower', 'http://localhost:8099/avatars/albums/Firepower.webp', v_artist_id, '', '2018-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 14
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Firepower', 208, 'http://localhost:8080/api/v1/track/6QtjdDiMLVg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lightning Strike', 210, 'http://localhost:8080/api/v1/track/CUzcxJNZKC4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Evil Never Dies', 264, 'http://localhost:8080/api/v1/track/ytzrxwg3Yjo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Never The Heroes', 264, 'http://localhost:8080/api/v1/track/V0J3u3_800c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Necromancer', 214, 'http://localhost:8080/api/v1/track/gNZaTNQmh_U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Children of the Sun', 241, 'http://localhost:8080/api/v1/track/RUGTNZ6aUKo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Guardians', 67, 'http://localhost:8080/api/v1/track/p40VdFT8sog', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rising From Ruins', 324, 'http://localhost:8080/api/v1/track/tOq-Z_p7WDg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Flame Thrower', 275, 'http://localhost:8080/api/v1/track/ihtQX5LsSiU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Spectre', 266, 'http://localhost:8080/api/v1/track/zVVrfqwA5lQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Traitors Gate', 344, 'http://localhost:8080/api/v1/track/i_disqBfj4A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('No Surrender', 174, 'http://localhost:8080/api/v1/track/vMU804-bjQA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lone Wolf', 310, 'http://localhost:8080/api/v1/track/_TvBZ1eM0p8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sea of Red', 352, 'http://localhost:8080/api/v1/track/aOznGqxWpeA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Redeemer of Souls (Deluxe)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Redeemer of Souls (Deluxe)', 'http://localhost:8099/avatars/albums/Redeemer of Souls (Deluxe).webp', v_artist_id, '', '2014-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 18
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Dragonaut', 267, 'http://localhost:8080/api/v1/track/shwOv_J7QGo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Redeemer of Souls', 239, 'http://localhost:8080/api/v1/track/mhkoNQ-7uRw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Halls of Valhalla', 365, 'http://localhost:8080/api/v1/track/VddfDsrVdcs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sword of Damocles', 295, 'http://localhost:8080/api/v1/track/o_8V5Fsr3hE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('March of the Damned', 237, 'http://localhost:8080/api/v1/track/HJhm2vZFj2k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Down in Flames', 236, 'http://localhost:8080/api/v1/track/7tYzuz_0QvQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hell & Back', 286, 'http://localhost:8080/api/v1/track/2IevED0jUJU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cold Blooded', 326, 'http://localhost:8080/api/v1/track/hUCxnhJdoBo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Metalizer', 278, 'http://localhost:8080/api/v1/track/egcflOaO7N0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Crossfire', 231, 'http://localhost:8080/api/v1/track/K-RjOGnZuak', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Secrets of the Dead', 342, 'http://localhost:8080/api/v1/track/4orNgfVdgww', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Battle Cry', 318, 'http://localhost:8080/api/v1/track/ss5uhrzXI-s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Beginning of the End', 308, 'http://localhost:8080/api/v1/track/vZ4W6KeGdRM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Snakebite', 195, 'http://localhost:8080/api/v1/track/piV2P_E349U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Tears of Blood', 258, 'http://localhost:8080/api/v1/track/vm9IiNGqrXw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Creatures', 266, 'http://localhost:8080/api/v1/track/9QnYdwlYjk8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Bring It On', 197, 'http://localhost:8080/api/v1/track/yrq1TUhb1SE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Never Forget', 386, 'http://localhost:8080/api/v1/track/w7EstT4KNNY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Nostradamus
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Nostradamus', 'http://localhost:8099/avatars/albums/Nostradamus.webp', v_artist_id, '', '2008-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 23
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Dawn of Creation', 152, 'http://localhost:8080/api/v1/track/0SIDBeohY0w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Prophecy', 327, 'http://localhost:8080/api/v1/track/-AlLsDN_4nQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Awakening', 53, 'http://localhost:8080/api/v1/track/4BQQZENf-Ew', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Revelations', 426, 'http://localhost:8080/api/v1/track/jiPSnK0EN1Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Four Horseman', 96, 'http://localhost:8080/api/v1/track/F6ogjTRTVyI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('War', 305, 'http://localhost:8080/api/v1/track/pZORlxvQqHE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sands of Time', 157, 'http://localhost:8080/api/v1/track/xe_jt8Ad-Ho', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Pestilence and Plague', 309, 'http://localhost:8080/api/v1/track/iGKrSFr9g2Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Death', 454, 'http://localhost:8080/api/v1/track/K-u6vWKUi4c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Peace', 142, 'http://localhost:8080/api/v1/track/qp5Z0jLq9sg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Conquest', 283, 'http://localhost:8080/api/v1/track/GJlneMaoIEI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lost Love', 269, 'http://localhost:8080/api/v1/track/VMnNB2dseOI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Persecution', 395, 'http://localhost:8080/api/v1/track/sTF3GMiAw_M', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Solitude', 83, 'http://localhost:8080/api/v1/track/F1JykXi3YEg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Exiled', 393, 'http://localhost:8080/api/v1/track/6dcVmv90Lro', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Alone', 471, 'http://localhost:8080/api/v1/track/hvM5Wzof0gk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Shadows in the Flame', 71, 'http://localhost:8080/api/v1/track/inxJBNmcTdU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Visions', 325, 'http://localhost:8080/api/v1/track/vjOKCorUqHw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hope', 130, 'http://localhost:8080/api/v1/track/tLsmNzRDXd4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('New Beginnings', 297, 'http://localhost:8080/api/v1/track/Aed-I4z-yXI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Calm Before the Storm', 126, 'http://localhost:8080/api/v1/track/e2TsbaS_Bno', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Nostradamus', 404, 'http://localhost:8080/api/v1/track/nEdvICRBMcQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Future of Mankind', 510, 'http://localhost:8080/api/v1/track/onaaI--Y4Tc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Angel Of Retribution
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Angel Of Retribution', 'http://localhost:8099/avatars/albums/Angel Of Retribution.webp', v_artist_id, '', '2005-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 10
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Judas Rising', 254, 'http://localhost:8080/api/v1/track/DuIoGWn6Bn8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Deal with the Devil', 235, 'http://localhost:8080/api/v1/track/cqOo8Oh58Ss', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Revolution', 283, 'http://localhost:8080/api/v1/track/S68_spOUvdo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Worth Fighting For', 259, 'http://localhost:8080/api/v1/track/sCUsjbBTvZg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Demonizer', 278, 'http://localhost:8080/api/v1/track/44aFSYMkDwI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wheels of Fire', 227, 'http://localhost:8080/api/v1/track/L_FzpD3qvSw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Angel', 265, 'http://localhost:8080/api/v1/track/zM1Y75jNaZ0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hellrider', 384, 'http://localhost:8080/api/v1/track/Cgs6wy4b18o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Eulogy', 173, 'http://localhost:8080/api/v1/track/2VoNPfhkPvc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Lochness', 810, 'http://localhost:8080/api/v1/track/Uufxnsmu0_s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Painkiller
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Painkiller', 'http://localhost:8099/avatars/albums/Painkiller.webp', v_artist_id, '', '1990-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 12
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Painkiller', 366, 'http://localhost:8080/api/v1/track/nM__lPTWThU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hell Patrol', 217, 'http://localhost:8080/api/v1/track/dUFtXrkvYKE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('All Guns Blazing', 238, 'http://localhost:8080/api/v1/track/Wfyupe_412I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Leather Rebel', 215, 'http://localhost:8080/api/v1/track/zsJ_pADlGrk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Metal Meltdown', 288, 'http://localhost:8080/api/v1/track/PZhlY-p3yCo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Night Crawler', 345, 'http://localhost:8080/api/v1/track/5yyO_HozK0c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Between the Hammer & the Anvil', 290, 'http://localhost:8080/api/v1/track/dJLXQ8i3uao', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('A Touch of Evil', 345, 'http://localhost:8080/api/v1/track/PW-6FKFnHx8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Battle Hymn', 57, 'http://localhost:8080/api/v1/track/HqKSCsfDJzM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('One Shot at Glory', 409, 'http://localhost:8080/api/v1/track/3FGuHKMdzzs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Living Bad Dreams', 322, 'http://localhost:8080/api/v1/track/Hs5R4qpmi2Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Leather Rebel (Live)', 220, 'http://localhost:8080/api/v1/track/2qgNezd1u7Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Ram It Down
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Ram It Down', 'http://localhost:8099/avatars/albums/Ram It Down.webp', v_artist_id, '', '1988-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 12
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ram It Down', 289, 'http://localhost:8080/api/v1/track/v0jVb9TmfRM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heavy Metal', 359, 'http://localhost:8080/api/v1/track/2AYB-Gjo6cU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Love Zone', 239, 'http://localhost:8080/api/v1/track/wgGnYm1lAPw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Come and Get It', 248, 'http://localhost:8080/api/v1/track/l8HD7WNExhY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hard as Iron', 249, 'http://localhost:8080/api/v1/track/UW9bAXTW1x4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Blood Red Skies', 471, 'http://localhost:8080/api/v1/track/fFdv2svhKH8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('I''m a Rocker', 239, 'http://localhost:8080/api/v1/track/VDMP5Hongbk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Johnny B. Goode', 280, 'http://localhost:8080/api/v1/track/2zxoGFjFJlk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Love You to Death', 277, 'http://localhost:8080/api/v1/track/gZsKj6xzs4Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Monsters of Rock', 330, 'http://localhost:8080/api/v1/track/0yljrbTG2cg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Night Comes Down (Live)', 273, 'http://localhost:8080/api/v1/track/g3kivPLj1eA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Bloodstone (Live)', 246, 'http://localhost:8080/api/v1/track/H5fF36RVBV8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Turbo
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Turbo', 'http://localhost:8099/avatars/albums/Turbo.webp', v_artist_id, '', '1986-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 9
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Turbo Lover', 334, 'http://localhost:8080/api/v1/track/JhY9GOhFwN4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Locked In', 260, 'http://localhost:8080/api/v1/track/Zr6rChjsWgs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Private Property', 271, 'http://localhost:8080/api/v1/track/cD2xFL38K4U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Parental Guidance', 207, 'http://localhost:8080/api/v1/track/B-fkbXbFd0o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock You All Around the World', 218, 'http://localhost:8080/api/v1/track/7qqbrpaVyjk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Out in the Cold', 388, 'http://localhost:8080/api/v1/track/R6QaXKiCz4I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Wild Nights, Hot & Crazy Days', 281, 'http://localhost:8080/api/v1/track/Mh7bjDg_0IA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hot for Love', 252, 'http://localhost:8080/api/v1/track/Ky-XZIaVydk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Reckless', 262, 'http://localhost:8080/api/v1/track/bnJZuXcjz5g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Defenders Of The Faith
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Defenders Of The Faith', 'http://localhost:8099/avatars/albums/Defenders Of The Faith.webp', v_artist_id, '', '1984-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 12
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Freewheel Burning', 265, 'http://localhost:8080/api/v1/track/M_s-49rNCdw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jawbreaker', 207, 'http://localhost:8080/api/v1/track/hwu6epsjGhI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock Hard Ride Free', 334, 'http://localhost:8080/api/v1/track/P-c62u8dh18', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Sentinel', 303, 'http://localhost:8080/api/v1/track/8Ksksu9JDkg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Love Bites', 288, 'http://localhost:8080/api/v1/track/PWFkhLUcvo0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Eat Me Alive', 216, 'http://localhost:8080/api/v1/track/l7wYGjLvgJw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Some Heads Are Gonna Roll', 248, 'http://localhost:8080/api/v1/track/xK7mgtTLprI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Night Comes Down', 241, 'http://localhost:8080/api/v1/track/NMxyEq17TpU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heavy Duty', 146, 'http://localhost:8080/api/v1/track/tezX5_H4CDw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Defenders of the Faith', 87, 'http://localhost:8080/api/v1/track/CqveT36yPRc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Turn on Your Light', 324, 'http://localhost:8080/api/v1/track/JEXLaZVanq8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heavy Duty / Defenders of the Faith (Live)', 327, 'http://localhost:8080/api/v1/track/itoq88hIDT0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Screaming For Vengeance
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Screaming For Vengeance', 'http://localhost:8099/avatars/albums/Screaming For Vengeance.webp', v_artist_id, '', '1982-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 12
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Hellion', 42, 'http://localhost:8080/api/v1/track/OXKrA6x76WU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Electric Eye', 219, 'http://localhost:8080/api/v1/track/eGtwgYt_QnA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Riding on the Wind', 190, 'http://localhost:8080/api/v1/track/aQBF3a9m8Fs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Bloodstone', 231, 'http://localhost:8080/api/v1/track/lYqKAL8NDKo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('(Take These) Chains', 186, 'http://localhost:8080/api/v1/track/s8vrKn78J-w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Pain and Pleasure', 254, 'http://localhost:8080/api/v1/track/fg2i0WIkaJQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Screaming for Vengeance', 284, 'http://localhost:8080/api/v1/track/TN7Lv0PR4Q8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('You''ve Got Another Thing Coming', 311, 'http://localhost:8080/api/v1/track/coA75uoMF40', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Fever', 321, 'http://localhost:8080/api/v1/track/MXB6rHTkDfM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Devil''s Child', 287, 'http://localhost:8080/api/v1/track/BKN2HEAr1VU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Prisoner of Your Eyes', 431, 'http://localhost:8080/api/v1/track/vi1JOCjWQ9Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Devil''s Child (Live)', 303, 'http://localhost:8080/api/v1/track/STrDasxwChc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Point Of Entry
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Point Of Entry', 'http://localhost:8099/avatars/albums/Point Of Entry.webp', v_artist_id, '', '1981-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 12
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heading Out to the Highway', 226, 'http://localhost:8080/api/v1/track/LKuuHfMx3CQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Don''t Go', 197, 'http://localhost:8080/api/v1/track/3ROVXf6fZ0U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hot Rockin''', 196, 'http://localhost:8080/api/v1/track/UxV7GTbqC10', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Turning Circles', 221, 'http://localhost:8080/api/v1/track/C1xBqtOyXB8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Desert Plains', 275, 'http://localhost:8080/api/v1/track/hxNN-VUbXfw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Solar Angels', 244, 'http://localhost:8080/api/v1/track/5CI87J4sLMI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('You Say Yes', 208, 'http://localhost:8080/api/v1/track/ob9R_akXi-Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('All the Way', 223, 'http://localhost:8080/api/v1/track/riaxp49E2DA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Troubleshooter', 241, 'http://localhost:8080/api/v1/track/ZXVEivD9WHc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('On the Run', 224, 'http://localhost:8080/api/v1/track/2AS7e-oCPXU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Thunder Road', 312, 'http://localhost:8080/api/v1/track/nZxrzSCuRfQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Desert Plains (Live)', 308, 'http://localhost:8080/api/v1/track/z-pR2uVO8FA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: British Steel
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('British Steel', 'http://localhost:8099/avatars/albums/British Steel.webp', v_artist_id, '', '1980-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 11
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rapid Fire', 248, 'http://localhost:8080/api/v1/track/FoA8OxjxSrw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Metal Gods', 239, 'http://localhost:8080/api/v1/track/KApie0UjEY8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Breaking the Law', 154, 'http://localhost:8080/api/v1/track/L397TWLwrUU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Grinder', 238, 'http://localhost:8080/api/v1/track/0iB9dnRPeRY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('United', 216, 'http://localhost:8080/api/v1/track/Qdbi5N3YCQ8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('You Don''t Have to Be Old to Be Wise', 304, 'http://localhost:8080/api/v1/track/GbB4xnfI9G4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Living After Midnight', 211, 'http://localhost:8080/api/v1/track/9VVFNgbsDC4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Rage', 285, 'http://localhost:8080/api/v1/track/nJMBPi7IXMA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Steeler', 270, 'http://localhost:8080/api/v1/track/bRTUZ2sS1D8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Red, White & Blue', 223, 'http://localhost:8080/api/v1/track/zPdvlZDEG3o', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Grinder (Live)', 290, 'http://localhost:8080/api/v1/track/9eETSaiP_M8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Killing Machine
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Killing Machine', 'http://localhost:8099/avatars/albums/Killing Machine.webp', v_artist_id, '', '1978-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 13
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Delivering the Goods', 258, 'http://localhost:8080/api/v1/track/bNHdpshFiZw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock Forever', 200, 'http://localhost:8080/api/v1/track/XzmUS-jXrBY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Evening Star', 247, 'http://localhost:8080/api/v1/track/8cGdd0myLck', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hell Bent for Leather', 161, 'http://localhost:8080/api/v1/track/YXJtz1TgmIM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Take on the World', 181, 'http://localhost:8080/api/v1/track/_0UyR17um2w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Burnin'' Up', 247, 'http://localhost:8080/api/v1/track/h_2tjzG9TN8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Green Manalishi (With the Two Pronged Crown)', 203, 'http://localhost:8080/api/v1/track/u8wjImfFGms', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Killing Machine', 182, 'http://localhost:8080/api/v1/track/BubCauRWS1s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Running Wild', 178, 'http://localhost:8080/api/v1/track/hV2nle-YEAk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Before the Dawn', 204, 'http://localhost:8080/api/v1/track/1Qjoffl_Lgo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Evil Fantasies', 254, 'http://localhost:8080/api/v1/track/eVuz2vZCNZs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Fight for Your Life', 244, 'http://localhost:8080/api/v1/track/0aQ3HnecbWc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Riding on the Wind (Live)', 196, 'http://localhost:8080/api/v1/track/0H3OraYU2DI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Stained Class
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Stained Class', 'http://localhost:8099/avatars/albums/Stained Class.webp', v_artist_id, '', '1978-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 11
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Exciter', 333, 'http://localhost:8080/api/v1/track/1tlEa0rDZbM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('White Heat, Red Hot', 259, 'http://localhost:8080/api/v1/track/H5HPyjhq3ao', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Better by You, Better Than Me', 203, 'http://localhost:8080/api/v1/track/I3UOkxdsh-8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Stained Class', 318, 'http://localhost:8080/api/v1/track/aoZDyGpB0_E', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Invader', 250, 'http://localhost:8080/api/v1/track/N6p2cyD-vpI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Saints in Hell', 329, 'http://localhost:8080/api/v1/track/mHHXLlChOgU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Savage', 208, 'http://localhost:8080/api/v1/track/1wcWYudVHAg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Beyond the Realms of Death', 410, 'http://localhost:8080/api/v1/track/4ewrSgDf50I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Heroes End', 298, 'http://localhost:8080/api/v1/track/HaiW6FNgdRc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Fire Burns Below', 419, 'http://localhost:8080/api/v1/track/DeTO9MmVch8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Better by You, Better Than Me (Live)', 221, 'http://localhost:8080/api/v1/track/lNQP_n1Cprw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Sin After Sin
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Sin After Sin', 'http://localhost:8099/avatars/albums/Sin After Sin.webp', v_artist_id, '', '1977-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 10
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Sinner', 403, 'http://localhost:8080/api/v1/track/W5Opvi_UHLY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Diamonds and Rust', 204, 'http://localhost:8080/api/v1/track/Hm25FhH9vqs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Starbreaker', 288, 'http://localhost:8080/api/v1/track/YmD4qZj0lNY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Last Rose of Summer', 337, 'http://localhost:8080/api/v1/track/zVCB581Ibpc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Let Us Prey / Call for the Priest', 373, 'http://localhost:8080/api/v1/track/8MQyI-JTkRM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Raw Deal', 359, 'http://localhost:8080/api/v1/track/TddtYPOBdOg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Here Come the Tears', 277, 'http://localhost:8080/api/v1/track/CigCwwUPHi0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Dissident Aggressor', 187, 'http://localhost:8080/api/v1/track/ntvF-VZ-ppQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Race with the Devil', 187, 'http://localhost:8080/api/v1/track/607WZmRxY1U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Jawbreaker (Live)', 241, 'http://localhost:8080/api/v1/track/HLDKcX33r8w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Sad Wings of Destiny
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Sad Wings of Destiny', 'http://localhost:8099/avatars/albums/Sad Wings of Destiny.webp', v_artist_id, '', '1976-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 9
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Victim of Changes', 474, 'http://localhost:8080/api/v1/track/JiAU5SFIpxo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Ripper', 171, 'http://localhost:8080/api/v1/track/h7JGbaWsxTQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Dreamer Deceiver', 354, 'http://localhost:8080/api/v1/track/mlqi0IoepYU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Deceiver', 167, 'http://localhost:8080/api/v1/track/yF7-xgOsl38', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Prelude', 123, 'http://localhost:8080/api/v1/track/dBaQ-PyGxqQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Tyrant', 268, 'http://localhost:8080/api/v1/track/xyww5oVfOuc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Genocide', 351, 'http://localhost:8080/api/v1/track/0e2ohqH21hk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Epitaph', 201, 'http://localhost:8080/api/v1/track/mSF8Ur_kHZc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Island of Domination', 256, 'http://localhost:8080/api/v1/track/WJb4Rp9GfZQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Rocka Rolla
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Rocka Rolla', 'http://localhost:8099/avatars/albums/Rocka Rolla.webp', v_artist_id, '', '1974-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 10
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('One for the Road', 280, 'http://localhost:8080/api/v1/track/EvsbFlA9b9g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rocka Rolla', 186, 'http://localhost:8080/api/v1/track/GrGjY1YpUMM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Winter', 183, 'http://localhost:8080/api/v1/track/u3_A-j33Ku0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Deep Freeze', 117, 'http://localhost:8080/api/v1/track/Jh7FTI1LOOQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Winter Retreat', 92, 'http://localhost:8080/api/v1/track/bkXsZqmXxZU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cheater', 178, 'http://localhost:8080/api/v1/track/7zZnmD7cpfQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Never Satisfied', 294, 'http://localhost:8080/api/v1/track/ZZflu5tVPJM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Run of the Mill', 515, 'http://localhost:8080/api/v1/track/z84xS-gjbRU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Dying to Meet You', 379, 'http://localhost:8080/api/v1/track/AuTzYEP1Ylw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Caviar and Meths', 124, 'http://localhost:8080/api/v1/track/yRMXia8-YLA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Rocka Rolla (50th Anniversary) [2024 Mixed and Remastered]
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Rocka Rolla (50th Anniversary) [2024 Mixed and Remastered]', 'http://localhost:8099/avatars/albums/Rocka Rolla (50th Anniversary) [2024 Mixed and Remastered].webp', v_artist_id, '', '1974-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 10
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('One for the Road (50th Anniversary) [2024 Mixed and Remastered]', 285, 'http://localhost:8080/api/v1/track/4IeuQNCzQbk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rocka Rolla (50th Anniversary) [2024 Mixed and Remastered]', 205, 'http://localhost:8080/api/v1/track/Ra-TsMN9Mg8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Winter (50th Anniversary) [2024 Mixed and Remastered]', 180, 'http://localhost:8080/api/v1/track/-W-TLPLy80s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Deep Freeze (50th Anniversary) [2024 Mixed and Remastered]', 128, 'http://localhost:8080/api/v1/track/QK6cStMTNas', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Winter Retreat (50th Anniversary) [2024 Mixed and Remastered]', 93, 'http://localhost:8080/api/v1/track/WJLlpQwOyMc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Cheater (50th Anniversary) [2024 Mixed and Remastered]', 182, 'http://localhost:8080/api/v1/track/0qjPBIFaH3s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Never Satisfied (50th Anniversary) [2024 Mixed and Remastered]', 291, 'http://localhost:8080/api/v1/track/OxnekKdNN-M', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Run of the Mill (50th Anniversary) [2024 Mixed and Remastered]', 502, 'http://localhost:8080/api/v1/track/EU_soouPt7s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Dying to Meet You (50th Anniversary) [2024 Mixed and Remastered]', 378, 'http://localhost:8080/api/v1/track/krDaxgUB7q0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Caviar and Meths (50th Anniversary) [2024 Mixed and Remastered]', 130, 'http://localhost:8080/api/v1/track/UmMVZYWpenc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+-- Артист: YOASOBI
+INSERT INTO artist (artist_name, description, avatar_url, header_url)
+VALUES ('YOASOBI', 'Yoasobi — японский дуэт, созданный в 2019 году компанией Sony Music Entertainment Japan, состоящий из продюсера Аясэ и певицы-автора песен Лилас Икуты, выступающей под псевдонимом Икура. Слоганом дуэта является фраза «рассказы в музыке»; дуэт первоначально выпускал песни, основанные на коротких рассказах, размещенных на Monogatary.com, социальной сети о творческом письме и иллюстрациях, управляемой их лейблом.
+После того, как дебютный сингл Yoasobi «Yoru ni Kakeru» стал вирусным в социальных сетях, он принёс им прорыв, впервые в истории Японской ассоциации звукозаписывающих компаний оставаясь на вершине Billboard Japan Hot 100 в течение шести недель подряд. К тому же сингл возглавил итоговый чарт Billboard Japan за 2020 год.
+После последовало несколько успешных синглов: вдохновленной мангой Голубой период «Gunjō», саундтреки для аниме «Выдающиеся звери» «Kaibutsu» и «Yasashii Suisei», «Shukufuku» для «Мобильный воин Гандам: Ведьма с Меркурия» и «Idol» для «Звёздного дитя»; последний занимал первое место в Japan Hot 100 в течение десяти недель подряд, а также первое место в Billboard Global Excl. US на протяжении трёх недель, а также в чартах Apple Music и YouTube Music.
+
+Источник: Wikipedia (', 'http://localhost:8099/avatars/artists/YOASOBI_avatar.webp', 'http://localhost:8099/avatars/artists/YOASOBI_header.webp')
+RETURNING artist_id INTO v_artist_id;
+
+-- Альбом/сингл: E-SIDE 3
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('E-SIDE 3', 'http://localhost:8099/avatars/albums/E-SIDE 3.webp', v_artist_id, '', '2024-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 8
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Biri-Biri (English Version)', 187, 'http://localhost:8080/api/v1/track/6VyUhnt5qf4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Idol', 213, 'http://localhost:8080/api/v1/track/XyJ3kgJXXVc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Mister', 185, 'http://localhost:8080/api/v1/track/OxIGOowtMk0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('manimani', 257, 'http://localhost:8080/api/v1/track/Lyy1QTdQvck', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Brave', 196, 'http://localhost:8080/api/v1/track/Z58Wkcb98nw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Seventeen', 200, 'http://localhost:8080/api/v1/track/QZzArjETSHU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Loving You', 218, 'http://localhost:8080/api/v1/track/E53YP36E73w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Adventure', 200, 'http://localhost:8080/api/v1/track/3VlOsMfQ7ds', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: THE BOOK 3
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('THE BOOK 3', 'http://localhost:8099/avatars/albums/THE BOOK 3.webp', v_artist_id, '', '2023-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 10
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('勇者', 195, 'http://localhost:8080/api/v1/track/M4-XU0a2hf0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Interlude "Awakening"', 49, 'http://localhost:8080/api/v1/track/regJUqLV2X4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('祝福', 193, 'http://localhost:8080/api/v1/track/SXSX2ABHpD4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('海のまにまに', 257, 'http://localhost:8080/api/v1/track/Q8yo172xlS8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ミスター', 186, 'http://localhost:8080/api/v1/track/Vy6MvRboHPg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Interlude "Worship"', 68, 'http://localhost:8080/api/v1/track/0k8rB-gsveQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('アイドル', 212, 'http://localhost:8080/api/v1/track/8u7KA_7EpeE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('セブンティーン', 199, 'http://localhost:8080/api/v1/track/odL_ICQxA3A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('アドベンチャー', 199, 'http://localhost:8080/api/v1/track/VmUZooM4ZtE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('好きだ', 218, 'http://localhost:8080/api/v1/track/ucGxEPmZjKw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: E-SIDE 2
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('E-SIDE 2', 'http://localhost:8099/avatars/albums/E-SIDE 2.webp', v_artist_id, '', '2022-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 8
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Blessing', 193, 'http://localhost:8080/api/v1/track/IdHR8PWgd1Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('If I Could Draw Life', 203, 'http://localhost:8080/api/v1/track/c65XHGurYRY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Romance', 167, 'http://localhost:8080/api/v1/track/c4vmVqr4soM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Swallow (feat. Midories)', 218, 'http://localhost:8080/api/v1/track/bdRwE0rd2WE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Halzion', 199, 'http://localhost:8080/api/v1/track/LHenmfSlNGQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Just a Little Step', 220, 'http://localhost:8080/api/v1/track/pwqdFNjPpl4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Haruka', 243, 'http://localhost:8080/api/v1/track/UdQNWNgbk8I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Love Letter', 211, 'http://localhost:8080/api/v1/track/kb1Kihiiw7k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: THE BOOK 2
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('THE BOOK 2', 'http://localhost:8099/avatars/albums/THE BOOK 2.webp', v_artist_id, '', '2021-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 8
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ツバメ (feat. ミドリーズ)', 217, 'http://localhost:8080/api/v1/track/9UYh8sOCjYw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('三原色', 221, 'http://localhost:8080/api/v1/track/07SWfNXgKGo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Romance', 167, 'http://localhost:8080/api/v1/track/717ulcsTQYI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('もう少しだけ', 219, 'http://localhost:8080/api/v1/track/uUAnQUxitpU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('優しい彗星', 214, 'http://localhost:8080/api/v1/track/tVjvDBD80fo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('怪物', 206, 'http://localhost:8080/api/v1/track/k0g04t7ZeSw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('もしも命が描けたら', 202, 'http://localhost:8080/api/v1/track/iVBQSJ5XrLo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ラブレター', 211, 'http://localhost:8080/api/v1/track/CSgG6wPB0Kw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: E-SIDE
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('E-SIDE', 'http://localhost:8099/avatars/albums/E-SIDE.webp', v_artist_id, '', '2021-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 8
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Into The Night', 260, 'http://localhost:8080/api/v1/track/1z8Pb2vwUco', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Haven''t', 257, 'http://localhost:8080/api/v1/track/rBhYTZ_VDJc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Monster', 206, 'http://localhost:8080/api/v1/track/4r6L3FUhbIo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Comet', 214, 'http://localhost:8080/api/v1/track/p0_IvX5JHrs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('RGB', 220, 'http://localhost:8080/api/v1/track/mzVhVsrWuD4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Encore', 271, 'http://localhost:8080/api/v1/track/AV54zNCNTLU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Blue', 247, 'http://localhost:8080/api/v1/track/4qEs4oor08A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Tracing A Dream', 242, 'http://localhost:8080/api/v1/track/m8tHuem6KOQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: 劇上
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('劇上', 'http://localhost:8099/avatars/albums/劇上.webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('劇上', 199, 'http://localhost:8080/api/v1/track/GuIkxXiVHps', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: the NOISE (Contains a Samples of Into The Night)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('the NOISE (Contains a Samples of Into The Night)', 'http://localhost:8099/avatars/albums/the NOISE (Contains a Samples of Into The Night).webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('the NOISE (Contains a Samples of 夜に駆ける) - the NOISE (Contains a Samples of Into The Night)', 225, 'http://localhost:8080/api/v1/track/PNQ-k7qj9r4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: New me (English Version)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('New me (English Version)', 'http://localhost:8099/avatars/albums/New me (English Version).webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('New me (English Version)', 203, 'http://localhost:8080/api/v1/track/p-wrt8cXi3s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Watch me! (English Version)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Watch me! (English Version)', 'http://localhost:8099/avatars/albums/Watch me! (English Version).webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Watch me! (English Version)', 187, 'http://localhost:8080/api/v1/track/_6mv2au-Wlo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: PLAYERS (English Version)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('PLAYERS (English Version)', 'http://localhost:8099/avatars/albums/PLAYERS (English Version).webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('PLAYERS (English Version)', 202, 'http://localhost:8080/api/v1/track/yfC8neD5UCQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Watch me!
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Watch me!', 'http://localhost:8099/avatars/albums/Watch me!.webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Watch me!', 187, 'http://localhost:8080/api/v1/track/evtoG-4dLM4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: PLAYERS
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('PLAYERS', 'http://localhost:8099/avatars/albums/PLAYERS.webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('PLAYERS', 202, 'http://localhost:8080/api/v1/track/ZfR_FP_7w00', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: UNDEAD (English Version)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('UNDEAD (English Version)', 'http://localhost:8099/avatars/albums/UNDEAD (English Version).webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('UNDEAD (English Version)', 183, 'http://localhost:8080/api/v1/track/tEelcVZ4Q7Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: New me
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('New me', 'http://localhost:8099/avatars/albums/New me.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('New me', 207, 'http://localhost:8080/api/v1/track/HRlW6yZo6Kc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Monotone
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Monotone', 'http://localhost:8099/avatars/albums/Monotone.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Monotone', 211, 'http://localhost:8080/api/v1/track/vzSFyVZVtdY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: モノトーン
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('モノトーン', 'http://localhost:8099/avatars/albums/モノトーン.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('モノトーン', 211, 'http://localhost:8080/api/v1/track/sJ-2X3rHtXw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: On the Stage
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('On the Stage', 'http://localhost:8099/avatars/albums/On the Stage.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('On the Stage', 208, 'http://localhost:8080/api/v1/track/IMjVFBNmKiA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: 舞台に立って
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('舞台に立って', 'http://localhost:8099/avatars/albums/舞台に立って.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('舞台に立って', 208, 'http://localhost:8080/api/v1/track/GWDzKel_vuQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: UNDEAD
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('UNDEAD', 'http://localhost:8099/avatars/albums/UNDEAD.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('UNDEAD', 183, 'http://localhost:8080/api/v1/track/Jj1_mfUzjOs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Adventure
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Adventure', 'http://localhost:8099/avatars/albums/Adventure.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Adventure', 201, 'http://localhost:8080/api/v1/track/A75an3iVh9Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: HEART BEAT
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('HEART BEAT', 'http://localhost:8099/avatars/albums/HEART BEAT.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('HEART BEAT', 336, 'http://localhost:8080/api/v1/track/ZSr3P-Rn6x0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: The Brave
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('The Brave', 'http://localhost:8099/avatars/albums/The Brave.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Brave', 195, 'http://localhost:8080/api/v1/track/wtde2lGAAd8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Biri-Biri
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Biri-Biri', 'http://localhost:8099/avatars/albums/Biri-Biri.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Biri-Biri', 188, 'http://localhost:8080/api/v1/track/shZyg5VFI1Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Biri-Biri (English Version)', 188, 'http://localhost:8080/api/v1/track/shZyg5VFI1Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: 勇者
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('勇者', 'http://localhost:8099/avatars/albums/勇者.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('勇者', 195, 'http://localhost:8080/api/v1/track/OIBODIPC_8Y', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: 夜に駆ける (From "THE FIRST TAKE")
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('夜に駆ける (From "THE FIRST TAKE")', 'http://localhost:8099/avatars/albums/夜に駆ける (From "THE FIRST TAKE").webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('夜に駆ける (From "THE FIRST TAKE")', 249, 'http://localhost:8080/api/v1/track/j1hft9Wjq9U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Idol
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Idol', 'http://localhost:8099/avatars/albums/Idol.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Idol', 214, 'http://localhost:8080/api/v1/track/RkjSfZ30GM4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: はじめての
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('はじめての', 'http://localhost:8099/avatars/albums/はじめての.webp', v_artist_id, '', '2023-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 4
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('セブンティーン', 200, 'http://localhost:8080/api/v1/track/0yoM7ETNPIY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('海のまにまに', 257, 'http://localhost:8080/api/v1/track/7G0ovtPqHnI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('好きだ', 219, 'http://localhost:8080/api/v1/track/WQ6ePunO8uY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ミスター', 186, 'http://localhost:8080/api/v1/track/2-c0DFt6vK4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: アイドル
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('アイドル', 'http://localhost:8099/avatars/albums/アイドル.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('アイドル', 214, 'http://localhost:8080/api/v1/track/ZRtdQ81jPUQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: セブンティーン
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('セブンティーン', 'http://localhost:8099/avatars/albums/セブンティーン.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('セブンティーン', 200, 'http://localhost:8080/api/v1/track/0yoM7ETNPIY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: アドベンチャー
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('アドベンチャー', 'http://localhost:8099/avatars/albums/アドベンチャー.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('アドベンチャー', 200, 'http://localhost:8080/api/v1/track/Av3xaZkVpJs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: 海のまにまに
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('海のまにまに', 'http://localhost:8099/avatars/albums/海のまにまに.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('海のまにまに', 256, 'http://localhost:8080/api/v1/track/7G0ovtPqHnI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: The Blessing
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('The Blessing', 'http://localhost:8099/avatars/albums/The Blessing.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Blessing', 193, 'http://localhost:8080/api/v1/track/3eytpBOkOFA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: The Swallow (feat. ミドリーズ)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('The Swallow (feat. ミドリーズ)', 'http://localhost:8099/avatars/albums/The Swallow (feat. ミドリーズ).webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('The Swallow (feat. ミドリーズ и Midories)', 218, 'http://localhost:8080/api/v1/track/eNuUEB_NDms', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: 祝福
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('祝福', 'http://localhost:8099/avatars/albums/祝福.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('祝福', 197, 'http://localhost:8080/api/v1/track/3eytpBOkOFA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: もしも命が描けたら
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('もしも命が描けたら', 'http://localhost:8099/avatars/albums/もしも命が描けたら.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('もしも命が描けたら', 202, 'http://localhost:8080/api/v1/track/I0kytvnHG-Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: 好きだ
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('好きだ', 'http://localhost:8099/avatars/albums/好きだ.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('好きだ', 218, 'http://localhost:8080/api/v1/track/WQ6ePunO8uY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: あの夢をなぞって (Ballade Ver.)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('あの夢をなぞって (Ballade Ver.)', 'http://localhost:8099/avatars/albums/あの夢をなぞって (Ballade Ver.).webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('あの夢をなぞって (Ballade Ver.)', 225, 'http://localhost:8080/api/v1/track/vWpc7f6b9kA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: ミスター
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('ミスター', 'http://localhost:8099/avatars/albums/ミスター.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ミスター', 187, 'http://localhost:8080/api/v1/track/2-c0DFt6vK4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Blue
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Blue', 'http://localhost:8099/avatars/albums/Blue.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Blue', 249, 'http://localhost:8080/api/v1/track/L8hMN2UAPxs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: ツバメ (feat. ミドリーズ)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('ツバメ (feat. ミドリーズ)', 'http://localhost:8099/avatars/albums/ツバメ (feat. ミドリーズ).webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ツバメ (feat. ミドリーズ)', 218, 'http://localhost:8080/api/v1/track/qDL3zhB8-MM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Romance
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Romance', 'http://localhost:8099/avatars/albums/Romance.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Romance', 169, 'http://localhost:8080/api/v1/track/wJQ9ig_d8yY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: ラブレター
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('ラブレター', 'http://localhost:8099/avatars/albums/ラブレター.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ラブレター', 213, 'http://localhost:8080/api/v1/track/mnta9Pp2LqA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Monster
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Monster', 'http://localhost:8099/avatars/albums/Monster.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Monster', 205, 'http://localhost:8080/api/v1/track/Eoe5IZHbarQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: RGB
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('RGB', 'http://localhost:8099/avatars/albums/RGB.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('RGB', 222, 'http://localhost:8080/api/v1/track/BS5YyieaXgc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Into the Night
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Into the Night', 'http://localhost:8099/avatars/albums/Into the Night.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Into the Night', 263, 'http://localhost:8080/api/v1/track/ORofRTMg-iY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: 三原色
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('三原色', 'http://localhost:8099/avatars/albums/三原色.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('三原色', 225, 'http://localhost:8080/api/v1/track/nhOhFOoURnE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: アンコール
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('アンコール', 'http://localhost:8099/avatars/albums/アンコール.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('アンコール', 272, 'http://localhost:8080/api/v1/track/vcGbefQBvJ4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: もう少しだけ
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('もう少しだけ', 'http://localhost:8099/avatars/albums/もう少しだけ.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('もう少しだけ', 221, 'http://localhost:8080/api/v1/track/K1Tz2yNmamI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: 優しい彗星
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('優しい彗星', 'http://localhost:8099/avatars/albums/優しい彗星.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('優しい彗星', 216, 'http://localhost:8080/api/v1/track/VyvhvlYvRnc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: 怪物
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('怪物', 'http://localhost:8099/avatars/albums/怪物.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('怪物', 206, 'http://localhost:8080/api/v1/track/dy90tA3TT1c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: THE BOOK
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('THE BOOK', 'http://localhost:8099/avatars/albums/THE BOOK.webp', v_artist_id, '', '2021-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 9
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Epilogue', 51, 'http://localhost:8080/api/v1/track/k_Z-mAvkCbM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('アンコール', 272, 'http://localhost:8080/api/v1/track/vcGbefQBvJ4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ハルジオン', 199, 'http://localhost:8080/api/v1/track/kzdJkT4kp-A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('あの夢をなぞって', 241, 'http://localhost:8080/api/v1/track/sAuEeM_6zpk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('たぶん', 257, 'http://localhost:8080/api/v1/track/8iuLXODzL04', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('群青', 249, 'http://localhost:8080/api/v1/track/Y4nEEZwckuU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ハルカ', 244, 'http://localhost:8080/api/v1/track/vd3IlOjSUGQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('夜に駆ける', 259, 'http://localhost:8080/api/v1/track/x8VYWazR5mE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Prologue', 36, 'http://localhost:8080/api/v1/track/KlJckf7QX6Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: ハルカ
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('ハルカ', 'http://localhost:8099/avatars/albums/ハルカ.webp', v_artist_id, '', '2020-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ハルカ', 244, 'http://localhost:8080/api/v1/track/vd3IlOjSUGQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: 群青
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('群青', 'http://localhost:8099/avatars/albums/群青.webp', v_artist_id, '', '2020-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('群青', 249, 'http://localhost:8080/api/v1/track/Y4nEEZwckuU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: たぶん
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('たぶん', 'http://localhost:8099/avatars/albums/たぶん.webp', v_artist_id, '', '2020-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('たぶん', 259, 'http://localhost:8080/api/v1/track/8iuLXODzL04', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: ハルジオン
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('ハルジオン', 'http://localhost:8099/avatars/albums/ハルジオン.webp', v_artist_id, '', '2020-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ハルジオン', 198, 'http://localhost:8080/api/v1/track/kzdJkT4kp-A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: あの夢をなぞって
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('あの夢をなぞって', 'http://localhost:8099/avatars/albums/あの夢をなぞって.webp', v_artist_id, '', '2020-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('あの夢をなぞって', 243, 'http://localhost:8080/api/v1/track/sAuEeM_6zpk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: 夜に駆ける
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('夜に駆ける', 'http://localhost:8099/avatars/albums/夜に駆ける.webp', v_artist_id, '', '2019-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('夜に駆ける', 262, 'http://localhost:8080/api/v1/track/x8VYWazR5mE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+-- Артист: Maximum the Hormone
+INSERT INTO artist (artist_name, description, avatar_url, header_url)
+VALUES ('Maximum the Hormone', 'Maximum The Hormone — японская хэви-метал группа из Хатиодзи, Токио. С 1999 года их состав состоит из вокалиста Дайсукэ-хана, барабанщицы Нао, гитариста Maximum the Ryo-kun и басиста Уэ-тян. Каждый участник поочередно исполняет ведущий вокал, часто в рамках одной и той же песни, за исключением Уэ-тяна, который почти исключительно исполняет бэк-вокал.
+Группа наиболее известна своим нетрадиционным и экспериментальным стилем альтернативной металлической музыки. За свою карьеру они добились успеха, включив в свое звучание элементы хэви-метала, хардкор-панка, хип-хопа, поп-музыки, фанка и ска. Стилистически их музыка простирается от мрачной и серьезной до ироничной или юмористической, часто с резкими изменениями темпа и настроения по ходу песни. Эклектичный характер группы часто вызывает сравнения с группой System of a Down.
+
+Источник: Wikipedia (', 'http://localhost:8099/avatars/artists/Maximum the Hormone_avatar.webp', 'http://localhost:8099/avatars/artists/Maximum the Hormone_header.webp')
+RETURNING artist_id INTO v_artist_id;
+
+-- Альбом/сингл: Mimikajiru Shin''uchi
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Mimikajiru Shin''uchi', 'http://localhost:8099/avatars/albums/Mimikajiru Shinuchi.webp', v_artist_id, '', '2015-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 7
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Nigirrrrrrrre!!', 278, 'http://localhost:8080/api/v1/track/IeppNGh5-V8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Johnny Tetsu PipeⅢ', 171, 'http://localhost:8080/api/v1/track/TOZ9wpj-hCo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Abara Bob <abara capsule markets bob>', 149, 'http://localhost:8080/api/v1/track/UIR8U16b5DY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Usukimi Billy ~koigimi sairoku hen~', 201, 'http://localhost:8080/api/v1/track/oJcfZE2vhiw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Ningen Empi (2015 Mix)', 233, 'http://localhost:8080/api/v1/track/Uj6R9SZ7D9g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Motto Policeman Fuck', 112, 'http://localhost:8080/api/v1/track/y_n8JYgkvgA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Pato-car Moyasu ~sotsugyo~', 94, 'http://localhost:8080/api/v1/track/DRCCKRsly4M', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Yoshu Fukushu
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Yoshu Fukushu', 'http://localhost:8099/avatars/albums/Yoshu Fukushu.webp', v_artist_id, '', '2013-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 15
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Yoshu Fukushu [Our Merciless Home''war''k]', 314, 'http://localhost:8080/api/v1/track/ir1fM8Et_2M', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Bluetiful Intro:Tsukino Bakugeki-ki', 32, 'http://localhost:8080/api/v1/track/e2SAi2wtbFw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Utsukushikihitobitonouta [Ode to Bluetiful People]', 279, 'http://localhost:8080/api/v1/track/rAZCIWI1bNo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Benjo Sandal Dance [Toilet Sandal Dance]', 244, 'http://localhost:8080/api/v1/track/UpDi7knMTXQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Chu2 The Beam [8th Grader Beam]', 242, 'http://localhost:8080/api/v1/track/k2UWVdVf1Lg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('"F"', 248, 'http://localhost:8080/api/v1/track/_SnyXfvCCGo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Tsume Tsume Tsume', 276, 'http://localhost:8080/api/v1/track/_RsCx0nAnoE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock Oreimairi～3 Chords de Omae Fullbocco～ [Rocking Retaliation: Beat the Hell out of You with 3 Chords]', 140, 'http://localhost:8080/api/v1/track/Ar56VgzFGtg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Unbelievable!: Swomints Hockeleiro Mifeho', 216, 'http://localhost:8080/api/v1/track/rys3KX3VDhY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('A-L-I-E-N', 287, 'http://localhost:8080/api/v1/track/h2PWBg2iZwk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('my girl', 243, 'http://localhost:8080/api/v1/track/EAHOpWOhVro', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Mesubuta no Ketsu ni Binta(Kick mo) [Bitch Ass Slapping: and Kicking]', 162, 'http://localhost:8080/api/v1/track/02bnyRC3DH0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Beauty Killosseum', 323, 'http://localhost:8080/api/v1/track/_zwV6YaSF5s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('maximum the hormone', 296, 'http://localhost:8080/api/v1/track/Hcx6Q5ECltI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Koino Sperm [Amorous Sperm]', 338, 'http://localhost:8080/api/v1/track/ZBxaCHFB75Q', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Bu-ikikaesu
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Bu-ikikaesu', 'http://localhost:8099/avatars/albums/Bu-ikikaesu.webp', v_artist_id, '', '2007-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 13
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Bu-ikikaesu!!', 235, 'http://localhost:8080/api/v1/track/ZnfuDiwSSGQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Zetsubou Billy', 225, 'http://localhost:8080/api/v1/track/60XZkQJxsp8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Kuso breakin'' Nou breakin'' Lily', 256, 'http://localhost:8080/api/v1/track/cR58ukSkpCc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Louisiana Bob', 221, 'http://localhost:8080/api/v1/track/PmDwzyrgEmM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Policeman Benz', 250, 'http://localhost:8080/api/v1/track/nCEE4nZ-hKo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Black￥Power G-men Spy', 148, 'http://localhost:8080/api/v1/track/32uXSdD8V2w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Akagi', 137, 'http://localhost:8080/api/v1/track/8wSI-6Lj7mE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Kyokatsu', 217, 'http://localhost:8080/api/v1/track/TIJO61yQncA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Bikini Sports Ponchin', 237, 'http://localhost:8080/api/v1/track/p-WP_TW3iuQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('What''s up, people?!', 251, 'http://localhost:8080/api/v1/track/muoWDA6zmsY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ChuChu Lovely MuniMuni MuraMura PrinPrin Boron Nururu ReroRero', 187, 'http://localhost:8080/api/v1/track/MPUCEz-RCg0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Shimi', 258, 'http://localhost:8080/api/v1/track/e-K3aNSRbO0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Koino Mega Lover', 328, 'http://localhost:8080/api/v1/track/fRBcgjEhAZE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Rock-impo Goroshi
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Rock-impo Goroshi', 'http://localhost:8099/avatars/albums/Rock-impo Goroshi.webp', v_artist_id, '', '2005-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 13
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock-impo Goroshi', 243, 'http://localhost:8080/api/v1/track/5XEo7klOt60', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hocho Hasami Cutter Knife Dosu Kiri', 146, 'http://localhost:8080/api/v1/track/S6AG_aMxMg0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Nitro BB Sensou', 125, 'http://localhost:8080/api/v1/track/-5VofHec0hs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('falling jimmy', 129, 'http://localhost:8080/api/v1/track/8rZApXXHo7M', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Kawakita Saruin', 112, 'http://localhost:8080/api/v1/track/x2Saw0M54yE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Anal Whiskey Ponce', 135, 'http://localhost:8080/api/v1/track/1DGbuzfOfxY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock Bankuruwase', 139, 'http://localhost:8080/api/v1/track/ue6w1DUhpgo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Haiyani Spain', 208, 'http://localhost:8080/api/v1/track/NPdliP4xby8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('UEHARA -FUTOSHI-', 157, 'http://localhost:8080/api/v1/track/N7PcQ3xzS84', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('REREREREREREREREMAMAMAMAMAMAMAMA', 182, 'http://localhost:8080/api/v1/track/3AJw49siaSw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ROLLING1000tOON', 169, 'http://localhost:8080/api/v1/track/rUhtR7IOsJo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Rock''n Roll Chainsaw', 209, 'http://localhost:8080/api/v1/track/RZu5PxVmuZU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Koino Kinako Watashini Kudasai', 67, 'http://localhost:8080/api/v1/track/qQxieNv2HjA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Kusoban
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Kusoban', 'http://localhost:8099/avatars/albums/Kusoban.webp', v_artist_id, '', '2004-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 8
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('恋のスウィート糞メリケン - Koino Sweet Kusomeriken', 224, 'http://localhost:8080/api/v1/track/8Mq_KveiDRk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('生理痛は神無月を凍らす気温。 - Seritsuwa Kannazukiwo Korasu Kion', 172, 'http://localhost:8080/api/v1/track/aCnhbb1oWbs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ヘルシー・ボブ - Healthy Bob', 138, 'http://localhost:8080/api/v1/track/FvdcpREmlLY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('セフィーロ・レディオ・カムバック～青春最下位～ - Cefiro Radio Comeback -Seishunnsaikai-', 155, 'http://localhost:8080/api/v1/track/rpAGG9j0YUU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Mrブギータンブリンマン - Mr BoogyTamblingman', 183, 'http://localhost:8080/api/v1/track/8OxwmvjCDLk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('平成ストロベリーバイブ - Heisei Strawberryvibe', 193, 'http://localhost:8080/api/v1/track/TclYQ-JTZSA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('暴力-BOURIKI-', 98, 'http://localhost:8080/api/v1/track/DZ8mvLWU3vk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('祟り君～タタリくん～ (BONUS TRACK) - TATARIKUN (BONUS TRACK)', 49, 'http://localhost:8080/api/v1/track/j_kgQ9OBZG0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: HAWATARI NIOKU CENTI [2-hundred-million-centimeter-long blades] (TV edit)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('HAWATARI NIOKU CENTI [2-hundred-million-centimeter-long blades] (TV edit)', 'http://localhost:8099/avatars/albums/HAWATARI NIOKU CENTI [2-hundred-million-centimeter-long blades] (TV edit).webp', v_artist_id, '', '2013-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('HAWATARI NIOKU CENTI [2-hundred-million-centimeter-long blades] (TV edit)', 90, 'http://localhost:8080/api/v1/track/QtLDltsBzsU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: KAMIGAMI (TV edit)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('KAMIGAMI (TV edit)', 'http://localhost:8099/avatars/albums/KAMIGAMI (TV edit).webp', v_artist_id, '', '2014-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('KAMIGAMI-神噛- (TV edit) - KAMIGAMI (TV edit)', 94, 'http://localhost:8080/api/v1/track/QQs4u9aKha0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: KOREKARANO MENKATA COTTELEENO HANASHIWO SHIYOU
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('KOREKARANO MENKATA COTTELEENO HANASHIWO SHIYOU', 'http://localhost:8099/avatars/albums/KOREKARANO MENKATA COTTELEENO HANASHIWO SHIYOU.webp', v_artist_id, '', '2011-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 4
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('maximum the hormone Ⅱ〜これからの麺カタコッテリの話をしよう〜 - maximum the hormone II -RYO vs RYO-', 280, 'http://localhost:8080/api/v1/track/IC-wDpwzEt4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('G''old〜en〜Guy - G''OLD-EN-GUY', 318, 'http://localhost:8080/api/v1/track/A5uz4EIVXxE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('肺脂西班牙〈we''re the 俺〉 - HAIYANI SPAIN WE ARE THE ORE', 218, 'http://localhost:8080/api/v1/track/s9q8tdFNeiY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('拝啓VAP殿 - HAIKEI VAP DONO', 252, 'http://localhost:8080/api/v1/track/dn17-EfMNY8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+-- Артист: Midvinterblot
+INSERT INTO artist (artist_name, description, avatar_url, header_url)
+VALUES ('Midvinterblot', '', 'http://localhost:8099/avatars/artists/Midvinterblot_avatar.webp', 'http://localhost:8099/avatars/artists/Midvinterblot_header.webp')
+RETURNING artist_id INTO v_artist_id;
+
+-- Альбом/сингл: Hörgr
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Hörgr', 'http://localhost:8099/avatars/albums/Hörgr.webp', v_artist_id, '', '1999-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Hörgr', 250, 'http://localhost:8080/api/v1/track/SF7c5snYIak', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+-- Артист: madk1d
+INSERT INTO artist (artist_name, description, avatar_url, header_url)
+VALUES ('madk1d', '', 'http://localhost:8099/avatars/artists/madk1d_avatar.webp', 'http://localhost:8099/avatars/artists/madk1d_header.webp')
+RETURNING artist_id INTO v_artist_id;
+
+-- Альбом/сингл: sexyswag
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('sexyswag', 'http://localhost:8099/avatars/albums/sexyswag.webp', v_artist_id, '', '2025-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 9
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('так похуй', 108, 'http://localhost:8080/api/v1/track/tRAmPLYjbGg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('цена', 139, 'http://localhost:8080/api/v1/track/IwF94S-T9RA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ты че обиделась', 90, 'http://localhost:8080/api/v1/track/z39pUlKXkaE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('супермаркет', 120, 'http://localhost:8080/api/v1/track/0xNI38yfb4k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('засосы', 100, 'http://localhost:8080/api/v1/track/XZhS8rSdcoI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('sexyswag2010', 90, 'http://localhost:8080/api/v1/track/ce29K68xVFI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('сдвг', 133, 'http://localhost:8080/api/v1/track/fdpjNzyyVJU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('последним летом', 124, 'http://localhost:8080/api/v1/track/sjcug8dL3yA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('танцор', 89, 'http://localhost:8080/api/v1/track/jimlL3ObVCA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Он сказал поехали!
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Он сказал поехали!', 'http://localhost:8099/avatars/albums/Он сказал поехали!.webp', v_artist_id, '', '2024-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 8
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('типичная ситуация', 131, 'http://localhost:8080/api/v1/track/9HuO63khusE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('1 мая', 128, 'http://localhost:8080/api/v1/track/WZmxsBTMglo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('самый лучший трудовик', 119, 'http://localhost:8080/api/v1/track/yU1LZhc6C2w', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('грустная история', 93, 'http://localhost:8080/api/v1/track/WFt9indFGjw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('незаконно', 95, 'http://localhost:8080/api/v1/track/Uo0eyGPeing', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('number 9', 103, 'http://localhost:8080/api/v1/track/xs0-K0YTi5c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('заправка', 97, 'http://localhost:8080/api/v1/track/R1E2WS4ZaoY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('типичная ситуация (Acoustic)', 89, 'http://localhost:8080/api/v1/track/1TJWiu2BOOI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: MARTINE ROSE
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('MARTINE ROSE', 'http://localhost:8099/avatars/albums/MARTINE ROSE.webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('MARTINE ROSE', 187, 'http://localhost:8080/api/v1/track/uE0pZWN1Au8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: дырки в штанах
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('дырки в штанах', 'http://localhost:8099/avatars/albums/дырки в штанах.webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('дырки в штанах', 107, 'http://localhost:8080/api/v1/track/3KVuiRBk5RI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Always
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Always', 'http://localhost:8099/avatars/albums/Always.webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Always', 145, 'http://localhost:8080/api/v1/track/PIikM8q1zro', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: ты че обиделась
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('ты че обиделась', 'http://localhost:8099/avatars/albums/ты че обиделась.webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ты че обиделась', 90, 'http://localhost:8080/api/v1/track/GaGOwFAlwkU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: цена
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('цена', 'http://localhost:8099/avatars/albums/цена.webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('цена', 139, 'http://localhost:8080/api/v1/track/k2uiDdvtxks', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: танцор
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('танцор', 'http://localhost:8099/avatars/albums/танцор.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('танцор', 89, 'http://localhost:8080/api/v1/track/Td2wsrs2MW4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Простужен
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Простужен', 'http://localhost:8099/avatars/albums/Простужен.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Простужен', 95, 'http://localhost:8080/api/v1/track/xRovW7KRXwE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: ИЗВИНИТЕ ЗА ВНИМАНИЕ
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('ИЗВИНИТЕ ЗА ВНИМАНИЕ', 'http://localhost:8099/avatars/albums/ИЗВИНИТЕ ЗА ВНИМАНИЕ.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('санкции', 99, 'http://localhost:8080/api/v1/track/qKu4CBkVRfQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('рехаб', 92, 'http://localhost:8080/api/v1/track/PMu7PvBeDsI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: питер паркер
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('питер паркер', 'http://localhost:8099/avatars/albums/питер паркер.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('питер паркер', 120, 'http://localhost:8080/api/v1/track/dw4hrqRpcQI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: типичная ситуация
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('типичная ситуация', 'http://localhost:8099/avatars/albums/типичная ситуация.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('типичная ситуация', 131, 'http://localhost:8080/api/v1/track/eC0kdhAvsPk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: мир, труд, май
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('мир, труд, май', 'http://localhost:8099/avatars/albums/мир, труд, май.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('1 мая', 128, 'http://localhost:8080/api/v1/track/jwritJhzhLo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('грустная история', 93, 'http://localhost:8080/api/v1/track/5DnL3DHsVsQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Барыга
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Барыга', 'http://localhost:8099/avatars/albums/Барыга.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Барыга', 92, 'http://localhost:8080/api/v1/track/DjNqZmdGlyk', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Толпы (Speed Up)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Толпы (Speed Up)', 'http://localhost:8099/avatars/albums/Толпы (Speed Up).webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Толпы (Speed Up)', 82, 'http://localhost:8080/api/v1/track/bqk447IzpaU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Круче чем вы (feat. CUPSIZE)
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Круче чем вы (feat. CUPSIZE)', 'http://localhost:8099/avatars/albums/Круче чем вы (feat. CUPSIZE).webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Круче чем вы (feat. CUPSIZE)', 100, 'http://localhost:8080/api/v1/track/YSdbOvkDTFE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Три парня на Бали
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Три парня на Бали', 'http://localhost:8099/avatars/albums/Три парня на Бали.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Три парня на Бали', 146, 'http://localhost:8080/api/v1/track/_G2pzMraV2g', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Толпы
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Толпы', 'http://localhost:8099/avatars/albums/Толпы.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Толпы', 91, 'http://localhost:8080/api/v1/track/rHIer9aa6PI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: умираю
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('умираю', 'http://localhost:8099/avatars/albums/умираю.webp', v_artist_id, '', '2022-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('умираю', 113, 'http://localhost:8080/api/v1/track/auNIKgAENjg', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: вредные привычки
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('вредные привычки', 'http://localhost:8099/avatars/albums/вредные привычки.webp', v_artist_id, '', '2021-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('вредные привычки', 101, 'http://localhost:8080/api/v1/track/WPqYgJ3l0bE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+-- Артист: CUPSIZE
+INSERT INTO artist (artist_name, description, avatar_url, header_url)
+VALUES ('CUPSIZE', '', 'http://localhost:8099/avatars/artists/CUPSIZE_avatar.webp', 'http://localhost:8099/avatars/artists/CUPSIZE_header.webp')
+RETURNING artist_id INTO v_artist_id;
+
+-- Альбом/сингл: неуравновешеннолетниепесни Pt.1
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('неуравновешеннолетниепесни Pt.1', 'http://localhost:8099/avatars/albums/неуравновешеннолетниепесни Pt.1.webp', v_artist_id, '', '2025-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 7
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('дьявол!', 209, 'http://localhost:8080/api/v1/track/htXO3nwQjiw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('оригами', 144, 'http://localhost:8080/api/v1/track/KEviVqwhLVw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('шАхАшАхА', 174, 'http://localhost:8080/api/v1/track/oxv5WWJ0oAo', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('песня про спид', 171, 'http://localhost:8080/api/v1/track/cTWbBiZinpA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('конъюнктивит', 208, 'http://localhost:8080/api/v1/track/mvfzBLpaFws', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('тварьтварьтварьтварь...', 186, 'http://localhost:8080/api/v1/track/HJ5lHPtYhis', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('злой отчим', 225, 'http://localhost:8080/api/v1/track/Z9og1UByvoc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: в моих легких выросли цветы
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('в моих легких выросли цветы', 'http://localhost:8099/avatars/albums/в моих легких выросли цветы.webp', v_artist_id, '', '2025-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 10
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('107.1', 119, 'http://localhost:8080/api/v1/track/JGs67DvT6YI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('печаль', 130, 'http://localhost:8080/api/v1/track/nLu0B1LBuhM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('минус, плюс', 225, 'http://localhost:8080/api/v1/track/ryfq5MMBVOQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('переломай мои кости', 168, 'http://localhost:8080/api/v1/track/BU-eVgBpxyc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('давай увидимся', 241, 'http://localhost:8080/api/v1/track/Vtc0poIr6VQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('твои поцелуи', 152, 'http://localhost:8080/api/v1/track/j73y9jpvjGs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('кислород', 143, 'http://localhost:8080/api/v1/track/63yKCcJS488', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('или хотя бы завтра...', 105, 'http://localhost:8080/api/v1/track/nwiBb8EazS0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('самокрутки', 154, 'http://localhost:8080/api/v1/track/VqRhjv-RzWA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('улыбнись', 270, 'http://localhost:8080/api/v1/track/mqKk7sYg-BU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: кажется, в аду прикольно, но меня выгнали б утром
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('кажется, в аду прикольно, но меня выгнали б утром', 'http://localhost:8099/avatars/albums/кажется, в аду прикольно, но меня выгнали б утром.webp', v_artist_id, '', '2024-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 10
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('влечение', 137, 'http://localhost:8080/api/v1/track/eAu6k-E7QuM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('привет, если ты мне не ответишь', 123, 'http://localhost:8080/api/v1/track/xiJdF73HWac', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('фура', 134, 'http://localhost:8080/api/v1/track/MojRcq-pG-A', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('мой врач думает, что у меня шизофрения', 134, 'http://localhost:8080/api/v1/track/CwqpI8cxGwA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('маршрутка', 190, 'http://localhost:8080/api/v1/track/FK2Ld4Czq-s', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ну почему', 172, 'http://localhost:8080/api/v1/track/6kt3mezkNHM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('я тупая, моя жизнь тупая', 187, 'http://localhost:8080/api/v1/track/oHe_lH8jNks', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('пока-пока', 173, 'http://localhost:8080/api/v1/track/Rw8SA_GJPDw', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('нам это нравится', 178, 'http://localhost:8080/api/v1/track/zJHlMlziotA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('больше, чем творчество', 155, 'http://localhost:8080/api/v1/track/sOZbxAXG44I', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Как испортить вечеринку?
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Как испортить вечеринку?', 'http://localhost:8099/avatars/albums/Как испортить вечеринку?.webp', v_artist_id, '', '2023-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 15
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Юра, Юра', 129, 'http://localhost:8080/api/v1/track/jcrA-YE65fE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('По улице иду я', 153, 'http://localhost:8080/api/v1/track/vdR06ZtG-98', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Они все дрочат на тебя в интернете', 109, 'http://localhost:8080/api/v1/track/eiSs2jvDq0k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Стенки моего подъезда', 150, 'http://localhost:8080/api/v1/track/WPT_wl-96ac', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Василий', 147, 'http://localhost:8080/api/v1/track/A8oZFXK4WUI', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Травматика', 161, 'http://localhost:8080/api/v1/track/Pjm5u23Cor4', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('И это прекрасно', 206, 'http://localhost:8080/api/v1/track/ef0TI8QgzgU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Клей', 146, 'http://localhost:8080/api/v1/track/bruZDcRPOD0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Целовались', 153, 'http://localhost:8080/api/v1/track/ZgkG7-xOBIU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Пьяные', 129, 'http://localhost:8080/api/v1/track/mIidmzOT8hE', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Высокий градус', 154, 'http://localhost:8080/api/v1/track/__cFrzeIdfU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Но им не смешно', 144, 'http://localhost:8080/api/v1/track/ikeivvIk2BA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Семнадцатилетняя', 153, 'http://localhost:8080/api/v1/track/1RwysRh343c', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Я схожу с ума', 188, 'http://localhost:8080/api/v1/track/dJFImLaSuno', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ДПП (Аутро)', 109, 'http://localhost:8080/api/v1/track/NbRwXSn0Q94', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: Еби меня, малышка
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('Еби меня, малышка', 'http://localhost:8099/avatars/albums/Еби меня, малышка.webp', v_artist_id, '', '2023-01-01', 'Альбом')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Вирус', 150, 'http://localhost:8080/api/v1/track/QvHItRuf81k', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('мне похуй', 114, 'http://localhost:8080/api/v1/track/TXh76MOExJM', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: ЦВЕТОФОБИЯ
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('ЦВЕТОФОБИЯ', 'http://localhost:8099/avatars/albums/ЦВЕТОФОБИЯ.webp', v_artist_id, '', '2024-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 5
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Цветофобия', 110, 'http://localhost:8080/api/v1/track/7Y1csVBy4lU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Паранойя', 118, 'http://localhost:8080/api/v1/track/LtDzAtauEJY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Оттенки', 98, 'http://localhost:8080/api/v1/track/I0XqEh95Tv0', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Бред', 113, 'http://localhost:8080/api/v1/track/sb8xAyZoMsY', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('Километры', 109, 'http://localhost:8080/api/v1/track/_QPyoV6OzeA', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: ВШБ
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('ВШБ', 'http://localhost:8099/avatars/albums/ВШБ.webp', v_artist_id, '', '2024-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ВШБ', 110, 'http://localhost:8080/api/v1/track/PjZzsCrMOW8', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: дели на два
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('дели на два', 'http://localhost:8099/avatars/albums/дели на два.webp', v_artist_id, '', '2025-01-01', 'EP')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 4
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('ты любишь танцевать', 145, 'http://localhost:8080/api/v1/track/LHiSYbn2pUU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('пятый элемент', 134, 'http://localhost:8080/api/v1/track/s3HlHnZ3CpQ', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('целую тебя', 130, 'http://localhost:8080/api/v1/track/cWaPuzn0TEs', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('воздух', 125, 'http://localhost:8080/api/v1/track/pi7Mv5ZNfYU', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: LSD
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('LSD', 'http://localhost:8099/avatars/albums/LSD.webp', v_artist_id, '', '2025-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 1
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('LSD', 117, 'http://localhost:8080/api/v1/track/mn0kbXinT0U', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+
+-- Альбом/сингл: В окно с тобой
+INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)
+VALUES ('В окно с тобой', 'http://localhost:8099/avatars/albums/В окно с тобой.webp', v_artist_id, '', '2023-01-01', 'Сингл')
+RETURNING album_id INTO v_album_id;
+-- Найдено треков: 2
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('В окно с тобой', 120, 'http://localhost:8080/api/v1/track/F5D04udwezc', '')
+RETURNING track_id INTO v_track_id;
+INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
+INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;
+INSERT INTO track (title, duration_s, file_url, description)
+VALUES ('В окно с тобой (Slow Version)', 149, 'http://localhost:8080/api/v1/track/LgeXnsuW8fM', '')
 RETURNING track_id INTO v_track_id;
 INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;
 INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;

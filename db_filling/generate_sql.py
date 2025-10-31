@@ -42,8 +42,6 @@ artist_ids = [
     'UCZU9T1ceaOgwfLRq7OKFU4Q',
     'UCEuOwB9vSL1oPKGNdONB4ig',
     'UCeMsJJOE6avjyvbqP4Kf24g',
-]
-"""
     'UCDVnp5x53g5L-kBvQsGOW9w',
     'UCWfAZudbGLAyrrEBaGuslNA',
     'UCrx-X329UKv0Y06VhfpFVvw',
@@ -54,6 +52,8 @@ artist_ids = [
     'UCbcXadHgtd1pWzTAWoI6loA',
     'UCvJLQlVdWiIU0qYmowdKh6g',
     'UCNpdKmV1hHFuKM6DUxGMOBw',
+]
+"""
     'UCqLqkJrUJ36z5bm0erMDkjQ',
     'UCqC_GY2ZiENFz2pwL0cSfAw',
     'UCIVROfF-b3Wjpk-G1-_ulFw',
@@ -109,6 +109,14 @@ artist_ids = [
     'UCmeMTJZRa80cGlMiNpXh64Q',
     """
 
+def sanitize_filename(name):
+    name = name.replace("/", "")
+    name = name.replace("\\", "")
+    name = name.replace("'", "").replace('"', "")
+    name = name.replace("#", "")
+    name = name.replace('?', "")
+    return name
+
 sql_statements = [
     "-- SQL миграция для вставки данных из YouTube Music\n",
     f"-- Генерация: {datetime.now().isoformat()}\n\n",
@@ -130,12 +138,12 @@ for artist_id in artist_ids:
 
         results = sp.search(q=artist_name, type="artist", limit=1)
         spotify_artist = results['artists']['items'][0]
-        artist_avatar_url = upload_avatar(spotify_artist['images'][2]['url'], f"artists/{artist_name}_avatar.webp",
+        artist_avatar_url = upload_avatar(spotify_artist['images'][2]['url'], f"artists/{sanitize_filename(artist_name)}_avatar.webp",
                                           bucket_name, minio_client)
 
         artist_description = (artist_info.get('description', '-') or '').replace("'", "''")
         artist_thumbnails = artist_info.get('thumbnails', [])
-        artist_header_url = upload_avatar(artist_thumbnails[-1]['url'], f"artists/{artist_name}_header.webp",
+        artist_header_url = upload_avatar(artist_thumbnails[-1]['url'], f"artists/{sanitize_filename(artist_name)}_header.webp",
                                           bucket_name, minio_client)
 
         sql_statements.append(f"-- Артист: {artist_name}\n")
@@ -175,7 +183,7 @@ for artist_id in artist_ids:
         for alb in albums_list:
             title = alb.get('title', '—').replace("'", "''")
             thumbnails = alb.get('thumbnails', [])
-            avatar_url = upload_avatar(thumbnails[-1]['url'], f"albums/{title}.webp", bucket_name, minio_client)
+            avatar_url = upload_avatar(thumbnails[-1]['url'], f"albums/{sanitize_filename(title)}.webp", bucket_name, minio_client)
             release_year = alb.get('year')
             alb_type = alb.get('type')
 

@@ -10,12 +10,12 @@ DOCKER_COMPOSE := docker compose -f $(COMPOSE_PATH) --env-file $(DOCKER_ENV_PATH
 DB_URL = postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable
 MIGRATIONS_PATH = migrations
 
-.PHONY: test coverage-html clean docker-build docker-up docker-down docker-stop docker-logs mocks
+.PHONY: test coverage-html clean docker-build docker-up docker-down docker-stop docker-logs generate
 
 # === Вспомогательные команды ===
 
-mocks:
-	@echo "==> Генерируем моки..."
+generate:
+	@echo "==> Generating..."
 	@go generate ./...
 
 

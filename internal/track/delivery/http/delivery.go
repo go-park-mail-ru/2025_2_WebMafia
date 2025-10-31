@@ -7,6 +7,7 @@ import (
 	"github.com/google/uuid"
 )
 
+//go:generate mockgen -destination=../../../mocks/track/service_mock.go -package=track spotify/internal/track/delivery/http IService
 type IService interface {
 	GetTrackByID(ctx context.Context, id uuid.UUID) (*dto.Track, error)
 	GetAllTracks(ctx context.Context, limit, offset uint64) ([]dto.Track, error)

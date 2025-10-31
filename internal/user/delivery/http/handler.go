@@ -6,6 +6,7 @@ import (
 	"spotify/pkg/jwtmanager"
 )
 
+//go:generate mockgen -destination=../../../mocks/user/service_mock.go -package=user spotify/internal/user/delivery/http IService,CSRFManager
 type IService interface {
 	Register(ctx context.Context, req dto.RegisterRequest) (*dto.RegisterResponse, error)
 	Login(ctx context.Context, req dto.LoginRequest) (*dto.LoginResponse, error)

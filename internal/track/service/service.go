@@ -9,6 +9,7 @@ import (
 	"github.com/google/uuid"
 )
 
+//go:generate mockgen -destination=../../mocks/track/repository_mock.go -package=track spotify/internal/track/service IRepository
 type IRepository interface {
 	GetByID(ctx context.Context, id uuid.UUID) (*model.Track, error)
 	GetAll(ctx context.Context, limit, offset uint64) ([]model.Track, error)

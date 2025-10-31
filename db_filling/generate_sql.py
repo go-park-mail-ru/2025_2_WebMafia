@@ -18,8 +18,8 @@ bucket_name = "avatars"
 if not minio_client.bucket_exists(bucket_name):
     minio_client.make_bucket(bucket_name)
 
-client_id = "e2f9643cd6c24e50964226ebd093ac88"
-client_secret = "723c43d6f74d445e8e5e592eed9a5833"
+client_id = ""
+client_secret = ""
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 output_file = os.path.join(base_dir, "..", "migrations", "010_insert_API_data.up.sql")

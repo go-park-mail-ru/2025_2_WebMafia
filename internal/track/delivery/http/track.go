@@ -174,6 +174,39 @@ func (h *Handler) GetTracksByGenre(w http.ResponseWriter, r *http.Request) {
 	response.JSON(w, http.StatusOK, tracks)
 }
 
+func (h *Handler) RegisterPlay(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.RegisterPlay"
+	log := middleware.LoggerFromContext(r.Context())
+
+	vars := mux.Vars(r)
+	idStr, ok := vars["id"]
+	if !ok {
+		log.Errorf("[%s]: id is missing in URL vars", op)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	id, err := uuid.Parse(idStr)
+	if err != nil {
+		log.Warnf("[%s]: Failed to parse track ID from URL: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	err = h.service.RegisterPlay(r.Context(), id)
+	if err != nil {
+		if errors.Is(err, service.ErrNotFound) {
+			log.Infof("[%s]: Resource not found: %v", op, err)
+		} else {
+			log.Errorf("[%s]: Service error: %v", op, err)
+		}
+		h.handleError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusAccepted, nil)
+}
+
 func parsePagination(r *http.Request) (uint64, uint64) {
 	query := r.URL.Query()
 	limitStr := query.Get(queryParamLimit)

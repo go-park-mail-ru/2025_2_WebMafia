@@ -17,6 +17,10 @@ type IRepository interface {
 	GetByAlbumID(ctx context.Context, albumID uuid.UUID, limit, offset uint64) ([]model.Track, error)
 	GetByGenreID(ctx context.Context, genreID uuid.UUID, limit, offset uint64) ([]model.Track, error)
 
+	IncrementPlayCount(ctx context.Context, trackID uuid.UUID) error
+
+	GetTotalPlaysByArtistID(ctx context.Context, artistID uuid.UUID) (int64, error)
+	GetTotalPlaysByArtistIDs(ctx context.Context, artistIDs []uuid.UUID) (map[uuid.UUID]int64, error)
 	GetAlbumIDsForTracks(ctx context.Context, trackIDs []uuid.UUID) (map[uuid.UUID]uuid.UUID, error)
 	GetArtistIDsForTracks(ctx context.Context, trackIDs []uuid.UUID) (map[uuid.UUID][]uuid.UUID, error)
 	GetGenresForTracks(ctx context.Context, trackIDs []uuid.UUID) (map[uuid.UUID][]model.Genre, error)
@@ -34,4 +38,12 @@ func New(repo IRepository, albumService *albumService.Service, artistService *ar
 		albumService:  albumService,
 		artistService: artistService,
 	}
+}
+
+func (s *Service) SetAlbumService(albumService *albumService.Service) {
+	s.albumService = albumService
+}
+
+func (s *Service) SetArtistService(artistService *artistService.Service) {
+	s.artistService = artistService
 }

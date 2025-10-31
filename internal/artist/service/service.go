@@ -14,12 +14,23 @@ type IRepository interface {
 	GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Artist, error)
 }
 
-type Service struct {
-	repo IRepository
+type ITrackService interface {
+	GetTotalPlaysByArtistID(ctx context.Context, artistID uuid.UUID) (int64, error)
+	GetTotalPlaysByArtistIDs(ctx context.Context, artistIDs []uuid.UUID) (map[uuid.UUID]int64, error)
 }
 
-func New(repo IRepository) *Service {
+type Service struct {
+	repo         IRepository
+	trackService ITrackService
+}
+
+func New(repo IRepository, trackService ITrackService) *Service {
 	return &Service{
-		repo: repo,
+		repo:         repo,
+		trackService: trackService,
 	}
+}
+
+func (s *Service) SetTrackService(ts ITrackService) {
+	s.trackService = ts
 }

@@ -35,3 +35,16 @@ type UploadAvatarResponse struct {
 type DeleteAvatarRequest struct {
 	UserID string
 }
+
+type UpdateProfileRequest struct {
+	UserID   string
+	Login    string
+	Email    string
+	Password string
+}
+
+type UpdateProfileResponse struct {
+	ID    string
+	Login string
+	Email string
+}

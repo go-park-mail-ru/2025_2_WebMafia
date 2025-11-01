@@ -66,19 +66,19 @@ type uploadAvatarRequest struct {
 	Size        int64
 }
 
-func validateAvatar(contentType string, size int64) error {
+func (h *Handler) validateAvatar(contentType string, size int64) error {
 	if size == 0 {
 		return fmt.Errorf("empty file")
 	}
 	if size > maxAvatarSize {
 		return fmt.Errorf("file too large (max 5MB)")
 	}
-	switch contentType {
-	case "image/png", "image/jpeg":
-		return nil
-	default:
-		return fmt.Errorf("unsupported content type: %s", contentType)
+	for _, allowed := range h.allowedAvatarTypes {
+		if contentType == allowed {
+			return nil
+		}
 	}
+	return fmt.Errorf("unsupported content type: %s", contentType)
 }
 
 type uploadAvatarResponse struct {
@@ -86,6 +86,25 @@ type uploadAvatarResponse struct {
 }
 type deleteAvatarResponse struct {
 	Status string `json:"status"`
+}
+
+type updateProfileRequest struct {
+	Login    string `json:"login,omitempty"`
+	Email    string `json:"email,omitempty"`
+	Password string `json:"password,omitempty"`
+}
+
+func (i *updateProfileRequest) validate() error {
+	if len(i.Login) < 5 {
+		return fmt.Errorf("login is too short (minimum 5 chars)")
+	}
+	if i.Password != "" && len(i.Password) < 8 {
+		return fmt.Errorf("password is too short (minimum 8 chars)")
+	}
+	if !strings.Contains(i.Email, "@") {
+		return fmt.Errorf("invalid email format")
+	}
+	return nil
 }
 
 func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
@@ -224,7 +243,7 @@ func (h *Handler) UploadAvatar(w http.ResponseWriter, r *http.Request) {
 	}
 	defer file.Close()
 
-	if err := validateAvatar(header.Header.Get("Content-Type"), header.Size); err != nil {
+	if err := h.validateAvatar(header.Header.Get("Content-Type"), header.Size); err != nil {
 		log.Errorf("[%s] validation error: %v", op, err)
 		response.BadRequestJSON(w)
 		return
@@ -269,4 +288,46 @@ func (h *Handler) DeleteAvatar(w http.ResponseWriter, r *http.Request) {
 
 	log.Infof("[%s]: Avatar deleted successfully:", op)
 	response.JSON(w, http.StatusOK, deleteAvatarResponse{Status: "deleted"})
+}
+
+func (h *Handler) UpdateProfile(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.UpdateProfile"
+	defer r.Body.Close()
+
+	userID, ok := middleware.GetUserID(r.Context())
+	if !ok || userID == "" {
+		response.UnauthorizedJSON(w)
+		return
+	}
+
+	log := middleware.LoggerFromContext(r.Context())
+
+	var req updateProfileRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		log.Errorf("[%s]: Invalid request body: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	if err := req.validate(); err != nil {
+		log.Warnf("[%s]: Validation error: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	res, err := h.svc.UpdateProfile(r.Context(), dto.UpdateProfileRequest{
+		UserID:   userID,
+		Login:    req.Login,
+		Email:    req.Email,
+		Password: req.Password,
+	})
+	if err != nil {
+		log.Errorf("[%s]: Service error: %v", op, err)
+		handleServiceError(w, err)
+		return
+	}
+
+	log.Infof("[%s]: Profile updated successfully: %s", op, userID)
+
+	response.JSON(w, http.StatusOK, res)
 }

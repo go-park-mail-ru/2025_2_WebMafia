@@ -10,14 +10,20 @@ DOCKER_COMPOSE := docker compose -f $(COMPOSE_PATH) --env-file $(DOCKER_ENV_PATH
 DB_URL = postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable
 MIGRATIONS_PATH = migrations
 
-.PHONY: test coverage-html clean docker-build docker-up docker-down docker-stop docker-logs
+.PHONY: test coverage-html clean docker-build docker-up docker-down docker-stop docker-logs generate
+
+# === Вспомогательные команды ===
+
+generate:
+	@echo "==> Generating..."
+	@go generate ./...
 
 
 # === Тестирование ===
 
 test:
 	@echo "==> Запускаем тесты и генерируем отчет о покрытии..."
-	@go test -coverprofile=coverage.out ./...
+	@go test -coverprofile=coverage.out $(shell go list ./... | grep -v /mocks)
 	@echo "\n==> Общее покрытие кода тестами:"
 	@go tool cover -func=coverage.out | grep total
 
@@ -53,10 +59,6 @@ docker-logs:
 
 
 # === Migrations === #
-
-migrate-up:
-	@echo "==> Применяем миграции..."
-	@migrate -path $(MIGRATIONS_PATH) -database "$(DB_URL)" up
 
 migrate-down:
 	@echo "==> Откатываем миграции..."

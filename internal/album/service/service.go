@@ -8,6 +8,7 @@ import (
 	"github.com/google/uuid"
 )
 
+//go:generate mockgen -destination=../../mocks/album/repository_mock.go -package=album spotify/internal/album/service IRepository
 type IRepository interface {
 	GetByID(ctx context.Context, id uuid.UUID) (*model.Album, error)
 	GetAll(ctx context.Context, limit, offset uint64) ([]model.Album, error)

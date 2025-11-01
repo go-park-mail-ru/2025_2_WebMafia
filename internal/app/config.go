@@ -18,19 +18,20 @@ import (
 )
 
 type Config struct {
-	Port            string
-	ShutdownTimeout time.Duration
-	ReadTimeout     time.Duration
-	WriteTimeout    time.Duration
-	IdleTimeout     time.Duration
-	AccessTokenTTL  time.Duration
-	JWTSecretKey    string
-	CSRFSecretKey   string
-	CSRFTokenTTL    time.Duration
-	CORS            middleware.CORSConfig
-	DB              postgres.Config
-	Minio           minio.Config
-	Logger          logger.Config
+	Port               string
+	ShutdownTimeout    time.Duration
+	ReadTimeout        time.Duration
+	WriteTimeout       time.Duration
+	IdleTimeout        time.Duration
+	AccessTokenTTL     time.Duration
+	JWTSecretKey       string
+	CSRFSecretKey      string
+	CSRFTokenTTL       time.Duration
+	CORS               middleware.CORSConfig
+	DB                 postgres.Config
+	Minio              minio.Config
+	Logger             logger.Config
+	AllowedAvatarTypes []string
 }
 
 func NewConfig() *Config {
@@ -76,6 +77,7 @@ func NewConfig() *Config {
 			Level: getEnv("LOGGER_LEVEL", logger.LevelInfo),
 			Mode:  getEnv("LOGGER_MODE", logger.ModeDev),
 		},
+		AllowedAvatarTypes: getEnvAsSlice("ALLOWED_AVATAR_TYPES", []string{"image/png", "image/jpeg", "image/webp"}),
 	}
 }
 

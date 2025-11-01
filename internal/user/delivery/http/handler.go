@@ -6,11 +6,13 @@ import (
 	"spotify/pkg/jwtmanager"
 )
 
+//go:generate mockgen -destination=../../../mocks/user/service_mock.go -package=user spotify/internal/user/delivery/http IService,CSRFManager
 type IService interface {
 	Register(ctx context.Context, req dto.RegisterRequest) (*dto.RegisterResponse, error)
 	Login(ctx context.Context, req dto.LoginRequest) (*dto.LoginResponse, error)
 	UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest) (*dto.UploadAvatarResponse, error)
 	DeleteAvatar(ctx context.Context, req dto.DeleteAvatarRequest) error
+	UpdateProfile(ctx context.Context, req dto.UpdateProfileRequest) (*dto.UpdateProfileResponse, error)
 }
 
 type CSRFManager interface {
@@ -18,15 +20,17 @@ type CSRFManager interface {
 }
 
 type Handler struct {
-	svc         IService
-	jwtManager  *jwtmanager.Manager
-	csrfManager CSRFManager
+	svc                IService
+	jwtManager         *jwtmanager.Manager
+	csrfManager        CSRFManager
+	allowedAvatarTypes []string
 }
 
-func NewHandler(svc IService, jwtManager *jwtmanager.Manager, csrfManager CSRFManager) *Handler {
+func NewHandler(svc IService, jwtManager *jwtmanager.Manager, csrfManager CSRFManager, allowedAvatarTypes []string) *Handler {
 	return &Handler{
-		svc:         svc,
-		jwtManager:  jwtManager,
-		csrfManager: csrfManager,
+		svc:                svc,
+		jwtManager:         jwtManager,
+		csrfManager:        csrfManager,
+		allowedAvatarTypes: allowedAvatarTypes,
 	}
 }

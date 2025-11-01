@@ -18,8 +18,11 @@ bucket_name = "avatars"
 if not minio_client.bucket_exists(bucket_name):
     minio_client.make_bucket(bucket_name)
 
-client_id = ""
-client_secret = ""
+with open("secret.json", "r", encoding="utf-8") as f:
+    client = json.load(f)
+
+client_id = client['client_id']
+client_secret = client['client_secret']
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 output_file = os.path.join(base_dir, "..", "migrations", "010_insert_API_data.up.sql")
@@ -109,14 +112,6 @@ artist_ids = [
     'UCmeMTJZRa80cGlMiNpXh64Q',
     """
 
-def sanitize_filename(name):
-    name = name.replace("/", "")
-    name = name.replace("\\", "")
-    name = name.replace("'", "").replace('"', "")
-    name = name.replace("#", "")
-    name = name.replace('?', "")
-    return name
-
 sql_statements = [
     "-- SQL миграция для вставки данных из YouTube Music\n",
     f"-- Генерация: {datetime.now().isoformat()}\n\n",
@@ -133,17 +128,18 @@ for artist_id in artist_ids:
     try:
         # --- Получаем информацию об артисте ---
         artist_info = yt.get_artist(artist_id)
+        artist_id = artist_info.get('channelId')
         artist_name = artist_info.get('name').replace("'", "''")
         print(f"=== Обрабатывается артист {artist_name} ===")
 
         results = sp.search(q=artist_name, type="artist", limit=1)
         spotify_artist = results['artists']['items'][0]
-        artist_avatar_url = upload_avatar(spotify_artist['images'][2]['url'], f"artists/{sanitize_filename(artist_name)}_avatar.webp",
+        artist_avatar_url = upload_avatar(spotify_artist['images'][2]['url'], f"artists/{artist_id}_avatar.webp",
                                           bucket_name, minio_client)
 
         artist_description = (artist_info.get('description', '-') or '').replace("'", "''")
         artist_thumbnails = artist_info.get('thumbnails', [])
-        artist_header_url = upload_avatar(artist_thumbnails[-1]['url'], f"artists/{sanitize_filename(artist_name)}_header.webp",
+        artist_header_url = upload_avatar(artist_thumbnails[-1]['url'], f"artists/{artist_id}_header.webp",
                                           bucket_name, minio_client)
 
         sql_statements.append(f"-- Артист: {artist_name}\n")
@@ -182,8 +178,9 @@ for artist_id in artist_ids:
         # --- Обработка альбомов и синглов ---
         for alb in albums_list:
             title = alb.get('title', '—').replace("'", "''")
+            album_id = alb.get('browseId')
             thumbnails = alb.get('thumbnails', [])
-            avatar_url = upload_avatar(thumbnails[-1]['url'], f"albums/{sanitize_filename(title)}.webp", bucket_name, minio_client)
+            avatar_url = upload_avatar(thumbnails[-1]['url'], f"albums/{album_id}.webp", bucket_name, minio_client)
             release_year = alb.get('year')
             alb_type = alb.get('type')
 

@@ -80,7 +80,7 @@ func NewApp(cfg *Config) (*App, error) {
 	csrfManager := csrfmanager.NewManager(cfg.CSRFSecretKey, cfg.CSRFTokenTTL)
 	csrfMiddleware := middleware.NewCSRFMiddleware(csrfManager)
 
-	userHandler := userDelivery.NewHandler(userSvc, jwtManager, csrfManager)
+	userHandler := userDelivery.NewHandler(userSvc, jwtManager, csrfManager, cfg.AllowedAvatarTypes)
 	artistHandler := artistDelivery.NewHandler(artistSvc)
 	albumHandler := albumDelivery.NewHandler(albumSvc)
 	trackHandler := trackDelivery.NewHandler(trackSvc)

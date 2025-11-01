@@ -20,15 +20,17 @@ type CSRFManager interface {
 }
 
 type Handler struct {
-	svc         IService
-	jwtManager  *jwtmanager.Manager
-	csrfManager CSRFManager
+	svc                IService
+	jwtManager         *jwtmanager.Manager
+	csrfManager        CSRFManager
+	allowedAvatarTypes []string
 }
 
-func NewHandler(svc IService, jwtManager *jwtmanager.Manager, csrfManager CSRFManager) *Handler {
+func NewHandler(svc IService, jwtManager *jwtmanager.Manager, csrfManager CSRFManager, allowedAvatarTypes []string) *Handler {
 	return &Handler{
-		svc:         svc,
-		jwtManager:  jwtManager,
-		csrfManager: csrfManager,
+		svc:                svc,
+		jwtManager:         jwtManager,
+		csrfManager:        csrfManager,
+		allowedAvatarTypes: allowedAvatarTypes,
 	}
 }

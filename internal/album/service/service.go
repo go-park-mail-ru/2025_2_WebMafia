@@ -27,3 +27,7 @@ func New(repo IRepository, artistService *artistService.Service) *Service {
 		artistService: artistService,
 	}
 }
+
+func (s *Service) SetArtistService(artistService *artistService.Service) {
+	s.artistService = artistService
+}

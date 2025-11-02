@@ -69,10 +69,13 @@ func NewApp(cfg *Config) (*App, error) {
 	trackRepository := trackRepo.New(db)
 
 	userSvc := userService.NewUserService(userRepository, avatarStorage)
-	artistSvc := artistService.New(artistRepository)
+
+	artistSvc := artistService.New(artistRepository, nil)
 
 	albumSvc := albumService.New(albumRepository, artistSvc)
 	trackSvc := trackService.New(trackRepository, albumSvc, artistSvc)
+
+	artistSvc.SetTrackService(trackSvc)
 
 	jwtManager := jwtmanager.NewManager(cfg.JWTSecretKey, cfg.AccessTokenTTL)
 	authMiddleware := middleware.NewAuthMiddleware(jwtManager)

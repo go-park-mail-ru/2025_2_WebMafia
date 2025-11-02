@@ -43,7 +43,7 @@ func NewRouter(logger logger.Logger,
 
 	handlers.ArtistHandler.RegisterRoutes(public)
 	handlers.AlbumHandler.RegisterRoutes(public)
-	handlers.TrackHandler.RegisterRoutes(public)
+	handlers.TrackHandler.RegisterRoutes(public, protected, csrfProtected)
 
 	return r
 }

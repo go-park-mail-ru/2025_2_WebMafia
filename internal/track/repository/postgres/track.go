@@ -9,10 +9,12 @@ import (
 	"github.com/google/uuid"
 )
 
+const maxIDsInBatch = 100
+
 func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Track, error) {
 	const op = "repository.GetByID"
 	query := `
-		SELECT track_id, title, duration_ms, file_url, description, created_at, updated_at
+		SELECT track_id, title, duration_ms, file_url, play_count, description, created_at, updated_at
 		FROM track
 		WHERE track_id = $1`
 	var track model.Track
@@ -21,6 +23,7 @@ func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Track, e
 		&track.Title,
 		&track.DurationMs,
 		&track.FileURL,
+		&track.PlayCount,
 		&track.Description,
 		&track.CreatedAt,
 		&track.UpdatedAt,
@@ -34,7 +37,7 @@ func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Track, e
 func (r *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.Track, error) {
 	const op = "repository.GetAll"
 	query := `
-		SELECT track_id, title, duration_ms, file_url, description, created_at, updated_at
+		SELECT track_id, title, duration_ms, file_url, play_count, description, created_at, updated_at
 		FROM track
 		ORDER BY created_at
 		LIMIT $1 OFFSET $2`
@@ -57,7 +60,7 @@ func (r *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.
 func (r *Repository) GetByArtistID(ctx context.Context, artistID uuid.UUID, limit, offset uint64) ([]model.Track, error) {
 	const op = "repository.GetByArtistID"
 	query := `
-		SELECT t.track_id, t.title, t.duration_ms, t.file_url, t.description, t.created_at, t.updated_at
+		SELECT t.track_id, t.title, t.duration_ms, t.file_url, t.play_count, t.description, t.created_at, t.updated_at
 		FROM track t
 		JOIN track_artist ta ON t.track_id = ta.track_id
 		WHERE ta.artist_id = $1
@@ -82,7 +85,7 @@ func (r *Repository) GetByArtistID(ctx context.Context, artistID uuid.UUID, limi
 func (r *Repository) GetByAlbumID(ctx context.Context, albumID uuid.UUID, limit, offset uint64) ([]model.Track, error) {
 	const op = "repository.GetByAlbumID"
 	query := `
-		SELECT t.track_id, t.title, t.duration_ms, t.file_url, t.description, t.created_at, t.updated_at
+		SELECT t.track_id, t.title, t.duration_ms, t.file_url, t.play_count, t.description, t.created_at, t.updated_at
 		FROM track t
 		JOIN track_album ta ON t.track_id = ta.track_id
 		WHERE ta.album_id = $1
@@ -107,7 +110,7 @@ func (r *Repository) GetByAlbumID(ctx context.Context, albumID uuid.UUID, limit,
 func (r *Repository) GetByGenreID(ctx context.Context, genreID uuid.UUID, limit, offset uint64) ([]model.Track, error) {
 	const op = "repository.GetByGenreID"
 	query := `
-		SELECT t.track_id, t.title, t.duration_ms, t.file_url, t.description, t.created_at, t.updated_at
+		SELECT t.track_id, t.title, t.duration_ms, t.file_url, t.play_count, t.description, t.created_at, t.updated_at
 		FROM track t
 		JOIN track_genre tg ON t.track_id = tg.track_id
 		WHERE tg.genre_id = $1
@@ -218,6 +221,89 @@ func (r *Repository) GetGenresForTracks(ctx context.Context, trackIDs []uuid.UUI
 	return result, nil
 }
 
+func (r *Repository) IncrementPlayCount(ctx context.Context, trackID uuid.UUID) error {
+	const op = "repository.IncrementPlayCount"
+	query := `UPDATE track SET play_count = play_count + 1 WHERE track_id = $1`
+
+	result, err := r.db.ExecContext(ctx, query, trackID)
+	if err != nil {
+		return fmt.Errorf("[%s]: %w", op, mapErrors(err))
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("[%s]: could not get rows affected: %w", op, mapErrors(err))
+	}
+
+	if rowsAffected == 0 {
+		return ErrNotFound
+	}
+
+	return nil
+}
+
+func (r *Repository) GetTotalPlaysByArtistID(ctx context.Context, artistID uuid.UUID) (int64, error) {
+	const op = "repository.GetTotalPlaysByArtistID"
+	query := `
+		SELECT COALESCE(SUM(t.play_count), 0)
+		FROM track t
+		JOIN track_artist ta ON t.track_id = ta.track_id
+		WHERE ta.artist_id = $1`
+
+	var totalPlays int64
+	err := r.db.QueryRowContext(ctx, query, artistID).Scan(&totalPlays)
+	if err != nil {
+		return 0, fmt.Errorf("[%s]: %w", op, mapErrors(err))
+	}
+
+	return totalPlays, nil
+}
+
+func (r *Repository) GetTotalPlaysByArtistIDs(ctx context.Context, artistIDs []uuid.UUID) (map[uuid.UUID]int64, error) {
+	const op = "repository.GetTotalPlaysByArtistIDs"
+	if len(artistIDs) == 0 {
+		return nil, nil
+	}
+
+	if len(artistIDs) > maxIDsInBatch {
+		return nil, fmt.Errorf("[%s]: too many IDs requested", op)
+	}
+
+	query := `
+        SELECT ta.artist_id, COALESCE(SUM(t.play_count), 0) as total_plays
+        FROM track_artist ta
+        JOIN track t ON t.track_id = ta.track_id
+        WHERE ta.artist_id = ANY($1)
+        GROUP BY ta.artist_id`
+
+	rows, err := r.db.QueryContext(ctx, query, artistIDs)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: query failed: %w", op, mapErrors(err))
+	}
+	defer rows.Close()
+
+	playsMap := make(map[uuid.UUID]int64)
+	for rows.Next() {
+		var artistID uuid.UUID
+		var totalPlays int64
+		if err := rows.Scan(&artistID, &totalPlays); err != nil {
+			return nil, fmt.Errorf("[%s]: scan failed: %w", op, mapErrors(err))
+		}
+		playsMap[artistID] = totalPlays
+	}
+	if err = rows.Err(); err != nil {
+		return nil, fmt.Errorf("[%s]: rows iteration failed: %w", op, mapErrors(err))
+	}
+
+	for _, id := range artistIDs {
+		if _, ok := playsMap[id]; !ok {
+			playsMap[id] = 0
+		}
+	}
+
+	return playsMap, nil
+}
+
 func selectTracks(rows *sql.Rows) ([]model.Track, error) {
 	tracks := make([]model.Track, 0)
 	for rows.Next() {
@@ -227,6 +313,7 @@ func selectTracks(rows *sql.Rows) ([]model.Track, error) {
 			&track.Title,
 			&track.DurationMs,
 			&track.FileURL,
+			&track.PlayCount,
 			&track.Description,
 			&track.CreatedAt,
 			&track.UpdatedAt,

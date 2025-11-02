@@ -9,6 +9,8 @@ import (
 	"github.com/google/uuid"
 )
 
+const maxIDsInBatch = 100
+
 func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Track, error) {
 	const op = "repository.GetByID"
 	query := `
@@ -261,6 +263,10 @@ func (r *Repository) GetTotalPlaysByArtistIDs(ctx context.Context, artistIDs []u
 	const op = "repository.GetTotalPlaysByArtistIDs"
 	if len(artistIDs) == 0 {
 		return nil, nil
+	}
+
+	if len(artistIDs) > maxIDsInBatch {
+		return nil, fmt.Errorf("[%s]: too many IDs requested", op)
 	}
 
 	query := `

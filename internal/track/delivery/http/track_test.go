@@ -186,3 +186,39 @@ func TestHandler_GetTracksByGenre(t *testing.T) {
 		assert.Equal(t, http.StatusBadRequest, rr.Code)
 	})
 }
+
+func TestHandler_RegisterPlay(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	mockService := mock_track.NewMockIService(ctrl)
+	handler := NewHandler(mockService)
+	router := mux.NewRouter()
+	router.HandleFunc("/tracks/{id}/listen", handler.RegisterPlay)
+
+	trackID := uuid.New()
+
+	t.Run("success", func(t *testing.T) {
+		mockService.EXPECT().RegisterPlay(gomock.Any(), trackID).Return(nil)
+		url := fmt.Sprintf("/tracks/%s/listen", trackID)
+		req := httptest.NewRequest(http.MethodPost, url, nil)
+		rr := httptest.NewRecorder()
+		router.ServeHTTP(rr, req)
+		assert.Equal(t, http.StatusAccepted, rr.Code)
+	})
+
+	t.Run("not found", func(t *testing.T) {
+		mockService.EXPECT().RegisterPlay(gomock.Any(), trackID).Return(service.ErrNotFound)
+		url := fmt.Sprintf("/tracks/%s/listen", trackID)
+		req := httptest.NewRequest(http.MethodPost, url, nil)
+		rr := httptest.NewRecorder()
+		router.ServeHTTP(rr, req)
+		assert.Equal(t, http.StatusNotFound, rr.Code)
+	})
+
+	t.Run("invalid id", func(t *testing.T) {
+		url := "/tracks/invalid-uuid/listen"
+		req := httptest.NewRequest(http.MethodPost, url, nil)
+		rr := httptest.NewRecorder()
+		router.ServeHTTP(rr, req)
+		assert.Equal(t, http.StatusBadRequest, rr.Code)
+	})
+}

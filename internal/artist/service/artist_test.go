@@ -33,11 +33,13 @@ func TestArtistService_GetArtistByID(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockRepo := mock_artist.NewMockIRepository(ctrl)
-	service := New(mockRepo)
+	mockTrackSvc := mock_artist.NewMockITrackService(ctrl)
+	service := New(mockRepo, mockTrackSvc)
 	artistModel := newModelArtist()
 
 	t.Run("success", func(t *testing.T) {
 		mockRepo.EXPECT().GetByID(gomock.Any(), artistModel.ID).Return(artistModel, nil)
+		mockTrackSvc.EXPECT().GetTotalPlaysByArtistID(gomock.Any(), artistModel.ID).Return(int64(100), nil)
 
 		artistDTO, err := service.GetArtistByID(context.Background(), artistModel.ID)
 
@@ -46,6 +48,7 @@ func TestArtistService_GetArtistByID(t *testing.T) {
 		assert.Equal(t, artistModel.ID.String(), artistDTO.ID)
 		assert.Equal(t, artistModel.Name, artistDTO.Name)
 		assert.Equal(t, artistModel.AvatarURL, artistDTO.AvatarURL)
+		assert.Equal(t, int64(100), artistDTO.PlayCount)
 	})
 
 	t.Run("not found", func(t *testing.T) {
@@ -74,12 +77,15 @@ func TestArtistService_GetAllArtists(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockRepo := mock_artist.NewMockIRepository(ctrl)
-	service := New(mockRepo)
+	mockTrackSvc := mock_artist.NewMockITrackService(ctrl)
+	service := New(mockRepo, mockTrackSvc)
 	artistModels := []model.Artist{*newModelArtist(), *newModelArtist()}
 	limit, offset := uint64(10), uint64(0)
 
 	t.Run("success", func(t *testing.T) {
+		artistIDs := []uuid.UUID{artistModels[0].ID, artistModels[1].ID}
 		mockRepo.EXPECT().GetAll(gomock.Any(), limit, offset).Return(artistModels, nil)
+		mockTrackSvc.EXPECT().GetTotalPlaysByArtistIDs(gomock.Any(), artistIDs).Return(make(map[uuid.UUID]int64), nil)
 
 		artistDTOs, err := service.GetAllArtists(context.Background(), limit, offset)
 
@@ -114,7 +120,8 @@ func TestArtistService_GetArtistsByIDs(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockRepo := mock_artist.NewMockIRepository(ctrl)
-	service := New(mockRepo)
+	mockTrackSvc := mock_artist.NewMockITrackService(ctrl)
+	service := New(mockRepo, mockTrackSvc)
 	artistModel1 := newModelArtist()
 	artistModel2 := newModelArtist()
 	artists := []model.Artist{*artistModel1, *artistModel2}
@@ -122,6 +129,7 @@ func TestArtistService_GetArtistsByIDs(t *testing.T) {
 
 	t.Run("success", func(t *testing.T) {
 		mockRepo.EXPECT().GetByIDs(gomock.Any(), ids).Return(artists, nil)
+		mockTrackSvc.EXPECT().GetTotalPlaysByArtistIDs(gomock.Any(), ids).Return(make(map[uuid.UUID]int64), nil)
 
 		artistDTOs, err := service.GetArtistsByIDs(context.Background(), ids)
 

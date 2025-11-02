@@ -13,7 +13,7 @@ import (
 
 	artist_service "spotify/internal/artist/service"
 	mock_album "spotify/internal/mocks/album"
-	mock_artist_repo "spotify/internal/mocks/artist"
+	mock_artist "spotify/internal/mocks/artist"
 	"spotify/internal/model"
 )
 
@@ -38,8 +38,9 @@ func TestAlbumService_GetAlbumByID(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockAlbumRepo := mock_album.NewMockIRepository(ctrl)
-	mockArtistRepo := mock_artist_repo.NewMockIRepository(ctrl)
-	realArtistService := artist_service.New(mockArtistRepo)
+	mockArtistRepo := mock_artist.NewMockIRepository(ctrl)
+	mockTrackSvc := mock_artist.NewMockITrackService(ctrl)
+	realArtistService := artist_service.New(mockArtistRepo, mockTrackSvc)
 	albumService := New(mockAlbumRepo, realArtistService)
 
 	artistModel := newArtistModel(uuid.New())
@@ -48,6 +49,7 @@ func TestAlbumService_GetAlbumByID(t *testing.T) {
 	t.Run("success", func(t *testing.T) {
 		mockAlbumRepo.EXPECT().GetByID(gomock.Any(), albumModel.ID).Return(albumModel, nil)
 		mockArtistRepo.EXPECT().GetByID(gomock.Any(), albumModel.ArtistID).Return(artistModel, nil)
+		mockTrackSvc.EXPECT().GetTotalPlaysByArtistID(gomock.Any(), artistModel.ID).Return(int64(0), nil)
 
 		albumDTO, err := albumService.GetAlbumByID(context.Background(), albumModel.ID)
 
@@ -79,8 +81,9 @@ func TestAlbumService_GetAllAlbums(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockAlbumRepo := mock_album.NewMockIRepository(ctrl)
-	mockArtistRepo := mock_artist_repo.NewMockIRepository(ctrl)
-	realArtistService := artist_service.New(mockArtistRepo)
+	mockArtistRepo := mock_artist.NewMockIRepository(ctrl)
+	mockTrackSvc := mock_artist.NewMockITrackService(ctrl)
+	realArtistService := artist_service.New(mockArtistRepo, mockTrackSvc)
 	albumService := New(mockAlbumRepo, realArtistService)
 
 	artistModel := newArtistModel(uuid.New())
@@ -92,6 +95,7 @@ func TestAlbumService_GetAllAlbums(t *testing.T) {
 
 		mockAlbumRepo.EXPECT().GetAll(gomock.Any(), gomock.Any(), gomock.Any()).Return(albumModels, nil)
 		mockArtistRepo.EXPECT().GetByIDs(gomock.Any(), []uuid.UUID{albumModel.ArtistID}).Return(artistModels, nil)
+		mockTrackSvc.EXPECT().GetTotalPlaysByArtistIDs(gomock.Any(), gomock.Any()).Return(make(map[uuid.UUID]int64), nil)
 
 		albumDTOs, err := albumService.GetAllAlbums(context.Background(), 10, 0)
 
@@ -125,8 +129,9 @@ func TestAlbumService_GetAlbumsByArtistID(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockAlbumRepo := mock_album.NewMockIRepository(ctrl)
-	mockArtistRepo := mock_artist_repo.NewMockIRepository(ctrl)
-	realArtistService := artist_service.New(mockArtistRepo)
+	mockArtistRepo := mock_artist.NewMockIRepository(ctrl)
+	mockTrackSvc := mock_artist.NewMockITrackService(ctrl)
+	realArtistService := artist_service.New(mockArtistRepo, mockTrackSvc)
 	albumService := New(mockAlbumRepo, realArtistService)
 
 	artistModel := newArtistModel(uuid.New())
@@ -135,6 +140,7 @@ func TestAlbumService_GetAlbumsByArtistID(t *testing.T) {
 	t.Run("success", func(t *testing.T) {
 		mockAlbumRepo.EXPECT().GetByArtistID(gomock.Any(), artistModel.ID, gomock.Any(), gomock.Any()).Return([]model.Album{*albumModel}, nil)
 		mockArtistRepo.EXPECT().GetByID(gomock.Any(), artistModel.ID).Return(artistModel, nil)
+		mockTrackSvc.EXPECT().GetTotalPlaysByArtistID(gomock.Any(), artistModel.ID).Return(int64(0), nil)
 
 		albumDTOs, err := albumService.GetAlbumsByArtistID(context.Background(), artistModel.ID, 10, 0)
 
@@ -168,8 +174,9 @@ func TestAlbumService_GetAlbumsByIDs(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockAlbumRepo := mock_album.NewMockIRepository(ctrl)
-	mockArtistRepo := mock_artist_repo.NewMockIRepository(ctrl)
-	realArtistService := artist_service.New(mockArtistRepo)
+	mockArtistRepo := mock_artist.NewMockIRepository(ctrl)
+	mockTrackSvc := mock_artist.NewMockITrackService(ctrl)
+	realArtistService := artist_service.New(mockArtistRepo, mockTrackSvc)
 	albumService := New(mockAlbumRepo, realArtistService)
 
 	artistModel := newArtistModel(uuid.New())

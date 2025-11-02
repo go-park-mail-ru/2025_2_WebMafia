@@ -161,3 +161,47 @@ func (mr *MockIRepositoryMockRecorder) GetGenresForTracks(ctx, trackIDs any) *go
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGenresForTracks", reflect.TypeOf((*MockIRepository)(nil).GetGenresForTracks), ctx, trackIDs)
 }
+
+// GetTotalPlaysByArtistID mocks base method.
+func (m *MockIRepository) GetTotalPlaysByArtistID(ctx context.Context, artistID uuid.UUID) (int64, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTotalPlaysByArtistID", ctx, artistID)
+	ret0, _ := ret[0].(int64)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTotalPlaysByArtistID indicates an expected call of GetTotalPlaysByArtistID.
+func (mr *MockIRepositoryMockRecorder) GetTotalPlaysByArtistID(ctx, artistID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTotalPlaysByArtistID", reflect.TypeOf((*MockIRepository)(nil).GetTotalPlaysByArtistID), ctx, artistID)
+}
+
+// GetTotalPlaysByArtistIDs mocks base method.
+func (m *MockIRepository) GetTotalPlaysByArtistIDs(ctx context.Context, artistIDs []uuid.UUID) (map[uuid.UUID]int64, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTotalPlaysByArtistIDs", ctx, artistIDs)
+	ret0, _ := ret[0].(map[uuid.UUID]int64)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTotalPlaysByArtistIDs indicates an expected call of GetTotalPlaysByArtistIDs.
+func (mr *MockIRepositoryMockRecorder) GetTotalPlaysByArtistIDs(ctx, artistIDs any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTotalPlaysByArtistIDs", reflect.TypeOf((*MockIRepository)(nil).GetTotalPlaysByArtistIDs), ctx, artistIDs)
+}
+
+// IncrementPlayCount mocks base method.
+func (m *MockIRepository) IncrementPlayCount(ctx context.Context, trackID uuid.UUID) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "IncrementPlayCount", ctx, trackID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// IncrementPlayCount indicates an expected call of IncrementPlayCount.
+func (mr *MockIRepositoryMockRecorder) IncrementPlayCount(ctx, trackID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "IncrementPlayCount", reflect.TypeOf((*MockIRepository)(nil).IncrementPlayCount), ctx, trackID)
+}

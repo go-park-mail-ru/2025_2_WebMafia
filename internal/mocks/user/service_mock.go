@@ -85,6 +85,21 @@ func (mr *MockIServiceMockRecorder) Register(ctx, req any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Register", reflect.TypeOf((*MockIService)(nil).Register), ctx, req)
 }
 
+// UpdateProfile mocks base method.
+func (m *MockIService) UpdateProfile(ctx context.Context, req dto.UpdateProfileRequest) (*dto.UpdateProfileResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateProfile", ctx, req)
+	ret0, _ := ret[0].(*dto.UpdateProfileResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UpdateProfile indicates an expected call of UpdateProfile.
+func (mr *MockIServiceMockRecorder) UpdateProfile(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateProfile", reflect.TypeOf((*MockIService)(nil).UpdateProfile), ctx, req)
+}
+
 // UploadAvatar mocks base method.
 func (m *MockIService) UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest) (*dto.UploadAvatarResponse, error) {
 	m.ctrl.T.Helper()

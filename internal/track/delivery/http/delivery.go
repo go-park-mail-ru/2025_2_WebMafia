@@ -14,6 +14,7 @@ type IService interface {
 	GetTracksByArtistID(ctx context.Context, artistID uuid.UUID, limit, offset uint64) ([]dto.Track, error)
 	GetTracksByAlbumID(ctx context.Context, albumID uuid.UUID, limit, offset uint64) ([]dto.Track, error)
 	GetTracksByGenreID(ctx context.Context, genreID uuid.UUID, limit, offset uint64) ([]dto.Track, error)
+	RegisterPlay(ctx context.Context, trackID uuid.UUID) error
 }
 
 type Handler struct {

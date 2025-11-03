@@ -116,3 +116,17 @@ func (mr *MockIServiceMockRecorder) GetTracksByGenreID(ctx, genreID, limit, offs
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTracksByGenreID", reflect.TypeOf((*MockIService)(nil).GetTracksByGenreID), ctx, genreID, limit, offset)
 }
+
+// RegisterPlay mocks base method.
+func (m *MockIService) RegisterPlay(ctx context.Context, trackID uuid.UUID) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RegisterPlay", ctx, trackID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RegisterPlay indicates an expected call of RegisterPlay.
+func (mr *MockIServiceMockRecorder) RegisterPlay(ctx, trackID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RegisterPlay", reflect.TypeOf((*MockIService)(nil).RegisterPlay), ctx, trackID)
+}

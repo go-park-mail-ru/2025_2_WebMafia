@@ -64,6 +64,33 @@ func (s *Service) GetTracksByGenreID(ctx context.Context, genreID uuid.UUID, lim
 	return s.enrichTracks(ctx, trackModels)
 }
 
+func (s *Service) RegisterPlay(ctx context.Context, trackID uuid.UUID) error {
+	const op = "service.RegisterPlay"
+	err := s.trackRepo.IncrementPlayCount(ctx, trackID)
+	if err != nil {
+		return fmt.Errorf("[%s]: %w", op, mapError(err))
+	}
+	return nil
+}
+
+func (s *Service) GetTotalPlaysByArtistID(ctx context.Context, artistID uuid.UUID) (int64, error) {
+	const op = "service.GetTotalPlaysByArtistID"
+	totalPlays, err := s.trackRepo.GetTotalPlaysByArtistID(ctx, artistID)
+	if err != nil {
+		return 0, fmt.Errorf("[%s]: %w", op, mapError(err))
+	}
+	return totalPlays, nil
+}
+
+func (s *Service) GetTotalPlaysByArtistIDs(ctx context.Context, artistIDs []uuid.UUID) (map[uuid.UUID]int64, error) {
+	const op = "service.GetTotalPlaysByArtistIDs"
+	playsMap, err := s.trackRepo.GetTotalPlaysByArtistIDs(ctx, artistIDs)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: %w", op, mapError(err))
+	}
+	return playsMap, nil
+}
+
 func (s *Service) enrichTracks(ctx context.Context, tracks []model.Track) ([]dto.Track, error) {
 	const op = "service.enrichTracks"
 	if len(tracks) == 0 {
@@ -125,6 +152,7 @@ func (s *Service) enrichTracks(ctx context.Context, tracks []model.Track) ([]dto
 			Title:     track.Title,
 			DurationS: track.DurationS,
 			FileURL:   track.FileURL,
+			PlayCount: track.PlayCount,
 			Album:     album,
 			Artists:   artists,
 			Genres:    genres,

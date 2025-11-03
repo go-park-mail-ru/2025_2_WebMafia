@@ -35,6 +35,7 @@ func newMockTrack() *model.Track {
 		Title:       "Test Track",
 		DurationMs:  180000,
 		FileURL:     "http://example.com/track.mp3",
+		PlayCount:   0,
 		Description: sql.NullString{String: "A test track", Valid: true},
 		CreatedAt:   time.Now(),
 		UpdatedAt:   time.Now(),
@@ -48,13 +49,13 @@ func TestTrackRepository_SimpleGets(t *testing.T) {
 
 	repo := New(db)
 	mockTrack := newMockTrack()
-	columns := []string{"track_id", "title", "duration_ms", "file_url", "description", "created_at", "updated_at"}
-	baseQuery := regexp.QuoteMeta(`SELECT track_id, title, duration_ms, file_url, description, created_at, updated_at FROM track`)
-	joinQuery := regexp.QuoteMeta(`SELECT t.track_id, t.title, t.duration_ms, t.file_url, t.description, t.created_at, t.updated_at FROM track t`)
+	columns := []string{"track_id", "title", "duration_ms", "file_url", "play_count", "description", "created_at", "updated_at"}
+	baseQuery := regexp.QuoteMeta(`SELECT track_id, title, duration_ms, file_url, play_count, description, created_at, updated_at FROM track`)
+	joinQuery := regexp.QuoteMeta(`SELECT t.track_id, t.title, t.duration_ms, t.file_url, t.play_count, t.description, t.created_at, t.updated_at FROM track t`)
 
 	t.Run("GetByID", func(t *testing.T) {
 		rows := sqlmock.NewRows(columns).
-			AddRow(mockTrack.ID, mockTrack.Title, mockTrack.DurationMs, mockTrack.FileURL, mockTrack.Description, mockTrack.CreatedAt, mockTrack.UpdatedAt)
+			AddRow(mockTrack.ID, mockTrack.Title, mockTrack.DurationMs, mockTrack.FileURL, mockTrack.PlayCount, mockTrack.Description, mockTrack.CreatedAt, mockTrack.UpdatedAt)
 		mock.ExpectQuery(baseQuery).WithArgs(mockTrack.ID).WillReturnRows(rows)
 
 		track, err := repo.GetByID(context.Background(), mockTrack.ID)
@@ -65,7 +66,7 @@ func TestTrackRepository_SimpleGets(t *testing.T) {
 
 	t.Run("GetAll", func(t *testing.T) {
 		rows := sqlmock.NewRows(columns).
-			AddRow(mockTrack.ID, mockTrack.Title, mockTrack.DurationMs, mockTrack.FileURL, mockTrack.Description, mockTrack.CreatedAt, mockTrack.UpdatedAt)
+			AddRow(mockTrack.ID, mockTrack.Title, mockTrack.DurationMs, mockTrack.FileURL, mockTrack.PlayCount, mockTrack.Description, mockTrack.CreatedAt, mockTrack.UpdatedAt)
 		mock.ExpectQuery(baseQuery).WithArgs(uint64(10), uint64(0)).WillReturnRows(rows)
 
 		tracks, err := repo.GetAll(context.Background(), 10, 0)
@@ -78,7 +79,7 @@ func TestTrackRepository_SimpleGets(t *testing.T) {
 	t.Run("GetByArtistID", func(t *testing.T) {
 		artistID := uuid.New()
 		rows := sqlmock.NewRows(columns).
-			AddRow(mockTrack.ID, mockTrack.Title, mockTrack.DurationMs, mockTrack.FileURL, mockTrack.Description, mockTrack.CreatedAt, mockTrack.UpdatedAt)
+			AddRow(mockTrack.ID, mockTrack.Title, mockTrack.DurationMs, mockTrack.FileURL, mockTrack.PlayCount, mockTrack.Description, mockTrack.CreatedAt, mockTrack.UpdatedAt)
 		mock.ExpectQuery(joinQuery).WithArgs(artistID, uint64(10), uint64(0)).WillReturnRows(rows)
 
 		tracks, err := repo.GetByArtistID(context.Background(), artistID, 10, 0)
@@ -90,7 +91,7 @@ func TestTrackRepository_SimpleGets(t *testing.T) {
 	t.Run("GetByAlbumID", func(t *testing.T) {
 		albumID := uuid.New()
 		rows := sqlmock.NewRows(columns).
-			AddRow(mockTrack.ID, mockTrack.Title, mockTrack.DurationMs, mockTrack.FileURL, mockTrack.Description, mockTrack.CreatedAt, mockTrack.UpdatedAt)
+			AddRow(mockTrack.ID, mockTrack.Title, mockTrack.DurationMs, mockTrack.FileURL, mockTrack.PlayCount, mockTrack.Description, mockTrack.CreatedAt, mockTrack.UpdatedAt)
 		mock.ExpectQuery(joinQuery).WithArgs(albumID, uint64(10), uint64(0)).WillReturnRows(rows)
 
 		tracks, err := repo.GetByAlbumID(context.Background(), albumID, 10, 0)
@@ -102,7 +103,7 @@ func TestTrackRepository_SimpleGets(t *testing.T) {
 	t.Run("GetByGenreID", func(t *testing.T) {
 		genreID := uuid.New()
 		rows := sqlmock.NewRows(columns).
-			AddRow(mockTrack.ID, mockTrack.Title, mockTrack.DurationMs, mockTrack.FileURL, mockTrack.Description, mockTrack.CreatedAt, mockTrack.UpdatedAt)
+			AddRow(mockTrack.ID, mockTrack.Title, mockTrack.DurationMs, mockTrack.FileURL, mockTrack.PlayCount, mockTrack.Description, mockTrack.CreatedAt, mockTrack.UpdatedAt)
 		mock.ExpectQuery(joinQuery).WithArgs(genreID, uint64(10), uint64(0)).WillReturnRows(rows)
 
 		tracks, err := repo.GetByGenreID(context.Background(), genreID, 10, 0)
@@ -198,6 +199,62 @@ func TestTrackRepository_JunctionTableGets(t *testing.T) {
 
 		_, err := repo.GetGenresForTracks(context.Background(), trackIDs)
 		assert.Error(t, err)
+		require.NoError(t, mock.ExpectationsWereMet())
+	})
+}
+
+func TestTrackRepository_UpdatesAndAggregates(t *testing.T) {
+	db, mock, err := sqlmock.New(sqlmock.ValueConverterOption(pgxUUIDValueConverter{}))
+	require.NoError(t, err)
+	defer db.Close()
+	repo := New(db)
+
+	t.Run("IncrementPlayCount success", func(t *testing.T) {
+		trackID := uuid.New()
+		query := regexp.QuoteMeta(`UPDATE track SET play_count = play_count + 1 WHERE track_id = $1`)
+		mock.ExpectExec(query).WithArgs(trackID).WillReturnResult(sqlmock.NewResult(1, 1))
+
+		err := repo.IncrementPlayCount(context.Background(), trackID)
+		assert.NoError(t, err)
+		require.NoError(t, mock.ExpectationsWereMet())
+	})
+
+	t.Run("IncrementPlayCount not found", func(t *testing.T) {
+		trackID := uuid.New()
+		query := regexp.QuoteMeta(`UPDATE track SET play_count = play_count + 1 WHERE track_id = $1`)
+		mock.ExpectExec(query).WithArgs(trackID).WillReturnResult(sqlmock.NewResult(0, 0))
+
+		err := repo.IncrementPlayCount(context.Background(), trackID)
+		assert.ErrorIs(t, err, ErrNotFound)
+		require.NoError(t, mock.ExpectationsWereMet())
+	})
+
+	t.Run("GetTotalPlaysByArtistID", func(t *testing.T) {
+		artistID := uuid.New()
+		query := regexp.QuoteMeta(`SELECT COALESCE(SUM(t.play_count), 0) FROM track t JOIN track_artist ta ON t.track_id = ta.track_id WHERE ta.artist_id = $1`)
+		rows := sqlmock.NewRows([]string{"coalesce"}).AddRow(12345)
+		mock.ExpectQuery(query).WithArgs(artistID).WillReturnRows(rows)
+
+		total, err := repo.GetTotalPlaysByArtistID(context.Background(), artistID)
+		assert.NoError(t, err)
+		assert.Equal(t, int64(12345), total)
+		require.NoError(t, mock.ExpectationsWereMet())
+	})
+
+	t.Run("GetTotalPlaysByArtistIDs", func(t *testing.T) {
+		artistID1, artistID2 := uuid.New(), uuid.New()
+		artistIDs := []uuid.UUID{artistID1, artistID2}
+		query := regexp.QuoteMeta(`SELECT ta.artist_id, COALESCE(SUM(t.play_count), 0) as total_plays FROM track_artist ta JOIN track t ON t.track_id = ta.track_id WHERE ta.artist_id = ANY($1) GROUP BY ta.artist_id`)
+		rows := sqlmock.NewRows([]string{"artist_id", "total_plays"}).
+			AddRow(artistID1, 100).
+			AddRow(artistID2, 200)
+		mock.ExpectQuery(query).WithArgs(artistIDs).WillReturnRows(rows)
+
+		result, err := repo.GetTotalPlaysByArtistIDs(context.Background(), artistIDs)
+		assert.NoError(t, err)
+		require.Len(t, result, 2)
+		assert.Equal(t, int64(100), result[artistID1])
+		assert.Equal(t, int64(200), result[artistID2])
 		require.NoError(t, mock.ExpectationsWereMet())
 	})
 }

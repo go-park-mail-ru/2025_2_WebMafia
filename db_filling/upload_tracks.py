@@ -25,11 +25,11 @@ def download_audio(video_id, tmp_dir="/tmp"):
         filename = ydl.prepare_filename(info)
     return filename
 
-with open("data/tracks_to_upload.json", "r", encoding="utf-8") as f:
+with open("tracks_to_upload.json", "r", encoding="utf-8") as f:
     tracks = json.load(f)
 
 for t in tracks:
-    video_id = t["video_id"]
+    video_id = t["videoId"]
     title = t["title"]
     print(f"Загрузка трека: {title}")
 

@@ -30,6 +30,7 @@ func (s *Service) GetAlbumByID(ctx context.Context, id uuid.UUID) (*dto.Album, e
 		Title:       albumModel.Title,
 		Type:        albumModel.Type,
 		AvatarURL:   albumModel.AvatarURL,
+		Description: albumModel.Description,
 		ReleaseDate: albumModel.ReleaseDate.Format(dateFormat),
 		Artists: []dto.Artist{
 			{

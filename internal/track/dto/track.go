@@ -5,6 +5,7 @@ type Track struct {
 	Title     string   `json:"title"`
 	DurationS int      `json:"duration_s"`
 	FileURL   string   `json:"file_url"`
+	PlayCount int64    `json:"play_count"`
 	Artists   []Artist `json:"artists"`
 	Album     Album    `json:"album"`
 	Genres    []Genre  `json:"genres"`

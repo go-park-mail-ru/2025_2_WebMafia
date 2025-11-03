@@ -3,6 +3,7 @@ CREATE TABLE track (
     title TEXT NOT NULL,
     duration_s INTEGER NOT NULL CHECK (duration_s > 0),
     file_url TEXT NOT NULL,
+    play_count BIGINT NOT NULL DEFAULT 0,
     description TEXT,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,

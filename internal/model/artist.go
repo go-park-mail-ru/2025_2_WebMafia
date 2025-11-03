@@ -11,6 +11,7 @@ type Artist struct {
 	ID          uuid.UUID
 	Name        string
 	AvatarURL   string
+	HeaderURL   string
 	Description sql.NullString
 	CreatedAt   time.Time
 	UpdatedAt   time.Time

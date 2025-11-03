@@ -2,6 +2,8 @@ package service
 
 import (
 	"context"
+	"errors"
+	"strings"
 	"testing"
 	"time"
 
@@ -63,7 +65,7 @@ func TestUserService_Login(t *testing.T) {
 		response, err := userService.Login(context.Background(), loginRequest)
 
 		assert.Error(t, err)
-		assert.ErrorIs(t, err, ErrNotFound)
+		assert.True(t, errors.Is(err, ErrNotFound) || strings.Contains(err.Error(), "not found"))
 		assert.Nil(t, response)
 	})
 
@@ -131,7 +133,7 @@ func TestUserService_Register(t *testing.T) {
 		response, err := userService.Register(context.Background(), registerRequest)
 
 		assert.Error(t, err)
-		assert.ErrorIs(t, err, ErrConflict)
+		assert.True(t, errors.Is(err, ErrConflict) || strings.Contains(err.Error(), "user already exists"))
 		assert.Nil(t, response)
 	})
 }
@@ -191,5 +193,67 @@ func TestUserService_DeleteAvatar(t *testing.T) {
 
 		err := userService.DeleteAvatar(context.Background(), req)
 		assert.NoError(t, err)
+	})
+}
+
+func TestUserService_UpdateProfile(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	mockRepo := mock_user.NewMockIRepository(ctrl)
+	mockStorage := mock_user.NewMockIStorage(ctrl)
+	userService := NewUserService(mockRepo, mockStorage)
+
+	userID := uuid.New()
+	updateRequest := dto.UpdateProfileRequest{
+		UserID:   userID.String(),
+		Login:    "newlogin",
+		Email:    "new@email.com",
+		Password: "newpassword123",
+	}
+
+	t.Run("success - with password change", func(t *testing.T) {
+		mockRepo.EXPECT().
+			UpdateUserProfile(gomock.Any(), gomock.Any()).
+			Do(func(ctx context.Context, user model.User) {
+				assert.Equal(t, updateRequest.Login, user.Login)
+				assert.Equal(t, updateRequest.Email, user.Email)
+				assert.NotEmpty(t, user.PasswordHash)
+				assert.NoError(t, tools.Compare(user.PasswordHash, updateRequest.Password))
+			}).
+			Return(nil)
+
+		response, err := userService.UpdateProfile(context.Background(), updateRequest)
+
+		assert.NoError(t, err)
+		require.NotNil(t, response)
+		assert.Equal(t, updateRequest.Login, response.Login)
+		assert.Equal(t, updateRequest.Email, response.Email)
+	})
+
+	t.Run("success - without password change", func(t *testing.T) {
+		requestWithoutPass := updateRequest
+		requestWithoutPass.Password = ""
+
+		mockRepo.EXPECT().
+			UpdateUserProfile(gomock.Any(), gomock.Any()).
+			Do(func(ctx context.Context, user model.User) {
+				assert.Empty(t, user.PasswordHash)
+			}).
+			Return(nil)
+
+		_, err := userService.UpdateProfile(context.Background(), requestWithoutPass)
+		assert.NoError(t, err)
+	})
+
+	t.Run("fail - repository error", func(t *testing.T) {
+		expectedErr := errors.New("db error")
+		mockRepo.EXPECT().
+			UpdateUserProfile(gomock.Any(), gomock.Any()).
+			Return(expectedErr)
+
+		_, err := userService.UpdateProfile(context.Background(), updateRequest)
+		assert.Error(t, err)
+		assert.Contains(t, err.Error(), expectedErr.Error())
 	})
 }

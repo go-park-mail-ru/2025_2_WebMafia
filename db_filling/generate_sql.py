@@ -3,6 +3,7 @@ import json
 from ytmusicapi import YTMusic
 from datetime import datetime
 import random
+import time
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from minio import Minio
@@ -124,135 +125,151 @@ sql_statements = [
 
 tracks_for_upload = []
 
+MAX_RETRIES = 5
+RETRY_DELAY = 5  # секунд
+
 for artist_id in artist_ids:
-    try:
-        # --- Получаем информацию об артисте ---
-        artist_info = yt.get_artist(artist_id)
-        artist_id = artist_info.get('channelId')
-        artist_name = artist_info.get('name').replace("'", "''")
-        print(f"=== Обрабатывается артист {artist_name} ===")
+    for attempt in range(1, MAX_RETRIES + 1):
+        # создаем временные буферы, которые будут добавлены только после успешной обработки
+        artist_sql = []
+        artist_tracks = []
+        try:
+            artist_info = yt.get_artist(artist_id)
+            artist_id = artist_info.get('channelId')
+            artist_name = artist_info.get('name', '—').replace("'", "''")
+            print(f"\n=== Обрабатывается артист {artist_name} (попытка {attempt}/{MAX_RETRIES}) ===")
 
-        results = sp.search(q=artist_name, type="artist", limit=1)
-        spotify_artist = results['artists']['items'][0]
-        artist_avatar_url = upload_avatar(spotify_artist['images'][2]['url'], f"artists/{artist_id}_avatar.webp",
-                                          bucket_name, minio_client)
-
-        artist_description = (artist_info.get('description', '-') or '').replace("'", "''")
-        artist_thumbnails = artist_info.get('thumbnails', [])
-        artist_header_url = upload_avatar(artist_thumbnails[-1]['url'], f"artists/{artist_id}_header.webp",
-                                          bucket_name, minio_client)
-
-        sql_statements.append(f"-- Артист: {artist_name}\n")
-        sql_statements.append(
-            f"INSERT INTO artist (artist_name, description, avatar_url, header_url)\n"
-            f"VALUES ('{artist_name}', '{artist_description}', '{artist_avatar_url}', '{artist_header_url}')\n"
-            f"RETURNING artist_id INTO v_artist_id;\n"
-        )
-
-        # --- Получаем все альбомы и синглы ---
-        albums_list = []
-
-        # --- Альбомы ---
-        albums_info = artist_info.get('albums')
-        if albums_info:
-            params = albums_info.get('params')
-            channelId = albums_info.get('browseId')
-            if params:
-                full_albums = yt.get_artist_albums(channelId, params=params, limit=None)
-                albums_list.extend(full_albums)
-            else:
-                albums_list.extend(albums_info.get('results', []))
-
-        # --- Синглы ---
-        singles_info = artist_info.get('singles')
-        if singles_info:
-            params = singles_info.get('params')
-            channelId = singles_info.get('browseId')
-            if params:
-                full_singles = yt.get_artist_albums(channelId, params=params, limit=None)
-                albums_list.extend(full_singles)
-            else:
-                albums_list.extend(singles_info.get('results', []))
-
-        min_year, max_year = 3000, 0
-        # --- Обработка альбомов и синглов ---
-        for alb in albums_list:
-            title = alb.get('title', '—').replace("'", "''")
-            album_id = alb.get('browseId')
-            thumbnails = alb.get('thumbnails', [])
-            avatar_url = upload_avatar(thumbnails[-1]['url'], f"albums/{album_id}.webp", bucket_name, minio_client)
-            release_year = alb.get('year')
-            alb_type = alb.get('type')
-
-            # --- определяем тип альбома ---
-            if alb_type and not str(alb_type).isdigit():
-                alb_type = alb_type
-            elif release_year and not str(release_year).isdigit():
-                t = release_year
-                release_year = alb_type
-                alb_type = t
-            else:
-                release_year = alb_type
-                alb_type = "Альбом"
-
-            # --- определяем год ---
-            if release_year and str(release_year).isdigit():
-                release_year = int(release_year)
-                min_year = release_year if release_year < min_year else min_year
-                max_year = release_year if release_year > max_year else max_year
-            else:
-                if max_year != 0:
-                    if min_year != max_year:
-                        release_year = random.randint(min_year, max_year)
-                    else:
-                        release_year = min_year
-                else:
-                    release_year = 1999
-
-            sql_statements.append(
-                f"\n-- Альбом/сингл: {title}\n"
-                f"INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)\n"
-                f"VALUES ('{title}', '{avatar_url}', v_artist_id, '', '{release_year}-01-01', '{alb_type}')\n"
-                f"RETURNING album_id INTO v_album_id;\n"
+            results = sp.search(q=artist_name, type="artist", limit=1)
+            spotify_artist = results['artists']['items'][0]
+            artist_avatar_url = upload_avatar(
+                spotify_artist['images'][2]['url'],
+                f"artists/{artist_id}_avatar.webp",
+                bucket_name, minio_client
             )
 
-            # --- Получаем треки ---
-            album_browse_id = alb.get('browseId')
-            audio_playlist_id = alb.get('audioPlaylistId')
-            if audio_playlist_id:
-                tracks = yt.get_playlist(audio_playlist_id, limit=None).get('tracks', [])
-            elif album_browse_id:
-                tracks = yt.get_album(album_browse_id).get('tracks', [])
+            artist_description = (artist_info.get('description', '—') or '').replace("'", "''")
+            artist_thumbnails = artist_info.get('thumbnails', [])
+            artist_header_url = upload_avatar(
+                artist_thumbnails[-1]['url'],
+                f"artists/{artist_id}_header.webp",
+                bucket_name, minio_client
+            )
+
+            artist_sql.append(f"-- Артист: {artist_name}\n")
+            artist_sql.append(
+                f"INSERT INTO artist (artist_name, description, avatar_url, header_url)\n"
+                f"VALUES ('{artist_name}', '{artist_description}', '{artist_avatar_url}', '{artist_header_url}')\n"
+                f"RETURNING artist_id INTO v_artist_id;\n"
+            )
+
+            # --- Получаем альбомы и синглы ---
+            albums_list = []
+            albums_info = artist_info.get('albums')
+            singles_info = artist_info.get('singles')
+
+            if albums_info:
+                params = albums_info.get('params')
+                channelId = albums_info.get('browseId')
+                if params:
+                    albums_list.extend(yt.get_artist_albums(channelId, params=params, limit=None))
+                else:
+                    albums_list.extend(albums_info.get('results', []))
+
+            if singles_info:
+                params = singles_info.get('params')
+                channelId = singles_info.get('browseId')
+                if params:
+                    albums_list.extend(yt.get_artist_albums(channelId, params=params, limit=None))
+                else:
+                    albums_list.extend(singles_info.get('results', []))
+
+            # --- обработка альбомов ---
+            min_year, max_year = 3000, 0
+            for alb in albums_list:
+                title = alb.get('title', '—').replace("'", "''")
+                album_id = alb.get('browseId')
+                thumbnails = alb.get('thumbnails', [])
+                avatar_url = upload_avatar(
+                    thumbnails[-1]['url'],
+                    f"albums/{album_id}.webp",
+                    bucket_name, minio_client
+                )
+                release_year = alb.get('year')
+                alb_type = alb.get('type')
+                all_album = yt.get_album(alb.get('browseId'))
+                alb_descr = (all_album.get('description', '—') or '').replace("'", "''")
+
+
+                # --- тип и год ---
+                if alb_type and not str(alb_type).isdigit():
+                    pass
+                elif release_year and not str(release_year).isdigit():
+                    release_year, alb_type = alb_type, release_year
+                else:
+                    release_year = alb_type
+                    alb_type = "Альбом"
+
+                if release_year and str(release_year).isdigit():
+                    release_year = int(release_year)
+                    min_year = min(min_year, release_year)
+                    max_year = max(max_year, release_year)
+                else:
+                    release_year = random.randint(min_year, max_year) if max_year else 1999
+
+                artist_sql.append(
+                    f"\n-- Альбом/сингл: {title}\n"
+                    f"INSERT INTO album (title, avatar_url, artist_id, description, release_date, type)\n"
+                    f"VALUES ('{title}', '{avatar_url}', v_artist_id, '{alb_descr}', '{release_year}-01-01', '{alb_type}')\n"
+                    f"RETURNING album_id INTO v_album_id;\n"
+                )
+
+                # --- треки ---
+                album_browse_id = alb.get('browseId')
+                audio_playlist_id = alb.get('audioPlaylistId')
+                if audio_playlist_id:
+                    tracks = yt.get_playlist(audio_playlist_id, limit=None).get('tracks', [])
+                elif album_browse_id:
+                    tracks = yt.get_album(album_browse_id).get('tracks', [])
+                else:
+                    tracks = []
+
+                artist_sql.append(f"-- Найдено треков: {len(tracks)}\n")
+
+                for track in tracks:
+                    track_title = track.get('title', '—').replace("'", "''")
+                    duration_s = int(track.get('duration_seconds', 0))
+                    videoId = track.get('videoId', '')
+                    file_url = f"http://localhost:8080/api/v1/track/{videoId}"
+
+                    artist_tracks.append({
+                        "videoId": videoId,
+                        "title": track_title,
+                    })
+
+                    artist_sql.append(
+                        f"INSERT INTO track (title, duration_s, file_url, description)\n"
+                        f"VALUES ('{track_title}', {duration_s}, '{file_url}', '')\n"
+                        f"RETURNING track_id INTO v_track_id;\n"
+                    )
+                    artist_sql.append(
+                        f"INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;\n"
+                    )
+                    artist_sql.append(
+                        f"INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;\n"
+                    )
+
+            # если всё успешно — переносим SQL и треки в общие списки
+            sql_statements.extend(artist_sql)
+            tracks_for_upload.extend(artist_tracks)
+            break
+
+        except Exception as e:
+            print(f"Ошибка при обработке артиста {artist_id}: {e}")
+            if attempt < MAX_RETRIES:
+                print(f"Повтор через {RETRY_DELAY} секунд...")
+                time.sleep(RETRY_DELAY)
             else:
-                tracks = []
-
-            sql_statements.append(f"-- Найдено треков: {len(tracks)}\n")
-
-            for track in tracks:
-                track_title = track.get('title', '—').replace("'", "''")
-                duration_s = int(track.get('duration_seconds', 0))
-                videoId = track.get('videoId', '')
-                file_url = f"http://localhost:8080/api/v1/track/{videoId}"
-
-                tracks_for_upload.append({
-                    "videoId": videoId,
-                    "title": track_title,
-                })
-
-                sql_statements.append(
-                    f"INSERT INTO track (title, duration_s, file_url, description)\n"
-                    f"VALUES ('{track_title}', {duration_s}, '{file_url}', '')\n"
-                    f"RETURNING track_id INTO v_track_id;\n"
-                )
-
-                sql_statements.append(
-                    f"INSERT INTO track_artist (track_id, artist_id) VALUES (v_track_id, v_artist_id) ON CONFLICT DO NOTHING;\n"
-                )
-                sql_statements.append(
-                    f"INSERT INTO track_album (track_id, album_id) VALUES (v_track_id, v_album_id) ON CONFLICT DO NOTHING;\n"
-                )
-    except Exception as e:
-        print(f"Ошибка при обработке артиста {artist_id}: {e}")
+                print(f"Артист {artist_id} пропущен после {MAX_RETRIES} неудачных попыток.")
 
 sql_statements.append("END $$;\n")
 

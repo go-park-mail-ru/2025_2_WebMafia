@@ -14,7 +14,7 @@ import (
 	album_service "spotify/internal/album/service"
 	artist_service "spotify/internal/artist/service"
 	mock_album_repo "spotify/internal/mocks/album"
-	mock_artist_repo "spotify/internal/mocks/artist"
+	mock_artist "spotify/internal/mocks/artist"
 	mock_track_repo "spotify/internal/mocks/track"
 	"spotify/internal/model"
 )
@@ -35,8 +35,9 @@ func TestTrackService_GetTrackByID(t *testing.T) {
 		ctrl := gomock.NewController(t)
 		mockTrackRepo := mock_track_repo.NewMockIRepository(ctrl)
 		mockAlbumRepo := mock_album_repo.NewMockIRepository(ctrl)
-		mockArtistRepo := mock_artist_repo.NewMockIRepository(ctrl)
-		realArtistService := artist_service.New(mockArtistRepo)
+		mockArtistRepo := mock_artist.NewMockIRepository(ctrl)
+		mockTrackSvcForArtist := mock_artist.NewMockITrackService(ctrl)
+		realArtistService := artist_service.New(mockArtistRepo, mockTrackSvcForArtist)
 		realAlbumService := album_service.New(mockAlbumRepo, realArtistService)
 		trackService := New(mockTrackRepo, realAlbumService, realArtistService)
 
@@ -46,6 +47,7 @@ func TestTrackService_GetTrackByID(t *testing.T) {
 		mockTrackRepo.EXPECT().GetGenresForTracks(ctx, []uuid.UUID{trackID}).Return(map[uuid.UUID][]model.Genre{trackID: {genre}}, nil)
 		mockAlbumRepo.EXPECT().GetByIDs(ctx, []uuid.UUID{albumID}).Return([]model.Album{*album}, nil)
 		mockArtistRepo.EXPECT().GetByIDs(ctx, gomock.Any()).Return([]model.Artist{*artist}, nil).AnyTimes()
+		mockTrackSvcForArtist.EXPECT().GetTotalPlaysByArtistIDs(gomock.Any(), gomock.Any()).Return(make(map[uuid.UUID]int64), nil).AnyTimes()
 
 		trackDTO, err := trackService.GetTrackByID(ctx, trackID)
 
@@ -73,7 +75,12 @@ func TestTrackService_GetTrackByID(t *testing.T) {
 	t.Run("enrichment fails - album error", func(t *testing.T) {
 		ctrl := gomock.NewController(t)
 		mockTrackRepo := mock_track_repo.NewMockIRepository(ctrl)
-		trackService := New(mockTrackRepo, nil, nil)
+		mockAlbumRepo := mock_album_repo.NewMockIRepository(ctrl)
+		mockArtistRepo := mock_artist.NewMockIRepository(ctrl)
+		mockTrackSvcForArtist := mock_artist.NewMockITrackService(ctrl)
+		realArtistService := artist_service.New(mockArtistRepo, mockTrackSvcForArtist)
+		realAlbumService := album_service.New(mockAlbumRepo, realArtistService)
+		trackService := New(mockTrackRepo, realAlbumService, realArtistService)
 
 		mockTrackRepo.EXPECT().GetByID(ctx, trackID).Return(track, nil)
 
@@ -89,8 +96,9 @@ func TestTrackService_GetTrackByID(t *testing.T) {
 	t.Run("enrichment fails - inconsistent data (no album)", func(t *testing.T) {
 		ctrl := gomock.NewController(t)
 		mockTrackRepo := mock_track_repo.NewMockIRepository(ctrl)
-		mockArtistRepo := mock_artist_repo.NewMockIRepository(ctrl)
-		realArtistService := artist_service.New(mockArtistRepo)
+		mockArtistRepo := mock_artist.NewMockIRepository(ctrl)
+		mockTrackSvcForArtist := mock_artist.NewMockITrackService(ctrl)
+		realArtistService := artist_service.New(mockArtistRepo, mockTrackSvcForArtist)
 		trackService := New(mockTrackRepo, nil, realArtistService)
 
 		mockTrackRepo.EXPECT().GetByID(ctx, trackID).Return(track, nil)
@@ -98,6 +106,7 @@ func TestTrackService_GetTrackByID(t *testing.T) {
 		mockTrackRepo.EXPECT().GetArtistIDsForTracks(ctx, gomock.Any()).Return(map[uuid.UUID][]uuid.UUID{trackID: {artistID}}, nil).AnyTimes()
 		mockTrackRepo.EXPECT().GetGenresForTracks(ctx, gomock.Any()).Return(map[uuid.UUID][]model.Genre{trackID: {genre}}, nil).AnyTimes()
 		mockArtistRepo.EXPECT().GetByIDs(ctx, gomock.Any()).Return([]model.Artist{*artist}, nil).AnyTimes()
+		mockTrackSvcForArtist.EXPECT().GetTotalPlaysByArtistIDs(gomock.Any(), gomock.Any()).Return(make(map[uuid.UUID]int64), nil).AnyTimes()
 
 		_, err := trackService.GetTrackByID(ctx, trackID)
 		assert.Error(t, err)
@@ -166,8 +175,9 @@ func TestTrackService_EnrichmentFailures(t *testing.T) {
 		ctrl := gomock.NewController(t)
 		mockTrackRepo := mock_track_repo.NewMockIRepository(ctrl)
 		mockAlbumRepo := mock_album_repo.NewMockIRepository(ctrl)
-		mockArtistRepo := mock_artist_repo.NewMockIRepository(ctrl)
-		realArtistService := artist_service.New(mockArtistRepo)
+		mockArtistRepo := mock_artist.NewMockIRepository(ctrl)
+		mockTrackSvcForArtist := mock_artist.NewMockITrackService(ctrl)
+		realArtistService := artist_service.New(mockArtistRepo, mockTrackSvcForArtist)
 		realAlbumService := album_service.New(mockAlbumRepo, realArtistService)
 		trackService := New(mockTrackRepo, realAlbumService, realArtistService)
 

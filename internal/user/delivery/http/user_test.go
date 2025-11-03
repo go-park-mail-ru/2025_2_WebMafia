@@ -3,6 +3,7 @@ package http
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"io"
 	"mime/multipart"
 	"net/http"
@@ -31,7 +32,7 @@ func TestHandler_Login(t *testing.T) {
 
 	mockUserService := mock_user.NewMockIService(ctrl)
 	jwtManager := jwtmanager.NewManager("test-secret", time.Hour)
-	handler := NewHandler(mockUserService, jwtManager, nil)
+	handler := NewHandler(mockUserService, jwtManager, nil, nil)
 
 	loginReqPayload := loginRequest{
 		Login:    "testuser",
@@ -102,7 +103,7 @@ func TestHandler_Register(t *testing.T) {
 
 	mockUserService := mock_user.NewMockIService(ctrl)
 	jwtManager := jwtmanager.NewManager("test-secret", time.Hour)
-	handler := NewHandler(mockUserService, jwtManager, nil)
+	handler := NewHandler(mockUserService, jwtManager, nil, nil)
 
 	registerReqPayload := registerRequest{
 		Login:    "testuser123",
@@ -159,7 +160,7 @@ func TestHandler_Register(t *testing.T) {
 }
 
 func TestHandler_Logout(t *testing.T) {
-	handler := NewHandler(nil, nil, nil)
+	handler := NewHandler(nil, nil, nil, nil)
 
 	req := httptest.NewRequest(http.MethodPost, "/logout", nil)
 	rr := httptest.NewRecorder()
@@ -178,7 +179,7 @@ func TestHandler_Avatar(t *testing.T) {
 	mockUserService := mock_user.NewMockIService(ctrl)
 	jwtManager := jwtmanager.NewManager("test-secret", time.Hour)
 	authMW := middleware.NewAuthMiddleware(jwtManager)
-	handler := NewHandler(mockUserService, jwtManager, nil)
+	handler := NewHandler(mockUserService, jwtManager, nil, []string{"image/jpeg", "image/png"})
 
 	router := mux.NewRouter()
 	router.Handle("/avatar", authMW.AuthMiddleware(http.HandlerFunc(handler.UploadAvatar))).Methods(http.MethodPost)
@@ -231,7 +232,7 @@ func TestHandler_Avatar(t *testing.T) {
 		_, _ = io.Copy(part, strings.NewReader("fake-image-data"))
 		writer.Close()
 
-		mockUserService.EXPECT().UploadAvatar(gomock.Any(), gomock.Any()).Return(nil, service.ErrInternal)
+		mockUserService.EXPECT().UploadAvatar(gomock.Any(), gomock.Any()).Return(nil, errors.New("internal server error"))
 
 		req := httptest.NewRequest(http.MethodPost, "/avatar", body)
 		req.Header.Set("Content-Type", writer.FormDataContentType())
@@ -264,7 +265,7 @@ func TestHandler_Avatar(t *testing.T) {
 	})
 
 	t.Run("DeleteAvatar - fail service error", func(t *testing.T) {
-		mockUserService.EXPECT().DeleteAvatar(gomock.Any(), gomock.Any()).Return(service.ErrInternal)
+		mockUserService.EXPECT().DeleteAvatar(gomock.Any(), gomock.Any()).Return(errors.New("internal server error"))
 
 		req := httptest.NewRequest(http.MethodDelete, "/avatar", nil)
 		req.AddCookie(&http.Cookie{Name: sessionTokenCookie, Value: token})
@@ -277,6 +278,56 @@ func TestHandler_Avatar(t *testing.T) {
 
 	t.Run("DeleteAvatar - fail unauthenticated", func(t *testing.T) {
 		req := httptest.NewRequest(http.MethodDelete, "/avatar", nil)
+		rr := httptest.NewRecorder()
+		router.ServeHTTP(rr, req)
+		assert.Equal(t, http.StatusUnauthorized, rr.Code)
+	})
+}
+
+func TestHandler_UpdateProfile(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	mockUserService := mock_user.NewMockIService(ctrl)
+	jwtManager := jwtmanager.NewManager("test-secret", time.Hour)
+	authMW := middleware.NewAuthMiddleware(jwtManager)
+	handler := NewHandler(mockUserService, jwtManager, nil, nil)
+
+	router := mux.NewRouter()
+	router.Handle("/profile", authMW.AuthMiddleware(http.HandlerFunc(handler.UpdateProfile))).Methods(http.MethodPut)
+
+	userID := uuid.New().String()
+	token, _ := jwtManager.Generate(userID)
+
+	updateReqPayload := updateProfileRequest{
+		Login: "newlogin123",
+		Email: "new@email.com",
+	}
+	body, _ := json.Marshal(updateReqPayload)
+
+	t.Run("success", func(t *testing.T) {
+		serviceResponse := &dto.UpdateProfileResponse{
+			ID:    userID,
+			Login: updateReqPayload.Login,
+			Email: updateReqPayload.Email,
+		}
+		mockUserService.EXPECT().UpdateProfile(gomock.Any(), gomock.Any()).Return(serviceResponse, nil)
+
+		req := httptest.NewRequest(http.MethodPut, "/profile", bytes.NewReader(body))
+		req.AddCookie(&http.Cookie{Name: sessionTokenCookie, Value: token})
+		rr := httptest.NewRecorder()
+
+		router.ServeHTTP(rr, req)
+
+		assert.Equal(t, http.StatusOK, rr.Code)
+		var respBody dto.UpdateProfileResponse
+		err := json.Unmarshal(rr.Body.Bytes(), &respBody)
+		require.NoError(t, err)
+		assert.Equal(t, userID, respBody.ID)
+	})
+
+	t.Run("fail - unauthenticated", func(t *testing.T) {
+		req := httptest.NewRequest(http.MethodPut, "/profile", bytes.NewReader(body))
 		rr := httptest.NewRecorder()
 		router.ServeHTTP(rr, req)
 		assert.Equal(t, http.StatusUnauthorized, rr.Code)

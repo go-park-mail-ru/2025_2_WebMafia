@@ -13,6 +13,7 @@ type Track struct {
 	DurationS   int
 	FileURL     string
 	Description sql.NullString
+	PlayCount   int64
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 }

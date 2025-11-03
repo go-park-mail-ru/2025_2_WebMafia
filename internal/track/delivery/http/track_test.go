@@ -21,11 +21,11 @@ import (
 
 func newTrackDTO() *dto.Track {
 	return &dto.Track{
-		ID:         uuid.New().String(),
-		Title:      "Test Track",
-		DurationMs: 180000,
-		FileURL:    "/static/track.mp3",
-		Album:      dto.Album{ID: uuid.New().String(), Title: "Test Album"},
+		ID:        uuid.New().String(),
+		Title:     "Test Track",
+		DurationS: 180000,
+		FileURL:   "/static/track.mp3",
+		Album:     dto.Album{ID: uuid.New().String(), Title: "Test Album"},
 		Artists: []dto.Artist{
 			{ID: uuid.New().String(), Name: "Test Artist"},
 		},

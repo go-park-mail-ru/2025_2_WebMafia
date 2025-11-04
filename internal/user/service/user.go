@@ -72,12 +72,7 @@ func (s *Service) UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest)
 		return nil, mapRepositoryError(err)
 	}
 
-	url, err := s.storage.GetAvatarURL(ctx, objectName)
-	if err != nil {
-		return nil, err
-	}
-
-	return &dto.UploadAvatarResponse{URL: url}, nil
+	return &dto.UploadAvatarResponse{URL: objectName}, nil
 }
 
 func (s *Service) DeleteAvatar(ctx context.Context, req dto.DeleteAvatarRequest) error {

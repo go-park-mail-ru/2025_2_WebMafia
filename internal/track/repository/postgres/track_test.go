@@ -33,7 +33,7 @@ func newMockTrack() *model.Track {
 	return &model.Track{
 		ID:          uuid.New(),
 		Title:       "Test Track",
-		DurationS:   180000,
+		DurationS:   180,
 		FileURL:     "http://example.com/track.mp3",
 		PlayCount:   0,
 		Description: sql.NullString{String: "A test track", Valid: true},
@@ -49,9 +49,9 @@ func TestTrackRepository_SimpleGets(t *testing.T) {
 
 	repo := New(db)
 	mockTrack := newMockTrack()
-	columns := []string{"track_id", "title", "duration_ms", "file_url", "play_count", "description", "created_at", "updated_at"}
-	baseQuery := regexp.QuoteMeta(`SELECT track_id, title, duration_ms, file_url, play_count, description, created_at, updated_at FROM track`)
-	joinQuery := regexp.QuoteMeta(`SELECT t.track_id, t.title, t.duration_ms, t.file_url, t.play_count, t.description, t.created_at, t.updated_at FROM track t`)
+	columns := []string{"track_id", "title", "duration_s", "file_url", "play_count", "description", "created_at", "updated_at"}
+	baseQuery := regexp.QuoteMeta(`SELECT track_id, title, duration_s, file_url, play_count, description, created_at, updated_at FROM track`)
+	joinQuery := regexp.QuoteMeta(`SELECT t.track_id, t.title, t.duration_s, t.file_url, t.play_count, t.description, t.created_at, t.updated_at FROM track t`)
 
 	t.Run("GetByID", func(t *testing.T) {
 		rows := sqlmock.NewRows(columns).

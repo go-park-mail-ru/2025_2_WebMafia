@@ -34,6 +34,7 @@ func newMockArtist() *model.Artist {
 		ID:          uuid.New(),
 		Name:        "Test Artist",
 		AvatarURL:   "http://example.com/avatar.jpg",
+		HeaderURL:   "http://example.com/header.jpg",
 		Description: sql.NullString{String: "A test artist", Valid: true},
 		CreatedAt:   time.Now(),
 		UpdatedAt:   time.Now(),
@@ -47,12 +48,12 @@ func TestArtistRepository_GetByID(t *testing.T) {
 
 	repo := New(db)
 	mockArtist := newMockArtist()
-	query := regexp.QuoteMeta(`SELECT artist_id, artist_name, avatar_url, description, created_at, updated_at FROM artist WHERE artist_id = $1`)
-	columns := []string{"artist_id", "artist_name", "avatar_url", "description", "created_at", "updated_at"}
+	query := regexp.QuoteMeta(`SELECT artist_id, artist_name, avatar_url, header_url, description, created_at, updated_at FROM artist WHERE artist_id = $1`)
+	columns := []string{"artist_id", "artist_name", "avatar_url", "header_url", "description", "created_at", "updated_at"}
 
 	t.Run("success", func(t *testing.T) {
 		rows := sqlmock.NewRows(columns).
-			AddRow(mockArtist.ID, mockArtist.Name, mockArtist.AvatarURL, mockArtist.Description, mockArtist.CreatedAt, mockArtist.UpdatedAt)
+			AddRow(mockArtist.ID, mockArtist.Name, mockArtist.AvatarURL, mockArtist.HeaderURL, mockArtist.Description, mockArtist.CreatedAt, mockArtist.UpdatedAt)
 		mock.ExpectQuery(query).WithArgs(mockArtist.ID).WillReturnRows(rows)
 
 		artist, err := repo.GetByID(context.Background(), mockArtist.ID)
@@ -95,13 +96,13 @@ func TestArtistRepository_GetByIDs(t *testing.T) {
 	artist2 := newMockArtist()
 	ids := []uuid.UUID{artist1.ID, artist2.ID}
 
-	query := regexp.QuoteMeta(`SELECT artist_id, artist_name, avatar_url, description, created_at, updated_at FROM artist WHERE artist_id = ANY($1)`)
-	columns := []string{"artist_id", "artist_name", "avatar_url", "description", "created_at", "updated_at"}
+	query := regexp.QuoteMeta(`SELECT artist_id, artist_name, avatar_url, header_url, description, created_at, updated_at FROM artist WHERE artist_id = ANY($1)`)
+	columns := []string{"artist_id", "artist_name", "avatar_url", "header_url", "description", "created_at", "updated_at"}
 
 	t.Run("success", func(t *testing.T) {
 		rows := sqlmock.NewRows(columns).
-			AddRow(artist1.ID, artist1.Name, artist1.AvatarURL, artist1.Description, artist1.CreatedAt, artist1.UpdatedAt).
-			AddRow(artist2.ID, artist2.Name, artist2.AvatarURL, artist2.Description, artist2.CreatedAt, artist2.UpdatedAt)
+			AddRow(artist1.ID, artist1.Name, artist1.AvatarURL, artist1.HeaderURL, artist1.Description, artist1.CreatedAt, artist1.UpdatedAt).
+			AddRow(artist2.ID, artist2.Name, artist2.AvatarURL, artist2.HeaderURL, artist2.Description, artist2.CreatedAt, artist2.UpdatedAt)
 		mock.ExpectQuery(query).WithArgs(ids).WillReturnRows(rows)
 
 		artists, err := repo.GetByIDs(context.Background(), ids)
@@ -134,7 +135,7 @@ func TestArtistRepository_GetByIDs(t *testing.T) {
 
 	t.Run("db error on rows scan", func(t *testing.T) {
 		rows := sqlmock.NewRows(columns).
-			AddRow(artist1.ID, artist1.Name, artist1.AvatarURL, artist1.Description, artist1.CreatedAt, "not a date")
+			AddRow(artist1.ID, artist1.Name, artist1.AvatarURL, artist1.HeaderURL, artist1.Description, artist1.CreatedAt, "not a date")
 		mock.ExpectQuery(query).WithArgs(ids).WillReturnRows(rows)
 
 		artists, err := repo.GetByIDs(context.Background(), ids)
@@ -147,7 +148,7 @@ func TestArtistRepository_GetByIDs(t *testing.T) {
 	t.Run("db error on rows iteration", func(t *testing.T) {
 		expectedError := errors.New("rows error")
 		rows := sqlmock.NewRows(columns).
-			AddRow(artist1.ID, artist1.Name, artist1.AvatarURL, artist1.Description, artist1.CreatedAt, artist1.UpdatedAt).
+			AddRow(artist1.ID, artist1.Name, artist1.AvatarURL, artist1.HeaderURL, artist1.Description, artist1.CreatedAt, artist1.UpdatedAt).
 			RowError(0, expectedError)
 		mock.ExpectQuery(query).WithArgs(ids).WillReturnRows(rows)
 
@@ -167,12 +168,12 @@ func TestArtistRepository_GetAll(t *testing.T) {
 
 	repo := New(db)
 	mockArtist := newMockArtist()
-	query := regexp.QuoteMeta(`SELECT artist_id, artist_name, avatar_url, description, created_at, updated_at FROM artist ORDER BY artist_name LIMIT $1 OFFSET $2`)
-	columns := []string{"artist_id", "artist_name", "avatar_url", "description", "created_at", "updated_at"}
+	query := regexp.QuoteMeta(`SELECT artist_id, artist_name, avatar_url, header_url,  description, created_at, updated_at FROM artist ORDER BY artist_name LIMIT $1 OFFSET $2`)
+	columns := []string{"artist_id", "artist_name", "avatar_url", "header_url", "description", "created_at", "updated_at"}
 
 	t.Run("success", func(t *testing.T) {
 		rows := sqlmock.NewRows(columns).
-			AddRow(mockArtist.ID, mockArtist.Name, mockArtist.AvatarURL, mockArtist.Description, mockArtist.CreatedAt, mockArtist.UpdatedAt)
+			AddRow(mockArtist.ID, mockArtist.Name, mockArtist.AvatarURL, mockArtist.HeaderURL, mockArtist.Description, mockArtist.CreatedAt, mockArtist.UpdatedAt)
 		mock.ExpectQuery(query).WithArgs(uint64(10), uint64(0)).WillReturnRows(rows)
 
 		artists, err := repo.GetAll(context.Background(), 10, 0)

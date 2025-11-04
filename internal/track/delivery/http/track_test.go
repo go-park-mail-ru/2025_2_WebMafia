@@ -23,7 +23,7 @@ func newTrackDTO() *dto.Track {
 	return &dto.Track{
 		ID:        uuid.New().String(),
 		Title:     "Test Track",
-		DurationS: 180000,
+		DurationS: 180,
 		FileURL:   "/static/track.mp3",
 		Album:     dto.Album{ID: uuid.New().String(), Title: "Test Album"},
 		Artists: []dto.Artist{

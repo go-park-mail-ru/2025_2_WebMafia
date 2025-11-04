@@ -14,7 +14,7 @@ const maxIDsInBatch = 100
 func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Track, error) {
 	const op = "repository.GetByID"
 	query := `
-		SELECT track_id, title, duration_s, file_url, description, created_at, updated_at
+		SELECT track_id, title, duration_s, file_url, play_count, description, created_at, updated_at
 		FROM track
 		WHERE track_id = $1`
 	var track model.Track

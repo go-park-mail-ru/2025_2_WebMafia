@@ -9,7 +9,7 @@ import (
 )
 
 func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Album, error) {
-	const op = "repository.GetAll"
+	const op = "repository.GetByID"
 	query := `
 		SELECT album_id, title, type, avatar_url, artist_id, description, release_date, created_at, updated_at
 		FROM album

@@ -33,6 +33,7 @@ func newMockAlbum() *model.Album {
 	return &model.Album{
 		ID:          uuid.New(),
 		Title:       "Test Album",
+		Type:        "Альбом",
 		AvatarURL:   "http://example.com/album.jpg",
 		ArtistID:    uuid.New(),
 		Description: sql.NullString{String: "A test album", Valid: true},
@@ -48,13 +49,13 @@ func TestAlbumRepository_GetByID(t *testing.T) {
 	defer db.Close()
 	repo := New(db)
 
-	query := regexp.QuoteMeta(`SELECT album_id, title, avatar_url, artist_id, description, release_date, created_at, updated_at FROM album WHERE album_id = $1`)
-	columns := []string{"album_id", "title", "avatar_url", "artist_id", "description", "release_date", "created_at", "updated_at"}
+	query := regexp.QuoteMeta(`SELECT album_id, title, type, avatar_url, artist_id, description, release_date, created_at, updated_at FROM album WHERE album_id = $1`)
+	columns := []string{"album_id", "title", "type", "avatar_url", "artist_id", "description", "release_date", "created_at", "updated_at"}
 	mockAlbum := newMockAlbum()
 
 	t.Run("success", func(t *testing.T) {
 		rows := sqlmock.NewRows(columns).
-			AddRow(mockAlbum.ID, mockAlbum.Title, mockAlbum.AvatarURL, mockAlbum.ArtistID, mockAlbum.Description, mockAlbum.ReleaseDate, mockAlbum.CreatedAt, mockAlbum.UpdatedAt)
+			AddRow(mockAlbum.ID, mockAlbum.Title, mockAlbum.Type, mockAlbum.AvatarURL, mockAlbum.ArtistID, mockAlbum.Description, mockAlbum.ReleaseDate, mockAlbum.CreatedAt, mockAlbum.UpdatedAt)
 		mock.ExpectQuery(query).WithArgs(mockAlbum.ID).WillReturnRows(rows)
 
 		album, err := repo.GetByID(context.Background(), mockAlbum.ID)
@@ -78,13 +79,13 @@ func TestAlbumRepository_GetAll(t *testing.T) {
 	defer db.Close()
 	repo := New(db)
 
-	query := regexp.QuoteMeta(`SELECT album_id, title, avatar_url, artist_id, description, release_date, created_at, updated_at FROM album ORDER BY release_date DESC LIMIT $1 OFFSET $2`)
-	columns := []string{"album_id", "title", "avatar_url", "artist_id", "description", "release_date", "created_at", "updated_at"}
+	query := regexp.QuoteMeta(`SELECT album_id, title, type, avatar_url, artist_id, description, release_date, created_at, updated_at FROM album ORDER BY release_date DESC LIMIT $1 OFFSET $2`)
+	columns := []string{"album_id", "title", "type", "avatar_url", "artist_id", "description", "release_date", "created_at", "updated_at"}
 	mockAlbum := newMockAlbum()
 
 	t.Run("success", func(t *testing.T) {
 		rows := sqlmock.NewRows(columns).
-			AddRow(mockAlbum.ID, mockAlbum.Title, mockAlbum.AvatarURL, mockAlbum.ArtistID, mockAlbum.Description, mockAlbum.ReleaseDate, mockAlbum.CreatedAt, mockAlbum.UpdatedAt)
+			AddRow(mockAlbum.ID, mockAlbum.Title, mockAlbum.Type, mockAlbum.AvatarURL, mockAlbum.ArtistID, mockAlbum.Description, mockAlbum.ReleaseDate, mockAlbum.CreatedAt, mockAlbum.UpdatedAt)
 		mock.ExpectQuery(query).WithArgs(uint64(10), uint64(0)).WillReturnRows(rows)
 
 		albums, err := repo.GetAll(context.Background(), 10, 0)
@@ -108,13 +109,13 @@ func TestAlbumRepository_GetByArtistID(t *testing.T) {
 	defer db.Close()
 	repo := New(db)
 
-	query := regexp.QuoteMeta(`SELECT album_id, title, avatar_url, artist_id, description, release_date, created_at, updated_at FROM album WHERE artist_id = $1 ORDER BY release_date DESC LIMIT $2 OFFSET $3`)
-	columns := []string{"album_id", "title", "avatar_url", "artist_id", "description", "release_date", "created_at", "updated_at"}
+	query := regexp.QuoteMeta(`SELECT album_id, title, type, avatar_url, artist_id, description, release_date, created_at, updated_at FROM album WHERE artist_id = $1 ORDER BY release_date DESC LIMIT $2 OFFSET $3`)
+	columns := []string{"album_id", "title", "type", "avatar_url", "artist_id", "description", "release_date", "created_at", "updated_at"}
 	mockAlbum := newMockAlbum()
 
 	t.Run("success", func(t *testing.T) {
 		rows := sqlmock.NewRows(columns).
-			AddRow(mockAlbum.ID, mockAlbum.Title, mockAlbum.AvatarURL, mockAlbum.ArtistID, mockAlbum.Description, mockAlbum.ReleaseDate, mockAlbum.CreatedAt, mockAlbum.UpdatedAt)
+			AddRow(mockAlbum.ID, mockAlbum.Title, mockAlbum.Type, mockAlbum.AvatarURL, mockAlbum.ArtistID, mockAlbum.Description, mockAlbum.ReleaseDate, mockAlbum.CreatedAt, mockAlbum.UpdatedAt)
 		mock.ExpectQuery(query).WithArgs(mockAlbum.ArtistID, uint64(10), uint64(0)).WillReturnRows(rows)
 
 		albums, err := repo.GetByArtistID(context.Background(), mockAlbum.ArtistID, 10, 0)
@@ -138,16 +139,16 @@ func TestAlbumRepository_GetByIDs(t *testing.T) {
 	defer db.Close()
 	repo := New(db)
 
-	query := regexp.QuoteMeta(`SELECT album_id, title, avatar_url, artist_id, description, release_date, created_at, updated_at FROM album WHERE album_id = ANY($1)`)
-	columns := []string{"album_id", "title", "avatar_url", "artist_id", "description", "release_date", "created_at", "updated_at"}
+	query := regexp.QuoteMeta(`SELECT album_id, title, type, avatar_url, artist_id, description, release_date, created_at, updated_at FROM album WHERE album_id = ANY($1)`)
+	columns := []string{"album_id", "title", "type", "avatar_url", "artist_id", "description", "release_date", "created_at", "updated_at"}
 	album1 := newMockAlbum()
 	album2 := newMockAlbum()
 	ids := []uuid.UUID{album1.ID, album2.ID}
 
 	t.Run("success", func(t *testing.T) {
 		rows := sqlmock.NewRows(columns).
-			AddRow(album1.ID, album1.Title, album1.AvatarURL, album1.ArtistID, album1.Description, album1.ReleaseDate, album1.CreatedAt, album1.UpdatedAt).
-			AddRow(album2.ID, album2.Title, album2.AvatarURL, album2.ArtistID, album2.Description, album2.ReleaseDate, album2.CreatedAt, album2.UpdatedAt)
+			AddRow(album1.ID, album1.Title, album1.Type, album1.AvatarURL, album1.ArtistID, album1.Description, album1.ReleaseDate, album1.CreatedAt, album1.UpdatedAt).
+			AddRow(album2.ID, album2.Title, album2.Type, album2.AvatarURL, album2.ArtistID, album2.Description, album2.ReleaseDate, album2.CreatedAt, album2.UpdatedAt)
 		mock.ExpectQuery(query).WithArgs(ids).WillReturnRows(rows)
 
 		albums, err := repo.GetByIDs(context.Background(), ids)

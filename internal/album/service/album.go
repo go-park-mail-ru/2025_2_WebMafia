@@ -30,7 +30,6 @@ func (s *Service) GetAlbumByID(ctx context.Context, id uuid.UUID) (*dto.Album, e
 		Title:       albumModel.Title,
 		Type:        albumModel.Type,
 		AvatarURL:   albumModel.AvatarURL,
-		Description: albumModel.Description,
 		ReleaseDate: albumModel.ReleaseDate.Format(dateFormat),
 		Artists: []dto.Artist{
 			{
@@ -39,6 +38,9 @@ func (s *Service) GetAlbumByID(ctx context.Context, id uuid.UUID) (*dto.Album, e
 				AvatarURL: artist.AvatarURL,
 			},
 		},
+	}
+	if albumModel.Description.Valid {
+		albumDTO.Description = albumModel.Description.String
 	}
 
 	return albumDTO, nil
@@ -80,7 +82,7 @@ func (s *Service) GetAllAlbums(ctx context.Context, limit, offset uint64) ([]dto
 			continue
 		}
 
-		albumDTOs = append(albumDTOs, dto.Album{
+		album := dto.Album{
 			ID:          albumModel.ID.String(),
 			Title:       albumModel.Title,
 			Type:        albumModel.Type,
@@ -93,7 +95,11 @@ func (s *Service) GetAllAlbums(ctx context.Context, limit, offset uint64) ([]dto
 					AvatarURL: artist.AvatarURL,
 				},
 			},
-		})
+		}
+		if albumModel.Description.Valid {
+			album.Description = albumModel.Description.String
+		}
+		albumDTOs = append(albumDTOs, album)
 	}
 
 	return albumDTOs, nil
@@ -134,18 +140,24 @@ func (s *Service) GetAlbumsByIDs(ctx context.Context, ids []uuid.UUID) ([]dto.Al
 		if !ok {
 			continue
 		}
-		albumDTOs = append(albumDTOs, dto.Album{
+		album := dto.Album{
 			ID:          albumModel.ID.String(),
 			Title:       albumModel.Title,
 			Type:        albumModel.Type,
 			AvatarURL:   albumModel.AvatarURL,
 			ReleaseDate: albumModel.ReleaseDate.Format(dateFormat),
-			Artists: []dto.Artist{{
-				ID:        artist.ID,
-				Name:      artist.Name,
-				AvatarURL: artist.AvatarURL,
-			}},
-		})
+			Artists: []dto.Artist{
+				{
+					ID:        artist.ID,
+					Name:      artist.Name,
+					AvatarURL: artist.AvatarURL,
+				},
+			},
+		}
+		if albumModel.Description.Valid {
+			album.Description = albumModel.Description.String
+		}
+		albumDTOs = append(albumDTOs, album)
 	}
 
 	return albumDTOs, nil
@@ -168,7 +180,7 @@ func (s *Service) GetAlbumsByArtistID(ctx context.Context, artistID uuid.UUID, l
 
 	albumDTOs := make([]dto.Album, 0, len(albumModels))
 	for _, albumModel := range albumModels {
-		albumDTOs = append(albumDTOs, dto.Album{
+		album := dto.Album{
 			ID:          albumModel.ID.String(),
 			Title:       albumModel.Title,
 			Type:        albumModel.Type,
@@ -181,7 +193,11 @@ func (s *Service) GetAlbumsByArtistID(ctx context.Context, artistID uuid.UUID, l
 					AvatarURL: artist.AvatarURL,
 				},
 			},
-		})
+		}
+		if albumModel.Description.Valid {
+			album.Description = albumModel.Description.String
+		}
+		albumDTOs = append(albumDTOs, album)
 	}
 
 	return albumDTOs, nil

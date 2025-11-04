@@ -133,3 +133,17 @@ func (s *Service) UpdateProfile(ctx context.Context, req dto.UpdateProfileReques
 		Email: user.Email,
 	}, nil
 }
+
+func (s *Service) GetProfile(ctx context.Context, req dto.GetProfileRequest) (*dto.GetProfileResponse, error) {
+	user, err := s.repo.GetUserByID(ctx, req.UserID)
+	if err != nil {
+		return nil, mapRepositoryError(err)
+	}
+
+	return &dto.GetProfileResponse{
+		ID:        user.ID.String(),
+		Login:     user.Login,
+		Email:     user.Email,
+		AvatarURL: user.AvatarURL,
+	}, nil
+}

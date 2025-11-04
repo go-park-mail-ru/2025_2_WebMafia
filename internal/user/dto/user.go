@@ -48,3 +48,13 @@ type UpdateProfileResponse struct {
 	Login string
 	Email string
 }
+
+type GetProfileRequest struct {
+	UserID string
+}
+type GetProfileResponse struct {
+	ID        string
+	Login     string
+	Email     string
+	AvatarURL string
+}

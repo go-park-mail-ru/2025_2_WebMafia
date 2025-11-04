@@ -17,4 +17,5 @@ func (h *Handler) RegisterRoutes(public, protected, csrfProtected *mux.Router) {
 	csrfProtected.HandleFunc("/avatar", h.DeleteAvatar).Methods(http.MethodDelete, http.MethodOptions)
 
 	protected.HandleFunc("/profile", h.UpdateProfile).Methods(http.MethodPut, http.MethodOptions)
+	protected.HandleFunc("/me", h.GetProfile).Methods(http.MethodGet, http.MethodOptions)
 }

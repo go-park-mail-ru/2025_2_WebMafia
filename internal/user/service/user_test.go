@@ -152,18 +152,16 @@ func TestUserService_UploadAvatar(t *testing.T) {
 		ContentType: "image/jpeg",
 	}
 	objectName := "avatar.jpg"
-	url := "http://example.com/avatar.jpg"
 
 	t.Run("success", func(t *testing.T) {
 		mockStorage.EXPECT().UploadAvatar(gomock.Any(), gomock.Any(), req.Size, req.ContentType).Return(objectName, nil)
 		mockRepo.EXPECT().UpdateUserAvatar(gomock.Any(), req.UserID, objectName).Return(nil)
-		mockStorage.EXPECT().GetAvatarURL(gomock.Any(), objectName).Return(url, nil)
 
 		resp, err := userService.UploadAvatar(context.Background(), req)
 
 		assert.NoError(t, err)
 		require.NotNil(t, resp)
-		assert.Equal(t, url, resp.URL)
+		assert.Equal(t, objectName, resp.URL)
 	})
 }
 

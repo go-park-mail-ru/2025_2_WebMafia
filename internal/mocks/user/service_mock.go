@@ -55,6 +55,21 @@ func (mr *MockIServiceMockRecorder) DeleteAvatar(ctx, req any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteAvatar", reflect.TypeOf((*MockIService)(nil).DeleteAvatar), ctx, req)
 }
 
+// GetProfile mocks base method.
+func (m *MockIService) GetProfile(ctx context.Context, req dto.GetProfileRequest) (*dto.GetProfileResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetProfile", ctx, req)
+	ret0, _ := ret[0].(*dto.GetProfileResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetProfile indicates an expected call of GetProfile.
+func (mr *MockIServiceMockRecorder) GetProfile(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetProfile", reflect.TypeOf((*MockIService)(nil).GetProfile), ctx, req)
+}
+
 // Login mocks base method.
 func (m *MockIService) Login(ctx context.Context, req dto.LoginRequest) (*dto.LoginResponse, error) {
 	m.ctrl.T.Helper()

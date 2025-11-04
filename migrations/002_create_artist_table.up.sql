@@ -6,8 +6,7 @@ CREATE TABLE artist (
     description TEXT,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT chk_artist_name_length CHECK (length(artist_name) >= 1),
-    CONSTRAINT chk_artist_avatar_url_extension CHECK (avatar_url IS NULL OR avatar_url LIKE '%.%')
+    CONSTRAINT chk_artist_name_length CHECK (length(artist_name) >= 1)
 );
 
 COMMENT ON TABLE artist IS 'Таблица хранения данных исполнителя';

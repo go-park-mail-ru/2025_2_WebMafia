@@ -72,12 +72,7 @@ func (s *Service) UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest)
 		return nil, mapRepositoryError(err)
 	}
 
-	url, err := s.storage.GetAvatarURL(ctx, objectName)
-	if err != nil {
-		return nil, err
-	}
-
-	return &dto.UploadAvatarResponse{URL: url}, nil
+	return &dto.UploadAvatarResponse{URL: objectName}, nil
 }
 
 func (s *Service) DeleteAvatar(ctx context.Context, req dto.DeleteAvatarRequest) error {
@@ -131,5 +126,19 @@ func (s *Service) UpdateProfile(ctx context.Context, req dto.UpdateProfileReques
 		ID:    user.ID.String(),
 		Login: user.Login,
 		Email: user.Email,
+	}, nil
+}
+
+func (s *Service) GetProfile(ctx context.Context, req dto.GetProfileRequest) (*dto.GetProfileResponse, error) {
+	user, err := s.repo.GetUserByID(ctx, req.UserID)
+	if err != nil {
+		return nil, mapRepositoryError(err)
+	}
+
+	return &dto.GetProfileResponse{
+		ID:        user.ID.String(),
+		Login:     user.Login,
+		Email:     user.Email,
+		AvatarURL: user.AvatarURL,
 	}, nil
 }

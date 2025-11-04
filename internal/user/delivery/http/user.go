@@ -331,3 +331,24 @@ func (h *Handler) UpdateProfile(w http.ResponseWriter, r *http.Request) {
 
 	response.JSON(w, http.StatusOK, res)
 }
+
+func (h *Handler) GetProfile(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.GetProfile"
+
+	userID, ok := middleware.GetUserID(r.Context())
+	if !ok || userID == "" {
+		response.UnauthorizedJSON(w)
+		return
+	}
+
+	log := middleware.LoggerFromContext(r.Context())
+
+	res, err := h.svc.GetProfile(r.Context(), dto.GetProfileRequest{UserID: userID})
+	if err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		handleServiceError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, res)
+}

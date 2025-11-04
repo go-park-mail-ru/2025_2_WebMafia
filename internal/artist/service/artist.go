@@ -24,6 +24,7 @@ func (s *Service) GetArtistByID(ctx context.Context, id uuid.UUID) (*dto.Artist,
 		ID:        artistModel.ID.String(),
 		Name:      artistModel.Name,
 		AvatarURL: artistModel.AvatarURL,
+		HeaderURL: artistModel.HeaderURL,
 		PlayCount: playCount,
 	}
 

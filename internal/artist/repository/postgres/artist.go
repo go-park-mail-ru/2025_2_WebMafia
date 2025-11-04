@@ -11,7 +11,7 @@ import (
 func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Artist, error) {
 	const op = "repository.GetByID"
 	query := `
-		SELECT artist_id, artist_name, avatar_url, description, created_at, updated_at
+		SELECT artist_id, artist_name, avatar_url, header_url, description, created_at, updated_at
 		FROM artist
 		WHERE artist_id = $1`
 
@@ -21,6 +21,7 @@ func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Artist, 
 		&artist.ID,
 		&artist.Name,
 		&artist.AvatarURL,
+		&artist.HeaderURL,
 		&artist.Description,
 		&artist.CreatedAt,
 		&artist.UpdatedAt,
@@ -40,7 +41,7 @@ func (r *Repository) GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Art
 	}
 
 	query := `
-		SELECT artist_id, artist_name, avatar_url, description, created_at, updated_at
+		SELECT artist_id, artist_name, avatar_url, header_url, description, created_at, updated_at
 		FROM artist
 		WHERE artist_id = ANY($1)`
 
@@ -57,6 +58,7 @@ func (r *Repository) GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Art
 			&artist.ID,
 			&artist.Name,
 			&artist.AvatarURL,
+			&artist.HeaderURL,
 			&artist.Description,
 			&artist.CreatedAt,
 			&artist.UpdatedAt,
@@ -76,7 +78,7 @@ func (r *Repository) GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Art
 func (r *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.Artist, error) {
 	const op = "repository.GetAll"
 	query := `
-		SELECT artist_id, artist_name, avatar_url, description, created_at, updated_at
+		SELECT artist_id, artist_name, avatar_url, header_url,  description, created_at, updated_at
 		FROM artist
 		ORDER BY artist_name
 		LIMIT $1 OFFSET $2`
@@ -94,6 +96,7 @@ func (r *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.
 			&artist.ID,
 			&artist.Name,
 			&artist.AvatarURL,
+			&artist.HeaderURL,
 			&artist.Description,
 			&artist.CreatedAt,
 			&artist.UpdatedAt,

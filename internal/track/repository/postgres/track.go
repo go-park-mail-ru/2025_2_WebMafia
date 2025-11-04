@@ -14,14 +14,14 @@ const maxIDsInBatch = 100
 func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Track, error) {
 	const op = "repository.GetByID"
 	query := `
-		SELECT track_id, title, duration_ms, file_url, play_count, description, created_at, updated_at
+		SELECT track_id, title, duration_s, file_url, play_count, description, created_at, updated_at
 		FROM track
 		WHERE track_id = $1`
 	var track model.Track
 	err := r.db.QueryRowContext(ctx, query, id).Scan(
 		&track.ID,
 		&track.Title,
-		&track.DurationMs,
+		&track.DurationS,
 		&track.FileURL,
 		&track.PlayCount,
 		&track.Description,
@@ -37,7 +37,7 @@ func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Track, e
 func (r *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.Track, error) {
 	const op = "repository.GetAll"
 	query := `
-		SELECT track_id, title, duration_ms, file_url, play_count, description, created_at, updated_at
+		SELECT track_id, title, duration_s, file_url, play_count, description, created_at, updated_at
 		FROM track
 		ORDER BY created_at
 		LIMIT $1 OFFSET $2`
@@ -60,7 +60,7 @@ func (r *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.
 func (r *Repository) GetByArtistID(ctx context.Context, artistID uuid.UUID, limit, offset uint64) ([]model.Track, error) {
 	const op = "repository.GetByArtistID"
 	query := `
-		SELECT t.track_id, t.title, t.duration_ms, t.file_url, t.play_count, t.description, t.created_at, t.updated_at
+		SELECT t.track_id, t.title, t.duration_s, t.file_url, t.play_count, t.description, t.created_at, t.updated_at
 		FROM track t
 		JOIN track_artist ta ON t.track_id = ta.track_id
 		WHERE ta.artist_id = $1
@@ -85,7 +85,7 @@ func (r *Repository) GetByArtistID(ctx context.Context, artistID uuid.UUID, limi
 func (r *Repository) GetByAlbumID(ctx context.Context, albumID uuid.UUID, limit, offset uint64) ([]model.Track, error) {
 	const op = "repository.GetByAlbumID"
 	query := `
-		SELECT t.track_id, t.title, t.duration_ms, t.file_url, t.play_count, t.description, t.created_at, t.updated_at
+		SELECT t.track_id, t.title, t.duration_s, t.file_url, t.play_count, t.description, t.created_at, t.updated_at
 		FROM track t
 		JOIN track_album ta ON t.track_id = ta.track_id
 		WHERE ta.album_id = $1
@@ -110,7 +110,7 @@ func (r *Repository) GetByAlbumID(ctx context.Context, albumID uuid.UUID, limit,
 func (r *Repository) GetByGenreID(ctx context.Context, genreID uuid.UUID, limit, offset uint64) ([]model.Track, error) {
 	const op = "repository.GetByGenreID"
 	query := `
-		SELECT t.track_id, t.title, t.duration_ms, t.file_url, t.play_count, t.description, t.created_at, t.updated_at
+		SELECT t.track_id, t.title, t.duration_s, t.file_url, t.play_count, t.description, t.created_at, t.updated_at
 		FROM track t
 		JOIN track_genre tg ON t.track_id = tg.track_id
 		WHERE tg.genre_id = $1
@@ -311,7 +311,7 @@ func selectTracks(rows *sql.Rows) ([]model.Track, error) {
 		if err := rows.Scan(
 			&track.ID,
 			&track.Title,
-			&track.DurationMs,
+			&track.DurationS,
 			&track.FileURL,
 			&track.PlayCount,
 			&track.Description,

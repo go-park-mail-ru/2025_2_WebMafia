@@ -9,9 +9,9 @@ import (
 )
 
 func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Album, error) {
-	const op = "repository.GetAll"
+	const op = "repository.GetByID"
 	query := `
-		SELECT album_id, title, avatar_url, artist_id, description, release_date, created_at, updated_at
+		SELECT album_id, title, type, avatar_url, artist_id, description, release_date, created_at, updated_at
 		FROM album
 		WHERE album_id = $1`
 
@@ -19,6 +19,7 @@ func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Album, e
 	err := r.db.QueryRowContext(ctx, query, id).Scan(
 		&album.ID,
 		&album.Title,
+		&album.Type,
 		&album.AvatarURL,
 		&album.ArtistID,
 		&album.Description,
@@ -37,7 +38,7 @@ func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Album, e
 func (r *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.Album, error) {
 	const op = "repository.GetAll"
 	query := `
-		SELECT album_id, title, avatar_url, artist_id, description, release_date, created_at, updated_at
+		SELECT album_id, title, type, avatar_url, artist_id, description, release_date, created_at, updated_at
 		FROM album
 		ORDER BY release_date DESC
 		LIMIT $1 OFFSET $2`
@@ -54,6 +55,7 @@ func (r *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.
 		if err := rows.Scan(
 			&album.ID,
 			&album.Title,
+			&album.Type,
 			&album.AvatarURL,
 			&album.ArtistID,
 			&album.Description,
@@ -80,7 +82,7 @@ func (r *Repository) GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Alb
 	}
 
 	query := `
-		SELECT album_id, title, avatar_url, artist_id, description, release_date, created_at, updated_at
+		SELECT album_id, title, type, avatar_url, artist_id, description, release_date, created_at, updated_at
 		FROM album
 		WHERE album_id = ANY($1)`
 
@@ -96,6 +98,7 @@ func (r *Repository) GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Alb
 		if err := rows.Scan(
 			&album.ID,
 			&album.Title,
+			&album.Type,
 			&album.AvatarURL,
 			&album.ArtistID,
 			&album.Description,
@@ -118,7 +121,7 @@ func (r *Repository) GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Alb
 func (r *Repository) GetByArtistID(ctx context.Context, artistID uuid.UUID, limit, offset uint64) ([]model.Album, error) {
 	const op = "repository.GetByArtistID"
 	query := `
-		SELECT album_id, title, avatar_url, artist_id, description, release_date, created_at, updated_at
+		SELECT album_id, title, type, avatar_url, artist_id, description, release_date, created_at, updated_at
 		FROM album
 		WHERE artist_id = $1
 		ORDER BY release_date DESC
@@ -136,6 +139,7 @@ func (r *Repository) GetByArtistID(ctx context.Context, artistID uuid.UUID, limi
 		if err := rows.Scan(
 			&album.ID,
 			&album.Title,
+			&album.Type,
 			&album.AvatarURL,
 			&album.ArtistID,
 			&album.Description,

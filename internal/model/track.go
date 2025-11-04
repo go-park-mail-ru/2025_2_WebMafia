@@ -10,7 +10,7 @@ import (
 type Track struct {
 	ID          uuid.UUID
 	Title       string
-	DurationMs  int
+	DurationS   int
 	FileURL     string
 	Description sql.NullString
 	PlayCount   int64

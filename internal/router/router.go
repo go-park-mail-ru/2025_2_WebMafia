@@ -1,32 +1,49 @@
 package router
 
 import (
-	"net/http"
-	"spotify/internal/handler"
+	albumDelivery "spotify/internal/album/delivery/http"
+	artistDelivery "spotify/internal/artist/delivery/http"
+	"spotify/internal/middleware"
+	trackDelivery "spotify/internal/track/delivery/http"
+	userDelivery "spotify/internal/user/delivery/http"
+	"spotify/pkg/logger"
 
 	"github.com/gorilla/mux"
 )
 
-func NewRouter(h *handler.Handlers, corsConfig handler.CORSConfig) *mux.Router {
+type AppHandlers struct {
+	UserHandler   *userDelivery.Handler
+	ArtistHandler *artistDelivery.Handler
+	AlbumHandler  *albumDelivery.Handler
+	TrackHandler  *trackDelivery.Handler
+}
+
+func NewRouter(logger logger.Logger,
+	handlers AppHandlers,
+	auth *middleware.Auth,
+	csrf *middleware.CSRF,
+	cfg middleware.CORSConfig) *mux.Router {
+
 	r := mux.NewRouter()
 
-	r.Use(handler.CORS(corsConfig))
+	r.Use(middleware.RequestLoggerMiddleware(logger))
+	r.Use(middleware.CORS(cfg))
 
 	api := r.PathPrefix("/api/v1").Subrouter()
 
-	api.HandleFunc("/register", h.RegisterHandler).Methods(http.MethodPost, http.MethodOptions)
-	api.HandleFunc("/login", h.LoginHandler).Methods(http.MethodPost, http.MethodOptions)
+	public := api.PathPrefix("").Subrouter()
 
 	protected := api.PathPrefix("").Subrouter()
-	protected.Use(h.AuthMiddleware)
+	protected.Use(auth.AuthMiddleware)
 
-	protected.HandleFunc("/logout", h.LogoutHandler).Methods(http.MethodPost, http.MethodOptions)
-	protected.HandleFunc("/home", h.HomeHandler).Methods(http.MethodGet, http.MethodOptions)
-	protected.HandleFunc("/tracks", h.GetAllTracksHandler).Methods(http.MethodGet, http.MethodOptions)
-	protected.HandleFunc("/tracks/{id}", h.GetTrackByIDHandler).Methods(http.MethodGet, http.MethodOptions)
-	protected.HandleFunc("/artists", h.GetAllArtistsHandler).Methods(http.MethodGet, http.MethodOptions)
-	protected.HandleFunc("/artists/{id}", h.GetArtistByIDHandler).Methods(http.MethodGet, http.MethodOptions)
-	protected.HandleFunc("/albums", h.GetAllAlbumsHandler).Methods(http.MethodGet, http.MethodOptions)
-	protected.HandleFunc("/albums/{id}", h.GetAlbumByIDHandler).Methods(http.MethodGet, http.MethodOptions)
+	csrfProtected := protected.PathPrefix("").Subrouter()
+	csrfProtected.Use(csrf.CSRFMiddleware)
+
+	handlers.UserHandler.RegisterRoutes(public, protected, csrfProtected)
+
+	handlers.ArtistHandler.RegisterRoutes(public)
+	handlers.AlbumHandler.RegisterRoutes(public)
+	handlers.TrackHandler.RegisterRoutes(public, protected, csrfProtected)
+
 	return r
 }

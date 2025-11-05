@@ -7,17 +7,17 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"spotify/internal/model"
 	"strings"
 	"time"
+
+	"github.com/google/uuid"
 )
 
-type claims struct {
-	UserID string `json:"sub"`
-	Login  string `json:"login"`
-	Email  string `json:"email"`
-	Exp    int64  `json:"exp"`
-	Iat    int64  `json:"iat"`
+type Claims struct {
+	UserID    string `json:"sub"`
+	SessionID string `json:"jti"`
+	Exp       int64  `json:"exp"`
+	Iat       int64  `json:"iat"`
 }
 
 type Manager struct {
@@ -33,16 +33,15 @@ func (m *Manager) GetTTL() time.Duration {
 	return m.accessTokenTTL
 }
 
-func (m *Manager) Generate(user *model.User) (string, error) {
+func (m *Manager) Generate(userID string) (string, error) {
 	now := time.Now()
 	expiresAt := now.Add(m.accessTokenTTL)
 
-	claims := claims{
-		UserID: user.ID.String(),
-		Login:  user.Login,
-		Email:  user.Email,
-		Exp:    expiresAt.Unix(),
-		Iat:    now.Unix(),
+	claims := Claims{
+		UserID:    userID,
+		SessionID: uuid.New().String(),
+		Exp:       expiresAt.Unix(),
+		Iat:       now.Unix(),
 	}
 
 	header := map[string]string{"alg": "HS256", "typ": "JWT"}
@@ -70,7 +69,7 @@ func (m *Manager) createSignature(data string) string {
 	return base64.RawURLEncoding.EncodeToString(hasher.Sum(nil))
 }
 
-func (m *Manager) Validate(tokenString string) (*claims, error) {
+func (m *Manager) Validate(tokenString string) (*Claims, error) {
 	parts := strings.Split(tokenString, ".")
 	if len(parts) != 3 {
 		return nil, errors.New("invalid token format")
@@ -87,7 +86,7 @@ func (m *Manager) Validate(tokenString string) (*claims, error) {
 		return nil, fmt.Errorf("failed to decode payload: %w", err)
 	}
 
-	var claims claims
+	var claims Claims
 	if err := json.Unmarshal(payloadJSON, &claims); err != nil {
 		return nil, fmt.Errorf("failed to parse claims: %w", err)
 	}

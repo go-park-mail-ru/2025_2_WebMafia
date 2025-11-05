@@ -1,15 +1,20 @@
 package model
 
-import "time"
+import (
+	"database/sql"
+	"time"
+
+	"github.com/google/uuid"
+)
 
 type Album struct {
-	AlbumID     uint64    `json:"album_id"`
-	Title       string    `json:"title"`
-	AvatarURL   string    `json:"avatar_url"`
-	ArtistID    uint64    `json:"artist_id"`
-	Artist      Artist    `json:"artist,omitempty"`
-	ReleaseDate time.Time `json:"release_date"`
-	CreatedAt   time.Time `json:"created_at"`
-	UpdatedAt   time.Time `json:"updated_at"`
-	Tracks      []Track   `json:"tracks,omitempty"`
+	ID          uuid.UUID
+	Title       string
+	Type        string
+	AvatarURL   string
+	ArtistID    uuid.UUID
+	Description sql.NullString
+	ReleaseDate time.Time
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
 }

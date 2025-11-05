@@ -3,22 +3,35 @@ package app
 import (
 	"log"
 	"os"
-	"spotify/internal/handler"
+
+	"spotify/internal/middleware"
+
+	"spotify/pkg/minio"
+	"spotify/pkg/postgres"
+	"strconv"
 	"strings"
 	"time"
+
+	"spotify/pkg/logger"
 
 	"github.com/joho/godotenv"
 )
 
 type Config struct {
-	Port            string
-	ShutdownTimeout time.Duration
-	ReadTimeout     time.Duration
-	WriteTimeout    time.Duration
-	IdleTimeout     time.Duration
-	AccessTokenTTL  time.Duration
-	JWTSecretKey    string
-	CORS            handler.CORSConfig
+	Port               string
+	ShutdownTimeout    time.Duration
+	ReadTimeout        time.Duration
+	WriteTimeout       time.Duration
+	IdleTimeout        time.Duration
+	AccessTokenTTL     time.Duration
+	JWTSecretKey       string
+	CSRFSecretKey      string
+	CSRFTokenTTL       time.Duration
+	CORS               middleware.CORSConfig
+	DB                 postgres.Config
+	Minio              minio.Config
+	Logger             logger.Config
+	AllowedAvatarTypes []string
 }
 
 func NewConfig() *Config {
@@ -36,12 +49,35 @@ func NewConfig() *Config {
 		IdleTimeout:     getEnvAsDuration("IDLE_TIMEOUT", 60*time.Second),
 		AccessTokenTTL:  getEnvAsDuration("ACCESS_TOKEN_TTL", 720*time.Hour),
 		JWTSecretKey:    getEnv("JWT_SECRET_KEY", ""),
-		CORS: handler.CORSConfig{
+		CSRFSecretKey:   getEnv("CSRF_SECRET_KEY", ""),
+		CSRFTokenTTL:    getEnvAsDuration("CSRF_TOKEN_TTL", 15*time.Minute),
+		CORS: middleware.CORSConfig{
 			AllowedOrigins:   getEnvAsSlice("CORS_ALLOWED_ORIGINS", []string{"http://localhost:8090"}),
 			AllowedMethods:   getEnvAsSlice("CORS_ALLOWED_METHODS", []string{"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"}),
 			AllowedHeaders:   getEnvAsSlice("CORS_ALLOWED_HEADERS", []string{"Content-Type", "Authorization", "X-Requested-With"}),
 			AllowCredentials: getEnvAsBool("CORS_ALLOW_CREDENTIALS", true),
 		},
+		DB: postgres.Config{
+			Host:            getEnv("DB_HOST", "localhost"),
+			Port:            getEnv("DB_PORT", "5432"),
+			User:            getEnv("DB_USER", "myuser"),
+			Password:        getEnv("DB_PASSWORD", "mypassword"),
+			DBName:          getEnv("DB_NAME", "mydb"),
+			MaxOpenConns:    getEnvAsInt("DB_MAX_OPEN_CONNS", 25),
+			MaxIdleConns:    getEnvAsInt("DB_MAX_IDLE_CONNS", 25),
+			ConnMaxLifetime: getEnvAsDuration("DB_CONN_MAX_LIFETIME", 5*time.Minute),
+		},
+		Minio: minio.Config{
+			Endpoint:  getEnv("MINIO_ENDPOINT", "localhost:9000"),
+			AccessKey: getEnv("MINIO_ACCESS_KEY", "miniouser"),
+			SecretKey: getEnv("MINIO_SECRET_KEY", "miniopassword"),
+			UseSSL:    getEnvAsBool("MINIO_USE_SSL", false),
+		},
+		Logger: logger.Config{
+			Level: getEnv("LOGGER_LEVEL", logger.LevelInfo),
+			Mode:  getEnv("LOGGER_MODE", logger.ModeDev),
+		},
+		AllowedAvatarTypes: getEnvAsSlice("ALLOWED_AVATAR_TYPES", []string{"image/png", "image/jpeg", "image/webp"}),
 	}
 }
 
@@ -77,4 +113,12 @@ func getEnvAsBool(key string, defaultValue bool) bool {
 		return defaultValue
 	}
 	return strings.ToLower(valueStr) == "true" || valueStr == "1"
+}
+
+func getEnvAsInt(key string, defaultValue int) int {
+	valueStr := getEnv(key, "")
+	if value, err := strconv.Atoi(valueStr); err == nil {
+		return value
+	}
+	return defaultValue
 }

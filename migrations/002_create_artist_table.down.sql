@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS artist;
+DROP INDEX IF EXISTS idx_artist_name;

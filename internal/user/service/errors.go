@@ -19,9 +19,9 @@ func mapRepositoryError(err error) error {
 
 	switch {
 	case errors.Is(err, postgres.ErrNotFound):
-		return fmt.Errorf("not found: %w", err)
+		return fmt.Errorf("not found: %w", ErrNotFound)
 	case errors.Is(err, postgres.ErrConflict):
-		return fmt.Errorf("user already exists: %w", err)
+		return fmt.Errorf("user already exists: %w", ErrConflict)
 	default:
 		return fmt.Errorf("internal error: %w", err)
 	}

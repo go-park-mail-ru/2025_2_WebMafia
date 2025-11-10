@@ -3,22 +3,17 @@ package minio
 import (
 	"context"
 	"fmt"
-	"github.com/google/uuid"
-	"github.com/minio/minio-go/v7"
-	"github.com/minio/minio-go/v7/pkg/credentials"
 	"io"
 	"log"
 	"net/url"
+	"spotify/config"
 	"strings"
 	"time"
-)
 
-type Config struct {
-	Endpoint  string
-	AccessKey string
-	SecretKey string
-	UseSSL    bool
-}
+	"github.com/google/uuid"
+	"github.com/minio/minio-go/v7"
+	"github.com/minio/minio-go/v7/pkg/credentials"
+)
 
 type ObjectInfo struct {
 	Bucket      string
@@ -32,7 +27,7 @@ type Client struct {
 	minioClient *minio.Client
 }
 
-func New(cfg Config) (*Client, error) {
+func New(cfg *config.MinioConfig) (*Client, error) {
 	mClient, err := minio.New(cfg.Endpoint, &minio.Options{
 		Creds:  credentials.NewStaticV4(cfg.AccessKey, cfg.SecretKey, ""),
 		Secure: cfg.UseSSL,

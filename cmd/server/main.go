@@ -6,8 +6,8 @@ import (
 )
 
 func main() {
-	cfg := app.NewConfig()
-	app, err := app.NewApp(cfg)
+	configPath := "config"
+	app, err := app.NewApp(configPath)
 	if err != nil {
 		log.Fatalf("application init failed: %v", err)
 	}

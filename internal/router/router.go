@@ -1,6 +1,7 @@
 package router
 
 import (
+	"spotify/config"
 	albumDelivery "spotify/internal/album/delivery/http"
 	artistDelivery "spotify/internal/artist/delivery/http"
 	"spotify/internal/middleware"
@@ -22,7 +23,7 @@ func NewRouter(logger logger.Logger,
 	handlers AppHandlers,
 	auth *middleware.Auth,
 	csrf *middleware.CSRF,
-	cfg middleware.CORSConfig) *mux.Router {
+	cfg config.CORSConfig) *mux.Router {
 
 	r := mux.NewRouter()
 

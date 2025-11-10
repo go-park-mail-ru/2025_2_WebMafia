@@ -8,6 +8,7 @@ import (
 	"testing"
 	"time"
 
+	"spotify/config"
 	"spotify/pkg/jwtmanager"
 	"spotify/pkg/logger"
 
@@ -134,7 +135,7 @@ func TestCSRFMiddleware(t *testing.T) {
 }
 
 func TestCORSMiddleware(t *testing.T) {
-	config := CORSConfig{
+	config := config.CORSConfig{
 		AllowedOrigins:   []string{"http://localhost:8080"},
 		AllowedMethods:   []string{"GET", "POST"},
 		AllowedHeaders:   []string{"Content-Type"},

@@ -9,7 +9,6 @@ services:
       - "8080:8080"
     container_name: wavemusic-app
     restart: always
-    env_file: .env.docker 
     depends_on:
       db:
         condition: service_healthy
@@ -20,7 +19,6 @@ services:
     image: migrate/migrate
     volumes:
       - ./migrations:/migrations
-    env_file: .env.docker
     command: [ "-path", "/migrations", "-database", "postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}?sslmode=disable", "up" ]
     depends_on:
       db:

@@ -10,6 +10,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	"spotify/config"
 	albumDelivery "spotify/internal/album/delivery/http"
 	albumRepo "spotify/internal/album/repository/postgres"
 	albumService "spotify/internal/album/service"
@@ -38,30 +39,35 @@ import (
 
 type App struct {
 	server *http.Server
-	cfg    *Config
+	cfg    *config.Config
 	db     *sql.DB
 	logger logger.Logger
 }
 
-func NewApp(cfg *Config) (*App, error) {
+func NewApp(configPath string) (*App, error) {
+	cfg, err := config.LoadConfig(configPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to load config: %w", err)
+	}
+
 	log, err := logger.New(cfg.Logger.Level, cfg.Logger.Mode)
 	if err != nil {
 		return nil, fmt.Errorf("failed to init logger: %w", err)
 	}
 	log.Infof("Logger initialized")
 
-	db, err := postgres.New(context.Background(), cfg.DB)
+	db, err := postgres.New(context.Background(), &cfg.DB)
 	if err != nil {
 		log.Errorf("failed to connect to db: %v", err)
 		return nil, fmt.Errorf("failed to connect to db: %w", err)
 	}
 	log.Infof("Database connection")
 
-	minioClient, err := minio.New(cfg.Minio)
+	minioClient, err := minio.New(&cfg.Minio)
 	if err != nil {
 		return nil, fmt.Errorf("failed to init minio: %w", err)
 	}
-	avatarStorage := storageRepo.NewStorage(minioClient, "avatars")
+	avatarStorage := storageRepo.NewStorage(minioClient, cfg.Minio.Bucket)
 
 	userRepository := userRepo.NewUserRepository(db)
 	artistRepository := artistRepo.New(db)
@@ -77,13 +83,13 @@ func NewApp(cfg *Config) (*App, error) {
 
 	artistSvc.SetTrackService(trackSvc)
 
-	jwtManager := jwtmanager.NewManager(cfg.JWTSecretKey, cfg.AccessTokenTTL)
+	jwtManager := jwtmanager.NewManager(cfg.Auth.JWT.SecretKey, cfg.Auth.JWT.AccessTokenTTL)
 	authMiddleware := middleware.NewAuthMiddleware(jwtManager)
 
-	csrfManager := csrfmanager.NewManager(cfg.CSRFSecretKey, cfg.CSRFTokenTTL)
+	csrfManager := csrfmanager.NewManager(cfg.Auth.CSRF.SecretKey, cfg.Auth.CSRF.TokenTTL)
 	csrfMiddleware := middleware.NewCSRFMiddleware(csrfManager)
 
-	userHandler := userDelivery.NewHandler(userSvc, jwtManager, csrfManager, cfg.AllowedAvatarTypes)
+	userHandler := userDelivery.NewHandler(userSvc, jwtManager, csrfManager, cfg.App.AllowedAvatarTypes)
 	artistHandler := artistDelivery.NewHandler(artistSvc)
 	albumHandler := albumDelivery.NewHandler(albumSvc)
 	trackHandler := trackDelivery.NewHandler(trackSvc)
@@ -98,11 +104,11 @@ func NewApp(cfg *Config) (*App, error) {
 	muxRouter := router.NewRouter(log, handlers, authMiddleware, csrfMiddleware, cfg.CORS)
 
 	server := &http.Server{
-		Addr:         ":" + cfg.Port,
+		Addr:         ":" + cfg.Server.Port,
 		Handler:      muxRouter,
-		ReadTimeout:  cfg.ReadTimeout,
-		WriteTimeout: cfg.WriteTimeout,
-		IdleTimeout:  cfg.IdleTimeout,
+		ReadTimeout:  cfg.Server.ReadTimeout,
+		WriteTimeout: cfg.Server.WriteTimeout,
+		IdleTimeout:  cfg.Server.IdleTimeout,
 	}
 
 	return &App{
@@ -138,7 +144,7 @@ func (a *App) Run() error {
 	case <-ctx.Done():
 		a.logger.Infof("shutting down server gracefully...")
 
-		shutdownCtx, cancel := context.WithTimeout(context.Background(), a.cfg.ShutdownTimeout)
+		shutdownCtx, cancel := context.WithTimeout(context.Background(), a.cfg.Server.ShutdownTimeout)
 		defer cancel()
 
 		if err := a.server.Shutdown(shutdownCtx); err != nil {

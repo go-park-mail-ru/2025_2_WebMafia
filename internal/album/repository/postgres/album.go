@@ -3,6 +3,7 @@ package postgres
 import (
 	"context"
 	"fmt"
+	"spotify/internal/album/dto"
 	"spotify/internal/model"
 
 	"github.com/google/uuid"
@@ -157,4 +158,48 @@ func (r *Repository) GetByArtistID(ctx context.Context, artistID uuid.UUID, limi
 	}
 
 	return albums, nil
+}
+
+func (r *Repository) Search(ctx context.Context, query string, limit uint64) ([]dto.SearchResult, error) {
+	const op = "repository.Search"
+
+	sqlQuery := `
+		SELECT album_id, title, type, avatar_url, artist_id, description, release_date, created_at, updated_at,
+			ts_rank_cd(fts_vector, plainto_tsquery('simple', $1)) as rank
+		FROM album
+		WHERE fts_vector @@ plainto_tsquery('simple', $1)
+		ORDER BY rank DESC
+		LIMIT $2;`
+
+	rows, err := r.db.QueryContext(ctx, sqlQuery, query, limit)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: query failed: %w", op, mapErrors(err))
+	}
+	defer rows.Close()
+
+	results := make([]dto.SearchResult, 0, limit)
+	for rows.Next() {
+		var searchResult dto.SearchResult
+		if err := rows.Scan(
+			&searchResult.Album.ID,
+			&searchResult.Album.Title,
+			&searchResult.Album.Type,
+			&searchResult.Album.AvatarURL,
+			&searchResult.Album.ArtistID,
+			&searchResult.Album.Description,
+			&searchResult.Album.ReleaseDate,
+			&searchResult.Album.CreatedAt,
+			&searchResult.Album.UpdatedAt,
+			&searchResult.Rank,
+		); err != nil {
+			return nil, fmt.Errorf("[%s]: scan failed: %w", op, mapErrors(err))
+		}
+		results = append(results, searchResult)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, fmt.Errorf("[%s]: rows iteration failed: %w", op, mapErrors(err))
+	}
+
+	return results, nil
 }

@@ -5,6 +5,7 @@ import (
 	albumService "spotify/internal/album/service"
 	artistService "spotify/internal/artist/service"
 	"spotify/internal/model"
+	"spotify/internal/track/dto"
 
 	"github.com/google/uuid"
 )
@@ -16,6 +17,7 @@ type IRepository interface {
 	GetByArtistID(ctx context.Context, artistID uuid.UUID, limit, offset uint64) ([]model.Track, error)
 	GetByAlbumID(ctx context.Context, albumID uuid.UUID, limit, offset uint64) ([]model.Track, error)
 	GetByGenreID(ctx context.Context, genreID uuid.UUID, limit, offset uint64) ([]model.Track, error)
+	Search(ctx context.Context, query string, limit uint64) ([]dto.SearchResult, error)
 
 	IncrementPlayCount(ctx context.Context, trackID uuid.UUID) error
 

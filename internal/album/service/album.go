@@ -202,3 +202,64 @@ func (s *Service) GetAlbumsByArtistID(ctx context.Context, artistID uuid.UUID, l
 
 	return albumDTOs, nil
 }
+
+func (s *Service) Search(ctx context.Context, query string, limit uint64) ([]dto.AlbumSearch, error) {
+	const op = "service.Search"
+
+	repoResults, err := s.albumRepo.Search(ctx, query, limit)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: failed to search albums in repository: %w", op, mapError(err))
+	}
+
+	if len(repoResults) == 0 {
+		return []dto.AlbumSearch{}, nil
+	}
+
+	artistIDs := make([]uuid.UUID, 0, len(repoResults))
+	uniqueArtistIDs := make(map[uuid.UUID]bool)
+	for _, result := range repoResults {
+		if !uniqueArtistIDs[result.Album.ArtistID] {
+			uniqueArtistIDs[result.Album.ArtistID] = true
+			artistIDs = append(artistIDs, result.Album.ArtistID)
+		}
+	}
+
+	artists, err := s.artistService.GetArtistsByIDs(ctx, artistIDs)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: failed to get artists for albums: %w", op, mapError(err))
+	}
+
+	artistsMap := make(map[string]artistDTO.Artist, len(artists))
+	for _, artist := range artists {
+		artistsMap[artist.ID] = artist
+	}
+
+	dtoResults := make([]dto.AlbumSearch, len(repoResults))
+	for i, result := range repoResults {
+		artist, ok := artistsMap[result.Album.ArtistID.String()]
+		if !ok {
+			continue
+		}
+
+		dtoResults[i] = dto.AlbumSearch{
+			ID:          result.Album.ID.String(),
+			Title:       result.Album.Title,
+			Type:        result.Album.Type,
+			AvatarURL:   result.Album.AvatarURL,
+			ReleaseDate: result.Album.ReleaseDate.Format(dateFormat),
+			Artists: []dto.Artist{
+				{
+					ID:        artist.ID,
+					Name:      artist.Name,
+					AvatarURL: artist.AvatarURL,
+				},
+			},
+			Rank: result.Rank,
+		}
+		if result.Album.Description.Valid {
+			dtoResults[i].Description = result.Album.Description.String
+		}
+	}
+
+	return dtoResults, nil
+}

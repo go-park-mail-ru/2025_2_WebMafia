@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"spotify/internal/album/dto"
 	artistService "spotify/internal/artist/service"
 	"spotify/internal/model"
 
@@ -14,6 +15,7 @@ type IRepository interface {
 	GetAll(ctx context.Context, limit, offset uint64) ([]model.Album, error)
 	GetByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Album, error)
 	GetByArtistID(ctx context.Context, artistID uuid.UUID, limit, offset uint64) ([]model.Album, error)
+	Search(ctx context.Context, query string, limit uint64) ([]dto.SearchResult, error)
 }
 
 type Service struct {

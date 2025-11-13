@@ -1,4 +1,4 @@
-package config
+package app
 
 import (
 	"fmt"
@@ -9,25 +9,25 @@ import (
 )
 
 type Config struct {
-	Server ServerConfig `mapstructure:"server"`
-	Logger LoggerConfig `mapstructure:"logger"`
-	DB     DBConfig     `mapstructure:"db"`
-	Minio  MinioConfig  `mapstructure:"minio"`
-	Auth   AuthConfig   `mapstructure:"auth"`
-	CORS   CORSConfig   `mapstructure:"cors"`
-	App    AppConfig    `mapstructure:"app"`
+	App   AppConfig   `mapstructure:"app"`
+	DB    DBConfig    `mapstructure:"db"`
+	Minio MinioConfig `mapstructure:"minio"`
 }
 
 type AppConfig struct {
-	AllowedAvatarTypes []string `mapstructure:"allowedAvatarTypes"`
+	HTTP   HTTPConfig   `mapstructure:"http"`
+	Logger LoggerConfig `mapstructure:"logger"`
 }
 
-type ServerConfig struct {
-	Port            string        `mapstructure:"port"`
-	ReadTimeout     time.Duration `mapstructure:"readTimeout"`
-	WriteTimeout    time.Duration `mapstructure:"writeTimeout"`
-	IdleTimeout     time.Duration `mapstructure:"idleTimeout"`
-	ShutdownTimeout time.Duration `mapstructure:"shutdownTimeout"`
+type HTTPConfig struct {
+	Port               string        `mapstructure:"port"`
+	ReadTimeout        time.Duration `mapstructure:"readTimeout"`
+	WriteTimeout       time.Duration `mapstructure:"writeTimeout"`
+	IdleTimeout        time.Duration `mapstructure:"idleTimeout"`
+	ShutdownTimeout    time.Duration `mapstructure:"shutdownTimeout"`
+	AllowedAvatarTypes []string      `mapstructure:"allowedAvatarTypes"`
+	Auth               AuthConfig    `mapstructure:"auth"`
+	CORS               CORSConfig    `mapstructure:"cors"`
 }
 
 type LoggerConfig struct {
@@ -84,14 +84,12 @@ func LoadConfig(configPath string) (*Config, error) {
 	v.SetConfigType("yml")
 	v.AddConfigPath(configPath)
 
-	if err := v.ReadInConfig(); err != nil {
-		if _, ok := err.(viper.ConfigFileNotFoundError); !ok {
-			return nil, fmt.Errorf("failed to read config file: %w", err)
-		}
-	}
-
 	v.AutomaticEnv()
 	v.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
+
+	if err := v.ReadInConfig(); err != nil {
+		return nil, fmt.Errorf("failed to read config file: %w", err)
+	}
 
 	var cfg Config
 	if err := v.Unmarshal(&cfg); err != nil {

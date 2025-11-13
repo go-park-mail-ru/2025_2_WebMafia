@@ -1,13 +1,20 @@
 package main
 
 import (
+	"context"
+	"flag"
 	"log"
 	"spotify/internal/app"
 )
 
 func main() {
-	configPath := "config"
-	app, err := app.NewApp(configPath)
+	var configPath string
+	flag.StringVar(&configPath, "f", "config", "path to config directory")
+	flag.Parse()
+
+	ctx := context.Background()
+
+	app, err := app.NewApp(ctx, configPath)
 	if err != nil {
 		log.Fatalf("application init failed: %v", err)
 	}

@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"net/http"
-	"spotify/config"
 	"strings"
 )
 
@@ -13,7 +12,7 @@ type CORSConfig struct {
 	AllowCredentials bool
 }
 
-func CORS(config config.CORSConfig) func(next http.Handler) http.Handler {
+func CORS(config CORSConfig) func(next http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			origin := r.Header.Get("Origin")

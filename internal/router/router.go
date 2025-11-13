@@ -4,6 +4,7 @@ import (
 	albumDelivery "spotify/internal/album/delivery/http"
 	artistDelivery "spotify/internal/artist/delivery/http"
 	"spotify/internal/middleware"
+	playlistDelivery "spotify/internal/playlist/delivery/http"
 	trackDelivery "spotify/internal/track/delivery/http"
 	userDelivery "spotify/internal/user/delivery/http"
 	"spotify/pkg/logger"
@@ -12,10 +13,11 @@ import (
 )
 
 type AppHandlers struct {
-	UserHandler   *userDelivery.Handler
-	ArtistHandler *artistDelivery.Handler
-	AlbumHandler  *albumDelivery.Handler
-	TrackHandler  *trackDelivery.Handler
+	UserHandler     *userDelivery.Handler
+	ArtistHandler   *artistDelivery.Handler
+	AlbumHandler    *albumDelivery.Handler
+	TrackHandler    *trackDelivery.Handler
+	PlaylistHandler *playlistDelivery.Handler
 }
 
 func NewRouter(logger logger.Logger,
@@ -31,10 +33,10 @@ func NewRouter(logger logger.Logger,
 
 	api := r.PathPrefix("/api/v1").Subrouter()
 
-	public := api.PathPrefix("").Subrouter()
-
 	protected := api.PathPrefix("").Subrouter()
 	protected.Use(auth.AuthMiddleware)
+
+	public := api.PathPrefix("").Subrouter()
 
 	csrfProtected := protected.PathPrefix("").Subrouter()
 	csrfProtected.Use(csrf.CSRFMiddleware)
@@ -44,6 +46,7 @@ func NewRouter(logger logger.Logger,
 	handlers.ArtistHandler.RegisterRoutes(public)
 	handlers.AlbumHandler.RegisterRoutes(public)
 	handlers.TrackHandler.RegisterRoutes(public, protected, csrfProtected)
+	handlers.PlaylistHandler.RegisterRoutes(public, protected)
 
 	return r
 }

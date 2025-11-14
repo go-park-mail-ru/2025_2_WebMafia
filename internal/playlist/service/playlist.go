@@ -3,7 +3,6 @@ package service
 import (
 	"context"
 	"errors"
-	"fmt"
 	"spotify/internal/model"
 	"spotify/internal/playlist/dto"
 	"time"
@@ -13,11 +12,6 @@ import (
 
 func (s *Service) CreatePlaylist(ctx context.Context, req dto.CreatePlaylistRequest) (*dto.Playlist, error) {
 	const op = "service.CreatePlaylist"
-
-	userID, err := uuid.Parse(req.UserID)
-	if err != nil {
-		return nil, fmt.Errorf("[%s]: invalid user ID: %w", op, err)
-	}
 
 	playlist := model.Playlist{
 		ID:          uuid.New(),
@@ -29,7 +23,7 @@ func (s *Service) CreatePlaylist(ctx context.Context, req dto.CreatePlaylistRequ
 		UpdatedAt:   time.Now(),
 	}
 
-	if err := s.repo.CreatePlaylist(ctx, playlist, userID); err != nil {
+	if err := s.repo.CreatePlaylist(ctx, playlist, req.UserID); err != nil {
 		return nil, mapRepositoryError(err)
 	}
 
@@ -45,12 +39,7 @@ func (s *Service) CreatePlaylist(ctx context.Context, req dto.CreatePlaylistRequ
 func (s *Service) GetPlaylist(ctx context.Context, req dto.GetPlaylistRequest) (*dto.Playlist, error) {
 	const op = "service.GetPlaylist"
 
-	id, err := uuid.Parse(req.ID)
-	if err != nil {
-		return nil, fmt.Errorf("[%s]: invalid playlist ID: %w", op, err)
-	}
-
-	playlist, err := s.repo.GetByID(ctx, id)
+	playlist, err := s.repo.GetByID(ctx, req.ID)
 	if err != nil {
 		return nil, mapRepositoryError(err)
 	}
@@ -67,20 +56,14 @@ func (s *Service) GetPlaylist(ctx context.Context, req dto.GetPlaylistRequest) (
 func (s *Service) GetPlaylistsByUser(ctx context.Context, req dto.GetPlaylistsByUserRequest) ([]dto.Playlist, error) {
 	const op = "service.GetPlaylistsByUser"
 
-	userID, err := uuid.Parse(req.UserID)
-	if err != nil {
-		return nil, fmt.Errorf("[%s]: invalid user ID: %w", op, err)
-	}
-
-	playlists, err := s.repo.GetAllByUser(ctx, userID, req.Limit, req.Offset)
+	playlists, err := s.repo.GetAllByUser(ctx, req.UserID, req.Limit, req.Offset)
 	if err != nil {
 		return nil, mapRepositoryError(err)
 	}
 
-	dtoList := make([]dto.Playlist, 0, len(playlists))
-
+	res := make([]dto.Playlist, 0, len(playlists))
 	for _, p := range playlists {
-		dtoList = append(dtoList, dto.Playlist{
+		res = append(res, dto.Playlist{
 			ID:          p.ID.String(),
 			Title:       p.Title,
 			Description: p.Description,
@@ -89,26 +72,28 @@ func (s *Service) GetPlaylistsByUser(ctx context.Context, req dto.GetPlaylistsBy
 		})
 	}
 
-	return dtoList, nil
+	return res, nil
 }
 
 func (s *Service) UpdatePlaylist(ctx context.Context, req dto.UpdatePlaylistRequest) (*dto.Playlist, error) {
 	const op = "service.UpdatePlaylist"
 
-	id, err := uuid.Parse(req.ID)
+	playlist, err := s.repo.GetByID(ctx, req.ID)
 	if err != nil {
-		return nil, fmt.Errorf("[%s]: invalid playlist ID: %w", op, err)
+		return nil, mapRepositoryError(err)
 	}
 
-	playlist := model.Playlist{
-		ID:          id,
-		Title:       req.Title,
-		Description: req.Description,
-		IsFavorite:  req.IsFavorite,
-		AvatarURL:   "",
+	if req.Title != nil {
+		playlist.Title = *req.Title
+	}
+	if req.Description != nil {
+		playlist.Description = *req.Description
+	}
+	if req.IsFavorite != nil {
+		playlist.IsFavorite = *req.IsFavorite
 	}
 
-	if err := s.repo.UpdatePlaylist(ctx, playlist); err != nil {
+	if err := s.repo.UpdatePlaylist(ctx, *playlist); err != nil {
 		return nil, mapRepositoryError(err)
 	}
 
@@ -124,16 +109,7 @@ func (s *Service) UpdatePlaylist(ctx context.Context, req dto.UpdatePlaylistRequ
 func (s *Service) DeletePlaylist(ctx context.Context, req dto.DeletePlaylistRequest) error {
 	const op = "service.DeletePlaylist"
 
-	id, err := uuid.Parse(req.ID)
-	if err != nil {
-		return fmt.Errorf("[%s]: invalid playlist ID: %w", op, err)
-	}
-
-	if err := s.repo.DeletePlaylist(ctx, id); err != nil {
-		return mapRepositoryError(err)
-	}
-
-	return nil
+	return mapRepositoryError(s.repo.DeletePlaylist(ctx, req.ID))
 }
 
 func (s *Service) getOrCreateFavorite(ctx context.Context, user uuid.UUID) (*model.Playlist, error) {
@@ -167,13 +143,7 @@ func (s *Service) getOrCreateFavorite(ctx context.Context, user uuid.UUID) (*mod
 }
 
 func (s *Service) GetFavoritePlaylist(ctx context.Context, req dto.GetFavoritePlaylistRequest) (*dto.Playlist, error) {
-	user, err := uuid.Parse(req.UserID)
-
-	if err != nil {
-		return nil, fmt.Errorf("invalid userID: %w", err)
-	}
-
-	playlist, err := s.getOrCreateFavorite(ctx, user)
+	playlist, err := s.getOrCreateFavorite(ctx, req.UserID)
 	if err != nil {
 		return nil, err
 	}
@@ -188,17 +158,10 @@ func (s *Service) GetFavoritePlaylist(ctx context.Context, req dto.GetFavoritePl
 }
 
 func (s *Service) AddTrackToFavorite(ctx context.Context, req dto.AddTrackToFavoriteRequest) error {
-	user, err := uuid.Parse(req.UserID)
-	if err != nil {
-		return fmt.Errorf("invalid userID: %w", err)
-	}
-
-	fav, err := s.getOrCreateFavorite(ctx, user)
+	fav, err := s.getOrCreateFavorite(ctx, req.UserID)
 	if err != nil {
 		return err
 	}
-	if err := s.repo.AddTrackToPlaylist(ctx, fav.ID, req.TrackID); err != nil {
-		return mapRepositoryError(err)
-	}
-	return nil
+
+	return mapRepositoryError(s.repo.AddTrackToPlaylist(ctx, fav.ID, req.TrackID))
 }

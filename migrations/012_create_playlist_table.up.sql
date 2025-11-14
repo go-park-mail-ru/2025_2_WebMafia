@@ -17,6 +17,5 @@ CREATE TABLE playlist (
 
 COMMENT ON TABLE playlist IS 'Плейлисты пользователей';
 
-CREATE INDEX idx_playlist_title ON playlist (title);
 CREATE INDEX idx_playlist_user_id ON playlist (user_id);
 CREATE INDEX idx_playlist_created_at ON playlist (created_at);

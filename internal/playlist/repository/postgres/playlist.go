@@ -12,8 +12,8 @@ import (
 func (r *Repository) CreatePlaylist(ctx context.Context, playlist model.Playlist, userID uuid.UUID) error {
 	const op = "repository.CreatePlaylist"
 
-	query := `INSERT INTO playlist (playlist_id, user_id, title, description, avatar_url, is_favorite, created_at, updated_at)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
+	query := `INSERT INTO playlist (playlist_id, user_id, title, description, avatar_url, is_favorite)
+          VALUES ($1, $2, $3, $4, $5, $6)`
 
 	_, err := r.Conn.ExecContext(ctx, query,
 		playlist.ID, userID, playlist.Title,
@@ -80,9 +80,8 @@ func (r *Repository) GetAllByUser(ctx context.Context, userID uuid.UUID, limit, 
 func (r *Repository) UpdatePlaylist(ctx context.Context, playlist model.Playlist) error {
 	const op = "repository.UpdatePlaylist"
 
-	query := `UPDATE playlist
-		SET title = $1, description = $2, avatar_url = $3
-		WHERE playlist_id = $4`
+	query := `UPDATE playlist SET title = $1, description = $2, avatar_url = $3, is_favorite = $4
+        WHERE playlist_id = $5`
 
 	res, err := r.Conn.ExecContext(ctx, query,
 		playlist.Title,

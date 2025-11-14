@@ -1,5 +1,7 @@
 package dto
 
+import "github.com/google/uuid"
+
 type Playlist struct {
 	ID          string   `json:"id"`
 	Title       string   `json:"title"`
@@ -30,36 +32,36 @@ type Artist struct {
 }
 
 type CreatePlaylistRequest struct {
-	UserID      string `json:"-"`
-	Title       string `json:"title"`
-	Description string `json:"description,omitempty"`
+	UserID      uuid.UUID
+	Title       string
+	Description string
 }
 
 type UpdatePlaylistRequest struct {
-	ID          string `json:"id"`
-	Title       string `json:"title"`
-	Description string `json:"description,omitempty"`
-	IsFavorite  bool   `json:"is_favorite"`
+	ID          uuid.UUID
+	Title       *string
+	Description *string
+	IsFavorite  *bool
 }
 
 type DeletePlaylistRequest struct {
-	ID string `json:"id"`
+	ID uuid.UUID
 }
 
 type GetPlaylistRequest struct {
-	ID string `json:"id"`
+	ID uuid.UUID
 }
 
 type GetPlaylistsByUserRequest struct {
-	UserID string `json:"user_id"`
-	Limit  uint64 `json:"limit,omitempty"`
-	Offset uint64 `json:"offset,omitempty"`
+	UserID uuid.UUID
+	Limit  uint64
+	Offset uint64
 }
 
 type GetFavoritePlaylistRequest struct {
-	UserID string `json:"-"`
+	UserID uuid.UUID
 }
 type AddTrackToFavoriteRequest struct {
-	UserID  string `json:"-"`
-	TrackID string `json:"track_id"`
+	UserID  uuid.UUID
+	TrackID string
 }

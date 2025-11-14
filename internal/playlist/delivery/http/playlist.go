@@ -3,7 +3,9 @@ package http
 import (
 	"encoding/json"
 	"errors"
+	"github.com/google/uuid"
 	"net/http"
+	"net/url"
 	"spotify/internal/middleware"
 	"spotify/internal/playlist/dto"
 	"spotify/internal/playlist/service"
@@ -19,6 +21,8 @@ const (
 	maxLimit         = 1000
 	queryParamLimit  = "limit"
 	queryParamOffset = "offset"
+	paramPlaylistID  = "id"
+	paramUserID      = "userId"
 )
 
 func (h *Handler) CreatePlaylist(w http.ResponseWriter, r *http.Request) {
@@ -26,9 +30,17 @@ func (h *Handler) CreatePlaylist(w http.ResponseWriter, r *http.Request) {
 	log := middleware.LoggerFromContext(r.Context())
 	defer r.Body.Close()
 
-	userID, ok := middleware.GetUserID(r.Context())
-	if !ok || userID == "" {
+	rawUserID, ok := middleware.GetUserID(r.Context())
+	if !ok || rawUserID == "" {
+		log.Errorf("[%s]: missing userId", op)
 		response.UnauthorizedJSON(w)
+		return
+	}
+
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.BadRequestJSON(w)
 		return
 	}
 
@@ -55,9 +67,16 @@ func (h *Handler) GetPlaylistByID(w http.ResponseWriter, r *http.Request) {
 	const op = "handler.GetPlaylistByID"
 	log := middleware.LoggerFromContext(r.Context())
 
-	id := mux.Vars(r)["id"]
-	if id == "" {
+	rawID := mux.Vars(r)[paramPlaylistID]
+	if rawID == "" {
 		log.Errorf("[%s]: missing playlist id", op)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	id, err := uuid.Parse(rawID)
+	if err != nil {
+		log.Errorf("[%s]: invalid playlist id: %v", op, err)
 		response.BadRequestJSON(w)
 		return
 	}
@@ -67,29 +86,35 @@ func (h *Handler) GetPlaylistByID(w http.ResponseWriter, r *http.Request) {
 	playlist, err := h.service.GetPlaylist(r.Context(), req)
 	if err != nil {
 		if errors.Is(err, service.ErrNotFound) {
-			log.Infof("[%s]: playlist not found: %v", op, err)
-		} else {
-			log.Errorf("[%s]: service error: %v", op, err)
+			h.handleError(w, err)
+			return
 		}
+		log.Errorf("[%s]: service error: %v", op, err)
 		h.handleError(w, err)
 		return
 	}
 
 	response.JSON(w, http.StatusOK, playlist)
 }
-
 func (h *Handler) GetAllPlaylistsByUserID(w http.ResponseWriter, r *http.Request) {
 	const op = "handler.GetAllPlaylistsByUserID"
 	log := middleware.LoggerFromContext(r.Context())
 
-	userID := mux.Vars(r)["userId"]
-	if userID == "" {
+	rawUserID := mux.Vars(r)[paramUserID]
+	if rawUserID == "" {
 		log.Errorf("[%s]: missing userId", op)
 		response.BadRequestJSON(w)
 		return
 	}
 
-	limit, offset := parsePagination(r)
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	limit, offset := parsePagination(r.URL.Query())
 
 	req := dto.GetPlaylistsByUserRequest{
 		UserID: userID,
@@ -100,25 +125,31 @@ func (h *Handler) GetAllPlaylistsByUserID(w http.ResponseWriter, r *http.Request
 	playlists, err := h.service.GetPlaylistsByUser(r.Context(), req)
 	if err != nil {
 		if errors.Is(err, service.ErrNotFound) {
-			log.Infof("[%s]: playlists not found for user %s", op, userID)
-		} else {
-			log.Errorf("[%s]: service error: %v", op, err)
+			h.handleError(w, err)
+			return
 		}
+		log.Errorf("[%s]: service error: %v", op, err)
 		h.handleError(w, err)
 		return
 	}
 
 	response.JSON(w, http.StatusOK, playlists)
 }
-
 func (h *Handler) UpdatePlaylist(w http.ResponseWriter, r *http.Request) {
 	const op = "handler.UpdatePlaylist"
 	log := middleware.LoggerFromContext(r.Context())
 	defer r.Body.Close()
 
-	id := mux.Vars(r)["id"]
-	if id == "" {
+	rawID := mux.Vars(r)[paramPlaylistID]
+	if rawID == "" {
 		log.Errorf("[%s]: missing playlist id", op)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	id, err := uuid.Parse(rawID)
+	if err != nil {
+		log.Errorf("[%s]: invalid playlist id: %v", op, err)
 		response.BadRequestJSON(w)
 		return
 	}
@@ -146,9 +177,16 @@ func (h *Handler) DeletePlaylist(w http.ResponseWriter, r *http.Request) {
 	const op = "handler.DeletePlaylist"
 	log := middleware.LoggerFromContext(r.Context())
 
-	id := mux.Vars(r)["id"]
-	if id == "" {
+	rawID := mux.Vars(r)[paramPlaylistID]
+	if rawID == "" {
 		log.Errorf("[%s]: missing playlist id", op)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	id, err := uuid.Parse(rawID)
+	if err != nil {
+		log.Errorf("[%s]: invalid playlist id: %v", op, err)
 		response.BadRequestJSON(w)
 		return
 	}
@@ -166,12 +204,19 @@ func (h *Handler) DeletePlaylist(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) AddTrackToFavorite(w http.ResponseWriter, r *http.Request) {
 	const op = "handler.AddTrackToFavorite"
-
 	log := middleware.LoggerFromContext(r.Context())
 
-	userID, ok := middleware.GetUserID(r.Context())
+	rawUserID, ok := middleware.GetUserID(r.Context())
 	if !ok {
+		log.Errorf("[%s]: missing userId", op)
 		response.UnauthorizedJSON(w)
+		return
+	}
+
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.BadRequestJSON(w)
 		return
 	}
 
@@ -183,6 +228,7 @@ func (h *Handler) AddTrackToFavorite(w http.ResponseWriter, r *http.Request) {
 	}
 
 	req.UserID = userID
+
 	if err := h.service.AddTrackToFavorite(r.Context(), req); err != nil {
 		log.Errorf("[%s]: service error: %v", op, err)
 		h.handleError(w, err)
@@ -193,18 +239,23 @@ func (h *Handler) AddTrackToFavorite(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) GetFavoritePlaylist(w http.ResponseWriter, r *http.Request) {
 	const op = "handler.GetFavoritePlaylist"
-
 	log := middleware.LoggerFromContext(r.Context())
 
-	userID, ok := middleware.GetUserID(r.Context())
+	rawUserID, ok := middleware.GetUserID(r.Context())
 	if !ok {
+		log.Errorf("[%s]: missing userId", op)
 		response.UnauthorizedJSON(w)
 		return
 	}
 
-	req := dto.GetFavoritePlaylistRequest{
-		UserID: userID,
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.BadRequestJSON(w)
+		return
 	}
+
+	req := dto.GetFavoritePlaylistRequest{UserID: userID}
 
 	playlist, err := h.service.GetFavoritePlaylist(r.Context(), req)
 	if err != nil {
@@ -212,11 +263,11 @@ func (h *Handler) GetFavoritePlaylist(w http.ResponseWriter, r *http.Request) {
 		h.handleError(w, err)
 		return
 	}
+
 	response.JSON(w, http.StatusOK, playlist)
 }
 
-func parsePagination(r *http.Request) (uint64, uint64) {
-	query := r.URL.Query()
+func parsePagination(query url.Values) (uint64, uint64) {
 	limitStr := query.Get(queryParamLimit)
 	offsetStr := query.Get(queryParamOffset)
 

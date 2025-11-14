@@ -10,19 +10,20 @@ import (
 )
 
 type Config struct {
-	Host            string
-	Port            string
-	User            string
-	Password        string
-	DBName          string
-	MaxOpenConns    int
-	MaxIdleConns    int
-	ConnMaxLifetime time.Duration
+	Host            string        `mapstructure:"host"`
+	Port            int           `mapstructure:"port"`
+	User            string        `mapstructure:"user"`
+	Password        string        `mapstructure:"password"`
+	DBName          string        `mapstructure:"dbName"`
+	SSLMode         string        `mapstructure:"sslmode"`
+	MaxOpenConns    int           `mapstructure:"maxOpenConns"`
+	MaxIdleConns    int           `mapstructure:"maxIdleConns"`
+	ConnMaxLifetime time.Duration `mapstructure:"connMaxLifetime"`
 }
 
 func (c Config) DSN() string {
-	return fmt.Sprintf("postgres://%s:%s@%s:%s/%s",
-		c.User, c.Password, c.Host, c.Port, c.DBName)
+	return fmt.Sprintf("postgres://%s:%s@%s:%d/%s?sslmode=%s",
+		c.User, c.Password, c.Host, c.Port, c.DBName, c.SSLMode)
 }
 
 func New(ctx context.Context, cfg Config) (*sql.DB, error) {

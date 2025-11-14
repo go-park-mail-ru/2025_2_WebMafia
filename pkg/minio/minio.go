@@ -3,21 +3,22 @@ package minio
 import (
 	"context"
 	"fmt"
-	"github.com/google/uuid"
-	"github.com/minio/minio-go/v7"
-	"github.com/minio/minio-go/v7/pkg/credentials"
 	"io"
 	"log"
 	"net/url"
 	"strings"
 	"time"
+
+	"github.com/google/uuid"
+	"github.com/minio/minio-go/v7"
+	"github.com/minio/minio-go/v7/pkg/credentials"
 )
 
 type Config struct {
-	Endpoint  string
-	AccessKey string
-	SecretKey string
-	UseSSL    bool
+	Endpoint  string `mapstructure:"endpoint"`
+	AccessKey string `mapstructure:"accessKey"`
+	SecretKey string `mapstructure:"secretKey"`
+	UseSSL    bool   `mapstructure:"useSSL"`
 }
 
 type ObjectInfo struct {

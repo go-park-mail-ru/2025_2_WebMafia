@@ -43,14 +43,19 @@ type App struct {
 	logger logger.Logger
 }
 
-func NewApp(cfg *Config) (*App, error) {
-	log, err := logger.New(cfg.Logger.Level, cfg.Logger.Mode)
+func NewApp(ctx context.Context, configPath string) (*App, error) {
+	cfg, err := LoadConfig(configPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to load config: %w", err)
+	}
+
+	log, err := logger.New(cfg.App.Logger.Level, cfg.App.Logger.Mode)
 	if err != nil {
 		return nil, fmt.Errorf("failed to init logger: %w", err)
 	}
 	log.Infof("Logger initialized")
 
-	db, err := postgres.New(context.Background(), cfg.DB)
+	db, err := postgres.New(ctx, cfg.DB)
 	if err != nil {
 		log.Errorf("failed to connect to db: %v", err)
 		return nil, fmt.Errorf("failed to connect to db: %w", err)
@@ -77,13 +82,13 @@ func NewApp(cfg *Config) (*App, error) {
 
 	artistSvc.SetTrackService(trackSvc)
 
-	jwtManager := jwtmanager.NewManager(cfg.JWTSecretKey, cfg.AccessTokenTTL)
+	jwtManager := jwtmanager.NewManager(cfg.App.HTTP.Auth.JWT.SecretKey, cfg.App.HTTP.Auth.JWT.AccessTokenTTL)
 	authMiddleware := middleware.NewAuthMiddleware(jwtManager)
 
-	csrfManager := csrfmanager.NewManager(cfg.CSRFSecretKey, cfg.CSRFTokenTTL)
+	csrfManager := csrfmanager.NewManager(cfg.App.HTTP.Auth.CSRF.SecretKey, cfg.App.HTTP.Auth.CSRF.TokenTTL)
 	csrfMiddleware := middleware.NewCSRFMiddleware(csrfManager)
 
-	userHandler := userDelivery.NewHandler(userSvc, jwtManager, csrfManager, cfg.AllowedAvatarTypes)
+	userHandler := userDelivery.NewHandler(userSvc, jwtManager, csrfManager, cfg.App.HTTP.AllowedAvatarTypes)
 	artistHandler := artistDelivery.NewHandler(artistSvc)
 	albumHandler := albumDelivery.NewHandler(albumSvc)
 	trackHandler := trackDelivery.NewHandler(trackSvc)
@@ -95,14 +100,14 @@ func NewApp(cfg *Config) (*App, error) {
 		TrackHandler:  trackHandler,
 	}
 
-	muxRouter := router.NewRouter(log, handlers, authMiddleware, csrfMiddleware, cfg.CORS)
+	muxRouter := router.NewRouter(log, handlers, authMiddleware, csrfMiddleware, cfg.App.HTTP.CORS)
 
 	server := &http.Server{
-		Addr:         ":" + cfg.Port,
+		Addr:         ":" + cfg.App.HTTP.Port,
 		Handler:      muxRouter,
-		ReadTimeout:  cfg.ReadTimeout,
-		WriteTimeout: cfg.WriteTimeout,
-		IdleTimeout:  cfg.IdleTimeout,
+		ReadTimeout:  cfg.App.HTTP.ReadTimeout,
+		WriteTimeout: cfg.App.HTTP.WriteTimeout,
+		IdleTimeout:  cfg.App.HTTP.IdleTimeout,
 	}
 
 	return &App{
@@ -138,7 +143,7 @@ func (a *App) Run() error {
 	case <-ctx.Done():
 		a.logger.Infof("shutting down server gracefully...")
 
-		shutdownCtx, cancel := context.WithTimeout(context.Background(), a.cfg.ShutdownTimeout)
+		shutdownCtx, cancel := context.WithTimeout(context.Background(), a.cfg.App.HTTP.ShutdownTimeout)
 		defer cancel()
 
 		if err := a.server.Shutdown(shutdownCtx); err != nil {

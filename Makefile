@@ -1,13 +1,12 @@
-ENV_PATH = .env.local
-DOCKER_ENV_PATH = .env.docker
+ENV_PATH = .env.dev
 
 include $(ENV_PATH)
 
 COMPOSE_PATH = docker-compose.yml
 
-DOCKER_COMPOSE := docker compose -f $(COMPOSE_PATH) --env-file $(DOCKER_ENV_PATH)
+DOCKER_COMPOSE := docker compose -f $(COMPOSE_PATH) --env-file $(ENV_PATH)
 
-DB_URL = postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable
+DB_URL = postgres://$(DB_USER):$(DB_PASSWORD)@localhost:5432/$(DB_NAME)?sslmode=disable
 MIGRATIONS_PATH = migrations
 
 .PHONY: test coverage-html clean docker-build docker-up docker-down docker-stop docker-logs generate

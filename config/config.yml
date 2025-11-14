@@ -36,20 +36,20 @@ app:
       - "image/ico"
     auth:
       jwt:
-        secretKey: ""
+        secretKey: "dev-jwt-secret"
         accessTokenTTL: 720h
       csrf:
-        secretKey: ""
+        secretKey: "dev-csrf-secret"
         tokenTTL: 15m
   logger:
-    level: "info"
-    mode: "prod"
+    level: "debug"
+    mode: "dev"
 
 db:
   host: "db"
   port: 5432
   user: "myuser"
-  password: ""
+  password: "mypassword"
   dbName: "mydb"
   sslmode: "disable"
   maxOpenConns: 25
@@ -58,7 +58,7 @@ db:
 
 minio:
   endpoint: "minio:9000"
-  accessKey: ""
-  secretKey: ""
+  accessKey: "miniouser"
+  secretKey: "miniopassword"
   bucket: "avatars"
   useSSL: false

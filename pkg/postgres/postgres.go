@@ -10,15 +10,15 @@ import (
 )
 
 type Config struct {
-	Host            string
-	Port            int
-	User            string
-	Password        string
-	DBName          string
-	SSLMode         string
-	MaxOpenConns    int
-	MaxIdleConns    int
-	ConnMaxLifetime time.Duration
+	Host            string        `mapstructure:"host"`
+	Port            int           `mapstructure:"port"`
+	User            string        `mapstructure:"user"`
+	Password        string        `mapstructure:"password"`
+	DBName          string        `mapstructure:"dbName"`
+	SSLMode         string        `mapstructure:"sslmode"`
+	MaxOpenConns    int           `mapstructure:"maxOpenConns"`
+	MaxIdleConns    int           `mapstructure:"maxIdleConns"`
+	ConnMaxLifetime time.Duration `mapstructure:"connMaxLifetime"`
 }
 
 func (c Config) DSN() string {

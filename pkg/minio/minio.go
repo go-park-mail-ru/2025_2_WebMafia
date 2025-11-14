@@ -15,10 +15,10 @@ import (
 )
 
 type Config struct {
-	Endpoint  string
-	AccessKey string
-	SecretKey string
-	UseSSL    bool
+	Endpoint  string `mapstructure:"endpoint"`
+	AccessKey string `mapstructure:"accessKey"`
+	SecretKey string `mapstructure:"secretKey"`
+	UseSSL    bool   `mapstructure:"useSSL"`
 }
 
 type ObjectInfo struct {

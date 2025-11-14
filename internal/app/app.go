@@ -55,35 +55,18 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	}
 	log.Infof("Logger initialized")
 
-	pgConfig := postgres.Config{
-		Host:            cfg.DB.Host,
-		Port:            cfg.DB.Port,
-		User:            cfg.DB.User,
-		Password:        cfg.DB.Password,
-		DBName:          cfg.DB.DBName,
-		SSLMode:         cfg.DB.SSLMode,
-		MaxOpenConns:    cfg.DB.MaxOpenConns,
-		MaxIdleConns:    cfg.DB.MaxIdleConns,
-		ConnMaxLifetime: cfg.DB.ConnMaxLifetime,
-	}
-	db, err := postgres.New(ctx, pgConfig)
+	db, err := postgres.New(ctx, cfg.DB)
 	if err != nil {
 		log.Errorf("failed to connect to db: %v", err)
 		return nil, fmt.Errorf("failed to connect to db: %w", err)
 	}
 	log.Infof("Database connection")
 
-	minioCfg := minio.Config{
-		Endpoint:  cfg.Minio.Endpoint,
-		AccessKey: cfg.Minio.AccessKey,
-		SecretKey: cfg.Minio.SecretKey,
-		UseSSL:    cfg.Minio.UseSSL,
-	}
-	minioClient, err := minio.New(minioCfg)
+	minioClient, err := minio.New(cfg.Minio)
 	if err != nil {
 		return nil, fmt.Errorf("failed to init minio: %w", err)
 	}
-	avatarStorage := storageRepo.NewStorage(minioClient, cfg.Minio.Bucket)
+	avatarStorage := storageRepo.NewStorage(minioClient, "avatars")
 
 	userRepository := userRepo.NewUserRepository(db)
 	artistRepository := artistRepo.New(db)
@@ -117,13 +100,7 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 		TrackHandler:  trackHandler,
 	}
 
-	CorsConfig := middleware.CORSConfig{
-		AllowedOrigins:   cfg.App.HTTP.CORS.AllowedOrigins,
-		AllowedMethods:   cfg.App.HTTP.CORS.AllowedMethods,
-		AllowedHeaders:   cfg.App.HTTP.CORS.AllowedHeaders,
-		AllowCredentials: cfg.App.HTTP.CORS.AllowCredentials,
-	}
-	muxRouter := router.NewRouter(log, handlers, authMiddleware, csrfMiddleware, CorsConfig)
+	muxRouter := router.NewRouter(log, handlers, authMiddleware, csrfMiddleware, cfg.App.HTTP.CORS)
 
 	server := &http.Server{
 		Addr:         ":" + cfg.App.HTTP.Port,

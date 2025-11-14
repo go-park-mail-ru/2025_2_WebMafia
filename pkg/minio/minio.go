@@ -6,7 +6,6 @@ import (
 	"io"
 	"log"
 	"net/url"
-	"spotify/config"
 	"strings"
 	"time"
 
@@ -14,6 +13,13 @@ import (
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
 )
+
+type Config struct {
+	Endpoint  string `mapstructure:"endpoint"`
+	AccessKey string `mapstructure:"accessKey"`
+	SecretKey string `mapstructure:"secretKey"`
+	UseSSL    bool   `mapstructure:"useSSL"`
+}
 
 type ObjectInfo struct {
 	Bucket      string
@@ -27,7 +33,7 @@ type Client struct {
 	minioClient *minio.Client
 }
 
-func New(cfg *config.MinioConfig) (*Client, error) {
+func New(cfg Config) (*Client, error) {
 	mClient, err := minio.New(cfg.Endpoint, &minio.Options{
 		Creds:  credentials.NewStaticV4(cfg.AccessKey, cfg.SecretKey, ""),
 		Secure: cfg.UseSSL,

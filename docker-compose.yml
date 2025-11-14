@@ -11,6 +11,9 @@ services:
     restart: always
     env_file:
       - ./.env.dev
+    volumes:
+      - ./config:/config
+    command: ["/server", "-f=/config"]
     depends_on:
       db:
         condition: service_healthy
@@ -53,8 +56,8 @@ services:
       - "8099:9000"
       - "8100:9001"
     environment:
-      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY}
-      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY}
+      MINIO_ROOT_USER: ${MINIO_ACCESSKEY}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRETKEY}
     volumes:
       - minio_data:/data
     command: server /data --console-address ":9001"

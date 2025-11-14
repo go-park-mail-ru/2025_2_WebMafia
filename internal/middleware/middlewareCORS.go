@@ -2,18 +2,17 @@ package middleware
 
 import (
 	"net/http"
-	"spotify/config"
 	"strings"
 )
 
 type CORSConfig struct {
-	AllowedOrigins   []string
-	AllowedMethods   []string
-	AllowedHeaders   []string
-	AllowCredentials bool
+	AllowedOrigins   []string `mapstructure:"allowedOrigins"`
+	AllowedMethods   []string `mapstructure:"allowedMethods"`
+	AllowedHeaders   []string `mapstructure:"allowedHeaders"`
+	AllowCredentials bool     `mapstructure:"allowCredentials"`
 }
 
-func CORS(config config.CORSConfig) func(next http.Handler) http.Handler {
+func CORS(config CORSConfig) func(next http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			origin := r.Header.Get("Origin")

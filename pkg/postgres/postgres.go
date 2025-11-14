@@ -4,19 +4,30 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-
-	"spotify/config"
+	"time"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
 )
 
-func dsn(cfg *config.DBConfig) string {
-	return fmt.Sprintf("postgres://%s:%s@%s:%d/%s?sslmode=%s",
-		cfg.User, cfg.Password, cfg.Host, cfg.Port, cfg.DBName, cfg.SSLMode)
+type Config struct {
+	Host            string        `mapstructure:"host"`
+	Port            int           `mapstructure:"port"`
+	User            string        `mapstructure:"user"`
+	Password        string        `mapstructure:"password"`
+	DBName          string        `mapstructure:"dbName"`
+	SSLMode         string        `mapstructure:"sslmode"`
+	MaxOpenConns    int           `mapstructure:"maxOpenConns"`
+	MaxIdleConns    int           `mapstructure:"maxIdleConns"`
+	ConnMaxLifetime time.Duration `mapstructure:"connMaxLifetime"`
 }
 
-func New(ctx context.Context, cfg *config.DBConfig) (*sql.DB, error) {
-	db, err := sql.Open("pgx", dsn(cfg))
+func (c Config) DSN() string {
+	return fmt.Sprintf("postgres://%s:%s@%s:%d/%s?sslmode=%s",
+		c.User, c.Password, c.Host, c.Port, c.DBName, c.SSLMode)
+}
+
+func New(ctx context.Context, cfg Config) (*sql.DB, error) {
+	db, err := sql.Open("pgx", cfg.DSN())
 	if err != nil {
 		return nil, err
 	}

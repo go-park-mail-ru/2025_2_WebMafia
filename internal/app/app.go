@@ -13,6 +13,7 @@ import (
 	albumDelivery "spotify/internal/album/delivery/http"
 	albumRepo "spotify/internal/album/repository/postgres"
 	albumService "spotify/internal/album/service"
+	"spotify/internal/metrics"
 
 	artistDelivery "spotify/internal/artist/delivery/http"
 	artistRepo "spotify/internal/artist/repository/postgres"
@@ -54,6 +55,9 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 		return nil, fmt.Errorf("failed to init logger: %w", err)
 	}
 	log.Infof("Logger initialized")
+
+	appMetrics := metrics.New("wave-music-app")
+	log.Infof("Custom metrics initialized")
 
 	db, err := postgres.New(ctx, cfg.DB)
 	if err != nil {
@@ -100,7 +104,7 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 		TrackHandler:  trackHandler,
 	}
 
-	muxRouter := router.NewRouter(log, handlers, authMiddleware, csrfMiddleware, cfg.App.HTTP.CORS)
+	muxRouter := router.NewRouter(log, handlers, authMiddleware, csrfMiddleware, cfg.App.HTTP.CORS, appMetrics)
 
 	server := &http.Server{
 		Addr:         ":" + cfg.App.HTTP.Port,

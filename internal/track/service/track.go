@@ -122,15 +122,8 @@ func (s *Service) Search(ctx context.Context, query string, limit uint64) ([]dto
 			continue
 		}
 		dtoResults[i] = dto.TrackSearch{
-			ID:        enrichedTrack.ID,
-			Title:     enrichedTrack.Title,
-			DurationS: enrichedTrack.DurationS,
-			FileURL:   enrichedTrack.FileURL,
-			PlayCount: enrichedTrack.PlayCount,
-			Artists:   enrichedTrack.Artists,
-			Album:     enrichedTrack.Album,
-			Genres:    enrichedTrack.Genres,
-			Rank:      ranksMap[trackID],
+			Track: enrichedTrack,
+			Rank:  ranksMap[trackID],
 		}
 	}
 

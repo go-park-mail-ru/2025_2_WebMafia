@@ -19,7 +19,7 @@ const (
 	queryParamLimit    = "limit"
 	queryParamOffset   = "offset"
 	queryParamSearch   = "q"
-	defaultSearchLimit = 10
+	defaultSearchLimit = 50
 )
 
 func (h *Handler) GetArtistByID(w http.ResponseWriter, r *http.Request) {

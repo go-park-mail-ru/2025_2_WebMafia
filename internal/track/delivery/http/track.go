@@ -20,7 +20,7 @@ const (
 	queryParamLimit    = "limit"
 	queryParamOffset   = "offset"
 	queryParamSearch   = "q"
-	defaultSearchLimit = 10
+	defaultSearchLimit = 50
 )
 
 func (h *Handler) GetTrackByID(w http.ResponseWriter, r *http.Request) {

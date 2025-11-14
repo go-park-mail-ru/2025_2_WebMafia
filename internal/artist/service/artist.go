@@ -129,12 +129,14 @@ func (s *Service) Search(ctx context.Context, query string, limit uint64) ([]dto
 	dtoResults := make([]dto.ArtistSearch, len(repoResults))
 	for i, result := range repoResults {
 		dtoResults[i] = dto.ArtistSearch{
-			ID:        result.Artist.ID.String(),
-			Name:      result.Artist.Name,
-			AvatarURL: result.Artist.AvatarURL,
-			HeaderURL: result.Artist.HeaderURL,
-			PlayCount: playsMap[result.Artist.ID],
-			Rank:      result.Rank,
+			Artist: dto.Artist{
+				ID:        result.Artist.ID.String(),
+				Name:      result.Artist.Name,
+				AvatarURL: result.Artist.AvatarURL,
+				HeaderURL: result.Artist.HeaderURL,
+				PlayCount: playsMap[result.Artist.ID],
+			},
+			Rank: result.Rank,
 		}
 		if result.Artist.Description.Valid {
 			dtoResults[i].Description = result.Artist.Description.String

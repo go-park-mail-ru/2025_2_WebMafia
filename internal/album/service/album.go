@@ -242,16 +242,18 @@ func (s *Service) Search(ctx context.Context, query string, limit uint64) ([]dto
 		}
 
 		dtoResults[i] = dto.AlbumSearch{
-			ID:          result.Album.ID.String(),
-			Title:       result.Album.Title,
-			Type:        result.Album.Type,
-			AvatarURL:   result.Album.AvatarURL,
-			ReleaseDate: result.Album.ReleaseDate.Format(dateFormat),
-			Artists: []dto.Artist{
-				{
-					ID:        artist.ID,
-					Name:      artist.Name,
-					AvatarURL: artist.AvatarURL,
+			Album: dto.Album{
+				ID:          result.Album.ID.String(),
+				Title:       result.Album.Title,
+				Type:        result.Album.Type,
+				AvatarURL:   result.Album.AvatarURL,
+				ReleaseDate: result.Album.ReleaseDate.Format(dateFormat),
+				Artists: []dto.Artist{
+					{
+						ID:        artist.ID,
+						Name:      artist.Name,
+						AvatarURL: artist.AvatarURL,
+					},
 				},
 			},
 			Rank: result.Rank,

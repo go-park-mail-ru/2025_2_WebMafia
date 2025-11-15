@@ -70,3 +70,25 @@ func GetUserID(ctx context.Context) (string, bool) {
 	}
 	return claims.UserID, true
 }
+
+func (a *Auth) AdminMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		const op = "middleware.AdminMiddleware"
+		log := LoggerFromContext(r.Context())
+
+		claims, err := ClaimsFromContext(r.Context())
+		if err != nil {
+			log.Errorf("[%s]: claims not found in context, which should not happen after AuthMiddleware", op)
+			response.ForbiddenJSON(w)
+			return
+		}
+
+		if claims.Role != "admin" && claims.Role != "superadmin" {
+			log.Warnf("[%s]: user '%s' with role '%s' attempted to access an admin route", op, claims.UserID, claims.Role)
+			response.ForbiddenJSON(w)
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}

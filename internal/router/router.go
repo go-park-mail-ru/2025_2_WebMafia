@@ -41,12 +41,17 @@ func NewRouter(logger logger.Logger,
 	csrfProtected := protected.PathPrefix("").Subrouter()
 	csrfProtected.Use(csrf.CSRFMiddleware)
 
-	handlers.UserHandler.RegisterRoutes(public, protected, csrfProtected)
+	adminProtected := protected.PathPrefix("/admin").Subrouter()
+	adminProtected.Use(auth.AdminMiddleware)
 
+	adminCsrfProtected := adminProtected.PathPrefix("").Subrouter()
+	adminCsrfProtected.Use(csrf.CSRFMiddleware)
+
+	handlers.UserHandler.RegisterRoutes(public, protected, csrfProtected, adminProtected, adminCsrfProtected)
 	handlers.ArtistHandler.RegisterRoutes(public)
 	handlers.AlbumHandler.RegisterRoutes(public)
 	handlers.TrackHandler.RegisterRoutes(public, protected, csrfProtected)
-	handlers.TicketHandler.RegisterRoutes(protected, csrfProtected)
+	handlers.TicketHandler.RegisterRoutes(protected, csrfProtected, adminProtected, adminCsrfProtected)
 
 	return r
 }

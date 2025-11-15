@@ -12,6 +12,8 @@ type IService interface {
 	GetUserTickets(ctx context.Context, userID uuid.UUID, limit, offset uint64) ([]dto.TicketResponse, error)
 	UpdateTicket(ctx context.Context, req dto.UpdateTicketRequest, ticketID, userID uuid.UUID) (*dto.TicketResponse, error)
 	GetAllTickets(ctx context.Context, limit, offset uint64) ([]dto.TicketResponse, error)
+	UpdateTicketStatusByAdmin(ctx context.Context, ticketID uuid.UUID, status string) (*dto.TicketResponse, error)
+	GetStatistics(ctx context.Context) (*dto.TicketStatistics, error)
 }
 
 type Handler struct {

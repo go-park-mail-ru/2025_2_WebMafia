@@ -5,6 +5,8 @@ import (
 	"database/sql"
 	"fmt"
 	"spotify/internal/model"
+	"spotify/internal/ticket/dto"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -114,6 +116,80 @@ func (m *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.
 	defer rows.Close()
 
 	return selectTickets(rows)
+}
+
+func (m *Repository) UpdateStatus(ctx context.Context, ticketID uuid.UUID, status string) error {
+	const op = "repository.UpdateStatus"
+
+	query := `
+		UPDATE ticket
+		SET status = $1,
+			updated_at = $2
+		WHERE ticket_id = $3`
+
+	result, err := m.Conn.ExecContext(ctx, query, status, time.Now(), ticketID)
+	if err != nil {
+		return fmt.Errorf("%s: %w", op, err)
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("%s: could not get rows affected: %w", op, err)
+	}
+	if rowsAffected == 0 {
+		return ErrNotFound
+	}
+
+	return nil
+}
+
+func (m *Repository) GetStatistics(ctx context.Context) (*dto.TicketStatistics, error) {
+	const op = "repository.GetStatistics"
+
+	queryStats := `
+		SELECT
+			COUNT(*),
+			COUNT(*) FILTER (WHERE status = 'Открыто'),
+			COUNT(*) FILTER (WHERE status = 'В работе'),
+			COUNT(*) FILTER (WHERE status = 'Закрыто')
+		FROM ticket`
+
+	stats := &dto.TicketStatistics{}
+	err := m.Conn.QueryRowContext(ctx, queryStats).Scan(
+		&stats.TotalTickets,
+		&stats.OpenTickets,
+		&stats.InProgress,
+		&stats.ClosedTickets,
+	)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: query failed for main stats: %w", op, mapErrors(err))
+	}
+
+	queryCategory := `
+		SELECT category, COUNT(*)
+		FROM ticket
+		GROUP BY category`
+
+	rows, err := m.Conn.QueryContext(ctx, queryCategory)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: query failed for category stats: %w", op, mapErrors(err))
+	}
+	defer rows.Close()
+
+	stats.ByCategory = make(map[string]int)
+	for rows.Next() {
+		var category string
+		var count int
+		if err := rows.Scan(&category, &count); err != nil {
+			return nil, fmt.Errorf("[%s]: scan failed for category stats: %w", op, err)
+		}
+		stats.ByCategory[category] = count
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("[%s]: rows iteration failed for category stats: %w", op, err)
+	}
+
+	return stats, nil
 }
 
 func selectTickets(rows *sql.Rows) ([]model.Ticket, error) {

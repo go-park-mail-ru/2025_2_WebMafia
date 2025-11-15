@@ -142,6 +142,51 @@ func (h *Handler) GetAllTickets(w http.ResponseWriter, r *http.Request) {
 	response.JSON(w, http.StatusOK, tickets)
 }
 
+func (h *Handler) UpdateTicketStatusByAdmin(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.UpdateTicketStatusByAdmin"
+	log := middleware.LoggerFromContext(r.Context())
+
+	vars := mux.Vars(r)
+	ticketID, err := uuid.Parse(vars["id"])
+	if err != nil {
+		log.Warnf("[%s]: failed to parse ticket ID: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	var reqBody struct {
+		Status string `json:"status"`
+	}
+	if err := json.NewDecoder(r.Body).Decode(&reqBody); err != nil {
+		log.Warnf("[%s]: failed to decode request body: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	updatedTicket, err := h.service.UpdateTicketStatusByAdmin(r.Context(), ticketID, reqBody.Status)
+	if err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		handleError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, updatedTicket)
+}
+
+func (h *Handler) GetStatistics(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.GetStatistics"
+	log := middleware.LoggerFromContext(r.Context())
+
+	stats, err := h.service.GetStatistics(r.Context())
+	if err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		handleError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, stats)
+}
+
 func parsePagination(r *http.Request) (uint64, uint64) {
 	query := r.URL.Query()
 	limitStr := query.Get(queryParamLimit)

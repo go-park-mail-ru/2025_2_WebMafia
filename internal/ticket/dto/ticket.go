@@ -26,3 +26,11 @@ type TicketResponse struct {
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
 }
+
+type TicketStatistics struct {
+	TotalTickets  int            `json:"total_tickets"`
+	OpenTickets   int            `json:"open_tickets"`
+	InProgress    int            `json:"in_progress"`
+	ClosedTickets int            `json:"closed_tickets"`
+	ByCategory    map[string]int `json:"by_category"`
+}

@@ -114,6 +114,41 @@ func (s *Service) UpdateTicket(ctx context.Context, req dto.UpdateTicketRequest,
 	return toTicketResponse(ticket), nil
 }
 
+func (s *Service) UpdateTicketStatusByAdmin(ctx context.Context, ticketID uuid.UUID, status string) (*dto.TicketResponse, error) {
+	const op = "service.UpdateTicketStatusByAdmin"
+
+	if status != "В работе" && status != "Закрыто" {
+		return nil, ErrInvalidStateForAction
+	}
+
+	_, err := s.repo.GetByID(ctx, ticketID)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: %w", op, mapError(err))
+	}
+
+	if err := s.repo.UpdateStatus(ctx, ticketID, status); err != nil {
+		return nil, fmt.Errorf("[%s]: %w", op, mapError(err))
+	}
+
+	updatedTicket, err := s.repo.GetByID(ctx, ticketID)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: failed to get updated ticket: %w", op, mapError(err))
+	}
+
+	return toTicketResponse(updatedTicket), nil
+}
+
+func (s *Service) GetStatistics(ctx context.Context) (*dto.TicketStatistics, error) {
+	const op = "service.GetStatistics"
+
+	stats, err := s.repo.GetStatistics(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: %w", op, mapError(err))
+	}
+
+	return stats, nil
+}
+
 func toTicketResponse(ticket *model.Ticket) *dto.TicketResponse {
 	resp := &dto.TicketResponse{
 		ID:          ticket.ID.String(),

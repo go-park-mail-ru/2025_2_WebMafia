@@ -12,13 +12,13 @@ import (
 
 func (m *Repository) CreateUser(ctx context.Context, user model.User) error {
 	const op = "repository.CreateUser "
-	query := `INSERT INTO "user" (user_id, login, email, password_hash, avatar_url, created_at, updated_at)
-		VALUES ($1, $2, $3, $4, $5, $6, $7)`
+	query := `INSERT INTO "user" (user_id, login, email, password_hash, avatar_url, role, created_at, updated_at)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`
 
 	_, err := m.Conn.ExecContext(ctx,
 		query,
 		user.ID, user.Login, user.Email, user.PasswordHash,
-		user.AvatarURL, user.CreatedAt, user.UpdatedAt,
+		user.AvatarURL, user.Role, user.CreatedAt, user.UpdatedAt,
 	)
 
 	if err != nil {
@@ -29,7 +29,7 @@ func (m *Repository) CreateUser(ctx context.Context, user model.User) error {
 
 func (m *Repository) GetUserByEmail(ctx context.Context, email string) (res *model.User, err error) {
 	const op = "repository.GetUserByEmail"
-	query := `SELECT user_id, login, email, password_hash, avatar_url, created_at, updated_at 
+	query := `SELECT user_id, login, email, password_hash, avatar_url, role, created_at, updated_at 
 		FROM "user" WHERE email = $1`
 
 	user, err := m.selectUser(ctx, query, email)
@@ -42,7 +42,7 @@ func (m *Repository) GetUserByEmail(ctx context.Context, email string) (res *mod
 func (m *Repository) GetUserByLogin(ctx context.Context, login string) (res *model.User, err error) {
 	const op = "repository.GetUserByLogin"
 
-	query := `SELECT user_id, login, email, password_hash, avatar_url, created_at, updated_at 
+	query := `SELECT user_id, login, email, password_hash, avatar_url, role, created_at, updated_at 
 		FROM "user" WHERE login = $1`
 
 	user, err := m.selectUser(ctx, query, login)
@@ -66,7 +66,7 @@ func (m *Repository) UpdateUserAvatar(ctx context.Context, userID string, avatar
 func (m *Repository) GetUserByID(ctx context.Context, userID string) (*model.User, error) {
 	const op = "repository.GetUserByID"
 
-	query := `SELECT user_id, login, email, password_hash, avatar_url, created_at, updated_at 
+	query := `SELECT user_id, login, email, password_hash, avatar_url, role, created_at, updated_at 
 			  FROM "user" WHERE user_id = $1`
 
 	user, err := m.selectUser(ctx, query, userID)
@@ -99,6 +99,23 @@ func (m *Repository) UpdateUserProfile(ctx context.Context, user model.User) err
 	return nil
 }
 
+func (m *Repository) UpdateUserRole(ctx context.Context, user model.User) error {
+	const op = "repository.UpdateUserRole"
+
+	query := `UPDATE "user"
+			  SET role = $1
+			  WHERE user_id = $2`
+
+	_, err := m.Conn.ExecContext(ctx, query,
+		user.Role,
+		user.ID,
+	)
+	if err != nil {
+		return fmt.Errorf("%s: %w", op, handlePostgresError(err))
+	}
+	return nil
+}
+
 func (m *Repository) selectUser(ctx context.Context, query string, args ...interface{}) (*model.User, error) {
 	rows := m.Conn.QueryRowContext(ctx, query, args...)
 	user := &model.User{}
@@ -108,6 +125,7 @@ func (m *Repository) selectUser(ctx context.Context, query string, args ...inter
 		&user.Email,
 		&user.PasswordHash,
 		&user.AvatarURL,
+		&user.Role,
 		&user.CreatedAt,
 		&user.UpdatedAt,
 	)

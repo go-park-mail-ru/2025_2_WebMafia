@@ -14,6 +14,7 @@ type IService interface {
 	DeleteAvatar(ctx context.Context, req dto.DeleteAvatarRequest) error
 	UpdateProfile(ctx context.Context, req dto.UpdateProfileRequest) (*dto.UpdateProfileResponse, error)
 	GetProfile(ctx context.Context, req dto.GetProfileRequest) (*dto.GetProfileResponse, error)
+	UpdateRole(ctx context.Context, req dto.UpdateRoleRequest) (*dto.UpdateRoleResponse, error)
 }
 
 type CSRFManager interface {

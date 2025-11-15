@@ -20,11 +20,13 @@ func (s *Service) Register(ctx context.Context, req dto.RegisterRequest) (*dto.R
 	}
 
 	user := model.User{
-		ID:           uuid.New(),
-		Login:        req.Login,
-		Email:        req.Email,
+		ID:    uuid.New(),
+		Login: req.Login,
+		Email: req.Email,
+
 		PasswordHash: hash,
 		AvatarURL:    "",
+		Role:         "user",
 		CreatedAt:    time.Now(),
 		UpdatedAt:    time.Now(),
 	}
@@ -140,5 +142,28 @@ func (s *Service) GetProfile(ctx context.Context, req dto.GetProfileRequest) (*d
 		Login:     user.Login,
 		Email:     user.Email,
 		AvatarURL: user.AvatarURL,
+	}, nil
+}
+
+func (s *Service) UpdateRole(ctx context.Context, req dto.UpdateRoleRequest) (*dto.UpdateRoleResponse, error) {
+	const op = "service.UpdateRole"
+
+	id, err := uuid.Parse(req.UserID)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: invalid user ID: %w", op, err)
+	}
+
+	user := model.User{
+		ID:   id,
+		Role: req.Role,
+	}
+
+	if err := s.repo.UpdateUserRole(ctx, user); err != nil {
+		return nil, mapRepositoryError(err)
+	}
+
+	return &dto.UpdateRoleResponse{
+		ID:   user.ID.String(),
+		Role: req.Role,
 	}, nil
 }

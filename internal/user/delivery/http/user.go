@@ -61,9 +61,8 @@ type logoutResponse struct {
 	Status string `json:"status"`
 }
 
-type uploadAvatarRequest struct {
-	ContentType string
-	Size        int64
+type updateRoleRequest struct {
+	Role string `json:"role"`
 }
 
 func (h *Handler) validateAvatar(contentType string, size int64) error {
@@ -349,6 +348,39 @@ func (h *Handler) GetProfile(w http.ResponseWriter, r *http.Request) {
 		handleServiceError(w, err)
 		return
 	}
+
+	response.JSON(w, http.StatusOK, res)
+}
+
+func (h *Handler) UpdateRole(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.UpdateRole"
+	defer r.Body.Close()
+
+	userID, ok := middleware.GetUserID(r.Context())
+	if !ok || userID == "" {
+		response.UnauthorizedJSON(w)
+		return
+	}
+	log := middleware.LoggerFromContext(r.Context())
+
+	var req updateRoleRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		log.Errorf("[%s]: Invalid request body: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	res, err := h.svc.UpdateRole(r.Context(), dto.UpdateRoleRequest{
+		UserID: userID,
+		Role:   req.Role,
+	})
+	if err != nil {
+		log.Errorf("[%s]: Service error: %v", op, err)
+		handleServiceError(w, err)
+		return
+	}
+
+	log.Infof("[%s]: Role updated successfully: %s", op, userID)
 
 	response.JSON(w, http.StatusOK, res)
 }

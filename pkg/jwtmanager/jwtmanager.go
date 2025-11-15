@@ -18,6 +18,7 @@ type Claims struct {
 	SessionID string `json:"jti"`
 	Exp       int64  `json:"exp"`
 	Iat       int64  `json:"iat"`
+	Role      string `json:"role"`
 }
 
 type Manager struct {

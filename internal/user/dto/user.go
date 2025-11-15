@@ -57,4 +57,15 @@ type GetProfileResponse struct {
 	Login     string
 	Email     string
 	AvatarURL string
+	Role      string
+}
+
+type UpdateRoleRequest struct {
+	UserID string
+	Role   string
+}
+
+type UpdateRoleResponse struct {
+	ID   string
+	Role string
 }

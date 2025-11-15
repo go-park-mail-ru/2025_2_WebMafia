@@ -11,6 +11,11 @@ type Track struct {
 	Genres    []Genre  `json:"genres"`
 }
 
+type TrackSearch struct {
+	Track
+	Rank float32 `json:"rank"`
+}
+
 type Genre struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`

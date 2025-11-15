@@ -91,6 +91,45 @@ func (s *Service) GetTotalPlaysByArtistIDs(ctx context.Context, artistIDs []uuid
 	return playsMap, nil
 }
 
+func (s *Service) Search(ctx context.Context, query string, limit uint64) ([]dto.TrackSearch, error) {
+	const op = "service.Search"
+
+	repoResults, err := s.trackRepo.Search(ctx, query, limit)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: failed to search tracks in repository: %w", op, mapError(err))
+	}
+
+	if len(repoResults) == 0 {
+		return []dto.TrackSearch{}, nil
+	}
+
+	tracks := make([]model.Track, len(repoResults))
+	ranksMap := make(map[uuid.UUID]float32, len(repoResults))
+	for i, res := range repoResults {
+		tracks[i] = res.Track
+		ranksMap[res.Track.ID] = res.Rank
+	}
+
+	enrichedTracks, err := s.enrichTracks(ctx, tracks)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: failed to enrich search results: %w", op, err)
+	}
+
+	dtoResults := make([]dto.TrackSearch, len(enrichedTracks))
+	for i, enrichedTrack := range enrichedTracks {
+		trackID, err := uuid.Parse(enrichedTrack.ID)
+		if err != nil {
+			continue
+		}
+		dtoResults[i] = dto.TrackSearch{
+			Track: enrichedTrack,
+			Rank:  ranksMap[trackID],
+		}
+	}
+
+	return dtoResults, nil
+}
+
 func (s *Service) enrichTracks(ctx context.Context, tracks []model.Track) ([]dto.Track, error) {
 	const op = "service.enrichTracks"
 	if len(tracks) == 0 {

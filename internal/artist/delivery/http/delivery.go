@@ -11,6 +11,7 @@ import (
 type IService interface {
 	GetArtistByID(ctx context.Context, id uuid.UUID) (*dto.Artist, error)
 	GetAllArtists(ctx context.Context, limit, offset uint64) ([]dto.Artist, error)
+	Search(ctx context.Context, query string, limit uint64) ([]dto.ArtistSearch, error)
 }
 
 type Handler struct {

@@ -103,3 +103,45 @@ func (s *Service) GetArtistsByIDs(ctx context.Context, ids []uuid.UUID) ([]dto.A
 
 	return artistDTOs, nil
 }
+
+func (s *Service) Search(ctx context.Context, query string, limit uint64) ([]dto.ArtistSearch, error) {
+	const op = "service.SearchArtists"
+
+	repoResults, err := s.repo.Search(ctx, query, limit)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: failed to search artists in repository: %w", op, mapError(err))
+	}
+
+	if len(repoResults) == 0 {
+		return []dto.ArtistSearch{}, nil
+	}
+
+	artistIDs := make([]uuid.UUID, len(repoResults))
+	for i, result := range repoResults {
+		artistIDs[i] = result.Artist.ID
+	}
+
+	playsMap, err := s.trackService.GetTotalPlaysByArtistIDs(ctx, artistIDs)
+	if err != nil {
+		playsMap = make(map[uuid.UUID]int64)
+	}
+
+	dtoResults := make([]dto.ArtistSearch, len(repoResults))
+	for i, result := range repoResults {
+		dtoResults[i] = dto.ArtistSearch{
+			Artist: dto.Artist{
+				ID:        result.Artist.ID.String(),
+				Name:      result.Artist.Name,
+				AvatarURL: result.Artist.AvatarURL,
+				HeaderURL: result.Artist.HeaderURL,
+				PlayCount: playsMap[result.Artist.ID],
+			},
+			Rank: result.Rank,
+		}
+		if result.Artist.Description.Valid {
+			dtoResults[i].Description = result.Artist.Description.String
+		}
+	}
+
+	return dtoResults, nil
+}

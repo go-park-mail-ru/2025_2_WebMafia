@@ -16,3 +16,8 @@ type Artist struct {
 	AvatarURL string `json:"avatar_url,omitempty"`
 	HeaderURL string `json:"header_url,omitempty"`
 }
+
+type AlbumSearch struct {
+	Album
+	Rank float32 `json:"rank"`
+}

@@ -7,6 +7,7 @@ import (
 )
 
 func (h *Handler) RegisterRoutes(public, protected, csrfProtected *mux.Router) {
+	public.HandleFunc("/tracks/search", h.Search).Methods(http.MethodGet, http.MethodOptions)
 	public.HandleFunc("/tracks", h.GetAllTracks).Methods(http.MethodGet, http.MethodOptions)
 	public.HandleFunc("/tracks/{id}", h.GetTrackByID).Methods(http.MethodGet, http.MethodOptions)
 	csrfProtected.HandleFunc("/tracks/{id}/listen", h.RegisterPlay).Methods(http.MethodPost, http.MethodOptions)

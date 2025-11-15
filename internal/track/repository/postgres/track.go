@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 	"spotify/internal/model"
+	"spotify/internal/track/dto"
 
 	"github.com/google/uuid"
 )
@@ -302,6 +303,49 @@ func (r *Repository) GetTotalPlaysByArtistIDs(ctx context.Context, artistIDs []u
 	}
 
 	return playsMap, nil
+}
+
+func (r *Repository) Search(ctx context.Context, query string, limit uint64) ([]dto.SearchResult, error) {
+	const op = "repository.Search"
+
+	sqlQuery := `
+		SELECT track_id, title, duration_s, file_url, play_count, description, created_at, updated_at, 
+			ts_rank_cd(fts_vector, plainto_tsquery('simple', $1)) as rank 
+		FROM track 
+		WHERE fts_vector @@ plainto_tsquery('simple', $1) 
+		ORDER BY rank DESC 
+		LIMIT $2;`
+
+	rows, err := r.db.QueryContext(ctx, sqlQuery, query, limit)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: query failed: %w", op, mapErrors(err))
+	}
+	defer rows.Close()
+
+	results := make([]dto.SearchResult, 0, limit)
+	for rows.Next() {
+		var searchResult dto.SearchResult
+		if err := rows.Scan(
+			&searchResult.Track.ID,
+			&searchResult.Track.Title,
+			&searchResult.Track.DurationS,
+			&searchResult.Track.FileURL,
+			&searchResult.Track.PlayCount,
+			&searchResult.Track.Description,
+			&searchResult.Track.CreatedAt,
+			&searchResult.Track.UpdatedAt,
+			&searchResult.Rank,
+		); err != nil {
+			return nil, fmt.Errorf("[%s]: scan failed: %w", op, mapErrors(err))
+		}
+		results = append(results, searchResult)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, fmt.Errorf("[%s]: rows iteration failed: %w", op, mapErrors(err))
+	}
+
+	return results, nil
 }
 
 func selectTracks(rows *sql.Rows) ([]model.Track, error) {

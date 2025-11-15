@@ -14,11 +14,13 @@ import (
 )
 
 const (
-	defaultLimit     = 100
-	defaultOffset    = 0
-	maxLimit         = 1000
-	queryParamLimit  = "limit"
-	queryParamOffset = "offset"
+	defaultLimit       = 100
+	defaultOffset      = 0
+	maxLimit           = 1000
+	queryParamLimit    = "limit"
+	queryParamOffset   = "offset"
+	queryParamSearch   = "q"
+	defaultSearchLimit = 50
 )
 
 func (h *Handler) GetTrackByID(w http.ResponseWriter, r *http.Request) {
@@ -205,6 +207,32 @@ func (h *Handler) RegisterPlay(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response.JSON(w, http.StatusAccepted, nil)
+}
+
+func (h *Handler) Search(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.SearchTracks"
+	log := middleware.LoggerFromContext(r.Context())
+
+	query := r.URL.Query().Get(queryParamSearch)
+	if query == "" {
+		log.Warnf("[%s]: search query is empty", op)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	limit, _ := parsePagination(r)
+	if limit == defaultLimit {
+		limit = defaultSearchLimit
+	}
+
+	results, err := h.service.Search(r.Context(), query, limit)
+	if err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, results)
 }
 
 func parsePagination(r *http.Request) (uint64, uint64) {

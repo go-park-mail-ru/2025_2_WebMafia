@@ -12,6 +12,7 @@ type IService interface {
 	GetAlbumByID(ctx context.Context, id uuid.UUID) (*dto.Album, error)
 	GetAllAlbums(ctx context.Context, limit, offset uint64) ([]dto.Album, error)
 	GetAlbumsByArtistID(ctx context.Context, artistID uuid.UUID, limit, offset uint64) ([]dto.Album, error)
+	Search(ctx context.Context, query string, limit uint64) ([]dto.AlbumSearch, error)
 }
 
 type Handler struct {

@@ -8,3 +8,8 @@ type Artist struct {
 	Description string `json:"description,omitempty"`
 	PlayCount   int64  `json:"play_count"`
 }
+
+type ArtistSearch struct {
+	Artist
+	Rank float32 `json:"rank"`
+}

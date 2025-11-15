@@ -138,7 +138,7 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	token, err := h.jwtManager.Generate(user.ID)
+	token, err := h.jwtManager.Generate(user.ID, user.Role)
 	if err != nil {
 		log.Errorf("[%s]: Failed to generate token: %v", op, err)
 		response.InternalErrorJSON(w)
@@ -188,7 +188,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	token, err := h.jwtManager.Generate(user.ID)
+	token, err := h.jwtManager.Generate(user.ID, user.Role)
 	if err != nil {
 		log.Errorf("[%s]: Failed to generate token: %v", op, err)
 		response.InternalErrorJSON(w)
@@ -300,6 +300,12 @@ func (h *Handler) UpdateProfile(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log := middleware.LoggerFromContext(r.Context())
+
+	role, ok := middleware.GetUserRole(r.Context())
+	if !ok || role != "superuser" {
+		response.ForbiddenJSON(w)
+		return
+	}
 
 	var req updateProfileRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {

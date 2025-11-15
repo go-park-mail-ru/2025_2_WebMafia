@@ -11,6 +11,7 @@ type RegisterResponse struct {
 	ID    string
 	Login string
 	Email string
+	Role  string
 }
 
 type LoginRequest struct {
@@ -19,7 +20,8 @@ type LoginRequest struct {
 }
 
 type LoginResponse struct {
-	ID string
+	ID   string
+	Role string
 }
 
 type UploadAvatarRequest struct {

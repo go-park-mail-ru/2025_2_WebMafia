@@ -18,4 +18,6 @@ func (h *Handler) RegisterRoutes(public, protected, csrfProtected *mux.Router) {
 
 	protected.HandleFunc("/profile", h.UpdateProfile).Methods(http.MethodPut, http.MethodOptions)
 	protected.HandleFunc("/me", h.GetProfile).Methods(http.MethodGet, http.MethodOptions)
+
+	protected.HandleFunc("/role", h.UpdateRole).Methods(http.MethodPut, http.MethodOptions)
 }

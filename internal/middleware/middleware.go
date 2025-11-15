@@ -49,7 +49,7 @@ func (a *Auth) AuthMiddleware(next http.Handler) http.Handler {
 		}
 
 		ctx := context.WithValue(r.Context(), claimsKey, claims)
-		ctxLogger := log.With("user_id", claims.UserID)
+		ctxLogger := log.With("user_id", claims.UserID, "role", claims.Role)
 		ctx = context.WithValue(ctx, loggerKey, ctxLogger)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
@@ -69,4 +69,12 @@ func GetUserID(ctx context.Context) (string, bool) {
 		return "", false
 	}
 	return claims.UserID, true
+}
+
+func GetUserRole(ctx context.Context) (string, bool) {
+	claims, err := ClaimsFromContext(ctx)
+	if err != nil {
+		return "", false
+	}
+	return claims.Role, true
 }

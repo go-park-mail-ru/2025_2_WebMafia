@@ -58,3 +58,13 @@ type GetProfileResponse struct {
 	Email     string
 	AvatarURL string
 }
+
+type UpdateRoleRequest struct {
+	UserID string
+	Role   string
+}
+
+type UpdateRoleResponse struct {
+	ID   string
+	Role string
+}

@@ -1,0 +1,2 @@
+INSERT INTO "user" (user_id, login, password_hash, email, role)
+VALUES ('ee4ed341-9bb2-48ef-bbd0-74e8a0469dca', 'superadmin', '$2a$12$lE0J440g/1Y5dBeyGm9Op.tptx0guwDmvTLTpmQNPsabgKcRnxDiq', 'superadmin@email.com', 'superadmin' );

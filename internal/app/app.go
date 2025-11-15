@@ -27,6 +27,10 @@ import (
 	storageRepo "spotify/internal/user/repository/storage"
 	userService "spotify/internal/user/service"
 
+	ticketDelivery "spotify/internal/ticket/delivery/http"
+	ticketRepo "spotify/internal/ticket/repository/postgres"
+	ticketService "spotify/internal/ticket/service"
+
 	"spotify/internal/middleware"
 	"spotify/internal/router"
 	"spotify/pkg/csrfmanager"
@@ -93,11 +97,16 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	albumHandler := albumDelivery.NewHandler(albumSvc)
 	trackHandler := trackDelivery.NewHandler(trackSvc)
 
+	ticketRepository := ticketRepo.New(db)
+	ticketSvc := ticketService.New(ticketRepository)
+	ticketHandler := ticketDelivery.NewHandler(ticketSvc)
+
 	handlers := router.AppHandlers{
 		UserHandler:   userHandler,
 		ArtistHandler: artistHandler,
 		AlbumHandler:  albumHandler,
 		TrackHandler:  trackHandler,
+		TicketHandler: ticketHandler,
 	}
 
 	muxRouter := router.NewRouter(log, handlers, authMiddleware, csrfMiddleware, cfg.App.HTTP.CORS)

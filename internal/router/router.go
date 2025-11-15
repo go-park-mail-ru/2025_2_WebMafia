@@ -4,6 +4,7 @@ import (
 	albumDelivery "spotify/internal/album/delivery/http"
 	artistDelivery "spotify/internal/artist/delivery/http"
 	"spotify/internal/middleware"
+	ticketDelivery "spotify/internal/ticket/delivery/http"
 	trackDelivery "spotify/internal/track/delivery/http"
 	userDelivery "spotify/internal/user/delivery/http"
 	"spotify/pkg/logger"
@@ -16,6 +17,7 @@ type AppHandlers struct {
 	ArtistHandler *artistDelivery.Handler
 	AlbumHandler  *albumDelivery.Handler
 	TrackHandler  *trackDelivery.Handler
+	TicketHandler *ticketDelivery.Handler
 }
 
 func NewRouter(logger logger.Logger,
@@ -44,6 +46,7 @@ func NewRouter(logger logger.Logger,
 	handlers.ArtistHandler.RegisterRoutes(public)
 	handlers.AlbumHandler.RegisterRoutes(public)
 	handlers.TrackHandler.RegisterRoutes(public, protected, csrfProtected)
+	handlers.TicketHandler.RegisterRoutes(protected, csrfProtected)
 
 	return r
 }

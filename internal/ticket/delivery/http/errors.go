@@ -13,8 +13,7 @@ func handleError(w http.ResponseWriter, err error) {
 		response.NotFoundJSON(w)
 	case errors.Is(err, service.ErrForbidden):
 		response.ForbiddenJSON(w)
-	case errors.Is(err, service.ErrCannotUpdateTicket),
-		errors.Is(err, service.ErrCannotRateTicket),
+	case errors.Is(err, service.ErrInvalidStateForAction),
 		errors.Is(err, service.ErrInvalidRating):
 		response.BadRequestJSON(w)
 	default:

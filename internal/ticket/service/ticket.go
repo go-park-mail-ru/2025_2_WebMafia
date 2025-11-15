@@ -13,7 +13,7 @@ import (
 
 func (s *Service) CreateTicket(ctx context.Context, req dto.CreateTicketRequest, userID uuid.UUID) (*dto.TicketResponse, error) {
 	const op = "service.CreateTicket"
-	ticket := model.SupportTicket{
+	ticket := model.Ticket{
 		ID:          uuid.New(),
 		UserID:      userID,
 		Title:       req.Title,
@@ -74,7 +74,7 @@ func (s *Service) UpdateTicket(ctx context.Context, req dto.UpdateTicketRequest,
 
 	if req.Title != nil || req.Description != nil {
 		if ticket.Status != "Открыто" {
-			return nil, ErrCannotUpdateTicket
+			return nil, ErrInvalidStateForAction
 		}
 		if req.Title != nil {
 			ticket.Title = *req.Title
@@ -86,11 +86,8 @@ func (s *Service) UpdateTicket(ctx context.Context, req dto.UpdateTicketRequest,
 	}
 
 	if req.Status != nil {
-		if *req.Status != "Закрыто" {
-			return nil, ErrInvalidStatusChange
-		}
-		if ticket.Status != "Открыто" {
-			return nil, ErrCannotCloseTicket
+		if *req.Status != "Закрыто" || ticket.Status != "Открыто" {
+			return nil, ErrInvalidStateForAction
 		}
 		ticket.Status = *req.Status
 		updated = true
@@ -98,7 +95,7 @@ func (s *Service) UpdateTicket(ctx context.Context, req dto.UpdateTicketRequest,
 
 	if req.Rating != nil {
 		if ticket.Status != "Закрыто" {
-			return nil, ErrCannotRateTicket
+			return nil, ErrInvalidStateForAction
 		}
 		if *req.Rating < 1 || *req.Rating > 5 {
 			return nil, ErrInvalidRating
@@ -117,7 +114,7 @@ func (s *Service) UpdateTicket(ctx context.Context, req dto.UpdateTicketRequest,
 	return toTicketResponse(ticket), nil
 }
 
-func toTicketResponse(ticket *model.SupportTicket) *dto.TicketResponse {
+func toTicketResponse(ticket *model.Ticket) *dto.TicketResponse {
 	resp := &dto.TicketResponse{
 		ID:          ticket.ID.String(),
 		UserID:      ticket.UserID.String(),

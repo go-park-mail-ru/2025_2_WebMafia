@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"spotify/internal/model"
+	"spotify/internal/ticket/dto"
 
 	"github.com/google/uuid"
 )
@@ -13,6 +14,7 @@ type IRepository interface {
 	GetByUserID(ctx context.Context, userID uuid.UUID, limit, offset uint64) ([]model.Ticket, error)
 	Update(ctx context.Context, ticket model.Ticket) error
 	GetAll(ctx context.Context, limit, offset uint64) ([]model.Ticket, error)
+	GetStatistics(ctx context.Context) (*dto.StatisticsResponse, error)
 }
 
 type Service struct {

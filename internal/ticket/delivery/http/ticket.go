@@ -142,6 +142,20 @@ func (h *Handler) GetAllTickets(w http.ResponseWriter, r *http.Request) {
 	response.JSON(w, http.StatusOK, tickets)
 }
 
+func (h *Handler) GetStatistics(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.GetStatistics"
+	log := middleware.LoggerFromContext(r.Context())
+
+	stats, err := h.service.GetStatistics(r.Context())
+	if err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		handleError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, stats)
+}
+
 func parsePagination(r *http.Request) (uint64, uint64) {
 	query := r.URL.Query()
 	limitStr := query.Get(queryParamLimit)

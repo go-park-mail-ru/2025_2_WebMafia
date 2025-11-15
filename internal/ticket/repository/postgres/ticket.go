@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 	"spotify/internal/model"
+	"spotify/internal/ticket/dto"
 
 	"github.com/google/uuid"
 )
@@ -114,6 +115,47 @@ func (m *Repository) GetAll(ctx context.Context, limit, offset uint64) ([]model.
 	defer rows.Close()
 
 	return selectTickets(rows)
+}
+
+func (m *Repository) GetStatistics(ctx context.Context) (*dto.StatisticsResponse, error) {
+	const op = "repository.GetStatistics"
+
+	query := `
+		SELECT 
+			status, 
+			category, 
+			COUNT(*) 
+		FROM "ticket" 
+		GROUP BY status, category`
+
+	rows, err := m.Conn.QueryContext(ctx, query)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: query failed: %w", op, mapErrors(err))
+	}
+	defer rows.Close()
+
+	stats := &dto.StatisticsResponse{
+		ByStatus:   make(map[string]int),
+		ByCategory: make(map[string]int),
+	}
+
+	for rows.Next() {
+		var status, category string
+		var count int
+		if err := rows.Scan(&status, &category, &count); err != nil {
+			return nil, fmt.Errorf("[%s]: scan failed: %w", op, err)
+		}
+
+		stats.TotalTickets += count
+		stats.ByStatus[status] += count
+		stats.ByCategory[category] += count
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("[%s]: rows iteration failed: %w", op, err)
+	}
+
+	return stats, nil
 }
 
 func selectTickets(rows *sql.Rows) ([]model.Ticket, error) {

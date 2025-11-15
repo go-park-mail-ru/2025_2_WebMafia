@@ -114,6 +114,15 @@ func (s *Service) UpdateTicket(ctx context.Context, req dto.UpdateTicketRequest,
 	return toTicketResponse(ticket), nil
 }
 
+func (s *Service) GetStatistics(ctx context.Context) (*dto.StatisticsResponse, error) {
+	const op = "service.GetStatistics"
+	stats, err := s.repo.GetStatistics(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: %w", op, mapError(err))
+	}
+	return stats, nil
+}
+
 func toTicketResponse(ticket *model.Ticket) *dto.TicketResponse {
 	resp := &dto.TicketResponse{
 		ID:          ticket.ID.String(),

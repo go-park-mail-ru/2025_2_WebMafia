@@ -27,6 +27,8 @@ import (
 	storageRepo "spotify/internal/user/repository/storage"
 	userService "spotify/internal/user/service"
 
+	ticketRepo "spotify/internal/ticket/repository/postgres"
+
 	"spotify/internal/middleware"
 	"spotify/internal/router"
 	"spotify/pkg/csrfmanager"
@@ -72,6 +74,7 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	artistRepository := artistRepo.New(db)
 	albumRepository := albumRepo.New(db)
 	trackRepository := trackRepo.New(db)
+	ticketRepository := ticketRepo.NewTicketRepository(db)
 
 	userSvc := userService.NewUserService(userRepository, avatarStorage)
 

@@ -138,7 +138,7 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	token, err := h.jwtManager.Generate(user.ID)
+	token, err := h.jwtManager.Generate(user.ID, "user")
 	if err != nil {
 		log.Errorf("[%s]: Failed to generate token: %v", op, err)
 		response.InternalErrorJSON(w)
@@ -188,7 +188,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	token, err := h.jwtManager.Generate(user.ID)
+	token, err := h.jwtManager.Generate(user.ID, user.Role)
 	if err != nil {
 		log.Errorf("[%s]: Failed to generate token: %v", op, err)
 		response.InternalErrorJSON(w)

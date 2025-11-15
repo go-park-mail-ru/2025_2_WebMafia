@@ -6,7 +6,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func (h *Handler) RegisterRoutes(public, protected, csrfProtected *mux.Router) {
+func (h *Handler) RegisterRoutes(public, protected, csrfProtected, adminProtected, adminCsrfProtected *mux.Router) {
 	public.HandleFunc("/register", h.Register).Methods(http.MethodPost, http.MethodOptions)
 	public.HandleFunc("/login", h.Login).Methods(http.MethodPost, http.MethodOptions)
 
@@ -18,4 +18,6 @@ func (h *Handler) RegisterRoutes(public, protected, csrfProtected *mux.Router) {
 
 	protected.HandleFunc("/profile", h.UpdateProfile).Methods(http.MethodPut, http.MethodOptions)
 	protected.HandleFunc("/me", h.GetProfile).Methods(http.MethodGet, http.MethodOptions)
+
+	adminCsrfProtected.HandleFunc("/users/{id}/role", h.UpdateRole).Methods(http.MethodPut, http.MethodOptions)
 }

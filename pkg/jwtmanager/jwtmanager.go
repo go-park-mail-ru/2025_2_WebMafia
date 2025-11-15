@@ -34,7 +34,7 @@ func (m *Manager) GetTTL() time.Duration {
 	return m.accessTokenTTL
 }
 
-func (m *Manager) Generate(userID string) (string, error) {
+func (m *Manager) Generate(userID, role string) (string, error) {
 	now := time.Now()
 	expiresAt := now.Add(m.accessTokenTTL)
 
@@ -43,6 +43,7 @@ func (m *Manager) Generate(userID string) (string, error) {
 		SessionID: uuid.New().String(),
 		Exp:       expiresAt.Unix(),
 		Iat:       now.Unix(),
+		Role:      role,
 	}
 
 	header := map[string]string{"alg": "HS256", "typ": "JWT"}

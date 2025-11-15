@@ -54,7 +54,8 @@ func (s *Service) Login(ctx context.Context, req dto.LoginRequest) (*dto.LoginRe
 	}
 
 	return &dto.LoginResponse{
-		ID: user.ID.String(),
+		ID:   user.ID.String(),
+		Role: user.Role,
 	}, nil
 }
 

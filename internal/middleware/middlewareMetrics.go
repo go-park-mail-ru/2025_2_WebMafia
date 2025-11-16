@@ -2,13 +2,11 @@ package middleware
 
 import (
 	"net/http"
-	"strconv"
 	"time"
 
 	"spotify/internal/metrics"
 
 	"github.com/gorilla/mux"
-	"github.com/prometheus/client_golang/prometheus"
 )
 
 func MetricsMiddleware(m *metrics.Metrics) func(next http.Handler) http.Handler {
@@ -20,19 +18,21 @@ func MetricsMiddleware(m *metrics.Metrics) func(next http.Handler) http.Handler 
 			next.ServeHTTP(rw, r)
 
 			duration := time.Since(start)
+			var path string
 			route := mux.CurrentRoute(r)
-			path, _ := route.GetPathTemplate()
+			if route != nil {
+				var err error
+				path, err = route.GetPathTemplate()
+				if err != nil {
+					LoggerFromContext(r.Context()).Warnf("Failed to get path template: %v", err)
+					path = "unknown"
+				}
+			} else {
+				path = "unknown"
+			}
 
-			m.RequestsTotal.With(prometheus.Labels{
-				"code":   strconv.Itoa(rw.statusCode),
-				"method": r.Method,
-				"path":   path,
-			}).Inc()
-
-			m.RequestDuration.With(prometheus.Labels{
-				"method": r.Method,
-				"path":   path,
-			}).Observe(duration.Seconds())
+			m.IncHttpRequestsTotal(rw.statusCode, r.Method, path)
+			m.ObserveHttpRequestDuration(r.Method, path, duration)
 		})
 	}
 }

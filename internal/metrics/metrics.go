@@ -1,6 +1,9 @@
 package metrics
 
 import (
+	"strconv"
+	"time"
+
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 )
@@ -38,4 +41,19 @@ func New(serviceName string) *Metrics {
 		RequestsTotal:   requestsTotal,
 		RequestDuration: requestDuration,
 	}
+}
+
+func (m *Metrics) IncHttpRequestsTotal(statusCode int, method, path string) {
+	m.RequestsTotal.With(prometheus.Labels{
+		"code":   strconv.Itoa(statusCode),
+		"method": method,
+		"path":   path,
+	}).Inc()
+}
+
+func (m *Metrics) ObserveHttpRequestDuration(method, path string, duration time.Duration) {
+	m.RequestDuration.With(prometheus.Labels{
+		"method": method,
+		"path":   path,
+	}).Observe(duration.Seconds())
 }

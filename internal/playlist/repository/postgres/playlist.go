@@ -18,7 +18,6 @@ func (r *Repository) CreatePlaylist(ctx context.Context, playlist model.Playlist
 	_, err := r.Conn.ExecContext(ctx, query,
 		playlist.ID, userID, playlist.Title,
 		playlist.Description, playlist.AvatarURL, playlist.IsFavorite,
-		playlist.CreatedAt, playlist.UpdatedAt,
 	)
 	if err != nil {
 		return fmt.Errorf("%s: %w", op, err)
@@ -87,6 +86,7 @@ func (r *Repository) UpdatePlaylist(ctx context.Context, playlist model.Playlist
 		playlist.Title,
 		playlist.Description,
 		playlist.AvatarURL,
+		playlist.IsFavorite,
 		playlist.ID,
 	)
 	if err != nil {

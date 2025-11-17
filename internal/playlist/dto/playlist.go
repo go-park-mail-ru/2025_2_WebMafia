@@ -62,6 +62,6 @@ type GetFavoritePlaylistRequest struct {
 	UserID uuid.UUID
 }
 type AddTrackToFavoriteRequest struct {
-	UserID  uuid.UUID
-	TrackID string
+	UserID  uuid.UUID `json:"-"`
+	TrackID string    `json:"track_id"`
 }

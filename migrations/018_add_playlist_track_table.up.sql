@@ -16,5 +16,3 @@ CREATE TABLE playlist_track (
 
 COMMENT ON TABLE playlist_track IS 'Связь треков и плейлистов';
 
-CREATE INDEX idx_playlist_track_playlist_id ON playlist_track (playlist_id);
-CREATE INDEX idx_playlist_track_track_id ON playlist_track (track_id);

@@ -39,8 +39,8 @@ func (h *Handler) CreatePlaylist(w http.ResponseWriter, r *http.Request) {
 
 	userID, err := uuid.Parse(rawUserID)
 	if err != nil {
-		log.Errorf("[%s]: invalid userId: %v", op, err)
-		response.BadRequestJSON(w)
+		log.Errorf("[%s]: invalid userId from context: %v", op, err)
+		response.InternalErrorJSON(w)
 		return
 	}
 
@@ -110,7 +110,7 @@ func (h *Handler) GetAllPlaylistsByUserID(w http.ResponseWriter, r *http.Request
 	userID, err := uuid.Parse(rawUserID)
 	if err != nil {
 		log.Errorf("[%s]: invalid userId: %v", op, err)
-		response.BadRequestJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 
@@ -209,14 +209,14 @@ func (h *Handler) AddTrackToFavorite(w http.ResponseWriter, r *http.Request) {
 	rawUserID, ok := middleware.GetUserID(r.Context())
 	if !ok {
 		log.Errorf("[%s]: missing userId", op)
-		response.UnauthorizedJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 
 	userID, err := uuid.Parse(rawUserID)
 	if err != nil {
 		log.Errorf("[%s]: invalid userId: %v", op, err)
-		response.BadRequestJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 
@@ -244,14 +244,14 @@ func (h *Handler) GetFavoritePlaylist(w http.ResponseWriter, r *http.Request) {
 	rawUserID, ok := middleware.GetUserID(r.Context())
 	if !ok {
 		log.Errorf("[%s]: missing userId", op)
-		response.UnauthorizedJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 
 	userID, err := uuid.Parse(rawUserID)
 	if err != nil {
 		log.Errorf("[%s]: invalid userId: %v", op, err)
-		response.BadRequestJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 

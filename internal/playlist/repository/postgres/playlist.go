@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/google/uuid"
 	"spotify/internal/model"
+	"strings"
 )
 
 func (r *Repository) CreatePlaylist(ctx context.Context, playlist model.Playlist, userID uuid.UUID) error {
@@ -76,29 +77,41 @@ func (r *Repository) GetAllByUser(ctx context.Context, userID uuid.UUID, limit, 
 	return playlists, nil
 }
 
-func (r *Repository) UpdatePlaylist(ctx context.Context, playlist model.Playlist) error {
+func (r *Repository) UpdatePlaylist(ctx context.Context, playlist model.Playlist, fields map[string]interface{}) error {
 	const op = "repository.UpdatePlaylist"
 
-	query := `UPDATE playlist SET title = $1, description = $2, avatar_url = $3, is_favorite = $4
-        WHERE playlist_id = $5`
+	setParts := make([]string, 0, len(fields))
+	args := make([]interface{}, 0, len(fields)+1)
+	i := 1
 
-	res, err := r.Conn.ExecContext(ctx, query,
-		playlist.Title,
-		playlist.Description,
-		playlist.AvatarURL,
-		playlist.IsFavorite,
-		playlist.ID,
+	for col, val := range fields {
+		setParts = append(setParts, fmt.Sprintf("%s = $%d", col, i))
+		args = append(args, val)
+		i++
+	}
+
+	if len(setParts) == 0 {
+		return nil
+	}
+
+	args = append(args, playlist.ID)
+
+	query := fmt.Sprintf(
+		"UPDATE playlist SET %s WHERE playlist_id = $%d",
+		strings.Join(setParts, ", "),
+		i,
 	)
+
+	res, err := r.Conn.ExecContext(ctx, query, args...)
 	if err != nil {
 		return fmt.Errorf("%s: %w", op, err)
 	}
 
-	rowsAffected, err := res.RowsAffected()
+	ra, err := res.RowsAffected()
 	if err != nil {
 		return fmt.Errorf("%s: count failed: %w", op, err)
 	}
-
-	if rowsAffected == 0 {
+	if ra == 0 {
 		return fmt.Errorf("%s: %w", op, ErrNotFound)
 	}
 

@@ -39,9 +39,9 @@ type CreatePlaylistRequest struct {
 
 type UpdatePlaylistRequest struct {
 	ID          uuid.UUID
-	Title       *string
-	Description *string
-	IsFavorite  *bool
+	Title       *string `json:"title"`
+	Description *string `json:"description"`
+	IsFavorite  *bool   `json:"is_favorite"`
 }
 
 type DeletePlaylistRequest struct {

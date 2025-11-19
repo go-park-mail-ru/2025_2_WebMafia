@@ -77,24 +77,47 @@ func (r *Repository) GetAllByUser(ctx context.Context, userID uuid.UUID, limit, 
 	return playlists, nil
 }
 
-func (r *Repository) UpdatePlaylist(ctx context.Context, playlist model.Playlist, fields map[string]interface{}) error {
+type playlistUpdate struct {
+	Title       *string
+	Description *string
+	IsFavorite  *bool
+}
+
+func (r *Repository) UpdatePlaylist(ctx context.Context, id uuid.UUID, title *string, description *string, isFavorite *bool) error {
 	const op = "repository.UpdatePlaylist"
 
-	setParts := make([]string, 0, len(fields))
-	args := make([]interface{}, 0, len(fields)+1)
+	upd := playlistUpdate{
+		Title:       title,
+		Description: description,
+		IsFavorite:  isFavorite,
+	}
+
+	setParts := []string{}
+	args := []interface{}{}
 	i := 1
 
-	for col, val := range fields {
-		setParts = append(setParts, fmt.Sprintf("%s = $%d", col, i))
-		args = append(args, val)
+	if upd.Title != nil {
+		setParts = append(setParts, fmt.Sprintf("title = $%d", i))
+		args = append(args, *upd.Title)
+		i++
+	}
+
+	if upd.Description != nil {
+		setParts = append(setParts, fmt.Sprintf("description = $%d", i))
+		args = append(args, *upd.Description)
+		i++
+	}
+
+	if upd.IsFavorite != nil {
+		setParts = append(setParts, fmt.Sprintf("is_favorite = $%d", i))
+		args = append(args, *upd.IsFavorite)
 		i++
 	}
 
 	if len(setParts) == 0 {
 		return nil
 	}
-
-	args = append(args, playlist.ID)
+	args = append(args, id)
 
 	query := fmt.Sprintf(
 		"UPDATE playlist SET %s WHERE playlist_id = $%d",
@@ -111,10 +134,10 @@ func (r *Repository) UpdatePlaylist(ctx context.Context, playlist model.Playlist
 	if err != nil {
 		return fmt.Errorf("%s: count failed: %w", op, err)
 	}
+
 	if ra == 0 {
 		return fmt.Errorf("%s: %w", op, ErrNotFound)
 	}
-
 	return nil
 }
 

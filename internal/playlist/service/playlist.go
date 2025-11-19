@@ -83,20 +83,20 @@ func (s *Service) UpdatePlaylist(ctx context.Context, req dto.UpdatePlaylistRequ
 		return nil, mapRepositoryError(err)
 	}
 
-	fields := map[string]interface{}{}
+	err = s.repo.UpdatePlaylist(ctx, req.ID, req.Title, req.Description, req.IsFavorite)
+	if err != nil {
+		return nil, mapRepositoryError(err)
+	}
 
 	if req.Title != nil {
-		fields["title"] = *req.Title
-	}
-	if req.Description != nil {
-		fields["description"] = *req.Description
-	}
-	if req.IsFavorite != nil {
-		fields["is_favorite"] = *req.IsFavorite
+		playlist.Title = *req.Title
 	}
 
-	if err := s.repo.UpdatePlaylist(ctx, *playlist, fields); err != nil {
-		return nil, mapRepositoryError(err)
+	if req.Description != nil {
+		playlist.Description = *req.Description
+	}
+	if req.IsFavorite != nil {
+		playlist.IsFavorite = *req.IsFavorite
 	}
 
 	return &dto.Playlist{

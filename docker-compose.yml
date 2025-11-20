@@ -1,25 +1,49 @@
 version: "3.8"
 
 services:
-  app:
+  # --- Микросервис Auth ---
+  auth:
     build:
       context: .
-      dockerfile: ./docker/Dockerfile
+      dockerfile: ./docker/auth.Dockerfile
     ports:
       - "8080:8080"
-    container_name: wavemusic-app
+    container_name: wavemusic-auth
     restart: always
     env_file:
       - ./.env.dev
     volumes:
       - ./config:/config
-    command: ["/server", "-f=/config"]
+    depends_on:
+      db:
+        condition: service_healthy
+      minio:
+        condition: service_started
+      migrate:
+        condition: service_completed_successfully
+
+  # --- Микросервис Catalog ---
+  catalog:
+    build:
+      context: .
+      dockerfile: ./docker/catalog.Dockerfile
+    ports:
+      - "8081:8081"
+    container_name: wavemusic-catalog
+    restart: always
+    env_file:
+      - ./.env.dev
+    volumes:
+      - ./config:/config
     depends_on:
       db:
         condition: service_healthy
       migrate:
         condition: service_completed_successfully
+      auth:
+        condition: service_started
 
+  # --- Миграции ---
   migrate:
     image: migrate/migrate
     volumes:
@@ -30,6 +54,7 @@ services:
         condition: service_healthy
     restart: on-failure
 
+  # --- База данных ---
   db:
     image: postgres:15-alpine
     container_name: wavemusic-db
@@ -48,6 +73,7 @@ services:
       timeout: 5s
       retries: 5
 
+  # --- Minio ---
   minio:
     image: minio/minio:latest
     container_name: wavemusic-minio
@@ -62,6 +88,7 @@ services:
       - minio_data:/data
     command: server /data --console-address ":9001"
 
+  # --- Мониторинг ---
   prometheus:
     image: prom/prometheus:latest
     container_name: wavemusic-prometheus

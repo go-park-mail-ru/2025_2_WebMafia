@@ -1,0 +1,36 @@
+package dto
+
+type Track struct {
+	ID        string           `json:"id"`
+	Title     string           `json:"title"`
+	DurationS int              `json:"duration_s"`
+	FileURL   string           `json:"file_url"`
+	PlayCount int64            `json:"play_count"`
+	Artists   []ArtistForTrack `json:"artists"`
+	Album     AlbumForTrack    `json:"album"`
+	Genres    []Genre          `json:"genres"`
+}
+
+type ArtistForTrack struct {
+	ID        string `json:"id"`
+	Name      string `json:"name"`
+	AvatarURL string `json:"avatar_url,omitempty"`
+}
+
+type AlbumForTrack struct {
+	ID          string           `json:"id"`
+	Title       string           `json:"title"`
+	AvatarURL   string           `json:"avatar_url,omitempty"`
+	ReleaseDate string           `json:"release_date"`
+	Artists     []ArtistForTrack `json:"artists"`
+}
+
+type Genre struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
+type TrackSearch struct {
+	Track
+	Rank float32 `json:"rank"`
+}

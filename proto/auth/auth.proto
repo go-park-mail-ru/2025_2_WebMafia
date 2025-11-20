@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "spotify/proto/auth";
+
+service AuthService {
+  rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse) {}
+  rpc CheckCSRF(CheckCSRFRequest) returns (CheckCSRFResponse) {}
+}
+
+message ValidateTokenRequest {
+  string token = 1;
+}
+
+message ValidateTokenResponse {
+  bool is_valid = 1;
+  string user_id = 2;
+  string session_id = 3; 
+}
+
+message CheckCSRFRequest {
+  string user_id = 1;
+  string session_id = 2;
+  string csrf_token = 3;
+}
+
+message CheckCSRFResponse {
+  bool is_valid = 1;
+}

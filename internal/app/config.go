@@ -11,14 +11,21 @@ import (
 )
 
 type Config struct {
-	App   AppConfig       `mapstructure:"app"`
-	DB    postgres.Config `mapstructure:"db"`
-	Minio minio.Config    `mapstructure:"minio"`
+	Catalog ServiceConfig   `mapstructure:"catalog"`
+	Auth    ServiceConfig   `mapstructure:"auth"`
+	DB      postgres.Config `mapstructure:"db"`
+	Minio   minio.Config    `mapstructure:"minio"`
 }
 
-type AppConfig struct {
-	HTTP   HTTPConfig   `mapstructure:"http"`
-	Logger LoggerConfig `mapstructure:"logger"`
+type ServiceConfig struct {
+	HTTP    HTTPConfig    `mapstructure:"http"`
+	GRPC    GRPCConfig    `mapstructure:"grpc"`
+	Logger  LoggerConfig  `mapstructure:"logger"`
+	Clients ClientsConfig `mapstructure:"clients"`
+}
+
+type ClientsConfig struct {
+	Auth string `mapstructure:"auth"`
 }
 
 type HTTPConfig struct {
@@ -30,6 +37,10 @@ type HTTPConfig struct {
 	AllowedAvatarTypes []string              `mapstructure:"allowedAvatarTypes"`
 	Auth               AuthConfig            `mapstructure:"auth"`
 	CORS               middleware.CORSConfig `mapstructure:"cors"`
+}
+
+type GRPCConfig struct {
+	Port string `mapstructure:"port"`
 }
 
 type LoggerConfig struct {

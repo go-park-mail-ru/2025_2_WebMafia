@@ -32,16 +32,16 @@ type Artist struct {
 }
 
 type CreatePlaylistRequest struct {
-	UserID      uuid.UUID
-	Title       string
-	Description string
+	UserID      uuid.UUID `json:"-"`
+	Title       string    `json:"title"`
+	Description string    `json:"description"`
 }
 
 type UpdatePlaylistRequest struct {
-	ID          uuid.UUID
-	Title       *string `json:"title"`
-	Description *string `json:"description"`
-	IsFavorite  *bool   `json:"is_favorite"`
+	ID          uuid.UUID `json:"-"`
+	Title       *string   `json:"title"`
+	Description *string   `json:"description"`
+	IsFavorite  *bool     `json:"is_favorite"`
 }
 
 type DeletePlaylistRequest struct {

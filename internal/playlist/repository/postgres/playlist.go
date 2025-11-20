@@ -77,20 +77,14 @@ func (r *Repository) GetAllByUser(ctx context.Context, userID uuid.UUID, limit, 
 	return playlists, nil
 }
 
-type playlistUpdate struct {
+type PlaylistUpdate struct {
 	Title       *string
 	Description *string
 	IsFavorite  *bool
 }
 
-func (r *Repository) UpdatePlaylist(ctx context.Context, id uuid.UUID, title *string, description *string, isFavorite *bool) error {
+func (r *Repository) UpdatePlaylist(ctx context.Context, id uuid.UUID, upd PlaylistUpdate) error {
 	const op = "repository.UpdatePlaylist"
-
-	upd := playlistUpdate{
-		Title:       title,
-		Description: description,
-		IsFavorite:  isFavorite,
-	}
 
 	setParts := []string{}
 	args := []interface{}{}
@@ -115,8 +109,9 @@ func (r *Repository) UpdatePlaylist(ctx context.Context, id uuid.UUID, title *st
 	}
 
 	if len(setParts) == 0 {
-		return nil
+		return fmt.Errorf("%s: no fields to update", op)
 	}
+
 	args = append(args, id)
 
 	query := fmt.Sprintf(

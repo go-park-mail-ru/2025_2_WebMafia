@@ -5,6 +5,7 @@ import (
 	"errors"
 	"spotify/internal/model"
 	"spotify/internal/playlist/dto"
+	"spotify/internal/playlist/repository/postgres"
 	"time"
 
 	"github.com/google/uuid"
@@ -75,15 +76,30 @@ func (s *Service) GetPlaylistsByUser(ctx context.Context, req dto.GetPlaylistsBy
 	return res, nil
 }
 
-func (s *Service) UpdatePlaylist(ctx context.Context, req dto.UpdatePlaylistRequest) (*dto.Playlist, error) {
-	const op = "service.UpdatePlaylist"
+type playlistUpdate struct {
+	Title       *string
+	Description *string
+	IsFavorite  *bool
+}
 
+func (s *Service) UpdatePlaylist(ctx context.Context, req dto.UpdatePlaylistRequest) (*dto.Playlist, error) {
 	playlist, err := s.repo.GetByID(ctx, req.ID)
 	if err != nil {
 		return nil, mapRepositoryError(err)
 	}
+	upd := playlistUpdate{
+		Title:       req.Title,
+		Description: req.Description,
+		IsFavorite:  req.IsFavorite,
+	}
 
-	err = s.repo.UpdatePlaylist(ctx, req.ID, req.Title, req.Description, req.IsFavorite)
+	repoUpd := postgres.PlaylistUpdate{
+		Title:       upd.Title,
+		Description: upd.Description,
+		IsFavorite:  upd.IsFavorite,
+	}
+
+	err = s.repo.UpdatePlaylist(ctx, req.ID, repoUpd)
 	if err != nil {
 		return nil, mapRepositoryError(err)
 	}
@@ -91,7 +107,6 @@ func (s *Service) UpdatePlaylist(ctx context.Context, req dto.UpdatePlaylistRequ
 	if req.Title != nil {
 		playlist.Title = *req.Title
 	}
-
 	if req.Description != nil {
 		playlist.Description = *req.Description
 	}

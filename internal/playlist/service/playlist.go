@@ -76,27 +76,16 @@ func (s *Service) GetPlaylistsByUser(ctx context.Context, req dto.GetPlaylistsBy
 	return res, nil
 }
 
-type playlistUpdate struct {
-	Title       *string
-	Description *string
-	IsFavorite  *bool
-}
-
 func (s *Service) UpdatePlaylist(ctx context.Context, req dto.UpdatePlaylistRequest) (*dto.Playlist, error) {
 	playlist, err := s.repo.GetByID(ctx, req.ID)
 	if err != nil {
 		return nil, mapRepositoryError(err)
 	}
-	upd := playlistUpdate{
+
+	repoUpd := postgres.PlaylistUpdate{
 		Title:       req.Title,
 		Description: req.Description,
 		IsFavorite:  req.IsFavorite,
-	}
-
-	repoUpd := postgres.PlaylistUpdate{
-		Title:       upd.Title,
-		Description: upd.Description,
-		IsFavorite:  upd.IsFavorite,
 	}
 
 	err = s.repo.UpdatePlaylist(ctx, req.ID, repoUpd)

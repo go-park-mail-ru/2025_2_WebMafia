@@ -7,7 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	catalogApp "spotify/microservices/catalog/app"
+	app "spotify/microservices/catalog/app"
 )
 
 func main() {
@@ -16,7 +16,7 @@ func main() {
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
 
-	catalog, err := catalogApp.NewApp(ctx, configPath)
+	catalog, err := app.NewApp(ctx, configPath)
 	if err != nil {
 		log.Fatalf("application init failed: %v", err)
 	}

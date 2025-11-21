@@ -7,7 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	authApp "spotify/microservices/auth/app"
+	app "spotify/microservices/auth/app"
 )
 
 func main() {
@@ -16,7 +16,7 @@ func main() {
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
 
-	auth, err := authApp.NewApp(ctx, configPath)
+	auth, err := app.NewApp(ctx, configPath)
 	if err != nil {
 		log.Fatalf("application init failed: %v", err)
 	}

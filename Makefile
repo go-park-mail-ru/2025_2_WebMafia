@@ -9,16 +9,18 @@ DOCKER_COMPOSE := docker compose -f $(COMPOSE_PATH) --env-file $(ENV_PATH)
 DB_URL = postgres://$(DB_USER):$(DB_PASSWORD)@localhost:5432/$(DB_NAME)?sslmode=disable
 MIGRATIONS_PATH = migrations
 
-.PHONY: test coverage-html clean docker-build docker-up docker-down docker-stop docker-logs generate
+.PHONY: test coverage-html clean docker-build docker-up docker-down docker-stop docker-logs generate proto-gen
 
 # === Вспомогательные команды ===
 
-generate:
+proto-gen:
 	@echo "==> Generating protobuf..."
 	@protoc --go_out=. --go_opt=paths=source_relative \
 		--go-grpc_out=. --go-grpc_opt=paths=source_relative \
 		proto/catalog/catalog.proto proto/auth/auth.proto
-	@echo "==> Generating..."
+
+generate:
+	@echo "==> Generating mocks and other go:generate assets..."
 	@go generate ./...
 
 

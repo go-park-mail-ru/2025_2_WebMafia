@@ -27,9 +27,7 @@ func RequestLoggerMiddleware(log logger.Logger) func(next http.Handler) http.Han
 			requestID := uuid.New().String()
 			contextLogger := log.With("request_id", requestID)
 
-			ctx := r.Context()
-			ctx = context.WithValue(ctx, requestIDKey, requestID)
-			ctx = ContextWithLogger(ctx, contextLogger)
+			ctx := ContextWithLogger(context.WithValue(r.Context(), requestIDKey, requestID), contextLogger)
 
 			rw := &responseWriter{ResponseWriter: w, statusCode: http.StatusOK}
 			start := time.Now()

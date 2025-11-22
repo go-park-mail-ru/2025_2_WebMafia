@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"spotify/internal/metrics"
 	"spotify/internal/middleware"
 	"spotify/internal/server"
 	"spotify/pkg/csrfmanager"
@@ -23,6 +24,8 @@ import (
 	userService "spotify/microservices/auth/service"
 
 	"github.com/gorilla/mux"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"google.golang.org/grpc"
 )
 
@@ -53,6 +56,10 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	}
 	appLogger.Infof("Database connection established")
 
+	if err := prometheus.Register(postgres.NewMonitor(db, cfg.DB.DBName)); err != nil {
+		appLogger.Errorf("failed to register db metrics: %v", err)
+	}
+
 	minioClient, err := minio.New(cfg.Minio)
 	if err != nil {
 		return nil, fmt.Errorf("failed to init minio: %w", err)
@@ -69,11 +76,17 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	authMiddleware := middleware.NewAuthMiddleware(jwtManager)
 	csrfMiddleware := middleware.NewCSRFMiddleware(csrfManager)
 
+	mtr := metrics.New("auth")
+
 	httpHandler := httpDelivery.NewHandler(userSvc, jwtManager, csrfManager, cfg.Auth.HTTP.AllowedAvatarTypes)
 
 	router := mux.NewRouter()
+
+	router.Handle("/metrics", promhttp.Handler())
+
 	api := router.PathPrefix("/api/v1").Subrouter()
 	api.Use(middleware.RequestLoggerMiddleware(appLogger))
+	api.Use(middleware.MetricsMiddleware(mtr))
 	api.Use(middleware.CORS(cfg.Auth.HTTP.CORS))
 
 	public := api.PathPrefix("").Subrouter()

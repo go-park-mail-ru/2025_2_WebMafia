@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"spotify/internal/metrics"
 	"spotify/internal/middleware"
 	"spotify/internal/server"
 	grpcDelivery "spotify/microservices/catalog/delivery/grpc"
@@ -20,6 +21,9 @@ import (
 	"sync"
 
 	"github.com/gorilla/mux"
+	grpc_prometheus "github.com/grpc-ecosystem/go-grpc-prometheus"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -52,25 +56,39 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	}
 	appLogger.Infof("Database connection established")
 
+	if err := prometheus.Register(postgres.NewMonitor(db, cfg.DB.DBName)); err != nil {
+		appLogger.Errorf("failed to register db metrics: %v", err)
+	}
+
 	repo := repository.New(db)
 	catalogService := service.New(repo)
+
+	grpc_prometheus.EnableClientHandlingTimeHistogram()
 
 	authConn, err := grpc.NewClient(
 		cfg.Catalog.GRPC.Clients.Auth,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
+		grpc.WithUnaryInterceptor(grpc_prometheus.UnaryClientInterceptor),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect to auth service: %w", err)
 	}
 
+	mtr := metrics.New("catalog")
+
 	authClient := pbAuth.NewAuthServiceClient(authConn)
 	authMiddleware := catalogMiddleware.NewAuthGrpcMiddleware(authClient)
 
 	httpHandler := httpDelivery.NewHandler(catalogService)
+
 	router := mux.NewRouter()
+
+	router.Handle("/metrics", promhttp.Handler())
+
 	api := router.PathPrefix("/api/v1").Subrouter()
 
 	api.Use(middleware.RequestLoggerMiddleware(appLogger))
+	api.Use(middleware.MetricsMiddleware(mtr))
 	api.Use(middleware.CORS(cfg.Catalog.HTTP.CORS))
 
 	protected := api.PathPrefix("").Subrouter()

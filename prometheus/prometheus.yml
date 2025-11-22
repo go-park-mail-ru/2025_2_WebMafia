@@ -1,5 +1,5 @@
 global:
-  scrape_interval: 15s
+  scrape_interval: 5s
 
 scrape_configs:
   - job_name: "prometheus"
@@ -13,7 +13,11 @@ scrape_configs:
   - job_name: "wave-auth"
     static_configs:
       - targets: ["auth:8080"]
+        labels:
+          service: "auth"
 
   - job_name: "wave-catalog"
     static_configs:
       - targets: ["catalog:8081"]
+        labels:
+          service: "catalog"

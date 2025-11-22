@@ -55,11 +55,11 @@ catalog:
       allowCredentials: true
   grpc:
     port: "9000"
+    clients:
+      auth: "auth:9001"
   logger:
     level: "debug"
     mode: "dev"
-  clients:
-    auth: "auth:9001"
 
 db:
   host: "db"

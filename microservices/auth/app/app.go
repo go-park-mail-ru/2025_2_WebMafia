@@ -1,4 +1,3 @@
-// Файл: microservices/auth/app/app.go (обновленная версия)
 package app
 
 import (
@@ -7,7 +6,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"spotify/internal/app"
 	"spotify/internal/middleware"
 	"spotify/internal/server"
 	"spotify/pkg/csrfmanager"
@@ -29,7 +27,7 @@ import (
 )
 
 type App struct {
-	cfg        *app.Config
+	cfg        *Config
 	logger     logger.Logger
 	db         *sql.DB
 	httpServer *server.Server
@@ -37,7 +35,7 @@ type App struct {
 }
 
 func NewApp(ctx context.Context, configPath string) (*App, error) {
-	cfg, err := app.LoadConfig(configPath)
+	cfg, err := LoadConfig(configPath)
 	if err != nil {
 		return nil, fmt.Errorf("failed to load config: %w", err)
 	}

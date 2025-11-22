@@ -7,7 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	app "spotify/microservices/catalog/app"
+	"spotify/microservices/catalog/app"
 )
 
 func main() {

@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"spotify/internal/app"
 	"spotify/internal/middleware"
 	"spotify/internal/server"
 	grpcDelivery "spotify/microservices/catalog/delivery/grpc"
@@ -26,7 +25,7 @@ import (
 )
 
 type App struct {
-	cfg        *app.Config
+	cfg        *Config
 	logger     logger.Logger
 	db         *sql.DB
 	httpServer *server.Server
@@ -35,7 +34,7 @@ type App struct {
 }
 
 func NewApp(ctx context.Context, configPath string) (*App, error) {
-	cfg, err := app.LoadConfig(configPath)
+	cfg, err := LoadConfig(configPath)
 	if err != nil {
 		return nil, fmt.Errorf("failed to load config: %w", err)
 	}
@@ -57,7 +56,7 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	catalogService := service.New(repo)
 
 	authConn, err := grpc.NewClient(
-		cfg.Catalog.Clients.Auth,
+		cfg.Catalog.GRPC.Clients.Auth,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
 	if err != nil {
@@ -82,7 +81,7 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	httpServer := server.NewHTTPServer(&cfg.Catalog.HTTP, router, appLogger)
 
 	grpcHandler := grpcDelivery.NewHandler(catalogService)
-	grpcServer := server.NewGRPCServer(&cfg.Catalog.GRPC, appLogger, func(s *grpc.Server) {
+	grpcServer := server.NewGRPCServer(&cfg.Catalog.GRPC.GRPCConfig, appLogger, func(s *grpc.Server) {
 		pb.RegisterCatalogServiceServer(s, grpcHandler)
 	})
 

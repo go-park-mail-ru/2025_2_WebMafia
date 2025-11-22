@@ -29,6 +29,7 @@ import (
 
 	playlistDelivery "spotify/internal/playlist/delivery/http"
 	playlistRepo "spotify/internal/playlist/repository/postgres"
+	playlistStor "spotify/internal/playlist/repository/storage"
 	playlistService "spotify/internal/playlist/service"
 
 	"spotify/internal/middleware"
@@ -92,9 +93,10 @@ func NewApp(cfg *Config) (*App, error) {
 	albumHandler := albumDelivery.NewHandler(albumSvc)
 	trackHandler := trackDelivery.NewHandler(trackSvc)
 
+	playlistStorage := playlistStor.NewStorage(minioClient, "playlist-avatars")
 	playlistRepository := playlistRepo.New(db)
-	playlistSvc := playlistService.New(playlistRepository)
-	playlistHandler := playlistDelivery.NewHandler(playlistSvc)
+	playlistSvc := playlistService.New(playlistRepository, playlistStorage)
+	playlistHandler := playlistDelivery.NewHandler(playlistSvc, cfg.AllowedAvatarTypes)
 
 	handlers := router.AppHandlers{
 		UserHandler:     userHandler,

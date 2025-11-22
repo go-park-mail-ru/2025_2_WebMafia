@@ -171,3 +171,40 @@ func (s *Service) AddTrackToFavorite(ctx context.Context, req dto.AddTrackToFavo
 
 	return mapRepositoryError(s.repo.AddTrackToPlaylist(ctx, fav.ID, req.TrackID))
 }
+
+func (s *Service) UploadPlaylistAvatar(ctx context.Context, req dto.UploadPlaylistAvatarRequest) (*dto.UploadPlaylistAvatarResponse, error) {
+	playlist, err := s.repo.GetByID(ctx, req.PlaylistID)
+	if err != nil {
+		return nil, mapRepositoryError(err)
+	}
+	objectName, err := s.storage.UploadAvatar(ctx, req.File, req.Size, req.ContentType)
+	if err != nil {
+		return nil, err
+	}
+
+	if playlist.AvatarURL != "" {
+		_ = s.storage.DeleteAvatar(ctx, playlist.AvatarURL)
+	}
+
+	if err := s.repo.UpdatePlaylistAvatar(ctx, req.PlaylistID, objectName); err != nil {
+		_ = s.storage.DeleteAvatar(ctx, objectName)
+		return nil, mapRepositoryError(err)
+	}
+	return &dto.UploadPlaylistAvatarResponse{URL: objectName}, nil
+}
+
+func (s *Service) DeletePlaylistAvatar(ctx context.Context, req dto.DeletePlaylistAvatarRequest) error {
+	playlist, err := s.repo.GetByID(ctx, req.PlaylistID)
+	if err != nil {
+		return mapRepositoryError(err)
+	}
+
+	if playlist.AvatarURL != "" {
+		_ = s.storage.DeleteAvatar(ctx, playlist.AvatarURL)
+	}
+
+	if err := s.repo.UpdatePlaylistAvatar(ctx, req.PlaylistID, ""); err != nil {
+		return mapRepositoryError(err)
+	}
+	return nil
+}

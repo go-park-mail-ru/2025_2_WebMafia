@@ -3,6 +3,7 @@ package http
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/google/uuid"
 	"net/http"
 	"net/url"
@@ -16,13 +17,14 @@ import (
 )
 
 const (
-	defaultLimit     = 100
-	defaultOffset    = 0
-	maxLimit         = 1000
-	queryParamLimit  = "limit"
-	queryParamOffset = "offset"
-	paramPlaylistID  = "id"
-	paramUserID      = "userId"
+	defaultLimit          = 100
+	defaultOffset         = 0
+	maxLimit              = 1000
+	queryParamLimit       = "limit"
+	queryParamOffset      = "offset"
+	paramPlaylistID       = "id"
+	paramUserID           = "userId"
+	maxPlaylistAvatarSize = 5 << 20
 )
 
 func (h *Handler) CreatePlaylist(w http.ResponseWriter, r *http.Request) {
@@ -265,6 +267,99 @@ func (h *Handler) GetFavoritePlaylist(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response.JSON(w, http.StatusOK, playlist)
+}
+
+func (h *Handler) validatePlaylistAvatar(contentType string, size int64) error {
+	if size == 0 {
+		return fmt.Errorf("empty file")
+	}
+	if size > maxPlaylistAvatarSize {
+		return fmt.Errorf("file too large (max 5MB)")
+	}
+	for _, allowed := range h.allowedAvatarTypes {
+		if contentType == allowed {
+			return nil
+		}
+	}
+	return fmt.Errorf("unsupported content type: %s", contentType)
+}
+
+func (h *Handler) UploadPlaylistAvatar(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.UploadPlaylistAvatar"
+
+	userID, ok := middleware.GetUserID(r.Context())
+	if !ok || userID == "" {
+		response.UnauthorizedJSON(w)
+		return
+	}
+
+	log := middleware.LoggerFromContext(r.Context())
+
+	rawID := mux.Vars(r)["id"]
+	playlistID, err := uuid.Parse(rawID)
+	if err != nil {
+		log.Errorf("[%s]: invalid playlist id: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	file, header, err := r.FormFile("avatar")
+	if err != nil {
+		log.Errorf("[%s]: failed to get file: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+	defer file.Close()
+
+	if err := h.validatePlaylistAvatar(header.Header.Get("Content-Type"), header.Size); err != nil {
+		log.Errorf("[%s] validation error: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	res, err := h.service.UploadPlaylistAvatar(r.Context(), dto.UploadPlaylistAvatarRequest{
+		PlaylistID:  playlistID,
+		File:        file,
+		Size:        header.Size,
+		ContentType: header.Header.Get("Content-Type"),
+	})
+	if err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, res)
+}
+
+func (h *Handler) DeletePlaylistAvatar(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.DeletePlaylistAvatar"
+	log := middleware.LoggerFromContext(r.Context())
+
+	userID, ok := middleware.GetUserID(r.Context())
+	if !ok || userID == "" {
+		response.UnauthorizedJSON(w)
+		return
+	}
+
+	rawID := mux.Vars(r)["id"]
+	playlistID, err := uuid.Parse(rawID)
+	if err != nil {
+		log.Errorf("[%s] invalid playlist id: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	req := dto.DeletePlaylistAvatarRequest{
+		PlaylistID: playlistID,
+	}
+	if err := h.service.DeletePlaylistAvatar(r.Context(), req); err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, map[string]string{"status": "deleted"})
 }
 
 func parsePagination(query url.Values) (uint64, uint64) {

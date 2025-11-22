@@ -174,6 +174,15 @@ func (r *Repository) AddTrackToPlaylist(ctx context.Context, playlistID uuid.UUI
 	return nil
 }
 
+func (r *Repository) UpdatePlaylistAvatar(ctx context.Context, id uuid.UUID, avatar string) error {
+	query := `UPDATE playlist SET avatar_url = $1 WHERE playlist_id = $2`
+	_, err := r.Conn.ExecContext(ctx, query, avatar, id)
+	if err != nil {
+		return fmt.Errorf("update playlist avatar: %w", err)
+	}
+	return nil
+}
+
 func (r *Repository) selectPlaylist(ctx context.Context, query string, args ...interface{}) (*model.Playlist, error) {
 	row := r.Conn.QueryRowContext(ctx, query, args...)
 

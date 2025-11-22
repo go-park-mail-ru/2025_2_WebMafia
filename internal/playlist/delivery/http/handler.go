@@ -13,14 +13,18 @@ type IService interface {
 	DeletePlaylist(ctx context.Context, req dto.DeletePlaylistRequest) error
 	GetFavoritePlaylist(ctx context.Context, req dto.GetFavoritePlaylistRequest) (*dto.Playlist, error)
 	AddTrackToFavorite(ctx context.Context, req dto.AddTrackToFavoriteRequest) error
+	UploadPlaylistAvatar(ctx context.Context, req dto.UploadPlaylistAvatarRequest) (*dto.UploadPlaylistAvatarResponse, error)
+	DeletePlaylistAvatar(ctx context.Context, req dto.DeletePlaylistAvatarRequest) error
 }
 
 type Handler struct {
-	service IService
+	service            IService
+	allowedAvatarTypes []string
 }
 
-func NewHandler(service IService) *Handler {
+func NewHandler(service IService, allowedAvatarTypes []string) *Handler {
 	return &Handler{
-		service: service,
+		service:            service,
+		allowedAvatarTypes: allowedAvatarTypes,
 	}
 }

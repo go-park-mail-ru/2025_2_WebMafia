@@ -1,6 +1,9 @@
 package dto
 
-import "github.com/google/uuid"
+import (
+	"github.com/google/uuid"
+	"io"
+)
 
 type Playlist struct {
 	ID          string   `json:"id"`
@@ -64,4 +67,19 @@ type GetFavoritePlaylistRequest struct {
 type AddTrackToFavoriteRequest struct {
 	UserID  uuid.UUID `json:"-"`
 	TrackID string    `json:"track_id"`
+}
+
+type UploadPlaylistAvatarRequest struct {
+	PlaylistID  uuid.UUID `json:"-"`
+	File        io.Reader `json:"-"`
+	Size        int64     `json:"-"`
+	ContentType string    `json:"-"`
+}
+
+type UploadPlaylistAvatarResponse struct {
+	URL string `json:"avatar_url"`
+}
+
+type DeletePlaylistAvatarRequest struct {
+	PlaylistID uuid.UUID `json:"-"`
 }

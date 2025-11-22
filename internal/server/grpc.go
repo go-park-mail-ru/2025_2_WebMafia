@@ -7,6 +7,7 @@ import (
 	"spotify/internal/interceptors"
 	"spotify/pkg/logger"
 
+	grpc_prometheus "github.com/grpc-ecosystem/go-grpc-prometheus"
 	"google.golang.org/grpc"
 )
 
@@ -17,16 +18,21 @@ type GRPCServer struct {
 }
 
 func NewGRPCServer(cfg *app.GRPCConfig, log logger.Logger, registerServices func(server *grpc.Server)) *GRPCServer {
+	grpc_prometheus.EnableHandlingTimeHistogram()
+
 	grpcServer := grpc.NewServer(
 		grpc.ChainUnaryInterceptor(
 			interceptors.RequestLogger(log),
 			interceptors.PanicRecovery,
+			grpc_prometheus.UnaryServerInterceptor,
 		),
 	)
 
 	if registerServices != nil {
 		registerServices(grpcServer)
 	}
+
+	grpc_prometheus.Register(grpcServer)
 
 	return &GRPCServer{
 		server: grpcServer,

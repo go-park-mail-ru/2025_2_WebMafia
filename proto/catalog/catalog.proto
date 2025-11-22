@@ -1,0 +1,203 @@
+syntax = "proto3";
+
+package catalog;
+
+option go_package = "spotify/proto/catalog";
+
+service CatalogService {
+  rpc GetArtistByID(GetArtistByIDRequest) returns (Artist) {}
+  rpc GetAllArtists(GetAllArtistsRequest) returns (GetAllArtistsResponse) {}
+  rpc SearchArtists(SearchArtistsRequest) returns (SearchArtistsResponse) {}
+  rpc GetArtistsByIDs(GetArtistsByIDsRequest) returns (GetArtistsByIDsResponse) {}
+
+
+  rpc GetAlbumByID(GetAlbumByIDRequest) returns (Album) {}
+  rpc GetAllAlbums(GetAllAlbumsRequest) returns (GetAllAlbumsResponse) {}
+  rpc GetAlbumsByArtistID(GetAlbumsByArtistIDRequest) returns (GetAllAlbumsResponse) {}
+  rpc SearchAlbums(SearchAlbumsRequest) returns (SearchAlbumsResponse) {}
+  rpc GetAlbumsByIDs(GetAlbumsByIDsRequest) returns (GetAllAlbumsResponse) {}
+
+  rpc GetTrackByID(GetTrackByIDRequest) returns (Track) {}
+  rpc GetAllTracks(GetAllTracksRequest) returns (GetAllTracksResponse) {}
+  rpc GetTracksByArtistID(GetTracksByArtistIDRequest) returns (GetAllTracksResponse) {}
+  rpc GetTracksByAlbumID(GetTracksByAlbumIDRequest) returns (GetAllTracksResponse) {}
+  rpc GetTracksByGenreID(GetTracksByGenreIDRequest) returns (GetAllTracksResponse) {}
+  rpc SearchTracks(SearchTracksRequest) returns (SearchTracksResponse) {}
+  rpc RegisterPlay(RegisterPlayRequest) returns (RegisterPlayResponse) {}
+}
+
+message Artist {
+  string id = 1;
+  string name = 2;
+  string avatar_url = 3;
+  string header_url = 4;
+  optional string description = 5;
+  int64 play_count = 6;
+}
+
+message ArtistForAlbum {
+  string id = 1;
+  string name = 2;
+  string avatar_url = 3;
+  string header_url = 4;
+}
+
+message ArtistForTrack {
+  string id = 1;
+  string name = 2;
+  string avatar_url = 3;
+}
+
+message Album {
+  string id = 1;
+  string title = 2;
+  string type = 3;
+  string avatar_url = 4;
+  optional string description = 5;
+  string release_date = 6;
+  repeated ArtistForAlbum artists = 7;
+}
+
+message AlbumForTrack {
+  string id = 1;
+  string title = 2;
+  string avatar_url = 3;
+  string release_date = 4;
+  repeated ArtistForTrack artists = 5;
+}
+
+message Genre {
+  string id = 1;
+  string name = 2;
+}
+
+message Track {
+  string id = 1;
+  string title = 2;
+  int32 duration_s = 3;
+  string file_url = 4;
+  int64 play_count = 5;
+  repeated ArtistForTrack artists = 6;
+  AlbumForTrack album = 7;
+  repeated Genre genres = 8;
+}
+
+message ArtistSearchResult {
+  Artist artist = 1;
+  float rank = 2;
+}
+
+message AlbumSearchResult {
+  Album album = 1;
+  float rank = 2;
+}
+
+message TrackSearchResult {
+  Track track = 1;
+  float rank = 2;
+}
+
+message GetArtistByIDRequest {
+  string id = 1;
+}
+
+message GetAllArtistsRequest {
+  uint64 limit = 1;
+  uint64 offset = 2;
+}
+
+message GetAllArtistsResponse {
+  repeated Artist artists = 1;
+}
+
+message SearchArtistsRequest {
+  string query = 1;
+  uint64 limit = 2;
+}
+
+message SearchArtistsResponse { 
+  repeated ArtistSearchResult results = 1;
+}
+
+message GetArtistsByIDsRequest {
+  repeated string ids = 1;
+}
+
+message GetArtistsByIDsResponse {
+  repeated Artist artists = 1;
+}
+
+message GetAlbumByIDRequest {
+  string id = 1;
+}
+
+message GetAllAlbumsRequest {
+  uint64 limit = 1;
+  uint64 offset = 2;
+}
+
+message GetAllAlbumsResponse {
+  repeated Album albums = 1;
+}
+
+message GetAlbumsByArtistIDRequest {
+  string artist_id = 1;
+  uint64 limit = 2;
+  uint64 offset = 3;
+}
+message SearchAlbumsRequest {
+  string query = 1;
+  uint64 limit = 2;
+}
+message SearchAlbumsResponse {
+  repeated AlbumSearchResult results = 1;
+}
+
+message GetAlbumsByIDsRequest {
+  repeated string ids = 1;
+}
+
+message GetTrackByIDRequest {
+  string id = 1;
+}
+
+message GetAllTracksRequest {
+  uint64 limit = 1;
+  uint64 offset = 2;
+}
+
+message GetAllTracksResponse { 
+  repeated Track tracks = 1;
+}
+
+message GetTracksByArtistIDRequest {
+  string artist_id = 1;
+  uint64 limit = 2;
+  uint64 offset = 3;
+}
+
+message GetTracksByAlbumIDRequest {
+  string album_id = 1;
+  uint64 limit = 2;
+  uint64 offset = 3;
+}
+
+message GetTracksByGenreIDRequest {
+  string genre_id = 1;
+  uint64 limit = 2;
+  uint64 offset = 3;
+}
+
+message SearchTracksRequest {
+  string query = 1;
+  uint64 limit = 2;
+}
+message SearchTracksResponse {
+  repeated TrackSearchResult results = 1;
+}
+
+message RegisterPlayRequest {
+  string track_id = 1;
+}
+
+message RegisterPlayResponse {}

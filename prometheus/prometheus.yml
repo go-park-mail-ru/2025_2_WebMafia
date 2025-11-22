@@ -10,6 +10,10 @@ scrape_configs:
     static_configs:
       - targets: ["node-exporter:9100"]
 
-  - job_name: "wave-music"
+  - job_name: "wave-auth"
     static_configs:
-      - targets: ["app:8080"]
+      - targets: ["auth:8080"]
+
+  - job_name: "wave-catalog"
+    static_configs:
+      - targets: ["catalog:8081"]

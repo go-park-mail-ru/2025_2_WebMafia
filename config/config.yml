@@ -1,4 +1,4 @@
-app:
+auth:
   http:
     port: "8080"
     readTimeout: 5s
@@ -9,18 +9,9 @@ app:
       allowedOrigins:
         - "http://localhost:8090"
         - "http://217.16.17.173:8090"
-      allowedMethods:
-        - "GET"
-        - "POST"
-        - "PUT"
-        - "DELETE"
-        - "OPTIONS"
-        - "PATCH"
+      allowedMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
       allowedHeaders:
-        - "Content-Type"
-        - "Authorization"
-        - "X-Requested-With"
-        - "X-CSRF-Token"
+        ["Content-Type", "Authorization", "X-Requested-With", "X-CSRF-Token"]
       allowCredentials: true
     allowedAvatarTypes:
       - "image/png"
@@ -41,6 +32,31 @@ app:
       csrf:
         secretKey: "dev-csrf-secret"
         tokenTTL: 15m
+  grpc:
+    port: "9001"
+  logger:
+    level: "debug"
+    mode: "dev"
+
+catalog:
+  http:
+    port: "8081"
+    readTimeout: 5s
+    writeTimeout: 10s
+    idleTimeout: 60s
+    shutdownTimeout: 15s
+    cors:
+      allowedOrigins:
+        - "http://localhost:8090"
+        - "http://217.16.17.173:8090"
+      allowedMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
+      allowedHeaders:
+        ["Content-Type", "Authorization", "X-Requested-With", "X-CSRF-Token"]
+      allowCredentials: true
+  grpc:
+    port: "9000"
+    clients:
+      auth: "auth:9001"
   logger:
     level: "debug"
     mode: "dev"

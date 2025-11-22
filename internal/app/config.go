@@ -1,25 +1,9 @@
 package app
 
 import (
-	"fmt"
 	"spotify/internal/middleware"
-	"spotify/pkg/minio"
-	"spotify/pkg/postgres"
 	"time"
-
-	"github.com/spf13/viper"
 )
-
-type Config struct {
-	App   AppConfig       `mapstructure:"app"`
-	DB    postgres.Config `mapstructure:"db"`
-	Minio minio.Config    `mapstructure:"minio"`
-}
-
-type AppConfig struct {
-	HTTP   HTTPConfig   `mapstructure:"http"`
-	Logger LoggerConfig `mapstructure:"logger"`
-}
 
 type HTTPConfig struct {
 	Port               string                `mapstructure:"port"`
@@ -30,6 +14,10 @@ type HTTPConfig struct {
 	AllowedAvatarTypes []string              `mapstructure:"allowedAvatarTypes"`
 	Auth               AuthConfig            `mapstructure:"auth"`
 	CORS               middleware.CORSConfig `mapstructure:"cors"`
+}
+
+type GRPCConfig struct {
+	Port string `mapstructure:"port"`
 }
 
 type LoggerConfig struct {
@@ -50,23 +38,4 @@ type JWTConfig struct {
 type CSRFConfig struct {
 	SecretKey string        `mapstructure:"secretKey"`
 	TokenTTL  time.Duration `mapstructure:"tokenTTL"`
-}
-
-func LoadConfig(configPath string) (*Config, error) {
-	v := viper.New()
-
-	v.SetConfigName("config")
-	v.SetConfigType("yml")
-	v.AddConfigPath(configPath)
-
-	if err := v.ReadInConfig(); err != nil {
-		return nil, fmt.Errorf("failed to read config file: %w", err)
-	}
-
-	var cfg Config
-	if err := v.Unmarshal(&cfg); err != nil {
-		return nil, fmt.Errorf("failed to unmarshal config: %w", err)
-	}
-
-	return &cfg, nil
 }

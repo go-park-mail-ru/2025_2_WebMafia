@@ -1,24 +1,41 @@
 version: "3.8"
 
 services:
-  app:
+  auth:
     build:
       context: .
-      dockerfile: ./docker/Dockerfile
+      dockerfile: ./docker/auth.Dockerfile
     ports:
       - "8080:8080"
-    container_name: wavemusic-app
+    container_name: wavemusic-auth
     restart: always
     env_file:
       - ./.env.dev
     volumes:
       - ./config:/config
-    command: ["/server", "-f=/config"]
     depends_on:
-      db:
-        condition: service_healthy
+      minio:
+        condition: service_started
       migrate:
         condition: service_completed_successfully
+
+  catalog:
+    build:
+      context: .
+      dockerfile: ./docker/catalog.Dockerfile
+    ports:
+      - "8081:8081"
+    container_name: wavemusic-catalog
+    restart: always
+    env_file:
+      - ./.env.dev
+    volumes:
+      - ./config:/config
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      auth:
+        condition: service_started
 
   migrate:
     image: migrate/migrate

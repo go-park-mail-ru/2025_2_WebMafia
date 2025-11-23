@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package playlist;
+
+option go_package = "spotify/proto/playlist";
+
+import "google/protobuf/empty.proto";
+
+service PlaylistService {
+  rpc CreatePlaylist (CreatePlaylistRequest) returns (Playlist) {}
+  rpc GetPlaylistByID (GetPlaylistByIDRequest) returns (Playlist) {}
+  rpc GetPlaylistsByUser (GetPlaylistsByUserRequest) returns (GetPlaylistsByUserResponse) {}
+  rpc UpdatePlaylist (UpdatePlaylistRequest) returns (Playlist) {}
+  rpc DeletePlaylist (DeletePlaylistRequest) returns (google.protobuf.Empty) {}
+
+  rpc GetFavoritePlaylist (GetFavoritePlaylistRequest) returns (Playlist) {}
+  rpc AddTrackToFavorite (AddTrackToFavoriteRequest) returns (google.protobuf.Empty) {}
+
+  rpc UploadPlaylistAvatar (UploadPlaylistAvatarRequest) returns (UploadPlaylistAvatarResponse) {}
+  rpc DeletePlaylistAvatar (DeletePlaylistAvatarRequest) returns (google.protobuf.Empty) {}
+
+  rpc GetMyPlaylists (GetMyPlaylistsRequest) returns (GetPlaylistsByUserResponse) {}
+}
+
+message Playlist {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  string avatar_url = 4;
+  bool is_favorite = 5;
+  repeated string tracks = 6;
+}
+
+message CreatePlaylistRequest {
+  string user_id = 1; // UUID
+  string title = 2;
+  string description = 3;
+}
+
+message UpdatePlaylistRequest {
+  string id = 1;
+  optional string title = 2;
+  optional string description = 3;
+  optional bool is_favorite = 4;
+}
+
+message DeletePlaylistRequest {
+  string id = 1;
+}
+
+message GetPlaylistByIDRequest {
+  string id = 1;
+}
+
+message GetPlaylistsByUserRequest {
+  string user_id = 1;
+  uint64 limit = 2;
+  uint64 offset = 3;
+}
+
+message GetMyPlaylistsRequest {
+  uint64 limit = 1;
+  uint64 offset = 2;
+}
+
+message GetPlaylistsByUserResponse {
+  repeated Playlist playlists = 1;
+}
+
+message GetFavoritePlaylistRequest {
+  string user_id = 1;
+}
+
+message AddTrackToFavoriteRequest {
+  string user_id = 1;
+  string track_id = 2;
+}
+
+message UploadPlaylistAvatarRequest {
+  string playlist_id = 1;
+  bytes file = 2; // file content
+  string content_type = 3;
+}
+
+message UploadPlaylistAvatarResponse {
+  string avatar_url = 1;
+}
+
+message DeletePlaylistAvatarRequest {
+  string playlist_id = 1;
+}

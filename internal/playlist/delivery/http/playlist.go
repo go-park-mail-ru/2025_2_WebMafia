@@ -362,6 +362,40 @@ func (h *Handler) DeletePlaylistAvatar(w http.ResponseWriter, r *http.Request) {
 	response.JSON(w, http.StatusOK, map[string]string{"status": "deleted"})
 }
 
+func (h *Handler) GetMyPlaylists(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.GetMyPlaylists"
+	log := middleware.LoggerFromContext(r.Context())
+
+	rawUserID, ok := middleware.GetUserID(r.Context())
+	if !ok || rawUserID == "" {
+		log.Errorf("[%s]: missing userId", op)
+		response.UnauthorizedJSON(w)
+		return
+	}
+
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	limit, offset := parsePagination(r.URL.Query())
+	req := dto.GetPlaylistsByUserRequest{
+		UserID: userID,
+		Limit:  limit,
+		Offset: offset,
+	}
+
+	playlists, err := h.service.GetPlaylistsByUser(r.Context(), req)
+	if err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+	response.JSON(w, http.StatusOK, playlists)
+}
+
 func parsePagination(query url.Values) (uint64, uint64) {
 	limitStr := query.Get(queryParamLimit)
 	offsetStr := query.Get(queryParamOffset)

@@ -19,4 +19,6 @@ func (h *Handler) RegisterRoutes(public, protected *mux.Router) {
 
 	protected.HandleFunc("/playlists/{id}/avatar", h.UploadPlaylistAvatar).Methods(http.MethodPost)
 	protected.HandleFunc("/playlists/{id}/avatar", h.DeletePlaylistAvatar).Methods(http.MethodDelete)
+
+	protected.HandleFunc("/playlists/my", h.GetMyPlaylists).Methods(http.MethodGet, http.MethodOptions)
 }

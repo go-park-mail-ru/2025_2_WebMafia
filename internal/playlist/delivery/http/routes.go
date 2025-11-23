@@ -21,4 +21,7 @@ func (h *Handler) RegisterRoutes(public, protected *mux.Router) {
 	protected.HandleFunc("/playlists/{id}/avatar", h.DeletePlaylistAvatar).Methods(http.MethodDelete)
 
 	protected.HandleFunc("/playlists/my", h.GetMyPlaylists).Methods(http.MethodGet, http.MethodOptions)
+
+	protected.HandleFunc("/playlists/{id}/tracks", h.AddTrackToPlaylist).Methods(http.MethodPost, http.MethodOptions)
+	protected.HandleFunc("/playlists/{id}/tracks", h.RemoveTrackFromPlaylist).Methods(http.MethodDelete, http.MethodOptions)
 }

@@ -174,6 +174,27 @@ func (r *Repository) AddTrackToPlaylist(ctx context.Context, playlistID uuid.UUI
 	return nil
 }
 
+func (r *Repository) RemoveTrackFromPlaylist(ctx context.Context, playlistID uuid.UUID, trackID string) error {
+	const op = "repository.RemoveTrackFromPlaylist"
+
+	query := `DELETE FROM playlist_track WHERE playlist_id = $1 AND track_id = $2`
+
+	res, err := r.Conn.ExecContext(ctx, query, playlistID, trackID)
+	if err != nil {
+		return fmt.Errorf("%s: %w", op, err)
+	}
+
+	ra, err := res.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("%s: %w", op, err)
+	}
+	if ra == 0 {
+		return fmt.Errorf("%s: %w", op, ErrNotFound)
+	}
+
+	return nil
+}
+
 func (r *Repository) UpdatePlaylistAvatar(ctx context.Context, id uuid.UUID, avatar string) error {
 	query := `UPDATE playlist SET avatar_url = $1 WHERE playlist_id = $2`
 	_, err := r.Conn.ExecContext(ctx, query, avatar, id)
@@ -181,6 +202,29 @@ func (r *Repository) UpdatePlaylistAvatar(ctx context.Context, id uuid.UUID, ava
 		return fmt.Errorf("update playlist avatar: %w", err)
 	}
 	return nil
+}
+
+func (r *Repository) GetTracksByPlaylist(ctx context.Context, playlistID uuid.UUID) ([]string, error) {
+	const op = "repository.GetTracksByPlaylist"
+
+	query := `SELECT track_id FROM playlist_track WHERE playlist_id = $1`
+
+	rows, err := r.Conn.QueryContext(ctx, query, playlistID)
+	if err != nil {
+		return nil, fmt.Errorf("%s: %w", op, err)
+	}
+	defer rows.Close()
+
+	ids := make([]string, 0)
+	for rows.Next() {
+		var id string
+		if err := rows.Scan(&id); err != nil {
+			return nil, fmt.Errorf("%s: scan: %w", op, err)
+		}
+		ids = append(ids, id)
+	}
+
+	return ids, nil
 }
 
 func (r *Repository) selectPlaylist(ctx context.Context, query string, args ...interface{}) (*model.Playlist, error) {

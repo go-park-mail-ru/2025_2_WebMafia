@@ -2,6 +2,7 @@ package http
 
 import (
 	"context"
+	"github.com/google/uuid"
 	"spotify/internal/playlist/dto"
 )
 
@@ -15,6 +16,9 @@ type IService interface {
 	AddTrackToFavorite(ctx context.Context, req dto.AddTrackToFavoriteRequest) error
 	UploadPlaylistAvatar(ctx context.Context, req dto.UploadPlaylistAvatarRequest) (*dto.UploadPlaylistAvatarResponse, error)
 	DeletePlaylistAvatar(ctx context.Context, req dto.DeletePlaylistAvatarRequest) error
+	GetPlaylistWithTracks(ctx context.Context, id uuid.UUID) (*dto.Playlist, error)
+	AddTrackToPlaylist(ctx context.Context, req dto.AddTrackToPlaylistRequest) error
+	RemoveTrackFromPlaylist(ctx context.Context, req dto.RemoveTrackFromPlaylistRequest) error
 }
 
 type Handler struct {

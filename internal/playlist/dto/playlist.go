@@ -83,3 +83,13 @@ type UploadPlaylistAvatarResponse struct {
 type DeletePlaylistAvatarRequest struct {
 	PlaylistID uuid.UUID `json:"-"`
 }
+
+type AddTrackToPlaylistRequest struct {
+	PlaylistID uuid.UUID `json:"-"`
+	TrackID    string    `json:"track_id"`
+}
+
+type RemoveTrackFromPlaylistRequest struct {
+	PlaylistID uuid.UUID `json:"-"`
+	TrackID    string    `json:"track_id"`
+}

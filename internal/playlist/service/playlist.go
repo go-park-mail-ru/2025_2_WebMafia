@@ -208,3 +208,38 @@ func (s *Service) DeletePlaylistAvatar(ctx context.Context, req dto.DeletePlayli
 	}
 	return nil
 }
+
+func (s *Service) GetPlaylistWithTracks(ctx context.Context, id uuid.UUID) (*dto.Playlist, error) {
+	p, err := s.repo.GetByID(ctx, id)
+	if err != nil {
+		return nil, mapRepositoryError(err)
+	}
+
+	trackIDs, err := s.repo.GetTracksByPlaylist(ctx, id)
+	if err != nil {
+		return nil, mapRepositoryError(err)
+	}
+
+	return &dto.Playlist{
+		ID:          p.ID.String(),
+		Title:       p.Title,
+		Description: p.Description,
+		IsFavorite:  p.IsFavorite,
+		AvatarURL:   p.AvatarURL,
+		Tracks:      trackIDs,
+	}, nil
+}
+
+func (s *Service) AddTrackToPlaylist(ctx context.Context, req dto.AddTrackToPlaylistRequest) error {
+	if req.TrackID == "" {
+		return errors.New("empty track id")
+	}
+	return mapRepositoryError(s.repo.AddTrackToPlaylist(ctx, req.PlaylistID, req.TrackID))
+}
+
+func (s *Service) RemoveTrackFromPlaylist(ctx context.Context, req dto.RemoveTrackFromPlaylistRequest) error {
+	if req.TrackID == "" {
+		return errors.New("empty track id")
+	}
+	return mapRepositoryError(s.repo.RemoveTrackFromPlaylist(ctx, req.PlaylistID, req.TrackID))
+}

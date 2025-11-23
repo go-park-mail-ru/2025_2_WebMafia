@@ -381,19 +381,86 @@ func (h *Handler) GetMyPlaylists(w http.ResponseWriter, r *http.Request) {
 	}
 
 	limit, offset := parsePagination(r.URL.Query())
-	req := dto.GetPlaylistsByUserRequest{
+
+	playlists, err := h.service.GetPlaylistsByUser(r.Context(), dto.GetPlaylistsByUserRequest{
 		UserID: userID,
 		Limit:  limit,
 		Offset: offset,
-	}
-
-	playlists, err := h.service.GetPlaylistsByUser(r.Context(), req)
+	})
 	if err != nil {
 		log.Errorf("[%s]: service error: %v", op, err)
 		h.handleError(w, err)
 		return
 	}
-	response.JSON(w, http.StatusOK, playlists)
+
+	full := make([]dto.Playlist, 0, len(playlists))
+	for _, p := range playlists {
+		id, _ := uuid.Parse(p.ID)
+		pl, err := h.service.GetPlaylistWithTracks(r.Context(), id)
+		if err == nil {
+			full = append(full, *pl)
+		}
+	}
+
+	response.JSON(w, http.StatusOK, full)
+}
+
+func (h *Handler) AddTrackToPlaylist(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.AddTrackToPlaylist"
+	log := middleware.LoggerFromContext(r.Context())
+
+	raw := mux.Vars(r)["id"]
+	playlistID, err := uuid.Parse(raw)
+	if err != nil {
+		log.Errorf("[%s]: invalid playlist id: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	var req dto.AddTrackToPlaylistRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		log.Errorf("[%s]: invalid body: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+	req.PlaylistID = playlistID
+
+	if err := h.service.AddTrackToPlaylist(r.Context(), req); err != nil {
+		log.Errorf("[%s]: service: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, map[string]string{"status": "ok"})
+}
+
+func (h *Handler) RemoveTrackFromPlaylist(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.RemoveTrackFromPlaylist"
+	log := middleware.LoggerFromContext(r.Context())
+
+	raw := mux.Vars(r)["id"]
+	playlistID, err := uuid.Parse(raw)
+	if err != nil {
+		log.Errorf("[%s]: invalid playlist id: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	var req dto.RemoveTrackFromPlaylistRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		log.Errorf("[%s]: invalid body: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+	req.PlaylistID = playlistID
+
+	if err := h.service.RemoveTrackFromPlaylist(r.Context(), req); err != nil {
+		log.Errorf("[%s]: service: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, map[string]string{"status": "removed"})
 }
 
 func parsePagination(query url.Values) (uint64, uint64) {

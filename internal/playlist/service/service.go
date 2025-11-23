@@ -18,6 +18,8 @@ type IRepository interface {
 	GetFavoritePlaylist(ctx context.Context, userID uuid.UUID) (*model.Playlist, error)
 	AddTrackToPlaylist(ctx context.Context, playlistID uuid.UUID, trackID string) error
 	UpdatePlaylistAvatar(ctx context.Context, id uuid.UUID, avatar string) error
+	GetTracksByPlaylist(ctx context.Context, playlistID uuid.UUID) ([]string, error)
+	RemoveTrackFromPlaylist(ctx context.Context, playlistID uuid.UUID, trackID string) error
 }
 
 type IStorage interface {

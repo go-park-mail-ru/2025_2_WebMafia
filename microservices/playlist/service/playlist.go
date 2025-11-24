@@ -241,13 +241,47 @@ func (s *Service) GetPlaylistWithTracks(ctx context.Context, id uuid.UUID) (*dto
 		return nil, mapRepositoryError(err)
 	}
 
+	tracks := make([]dto.Track, 0, len(trackIDs))
+
+	for _, tid := range trackIDs {
+		grpcTrack, err := s.catalog.GetTrackByID(ctx, &pbCatalog.GetTrackByIDRequest{
+			Id: tid,
+		})
+		if err != nil {
+			continue
+		}
+
+		t := grpcTrack
+
+		dtoTrack := dto.Track{
+			ID:        t.Id,
+			Title:     t.Title,
+			DurationS: int(t.DurationS),
+			FileURL:   t.FileUrl,
+			Album: dto.Album{
+				ID:        t.Album.Id,
+				Title:     t.Album.Title,
+				AvatarURL: t.Album.AvatarUrl,
+			},
+		}
+
+		for _, a := range t.Artists {
+			dtoTrack.Artists = append(dtoTrack.Artists, dto.Artist{
+				ID:   a.Id,
+				Name: a.Name,
+			})
+		}
+
+		tracks = append(tracks, dtoTrack)
+	}
+
 	return &dto.Playlist{
 		ID:          p.ID.String(),
 		Title:       p.Title,
 		Description: p.Description,
 		IsFavorite:  p.IsFavorite,
 		AvatarURL:   p.AvatarURL,
-		Tracks:      trackIDs,
+		Tracks:      tracks,
 	}, nil
 }
 

@@ -126,3 +126,32 @@ func (h *Handler) RegisterPlay(ctx context.Context, req *pb.RegisterPlayRequest)
 	}
 	return &pb.RegisterPlayResponse{}, nil
 }
+
+func (h *Handler) GetTracksByIDs(ctx context.Context, req *pb.GetTracksByIDsRequest) (*pb.GetTracksByIDsResponse, error) {
+	const op = "grpc.GetTracksByIDs"
+	log := middleware.LoggerFromContext(ctx)
+
+	if len(req.GetIds()) == 0 {
+		return &pb.GetTracksByIDsResponse{Tracks: []*pb.Track{}}, nil
+	}
+
+	uuids := make([]uuid.UUID, 0, len(req.Ids))
+	for _, id := range req.GetIds() {
+		parsed, err := uuid.Parse(id)
+		if err != nil {
+			log.Warnf("[%s]: invalid ID: %v", op, err)
+			return nil, status.Errorf(codes.InvalidArgument, "invalid track id: %s", id)
+		}
+		uuids = append(uuids, parsed)
+	}
+
+	tracks, err := h.service.GetTracksByIDs(ctx, uuids)
+	if err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		return nil, status.Errorf(codes.Internal, "failed to get tracks: %v", err)
+	}
+
+	return &pb.GetTracksByIDsResponse{
+		Tracks: TracksToProto(tracks),
+	}, nil
+}

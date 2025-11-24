@@ -6,12 +6,12 @@ import (
 )
 
 type Playlist struct {
-	ID          string   `json:"id"`
-	Title       string   `json:"title"`
-	Description string   `json:"description,omitempty"`
-	IsFavorite  bool     `json:"is_favorite"`
-	AvatarURL   string   `json:"avatar_url,omitempty"`
-	Tracks      []string `json:"tracks,omitempty"`
+	ID          string  `json:"id"`
+	Title       string  `json:"title"`
+	Description string  `json:"description,omitempty"`
+	IsFavorite  bool    `json:"is_favorite"`
+	AvatarURL   string  `json:"avatar_url,omitempty"`
+	Tracks      []Track `json:"tracks,omitempty"`
 }
 
 type Track struct {

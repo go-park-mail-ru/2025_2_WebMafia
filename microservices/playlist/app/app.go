@@ -1,0 +1,126 @@
+package app
+
+import (
+	"context"
+	"database/sql"
+	"fmt"
+	"google.golang.org/grpc/credentials/insecure"
+	"spotify/pkg/jwtmanager"
+
+	"spotify/internal/metrics"
+	"spotify/internal/middleware"
+	"spotify/internal/server"
+
+	httpDelivery "spotify/microservices/playlist/delivery/http"
+	repository "spotify/microservices/playlist/repository/postgres"
+	storageRepo "spotify/microservices/playlist/repository/storage"
+	service "spotify/microservices/playlist/service"
+	"spotify/pkg/logger"
+	"spotify/pkg/minio"
+	"spotify/pkg/postgres"
+
+	"github.com/gorilla/mux"
+	pbCatalog "spotify/proto/catalog"
+
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+
+	"google.golang.org/grpc"
+)
+
+type App struct {
+	cfg        *Config
+	logger     logger.Logger
+	db         *sql.DB
+	minio      *minio.Client
+	httpServer *server.Server
+}
+
+func NewApp(ctx context.Context, configPath string) (*App, error) {
+	cfg, err := LoadConfig(configPath)
+	if err != nil {
+		return nil, fmt.Errorf("failed to load playlist config: %w", err)
+	}
+
+	appLogger, err := logger.New(cfg.Playlist.Logger.Level, cfg.Playlist.Logger.Mode)
+	if err != nil {
+		return nil, fmt.Errorf("failed to init logger: %w", err)
+	}
+
+	db, err := postgres.New(ctx, cfg.DB)
+	if err != nil {
+		return nil, fmt.Errorf("failed to connect to db: %w", err)
+	}
+
+	if err := prometheus.Register(postgres.NewMonitor(db, cfg.DB.DBName)); err != nil {
+		appLogger.Warnf("db metrics already registered or failed: %v", err)
+	}
+
+	minioClient, err := minio.New(cfg.Minio)
+	if err != nil {
+		return nil, fmt.Errorf("failed to init minio: %w", err)
+	}
+
+	stor := storageRepo.NewStorage(minioClient, cfg.Playlist.Buckets.Avatars)
+	repo := repository.New(db)
+
+	catalogConn, _ := grpc.Dial(cfg.Playlist.Clients.Catalog, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	catalogClient := pbCatalog.NewCatalogServiceClient(catalogConn)
+
+	playlistService := service.New(repo, stor, catalogClient)
+
+	mtr := metrics.New("playlist")
+
+	httpHandler := httpDelivery.NewHandler(
+		playlistService,
+		cfg.Playlist.AllowedAvatarTypes,
+	)
+
+	router := mux.NewRouter()
+	router.Handle("/metrics", promhttp.Handler())
+
+	api := router.PathPrefix("/api/v1").Subrouter()
+
+	api.Use(middleware.RequestLoggerMiddleware(appLogger))
+	api.Use(middleware.MetricsMiddleware(mtr))
+	api.Use(middleware.CORS(cfg.Playlist.HTTP.CORS))
+
+	protected := api.PathPrefix("").Subrouter()
+
+	jwtManager := jwtmanager.NewManager(
+		cfg.Playlist.HTTP.Auth.JWT.SecretKey,
+		cfg.Playlist.HTTP.Auth.JWT.AccessTokenTTL,
+	)
+	authMiddleware := middleware.NewAuthMiddleware(jwtManager)
+
+	protected.Use(authMiddleware.AuthMiddleware)
+
+	httpHandler.RegisterRoutes(api, protected)
+
+	httpServer := server.NewHTTPServer(&cfg.Playlist.HTTP, router, appLogger)
+
+	return &App{
+		cfg:        cfg,
+		logger:     appLogger,
+		db:         db,
+		minio:      minioClient,
+		httpServer: httpServer,
+	}, nil
+}
+
+func (a *App) Run(ctx context.Context) error {
+	errCh := make(chan error, 1)
+
+	go func() {
+		errCh <- a.httpServer.Run()
+	}()
+
+	select {
+	case <-ctx.Done():
+		shutCtx, cancel := context.WithTimeout(context.Background(), a.cfg.Playlist.HTTP.ShutdownTimeout)
+		defer cancel()
+		return a.httpServer.Shutdown(shutCtx)
+	case err := <-errCh:
+		return err
+	}
+}

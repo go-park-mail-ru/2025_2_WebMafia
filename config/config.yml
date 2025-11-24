@@ -61,6 +61,51 @@ catalog:
     level: "debug"
     mode: "dev"
 
+playlist:
+  http:
+    port: "8082"
+    readTimeout: 5s
+    writeTimeout: 10s
+    idleTimeout: 60s
+    shutdownTimeout: 15s
+    cors:
+      allowedOrigins:
+        - "http://localhost:8090"
+        - "http://217.16.17.173:8090"
+      allowedMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
+      allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "X-CSRF-Token"]
+      allowCredentials: true
+    auth:
+      jwt:
+        secretKey: "dev-jwt-secret"
+        accessTokenTTL: 720h
+      csrf:
+        secretKey: "dev-csrf-secret"
+        tokenTTL: 15m
+
+  logger:
+    level: "debug"
+    mode: "dev"
+
+  allowed_avatar_types:
+    - "image/png"
+    - "image/jpeg"
+    - "image/webp"
+    - "image/jpg"
+    - "image/gif"
+    - "image/bmp"
+    - "image/svg"
+    - "image/avif"
+    - "image/heic"
+    - "image/heif"
+    - "image/ico"
+
+  buckets:
+    avatars: "avatars"
+
+  clients:
+    catalog: "catalog:9000"
+
 db:
   host: "db"
   port: 5432

@@ -100,7 +100,7 @@ services:
     restart: always
     pid: host
     volumes:
-      - /:/host:ro,rslave
+      - /:/host:ro
     command:
       - '--path.rootfs=/host'
 

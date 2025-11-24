@@ -7,6 +7,7 @@ import (
 	"github.com/google/uuid"
 )
 
+//go:generate mockgen -destination=../../mocks/service/service_mock.go -package=service_mock spotify/microservices/catalog/delivery/http IService
 type IService interface {
 	GetArtistByID(ctx context.Context, id uuid.UUID) (*dto.Artist, error)
 	GetAllArtists(ctx context.Context, limit, offset uint64) ([]dto.Artist, error)

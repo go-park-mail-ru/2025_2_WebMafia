@@ -12,19 +12,21 @@ import (
 	"github.com/stretchr/testify/require"
 	"go.uber.org/mock/gomock"
 
-	mock_user "spotify/internal/mocks/user"
+	repository_mock "spotify/microservices/auth/mocks/repository"
+	storage_mock "spotify/microservices/auth/mocks/storage"
+
 	"spotify/internal/model"
-	"spotify/internal/user/dto"
-	"spotify/internal/user/repository/postgres"
-	"spotify/internal/user/tools"
+	"spotify/microservices/auth/dto"
+	"spotify/microservices/auth/repository/postgres"
+	"spotify/microservices/auth/tools"
 )
 
 func TestUserService_Login(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
-	mockRepo := mock_user.NewMockIRepository(ctrl)
-	mockStorage := mock_user.NewMockIStorage(ctrl)
+	mockRepo := repository_mock.NewMockIRepository(ctrl)
+	mockStorage := storage_mock.NewMockIStorage(ctrl)
 
 	userService := NewUserService(mockRepo, mockStorage)
 
@@ -93,8 +95,8 @@ func TestUserService_Register(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
-	mockRepo := mock_user.NewMockIRepository(ctrl)
-	mockStorage := mock_user.NewMockIStorage(ctrl)
+	mockRepo := repository_mock.NewMockIRepository(ctrl)
+	mockStorage := storage_mock.NewMockIStorage(ctrl)
 	userService := NewUserService(mockRepo, mockStorage)
 
 	registerRequest := dto.RegisterRequest{
@@ -142,8 +144,8 @@ func TestUserService_UploadAvatar(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
-	mockRepo := mock_user.NewMockIRepository(ctrl)
-	mockStorage := mock_user.NewMockIStorage(ctrl)
+	mockRepo := repository_mock.NewMockIRepository(ctrl)
+	mockStorage := storage_mock.NewMockIStorage(ctrl)
 	userService := NewUserService(mockRepo, mockStorage)
 
 	req := dto.UploadAvatarRequest{
@@ -169,8 +171,8 @@ func TestUserService_DeleteAvatar(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
-	mockRepo := mock_user.NewMockIRepository(ctrl)
-	mockStorage := mock_user.NewMockIStorage(ctrl)
+	mockRepo := repository_mock.NewMockIRepository(ctrl)
+	mockStorage := storage_mock.NewMockIStorage(ctrl)
 	userService := NewUserService(mockRepo, mockStorage)
 
 	req := dto.DeleteAvatarRequest{UserID: "user-id"}
@@ -198,8 +200,8 @@ func TestUserService_UpdateProfile(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
-	mockRepo := mock_user.NewMockIRepository(ctrl)
-	mockStorage := mock_user.NewMockIStorage(ctrl)
+	mockRepo := repository_mock.NewMockIRepository(ctrl)
+	mockStorage := storage_mock.NewMockIStorage(ctrl)
 	userService := NewUserService(mockRepo, mockStorage)
 
 	userID := uuid.New()

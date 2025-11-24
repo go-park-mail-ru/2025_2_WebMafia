@@ -33,6 +33,7 @@ type IRepository interface {
 	GetAlbumIDsForTracks(ctx context.Context, trackIDs []uuid.UUID) (map[uuid.UUID]uuid.UUID, error)
 	GetArtistIDsForTracks(ctx context.Context, trackIDs []uuid.UUID) (map[uuid.UUID][]uuid.UUID, error)
 	GetGenresForTracks(ctx context.Context, trackIDs []uuid.UUID) (map[uuid.UUID][]model.Genre, error)
+	GetTracksByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Track, error)
 }
 
 type Service struct {

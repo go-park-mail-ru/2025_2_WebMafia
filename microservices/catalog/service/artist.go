@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
+	"sort"
 	"spotify/microservices/catalog/dto"
 
 	"github.com/google/uuid"
@@ -69,6 +70,10 @@ func (s *Service) GetAllArtists(ctx context.Context, limit, offset uint64) ([]dt
 		}
 	}
 
+	sort.Slice(artistDTOs, func(i, j int) bool {
+		return artistDTOs[i].PlayCount > artistDTOs[j].PlayCount
+	})
+
 	return artistDTOs, nil
 }
 
@@ -100,6 +105,10 @@ func (s *Service) GetArtistsByIDs(ctx context.Context, ids []uuid.UUID) ([]dto.A
 			artistDTOs[i].Description = artist.Description.String
 		}
 	}
+
+	sort.Slice(artistDTOs, func(i, j int) bool {
+		return artistDTOs[i].PlayCount > artistDTOs[j].PlayCount
+	})
 
 	return artistDTOs, nil
 }

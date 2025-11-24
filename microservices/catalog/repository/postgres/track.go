@@ -40,7 +40,7 @@ func (r *Repository) GetAllTracks(ctx context.Context, limit, offset uint64) ([]
 	query := `
 		SELECT track_id, title, duration_s, file_url, play_count, description, created_at, updated_at
 		FROM track
-		ORDER BY created_at
+		ORDER BY play_count DESC, created_at DESC
 		LIMIT $1 OFFSET $2`
 	rows, err := r.db.QueryContext(ctx, query, limit, offset)
 	if err != nil {
@@ -65,7 +65,7 @@ func (r *Repository) GetTracksByArtistID(ctx context.Context, artistID uuid.UUID
 		FROM track t
 		JOIN track_artist ta ON t.track_id = ta.track_id
 		WHERE ta.artist_id = $1
-		ORDER BY t.created_at
+		ORDER BY play_count DESC, created_at DESC
 		LIMIT $2 OFFSET $3`
 	rows, err := r.db.QueryContext(ctx, query, artistID, limit, offset)
 	if err != nil {
@@ -90,7 +90,7 @@ func (r *Repository) GetTracksByAlbumID(ctx context.Context, albumID uuid.UUID, 
 		FROM track t
 		JOIN track_album ta ON t.track_id = ta.track_id
 		WHERE ta.album_id = $1
-		ORDER BY t.created_at
+		ORDER BY play_count DESC, created_at DESC
 		LIMIT $2 OFFSET $3`
 	rows, err := r.db.QueryContext(ctx, query, albumID, limit, offset)
 	if err != nil {
@@ -115,7 +115,7 @@ func (r *Repository) GetTracksByGenreID(ctx context.Context, genreID uuid.UUID, 
 		FROM track t
 		JOIN track_genre tg ON t.track_id = tg.track_id
 		WHERE tg.genre_id = $1
-		ORDER BY t.created_at
+		ORDER BY play_count DESC, created_at DESC
 		LIMIT $2 OFFSET $3`
 	rows, err := r.db.QueryContext(ctx, query, genreID, limit, offset)
 	if err != nil {
@@ -346,6 +346,27 @@ func (r *Repository) SearchTracks(ctx context.Context, query string, limit uint6
 	}
 
 	return results, nil
+}
+
+func (r *Repository) GetTracksByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Track, error) {
+	const op = "repo.GetTracksByIDs"
+
+	query := `
+        SELECT track_id, title, duration_s, file_url, play_count, description, created_at, updated_at
+        FROM track
+        WHERE track_id = ANY($1)
+    `
+	rows, err := r.db.QueryContext(ctx, query, ids)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: query failed: %w", op, err)
+	}
+	defer rows.Close()
+
+	tracks, err := selectTracks(rows)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: scan failed: %w", op, err)
+	}
+	return tracks, nil
 }
 
 func selectTracks(rows *sql.Rows) ([]model.Track, error) {

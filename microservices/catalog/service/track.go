@@ -329,3 +329,18 @@ func (s *Service) getGenresForTracks(ctx context.Context, trackIDs []uuid.UUID) 
 	}
 	return result, nil
 }
+
+func (s *Service) GetTracksByIDs(ctx context.Context, ids []uuid.UUID) ([]dto.Track, error) {
+	const op = "service.GetTracksByIDs"
+
+	if len(ids) == 0 {
+		return []dto.Track{}, nil
+	}
+
+	tracks, err := s.repo.GetTracksByIDs(ctx, ids)
+	if err != nil {
+		return nil, fmt.Errorf("[%s]: repo error: %w", op, mapError(err))
+	}
+
+	return s.enrichTracks(ctx, tracks)
+}

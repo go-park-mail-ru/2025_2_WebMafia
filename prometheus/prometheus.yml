@@ -21,3 +21,10 @@ scrape_configs:
       - targets: ["catalog:8081"]
         labels:
           service: "catalog"
+
+  - job_name: "wave-playlist"
+    static_configs:
+      - targets: [ "playlist:8082" ]
+        labels:
+          service: "playlist"
+

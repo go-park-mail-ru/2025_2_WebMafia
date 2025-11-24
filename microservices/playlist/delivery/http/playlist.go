@@ -83,21 +83,15 @@ func (h *Handler) GetPlaylistByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	req := dto.GetPlaylistRequest{ID: id}
-
-	playlist, err := h.service.GetPlaylist(r.Context(), req)
+	playlist, err := h.service.GetPlaylistWithTracks(r.Context(), id)
 	if err != nil {
-		if errors.Is(err, service.ErrNotFound) {
-			h.handleError(w, err)
-			return
-		}
-		log.Errorf("[%s]: service error: %v", op, err)
 		h.handleError(w, err)
 		return
 	}
 
 	response.JSON(w, http.StatusOK, playlist)
 }
+
 func (h *Handler) GetAllPlaylistsByUserID(w http.ResponseWriter, r *http.Request) {
 	const op = "handler.GetAllPlaylistsByUserID"
 	log := middleware.LoggerFromContext(r.Context())
@@ -245,28 +239,42 @@ func (h *Handler) GetFavoritePlaylist(w http.ResponseWriter, r *http.Request) {
 
 	rawUserID, ok := middleware.GetUserID(r.Context())
 	if !ok {
-		log.Errorf("[%s]: missing userId", op)
-		response.InternalErrorJSON(w)
+		log.Errorf("[%s] missing userId", op)
+		response.UnauthorizedJSON(w)
 		return
 	}
 
 	userID, err := uuid.Parse(rawUserID)
 	if err != nil {
-		log.Errorf("[%s]: invalid userId: %v", op, err)
+		log.Errorf("[%s] invalid userId: %v", op, err)
 		response.BadRequestJSON(w)
 		return
 	}
 
 	req := dto.GetFavoritePlaylistRequest{UserID: userID}
 
-	playlist, err := h.service.GetFavoritePlaylist(r.Context(), req)
+	pl, err := h.service.GetFavoritePlaylist(r.Context(), req)
 	if err != nil {
-		log.Errorf("[%s]: service error: %v", op, err)
+		log.Errorf("[%s] service error: %v", op, err)
 		h.handleError(w, err)
 		return
 	}
 
-	response.JSON(w, http.StatusOK, playlist)
+	id, err := uuid.Parse(pl.ID)
+	if err != nil {
+		log.Errorf("[%s] failed to parse playlist ID '%s': %v", op, pl.ID, err)
+		response.InternalErrorJSON(w)
+		return
+	}
+
+	full, err := h.service.GetPlaylistWithTracks(r.Context(), id)
+	if err != nil {
+		log.Errorf("[%s] failed to load tracks: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, full)
 }
 
 func (h *Handler) validatePlaylistAvatar(contentType string, size int64) error {

@@ -77,6 +77,6 @@ func TestService_GetAllArtists(t *testing.T) {
 
 		assert.NoError(t, err)
 		assert.Len(t, res, 2)
-		assert.Equal(t, "A1", res[0].Name)
+		assert.Equal(t, "A2", res[0].Name)
 	})
 }

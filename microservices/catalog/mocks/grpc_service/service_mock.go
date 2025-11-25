@@ -222,6 +222,21 @@ func (mr *MockIServiceMockRecorder) GetTracksByGenreID(ctx, genreID, limit, offs
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTracksByGenreID", reflect.TypeOf((*MockIService)(nil).GetTracksByGenreID), ctx, genreID, limit, offset)
 }
 
+// GetTracksByIDs mocks base method.
+func (m *MockIService) GetTracksByIDs(ctx context.Context, ids []uuid.UUID) ([]dto.Track, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetTracksByIDs", ctx, ids)
+	ret0, _ := ret[0].([]dto.Track)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetTracksByIDs indicates an expected call of GetTracksByIDs.
+func (mr *MockIServiceMockRecorder) GetTracksByIDs(ctx, ids any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTracksByIDs", reflect.TypeOf((*MockIService)(nil).GetTracksByIDs), ctx, ids)
+}
+
 // RegisterPlay mocks base method.
 func (m *MockIService) RegisterPlay(ctx context.Context, trackID uuid.UUID) error {
 	m.ctrl.T.Helper()

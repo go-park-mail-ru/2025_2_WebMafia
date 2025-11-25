@@ -70,7 +70,7 @@ func TestRepository_GetAllTracks(t *testing.T) {
 		rows := sqlmock.NewRows([]string{"track_id", "title", "duration_s", "file_url", "play_count", "description", "created_at", "updated_at"}).
 			AddRow(uuid.New(), "Title", 180, "url", 0, sql.NullString{}, time.Now(), time.Now())
 
-		mock.ExpectQuery(regexp.QuoteMeta(`SELECT track_id, title, duration_s, file_url, play_count, description, created_at, updated_at FROM track ORDER BY created_at LIMIT $1 OFFSET $2`)).
+		mock.ExpectQuery(regexp.QuoteMeta(`SELECT track_id, title, duration_s, file_url, play_count, description, created_at, updated_at FROM track ORDER BY play_count DESC, created_at DESC LIMIT $1 OFFSET $2`)).
 			WithArgs(uint64(10), uint64(0)).
 			WillReturnRows(rows)
 
@@ -88,7 +88,6 @@ func TestRepository_GetTracksByReferences(t *testing.T) {
 	repo := New(db)
 	id := uuid.New()
 
-	// Хелпер для создания свежих строк
 	newRows := func() *sqlmock.Rows {
 		return sqlmock.NewRows([]string{"track_id", "title", "duration_s", "file_url", "play_count", "description", "created_at", "updated_at"}).
 			AddRow(uuid.New(), "Title", 180, "url", 0, sql.NullString{}, time.Now(), time.Now())

@@ -10,8 +10,6 @@ func (h *Handler) RegisterRoutes(public, protected, csrfProtected *mux.Router) {
 	protected.HandleFunc("/playlists/my", h.GetMyPlaylists).Methods(http.MethodGet, http.MethodOptions)
 	protected.HandleFunc("/playlists/favorite", h.GetFavoritePlaylist).Methods(http.MethodGet, http.MethodOptions)
 
-	public.HandleFunc("/users/{userId}/playlists", h.GetAllPlaylistsByUserID).Methods(http.MethodGet, http.MethodOptions)
-
 	public.HandleFunc("/playlists/{id}", h.GetPlaylistByID).Methods(http.MethodGet, http.MethodOptions)
 
 	csrfProtected.HandleFunc("/playlists/favorite/add-track", h.AddTrackToFavorite).Methods(http.MethodPost, http.MethodOptions)

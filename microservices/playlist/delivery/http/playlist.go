@@ -2,14 +2,12 @@ package http
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"github.com/google/uuid"
 	"net/http"
 	"net/url"
 	"spotify/internal/middleware"
 	"spotify/microservices/playlist/dto"
-	"spotify/microservices/playlist/service"
 	"spotify/pkg/response"
 	"strconv"
 
@@ -92,45 +90,6 @@ func (h *Handler) GetPlaylistByID(w http.ResponseWriter, r *http.Request) {
 	response.JSON(w, http.StatusOK, playlist)
 }
 
-func (h *Handler) GetAllPlaylistsByUserID(w http.ResponseWriter, r *http.Request) {
-	const op = "handler.GetAllPlaylistsByUserID"
-	log := middleware.LoggerFromContext(r.Context())
-
-	rawUserID := mux.Vars(r)[paramUserID]
-	if rawUserID == "" {
-		log.Errorf("[%s]: missing userId", op)
-		response.BadRequestJSON(w)
-		return
-	}
-
-	userID, err := uuid.Parse(rawUserID)
-	if err != nil {
-		log.Errorf("[%s]: invalid userId: %v", op, err)
-		response.BadRequestJSON(w)
-		return
-	}
-
-	limit, offset := parsePagination(r.URL.Query())
-
-	req := dto.GetPlaylistsByUserRequest{
-		UserID: userID,
-		Limit:  limit,
-		Offset: offset,
-	}
-
-	playlists, err := h.service.GetPlaylistsByUser(r.Context(), req)
-	if err != nil {
-		if errors.Is(err, service.ErrNotFound) {
-			h.handleError(w, err)
-			return
-		}
-		log.Errorf("[%s]: service error: %v", op, err)
-		h.handleError(w, err)
-		return
-	}
-
-	response.JSON(w, http.StatusOK, playlists)
-}
 func (h *Handler) UpdatePlaylist(w http.ResponseWriter, r *http.Request) {
 	const op = "handler.UpdatePlaylist"
 	log := middleware.LoggerFromContext(r.Context())

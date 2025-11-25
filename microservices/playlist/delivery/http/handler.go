@@ -2,10 +2,12 @@ package http
 
 import (
 	"context"
-	"github.com/google/uuid"
 	"spotify/microservices/playlist/dto"
+
+	"github.com/google/uuid"
 )
 
+//go:generate mockgen -destination=../../mocks/service/service_mock.go -package=service_mock spotify/microservices/playlist/delivery/http IService
 type IService interface {
 	CreatePlaylist(ctx context.Context, req dto.CreatePlaylistRequest) (*dto.Playlist, error)
 	GetPlaylist(ctx context.Context, req dto.GetPlaylistRequest) (*dto.Playlist, error)

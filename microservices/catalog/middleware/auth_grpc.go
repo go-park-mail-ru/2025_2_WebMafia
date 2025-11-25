@@ -13,6 +13,7 @@ const (
 	csrfHeader         = "X-CSRF-Token"
 )
 
+//go:generate mockgen -destination=../mocks/auth_client_mock.go -package=mocks spotify/proto/auth AuthServiceClient
 type AuthGrpcMiddleware struct {
 	authClient pb.AuthServiceClient
 }

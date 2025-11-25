@@ -20,9 +20,9 @@ import (
 	"go.uber.org/mock/gomock"
 
 	"spotify/internal/middleware"
-	mock_user "spotify/internal/mocks/user"
-	"spotify/internal/user/dto"
-	"spotify/internal/user/service"
+	"spotify/microservices/auth/dto"
+	service_mock "spotify/microservices/auth/mocks/service"
+	"spotify/microservices/auth/service"
 	"spotify/pkg/jwtmanager"
 )
 
@@ -30,7 +30,7 @@ func TestHandler_Login(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
-	mockUserService := mock_user.NewMockIService(ctrl)
+	mockUserService := service_mock.NewMockIService(ctrl)
 	jwtManager := jwtmanager.NewManager("test-secret", time.Hour)
 	handler := NewHandler(mockUserService, jwtManager, nil, nil)
 
@@ -101,7 +101,7 @@ func TestHandler_Register(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
-	mockUserService := mock_user.NewMockIService(ctrl)
+	mockUserService := service_mock.NewMockIService(ctrl)
 	jwtManager := jwtmanager.NewManager("test-secret", time.Hour)
 	handler := NewHandler(mockUserService, jwtManager, nil, nil)
 
@@ -176,7 +176,7 @@ func TestHandler_Avatar(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
-	mockUserService := mock_user.NewMockIService(ctrl)
+	mockUserService := service_mock.NewMockIService(ctrl)
 	jwtManager := jwtmanager.NewManager("test-secret", time.Hour)
 	authMW := middleware.NewAuthMiddleware(jwtManager)
 	handler := NewHandler(mockUserService, jwtManager, nil, []string{"image/jpeg", "image/png"})
@@ -288,7 +288,7 @@ func TestHandler_UpdateProfile(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
-	mockUserService := mock_user.NewMockIService(ctrl)
+	mockUserService := service_mock.NewMockIService(ctrl)
 	jwtManager := jwtmanager.NewManager("test-secret", time.Hour)
 	authMW := middleware.NewAuthMiddleware(jwtManager)
 	handler := NewHandler(mockUserService, jwtManager, nil, nil)

@@ -37,6 +37,28 @@ services:
       auth:
         condition: service_started
 
+  playlist:
+    build:
+      context: .
+      dockerfile: ./docker/playlist.Dockerfile
+    ports:
+      - "8082:8082"
+    container_name: wavemusic-playlist
+    restart: always
+    env_file:
+      - ./.env.dev
+    volumes:
+      - ./config:/config
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      auth:
+        condition: service_started
+      catalog:
+        condition: service_started
+      minio:
+        condition: service_started
+
   migrate:
     image: migrate/migrate
     volumes:

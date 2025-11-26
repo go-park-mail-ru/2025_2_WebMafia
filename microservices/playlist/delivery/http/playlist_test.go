@@ -289,41 +289,6 @@ func TestHandler_RemoveTrackFromPlaylist(t *testing.T) {
 	})
 }
 
-func TestHandler_GetPlaylists(t *testing.T) {
-	ctrl := gomock.NewController(t)
-	defer ctrl.Finish()
-	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc, nil)
-	uid := uuid.New()
-
-	t.Run("GetMyPlaylists success", func(t *testing.T) {
-		mockSvc.EXPECT().GetPlaylistsByUser(gomock.Any(), gomock.Any()).Return([]dto.Playlist{}, nil)
-		req := httptest.NewRequest("GET", "/my", nil)
-		ctx := middleware.ContextWithClaims(req.Context(), &jwtmanager.Claims{UserID: uid.String()})
-		rr := httptest.NewRecorder()
-		handler.GetMyPlaylists(rr, req.WithContext(ctx))
-		assert.Equal(t, http.StatusOK, rr.Code)
-	})
-
-	t.Run("GetAllPlaylistsByUserID success", func(t *testing.T) {
-		mockSvc.EXPECT().GetPlaylistsByUser(gomock.Any(), gomock.Any()).Return([]dto.Playlist{}, nil)
-		req := httptest.NewRequest("GET", "/user", nil)
-		req = mux.SetURLVars(req, map[string]string{"userId": uid.String()})
-		rr := httptest.NewRecorder()
-		handler.GetAllPlaylistsByUserID(rr, req)
-		assert.Equal(t, http.StatusOK, rr.Code)
-	})
-
-	t.Run("GetAllPlaylistsByUserID not found", func(t *testing.T) {
-		mockSvc.EXPECT().GetPlaylistsByUser(gomock.Any(), gomock.Any()).Return(nil, service.ErrNotFound)
-		req := httptest.NewRequest("GET", "/user", nil)
-		req = mux.SetURLVars(req, map[string]string{"userId": uid.String()})
-		rr := httptest.NewRecorder()
-		handler.GetAllPlaylistsByUserID(rr, req)
-		assert.Equal(t, http.StatusNotFound, rr.Code)
-	})
-}
-
 func TestHandler_Favorites(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()

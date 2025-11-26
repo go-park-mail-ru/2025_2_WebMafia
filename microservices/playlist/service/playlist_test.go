@@ -219,16 +219,49 @@ func TestService_AddTrackToFavorite(t *testing.T) {
 func TestService_GetPlaylistWithTracks(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
+
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
 	mockCatalog := catalog_mock.NewMockCatalogServiceClient(ctrl)
 	svc := New(mockRepo, nil, mockCatalog)
 	id := uuid.New()
 
-	mockRepo.EXPECT().GetByID(gomock.Any(), id).Return(&model.Playlist{ID: id}, nil)
-	mockRepo.EXPECT().GetTracksByPlaylist(gomock.Any(), id).Return([]string{"t1"}, nil)
-	mockCatalog.EXPECT().GetTrackByID(gomock.Any(), gomock.Any()).Return(&pbCatalog.Track{Id: "t1", Title: "S", Album: &pbCatalog.AlbumForTrack{}}, nil)
+	mockRepo.EXPECT().
+		GetByID(gomock.Any(), id).
+		Return(&model.Playlist{ID: id}, nil)
+
+	mockRepo.EXPECT().
+		GetTracksByPlaylist(gomock.Any(), id).
+		Return([]string{"t1"}, nil)
+
+	mockCatalog.EXPECT().
+		GetTracksByIDs(gomock.Any(), &pbCatalog.GetTracksByIDsRequest{
+			Ids: []string{"t1"},
+		}).
+		Return(&pbCatalog.GetTracksByIDsResponse{
+			Tracks: []*pbCatalog.Track{
+				{
+					Id:        "t1",
+					Title:     "S",
+					DurationS: 123,
+					FileUrl:   "url",
+					Album: &pbCatalog.AlbumForTrack{
+						Id:        "a1",
+						Title:     "Album",
+						AvatarUrl: "img",
+					},
+					Artists: []*pbCatalog.ArtistForTrack{
+						{
+							Id:   "art1",
+							Name: "Artist",
+						},
+					},
+				},
+			},
+		}, nil)
 
 	res, err := svc.GetPlaylistWithTracks(context.Background(), id)
+
 	assert.NoError(t, err)
 	assert.Len(t, res.Tracks, 1)
+	assert.Equal(t, "t1", res.Tracks[0].ID)
 }

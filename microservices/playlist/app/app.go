@@ -4,7 +4,10 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+
 	"google.golang.org/grpc/credentials/insecure"
+
+	"spotify/pkg/csrfmanager"
 	"spotify/pkg/jwtmanager"
 
 	"spotify/internal/metrics"
@@ -25,6 +28,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
+	grpcprometheus "github.com/grpc-ecosystem/go-grpc-prometheus"
 	"google.golang.org/grpc"
 )
 
@@ -64,7 +68,21 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	stor := storageRepo.NewStorage(minioClient, cfg.Playlist.Buckets.Avatars)
 	repo := repository.New(db)
 
-	catalogConn, _ := grpc.Dial(cfg.Playlist.Clients.Catalog, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	grpcprometheus.EnableClientHandlingTimeHistogram()
+
+	if err := prometheus.Register(grpcprometheus.DefaultClientMetrics); err != nil {
+		appLogger.Warnf("grpc client metrics already registered: %v", err)
+	}
+
+	catalogConn, err := grpc.Dial(
+		cfg.Playlist.Clients.Catalog,
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+		grpc.WithUnaryInterceptor(grpcprometheus.UnaryClientInterceptor),
+	)
+	if err != nil {
+		return nil, fmt.Errorf("failed to connect to catalog: %w", err)
+	}
+
 	catalogClient := pbCatalog.NewCatalogServiceClient(catalogConn)
 
 	playlistService := service.New(repo, stor, catalogClient)
@@ -85,17 +103,26 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	api.Use(middleware.MetricsMiddleware(mtr))
 	api.Use(middleware.CORS(cfg.Playlist.HTTP.CORS))
 
-	protected := api.PathPrefix("").Subrouter()
-
 	jwtManager := jwtmanager.NewManager(
 		cfg.Playlist.HTTP.Auth.JWT.SecretKey,
 		cfg.Playlist.HTTP.Auth.JWT.AccessTokenTTL,
 	)
-	authMiddleware := middleware.NewAuthMiddleware(jwtManager)
+	csrfManager := csrfmanager.NewManager(
+		cfg.Playlist.HTTP.Auth.CSRF.SecretKey,
+		cfg.Playlist.HTTP.Auth.CSRF.TokenTTL,
+	)
 
+	authMiddleware := middleware.NewAuthMiddleware(jwtManager)
+	csrfMiddleware := middleware.NewCSRFMiddleware(csrfManager)
+
+	protected := api.PathPrefix("").Subrouter()
 	protected.Use(authMiddleware.AuthMiddleware)
 
-	httpHandler.RegisterRoutes(api, protected)
+	csrfProtected := protected.PathPrefix("").Subrouter()
+	csrfProtected.Use(csrfMiddleware.CSRFMiddleware)
+	public := api.PathPrefix("").Subrouter()
+
+	httpHandler.RegisterRoutes(public, protected, csrfProtected)
 
 	httpServer := server.NewHTTPServer(&cfg.Playlist.HTTP, router, appLogger)
 

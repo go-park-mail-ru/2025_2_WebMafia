@@ -1,26 +1,68 @@
 version: "3.8"
 
 services:
-  app:
+  auth:
     build:
       context: .
-      dockerfile: ./docker/Dockerfile
+      dockerfile: ./docker/auth.Dockerfile
     ports:
       - "8080:8080"
-    container_name: wavemusic-app
+    container_name: wavemusic-auth
     restart: always
-    env_file: .env.docker 
+    env_file:
+      - ./.env.dev
+    volumes:
+      - ./config:/config
     depends_on:
-      db:
-        condition: service_healthy
+      minio:
+        condition: service_started
       migrate:
         condition: service_completed_successfully
+
+  catalog:
+    build:
+      context: .
+      dockerfile: ./docker/catalog.Dockerfile
+    ports:
+      - "8081:8081"
+    container_name: wavemusic-catalog
+    restart: always
+    env_file:
+      - ./.env.dev
+    volumes:
+      - ./config:/config
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      auth:
+        condition: service_started
+
+  playlist:
+    build:
+      context: .
+      dockerfile: ./docker/playlist.Dockerfile
+    ports:
+      - "8082:8082"
+    container_name: wavemusic-playlist
+    restart: always
+    env_file:
+      - ./.env.dev
+    volumes:
+      - ./config:/config
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      auth:
+        condition: service_started
+      catalog:
+        condition: service_started
+      minio:
+        condition: service_started
 
   migrate:
     image: migrate/migrate
     volumes:
       - ./migrations:/migrations
-    env_file: .env.docker
     command: [ "-path", "/migrations", "-database", "postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}?sslmode=disable", "up" ]
     depends_on:
       db:
@@ -53,12 +95,54 @@ services:
       - "8099:9000"
       - "8100:9001"
     environment:
-      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY}
-      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY}
+      MINIO_ROOT_USER: ${MINIO_ACCESSKEY}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRETKEY}
     volumes:
       - minio_data:/data
     command: server /data --console-address ":9001"
 
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: wavemusic-prometheus
+    restart: always
+    ports:
+      - "8091:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: wavemusic-node-exporter
+    restart: always
+    pid: host
+    volumes:
+      - /:/host:ro
+    command:
+      - '--path.rootfs=/host'
+
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: wavemusic-grafana
+    restart: always
+    ports:
+      - "8092:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./config/grafana:/etc/grafana/provisioning
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GF_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_PASSWORD}
+    depends_on:
+      - prometheus
+
 volumes:
   pg_data:
   minio_data:
+  prometheus_data:
+  grafana_data:

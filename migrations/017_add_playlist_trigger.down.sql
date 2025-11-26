@@ -1,0 +1,1 @@
+DROP TRIGGER IF EXISTS update_playlist_updated_at ON playlist;

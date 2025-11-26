@@ -1,21 +1,26 @@
-ENV_PATH = .env.local
-DOCKER_ENV_PATH = .env.docker
+ENV_PATH = .env.dev
 
 include $(ENV_PATH)
 
 COMPOSE_PATH = docker-compose.yml
 
-DOCKER_COMPOSE := docker compose -f $(COMPOSE_PATH) --env-file $(DOCKER_ENV_PATH)
+DOCKER_COMPOSE := docker compose -f $(COMPOSE_PATH) --env-file $(ENV_PATH)
 
-DB_URL = postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable
+DB_URL = postgres://$(DB_USER):$(DB_PASSWORD)@localhost:5432/$(DB_NAME)?sslmode=disable
 MIGRATIONS_PATH = migrations
 
-.PHONY: test coverage-html clean docker-build docker-up docker-down docker-stop docker-logs generate
+.PHONY: test coverage-html clean docker-build docker-up docker-down docker-stop docker-logs generate proto-gen
 
 # === Вспомогательные команды ===
 
+proto-gen:
+	@echo "==> Generating protobuf..."
+	@protoc --go_out=. --go_opt=paths=source_relative \
+		--go-grpc_out=. --go-grpc_opt=paths=source_relative \
+		proto/catalog/catalog.proto proto/auth/auth.proto
+
 generate:
-	@echo "==> Generating..."
+	@echo "==> Generating mocks and other go:generate assets..."
 	@go generate ./...
 
 
@@ -23,9 +28,10 @@ generate:
 
 test:
 	@echo "==> Запускаем тесты и генерируем отчет о покрытии..."
-	@go test -coverprofile=coverage.out $(shell go list ./... | grep -v /mocks)
+	@go test -coverprofile=coverage.out $(shell go list ./... | grep -v /mocks | grep -v /proto)
 	@echo "\n==> Общее покрытие кода тестами:"
 	@go tool cover -func=coverage.out | grep total
+	@rm coverage.out
 
 coverage-html: test
 	@echo "==> Открываем HTML-отчет в браузере..."

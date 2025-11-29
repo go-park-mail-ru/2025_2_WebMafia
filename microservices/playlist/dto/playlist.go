@@ -3,15 +3,17 @@ package dto
 import (
 	"github.com/google/uuid"
 	"io"
+	"time"
 )
 
 type Playlist struct {
-	ID          string  `json:"id"`
-	Title       string  `json:"title"`
-	Description string  `json:"description,omitempty"`
-	IsFavorite  bool    `json:"is_favorite"`
-	AvatarURL   string  `json:"avatar_url,omitempty"`
-	Tracks      []Track `json:"tracks,omitempty"`
+	ID          string    `json:"id"`
+	Title       string    `json:"title"`
+	Description string    `json:"description,omitempty"`
+	IsFavorite  bool      `json:"is_favorite"`
+	AvatarURL   string    `json:"avatar_url,omitempty"`
+	Tracks      []Track   `json:"tracks,omitempty"`
+	CreatedAt   time.Time `json:"created_at"`
 }
 
 type Track struct {

@@ -36,6 +36,7 @@ func (s *Service) CreatePlaylist(ctx context.Context, req dto.CreatePlaylistRequ
 		Description: playlist.Description,
 		IsFavorite:  playlist.IsFavorite,
 		AvatarURL:   playlist.AvatarURL,
+		CreatedAt:   playlist.CreatedAt,
 	}, nil
 }
 
@@ -55,6 +56,7 @@ func (s *Service) GetPlaylistsByUser(ctx context.Context, req dto.GetPlaylistsBy
 			Description: p.Description,
 			IsFavorite:  p.IsFavorite,
 			AvatarURL:   p.AvatarURL,
+			CreatedAt:   p.CreatedAt,
 		})
 	}
 	return res, nil
@@ -94,6 +96,7 @@ func (s *Service) UpdatePlaylist(ctx context.Context, req dto.UpdatePlaylistRequ
 		Description: playlist.Description,
 		IsFavorite:  playlist.IsFavorite,
 		AvatarURL:   playlist.AvatarURL,
+		CreatedAt:   playlist.CreatedAt,
 	}, nil
 }
 
@@ -151,6 +154,7 @@ func (s *Service) GetFavoritePlaylist(ctx context.Context, req dto.GetFavoritePl
 		Description: playlist.Description,
 		IsFavorite:  playlist.IsFavorite,
 		AvatarURL:   playlist.AvatarURL,
+		CreatedAt:   playlist.CreatedAt,
 	}, nil
 }
 
@@ -253,6 +257,7 @@ func (s *Service) GetPlaylistWithTracks(ctx context.Context, id uuid.UUID) (*dto
 			IsFavorite:  p.IsFavorite,
 			AvatarURL:   p.AvatarURL,
 			Tracks:      []dto.Track{},
+			CreatedAt:   p.CreatedAt,
 		}, nil
 	}
 
@@ -292,6 +297,7 @@ func (s *Service) GetPlaylistWithTracks(ctx context.Context, id uuid.UUID) (*dto
 		IsFavorite:  p.IsFavorite,
 		AvatarURL:   p.AvatarURL,
 		Tracks:      tracks,
+		CreatedAt:   p.CreatedAt,
 	}, nil
 }
 

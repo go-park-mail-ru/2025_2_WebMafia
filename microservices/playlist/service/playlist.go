@@ -39,23 +39,6 @@ func (s *Service) CreatePlaylist(ctx context.Context, req dto.CreatePlaylistRequ
 	}, nil
 }
 
-func (s *Service) GetPlaylist(ctx context.Context, req dto.GetPlaylistRequest) (*dto.Playlist, error) {
-	const op = "service.GetPlaylist"
-
-	playlist, err := s.repo.GetByID(ctx, req.ID)
-	if err != nil {
-		return nil, fmt.Errorf("%s: get by id: %w", op, mapRepositoryError(err))
-	}
-
-	return &dto.Playlist{
-		ID:          playlist.ID.String(),
-		Title:       playlist.Title,
-		Description: playlist.Description,
-		IsFavorite:  playlist.IsFavorite,
-		AvatarURL:   playlist.AvatarURL,
-	}, nil
-}
-
 func (s *Service) GetPlaylistsByUser(ctx context.Context, req dto.GetPlaylistsByUserRequest) ([]dto.Playlist, error) {
 	const op = "service.GetPlaylistsByUser"
 

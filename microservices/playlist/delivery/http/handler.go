@@ -10,7 +10,6 @@ import (
 //go:generate mockgen -destination=../../mocks/service/service_mock.go -package=service_mock spotify/microservices/playlist/delivery/http IService
 type IService interface {
 	CreatePlaylist(ctx context.Context, req dto.CreatePlaylistRequest) (*dto.Playlist, error)
-	GetPlaylist(ctx context.Context, req dto.GetPlaylistRequest) (*dto.Playlist, error)
 	GetPlaylistsByUser(ctx context.Context, req dto.GetPlaylistsByUserRequest) ([]dto.Playlist, error)
 	UpdatePlaylist(ctx context.Context, req dto.UpdatePlaylistRequest) (*dto.Playlist, error)
 	DeletePlaylist(ctx context.Context, req dto.DeletePlaylistRequest) error

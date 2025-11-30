@@ -449,3 +449,205 @@ func parsePagination(query url.Values) (uint64, uint64) {
 
 	return limit, offset
 }
+
+// любимые альбомы
+func (h *Handler) AddAlbumToFavorite(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.AddAlbumToFavorite"
+	log := middleware.LoggerFromContext(r.Context())
+
+	rawUserID, ok := middleware.GetUserID(r.Context())
+	if !ok {
+		log.Errorf("[%s]: missing userId", op)
+		response.UnauthorizedJSON(w)
+		return
+	}
+
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	albumID := mux.Vars(r)["id"]
+	if albumID == "" {
+		response.BadRequestJSON(w)
+		return
+	}
+
+	req := dto.AddAlbumToFavoriteRequest{
+		UserID:  userID,
+		AlbumID: albumID,
+	}
+
+	if err := h.service.AddAlbumToFavorite(r.Context(), req); err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+	response.JSON(w, http.StatusOK, map[string]string{"status": "ok"})
+}
+
+func (h *Handler) RemoveAlbumFromFavorite(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.RemoveAlbumFromFavorite"
+	log := middleware.LoggerFromContext(r.Context())
+
+	rawUserID, ok := middleware.GetUserID(r.Context())
+	if !ok {
+		log.Errorf("[%s]: missing userId", op)
+		response.UnauthorizedJSON(w)
+		return
+	}
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	albumID := mux.Vars(r)["id"]
+	if albumID == "" {
+		response.BadRequestJSON(w)
+		return
+	}
+
+	req := dto.RemoveAlbumFromFavoriteRequest{
+		UserID:  userID,
+		AlbumID: albumID,
+	}
+
+	if err := h.service.RemoveAlbumFromFavorite(r.Context(), req); err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+	response.JSON(w, http.StatusOK, map[string]string{"status": "removed"})
+}
+
+func (h *Handler) GetFavoriteAlbums(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.GetFavoriteAlbums"
+	log := middleware.LoggerFromContext(r.Context())
+
+	rawUserID, ok := middleware.GetUserID(r.Context())
+	if !ok {
+		log.Errorf("[%s]: missing userId", op)
+		response.UnauthorizedJSON(w)
+		return
+	}
+
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	albums, err := h.service.GetFavoriteAlbums(r.Context(), userID)
+	if err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+	response.JSON(w, http.StatusOK, albums)
+}
+
+// любимые артисты
+func (h *Handler) AddArtistToFavorite(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.AddArtistToFavorite"
+	log := middleware.LoggerFromContext(r.Context())
+
+	rawUserID, ok := middleware.GetUserID(r.Context())
+	if !ok {
+		log.Errorf("[%s]: missing userId", op)
+		response.UnauthorizedJSON(w)
+		return
+	}
+
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+	artistID := mux.Vars(r)["id"]
+	if artistID == "" {
+		response.BadRequestJSON(w)
+		return
+	}
+
+	req := dto.AddArtistToFavoriteRequest{
+		UserID:   userID,
+		ArtistID: artistID,
+	}
+
+	if err := h.service.AddArtistToFavorite(r.Context(), req); err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+	response.JSON(w, http.StatusOK, map[string]string{"status": "ok"})
+}
+
+func (h *Handler) RemoveArtistFromFavorite(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.RemoveArtistFromFavorite"
+	log := middleware.LoggerFromContext(r.Context())
+
+	rawUserID, ok := middleware.GetUserID(r.Context())
+	if !ok {
+		log.Errorf("[%s]: missing userId", op)
+		response.UnauthorizedJSON(w)
+		return
+	}
+
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	artistID := mux.Vars(r)["id"]
+	if artistID == "" {
+		response.BadRequestJSON(w)
+		return
+	}
+
+	req := dto.RemoveArtistFromFavoriteRequest{
+		UserID:   userID,
+		ArtistID: artistID,
+	}
+	if err := h.service.RemoveArtistFromFavorite(r.Context(), req); err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+	response.JSON(w, http.StatusOK, map[string]string{"status": "removed"})
+}
+
+func (h *Handler) GetFavoriteArtists(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.GetFavoriteArtists"
+	log := middleware.LoggerFromContext(r.Context())
+
+	rawUserID, ok := middleware.GetUserID(r.Context())
+	if !ok {
+		log.Errorf("[%s]: missing userId", op)
+		response.UnauthorizedJSON(w)
+		return
+	}
+
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	artists, err := h.service.GetFavoriteArtists(r.Context(), userID)
+	if err != nil {
+		log.Errorf("[%s]: service: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, artists)
+}

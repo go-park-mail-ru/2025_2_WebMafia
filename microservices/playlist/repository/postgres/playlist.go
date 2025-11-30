@@ -227,6 +227,124 @@ func (r *Repository) GetTracksByPlaylist(ctx context.Context, playlistID uuid.UU
 	return ids, nil
 }
 
+// ЛЮБИМЫЕ АЛЬБОМЫ
+func (r *Repository) AddAlbumToFavorite(ctx context.Context, userID uuid.UUID, albumID string) error {
+	const op = "repository.AddAlbumToFavorite"
+
+	query := `INSERT INTO favorite_album (user_id, album_id)
+	          VALUES ($1, $2)
+	          ON CONFLICT DO NOTHING`
+
+	_, err := r.Conn.ExecContext(ctx, query, userID, albumID)
+	if err != nil {
+		return fmt.Errorf("%s: %w", op, err)
+	}
+
+	return nil
+}
+
+func (r *Repository) RemoveAlbumFromFavorite(ctx context.Context, userID uuid.UUID, albumID string) error {
+	const op = "repository.RemoveAlbumFromFavorite"
+
+	query := `DELETE FROM favorite_album WHERE user_id = $1 AND album_id = $2`
+	res, err := r.Conn.ExecContext(ctx, query, userID, albumID)
+	if err != nil {
+		return fmt.Errorf("%s: %w", op, err)
+	}
+
+	ra, err := res.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("%s: %w", op, err)
+	}
+	if ra == 0 {
+		return fmt.Errorf("%s: %w", op, ErrNotFound)
+	}
+
+	return nil
+}
+
+func (r *Repository) GetFavoriteAlbumIDs(ctx context.Context, userID uuid.UUID) ([]string, error) {
+	const op = "repository.GetFavoriteAlbumIDs"
+
+	query := `SELECT album_id FROM favorite_album WHERE user_id = $1 ORDER BY created_at DESC`
+
+	rows, err := r.Conn.QueryContext(ctx, query, userID)
+	if err != nil {
+		return nil, fmt.Errorf("%s: %w", op, err)
+	}
+	defer rows.Close()
+
+	ids := make([]string, 0)
+	for rows.Next() {
+		var id string
+		if err := rows.Scan(&id); err != nil {
+			return nil, fmt.Errorf("%s: scan: %w", op, err)
+		}
+		ids = append(ids, id)
+	}
+
+	return ids, nil
+}
+
+// ЛЮБИМЫЕ АРТИСТЫ
+func (r *Repository) AddArtistToFavorite(ctx context.Context, userID uuid.UUID, artistID string) error {
+	const op = "repository.AddArtistToFavorite"
+
+	query := `INSERT INTO favorite_artist (user_id, artist_id)
+	          VALUES ($1, $2) ON CONFLICT DO NOTHING`
+
+	_, err := r.Conn.ExecContext(ctx, query, userID, artistID)
+	if err != nil {
+		return fmt.Errorf("%s: %w", op, err)
+	}
+
+	return nil
+}
+
+func (r *Repository) RemoveArtistFromFavorite(ctx context.Context, userID uuid.UUID, artistID string) error {
+	const op = "repository.RemoveArtistFromFavorite"
+
+	query := `DELETE FROM favorite_artist WHERE user_id = $1 AND artist_id = $2`
+
+	res, err := r.Conn.ExecContext(ctx, query, userID, artistID)
+	if err != nil {
+		return fmt.Errorf("%s: %w", op, err)
+	}
+
+	ra, err := res.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("%s: %w", op, err)
+	}
+	if ra == 0 {
+		return fmt.Errorf("%s: %w", op, ErrNotFound)
+	}
+
+	return nil
+}
+
+func (r *Repository) GetFavoriteArtistIDs(ctx context.Context, userID uuid.UUID) ([]string, error) {
+	const op = "repository.GetFavoriteArtistIDs"
+
+	query := `SELECT artist_id FROM favorite_artist WHERE user_id = $1 ORDER BY created_at DESC`
+
+	rows, err := r.Conn.QueryContext(ctx, query, userID)
+	if err != nil {
+		return nil, fmt.Errorf("%s: %w", op, err)
+	}
+	defer rows.Close()
+
+	ids := make([]string, 0)
+	for rows.Next() {
+		var id string
+		if err := rows.Scan(&id); err != nil {
+			return nil, fmt.Errorf("%s: scan: %w", op, err)
+		}
+		ids = append(ids, id)
+	}
+
+	return ids, nil
+}
+
 func (r *Repository) selectPlaylist(ctx context.Context, query string, args ...interface{}) (*model.Playlist, error) {
 	row := r.Conn.QueryRowContext(ctx, query, args...)
 

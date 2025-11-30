@@ -158,27 +158,8 @@ func (s *Service) GetFavoritePlaylist(ctx context.Context, req dto.GetFavoritePl
 	}, nil
 }
 
-func (s *Service) validateTrack(ctx context.Context, trackID string) error {
-	const op = "service.validateTrack"
-
-	if trackID == "" {
-		return fmt.Errorf("%s: empty track id", op)
-	}
-
-	_, err := s.catalog.GetTrackByID(ctx, &pbCatalog.GetTrackByIDRequest{Id: trackID})
-	if err != nil {
-		return fmt.Errorf("%s: track not found: %w", op, ErrNotFound)
-	}
-
-	return nil
-}
-
 func (s *Service) AddTrackToFavorite(ctx context.Context, req dto.AddTrackToFavoriteRequest) error {
 	const op = "service.AddTrackToFavorite"
-
-	if err := s.validateTrack(ctx, req.TrackID); err != nil {
-		return fmt.Errorf("%s: %w", op, err)
-	}
 
 	fav, err := s.getOrCreateFavorite(ctx, req.UserID)
 	if err != nil {
@@ -304,10 +285,6 @@ func (s *Service) GetPlaylistWithTracks(ctx context.Context, id uuid.UUID) (*dto
 func (s *Service) AddTrackToPlaylist(ctx context.Context, req dto.AddTrackToPlaylistRequest) error {
 	const op = "service.AddTrackToPlaylist"
 
-	if err := s.validateTrack(ctx, req.TrackID); err != nil {
-		return fmt.Errorf("%s: validate: %w", op, err)
-	}
-
 	if err := s.repo.AddTrackToPlaylist(ctx, req.PlaylistID, req.TrackID); err != nil {
 		return fmt.Errorf("%s: repo add: %w", op, mapRepositoryError(err))
 	}
@@ -324,4 +301,100 @@ func (s *Service) RemoveTrackFromPlaylist(ctx context.Context, req dto.RemoveTra
 		return fmt.Errorf("%s: repo remove: %w", op, mapRepositoryError(err))
 	}
 	return nil
+}
+
+// любимые альбомы
+
+func (s *Service) AddAlbumToFavorite(ctx context.Context, req dto.AddAlbumToFavoriteRequest) error {
+	const op = "service.AddAlbumToFavorite"
+
+	if err := s.repo.AddAlbumToFavorite(ctx, req.UserID, req.AlbumID); err != nil {
+		return fmt.Errorf("%s: repo add: %w", op, mapRepositoryError(err))
+	}
+	return nil
+}
+
+func (s *Service) RemoveAlbumFromFavorite(ctx context.Context, req dto.RemoveAlbumFromFavoriteRequest) error {
+	const op = "service.RemoveAlbumFromFavorite"
+
+	if err := s.repo.RemoveAlbumFromFavorite(ctx, req.UserID, req.AlbumID); err != nil {
+		return fmt.Errorf("%s: repo remove: %w", op, mapRepositoryError(err))
+	}
+	return nil
+}
+
+func (s *Service) GetFavoriteAlbums(ctx context.Context, userID uuid.UUID) ([]dto.Album, error) {
+	const op = "service.GetFavoriteAlbums"
+
+	ids, err := s.repo.GetFavoriteAlbumIDs(ctx, userID)
+	if err != nil {
+		return nil, fmt.Errorf("%s: get ids: %w", op, mapRepositoryError(err))
+	}
+
+	if len(ids) == 0 {
+		return []dto.Album{}, nil
+	}
+
+	resp, err := s.catalog.GetAlbumsByIDs(ctx, &pbCatalog.GetAlbumsByIDsRequest{Ids: ids})
+	if err != nil {
+		return nil, fmt.Errorf("%s: batch load: %w", op, err)
+	}
+
+	albums := make([]dto.Album, 0, len(resp.Albums))
+	for _, a := range resp.Albums {
+		album := dto.Album{
+			ID:        a.Id,
+			Title:     a.Title,
+			AvatarURL: a.AvatarUrl,
+		}
+
+		albums = append(albums, album)
+	}
+	return albums, nil
+}
+
+// любимые артисты
+func (s *Service) AddArtistToFavorite(ctx context.Context, req dto.AddArtistToFavoriteRequest) error {
+	const op = "service.AddArtistToFavorite"
+	if err := s.repo.AddArtistToFavorite(ctx, req.UserID, req.ArtistID); err != nil {
+		return fmt.Errorf("%s: repo add: %w", op, mapRepositoryError(err))
+	}
+	return nil
+}
+
+func (s *Service) RemoveArtistFromFavorite(ctx context.Context, req dto.RemoveArtistFromFavoriteRequest) error {
+	const op = "service.RemoveArtistFromFavorite"
+
+	if err := s.repo.RemoveArtistFromFavorite(ctx, req.UserID, req.ArtistID); err != nil {
+		return fmt.Errorf("%s: repo remove: %w", op, mapRepositoryError(err))
+	}
+	return nil
+}
+
+func (s *Service) GetFavoriteArtists(ctx context.Context, userID uuid.UUID) ([]dto.FavoriteArtist, error) {
+	const op = "service.GetFavoriteArtists"
+
+	ids, err := s.repo.GetFavoriteArtistIDs(ctx, userID)
+	if err != nil {
+		return nil, fmt.Errorf("%s: get ids: %w", op, mapRepositoryError(err))
+	}
+	if len(ids) == 0 {
+		return []dto.FavoriteArtist{}, nil
+	}
+
+	resp, err := s.catalog.GetArtistsByIDs(ctx, &pbCatalog.GetArtistsByIDsRequest{Ids: ids})
+	if err != nil {
+		return nil, fmt.Errorf("%s: batch load: %w", op, err)
+	}
+
+	artists := make([]dto.FavoriteArtist, 0, len(resp.Artists))
+	for _, a := range resp.Artists {
+		artist := dto.FavoriteArtist{
+			ID:        a.Id,
+			Name:      a.Name,
+			AvatarURL: a.AvatarUrl,
+		}
+		artists = append(artists, artist)
+	}
+	return artists, nil
 }

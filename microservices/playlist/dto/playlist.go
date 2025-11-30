@@ -112,6 +112,19 @@ type RemoveArtistFromFavoriteRequest struct {
 }
 
 // любимые альбомы
+
+type FavoriteAlbum struct {
+	ID        string           `json:"id"`
+	Title     string           `json:"title"`
+	AvatarURL string           `json:"avatar_url,omitempty"`
+	Artists   []ArtistForAlbum `json:"artists"`
+}
+
+type ArtistForAlbum struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
 type AddAlbumToFavoriteRequest struct {
 	UserID  uuid.UUID `json:"-"`
 	AlbumID string    `json:"album_id"`

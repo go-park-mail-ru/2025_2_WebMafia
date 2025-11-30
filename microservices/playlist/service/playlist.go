@@ -323,16 +323,15 @@ func (s *Service) RemoveAlbumFromFavorite(ctx context.Context, req dto.RemoveAlb
 	return nil
 }
 
-func (s *Service) GetFavoriteAlbums(ctx context.Context, userID uuid.UUID) ([]dto.Album, error) {
+func (s *Service) GetFavoriteAlbums(ctx context.Context, userID uuid.UUID) ([]dto.FavoriteAlbum, error) {
 	const op = "service.GetFavoriteAlbums"
 
 	ids, err := s.repo.GetFavoriteAlbumIDs(ctx, userID)
 	if err != nil {
 		return nil, fmt.Errorf("%s: get ids: %w", op, mapRepositoryError(err))
 	}
-
 	if len(ids) == 0 {
-		return []dto.Album{}, nil
+		return []dto.FavoriteAlbum{}, nil
 	}
 
 	resp, err := s.catalog.GetAlbumsByIDs(ctx, &pbCatalog.GetAlbumsByIDsRequest{Ids: ids})
@@ -340,17 +339,24 @@ func (s *Service) GetFavoriteAlbums(ctx context.Context, userID uuid.UUID) ([]dt
 		return nil, fmt.Errorf("%s: batch load: %w", op, err)
 	}
 
-	albums := make([]dto.Album, 0, len(resp.Albums))
+	out := make([]dto.FavoriteAlbum, 0, len(resp.Albums))
+
 	for _, a := range resp.Albums {
-		album := dto.Album{
+		alb := dto.FavoriteAlbum{
 			ID:        a.Id,
 			Title:     a.Title,
 			AvatarURL: a.AvatarUrl,
 		}
+		for _, art := range a.Artists {
+			alb.Artists = append(alb.Artists, dto.ArtistForAlbum{
+				ID:   art.Id,
+				Name: art.Name,
+			})
+		}
 
-		albums = append(albums, album)
+		out = append(out, alb)
 	}
-	return albums, nil
+	return out, nil
 }
 
 // любимые артисты

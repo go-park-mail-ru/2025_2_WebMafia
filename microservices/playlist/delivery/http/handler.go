@@ -23,7 +23,7 @@ type IService interface {
 	//любимые альбомы
 	AddAlbumToFavorite(ctx context.Context, req dto.AddAlbumToFavoriteRequest) error
 	RemoveAlbumFromFavorite(ctx context.Context, req dto.RemoveAlbumFromFavoriteRequest) error
-	GetFavoriteAlbums(ctx context.Context, userID uuid.UUID) ([]dto.Album, error)
+	GetFavoriteAlbums(ctx context.Context, userID uuid.UUID) ([]dto.FavoriteAlbum, error)
 	//любимые артисты
 	AddArtistToFavorite(ctx context.Context, req dto.AddArtistToFavoriteRequest) error
 	RemoveArtistFromFavorite(ctx context.Context, req dto.RemoveArtistFromFavoriteRequest) error

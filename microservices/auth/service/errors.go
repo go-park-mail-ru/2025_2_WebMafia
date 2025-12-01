@@ -3,6 +3,7 @@ package service
 import (
 	"errors"
 	"fmt"
+
 	"spotify/microservices/auth/repository/postgres"
 )
 

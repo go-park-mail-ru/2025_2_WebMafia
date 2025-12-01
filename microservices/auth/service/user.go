@@ -3,10 +3,11 @@ package service
 import (
 	"context"
 	"fmt"
+	"time"
+
 	"spotify/internal/model"
 	"spotify/microservices/auth/dto"
 	"spotify/microservices/auth/tools"
-	"time"
 
 	"github.com/google/uuid"
 )

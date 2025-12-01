@@ -4,11 +4,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strings"
+	"time"
+
 	"spotify/internal/middleware"
 	"spotify/microservices/auth/dto"
 	"spotify/pkg/response"
-	"strings"
-	"time"
 )
 
 const (
@@ -127,7 +128,6 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 		Email:    req.Email,
 		Password: req.Password,
 	})
-
 	if err != nil {
 		log.Errorf("[%s]: Service error: %v", op, err)
 		handleServiceError(w, err)
@@ -177,7 +177,6 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		Login:    req.Login,
 		Password: req.Password,
 	})
-
 	if err != nil {
 		log.Errorf("[%s]: Service error: %v", op, err)
 		handleServiceError(w, err)

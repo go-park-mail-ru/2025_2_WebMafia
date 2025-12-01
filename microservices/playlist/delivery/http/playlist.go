@@ -3,13 +3,15 @@ package http
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/google/uuid"
 	"net/http"
 	"net/url"
+	"strconv"
+
+	"github.com/google/uuid"
+
 	"spotify/internal/middleware"
 	"spotify/microservices/playlist/dto"
 	"spotify/pkg/response"
-	"strconv"
 
 	"github.com/gorilla/mux"
 )

@@ -23,7 +23,6 @@ type responseWriter struct {
 func RequestLoggerMiddleware(log logger.Logger) func(next http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-
 			requestID := uuid.New().String()
 			contextLogger := log.With("request_id", requestID)
 

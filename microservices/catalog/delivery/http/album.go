@@ -3,6 +3,7 @@ package http
 import (
 	"errors"
 	"net/http"
+
 	"spotify/internal/middleware"
 	"spotify/microservices/catalog/service"
 	"spotify/pkg/response"

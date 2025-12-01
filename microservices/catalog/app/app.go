@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"sync"
+
 	"spotify/internal/metrics"
 	"spotify/internal/middleware"
 	"spotify/internal/server"
@@ -18,7 +20,6 @@ import (
 	"spotify/pkg/postgres"
 	pbAuth "spotify/proto/auth"
 	pb "spotify/proto/catalog"
-	"sync"
 
 	"github.com/gorilla/mux"
 	grpc_prometheus "github.com/grpc-ecosystem/go-grpc-prometheus"

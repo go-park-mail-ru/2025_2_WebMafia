@@ -2,12 +2,11 @@ package service
 
 import (
 	"errors"
+
 	"spotify/microservices/catalog/repository/postgres"
 )
 
-var (
-	ErrNotFound = errors.New("entity not found")
-)
+var ErrNotFound = errors.New("entity not found")
 
 func mapError(err error) error {
 	switch {

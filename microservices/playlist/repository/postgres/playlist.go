@@ -5,9 +5,10 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"strings"
+
 	"github.com/google/uuid"
 	"spotify/internal/model"
-	"strings"
 )
 
 func (r *Repository) CreatePlaylist(ctx context.Context, playlist model.Playlist, userID uuid.UUID) error {
@@ -33,7 +34,6 @@ func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Playlist
 		FROM playlist WHERE playlist_id = $1`
 
 	playlist, err := r.selectPlaylist(ctx, query, id)
-
 	if err != nil {
 		return nil, fmt.Errorf("%s: %w", op, err)
 	}

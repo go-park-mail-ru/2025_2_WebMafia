@@ -25,16 +25,19 @@ func (m *mockLogger) Debugf(t string, args ...interface{}) {
 		m.debugFunc(t, args...)
 	}
 }
+
 func (m *mockLogger) Infof(t string, args ...interface{}) {
 	if m.infoFunc != nil {
 		m.infoFunc(t, args...)
 	}
 }
+
 func (m *mockLogger) Errorf(t string, args ...interface{}) {
 	if m.errorFunc != nil {
 		m.errorFunc(t, args...)
 	}
 }
+
 func (m *mockLogger) With(args ...interface{}) logger.Logger {
 	if m.withFunc != nil {
 		return m.withFunc(args...)

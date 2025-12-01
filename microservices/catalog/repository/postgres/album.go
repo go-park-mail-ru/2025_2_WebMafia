@@ -3,6 +3,7 @@ package postgres
 import (
 	"context"
 	"fmt"
+
 	"spotify/internal/model"
 	"spotify/microservices/catalog/dto"
 
@@ -28,7 +29,6 @@ func (r *Repository) GetAlbumByID(ctx context.Context, id uuid.UUID) (*model.Alb
 		&album.CreatedAt,
 		&album.UpdatedAt,
 	)
-
 	if err != nil {
 		return nil, fmt.Errorf("[%s]: %w", op, mapErrors(err))
 	}

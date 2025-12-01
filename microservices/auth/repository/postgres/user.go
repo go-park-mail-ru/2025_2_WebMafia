@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+
 	"spotify/internal/model"
 
 	"github.com/jackc/pgx/v5/pgconn"
@@ -20,7 +21,6 @@ func (m *Repository) CreateUser(ctx context.Context, user model.User) error {
 		user.ID, user.Login, user.Email, user.PasswordHash,
 		user.AvatarURL, user.CreatedAt, user.UpdatedAt,
 	)
-
 	if err != nil {
 		return fmt.Errorf("%s: %w", op, handlePostgresError(err))
 	}
@@ -92,7 +92,6 @@ func (m *Repository) UpdateUserProfile(ctx context.Context, user model.User) err
 		user.PasswordHash,
 		user.ID,
 	)
-
 	if err != nil {
 		return fmt.Errorf("%s: %w", op, handlePostgresError(err))
 	}

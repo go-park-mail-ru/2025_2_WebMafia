@@ -22,8 +22,9 @@ import (
 	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
 
-	"github.com/gorilla/mux"
 	pbCatalog "spotify/proto/catalog"
+
+	"github.com/gorilla/mux"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -74,7 +75,7 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 		appLogger.Warnf("grpc client metrics already registered: %v", err)
 	}
 
-	catalogConn, err := grpc.Dial(
+	catalogConn, err := grpc.NewClient(
 		cfg.Playlist.Clients.Catalog,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 		grpc.WithUnaryInterceptor(grpcprometheus.UnaryClientInterceptor),

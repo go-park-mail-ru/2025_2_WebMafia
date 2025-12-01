@@ -25,7 +25,9 @@ func JSON(w http.ResponseWriter, statusCode int, data interface{}) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(statusCode)
-	w.Write(jsonData)
+	if _, err := w.Write(jsonData); err != nil {
+		log.Printf("ERROR: failed to write response: %v", err)
+	}
 }
 
 // 400 Bad Request

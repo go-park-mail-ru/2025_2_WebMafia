@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"time"
 
-	"spotify/internal/metrics"
-
 	"github.com/gorilla/mux"
+
+	"spotify/internal/metrics"
 )
 
 func MetricsMiddleware(m *metrics.Metrics) func(next http.Handler) http.Handler {

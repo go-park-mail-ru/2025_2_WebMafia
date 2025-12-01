@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"time"
 
-	"spotify/pkg/logger"
-
 	"github.com/google/uuid"
+
+	"spotify/pkg/logger"
 )
 
 const (

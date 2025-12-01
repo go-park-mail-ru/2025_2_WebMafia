@@ -2,7 +2,6 @@ package http
 
 import (
 	"context"
-
 	"spotify/microservices/catalog/dto"
 
 	"github.com/google/uuid"

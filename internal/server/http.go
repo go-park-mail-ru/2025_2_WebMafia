@@ -3,7 +3,6 @@ package server
 import (
 	"context"
 	"net/http"
-
 	"spotify/internal/app"
 	"spotify/pkg/logger"
 )

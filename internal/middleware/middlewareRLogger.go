@@ -3,11 +3,10 @@ package middleware
 import (
 	"context"
 	"net/http"
+	"spotify/pkg/logger"
 	"time"
 
 	"github.com/google/uuid"
-
-	"spotify/pkg/logger"
 )
 
 const (

@@ -3,10 +3,9 @@ package service
 import (
 	"context"
 	"fmt"
-	"sync"
-
 	"spotify/internal/model"
 	"spotify/microservices/catalog/dto"
+	"sync"
 
 	"github.com/google/uuid"
 )

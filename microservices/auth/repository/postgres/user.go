@@ -5,7 +5,6 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-
 	"spotify/internal/model"
 
 	"github.com/jackc/pgx/v5/pgconn"

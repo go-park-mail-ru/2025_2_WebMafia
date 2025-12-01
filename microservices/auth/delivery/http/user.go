@@ -4,12 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"strings"
-	"time"
-
 	"spotify/internal/middleware"
 	"spotify/microservices/auth/dto"
 	"spotify/pkg/response"
+	"strings"
+	"time"
 )
 
 const (

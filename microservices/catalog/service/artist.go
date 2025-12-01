@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"sort"
-
 	"spotify/microservices/catalog/dto"
 
 	"github.com/google/uuid"

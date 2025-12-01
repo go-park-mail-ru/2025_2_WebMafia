@@ -3,7 +3,6 @@ package middleware
 import (
 	"context"
 	"fmt"
-
 	"spotify/pkg/jwtmanager"
 )
 

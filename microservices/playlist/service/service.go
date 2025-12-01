@@ -3,9 +3,9 @@ package service
 import (
 	"context"
 	"io"
-
 	"spotify/internal/model"
 	"spotify/microservices/playlist/repository/postgres"
+
 	pbCatalog "spotify/proto/catalog"
 
 	"github.com/google/uuid"

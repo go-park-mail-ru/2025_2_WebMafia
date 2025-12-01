@@ -2,7 +2,6 @@ package http
 
 import (
 	"context"
-
 	"spotify/microservices/auth/dto"
 	"spotify/pkg/jwtmanager"
 )

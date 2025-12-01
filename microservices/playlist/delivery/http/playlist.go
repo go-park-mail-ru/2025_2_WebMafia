@@ -5,13 +5,12 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
-	"strconv"
-
-	"github.com/google/uuid"
-
 	"spotify/internal/middleware"
 	"spotify/microservices/playlist/dto"
 	"spotify/pkg/response"
+	"strconv"
+
+	"github.com/google/uuid"
 
 	"github.com/gorilla/mux"
 )

@@ -2,7 +2,6 @@ package service
 
 import (
 	"errors"
-
 	"spotify/microservices/catalog/repository/postgres"
 )
 

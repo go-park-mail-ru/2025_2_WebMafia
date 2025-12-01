@@ -2,10 +2,9 @@ package interceptors
 
 import (
 	"context"
-	"time"
-
 	"spotify/internal/middleware"
 	"spotify/pkg/logger"
+	"time"
 
 	"github.com/google/uuid"
 	"google.golang.org/grpc"

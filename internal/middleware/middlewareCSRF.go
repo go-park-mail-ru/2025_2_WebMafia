@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"net/http"
-
 	"spotify/pkg/response"
 )
 

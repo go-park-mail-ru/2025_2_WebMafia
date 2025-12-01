@@ -6,8 +6,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"sync"
-
 	"spotify/internal/metrics"
 	"spotify/internal/middleware"
 	"spotify/internal/server"
@@ -16,6 +14,8 @@ import (
 	"spotify/pkg/logger"
 	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
+	"sync"
+
 	pb "spotify/proto/auth"
 
 	grpcDelivery "spotify/microservices/auth/delivery/grpc"

@@ -3,7 +3,6 @@ package server
 import (
 	"fmt"
 	"net"
-
 	"spotify/internal/app"
 	"spotify/internal/interceptors"
 	"spotify/pkg/logger"

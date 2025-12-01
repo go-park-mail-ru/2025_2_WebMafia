@@ -2,11 +2,10 @@ package middleware
 
 import (
 	"net/http"
+	"spotify/internal/metrics"
 	"time"
 
 	"github.com/gorilla/mux"
-
-	"spotify/internal/metrics"
 )
 
 func MetricsMiddleware(m *metrics.Metrics) func(next http.Handler) http.Handler {

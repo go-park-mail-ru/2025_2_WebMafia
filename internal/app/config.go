@@ -1,9 +1,8 @@
 package app
 
 import (
-	"time"
-
 	"spotify/internal/middleware"
+	"time"
 )
 
 type HTTPConfig struct {

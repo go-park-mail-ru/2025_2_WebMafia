@@ -3,7 +3,6 @@ package service
 import (
 	"context"
 	"fmt"
-
 	"spotify/microservices/catalog/dto"
 
 	"github.com/google/uuid"

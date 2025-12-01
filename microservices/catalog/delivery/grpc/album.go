@@ -2,8 +2,8 @@ package grpc
 
 import (
 	"context"
-
 	"spotify/internal/middleware"
+
 	pb "spotify/proto/catalog"
 
 	"github.com/google/uuid"

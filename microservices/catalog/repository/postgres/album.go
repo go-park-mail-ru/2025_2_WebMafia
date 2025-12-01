@@ -3,7 +3,6 @@ package postgres
 import (
 	"context"
 	"fmt"
-
 	"spotify/internal/model"
 	"spotify/microservices/catalog/dto"
 

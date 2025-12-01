@@ -6,13 +6,11 @@ on:
       - main
       - dev
       - deploy
-      - task-33-proxy
   pull_request:
     branches:
       - main
       - dev
       - deploy
-      - task-33-proxy
 
 jobs:
   lint:

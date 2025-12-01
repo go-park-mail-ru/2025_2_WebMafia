@@ -1,8 +1,9 @@
 package dto
 
 import (
-	"github.com/google/uuid"
 	"io"
+
+	"github.com/google/uuid"
 )
 
 type Playlist struct {

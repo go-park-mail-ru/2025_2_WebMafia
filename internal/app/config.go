@@ -42,20 +42,29 @@ type CSRFConfig struct {
 	TokenTTL  time.Duration `mapstructure:"tokenTTL"`
 }
 
-func BindViperEnv(v *viper.Viper) {
+func BindViperEnv(v *viper.Viper) error {
+	bindings := map[string]string{
+		"db.password": "DB_PASSWORD",
+		"db.user":     "DB_USER",
+		"db.host":     "DB_HOST",
+		"db.dbName":   "DB_NAME",
 
-	v.BindEnv("db.password", "DB_PASSWORD")
-	v.BindEnv("db.user", "DB_USER")
-	v.BindEnv("db.host", "DB_HOST")
-	v.BindEnv("db.dbName", "DB_NAME")
+		"minio.accessKey": "MINIO_ACCESS_KEY",
+		"minio.secretKey": "MINIO_SECRET_KEY",
+		"minio.endpoint":  "MINIO_ENDPOINT",
 
-	v.BindEnv("minio.accessKey", "MINIO_ACCESS_KEY")
-	v.BindEnv("minio.secretKey", "MINIO_SECRET_KEY")
-	v.BindEnv("minio.endpoint", "MINIO_ENDPOINT")
+		"auth.http.auth.jwt.secretKey":  "JWT_SECRET",
+		"auth.http.auth.csrf.secretKey": "CSRF_SECRET",
 
-	v.BindEnv("auth.http.auth.jwt.secretKey", "JWT_SECRET")
-	v.BindEnv("auth.http.auth.csrf.secretKey", "CSRF_SECRET")
+		"playlist.http.auth.jwt.secretKey":  "JWT_SECRET",
+		"playlist.http.auth.csrf.secretKey": "CSRF_SECRET",
+	}
 
-	v.BindEnv("playlist.http.auth.jwt.secretKey", "JWT_SECRET")
-	v.BindEnv("playlist.http.auth.csrf.secretKey", "CSRF_SECRET")
+	for configKey, envKey := range bindings {
+		if err := v.BindEnv(configKey, envKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

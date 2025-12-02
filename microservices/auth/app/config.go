@@ -31,7 +31,9 @@ func LoadConfig(configPath string) (*Config, error) {
 		return nil, fmt.Errorf("failed to read config file: %w", err)
 	}
 
-	app.BindViperEnv(v)
+	if err := app.BindViperEnv(v); err != nil {
+		return nil, fmt.Errorf("failed to bind env variables: %w", err)
+	}
 
 	var cfg Config
 	if err := v.Unmarshal(&cfg); err != nil {

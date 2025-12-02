@@ -42,7 +42,9 @@ func LoadConfig(path string) (*Config, error) {
 		return nil, fmt.Errorf("cannot read playlist config: %w", err)
 	}
 
-	app.BindViperEnv(v)
+	if err := app.BindViperEnv(v); err != nil {
+		return nil, fmt.Errorf("failed to bind env variables: %w", err)
+	}
 
 	var cfg Config
 	if err := v.Unmarshal(&cfg); err != nil {

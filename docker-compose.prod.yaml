@@ -145,6 +145,7 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
+       ../front/2025_2_WebMafia/dist:/var/www/frontend:ro
     depends_on:
       - auth
       - catalog

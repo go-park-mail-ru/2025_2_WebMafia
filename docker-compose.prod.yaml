@@ -1,0 +1,157 @@
+version: "3.8"
+
+services:
+  auth:
+    image: ghcr.io/go-park-mail-ru/2025_2_webmafia/auth:latest
+    ports:
+      - "8080:8080"
+    container_name: wavemusic-auth
+    restart: always
+    env_file:
+      - ./.env
+    volumes:
+      - ./config:/config
+    depends_on:
+      minio:
+        condition: service_started
+      migrate:
+        condition: service_completed_successfully
+
+  catalog:
+    image: ghcr.io/go-park-mail-ru/2025_2_webmafia/catalog:latest
+    ports:
+      - "8081:8081"
+    container_name: wavemusic-catalog
+    restart: always
+    env_file:
+      - ./.env
+    volumes:
+      - ./config:/config
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      auth:
+        condition: service_started
+
+  playlist:
+    image: ghcr.io/go-park-mail-ru/2025_2_webmafia/playlist:latest
+    ports:
+      - "8082:8082"
+    container_name: wavemusic-playlist
+    restart: always
+    env_file:
+      - ./.env
+    volumes:
+      - ./config:/config
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      auth:
+        condition: service_started
+      catalog:
+        condition: service_started
+      minio:
+        condition: service_started
+
+  migrate:
+    image: migrate/migrate
+    volumes:
+      - ./migrations:/migrations
+    command: [ "-path", "/migrations", "-database", "postgres://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}?sslmode=disable", "up" ]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: on-failure
+
+  db:
+    image: postgres:15-alpine
+    container_name: wavemusic-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: minio/minio:latest
+    container_name: wavemusic-minio
+    restart: always
+    ports:
+      - "8099:9000"
+      - "8100:9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESSKEY}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRETKEY}
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: wavemusic-prometheus
+    restart: always
+    ports:
+      - "8091:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: wavemusic-node-exporter
+    restart: always
+    pid: host
+    volumes:
+      - /:/host:ro
+    command:
+      - '--path.rootfs=/host'
+
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: wavemusic-grafana
+    restart: always
+    ports:
+      - "8092:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./config/grafana:/etc/grafana/provisioning
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GF_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_PASSWORD}
+    depends_on:
+      - prometheus
+
+  nginx:
+    image: nginx:latest
+    container_name: wavemusic-gateway
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - auth
+      - catalog
+      - playlist
+
+volumes:
+  pg_data:
+  minio_data:
+  prometheus_data:
+  grafana_data:

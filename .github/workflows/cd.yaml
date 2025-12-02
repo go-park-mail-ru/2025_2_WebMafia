@@ -85,7 +85,7 @@ jobs:
             echo "${{ secrets.PROD_ENV_FILE }}" > .env
 
             docker-compose -f docker-compose.prod.yaml pull
-            docker-compose -f docker-compose.prod.yaml up -d --remove-orphans            
+            docker-compose -f docker-compose.prod.yaml up -d --remove-orphans --force-recreate          
             docker image prune -f
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

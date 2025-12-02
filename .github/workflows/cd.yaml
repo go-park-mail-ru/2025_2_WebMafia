@@ -78,6 +78,8 @@ jobs:
 
           envs: GITHUB_TOKEN,GITHUB_ACTOR
           script: |
+            set -e
+
             echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
 
             cd ${{ secrets.DEPLOY_PATH }}
@@ -86,7 +88,7 @@ jobs:
 
             docker-compose -f docker-compose.prod.yaml pull
             docker-compose -f docker-compose.prod.yaml down
-            docker-compose -f docker-compose.prod.yaml up -d         
+            docker-compose -f docker-compose.prod.yaml up -d --remove-orphans      
             docker image prune -f
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

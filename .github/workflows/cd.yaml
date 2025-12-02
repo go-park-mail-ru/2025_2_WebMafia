@@ -75,13 +75,18 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
+
+          envs: GITHUB_TOKEN,GITHUB_ACTOR
           script: |
+            echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+
             cd ${{ secrets.DEPLOY_PATH }}
 
             echo "${{ secrets.PROD_ENV_FILE }}" > .env
 
-            docker compose -f docker-compose.prod.yaml pull
-
-            docker compose -f docker-compose.prod.yaml up -d --remove-orphans
-
+            docker-compose -f docker-compose.prod.yaml pull
+            docker-compose -f docker-compose.prod.yaml up -d --remove-orphans            
             docker image prune -f
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}

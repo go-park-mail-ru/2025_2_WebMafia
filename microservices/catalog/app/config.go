@@ -9,8 +9,8 @@ import (
 )
 
 type Config struct {
-	Catalog CatalogConfig   `mapstructure:"catalog"`
-	DB      postgres.Config `mapstructure:"db"`
+	Catalog CatalogConfig `mapstructure:"catalog"`
+	DB      postgres.Config
 }
 
 type CatalogConfig struct {
@@ -38,10 +38,19 @@ func LoadConfig(configPath string) (*Config, error) {
 		return nil, fmt.Errorf("failed to read config file: %w", err)
 	}
 
-	var cfg Config
-	if err := v.Unmarshal(&cfg); err != nil {
+	var raw struct {
+		Catalog CatalogConfig              `mapstructure:"catalog"`
+		DB      map[string]postgres.Config `mapstructure:"db"`
+	}
+
+	if err := v.Unmarshal(&raw); err != nil {
 		return nil, fmt.Errorf("failed to unmarshal catalog config: %w", err)
 	}
 
-	return &cfg, nil
+	cfg := &Config{
+		Catalog: raw.Catalog,
+		DB:      raw.DB["catalog"],
+	}
+
+	return cfg, nil
 }

@@ -10,9 +10,9 @@ import (
 )
 
 type Config struct {
-	Playlist PlaylistConfig  `mapstructure:"playlist"`
-	DB       postgres.Config `mapstructure:"db"`
-	Minio    minio.Config    `mapstructure:"minio"`
+	Playlist PlaylistConfig `mapstructure:"playlist"`
+	DB       postgres.Config
+	Minio    minio.Config `mapstructure:"minio"`
 }
 
 type ClientsConfig struct {
@@ -42,10 +42,21 @@ func LoadConfig(path string) (*Config, error) {
 		return nil, fmt.Errorf("cannot read playlist config: %w", err)
 	}
 
-	var cfg Config
-	if err := v.Unmarshal(&cfg); err != nil {
+	var raw struct {
+		Playlist PlaylistConfig             `mapstructure:"playlist"`
+		DB       map[string]postgres.Config `mapstructure:"db"`
+		Minio    minio.Config               `mapstructure:"minio"`
+	}
+
+	if err := v.Unmarshal(&raw); err != nil {
 		return nil, fmt.Errorf("cannot unmarshal playlist config: %w", err)
 	}
 
-	return &cfg, nil
+	cfg := &Config{
+		Playlist: raw.Playlist,
+		DB:       raw.DB["playlist"],
+		Minio:    raw.Minio,
+	}
+
+	return cfg, nil
 }

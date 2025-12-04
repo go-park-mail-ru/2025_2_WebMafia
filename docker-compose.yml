@@ -77,10 +77,16 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
+    command:
+      - "postgres"
+      - "-c"
+      - "config_file=/etc/postgresql/postgresql.conf"
     ports:
       - "5432:5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
+      - ./config/postgres/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./logs/postgres:/var/lib/postgresql/data/pg_log
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
       interval: 5s
@@ -135,11 +141,23 @@ services:
     volumes:
       - grafana_data:/var/lib/grafana
       - ./config/grafana:/etc/grafana/provisioning
+      - ./logs/postgres:/var/lib/postgresql/data/pg_log
     environment:
       - GF_SECURITY_ADMIN_USER=${GF_USER}
       - GF_SECURITY_ADMIN_PASSWORD=${GF_PASSWORD}
     depends_on:
       - prometheus
+
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter
+    container_name: wavemusic-postgres-exporter
+    restart: always
+    environment:
+      DATA_SOURCE_NAME: "postgresql://postgres:postgres@db:5432/mydb?sslmode=disable"
+    ports:
+      - "9187:9187"
+    depends_on:
+      - db
 
 volumes:
   pg_data:

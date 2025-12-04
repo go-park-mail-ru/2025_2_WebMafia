@@ -10,9 +10,9 @@ import (
 )
 
 type Config struct {
-	Auth  AuthConfig      `mapstructure:"auth"`
-	DB    postgres.Config `mapstructure:"db"`
-	Minio minio.Config    `mapstructure:"minio"`
+	Auth  AuthConfig `mapstructure:"auth"`
+	DB    postgres.Config
+	Minio minio.Config `mapstructure:"minio"`
 }
 
 type AuthConfig struct {
@@ -31,10 +31,20 @@ func LoadConfig(configPath string) (*Config, error) {
 		return nil, fmt.Errorf("failed to read config file: %w", err)
 	}
 
-	var cfg Config
-	if err := v.Unmarshal(&cfg); err != nil {
+	var raw struct {
+		Auth  AuthConfig                 `mapstructure:"auth"`
+		DB    map[string]postgres.Config `mapstructure:"db"`
+		Minio minio.Config               `mapstructure:"minio"`
+	}
+
+	if err := v.Unmarshal(&raw); err != nil {
 		return nil, fmt.Errorf("failed to unmarshal auth config: %w", err)
 	}
 
-	return &cfg, nil
+	cfg := &Config{
+		Auth:  raw.Auth,
+		DB:    raw.DB["auth"],
+		Minio: raw.Minio,
+	}
+	return cfg, nil
 }

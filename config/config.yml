@@ -38,6 +38,7 @@ auth:
     level: "debug"
     mode: "dev"
 
+
 catalog:
   http:
     port: "8081"
@@ -107,15 +108,38 @@ playlist:
     catalog: "catalog:9000"
 
 db:
-  host: "db"
-  port: 5432
-  user: "myuser"
-  password: "mypassword"
-  dbName: "mydb"
-  sslmode: "disable"
-  maxOpenConns: 25
-  maxIdleConns: 25
-  connMaxLifetime: 5m
+  auth:
+    host: "db"
+    port: 5432
+    user: "auth_user"
+    password: "auth_password"
+    dbName: "mydb"
+    sslmode: "disable"
+    maxOpenConns: 20
+    maxIdleConns: 20
+    connMaxLifetime: 5m
+
+  catalog:
+    host: "db"
+    port: 5432
+    user: "catalog_user"
+    password: "catalog_password"
+    dbName: "mydb"
+    sslmode: "disable"
+    maxOpenConns: 30
+    maxIdleConns: 30
+    connMaxLifetime: 5m
+
+  playlist:
+    host: "db"
+    port: 5432
+    user: "playlist_user"
+    password: "playlist_password"
+    dbName: "mydb"
+    sslmode: "disable"
+    maxOpenConns: 15
+    maxIdleConns: 15
+    connMaxLifetime: 5m
 
 minio:
   endpoint: "minio:9000"

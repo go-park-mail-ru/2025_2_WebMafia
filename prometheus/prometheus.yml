@@ -28,3 +28,8 @@ scrape_configs:
         labels:
           service: "playlist"
 
+  - job_name: "postgres"
+    static_configs:
+      - targets: [ "postgres-exporter:9187" ]
+
+

@@ -18,6 +18,7 @@ func (s *Service) CreatePlaylist(ctx context.Context, req dto.CreatePlaylistRequ
 
 	playlist := model.Playlist{
 		ID:          uuid.New(),
+		UserID:      req.UserID,
 		Title:       req.Title,
 		Description: req.Description,
 		IsFavorite:  false,
@@ -32,6 +33,7 @@ func (s *Service) CreatePlaylist(ctx context.Context, req dto.CreatePlaylistRequ
 
 	return &dto.Playlist{
 		ID:          playlist.ID.String(),
+		CreatorID:   playlist.UserID.String(),
 		Title:       playlist.Title,
 		Description: playlist.Description,
 		IsFavorite:  playlist.IsFavorite,
@@ -52,6 +54,7 @@ func (s *Service) GetPlaylistsByUser(ctx context.Context, req dto.GetPlaylistsBy
 	for _, p := range playlists {
 		res = append(res, dto.Playlist{
 			ID:          p.ID.String(),
+			CreatorID:   p.UserID.String(),
 			Title:       p.Title,
 			Description: p.Description,
 			IsFavorite:  p.IsFavorite,
@@ -92,6 +95,7 @@ func (s *Service) UpdatePlaylist(ctx context.Context, req dto.UpdatePlaylistRequ
 
 	return &dto.Playlist{
 		ID:          playlist.ID.String(),
+		CreatorID:   playlist.UserID.String(),
 		Title:       playlist.Title,
 		Description: playlist.Description,
 		IsFavorite:  playlist.IsFavorite,
@@ -150,6 +154,7 @@ func (s *Service) GetFavoritePlaylist(ctx context.Context, req dto.GetFavoritePl
 
 	return &dto.Playlist{
 		ID:          playlist.ID.String(),
+		CreatorID:   req.UserID.String(),
 		Title:       playlist.Title,
 		Description: playlist.Description,
 		IsFavorite:  playlist.IsFavorite,
@@ -233,6 +238,7 @@ func (s *Service) GetPlaylistWithTracks(ctx context.Context, id uuid.UUID) (*dto
 	if len(trackIDs) == 0 {
 		return &dto.Playlist{
 			ID:          p.ID.String(),
+			CreatorID:   p.UserID.String(),
 			Title:       p.Title,
 			Description: p.Description,
 			IsFavorite:  p.IsFavorite,
@@ -273,6 +279,7 @@ func (s *Service) GetPlaylistWithTracks(ctx context.Context, id uuid.UUID) (*dto
 
 	return &dto.Playlist{
 		ID:          p.ID.String(),
+		CreatorID:   p.UserID.String(),
 		Title:       p.Title,
 		Description: p.Description,
 		IsFavorite:  p.IsFavorite,
@@ -344,6 +351,7 @@ func (s *Service) GetFavoriteAlbums(ctx context.Context, userID uuid.UUID) ([]dt
 	for _, a := range resp.Albums {
 		alb := dto.FavoriteAlbum{
 			ID:        a.Id,
+			CreatorID: userID.String(),
 			Title:     a.Title,
 			AvatarURL: a.AvatarUrl,
 		}
@@ -397,6 +405,7 @@ func (s *Service) GetFavoriteArtists(ctx context.Context, userID uuid.UUID) ([]d
 	for _, a := range resp.Artists {
 		artist := dto.FavoriteArtist{
 			ID:        a.Id,
+			CreatorID: userID.String(),
 			Name:      a.Name,
 			AvatarURL: a.AvatarUrl,
 		}

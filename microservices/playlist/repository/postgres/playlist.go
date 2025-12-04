@@ -14,12 +14,19 @@ func (r *Repository) CreatePlaylist(ctx context.Context, playlist model.Playlist
 	const op = "repository.CreatePlaylist"
 
 	query := `INSERT INTO playlist (playlist_id, user_id, title, description, avatar_url, is_favorite)
-          VALUES ($1, $2, $3, $4, $5, $6)`
+	          VALUES ($1, $2, $3, $4, $5, $6)`
 
-	_, err := r.Conn.ExecContext(ctx, query,
-		playlist.ID, userID, playlist.Title,
-		playlist.Description, playlist.AvatarURL, playlist.IsFavorite,
+	_, err := r.Conn.ExecContext(
+		ctx,
+		query,
+		playlist.ID,
+		userID,
+		playlist.Title,
+		playlist.Description,
+		playlist.AvatarURL,
+		playlist.IsFavorite,
 	)
+
 	if err != nil {
 		return fmt.Errorf("%s: %w", op, err)
 	}
@@ -29,11 +36,11 @@ func (r *Repository) CreatePlaylist(ctx context.Context, playlist model.Playlist
 func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Playlist, error) {
 	const op = "repository.GetByID"
 
-	query := `SELECT playlist_id, title, description, avatar_url, is_favorite, created_at, updated_at
-		FROM playlist WHERE playlist_id = $1`
+	query := `SELECT playlist_id, user_id, title, description, avatar_url, is_favorite, created_at, updated_at
+	          FROM playlist
+	          WHERE playlist_id = $1`
 
 	playlist, err := r.selectPlaylist(ctx, query, id)
-
 	if err != nil {
 		return nil, fmt.Errorf("%s: %w", op, err)
 	}
@@ -43,10 +50,11 @@ func (r *Repository) GetByID(ctx context.Context, id uuid.UUID) (*model.Playlist
 func (r *Repository) GetAllByUser(ctx context.Context, userID uuid.UUID, limit, offset uint64) ([]model.Playlist, error) {
 	const op = "repository.GetAllByUser"
 
-	query := `SELECT playlist_id, title, description, avatar_url, is_favorite, created_at, updated_at
-		FROM playlist WHERE user_id = $1
-		ORDER BY created_at DESC
-		LIMIT $2 OFFSET $3`
+	query := `SELECT playlist_id, user_id, title, description, avatar_url, is_favorite, created_at, updated_at
+	          FROM playlist
+	          WHERE user_id = $1
+	          ORDER BY created_at DESC
+	          LIMIT $2 OFFSET $3`
 
 	rows, err := r.Conn.QueryContext(ctx, query, userID, limit, offset)
 	if err != nil {
@@ -59,6 +67,7 @@ func (r *Repository) GetAllByUser(ctx context.Context, userID uuid.UUID, limit, 
 		var playlist model.Playlist
 		if err := rows.Scan(
 			&playlist.ID,
+			&playlist.UserID,
 			&playlist.Title,
 			&playlist.Description,
 			&playlist.AvatarURL,
@@ -95,13 +104,11 @@ func (r *Repository) UpdatePlaylist(ctx context.Context, id uuid.UUID, upd Playl
 		args = append(args, *upd.Title)
 		i++
 	}
-
 	if upd.Description != nil {
 		setParts = append(setParts, fmt.Sprintf("description = $%d", i))
 		args = append(args, *upd.Description)
 		i++
 	}
-
 	if upd.IsFavorite != nil {
 		setParts = append(setParts, fmt.Sprintf("is_favorite = $%d", i))
 		args = append(args, *upd.IsFavorite)
@@ -114,11 +121,7 @@ func (r *Repository) UpdatePlaylist(ctx context.Context, id uuid.UUID, upd Playl
 
 	args = append(args, id)
 
-	query := fmt.Sprintf(
-		"UPDATE playlist SET %s WHERE playlist_id = $%d",
-		strings.Join(setParts, ", "),
-		i,
-	)
+	query := fmt.Sprintf("UPDATE playlist SET %s WHERE playlist_id = $%d", strings.Join(setParts, ", "), i)
 
 	res, err := r.Conn.ExecContext(ctx, query, args...)
 	if err != nil {
@@ -129,10 +132,10 @@ func (r *Repository) UpdatePlaylist(ctx context.Context, id uuid.UUID, upd Playl
 	if err != nil {
 		return fmt.Errorf("%s: count failed: %w", op, err)
 	}
-
 	if ra == 0 {
 		return fmt.Errorf("%s: %w", op, ErrNotFound)
 	}
+
 	return nil
 }
 
@@ -140,6 +143,7 @@ func (r *Repository) DeletePlaylist(ctx context.Context, id uuid.UUID) error {
 	const op = "repository.DeletePlaylist"
 
 	query := `DELETE FROM playlist WHERE playlist_id = $1`
+
 	res, err := r.Conn.ExecContext(ctx, query, id)
 	if err != nil {
 		return fmt.Errorf("%s: %w", op, err)
@@ -152,20 +156,22 @@ func (r *Repository) DeletePlaylist(ctx context.Context, id uuid.UUID) error {
 	if rowsAffected == 0 {
 		return fmt.Errorf("%s: %w", op, ErrNotFound)
 	}
+
 	return nil
 }
 
 func (r *Repository) GetFavoritePlaylist(ctx context.Context, userID uuid.UUID) (*model.Playlist, error) {
-	query := `SELECT playlist_id, title, description, avatar_url, is_favorite, created_at, updated_at
-              FROM playlist
-              WHERE user_id = $1 AND is_favorite = true LIMIT 1`
+	query := `SELECT playlist_id, user_id, title, description, avatar_url, is_favorite, created_at, updated_at
+	          FROM playlist
+	          WHERE user_id = $1 AND is_favorite = true LIMIT 1`
 
 	return r.selectPlaylist(ctx, query, userID)
 }
 
 func (r *Repository) AddTrackToPlaylist(ctx context.Context, playlistID uuid.UUID, trackID string) error {
 	query := `INSERT INTO playlist_track (playlist_id, track_id)
-              VALUES ($1, $2) ON CONFLICT DO NOTHING`
+	          VALUES ($1, $2)
+	          ON CONFLICT DO NOTHING`
 
 	_, err := r.Conn.ExecContext(ctx, query, playlistID, trackID)
 	if err != nil {
@@ -197,6 +203,7 @@ func (r *Repository) RemoveTrackFromPlaylist(ctx context.Context, playlistID uui
 
 func (r *Repository) UpdatePlaylistAvatar(ctx context.Context, id uuid.UUID, avatar string) error {
 	query := `UPDATE playlist SET avatar_url = $1 WHERE playlist_id = $2`
+
 	_, err := r.Conn.ExecContext(ctx, query, avatar, id)
 	if err != nil {
 		return fmt.Errorf("update playlist avatar: %w", err)
@@ -351,6 +358,7 @@ func (r *Repository) selectPlaylist(ctx context.Context, query string, args ...i
 	playlist := &model.Playlist{}
 	err := row.Scan(
 		&playlist.ID,
+		&playlist.UserID,
 		&playlist.Title,
 		&playlist.Description,
 		&playlist.AvatarURL,

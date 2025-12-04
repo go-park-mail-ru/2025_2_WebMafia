@@ -7,6 +7,7 @@ import (
 
 type Playlist struct {
 	ID          uuid.UUID
+	UserID      uuid.UUID
 	Title       string
 	Description string
 	AvatarURL   string

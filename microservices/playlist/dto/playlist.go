@@ -8,6 +8,7 @@ import (
 
 type Playlist struct {
 	ID          string    `json:"id"`
+	CreatorID   string    `json:"creator_id"`
 	Title       string    `json:"title"`
 	Description string    `json:"description,omitempty"`
 	IsFavorite  bool      `json:"is_favorite"`
@@ -99,6 +100,7 @@ type RemoveTrackFromPlaylistRequest struct {
 // любимые артисты
 type FavoriteArtist struct {
 	ID        string `json:"id"`
+	CreatorID string `json:"creator_id"`
 	Name      string `json:"name"`
 	AvatarURL string `json:"avatar_url,omitempty"`
 }
@@ -115,6 +117,7 @@ type RemoveArtistFromFavoriteRequest struct {
 
 type FavoriteAlbum struct {
 	ID        string           `json:"id"`
+	CreatorID string           `json:"creator_id"`
 	Title     string           `json:"title"`
 	AvatarURL string           `json:"avatar_url,omitempty"`
 	Artists   []ArtistForAlbum `json:"artists"`

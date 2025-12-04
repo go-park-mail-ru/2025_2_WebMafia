@@ -9,6 +9,8 @@ services:
     restart: always
     env_file:
       - ./.env
+    environment:
+      - CONFIG_FILE=config.prod
     volumes:
       - ./config:/config
     depends_on:
@@ -25,6 +27,8 @@ services:
     restart: always
     env_file:
       - ./.env
+    environment:
+      - CONFIG_FILE=config.prod
     volumes:
       - ./config:/config
     depends_on:
@@ -41,6 +45,8 @@ services:
     restart: always
     env_file:
       - ./.env
+    environment:
+      - CONFIG_FILE=config.prod
     volumes:
       - ./config:/config
     depends_on:

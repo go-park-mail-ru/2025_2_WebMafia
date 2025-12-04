@@ -11,6 +11,8 @@ services:
     restart: always
     env_file:
       - ./.env.dev
+    environment:
+      - CONFIG_FILE=config.dev
     volumes:
       - ./config:/config
     depends_on:
@@ -29,6 +31,8 @@ services:
     restart: always
     env_file:
       - ./.env.dev
+    environment:
+      - CONFIG_FILE=config.dev
     volumes:
       - ./config:/config
     depends_on:
@@ -47,6 +51,8 @@ services:
     restart: always
     env_file:
       - ./.env.dev
+    environment:
+      - CONFIG_FILE=config.dev
     volumes:
       - ./config:/config
     depends_on:

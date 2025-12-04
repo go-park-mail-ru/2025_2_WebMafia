@@ -16,5 +16,3 @@ linters:
 run:
   timeout: 5m
   tests: false
-  build-tags:
-    - wireinject

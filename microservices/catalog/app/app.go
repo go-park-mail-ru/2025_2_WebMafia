@@ -9,16 +9,18 @@ import (
 	"spotify/internal/metrics"
 	"spotify/internal/middleware"
 	"spotify/internal/server"
+	"spotify/pkg/logger"
+	"spotify/pkg/postgres"
+	"sync"
+
 	grpcDelivery "spotify/microservices/catalog/delivery/grpc"
 	httpDelivery "spotify/microservices/catalog/delivery/http"
 	catalogMiddleware "spotify/microservices/catalog/middleware"
 	repository "spotify/microservices/catalog/repository/postgres"
 	service "spotify/microservices/catalog/service"
-	"spotify/pkg/logger"
-	"spotify/pkg/postgres"
+
 	pbAuth "spotify/proto/auth"
 	pb "spotify/proto/catalog"
-	"sync"
 
 	"github.com/gorilla/mux"
 	grpc_prometheus "github.com/grpc-ecosystem/go-grpc-prometheus"

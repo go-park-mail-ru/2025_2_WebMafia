@@ -5,9 +5,8 @@ import (
 	"flag"
 	"log"
 	"os/signal"
-	"syscall"
-
 	"spotify/microservices/catalog/app"
+	"syscall"
 )
 
 func main() {

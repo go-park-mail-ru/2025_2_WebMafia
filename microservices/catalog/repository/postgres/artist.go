@@ -27,7 +27,6 @@ func (r *Repository) GetArtistByID(ctx context.Context, id uuid.UUID) (*model.Ar
 		&artist.CreatedAt,
 		&artist.UpdatedAt,
 	)
-
 	if err != nil {
 		return nil, fmt.Errorf("[%s]: %w", op, mapErrors(err))
 	}

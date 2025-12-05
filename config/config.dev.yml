@@ -9,6 +9,8 @@ auth:
       allowedOrigins:
         - "http://localhost:8090"
         - "http://217.16.17.173:8090"
+        - "https://wave-music.ru"
+        - "https://www.wave-music.ru"
       allowedMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
       allowedHeaders:
         ["Content-Type", "Authorization", "X-Requested-With", "X-CSRF-Token"]
@@ -49,6 +51,8 @@ catalog:
       allowedOrigins:
         - "http://localhost:8090"
         - "http://217.16.17.173:8090"
+        - "https://wave-music.ru"
+        - "https://www.wave-music.ru"
       allowedMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
       allowedHeaders:
         ["Content-Type", "Authorization", "X-Requested-With", "X-CSRF-Token"]
@@ -72,8 +76,11 @@ playlist:
       allowedOrigins:
         - "http://localhost:8090"
         - "http://217.16.17.173:8090"
+        - "https://wave-music.ru"
+        - "https://www.wave-music.ru"
       allowedMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
-      allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "X-CSRF-Token"]
+      allowedHeaders:
+        ["Content-Type", "Authorization", "X-Requested-With", "X-CSRF-Token"]
       allowCredentials: true
     auth:
       jwt:

@@ -2,6 +2,7 @@ package app
 
 import (
 	"fmt"
+	"os"
 	"spotify/internal/app"
 	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
@@ -23,12 +24,20 @@ type AuthConfig struct {
 
 func LoadConfig(configPath string) (*Config, error) {
 	v := viper.New()
-	v.SetConfigName("config")
+	configName := os.Getenv("CONFIG_FILE")
+	if configName == "" {
+		configName = "config.dev"
+	}
+	v.SetConfigName(configName)
 	v.SetConfigType("yml")
 	v.AddConfigPath(configPath)
 
 	if err := v.ReadInConfig(); err != nil {
 		return nil, fmt.Errorf("failed to read config file: %w", err)
+	}
+
+	if err := app.BindViperEnv(v); err != nil {
+		return nil, fmt.Errorf("failed to bind env variables: %w", err)
 	}
 
 	var cfg Config

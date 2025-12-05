@@ -22,6 +22,14 @@ proto-gen:
 generate:
 	@echo "==> Generating mocks and other go:generate assets..."
 	@go generate ./...
+	@echo "==> Generating EasyJSON..."
+	@easyjson microservices/auth/dto/user.go
+	@easyjson microservices/auth/delivery/http/user.go
+	@easyjson microservices/auth/delivery/http/csrf.go
+	@easyjson microservices/catalog/dto/album.go
+	@easyjson microservices/catalog/dto/artist.go
+	@easyjson microservices/catalog/dto/track.go
+	@easyjson microservices/playlist/dto/playlist.go
 
 
 # === Тестирование ===
@@ -29,6 +37,7 @@ generate:
 test:
 	@echo "==> Запускаем тесты и генерируем отчет о покрытии..."
 	@go test -coverprofile=coverage.out $(shell go list ./... | grep -v /mocks | grep -v /proto)
+	@grep -v "_easyjson.go" coverage.out > coverage.out.tmp && mv coverage.out.tmp coverage.out
 	@echo "\n==> Общее покрытие кода тестами:"
 	@go tool cover -func=coverage.out | grep total
 

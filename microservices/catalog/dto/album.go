@@ -1,5 +1,6 @@
 package dto
 
+//easyjson:json
 type Album struct {
 	ID          string           `json:"id"`
 	Title       string           `json:"title"`
@@ -10,6 +11,7 @@ type Album struct {
 	Artists     []ArtistForAlbum `json:"artists"`
 }
 
+//easyjson:json
 type ArtistForAlbum struct {
 	ID        string `json:"id"`
 	Name      string `json:"name"`
@@ -17,6 +19,7 @@ type ArtistForAlbum struct {
 	HeaderURL string `json:"header_url,omitempty"`
 }
 
+//easyjson:json
 type AlbumSearch struct {
 	Album
 	Rank float32 `json:"rank"`

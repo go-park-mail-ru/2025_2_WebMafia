@@ -16,6 +16,7 @@ const (
 	maxAvatarSize      = 5 << 20
 )
 
+//easyjson:json
 type registerRequest struct {
 	Login    string `json:"login"`
 	Email    string `json:"email"`
@@ -35,9 +36,12 @@ func (i *registerRequest) validate() error {
 	return nil
 }
 
+//easyjson:jsonы
 type registerResponse struct {
 	ID string `json:"id"`
 }
+
+//easyjson:json
 type loginRequest struct {
 	Login    string `json:"login"`
 	Password string `json:"password"`
@@ -53,10 +57,12 @@ func (i *loginRequest) validate() error {
 	return nil
 }
 
+//easyjson:json
 type loginResponse struct {
 	ID string `json:"id"`
 }
 
+//easyjson:json
 type logoutResponse struct {
 	Status string `json:"status"`
 }
@@ -76,13 +82,17 @@ func (h *Handler) validateAvatar(contentType string, size int64) error {
 	return fmt.Errorf("unsupported content type: %s", contentType)
 }
 
+//easyjson:json
 type uploadAvatarResponse struct {
 	URL string `json:"avatar_url"`
 }
+
+//easyjson:json
 type deleteAvatarResponse struct {
 	Status string `json:"status"`
 }
 
+//easyjson:json
 type updateProfileRequest struct {
 	Login    string `json:"login,omitempty"`
 	Email    string `json:"email,omitempty"`

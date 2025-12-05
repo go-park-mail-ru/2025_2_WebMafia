@@ -6,6 +6,7 @@ import (
 	"spotify/pkg/response"
 )
 
+//easyjson:json
 type csrfResponse struct {
 	Token string `json:"csrf_token"`
 }

@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/textproto"
+	"net/url"
 	"strings"
 	"testing"
 
@@ -323,4 +324,253 @@ func TestHandler_Favorites(t *testing.T) {
 		handler.GetFavoritePlaylist(rr, req.WithContext(ctx))
 		assert.Equal(t, http.StatusOK, rr.Code)
 	})
+}
+
+func TestHandler_AddAlbumToFavorite(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	svc := service_mock.NewMockIService(ctrl)
+	h := NewHandler(svc, nil)
+	uid := uuid.New()
+
+	t.Run("no user id", func(t *testing.T) {
+		req := httptest.NewRequest("POST", "/albums/1/fav", nil)
+		req = mux.SetURLVars(req, map[string]string{"id": "1"})
+		rr := httptest.NewRecorder()
+		h.AddAlbumToFavorite(rr, req)
+		assert.Equal(t, http.StatusUnauthorized, rr.Code)
+	})
+
+	t.Run("invalid user id", func(t *testing.T) {
+		req := httptest.NewRequest("POST", "/albums/1/fav", nil)
+		req = mux.SetURLVars(req, map[string]string{"id": "1"})
+		ctx := middleware.ContextWithClaims(req.Context(), &jwtmanager.Claims{UserID: "bad"})
+		rr := httptest.NewRecorder()
+		h.AddAlbumToFavorite(rr, req.WithContext(ctx))
+		assert.Equal(t, http.StatusBadRequest, rr.Code)
+	})
+
+	t.Run("success", func(t *testing.T) {
+		svc.EXPECT().
+			AddAlbumToFavorite(gomock.Any(), gomock.Any()).
+			Return(nil)
+
+		req := httptest.NewRequest("POST", "/albums/123/fav", nil)
+		req = mux.SetURLVars(req, map[string]string{"id": "123"})
+		ctx := middleware.ContextWithClaims(req.Context(), &jwtmanager.Claims{UserID: uid.String()})
+		rr := httptest.NewRecorder()
+		h.AddAlbumToFavorite(rr, req.WithContext(ctx))
+		assert.Equal(t, http.StatusOK, rr.Code)
+	})
+}
+
+func TestHandler_RemoveAlbumFromFavorite(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	svc := service_mock.NewMockIService(ctrl)
+	h := NewHandler(svc, nil)
+	uid := uuid.New()
+
+	t.Run("no user", func(t *testing.T) {
+		req := httptest.NewRequest("DELETE", "/albums/1/fav", nil)
+		req = mux.SetURLVars(req, map[string]string{"id": "1"})
+		rr := httptest.NewRecorder()
+		h.RemoveAlbumFromFavorite(rr, req)
+		assert.Equal(t, http.StatusUnauthorized, rr.Code)
+	})
+
+	t.Run("invalid user id", func(t *testing.T) {
+		req := httptest.NewRequest("DELETE", "/albums/1/fav", nil)
+		req = mux.SetURLVars(req, map[string]string{"id": "1"})
+		ctx := middleware.ContextWithClaims(req.Context(), &jwtmanager.Claims{UserID: "bad"})
+		rr := httptest.NewRecorder()
+		h.RemoveAlbumFromFavorite(rr, req.WithContext(ctx))
+		assert.Equal(t, http.StatusBadRequest, rr.Code)
+	})
+
+	t.Run("success", func(t *testing.T) {
+		svc.EXPECT().RemoveAlbumFromFavorite(gomock.Any(), gomock.Any()).Return(nil)
+
+		req := httptest.NewRequest("DELETE", "/albums/123/fav", nil)
+		req = mux.SetURLVars(req, map[string]string{"id": "123"})
+		ctx := middleware.ContextWithClaims(req.Context(), &jwtmanager.Claims{UserID: uid.String()})
+		rr := httptest.NewRecorder()
+		h.RemoveAlbumFromFavorite(rr, req.WithContext(ctx))
+		assert.Equal(t, http.StatusOK, rr.Code)
+	})
+}
+
+func TestHandler_GetFavoriteAlbums(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	svc := service_mock.NewMockIService(ctrl)
+	h := NewHandler(svc, nil)
+	uid := uuid.New()
+
+	t.Run("no user", func(t *testing.T) {
+		req := httptest.NewRequest("GET", "/albums/fav", nil)
+		rr := httptest.NewRecorder()
+		h.GetFavoriteAlbums(rr, req)
+		assert.Equal(t, http.StatusUnauthorized, rr.Code)
+	})
+
+	t.Run("invalid user id", func(t *testing.T) {
+		req := httptest.NewRequest("GET", "/albums/fav", nil)
+		ctx := middleware.ContextWithClaims(req.Context(), &jwtmanager.Claims{UserID: "bad"})
+		rr := httptest.NewRecorder()
+		h.GetFavoriteAlbums(rr, req.WithContext(ctx))
+		assert.Equal(t, http.StatusBadRequest, rr.Code)
+	})
+
+	t.Run("success", func(t *testing.T) {
+		svc.EXPECT().
+			GetFavoriteAlbums(gomock.Any(), uid).
+			Return([]dto.FavoriteAlbum{
+				{
+					ID:        "alb1",
+					Title:     "A1",
+					CreatorID: uid.String(),
+				},
+			}, nil)
+
+		req := httptest.NewRequest("GET", "/albums/fav", nil)
+		ctx := middleware.ContextWithClaims(req.Context(), &jwtmanager.Claims{UserID: uid.String()})
+		rr := httptest.NewRecorder()
+		h.GetFavoriteAlbums(rr, req.WithContext(ctx))
+		assert.Equal(t, http.StatusOK, rr.Code)
+	})
+}
+
+func TestHandler_AddArtistToFavorite(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	svc := service_mock.NewMockIService(ctrl)
+	h := NewHandler(svc, nil)
+	uid := uuid.New()
+
+	t.Run("no user", func(t *testing.T) {
+		req := httptest.NewRequest("POST", "/artists/1/fav", nil)
+		req = mux.SetURLVars(req, map[string]string{"id": "1"})
+		rr := httptest.NewRecorder()
+		h.AddArtistToFavorite(rr, req)
+		assert.Equal(t, http.StatusUnauthorized, rr.Code)
+	})
+
+	t.Run("invalid user", func(t *testing.T) {
+		req := httptest.NewRequest("POST", "/artists/1/fav", nil)
+		req = mux.SetURLVars(req, map[string]string{"id": "1"})
+		ctx := middleware.ContextWithClaims(req.Context(), &jwtmanager.Claims{UserID: "bad"})
+		rr := httptest.NewRecorder()
+		h.AddArtistToFavorite(rr, req.WithContext(ctx))
+		assert.Equal(t, http.StatusBadRequest, rr.Code)
+	})
+
+	t.Run("success", func(t *testing.T) {
+		svc.EXPECT().AddArtistToFavorite(gomock.Any(), gomock.Any()).Return(nil)
+
+		req := httptest.NewRequest("POST", "/artists/123/fav", nil)
+		req = mux.SetURLVars(req, map[string]string{"id": "123"})
+		ctx := middleware.ContextWithClaims(req.Context(), &jwtmanager.Claims{UserID: uid.String()})
+		rr := httptest.NewRecorder()
+		h.AddArtistToFavorite(rr, req.WithContext(ctx))
+		assert.Equal(t, http.StatusOK, rr.Code)
+	})
+}
+
+func TestHandler_RemoveArtistFromFavorite(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	svc := service_mock.NewMockIService(ctrl)
+	h := NewHandler(svc, nil)
+	uid := uuid.New()
+
+	t.Run("no user", func(t *testing.T) {
+		req := httptest.NewRequest("DELETE", "/artists/1/fav", nil)
+		req = mux.SetURLVars(req, map[string]string{"id": "1"})
+		rr := httptest.NewRecorder()
+		h.RemoveArtistFromFavorite(rr, req)
+		assert.Equal(t, http.StatusUnauthorized, rr.Code)
+	})
+
+	t.Run("invalid user", func(t *testing.T) {
+		req := httptest.NewRequest("DELETE", "/artists/1/fav", nil)
+		req = mux.SetURLVars(req, map[string]string{"id": "1"})
+		ctx := middleware.ContextWithClaims(req.Context(), &jwtmanager.Claims{UserID: "bad"})
+		rr := httptest.NewRecorder()
+		h.RemoveArtistFromFavorite(rr, req.WithContext(ctx))
+		assert.Equal(t, http.StatusBadRequest, rr.Code)
+	})
+
+	t.Run("success", func(t *testing.T) {
+		svc.EXPECT().RemoveArtistFromFavorite(gomock.Any(), gomock.Any()).Return(nil)
+
+		req := httptest.NewRequest("DELETE", "/artists/123/fav", nil)
+		req = mux.SetURLVars(req, map[string]string{"id": "123"})
+		ctx := middleware.ContextWithClaims(req.Context(), &jwtmanager.Claims{UserID: uid.String()})
+		rr := httptest.NewRecorder()
+		h.RemoveArtistFromFavorite(rr, req.WithContext(ctx))
+		assert.Equal(t, http.StatusOK, rr.Code)
+	})
+}
+
+func TestHandler_GetFavoriteArtists(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	svc := service_mock.NewMockIService(ctrl)
+	h := NewHandler(svc, nil)
+	uid := uuid.New()
+
+	t.Run("no user", func(t *testing.T) {
+		req := httptest.NewRequest("GET", "/artists/fav", nil)
+		rr := httptest.NewRecorder()
+		h.GetFavoriteArtists(rr, req)
+		assert.Equal(t, http.StatusUnauthorized, rr.Code)
+	})
+
+	t.Run("invalid user id", func(t *testing.T) {
+		req := httptest.NewRequest("GET", "/artists/fav", nil)
+		ctx := middleware.ContextWithClaims(req.Context(), &jwtmanager.Claims{UserID: "bad"})
+		rr := httptest.NewRecorder()
+		h.GetFavoriteArtists(rr, req.WithContext(ctx))
+		assert.Equal(t, http.StatusBadRequest, rr.Code)
+	})
+
+	t.Run("success", func(t *testing.T) {
+		svc.EXPECT().
+			GetFavoriteArtists(gomock.Any(), uid).
+			Return([]dto.FavoriteArtist{
+				{
+					ID:        "a1",
+					Name:      "A1",
+					CreatorID: uid.String(),
+				},
+			}, nil)
+
+		req := httptest.NewRequest("GET", "/artists/fav", nil)
+		ctx := middleware.ContextWithClaims(req.Context(), &jwtmanager.Claims{UserID: uid.String()})
+		rr := httptest.NewRecorder()
+		h.GetFavoriteArtists(rr, req.WithContext(ctx))
+		assert.Equal(t, http.StatusOK, rr.Code)
+	})
+}
+
+func TestParsePagination(t *testing.T) {
+	q := url.Values{}
+	q.Set("limit", "2000")
+	q.Set("offset", "10")
+
+	limit, offset := parsePagination(q)
+	assert.Equal(t, uint64(1000), limit)
+	assert.Equal(t, uint64(10), offset)
+
+	q = url.Values{}
+	limit, offset = parsePagination(q)
+	assert.Equal(t, uint64(100), limit)
+	assert.Equal(t, uint64(0), offset)
 }

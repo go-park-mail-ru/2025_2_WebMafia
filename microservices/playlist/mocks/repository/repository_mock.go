@@ -43,6 +43,34 @@ func (m *MockIRepository) EXPECT() *MockIRepositoryMockRecorder {
 	return m.recorder
 }
 
+// AddAlbumToFavorite mocks base method.
+func (m *MockIRepository) AddAlbumToFavorite(ctx context.Context, userID uuid.UUID, albumID string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddAlbumToFavorite", ctx, userID, albumID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// AddAlbumToFavorite indicates an expected call of AddAlbumToFavorite.
+func (mr *MockIRepositoryMockRecorder) AddAlbumToFavorite(ctx, userID, albumID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddAlbumToFavorite", reflect.TypeOf((*MockIRepository)(nil).AddAlbumToFavorite), ctx, userID, albumID)
+}
+
+// AddArtistToFavorite mocks base method.
+func (m *MockIRepository) AddArtistToFavorite(ctx context.Context, userID uuid.UUID, artistID string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddArtistToFavorite", ctx, userID, artistID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// AddArtistToFavorite indicates an expected call of AddArtistToFavorite.
+func (mr *MockIRepositoryMockRecorder) AddArtistToFavorite(ctx, userID, artistID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddArtistToFavorite", reflect.TypeOf((*MockIRepository)(nil).AddArtistToFavorite), ctx, userID, artistID)
+}
+
 // AddTrackToPlaylist mocks base method.
 func (m *MockIRepository) AddTrackToPlaylist(ctx context.Context, playlistID uuid.UUID, trackID string) error {
 	m.ctrl.T.Helper()
@@ -115,6 +143,36 @@ func (mr *MockIRepositoryMockRecorder) GetByID(ctx, id any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetByID", reflect.TypeOf((*MockIRepository)(nil).GetByID), ctx, id)
 }
 
+// GetFavoriteAlbumIDs mocks base method.
+func (m *MockIRepository) GetFavoriteAlbumIDs(ctx context.Context, userID uuid.UUID) ([]string, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetFavoriteAlbumIDs", ctx, userID)
+	ret0, _ := ret[0].([]string)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetFavoriteAlbumIDs indicates an expected call of GetFavoriteAlbumIDs.
+func (mr *MockIRepositoryMockRecorder) GetFavoriteAlbumIDs(ctx, userID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetFavoriteAlbumIDs", reflect.TypeOf((*MockIRepository)(nil).GetFavoriteAlbumIDs), ctx, userID)
+}
+
+// GetFavoriteArtistIDs mocks base method.
+func (m *MockIRepository) GetFavoriteArtistIDs(ctx context.Context, userID uuid.UUID) ([]string, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetFavoriteArtistIDs", ctx, userID)
+	ret0, _ := ret[0].([]string)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetFavoriteArtistIDs indicates an expected call of GetFavoriteArtistIDs.
+func (mr *MockIRepositoryMockRecorder) GetFavoriteArtistIDs(ctx, userID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetFavoriteArtistIDs", reflect.TypeOf((*MockIRepository)(nil).GetFavoriteArtistIDs), ctx, userID)
+}
+
 // GetFavoritePlaylist mocks base method.
 func (m *MockIRepository) GetFavoritePlaylist(ctx context.Context, userID uuid.UUID) (*model.Playlist, error) {
 	m.ctrl.T.Helper()
@@ -143,6 +201,34 @@ func (m *MockIRepository) GetTracksByPlaylist(ctx context.Context, playlistID uu
 func (mr *MockIRepositoryMockRecorder) GetTracksByPlaylist(ctx, playlistID any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTracksByPlaylist", reflect.TypeOf((*MockIRepository)(nil).GetTracksByPlaylist), ctx, playlistID)
+}
+
+// RemoveAlbumFromFavorite mocks base method.
+func (m *MockIRepository) RemoveAlbumFromFavorite(ctx context.Context, userID uuid.UUID, albumID string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RemoveAlbumFromFavorite", ctx, userID, albumID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RemoveAlbumFromFavorite indicates an expected call of RemoveAlbumFromFavorite.
+func (mr *MockIRepositoryMockRecorder) RemoveAlbumFromFavorite(ctx, userID, albumID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveAlbumFromFavorite", reflect.TypeOf((*MockIRepository)(nil).RemoveAlbumFromFavorite), ctx, userID, albumID)
+}
+
+// RemoveArtistFromFavorite mocks base method.
+func (m *MockIRepository) RemoveArtistFromFavorite(ctx context.Context, userID uuid.UUID, artistID string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RemoveArtistFromFavorite", ctx, userID, artistID)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RemoveArtistFromFavorite indicates an expected call of RemoveArtistFromFavorite.
+func (mr *MockIRepositoryMockRecorder) RemoveArtistFromFavorite(ctx, userID, artistID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveArtistFromFavorite", reflect.TypeOf((*MockIRepository)(nil).RemoveArtistFromFavorite), ctx, userID, artistID)
 }
 
 // RemoveTrackFromPlaylist mocks base method.

@@ -104,7 +104,7 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	api.Use(middleware.MetricsMiddleware(mtr))
 	api.Use(middleware.CORS(cfg.Playlist.HTTP.CORS))
 
-	authConn, err := grpc.Dial(
+	authConn, err := grpc.NewClient(
 		cfg.Playlist.Clients.Auth,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)

@@ -144,10 +144,10 @@ func (mr *MockIRepositoryMockRecorder) GetByID(ctx, id any) *gomock.Call {
 }
 
 // GetFavoriteAlbumIDs mocks base method.
-func (m *MockIRepository) GetFavoriteAlbumIDs(ctx context.Context, userID uuid.UUID) ([]string, error) {
+func (m *MockIRepository) GetFavoriteAlbumIDs(ctx context.Context, userID uuid.UUID) ([]model.FavoriteAlbum, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetFavoriteAlbumIDs", ctx, userID)
-	ret0, _ := ret[0].([]string)
+	ret0, _ := ret[0].([]model.FavoriteAlbum)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -159,10 +159,10 @@ func (mr *MockIRepositoryMockRecorder) GetFavoriteAlbumIDs(ctx, userID any) *gom
 }
 
 // GetFavoriteArtistIDs mocks base method.
-func (m *MockIRepository) GetFavoriteArtistIDs(ctx context.Context, userID uuid.UUID) ([]string, error) {
+func (m *MockIRepository) GetFavoriteArtistIDs(ctx context.Context, userID uuid.UUID) ([]model.FavoriteArtist, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetFavoriteArtistIDs", ctx, userID)
-	ret0, _ := ret[0].([]string)
+	ret0, _ := ret[0].([]model.FavoriteArtist)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

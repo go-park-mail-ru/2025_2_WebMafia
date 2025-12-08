@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"testing"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
@@ -368,18 +369,23 @@ func TestService_GetFavoriteArtists(t *testing.T) {
 
 	uid := uuid.New()
 
+	artistID := uuid.MustParse("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb")
+	now := time.Now()
+
 	repo.EXPECT().
 		GetFavoriteArtistIDs(gomock.Any(), uid).
-		Return([]string{"art1"}, nil)
+		Return([]model.FavoriteArtist{
+			{UserID: uid, ArtistID: artistID, CreatedAt: now},
+		}, nil)
 
 	cat.EXPECT().
 		GetArtistsByIDs(gomock.Any(), &pbCatalog.GetArtistsByIDsRequest{
-			Ids: []string{"art1"},
+			Ids: []string{artistID.String()},
 		}).
 		Return(&pbCatalog.GetArtistsByIDsResponse{
 			Artists: []*pbCatalog.Artist{
 				{
-					Id:        "art1",
+					Id:        artistID.String(),
 					Name:      "A1",
 					AvatarUrl: "img1",
 				},
@@ -387,9 +393,11 @@ func TestService_GetFavoriteArtists(t *testing.T) {
 		}, nil)
 
 	res, err := svc.GetFavoriteArtists(context.Background(), uid)
+
 	assert.NoError(t, err)
 	assert.Len(t, res, 1)
-	assert.Equal(t, "art1", res[0].ID)
+	assert.Equal(t, artistID.String(), res[0].ID)
+	assert.Equal(t, "A1", res[0].Name)
 }
 
 func TestService_AddAlbumToFavorite_Error(t *testing.T) {
@@ -418,14 +426,20 @@ func TestService_GetFavoriteAlbums_CatalogError(t *testing.T) {
 	repo := repository_mock.NewMockIRepository(ctrl)
 	cat := catalog_mock.NewMockCatalogServiceClient(ctrl)
 	svc := New(repo, nil, cat)
+
 	uid := uuid.New()
+	albumID := uuid.MustParse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")
 
 	repo.EXPECT().
 		GetFavoriteAlbumIDs(gomock.Any(), uid).
-		Return([]string{"a1"}, nil)
+		Return([]model.FavoriteAlbum{
+			{UserID: uid, AlbumID: albumID, CreatedAt: time.Now()},
+		}, nil)
 
 	cat.EXPECT().
-		GetAlbumsByIDs(gomock.Any(), &pbCatalog.GetAlbumsByIDsRequest{Ids: []string{"a1"}}).
+		GetAlbumsByIDs(gomock.Any(), &pbCatalog.GetAlbumsByIDsRequest{
+			Ids: []string{albumID.String()},
+		}).
 		Return(nil, errors.New("cat"))
 
 	_, err := svc.GetFavoriteAlbums(context.Background(), uid)
@@ -455,14 +469,20 @@ func TestService_GetFavoriteArtists_CatalogError(t *testing.T) {
 	repo := repository_mock.NewMockIRepository(ctrl)
 	cat := catalog_mock.NewMockCatalogServiceClient(ctrl)
 	svc := New(repo, nil, cat)
+
 	uid := uuid.New()
+	artistID := uuid.New()
 
 	repo.EXPECT().
 		GetFavoriteArtistIDs(gomock.Any(), uid).
-		Return([]string{"art1"}, nil)
+		Return([]model.FavoriteArtist{
+			{UserID: uid, ArtistID: artistID, CreatedAt: time.Now()},
+		}, nil)
 
 	cat.EXPECT().
-		GetArtistsByIDs(gomock.Any(), &pbCatalog.GetArtistsByIDsRequest{Ids: []string{"art1"}}).
+		GetArtistsByIDs(gomock.Any(), &pbCatalog.GetArtistsByIDsRequest{
+			Ids: []string{artistID.String()},
+		}).
 		Return(nil, errors.New("cat"))
 
 	_, err := svc.GetFavoriteArtists(context.Background(), uid)

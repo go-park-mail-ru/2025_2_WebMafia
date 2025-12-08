@@ -26,11 +26,11 @@ type IRepository interface {
 	// любимые альбомы
 	AddAlbumToFavorite(ctx context.Context, userID uuid.UUID, albumID string) error
 	RemoveAlbumFromFavorite(ctx context.Context, userID uuid.UUID, albumID string) error
-	GetFavoriteAlbumIDs(ctx context.Context, userID uuid.UUID) ([]string, error)
+	GetFavoriteAlbumIDs(ctx context.Context, userID uuid.UUID) ([]model.FavoriteAlbum, error)
 	// любимые артисты
 	AddArtistToFavorite(ctx context.Context, userID uuid.UUID, artistID string) error
 	RemoveArtistFromFavorite(ctx context.Context, userID uuid.UUID, artistID string) error
-	GetFavoriteArtistIDs(ctx context.Context, userID uuid.UUID) ([]string, error)
+	GetFavoriteArtistIDs(ctx context.Context, userID uuid.UUID) ([]model.FavoriteArtist, error)
 }
 
 //go:generate mockgen -destination=../mocks/storage/storage_mock.go -package=storage_mock spotify/microservices/playlist/service IStorage

@@ -270,10 +270,10 @@ func (r *Repository) RemoveAlbumFromFavorite(ctx context.Context, userID uuid.UU
 	return nil
 }
 
-func (r *Repository) GetFavoriteAlbumIDs(ctx context.Context, userID uuid.UUID) ([]string, error) {
+func (r *Repository) GetFavoriteAlbumIDs(ctx context.Context, userID uuid.UUID) ([]model.FavoriteAlbum, error) {
 	const op = "repository.GetFavoriteAlbumIDs"
 
-	query := `SELECT album_id FROM favorite_album WHERE user_id = $1 ORDER BY created_at DESC`
+	query := `SELECT album_id, created_at FROM favorite_album WHERE user_id = $1 ORDER BY created_at DESC`
 
 	rows, err := r.Conn.QueryContext(ctx, query, userID)
 	if err != nil {
@@ -281,16 +281,20 @@ func (r *Repository) GetFavoriteAlbumIDs(ctx context.Context, userID uuid.UUID) 
 	}
 	defer rows.Close()
 
-	ids := make([]string, 0)
+	out := make([]model.FavoriteAlbum, 0)
 	for rows.Next() {
-		var id string
-		if err := rows.Scan(&id); err != nil {
+		var rec model.FavoriteAlbum
+		if err := rows.Scan(&rec.AlbumID, &rec.CreatedAt); err != nil {
 			return nil, fmt.Errorf("%s: scan: %w", op, err)
 		}
-		ids = append(ids, id)
+		rec.UserID = userID
+		out = append(out, rec)
 	}
 
-	return ids, nil
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("%s: iteration: %w", op, err)
+	}
+	return out, nil
 }
 
 // ЛЮБИМЫЕ АРТИСТЫ
@@ -329,10 +333,10 @@ func (r *Repository) RemoveArtistFromFavorite(ctx context.Context, userID uuid.U
 	return nil
 }
 
-func (r *Repository) GetFavoriteArtistIDs(ctx context.Context, userID uuid.UUID) ([]string, error) {
+func (r *Repository) GetFavoriteArtistIDs(ctx context.Context, userID uuid.UUID) ([]model.FavoriteArtist, error) {
 	const op = "repository.GetFavoriteArtistIDs"
 
-	query := `SELECT artist_id FROM favorite_artist WHERE user_id = $1 ORDER BY created_at DESC`
+	query := `SELECT artist_id, created_at FROM favorite_artist WHERE user_id = $1 ORDER BY created_at DESC`
 
 	rows, err := r.Conn.QueryContext(ctx, query, userID)
 	if err != nil {
@@ -340,16 +344,21 @@ func (r *Repository) GetFavoriteArtistIDs(ctx context.Context, userID uuid.UUID)
 	}
 	defer rows.Close()
 
-	ids := make([]string, 0)
+	out := make([]model.FavoriteArtist, 0)
 	for rows.Next() {
-		var id string
-		if err := rows.Scan(&id); err != nil {
+		var rec model.FavoriteArtist
+		if err := rows.Scan(&rec.ArtistID, &rec.CreatedAt); err != nil {
 			return nil, fmt.Errorf("%s: scan: %w", op, err)
 		}
-		ids = append(ids, id)
+		rec.UserID = userID
+		out = append(out, rec)
 	}
 
-	return ids, nil
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("%s: iteration: %w", op, err)
+	}
+
+	return out, nil
 }
 
 func (r *Repository) selectPlaylist(ctx context.Context, query string, args ...interface{}) (*model.Playlist, error) {

@@ -304,18 +304,29 @@ func TestRepository_GetFavoriteAlbumIDs(t *testing.T) {
 
 	repo := New(db)
 	uid := uuid.New()
+	now := time.Now()
 
-	rows := sqlmock.NewRows([]string{"album_id"}).
-		AddRow("a1").
-		AddRow("a2")
+	a1 := uuid.New()
+	a2 := uuid.New()
 
-	mock.ExpectQuery(regexp.QuoteMeta(`SELECT album_id FROM favorite_album`)).
+	rows := sqlmock.NewRows([]string{"album_id", "created_at"}).
+		AddRow(a1, now).
+		AddRow(a2, now)
+
+	mock.ExpectQuery(regexp.QuoteMeta(`SELECT album_id, created_at FROM favorite_album`)).
 		WithArgs(uid).
 		WillReturnRows(rows)
 
 	res, err := repo.GetFavoriteAlbumIDs(context.Background(), uid)
 	assert.NoError(t, err)
-	assert.Equal(t, []string{"a1", "a2"}, res)
+
+	require.Len(t, res, 2)
+	assert.Equal(t, uid, res[0].UserID)
+	assert.Equal(t, a1, res[0].AlbumID)
+	assert.Equal(t, now, res[0].CreatedAt)
+
+	assert.Equal(t, a2, res[1].AlbumID)
+	assert.Equal(t, now, res[1].CreatedAt)
 }
 
 func TestRepository_AddArtistToFavorite(t *testing.T) {
@@ -357,14 +368,22 @@ func TestRepository_GetFavoriteArtistIDs(t *testing.T) {
 
 	repo := New(db)
 	uid := uuid.New()
+	now := time.Now()
 
-	rows := sqlmock.NewRows([]string{"artist_id"}).AddRow("art1")
+	aid := uuid.New()
 
-	mock.ExpectQuery(regexp.QuoteMeta(`SELECT artist_id FROM favorite_artist`)).
+	rows := sqlmock.NewRows([]string{"artist_id", "created_at"}).
+		AddRow(aid, now)
+
+	mock.ExpectQuery(regexp.QuoteMeta(`SELECT artist_id, created_at FROM favorite_artist`)).
 		WithArgs(uid).
 		WillReturnRows(rows)
 
 	res, err := repo.GetFavoriteArtistIDs(context.Background(), uid)
 	assert.NoError(t, err)
-	assert.Equal(t, []string{"art1"}, res)
+
+	require.Len(t, res, 1)
+	assert.Equal(t, uid, res[0].UserID)
+	assert.Equal(t, aid, res[0].ArtistID)
+	assert.Equal(t, now, res[0].CreatedAt)
 }

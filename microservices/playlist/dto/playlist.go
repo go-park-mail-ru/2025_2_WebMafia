@@ -100,10 +100,12 @@ type RemoveTrackFromPlaylistRequest struct {
 
 // любимые артисты
 type FavoriteArtist struct {
-	ID        string `json:"id"`
-	CreatorID string `json:"creator_id"`
-	Name      string `json:"name"`
-	AvatarURL string `json:"avatar_url,omitempty"`
+	ID        string    `json:"id"`
+	CreatorID string    `json:"creator_id"`
+	Name      string    `json:"name"`
+	AvatarURL string    `json:"avatar_url,omitempty"`
+	PlayCount int64     `json:"play_count"`
+	CreatedAt time.Time `json:"created_at"`
 }
 type AddArtistToFavoriteRequest struct {
 	UserID   uuid.UUID `json:"-"`
@@ -122,6 +124,8 @@ type FavoriteAlbum struct {
 	Title     string           `json:"title"`
 	AvatarURL string           `json:"avatar_url,omitempty"`
 	Artists   []ArtistForAlbum `json:"artists"`
+	Type      string           `json:"type"`
+	CreatedAt time.Time        `json:"created_at"`
 }
 
 type ArtistForAlbum struct {

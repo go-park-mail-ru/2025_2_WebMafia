@@ -3,6 +3,7 @@ package app
 import (
 	"fmt"
 	"os"
+
 	"spotify/internal/app"
 	"spotify/pkg/minio"
 	"spotify/pkg/postgres"

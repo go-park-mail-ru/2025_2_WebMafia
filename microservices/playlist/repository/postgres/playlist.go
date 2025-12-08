@@ -5,10 +5,11 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"spotify/internal/model"
 	"strings"
 
 	"github.com/google/uuid"
+
+	"spotify/internal/model"
 )
 
 func (r *Repository) CreatePlaylist(ctx context.Context, playlist model.Playlist, userID uuid.UUID) error {
@@ -27,7 +28,6 @@ func (r *Repository) CreatePlaylist(ctx context.Context, playlist model.Playlist
 		playlist.AvatarURL,
 		playlist.IsFavorite,
 	)
-
 	if err != nil {
 		return fmt.Errorf("%s: %w", op, err)
 	}

@@ -2,6 +2,7 @@ package http
 
 import (
 	"context"
+
 	"spotify/microservices/playlist/dto"
 
 	"github.com/google/uuid"
@@ -20,11 +21,11 @@ type IService interface {
 	GetPlaylistWithTracks(ctx context.Context, id uuid.UUID) (*dto.Playlist, error)
 	AddTrackToPlaylist(ctx context.Context, req dto.AddTrackToPlaylistRequest) error
 	RemoveTrackFromPlaylist(ctx context.Context, req dto.RemoveTrackFromPlaylistRequest) error
-	//любимые альбомы
+	// любимые альбомы
 	AddAlbumToFavorite(ctx context.Context, req dto.AddAlbumToFavoriteRequest) error
 	RemoveAlbumFromFavorite(ctx context.Context, req dto.RemoveAlbumFromFavoriteRequest) error
 	GetFavoriteAlbums(ctx context.Context, userID uuid.UUID) ([]dto.FavoriteAlbum, error)
-	//любимые артисты
+	// любимые артисты
 	AddArtistToFavorite(ctx context.Context, req dto.AddArtistToFavoriteRequest) error
 	RemoveArtistFromFavorite(ctx context.Context, req dto.RemoveArtistFromFavoriteRequest) error
 	GetFavoriteArtists(ctx context.Context, userID uuid.UUID) ([]dto.FavoriteArtist, error)

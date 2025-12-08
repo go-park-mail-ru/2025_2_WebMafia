@@ -1,5 +1,8 @@
 package dto
 
+//go:generate easyjson $GOFILE
+
+//easyjson:json
 type Artist struct {
 	ID          string `json:"id"`
 	Name        string `json:"name"`
@@ -9,6 +12,7 @@ type Artist struct {
 	PlayCount   int64  `json:"play_count"`
 }
 
+//easyjson:json
 type ArtistSearch struct {
 	Artist
 	Rank float32 `json:"rank"`

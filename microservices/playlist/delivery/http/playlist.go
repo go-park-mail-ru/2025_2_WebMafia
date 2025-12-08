@@ -1,7 +1,6 @@
 package http
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -11,6 +10,7 @@ import (
 	"strconv"
 
 	"github.com/google/uuid"
+	"github.com/mailru/easyjson"
 
 	"github.com/gorilla/mux"
 )
@@ -46,7 +46,7 @@ func (h *Handler) CreatePlaylist(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req dto.CreatePlaylistRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
 		log.Errorf("[%s]: invalid request body: %v", op, err)
 		response.BadRequestJSON(w)
 		return
@@ -111,7 +111,7 @@ func (h *Handler) UpdatePlaylist(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req dto.UpdatePlaylistRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
 		log.Errorf("[%s]: invalid request body: %v", op, err)
 		response.BadRequestJSON(w)
 		return
@@ -177,7 +177,7 @@ func (h *Handler) AddTrackToFavorite(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req dto.AddTrackToFavoriteRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
 		log.Errorf("[%s]: invalid request body: %v", op, err)
 		response.BadRequestJSON(w)
 		return
@@ -386,7 +386,7 @@ func (h *Handler) AddTrackToPlaylist(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req dto.AddTrackToPlaylistRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
 		log.Errorf("[%s]: invalid body: %v", op, err)
 		response.BadRequestJSON(w)
 		return
@@ -415,7 +415,7 @@ func (h *Handler) RemoveTrackFromPlaylist(w http.ResponseWriter, r *http.Request
 	}
 
 	var req dto.RemoveTrackFromPlaylistRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
 		log.Errorf("[%s]: invalid body: %v", op, err)
 		response.BadRequestJSON(w)
 		return

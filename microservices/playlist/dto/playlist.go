@@ -1,5 +1,7 @@
 package dto
 
+//go:generate easyjson $GOFILE
+
 import (
 	"io"
 	"time"
@@ -7,6 +9,7 @@ import (
 	"github.com/google/uuid"
 )
 
+//easyjson:json
 type Playlist struct {
 	ID          string    `json:"id"`
 	CreatorID   string    `json:"creator_id"`
@@ -18,6 +21,7 @@ type Playlist struct {
 	CreatedAt   time.Time `json:"created_at"`
 }
 
+//easyjson:json
 type Track struct {
 	ID        string   `json:"id"`
 	Title     string   `json:"title"`
@@ -27,23 +31,27 @@ type Track struct {
 	Album     Album    `json:"album"`
 }
 
+//easyjson:json
 type Album struct {
 	ID        string `json:"id"`
 	Title     string `json:"title"`
 	AvatarURL string `json:"avatar_url,omitempty"`
 }
 
+//easyjson:json
 type Artist struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
 }
 
+//easyjson:json
 type CreatePlaylistRequest struct {
 	UserID      uuid.UUID `json:"-"`
 	Title       string    `json:"title"`
 	Description string    `json:"description"`
 }
 
+//easyjson:json
 type UpdatePlaylistRequest struct {
 	ID          uuid.UUID `json:"-"`
 	Title       *string   `json:"title"`
@@ -68,6 +76,8 @@ type GetPlaylistsByUserRequest struct {
 type GetFavoritePlaylistRequest struct {
 	UserID uuid.UUID
 }
+
+//easyjson:json
 type AddTrackToFavoriteRequest struct {
 	UserID  uuid.UUID `json:"-"`
 	TrackID string    `json:"track_id"`
@@ -80,6 +90,7 @@ type UploadPlaylistAvatarRequest struct {
 	ContentType string    `json:"-"`
 }
 
+//easyjson:json
 type UploadPlaylistAvatarResponse struct {
 	URL string `json:"avatar_url"`
 }
@@ -88,11 +99,13 @@ type DeletePlaylistAvatarRequest struct {
 	PlaylistID uuid.UUID `json:"-"`
 }
 
+//easyjson:json
 type AddTrackToPlaylistRequest struct {
 	PlaylistID uuid.UUID `json:"-"`
 	TrackID    string    `json:"track_id"`
 }
 
+//easyjson:json
 type RemoveTrackFromPlaylistRequest struct {
 	PlaylistID uuid.UUID `json:"-"`
 	TrackID    string    `json:"track_id"`

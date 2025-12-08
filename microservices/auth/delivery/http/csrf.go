@@ -1,11 +1,14 @@
 package http
 
+//go:generate easyjson $GOFILE
+
 import (
 	"net/http"
 	"spotify/internal/middleware"
 	"spotify/pkg/response"
 )
 
+//easyjson:json
 type csrfResponse struct {
 	Token string `json:"csrf_token"`
 }

@@ -29,6 +29,7 @@ generate:
 test:
 	@echo "==> Запускаем тесты и генерируем отчет о покрытии..."
 	@go test -coverprofile=coverage.out $(shell go list ./... | grep -v /mocks | grep -v /proto)
+	@grep -v "_easyjson.go" coverage.out > coverage.out.tmp && mv coverage.out.tmp coverage.out
 	@echo "\n==> Общее покрытие кода тестами:"
 	@go tool cover -func=coverage.out | grep total
 

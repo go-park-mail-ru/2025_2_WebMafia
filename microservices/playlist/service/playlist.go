@@ -7,8 +7,9 @@ import (
 	"spotify/internal/model"
 	"spotify/microservices/playlist/dto"
 	"spotify/microservices/playlist/repository/postgres"
-	pbCatalog "spotify/proto/catalog"
 	"time"
+
+	pbCatalog "spotify/proto/catalog"
 
 	"github.com/google/uuid"
 )

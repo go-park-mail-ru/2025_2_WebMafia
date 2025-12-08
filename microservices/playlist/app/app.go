@@ -13,17 +13,22 @@ import (
 
 	"spotify/internal/metrics"
 	"spotify/internal/server"
+	"spotify/pkg/csrfmanager"
+	"spotify/pkg/jwtmanager"
+	"spotify/pkg/logger"
+	"spotify/pkg/minio"
+	"spotify/pkg/postgres"
+
+	"google.golang.org/grpc/credentials/insecure"
 
 	httpDelivery "spotify/microservices/playlist/delivery/http"
 	repository "spotify/microservices/playlist/repository/postgres"
 	storageRepo "spotify/microservices/playlist/repository/storage"
 	service "spotify/microservices/playlist/service"
-	"spotify/pkg/logger"
-	"spotify/pkg/minio"
-	"spotify/pkg/postgres"
+
+	pbCatalog "spotify/proto/catalog"
 
 	"github.com/gorilla/mux"
-	pbCatalog "spotify/proto/catalog"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -74,7 +79,7 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 		appLogger.Warnf("grpc client metrics already registered: %v", err)
 	}
 
-	catalogConn, err := grpc.Dial(
+	catalogConn, err := grpc.NewClient(
 		cfg.Playlist.Clients.Catalog,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 		grpc.WithUnaryInterceptor(grpcprometheus.UnaryClientInterceptor),

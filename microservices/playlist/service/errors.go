@@ -6,9 +6,7 @@ import (
 	"spotify/microservices/playlist/repository/postgres"
 )
 
-var (
-	ErrNotFound = errors.New("not_found")
-)
+var ErrNotFound = errors.New("not_found")
 
 func mapRepositoryError(err error) error {
 	if err == nil {

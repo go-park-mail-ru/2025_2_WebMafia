@@ -14,8 +14,9 @@ import (
 	"spotify/pkg/logger"
 	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
-	pb "spotify/proto/auth"
 	"sync"
+
+	pb "spotify/proto/auth"
 
 	grpcDelivery "spotify/microservices/auth/delivery/grpc"
 	httpDelivery "spotify/microservices/auth/delivery/http"

@@ -61,11 +61,6 @@ type logoutResponse struct {
 	Status string `json:"status"`
 }
 
-type uploadAvatarRequest struct {
-	ContentType string
-	Size        int64
-}
-
 func (h *Handler) validateAvatar(contentType string, size int64) error {
 	if size == 0 {
 		return fmt.Errorf("empty file")
@@ -132,7 +127,6 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 		Email:    req.Email,
 		Password: req.Password,
 	})
-
 	if err != nil {
 		log.Errorf("[%s]: Service error: %v", op, err)
 		handleServiceError(w, err)
@@ -182,7 +176,6 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		Login:    req.Login,
 		Password: req.Password,
 	})
-
 	if err != nil {
 		log.Errorf("[%s]: Service error: %v", op, err)
 		handleServiceError(w, err)
@@ -220,7 +213,7 @@ func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
 		Path:     "/",
 	})
 
-	log.Infof("[%s]: User logout successfull", op)
+	log.Infof("[%s]: User logout successful", op)
 	response.JSON(w, http.StatusOK, logoutResponse{Status: "ok"})
 }
 

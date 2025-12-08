@@ -70,7 +70,6 @@ func (c *Client) Upload(ctx context.Context, obj ObjectInfo) (string, error) {
 	_, err := c.minioClient.PutObject(ctx, obj.Bucket, objectName, obj.Reader, obj.Size, minio.PutObjectOptions{
 		ContentType: obj.ContentType,
 	})
-
 	if err != nil {
 		return "", fmt.Errorf("upload object: %w", err)
 	}

@@ -2,17 +2,15 @@ version: "3.8"
 
 services:
   auth:
-    build:
-      context: .
-      dockerfile: ./docker/auth.Dockerfile
+    image: ghcr.io/go-park-mail-ru/2025_2_webmafia/auth:latest
     ports:
       - "8080:8080"
     container_name: wavemusic-auth
     restart: always
     env_file:
-      - ./.env.dev
+      - ./.env
     environment:
-      - CONFIG_FILE=config.dev
+      - CONFIG_FILE=config.prod
     volumes:
       - ./config:/config
     depends_on:
@@ -22,17 +20,15 @@ services:
         condition: service_completed_successfully
 
   catalog:
-    build:
-      context: .
-      dockerfile: ./docker/catalog.Dockerfile
+    image: ghcr.io/go-park-mail-ru/2025_2_webmafia/catalog:latest
     ports:
       - "8081:8081"
     container_name: wavemusic-catalog
     restart: always
     env_file:
-      - ./.env.dev
+      - ./.env
     environment:
-      - CONFIG_FILE=config.dev
+      - CONFIG_FILE=config.prod
     volumes:
       - ./config:/config
     depends_on:
@@ -42,17 +38,15 @@ services:
         condition: service_started
 
   playlist:
-    build:
-      context: .
-      dockerfile: ./docker/playlist.Dockerfile
+    image: ghcr.io/go-park-mail-ru/2025_2_webmafia/playlist:latest
     ports:
       - "8082:8082"
     container_name: wavemusic-playlist
     restart: always
     env_file:
-      - ./.env.dev
+      - ./.env
     environment:
-      - CONFIG_FILE=config.dev
+      - CONFIG_FILE=config.prod
     volumes:
       - ./config:/config
     depends_on:
@@ -84,7 +78,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     ports:
-      - "5433:5432"
+      - "5432:5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
     healthcheck:
@@ -156,7 +150,8 @@ services:
       - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /home/ubuntu/wavemusic/front/2025_2_WebMafia/dist:/var/www/frontend:ro
     depends_on:
       - auth
       - catalog

@@ -4,19 +4,18 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-
+	"spotify/internal/metrics"
 	"spotify/internal/middleware"
+	"spotify/internal/server"
+	"spotify/pkg/logger"
+	"spotify/pkg/minio"
+	"spotify/pkg/postgres"
+
 	playlistMiddleware "spotify/microservices/playlist/middleware"
 
 	pbAuth "spotify/proto/auth"
 
 	"google.golang.org/grpc/credentials/insecure"
-
-	"spotify/internal/metrics"
-	"spotify/internal/server"
-	"spotify/pkg/logger"
-	"spotify/pkg/minio"
-	"spotify/pkg/postgres"
 
 	httpDelivery "spotify/microservices/playlist/delivery/http"
 	repository "spotify/microservices/playlist/repository/postgres"

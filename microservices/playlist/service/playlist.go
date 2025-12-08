@@ -4,11 +4,10 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"time"
-
 	"spotify/internal/model"
 	"spotify/microservices/playlist/dto"
 	"spotify/microservices/playlist/repository/postgres"
+	"time"
 
 	pbCatalog "spotify/proto/catalog"
 

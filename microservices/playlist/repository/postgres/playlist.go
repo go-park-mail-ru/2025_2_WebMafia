@@ -5,11 +5,10 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"spotify/internal/model"
 	"strings"
 
 	"github.com/google/uuid"
-
-	"spotify/internal/model"
 )
 
 func (r *Repository) CreatePlaylist(ctx context.Context, playlist model.Playlist, userID uuid.UUID) error {

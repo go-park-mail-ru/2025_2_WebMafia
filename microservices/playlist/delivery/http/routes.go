@@ -9,9 +9,7 @@ import (
 func (h *Handler) RegisterRoutes(public, protected, csrfProtected *mux.Router) {
 	protected.HandleFunc("/playlists/my", h.GetMyPlaylists).Methods(http.MethodGet, http.MethodOptions)
 	protected.HandleFunc("/playlists/favorite", h.GetFavoritePlaylist).Methods(http.MethodGet, http.MethodOptions)
-	// любимые альбомы
 	protected.HandleFunc("/favorite/albums", h.GetFavoriteAlbums).Methods(http.MethodGet, http.MethodOptions)
-	// любимые артисты
 	protected.HandleFunc("/favorite/artists", h.GetFavoriteArtists).Methods(http.MethodGet, http.MethodOptions)
 
 	public.HandleFunc("/playlists/{id}", h.GetPlaylistByID).Methods(http.MethodGet, http.MethodOptions)

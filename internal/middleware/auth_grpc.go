@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"net/http"
-	"spotify/internal/middleware"
 	"spotify/pkg/jwtmanager"
 	"spotify/pkg/response"
 
@@ -10,8 +9,7 @@ import (
 )
 
 const (
-	sessionTokenCookie = "session_token"
-	csrfHeader         = "X-CSRF-Token"
+	csrfHeader = "X-CSRF-Token"
 )
 
 //go:generate mockgen -destination=../mocks/auth_client_mock.go -package=mocks spotify/proto/auth AuthServiceClient
@@ -29,7 +27,7 @@ func (m *AuthGrpcMiddleware) Handle(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		const op = "middleware.AuthGrpc"
 
-		log := middleware.LoggerFromContext(r.Context())
+		log := LoggerFromContext(r.Context())
 
 		cookie, err := r.Cookie(sessionTokenCookie)
 		if err != nil {
@@ -57,7 +55,7 @@ func (m *AuthGrpcMiddleware) Handle(next http.Handler) http.Handler {
 			SessionID: validateResp.GetSessionId(),
 		}
 
-		ctx := middleware.ContextWithClaims(r.Context(), claims)
+		ctx := ContextWithClaims(r.Context(), claims)
 
 		if r.Method != http.MethodGet && r.Method != http.MethodHead && r.Method != http.MethodOptions {
 			csrfToken := r.Header.Get(csrfHeader)
@@ -85,7 +83,7 @@ func (m *AuthGrpcMiddleware) Handle(next http.Handler) http.Handler {
 		}
 
 		ctxLogger := log.With("user_id", claims.UserID)
-		ctx = middleware.ContextWithLogger(ctx, ctxLogger)
+		ctx = ContextWithLogger(ctx, ctxLogger)
 		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }

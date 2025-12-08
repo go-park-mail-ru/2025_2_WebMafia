@@ -337,7 +337,7 @@ func (h *Handler) GetMyPlaylists(w http.ResponseWriter, r *http.Request) {
 	rawUserID, ok := middleware.GetUserID(r.Context())
 	if !ok || rawUserID == "" {
 		log.Errorf("[%s]: missing userId", op)
-		response.UnauthorizedJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 
@@ -451,7 +451,6 @@ func parsePagination(query url.Values) (uint64, uint64) {
 	return limit, offset
 }
 
-// любимые альбомы
 func (h *Handler) AddAlbumToFavorite(w http.ResponseWriter, r *http.Request) {
 	const op = "handler.AddAlbumToFavorite"
 	log := middleware.LoggerFromContext(r.Context())
@@ -459,7 +458,7 @@ func (h *Handler) AddAlbumToFavorite(w http.ResponseWriter, r *http.Request) {
 	rawUserID, ok := middleware.GetUserID(r.Context())
 	if !ok {
 		log.Errorf("[%s]: missing userId", op)
-		response.UnauthorizedJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 
@@ -486,7 +485,7 @@ func (h *Handler) AddAlbumToFavorite(w http.ResponseWriter, r *http.Request) {
 		h.handleError(w, err)
 		return
 	}
-	response.JSON(w, http.StatusOK, map[string]string{"status": "ok"})
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *Handler) RemoveAlbumFromFavorite(w http.ResponseWriter, r *http.Request) {
@@ -496,7 +495,7 @@ func (h *Handler) RemoveAlbumFromFavorite(w http.ResponseWriter, r *http.Request
 	rawUserID, ok := middleware.GetUserID(r.Context())
 	if !ok {
 		log.Errorf("[%s]: missing userId", op)
-		response.UnauthorizedJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 	userID, err := uuid.Parse(rawUserID)
@@ -522,7 +521,7 @@ func (h *Handler) RemoveAlbumFromFavorite(w http.ResponseWriter, r *http.Request
 		h.handleError(w, err)
 		return
 	}
-	response.JSON(w, http.StatusOK, map[string]string{"status": "removed"})
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *Handler) GetFavoriteAlbums(w http.ResponseWriter, r *http.Request) {
@@ -532,7 +531,7 @@ func (h *Handler) GetFavoriteAlbums(w http.ResponseWriter, r *http.Request) {
 	rawUserID, ok := middleware.GetUserID(r.Context())
 	if !ok {
 		log.Errorf("[%s]: missing userId", op)
-		response.UnauthorizedJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 
@@ -552,7 +551,6 @@ func (h *Handler) GetFavoriteAlbums(w http.ResponseWriter, r *http.Request) {
 	response.JSON(w, http.StatusOK, albums)
 }
 
-// любимые артисты
 func (h *Handler) AddArtistToFavorite(w http.ResponseWriter, r *http.Request) {
 	const op = "handler.AddArtistToFavorite"
 	log := middleware.LoggerFromContext(r.Context())
@@ -560,7 +558,7 @@ func (h *Handler) AddArtistToFavorite(w http.ResponseWriter, r *http.Request) {
 	rawUserID, ok := middleware.GetUserID(r.Context())
 	if !ok {
 		log.Errorf("[%s]: missing userId", op)
-		response.UnauthorizedJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 
@@ -586,7 +584,7 @@ func (h *Handler) AddArtistToFavorite(w http.ResponseWriter, r *http.Request) {
 		h.handleError(w, err)
 		return
 	}
-	response.JSON(w, http.StatusOK, map[string]string{"status": "ok"})
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *Handler) RemoveArtistFromFavorite(w http.ResponseWriter, r *http.Request) {
@@ -596,7 +594,7 @@ func (h *Handler) RemoveArtistFromFavorite(w http.ResponseWriter, r *http.Reques
 	rawUserID, ok := middleware.GetUserID(r.Context())
 	if !ok {
 		log.Errorf("[%s]: missing userId", op)
-		response.UnauthorizedJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 
@@ -622,7 +620,7 @@ func (h *Handler) RemoveArtistFromFavorite(w http.ResponseWriter, r *http.Reques
 		h.handleError(w, err)
 		return
 	}
-	response.JSON(w, http.StatusOK, map[string]string{"status": "removed"})
+	w.WriteHeader(http.StatusOK)
 }
 
 func (h *Handler) GetFavoriteArtists(w http.ResponseWriter, r *http.Request) {
@@ -632,7 +630,7 @@ func (h *Handler) GetFavoriteArtists(w http.ResponseWriter, r *http.Request) {
 	rawUserID, ok := middleware.GetUserID(r.Context())
 	if !ok {
 		log.Errorf("[%s]: missing userId", op)
-		response.UnauthorizedJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 

@@ -11,8 +11,6 @@ import (
 	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
 
-	playlistMiddleware "spotify/microservices/playlist/middleware"
-
 	pbAuth "spotify/proto/auth"
 
 	"google.golang.org/grpc/credentials/insecure"
@@ -112,7 +110,7 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 		return nil, fmt.Errorf("failed to connect to auth: %w", err)
 	}
 	authClient := pbAuth.NewAuthServiceClient(authConn)
-	authMiddleware := playlistMiddleware.NewAuthGrpcMiddleware(authClient)
+	authMiddleware := middleware.NewAuthGrpcMiddleware(authClient)
 
 	protected := api.PathPrefix("").Subrouter()
 	protected.Use(authMiddleware.Handle)

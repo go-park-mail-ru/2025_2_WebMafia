@@ -23,11 +23,9 @@ type IRepository interface {
 	UpdatePlaylistAvatar(ctx context.Context, id uuid.UUID, avatar string) error
 	GetTracksByPlaylist(ctx context.Context, playlistID uuid.UUID) ([]string, error)
 	RemoveTrackFromPlaylist(ctx context.Context, playlistID uuid.UUID, trackID string) error
-	// любимые альбомы
 	AddAlbumToFavorite(ctx context.Context, userID uuid.UUID, albumID string) error
 	RemoveAlbumFromFavorite(ctx context.Context, userID uuid.UUID, albumID string) error
 	GetFavoriteAlbumIDs(ctx context.Context, userID uuid.UUID) ([]model.FavoriteAlbum, error)
-	// любимые артисты
 	AddArtistToFavorite(ctx context.Context, userID uuid.UUID, artistID string) error
 	RemoveArtistFromFavorite(ctx context.Context, userID uuid.UUID, artistID string) error
 	GetFavoriteArtistIDs(ctx context.Context, userID uuid.UUID) ([]model.FavoriteArtist, error)

@@ -11,7 +11,6 @@ import (
 	"go.uber.org/mock/gomock"
 	"google.golang.org/grpc"
 
-	"spotify/internal/middleware"
 	"spotify/microservices/catalog/mocks"
 	pb "spotify/proto/auth"
 )
@@ -24,7 +23,7 @@ func TestAuthGrpcMiddleware_Handle(t *testing.T) {
 	mw := NewAuthGrpcMiddleware(mockAuthClient)
 
 	nextHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		userID, ok := middleware.GetUserID(r.Context())
+		userID, ok := GetUserID(r.Context())
 		if ok && userID == "user123" {
 			w.WriteHeader(http.StatusOK)
 		} else {

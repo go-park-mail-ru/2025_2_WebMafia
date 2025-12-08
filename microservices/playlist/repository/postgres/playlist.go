@@ -234,7 +234,6 @@ func (r *Repository) GetTracksByPlaylist(ctx context.Context, playlistID uuid.UU
 	return ids, nil
 }
 
-// ЛЮБИМЫЕ АЛЬБОМЫ
 func (r *Repository) AddAlbumToFavorite(ctx context.Context, userID uuid.UUID, albumID string) error {
 	const op = "repository.AddAlbumToFavorite"
 
@@ -297,7 +296,6 @@ func (r *Repository) GetFavoriteAlbumIDs(ctx context.Context, userID uuid.UUID) 
 	return out, nil
 }
 
-// ЛЮБИМЫЕ АРТИСТЫ
 func (r *Repository) AddArtistToFavorite(ctx context.Context, userID uuid.UUID, artistID string) error {
 	const op = "repository.AddArtistToFavorite"
 

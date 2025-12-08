@@ -13,13 +13,9 @@ import (
 
 	"spotify/internal/metrics"
 	"spotify/internal/server"
-	"spotify/pkg/csrfmanager"
-	"spotify/pkg/jwtmanager"
 	"spotify/pkg/logger"
 	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
-
-	"google.golang.org/grpc/credentials/insecure"
 
 	httpDelivery "spotify/microservices/playlist/delivery/http"
 	repository "spotify/microservices/playlist/repository/postgres"

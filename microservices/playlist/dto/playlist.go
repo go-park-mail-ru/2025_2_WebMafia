@@ -112,6 +112,8 @@ type RemoveTrackFromPlaylistRequest struct {
 }
 
 // любимые артисты
+
+//easyjson:json
 type FavoriteArtist struct {
 	ID        string    `json:"id"`
 	CreatorID string    `json:"creator_id"`
@@ -131,6 +133,7 @@ type RemoveArtistFromFavoriteRequest struct {
 
 // любимые альбомы
 
+//easyjson:json
 type FavoriteAlbum struct {
 	ID        string           `json:"id"`
 	CreatorID string           `json:"creator_id"`
@@ -141,6 +144,7 @@ type FavoriteAlbum struct {
 	CreatedAt time.Time        `json:"created_at"`
 }
 
+//easyjson:json
 type ArtistForAlbum struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`

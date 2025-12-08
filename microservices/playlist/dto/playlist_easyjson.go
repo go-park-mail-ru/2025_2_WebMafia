@@ -452,6 +452,12 @@ func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto4(in *jlexer.Lexer, ou
 			} else {
 				out.ID = string(in.String())
 			}
+		case "creator_id":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CreatorID = string(in.String())
+			}
 		case "title":
 			if in.IsNull() {
 				in.Skip()
@@ -503,6 +509,14 @@ func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto4(in *jlexer.Lexer, ou
 				}
 				in.Delim(']')
 			}
+		case "created_at":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.CreatedAt).UnmarshalJSON(data))
+				}
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -521,6 +535,11 @@ func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto4(out *jwriter.Writer,
 		const prefix string = ",\"id\":"
 		out.RawString(prefix[1:])
 		out.String(string(in.ID))
+	}
+	{
+		const prefix string = ",\"creator_id\":"
+		out.RawString(prefix)
+		out.String(string(in.CreatorID))
 	}
 	{
 		const prefix string = ",\"title\":"
@@ -556,6 +575,11 @@ func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto4(out *jwriter.Writer,
 			out.RawByte(']')
 		}
 	}
+	{
+		const prefix string = ",\"created_at\":"
+		out.RawString(prefix)
+		out.Raw((in.CreatedAt).MarshalJSON())
+	}
 	out.RawByte('}')
 }
 
@@ -582,7 +606,294 @@ func (v *Playlist) UnmarshalJSON(data []byte) error {
 func (v *Playlist) UnmarshalEasyJSON(l *jlexer.Lexer) {
 	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto4(l, v)
 }
-func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto5(in *jlexer.Lexer, out *CreatePlaylistRequest) {
+func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto5(in *jlexer.Lexer, out *FavoriteArtist) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeFieldName(false)
+		in.WantColon()
+		switch key {
+		case "id":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ID = string(in.String())
+			}
+		case "creator_id":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CreatorID = string(in.String())
+			}
+		case "name":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
+		case "avatar_url":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AvatarURL = string(in.String())
+			}
+		case "play_count":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.PlayCount = int64(in.Int64())
+			}
+		case "created_at":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.CreatedAt).UnmarshalJSON(data))
+				}
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto5(out *jwriter.Writer, in FavoriteArtist) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	{
+		const prefix string = ",\"id\":"
+		out.RawString(prefix[1:])
+		out.String(string(in.ID))
+	}
+	{
+		const prefix string = ",\"creator_id\":"
+		out.RawString(prefix)
+		out.String(string(in.CreatorID))
+	}
+	{
+		const prefix string = ",\"name\":"
+		out.RawString(prefix)
+		out.String(string(in.Name))
+	}
+	if in.AvatarURL != "" {
+		const prefix string = ",\"avatar_url\":"
+		out.RawString(prefix)
+		out.String(string(in.AvatarURL))
+	}
+	{
+		const prefix string = ",\"play_count\":"
+		out.RawString(prefix)
+		out.Int64(int64(in.PlayCount))
+	}
+	{
+		const prefix string = ",\"created_at\":"
+		out.RawString(prefix)
+		out.Raw((in.CreatedAt).MarshalJSON())
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v FavoriteArtist) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto5(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v FavoriteArtist) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto5(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *FavoriteArtist) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto5(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *FavoriteArtist) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto5(l, v)
+}
+func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto6(in *jlexer.Lexer, out *FavoriteAlbum) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeFieldName(false)
+		in.WantColon()
+		switch key {
+		case "id":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ID = string(in.String())
+			}
+		case "creator_id":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.CreatorID = string(in.String())
+			}
+		case "title":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Title = string(in.String())
+			}
+		case "avatar_url":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.AvatarURL = string(in.String())
+			}
+		case "artists":
+			if in.IsNull() {
+				in.Skip()
+				out.Artists = nil
+			} else {
+				in.Delim('[')
+				if out.Artists == nil {
+					if !in.IsDelim(']') {
+						out.Artists = make([]ArtistForAlbum, 0, 2)
+					} else {
+						out.Artists = []ArtistForAlbum{}
+					}
+				} else {
+					out.Artists = (out.Artists)[:0]
+				}
+				for !in.IsDelim(']') {
+					var v7 ArtistForAlbum
+					if in.IsNull() {
+						in.Skip()
+					} else {
+						(v7).UnmarshalEasyJSON(in)
+					}
+					out.Artists = append(out.Artists, v7)
+					in.WantComma()
+				}
+				in.Delim(']')
+			}
+		case "type":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Type = string(in.String())
+			}
+		case "created_at":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				if data := in.Raw(); in.Ok() {
+					in.AddError((out.CreatedAt).UnmarshalJSON(data))
+				}
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto6(out *jwriter.Writer, in FavoriteAlbum) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	{
+		const prefix string = ",\"id\":"
+		out.RawString(prefix[1:])
+		out.String(string(in.ID))
+	}
+	{
+		const prefix string = ",\"creator_id\":"
+		out.RawString(prefix)
+		out.String(string(in.CreatorID))
+	}
+	{
+		const prefix string = ",\"title\":"
+		out.RawString(prefix)
+		out.String(string(in.Title))
+	}
+	if in.AvatarURL != "" {
+		const prefix string = ",\"avatar_url\":"
+		out.RawString(prefix)
+		out.String(string(in.AvatarURL))
+	}
+	{
+		const prefix string = ",\"artists\":"
+		out.RawString(prefix)
+		if in.Artists == nil && (out.Flags&jwriter.NilSliceAsEmpty) == 0 {
+			out.RawString("null")
+		} else {
+			out.RawByte('[')
+			for v8, v9 := range in.Artists {
+				if v8 > 0 {
+					out.RawByte(',')
+				}
+				(v9).MarshalEasyJSON(out)
+			}
+			out.RawByte(']')
+		}
+	}
+	{
+		const prefix string = ",\"type\":"
+		out.RawString(prefix)
+		out.String(string(in.Type))
+	}
+	{
+		const prefix string = ",\"created_at\":"
+		out.RawString(prefix)
+		out.Raw((in.CreatedAt).MarshalJSON())
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v FavoriteAlbum) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto6(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v FavoriteAlbum) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto6(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *FavoriteAlbum) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto6(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *FavoriteAlbum) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto6(l, v)
+}
+func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto7(in *jlexer.Lexer, out *CreatePlaylistRequest) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -618,7 +929,7 @@ func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto5(in *jlexer.Lexer, ou
 		in.Consumed()
 	}
 }
-func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto5(out *jwriter.Writer, in CreatePlaylistRequest) {
+func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto7(out *jwriter.Writer, in CreatePlaylistRequest) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -643,27 +954,27 @@ func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto5(out *jwriter.Writer,
 // MarshalJSON supports json.Marshaler interface
 func (v CreatePlaylistRequest) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto5(&w, v)
+	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto7(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v CreatePlaylistRequest) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto5(w, v)
+	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto7(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *CreatePlaylistRequest) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto5(&r, v)
+	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto7(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *CreatePlaylistRequest) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto5(l, v)
+	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto7(l, v)
 }
-func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto6(in *jlexer.Lexer, out *Artist) {
+func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto8(in *jlexer.Lexer, out *ArtistForAlbum) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -699,7 +1010,83 @@ func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto6(in *jlexer.Lexer, ou
 		in.Consumed()
 	}
 }
-func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto6(out *jwriter.Writer, in Artist) {
+func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto8(out *jwriter.Writer, in ArtistForAlbum) {
+	out.RawByte('{')
+	first := true
+	_ = first
+	{
+		const prefix string = ",\"id\":"
+		out.RawString(prefix[1:])
+		out.String(string(in.ID))
+	}
+	{
+		const prefix string = ",\"name\":"
+		out.RawString(prefix)
+		out.String(string(in.Name))
+	}
+	out.RawByte('}')
+}
+
+// MarshalJSON supports json.Marshaler interface
+func (v ArtistForAlbum) MarshalJSON() ([]byte, error) {
+	w := jwriter.Writer{}
+	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto8(&w, v)
+	return w.Buffer.BuildBytes(), w.Error
+}
+
+// MarshalEasyJSON supports easyjson.Marshaler interface
+func (v ArtistForAlbum) MarshalEasyJSON(w *jwriter.Writer) {
+	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto8(w, v)
+}
+
+// UnmarshalJSON supports json.Unmarshaler interface
+func (v *ArtistForAlbum) UnmarshalJSON(data []byte) error {
+	r := jlexer.Lexer{Data: data}
+	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto8(&r, v)
+	return r.Error()
+}
+
+// UnmarshalEasyJSON supports easyjson.Unmarshaler interface
+func (v *ArtistForAlbum) UnmarshalEasyJSON(l *jlexer.Lexer) {
+	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto8(l, v)
+}
+func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto9(in *jlexer.Lexer, out *Artist) {
+	isTopLevel := in.IsStart()
+	if in.IsNull() {
+		if isTopLevel {
+			in.Consumed()
+		}
+		in.Skip()
+		return
+	}
+	in.Delim('{')
+	for !in.IsDelim('}') {
+		key := in.UnsafeFieldName(false)
+		in.WantColon()
+		switch key {
+		case "id":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.ID = string(in.String())
+			}
+		case "name":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Name = string(in.String())
+			}
+		default:
+			in.SkipRecursive()
+		}
+		in.WantComma()
+	}
+	in.Delim('}')
+	if isTopLevel {
+		in.Consumed()
+	}
+}
+func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto9(out *jwriter.Writer, in Artist) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -719,27 +1106,27 @@ func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto6(out *jwriter.Writer,
 // MarshalJSON supports json.Marshaler interface
 func (v Artist) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto6(&w, v)
+	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto9(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Artist) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto6(w, v)
+	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto9(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Artist) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto6(&r, v)
+	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto9(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Artist) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto6(l, v)
+	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto9(l, v)
 }
-func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto7(in *jlexer.Lexer, out *Album) {
+func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto10(in *jlexer.Lexer, out *Album) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -781,7 +1168,7 @@ func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto7(in *jlexer.Lexer, ou
 		in.Consumed()
 	}
 }
-func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto7(out *jwriter.Writer, in Album) {
+func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto10(out *jwriter.Writer, in Album) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -806,27 +1193,27 @@ func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto7(out *jwriter.Writer,
 // MarshalJSON supports json.Marshaler interface
 func (v Album) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto7(&w, v)
+	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto10(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v Album) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto7(w, v)
+	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto10(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *Album) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto7(&r, v)
+	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto10(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *Album) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto7(l, v)
+	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto10(l, v)
 }
-func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto8(in *jlexer.Lexer, out *AddTrackToPlaylistRequest) {
+func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto11(in *jlexer.Lexer, out *AddTrackToPlaylistRequest) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -856,7 +1243,7 @@ func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto8(in *jlexer.Lexer, ou
 		in.Consumed()
 	}
 }
-func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto8(out *jwriter.Writer, in AddTrackToPlaylistRequest) {
+func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto11(out *jwriter.Writer, in AddTrackToPlaylistRequest) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -876,27 +1263,27 @@ func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto8(out *jwriter.Writer,
 // MarshalJSON supports json.Marshaler interface
 func (v AddTrackToPlaylistRequest) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto8(&w, v)
+	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto11(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v AddTrackToPlaylistRequest) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto8(w, v)
+	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto11(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *AddTrackToPlaylistRequest) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto8(&r, v)
+	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto11(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *AddTrackToPlaylistRequest) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto8(l, v)
+	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto11(l, v)
 }
-func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto9(in *jlexer.Lexer, out *AddTrackToFavoriteRequest) {
+func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto12(in *jlexer.Lexer, out *AddTrackToFavoriteRequest) {
 	isTopLevel := in.IsStart()
 	if in.IsNull() {
 		if isTopLevel {
@@ -926,7 +1313,7 @@ func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto9(in *jlexer.Lexer, ou
 		in.Consumed()
 	}
 }
-func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto9(out *jwriter.Writer, in AddTrackToFavoriteRequest) {
+func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto12(out *jwriter.Writer, in AddTrackToFavoriteRequest) {
 	out.RawByte('{')
 	first := true
 	_ = first
@@ -946,23 +1333,23 @@ func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto9(out *jwriter.Writer,
 // MarshalJSON supports json.Marshaler interface
 func (v AddTrackToFavoriteRequest) MarshalJSON() ([]byte, error) {
 	w := jwriter.Writer{}
-	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto9(&w, v)
+	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto12(&w, v)
 	return w.Buffer.BuildBytes(), w.Error
 }
 
 // MarshalEasyJSON supports easyjson.Marshaler interface
 func (v AddTrackToFavoriteRequest) MarshalEasyJSON(w *jwriter.Writer) {
-	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto9(w, v)
+	easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto12(w, v)
 }
 
 // UnmarshalJSON supports json.Unmarshaler interface
 func (v *AddTrackToFavoriteRequest) UnmarshalJSON(data []byte) error {
 	r := jlexer.Lexer{Data: data}
-	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto9(&r, v)
+	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto12(&r, v)
 	return r.Error()
 }
 
 // UnmarshalEasyJSON supports easyjson.Unmarshaler interface
 func (v *AddTrackToFavoriteRequest) UnmarshalEasyJSON(l *jlexer.Lexer) {
-	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto9(l, v)
+	easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto12(l, v)
 }

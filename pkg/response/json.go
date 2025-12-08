@@ -1,5 +1,7 @@
 package response
 
+//go:generate easyjson $GOFILE
+
 import (
 	"encoding/json"
 	"log"

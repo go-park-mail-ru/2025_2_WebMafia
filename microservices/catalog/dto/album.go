@@ -1,5 +1,7 @@
 package dto
 
+//go:generate easyjson $GOFILE
+
 //easyjson:json
 type Album struct {
 	ID          string           `json:"id"`

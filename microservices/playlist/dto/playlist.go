@@ -1,5 +1,7 @@
 package dto
 
+//go:generate easyjson $GOFILE
+
 import (
 	"io"
 

@@ -1,5 +1,7 @@
 package http
 
+//go:generate easyjson $GOFILE
+
 import (
 	"fmt"
 	"net/http"
@@ -37,7 +39,7 @@ func (i *registerRequest) validate() error {
 	return nil
 }
 
-//easyjson:jsonы
+//easyjson:json
 type registerResponse struct {
 	ID string `json:"id"`
 }

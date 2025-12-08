@@ -1,5 +1,7 @@
 package dto
 
+//go:generate easyjson $GOFILE
+
 //easyjson:json
 type Track struct {
 	ID        string           `json:"id"`

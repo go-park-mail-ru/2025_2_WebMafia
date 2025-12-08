@@ -1,7 +1,6 @@
 package http
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"spotify/internal/middleware"
@@ -9,6 +8,8 @@ import (
 	"spotify/pkg/response"
 	"strings"
 	"time"
+
+	easyjson "github.com/mailru/easyjson"
 )
 
 const (
@@ -120,7 +121,7 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 
 	var req registerRequest
 
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
 		log.Errorf("[%s]: Invalid request body: %v", op, err)
 		response.BadRequestJSON(w)
 		return
@@ -170,7 +171,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 
 	var req loginRequest
 
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
 		log.Errorf("[%s]: Invalid request body: %v", op, err)
 		response.BadRequestJSON(w)
 		return
@@ -306,7 +307,7 @@ func (h *Handler) UpdateProfile(w http.ResponseWriter, r *http.Request) {
 	log := middleware.LoggerFromContext(r.Context())
 
 	var req updateProfileRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
 		log.Errorf("[%s]: Invalid request body: %v", op, err)
 		response.BadRequestJSON(w)
 		return

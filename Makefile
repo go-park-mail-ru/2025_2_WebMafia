@@ -23,13 +23,15 @@ generate:
 	@echo "==> Generating mocks and other go:generate assets..."
 	@go generate ./...
 	@echo "==> Generating EasyJSON..."
-	@easyjson microservices/auth/dto/user.go
-	@easyjson microservices/auth/delivery/http/user.go
-	@easyjson microservices/auth/delivery/http/csrf.go
-	@easyjson microservices/catalog/dto/album.go
-	@easyjson microservices/catalog/dto/artist.go
-	@easyjson microservices/catalog/dto/track.go
-	@easyjson microservices/playlist/dto/playlist.go
+	@easyjson \
+		microservices/auth/dto/user.go \
+		microservices/auth/delivery/http/user.go \
+		microservices/auth/delivery/http/csrf.go \
+		microservices/catalog/dto/album.go \
+		microservices/catalog/dto/artist.go \
+		microservices/catalog/dto/track.go \
+		microservices/playlist/dto/playlist.go \
+		pkg/response/json.go
 
 
 # === Тестирование ===

@@ -10,7 +10,7 @@ import (
 
 const (
 	grpcTokenCookie string = "session_token"
-	csrfHeader             = "X-CSRF-Token"
+	csrfHeader      string = "X-CSRF-Token"
 )
 
 //go:generate mockgen -destination=../mocks/auth_client_mock.go -package=mocks spotify/proto/auth AuthServiceClient

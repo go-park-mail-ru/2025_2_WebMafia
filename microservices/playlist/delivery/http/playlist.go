@@ -465,7 +465,7 @@ func (h *Handler) AddAlbumToFavorite(w http.ResponseWriter, r *http.Request) {
 	userID, err := uuid.Parse(rawUserID)
 	if err != nil {
 		log.Errorf("[%s]: invalid userId: %v", op, err)
-		response.BadRequestJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 
@@ -501,7 +501,7 @@ func (h *Handler) RemoveAlbumFromFavorite(w http.ResponseWriter, r *http.Request
 	userID, err := uuid.Parse(rawUserID)
 	if err != nil {
 		log.Errorf("[%s]: invalid userId: %v", op, err)
-		response.BadRequestJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 
@@ -538,7 +538,7 @@ func (h *Handler) GetFavoriteAlbums(w http.ResponseWriter, r *http.Request) {
 	userID, err := uuid.Parse(rawUserID)
 	if err != nil {
 		log.Errorf("[%s]: invalid userId: %v", op, err)
-		response.BadRequestJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 
@@ -565,7 +565,7 @@ func (h *Handler) AddArtistToFavorite(w http.ResponseWriter, r *http.Request) {
 	userID, err := uuid.Parse(rawUserID)
 	if err != nil {
 		log.Errorf("[%s]: invalid userId: %v", op, err)
-		response.BadRequestJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 	artistID := mux.Vars(r)["id"]
@@ -601,7 +601,7 @@ func (h *Handler) RemoveArtistFromFavorite(w http.ResponseWriter, r *http.Reques
 	userID, err := uuid.Parse(rawUserID)
 	if err != nil {
 		log.Errorf("[%s]: invalid userId: %v", op, err)
-		response.BadRequestJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 
@@ -637,7 +637,7 @@ func (h *Handler) GetFavoriteArtists(w http.ResponseWriter, r *http.Request) {
 	userID, err := uuid.Parse(rawUserID)
 	if err != nil {
 		log.Errorf("[%s]: invalid userId: %v", op, err)
-		response.BadRequestJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 

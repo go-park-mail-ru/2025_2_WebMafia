@@ -434,3 +434,61 @@ func (s *Service) GetFavoriteArtists(ctx context.Context, userID uuid.UUID) ([]d
 	}
 	return out, nil
 }
+
+func (s *Service) GeneratePlaylistMeta(ctx context.Context, playlistID uuid.UUID) (*dto.GeneratedMeta, error) {
+	const op = "service.GeneratePlaylistMeta"
+
+	p, err := s.repo.GetByID(ctx, playlistID)
+	if err != nil {
+		return nil, fmt.Errorf("%s: load playlist: %w", op, mapRepositoryError(err))
+	}
+
+	trackIDs, err := s.repo.GetTracksByPlaylist(ctx, playlistID)
+	if err != nil {
+		return nil, fmt.Errorf("%s: get tracks: %w", op, mapRepositoryError(err))
+	}
+
+	if len(trackIDs) == 0 {
+		return &dto.GeneratedMeta{
+			Title:       p.Title,
+			Description: p.Description,
+		}, nil
+	}
+
+	resp, err := s.catalog.GetTracksByIDs(ctx, &pbCatalog.GetTracksByIDsRequest{Ids: trackIDs})
+	if err != nil {
+		return nil, fmt.Errorf("%s: load tracks: %w", op, err)
+	}
+
+	tracks := make([]dto.Track, 0, len(resp.Tracks))
+	for _, t := range resp.Tracks {
+		track := dto.Track{
+			ID:        t.Id,
+			Title:     t.Title,
+			DurationS: int(t.DurationS),
+			FileURL:   t.FileUrl,
+			Album: dto.Album{
+				ID:        t.Album.Id,
+				Title:     t.Album.Title,
+				AvatarURL: t.Album.AvatarUrl,
+			},
+		}
+		for _, a := range t.Artists {
+			track.Artists = append(track.Artists, dto.Artist{
+				ID:   a.Id,
+				Name: a.Name,
+			})
+		}
+		tracks = append(tracks, track)
+	}
+
+	title, desc, err := s.ai.GeneratePlaylistMeta(ctx, tracks)
+	if err != nil {
+		return nil, fmt.Errorf("%s: ai error: %w", op, err)
+	}
+
+	return &dto.GeneratedMeta{
+		Title:       title,
+		Description: desc,
+	}, nil
+}

@@ -4,6 +4,7 @@ import (
 	"context"
 	"io"
 	"spotify/internal/model"
+	"spotify/microservices/playlist/ai"
 	"spotify/microservices/playlist/repository/postgres"
 
 	pbCatalog "spotify/proto/catalog"
@@ -42,8 +43,9 @@ type Service struct {
 	repo    IRepository
 	storage IStorage
 	catalog pbCatalog.CatalogServiceClient
+	ai      ai.IAIGenerator
 }
 
-func New(repo IRepository, storage IStorage, catalog pbCatalog.CatalogServiceClient) *Service {
-	return &Service{repo: repo, storage: storage, catalog: catalog}
+func New(repo IRepository, storage IStorage, catalog pbCatalog.CatalogServiceClient, ai ai.IAIGenerator) *Service {
+	return &Service{repo: repo, storage: storage, catalog: catalog, ai: ai}
 }

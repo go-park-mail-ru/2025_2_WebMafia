@@ -7,6 +7,7 @@ import (
 	"spotify/internal/metrics"
 	"spotify/internal/middleware"
 	"spotify/internal/server"
+	"spotify/microservices/playlist/ai"
 	"spotify/pkg/logger"
 	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
@@ -84,7 +85,11 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 
 	catalogClient := pbCatalog.NewCatalogServiceClient(catalogConn)
 
-	playlistService := service.New(repo, stor, catalogClient)
+	aiClient := ai.NewGigaChat(ai.GigaChatConfig{
+		AuthKey: cfg.Playlist.AI.AuthKey,
+		Model:   cfg.Playlist.AI.Model,
+	})
+	playlistService := service.New(repo, stor, catalogClient, aiClient)
 
 	mtr := metrics.New("playlist")
 

@@ -650,3 +650,31 @@ func (h *Handler) GetFavoriteArtists(w http.ResponseWriter, r *http.Request) {
 
 	response.JSON(w, http.StatusOK, artists)
 }
+
+func (h *Handler) GeneratePlaylistMeta(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.GeneratePlaylistMeta"
+	log := middleware.LoggerFromContext(r.Context())
+
+	rawID := mux.Vars(r)["id"]
+	if rawID == "" {
+		log.Errorf("[%s]: missing playlist id", op)
+		response.InternalErrorJSON(w)
+		return
+	}
+
+	id, err := uuid.Parse(rawID)
+	if err != nil {
+		log.Errorf("[%s]: invalid playlist id: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	meta, err := h.service.GeneratePlaylistMeta(r.Context(), id)
+	if err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, meta)
+}

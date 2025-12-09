@@ -2,12 +2,11 @@ package app
 
 import (
 	"fmt"
+	"github.com/spf13/viper"
 	"os"
 	"spotify/internal/app"
 	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
-
-	"github.com/spf13/viper"
 )
 
 type Config struct {
@@ -27,10 +26,16 @@ type PlaylistConfig struct {
 	AllowedAvatarTypes []string         `mapstructure:"allowed_avatar_types"`
 	Buckets            BucketsConfig    `mapstructure:"buckets"`
 	Clients            ClientsConfig    `mapstructure:"clients"`
+	AI                 PlaylistAI       `mapstructure:"ai"`
 }
 
 type BucketsConfig struct {
 	Avatars string `mapstructure:"avatars"`
+}
+
+type PlaylistAI struct {
+	AuthKey string `mapstructure:"auth_key"`
+	Model   string `mapstructure:"model"`
 }
 
 func LoadConfig(path string) (*Config, error) {

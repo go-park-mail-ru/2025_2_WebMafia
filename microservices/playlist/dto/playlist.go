@@ -111,8 +111,6 @@ type RemoveTrackFromPlaylistRequest struct {
 	TrackID    string    `json:"track_id"`
 }
 
-// любимые артисты
-
 //easyjson:json
 type FavoriteArtist struct {
 	ID        string    `json:"id"`
@@ -130,8 +128,6 @@ type RemoveArtistFromFavoriteRequest struct {
 	UserID   uuid.UUID `json:"-"`
 	ArtistID string    `json:"artist_id"`
 }
-
-// любимые альбомы
 
 //easyjson:json
 type FavoriteAlbum struct {

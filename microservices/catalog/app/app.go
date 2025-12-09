@@ -15,7 +15,6 @@ import (
 
 	grpcDelivery "spotify/microservices/catalog/delivery/grpc"
 	httpDelivery "spotify/microservices/catalog/delivery/http"
-	catalogMiddleware "spotify/microservices/catalog/middleware"
 	repository "spotify/microservices/catalog/repository/postgres"
 	service "spotify/microservices/catalog/service"
 
@@ -79,7 +78,7 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	mtr := metrics.New("catalog")
 
 	authClient := pbAuth.NewAuthServiceClient(authConn)
-	authMiddleware := catalogMiddleware.NewAuthGrpcMiddleware(authClient)
+	authMiddleware := middleware.NewAuthGrpcMiddleware(authClient)
 
 	httpHandler := httpDelivery.NewHandler(catalogService)
 

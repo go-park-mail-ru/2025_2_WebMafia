@@ -16,3 +16,9 @@ type Artist struct {
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 }
+
+type FavoriteArtist struct {
+	UserID    uuid.UUID
+	ArtistID  uuid.UUID
+	CreatedAt time.Time
+}

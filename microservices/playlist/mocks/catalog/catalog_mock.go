@@ -182,6 +182,26 @@ func (mr *MockCatalogServiceClientMockRecorder) GetArtistByID(ctx, in any, opts 
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetArtistByID", reflect.TypeOf((*MockCatalogServiceClient)(nil).GetArtistByID), varargs...)
 }
 
+// GetArtistsByIDs mocks base method.
+func (m *MockCatalogServiceClient) GetArtistsByIDs(ctx context.Context, in *catalog.GetArtistsByIDsRequest, opts ...grpc.CallOption) (*catalog.GetArtistsByIDsResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetArtistsByIDs", varargs...)
+	ret0, _ := ret[0].(*catalog.GetArtistsByIDsResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetArtistsByIDs indicates an expected call of GetArtistsByIDs.
+func (mr *MockCatalogServiceClientMockRecorder) GetArtistsByIDs(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetArtistsByIDs", reflect.TypeOf((*MockCatalogServiceClient)(nil).GetArtistsByIDs), varargs...)
+}
+
 // GetTrackByID mocks base method.
 func (m *MockCatalogServiceClient) GetTrackByID(ctx context.Context, in *catalog.GetTrackByIDRequest, opts ...grpc.CallOption) (*catalog.Track, error) {
 	m.ctrl.T.Helper()

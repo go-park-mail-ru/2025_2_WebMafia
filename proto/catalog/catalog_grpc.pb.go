@@ -22,6 +22,7 @@ const (
 	CatalogService_GetArtistByID_FullMethodName       = "/catalog.CatalogService/GetArtistByID"
 	CatalogService_GetAllArtists_FullMethodName       = "/catalog.CatalogService/GetAllArtists"
 	CatalogService_SearchArtists_FullMethodName       = "/catalog.CatalogService/SearchArtists"
+	CatalogService_GetArtistsByIDs_FullMethodName     = "/catalog.CatalogService/GetArtistsByIDs"
 	CatalogService_GetTracksByIDs_FullMethodName      = "/catalog.CatalogService/GetTracksByIDs"
 	CatalogService_GetAlbumByID_FullMethodName        = "/catalog.CatalogService/GetAlbumByID"
 	CatalogService_GetAllAlbums_FullMethodName        = "/catalog.CatalogService/GetAllAlbums"
@@ -44,6 +45,7 @@ type CatalogServiceClient interface {
 	GetArtistByID(ctx context.Context, in *GetArtistByIDRequest, opts ...grpc.CallOption) (*Artist, error)
 	GetAllArtists(ctx context.Context, in *GetAllArtistsRequest, opts ...grpc.CallOption) (*GetAllArtistsResponse, error)
 	SearchArtists(ctx context.Context, in *SearchArtistsRequest, opts ...grpc.CallOption) (*SearchArtistsResponse, error)
+	GetArtistsByIDs(ctx context.Context, in *GetArtistsByIDsRequest, opts ...grpc.CallOption) (*GetArtistsByIDsResponse, error)
 	GetTracksByIDs(ctx context.Context, in *GetTracksByIDsRequest, opts ...grpc.CallOption) (*GetTracksByIDsResponse, error)
 	GetAlbumByID(ctx context.Context, in *GetAlbumByIDRequest, opts ...grpc.CallOption) (*Album, error)
 	GetAllAlbums(ctx context.Context, in *GetAllAlbumsRequest, opts ...grpc.CallOption) (*GetAllAlbumsResponse, error)
@@ -91,6 +93,16 @@ func (c *catalogServiceClient) SearchArtists(ctx context.Context, in *SearchArti
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SearchArtistsResponse)
 	err := c.cc.Invoke(ctx, CatalogService_SearchArtists_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *catalogServiceClient) GetArtistsByIDs(ctx context.Context, in *GetArtistsByIDsRequest, opts ...grpc.CallOption) (*GetArtistsByIDsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetArtistsByIDsResponse)
+	err := c.cc.Invoke(ctx, CatalogService_GetArtistsByIDs_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -234,6 +246,7 @@ type CatalogServiceServer interface {
 	GetArtistByID(context.Context, *GetArtistByIDRequest) (*Artist, error)
 	GetAllArtists(context.Context, *GetAllArtistsRequest) (*GetAllArtistsResponse, error)
 	SearchArtists(context.Context, *SearchArtistsRequest) (*SearchArtistsResponse, error)
+	GetArtistsByIDs(context.Context, *GetArtistsByIDsRequest) (*GetArtistsByIDsResponse, error)
 	GetTracksByIDs(context.Context, *GetTracksByIDsRequest) (*GetTracksByIDsResponse, error)
 	GetAlbumByID(context.Context, *GetAlbumByIDRequest) (*Album, error)
 	GetAllAlbums(context.Context, *GetAllAlbumsRequest) (*GetAllAlbumsResponse, error)
@@ -265,6 +278,9 @@ func (UnimplementedCatalogServiceServer) GetAllArtists(context.Context, *GetAllA
 }
 func (UnimplementedCatalogServiceServer) SearchArtists(context.Context, *SearchArtistsRequest) (*SearchArtistsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchArtists not implemented")
+}
+func (UnimplementedCatalogServiceServer) GetArtistsByIDs(context.Context, *GetArtistsByIDsRequest) (*GetArtistsByIDsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetArtistsByIDs not implemented")
 }
 func (UnimplementedCatalogServiceServer) GetTracksByIDs(context.Context, *GetTracksByIDsRequest) (*GetTracksByIDsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTracksByIDs not implemented")
@@ -376,6 +392,24 @@ func _CatalogService_SearchArtists_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CatalogServiceServer).SearchArtists(ctx, req.(*SearchArtistsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CatalogService_GetArtistsByIDs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetArtistsByIDsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CatalogServiceServer).GetArtistsByIDs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CatalogService_GetArtistsByIDs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CatalogServiceServer).GetArtistsByIDs(ctx, req.(*GetArtistsByIDsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -632,6 +666,10 @@ var CatalogService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SearchArtists",
 			Handler:    _CatalogService_SearchArtists_Handler,
+		},
+		{
+			MethodName: "GetArtistsByIDs",
+			Handler:    _CatalogService_GetArtistsByIDs_Handler,
 		},
 		{
 			MethodName: "GetTracksByIDs",

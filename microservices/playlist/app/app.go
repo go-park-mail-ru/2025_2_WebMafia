@@ -7,11 +7,11 @@ import (
 	"spotify/internal/metrics"
 	"spotify/internal/middleware"
 	"spotify/internal/server"
-	"spotify/pkg/csrfmanager"
-	"spotify/pkg/jwtmanager"
 	"spotify/pkg/logger"
 	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
+
+	pbAuth "spotify/proto/auth"
 
 	"google.golang.org/grpc/credentials/insecure"
 
@@ -102,23 +102,21 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	api.Use(middleware.MetricsMiddleware(mtr))
 	api.Use(middleware.CORS(cfg.Playlist.HTTP.CORS))
 
-	jwtManager := jwtmanager.NewManager(
-		cfg.Playlist.HTTP.Auth.JWT.SecretKey,
-		cfg.Playlist.HTTP.Auth.JWT.AccessTokenTTL,
+	authConn, err := grpc.NewClient(
+		cfg.Playlist.Clients.Auth,
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
-	csrfManager := csrfmanager.NewManager(
-		cfg.Playlist.HTTP.Auth.CSRF.SecretKey,
-		cfg.Playlist.HTTP.Auth.CSRF.TokenTTL,
-	)
-
-	authMiddleware := middleware.NewAuthMiddleware(jwtManager)
-	csrfMiddleware := middleware.NewCSRFMiddleware(csrfManager)
+	if err != nil {
+		return nil, fmt.Errorf("failed to connect to auth: %w", err)
+	}
+	authClient := pbAuth.NewAuthServiceClient(authConn)
+	authMiddleware := middleware.NewAuthGrpcMiddleware(authClient)
 
 	protected := api.PathPrefix("").Subrouter()
-	protected.Use(authMiddleware.AuthMiddleware)
+	protected.Use(authMiddleware.Handle)
 
 	csrfProtected := protected.PathPrefix("").Subrouter()
-	csrfProtected.Use(csrfMiddleware.CSRFMiddleware)
+	csrfProtected.Use(authMiddleware.Handle)
 	public := api.PathPrefix("").Subrouter()
 
 	httpHandler.RegisterRoutes(public, protected, csrfProtected)

@@ -112,6 +112,7 @@ playlist:
 
   clients:
     catalog: "catalog:9000"
+    auth: "auth:9001"
 
 db:
   host: "db"

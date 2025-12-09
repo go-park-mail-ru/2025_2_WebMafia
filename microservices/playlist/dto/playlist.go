@@ -4,18 +4,21 @@ package dto
 
 import (
 	"io"
+	"time"
 
 	"github.com/google/uuid"
 )
 
 //easyjson:json
 type Playlist struct {
-	ID          string  `json:"id"`
-	Title       string  `json:"title"`
-	Description string  `json:"description,omitempty"`
-	IsFavorite  bool    `json:"is_favorite"`
-	AvatarURL   string  `json:"avatar_url,omitempty"`
-	Tracks      []Track `json:"tracks,omitempty"`
+	ID          string    `json:"id"`
+	CreatorID   string    `json:"creator_id"`
+	Title       string    `json:"title"`
+	Description string    `json:"description,omitempty"`
+	IsFavorite  bool      `json:"is_favorite"`
+	AvatarURL   string    `json:"avatar_url,omitempty"`
+	Tracks      []Track   `json:"tracks,omitempty"`
+	CreatedAt   time.Time `json:"created_at"`
 }
 
 //easyjson:json
@@ -106,4 +109,53 @@ type AddTrackToPlaylistRequest struct {
 type RemoveTrackFromPlaylistRequest struct {
 	PlaylistID uuid.UUID `json:"-"`
 	TrackID    string    `json:"track_id"`
+}
+
+// любимые артисты
+
+//easyjson:json
+type FavoriteArtist struct {
+	ID        string    `json:"id"`
+	CreatorID string    `json:"creator_id"`
+	Name      string    `json:"name"`
+	AvatarURL string    `json:"avatar_url,omitempty"`
+	PlayCount int64     `json:"play_count"`
+	CreatedAt time.Time `json:"created_at"`
+}
+type AddArtistToFavoriteRequest struct {
+	UserID   uuid.UUID `json:"-"`
+	ArtistID string    `json:"artist_id"`
+}
+type RemoveArtistFromFavoriteRequest struct {
+	UserID   uuid.UUID `json:"-"`
+	ArtistID string    `json:"artist_id"`
+}
+
+// любимые альбомы
+
+//easyjson:json
+type FavoriteAlbum struct {
+	ID        string           `json:"id"`
+	CreatorID string           `json:"creator_id"`
+	Title     string           `json:"title"`
+	AvatarURL string           `json:"avatar_url,omitempty"`
+	Artists   []ArtistForAlbum `json:"artists"`
+	Type      string           `json:"type"`
+	CreatedAt time.Time        `json:"created_at"`
+}
+
+//easyjson:json
+type ArtistForAlbum struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
+type AddAlbumToFavoriteRequest struct {
+	UserID  uuid.UUID `json:"-"`
+	AlbumID string    `json:"album_id"`
+}
+
+type RemoveAlbumFromFavoriteRequest struct {
+	UserID  uuid.UUID `json:"-"`
+	AlbumID string    `json:"album_id"`
 }

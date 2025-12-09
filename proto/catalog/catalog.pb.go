@@ -2089,12 +2089,13 @@ const file_proto_catalog_catalog_proto_rawDesc = "" +
 	"\x15GetTracksByIDsRequest\x12\x10\n" +
 	"\x03ids\x18\x01 \x03(\tR\x03ids\"@\n" +
 	"\x16GetTracksByIDsResponse\x12&\n" +
-	"\x06tracks\x18\x01 \x03(\v2\x0e.catalog.TrackR\x06tracks2\x98\n" +
+	"\x06tracks\x18\x01 \x03(\v2\x0e.catalog.TrackR\x06tracks2\xf0\n" +
 	"\n" +
 	"\x0eCatalogService\x12A\n" +
 	"\rGetArtistByID\x12\x1d.catalog.GetArtistByIDRequest\x1a\x0f.catalog.Artist\"\x00\x12P\n" +
 	"\rGetAllArtists\x12\x1d.catalog.GetAllArtistsRequest\x1a\x1e.catalog.GetAllArtistsResponse\"\x00\x12P\n" +
-	"\rSearchArtists\x12\x1d.catalog.SearchArtistsRequest\x1a\x1e.catalog.SearchArtistsResponse\"\x00\x12Q\n" +
+	"\rSearchArtists\x12\x1d.catalog.SearchArtistsRequest\x1a\x1e.catalog.SearchArtistsResponse\"\x00\x12V\n" +
+	"\x0fGetArtistsByIDs\x12\x1f.catalog.GetArtistsByIDsRequest\x1a .catalog.GetArtistsByIDsResponse\"\x00\x12Q\n" +
 	"\x0eGetTracksByIDs\x12\x1e.catalog.GetTracksByIDsRequest\x1a\x1f.catalog.GetTracksByIDsResponse\x12>\n" +
 	"\fGetAlbumByID\x12\x1c.catalog.GetAlbumByIDRequest\x1a\x0e.catalog.Album\"\x00\x12M\n" +
 	"\fGetAllAlbums\x12\x1c.catalog.GetAllAlbumsRequest\x1a\x1d.catalog.GetAllAlbumsResponse\"\x00\x12[\n" +
@@ -2180,37 +2181,39 @@ var file_proto_catalog_catalog_proto_depIdxs = []int32{
 	10, // 16: catalog.CatalogService.GetArtistByID:input_type -> catalog.GetArtistByIDRequest
 	11, // 17: catalog.CatalogService.GetAllArtists:input_type -> catalog.GetAllArtistsRequest
 	13, // 18: catalog.CatalogService.SearchArtists:input_type -> catalog.SearchArtistsRequest
-	34, // 19: catalog.CatalogService.GetTracksByIDs:input_type -> catalog.GetTracksByIDsRequest
-	17, // 20: catalog.CatalogService.GetAlbumByID:input_type -> catalog.GetAlbumByIDRequest
-	18, // 21: catalog.CatalogService.GetAllAlbums:input_type -> catalog.GetAllAlbumsRequest
-	20, // 22: catalog.CatalogService.GetAlbumsByArtistID:input_type -> catalog.GetAlbumsByArtistIDRequest
-	21, // 23: catalog.CatalogService.SearchAlbums:input_type -> catalog.SearchAlbumsRequest
-	23, // 24: catalog.CatalogService.GetAlbumsByIDs:input_type -> catalog.GetAlbumsByIDsRequest
-	24, // 25: catalog.CatalogService.GetTrackByID:input_type -> catalog.GetTrackByIDRequest
-	25, // 26: catalog.CatalogService.GetAllTracks:input_type -> catalog.GetAllTracksRequest
-	27, // 27: catalog.CatalogService.GetTracksByArtistID:input_type -> catalog.GetTracksByArtistIDRequest
-	28, // 28: catalog.CatalogService.GetTracksByAlbumID:input_type -> catalog.GetTracksByAlbumIDRequest
-	29, // 29: catalog.CatalogService.GetTracksByGenreID:input_type -> catalog.GetTracksByGenreIDRequest
-	30, // 30: catalog.CatalogService.SearchTracks:input_type -> catalog.SearchTracksRequest
-	32, // 31: catalog.CatalogService.RegisterPlay:input_type -> catalog.RegisterPlayRequest
-	0,  // 32: catalog.CatalogService.GetArtistByID:output_type -> catalog.Artist
-	12, // 33: catalog.CatalogService.GetAllArtists:output_type -> catalog.GetAllArtistsResponse
-	14, // 34: catalog.CatalogService.SearchArtists:output_type -> catalog.SearchArtistsResponse
-	35, // 35: catalog.CatalogService.GetTracksByIDs:output_type -> catalog.GetTracksByIDsResponse
-	3,  // 36: catalog.CatalogService.GetAlbumByID:output_type -> catalog.Album
-	19, // 37: catalog.CatalogService.GetAllAlbums:output_type -> catalog.GetAllAlbumsResponse
-	19, // 38: catalog.CatalogService.GetAlbumsByArtistID:output_type -> catalog.GetAllAlbumsResponse
-	22, // 39: catalog.CatalogService.SearchAlbums:output_type -> catalog.SearchAlbumsResponse
-	19, // 40: catalog.CatalogService.GetAlbumsByIDs:output_type -> catalog.GetAllAlbumsResponse
-	6,  // 41: catalog.CatalogService.GetTrackByID:output_type -> catalog.Track
-	26, // 42: catalog.CatalogService.GetAllTracks:output_type -> catalog.GetAllTracksResponse
-	26, // 43: catalog.CatalogService.GetTracksByArtistID:output_type -> catalog.GetAllTracksResponse
-	26, // 44: catalog.CatalogService.GetTracksByAlbumID:output_type -> catalog.GetAllTracksResponse
-	26, // 45: catalog.CatalogService.GetTracksByGenreID:output_type -> catalog.GetAllTracksResponse
-	31, // 46: catalog.CatalogService.SearchTracks:output_type -> catalog.SearchTracksResponse
-	33, // 47: catalog.CatalogService.RegisterPlay:output_type -> catalog.RegisterPlayResponse
-	32, // [32:48] is the sub-list for method output_type
-	16, // [16:32] is the sub-list for method input_type
+	15, // 19: catalog.CatalogService.GetArtistsByIDs:input_type -> catalog.GetArtistsByIDsRequest
+	34, // 20: catalog.CatalogService.GetTracksByIDs:input_type -> catalog.GetTracksByIDsRequest
+	17, // 21: catalog.CatalogService.GetAlbumByID:input_type -> catalog.GetAlbumByIDRequest
+	18, // 22: catalog.CatalogService.GetAllAlbums:input_type -> catalog.GetAllAlbumsRequest
+	20, // 23: catalog.CatalogService.GetAlbumsByArtistID:input_type -> catalog.GetAlbumsByArtistIDRequest
+	21, // 24: catalog.CatalogService.SearchAlbums:input_type -> catalog.SearchAlbumsRequest
+	23, // 25: catalog.CatalogService.GetAlbumsByIDs:input_type -> catalog.GetAlbumsByIDsRequest
+	24, // 26: catalog.CatalogService.GetTrackByID:input_type -> catalog.GetTrackByIDRequest
+	25, // 27: catalog.CatalogService.GetAllTracks:input_type -> catalog.GetAllTracksRequest
+	27, // 28: catalog.CatalogService.GetTracksByArtistID:input_type -> catalog.GetTracksByArtistIDRequest
+	28, // 29: catalog.CatalogService.GetTracksByAlbumID:input_type -> catalog.GetTracksByAlbumIDRequest
+	29, // 30: catalog.CatalogService.GetTracksByGenreID:input_type -> catalog.GetTracksByGenreIDRequest
+	30, // 31: catalog.CatalogService.SearchTracks:input_type -> catalog.SearchTracksRequest
+	32, // 32: catalog.CatalogService.RegisterPlay:input_type -> catalog.RegisterPlayRequest
+	0,  // 33: catalog.CatalogService.GetArtistByID:output_type -> catalog.Artist
+	12, // 34: catalog.CatalogService.GetAllArtists:output_type -> catalog.GetAllArtistsResponse
+	14, // 35: catalog.CatalogService.SearchArtists:output_type -> catalog.SearchArtistsResponse
+	16, // 36: catalog.CatalogService.GetArtistsByIDs:output_type -> catalog.GetArtistsByIDsResponse
+	35, // 37: catalog.CatalogService.GetTracksByIDs:output_type -> catalog.GetTracksByIDsResponse
+	3,  // 38: catalog.CatalogService.GetAlbumByID:output_type -> catalog.Album
+	19, // 39: catalog.CatalogService.GetAllAlbums:output_type -> catalog.GetAllAlbumsResponse
+	19, // 40: catalog.CatalogService.GetAlbumsByArtistID:output_type -> catalog.GetAllAlbumsResponse
+	22, // 41: catalog.CatalogService.SearchAlbums:output_type -> catalog.SearchAlbumsResponse
+	19, // 42: catalog.CatalogService.GetAlbumsByIDs:output_type -> catalog.GetAllAlbumsResponse
+	6,  // 43: catalog.CatalogService.GetTrackByID:output_type -> catalog.Track
+	26, // 44: catalog.CatalogService.GetAllTracks:output_type -> catalog.GetAllTracksResponse
+	26, // 45: catalog.CatalogService.GetTracksByArtistID:output_type -> catalog.GetAllTracksResponse
+	26, // 46: catalog.CatalogService.GetTracksByAlbumID:output_type -> catalog.GetAllTracksResponse
+	26, // 47: catalog.CatalogService.GetTracksByGenreID:output_type -> catalog.GetAllTracksResponse
+	31, // 48: catalog.CatalogService.SearchTracks:output_type -> catalog.SearchTracksResponse
+	33, // 49: catalog.CatalogService.RegisterPlay:output_type -> catalog.RegisterPlayResponse
+	33, // [33:50] is the sub-list for method output_type
+	16, // [16:33] is the sub-list for method input_type
 	16, // [16:16] is the sub-list for extension type_name
 	16, // [16:16] is the sub-list for extension extendee
 	0,  // [0:16] is the sub-list for field type_name

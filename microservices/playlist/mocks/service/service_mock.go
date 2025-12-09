@@ -42,6 +42,34 @@ func (m *MockIService) EXPECT() *MockIServiceMockRecorder {
 	return m.recorder
 }
 
+// AddAlbumToFavorite mocks base method.
+func (m *MockIService) AddAlbumToFavorite(ctx context.Context, req dto.AddAlbumToFavoriteRequest) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddAlbumToFavorite", ctx, req)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// AddAlbumToFavorite indicates an expected call of AddAlbumToFavorite.
+func (mr *MockIServiceMockRecorder) AddAlbumToFavorite(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddAlbumToFavorite", reflect.TypeOf((*MockIService)(nil).AddAlbumToFavorite), ctx, req)
+}
+
+// AddArtistToFavorite mocks base method.
+func (m *MockIService) AddArtistToFavorite(ctx context.Context, req dto.AddArtistToFavoriteRequest) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddArtistToFavorite", ctx, req)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// AddArtistToFavorite indicates an expected call of AddArtistToFavorite.
+func (mr *MockIServiceMockRecorder) AddArtistToFavorite(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddArtistToFavorite", reflect.TypeOf((*MockIService)(nil).AddArtistToFavorite), ctx, req)
+}
+
 // AddTrackToFavorite mocks base method.
 func (m *MockIService) AddTrackToFavorite(ctx context.Context, req dto.AddTrackToFavoriteRequest) error {
 	m.ctrl.T.Helper()
@@ -113,6 +141,36 @@ func (mr *MockIServiceMockRecorder) DeletePlaylistAvatar(ctx, req any) *gomock.C
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeletePlaylistAvatar", reflect.TypeOf((*MockIService)(nil).DeletePlaylistAvatar), ctx, req)
 }
 
+// GetFavoriteAlbums mocks base method.
+func (m *MockIService) GetFavoriteAlbums(ctx context.Context, userID uuid.UUID) ([]dto.FavoriteAlbum, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetFavoriteAlbums", ctx, userID)
+	ret0, _ := ret[0].([]dto.FavoriteAlbum)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetFavoriteAlbums indicates an expected call of GetFavoriteAlbums.
+func (mr *MockIServiceMockRecorder) GetFavoriteAlbums(ctx, userID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetFavoriteAlbums", reflect.TypeOf((*MockIService)(nil).GetFavoriteAlbums), ctx, userID)
+}
+
+// GetFavoriteArtists mocks base method.
+func (m *MockIService) GetFavoriteArtists(ctx context.Context, userID uuid.UUID) ([]dto.FavoriteArtist, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetFavoriteArtists", ctx, userID)
+	ret0, _ := ret[0].([]dto.FavoriteArtist)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetFavoriteArtists indicates an expected call of GetFavoriteArtists.
+func (mr *MockIServiceMockRecorder) GetFavoriteArtists(ctx, userID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetFavoriteArtists", reflect.TypeOf((*MockIService)(nil).GetFavoriteArtists), ctx, userID)
+}
+
 // GetFavoritePlaylist mocks base method.
 func (m *MockIService) GetFavoritePlaylist(ctx context.Context, req dto.GetFavoritePlaylistRequest) (*dto.Playlist, error) {
 	m.ctrl.T.Helper()
@@ -126,21 +184,6 @@ func (m *MockIService) GetFavoritePlaylist(ctx context.Context, req dto.GetFavor
 func (mr *MockIServiceMockRecorder) GetFavoritePlaylist(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetFavoritePlaylist", reflect.TypeOf((*MockIService)(nil).GetFavoritePlaylist), ctx, req)
-}
-
-// GetPlaylist mocks base method.
-func (m *MockIService) GetPlaylist(ctx context.Context, req dto.GetPlaylistRequest) (*dto.Playlist, error) {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetPlaylist", ctx, req)
-	ret0, _ := ret[0].(*dto.Playlist)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
-}
-
-// GetPlaylist indicates an expected call of GetPlaylist.
-func (mr *MockIServiceMockRecorder) GetPlaylist(ctx, req any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPlaylist", reflect.TypeOf((*MockIService)(nil).GetPlaylist), ctx, req)
 }
 
 // GetPlaylistWithTracks mocks base method.
@@ -171,6 +214,34 @@ func (m *MockIService) GetPlaylistsByUser(ctx context.Context, req dto.GetPlayli
 func (mr *MockIServiceMockRecorder) GetPlaylistsByUser(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPlaylistsByUser", reflect.TypeOf((*MockIService)(nil).GetPlaylistsByUser), ctx, req)
+}
+
+// RemoveAlbumFromFavorite mocks base method.
+func (m *MockIService) RemoveAlbumFromFavorite(ctx context.Context, req dto.RemoveAlbumFromFavoriteRequest) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RemoveAlbumFromFavorite", ctx, req)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RemoveAlbumFromFavorite indicates an expected call of RemoveAlbumFromFavorite.
+func (mr *MockIServiceMockRecorder) RemoveAlbumFromFavorite(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveAlbumFromFavorite", reflect.TypeOf((*MockIService)(nil).RemoveAlbumFromFavorite), ctx, req)
+}
+
+// RemoveArtistFromFavorite mocks base method.
+func (m *MockIService) RemoveArtistFromFavorite(ctx context.Context, req dto.RemoveArtistFromFavoriteRequest) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "RemoveArtistFromFavorite", ctx, req)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// RemoveArtistFromFavorite indicates an expected call of RemoveArtistFromFavorite.
+func (mr *MockIServiceMockRecorder) RemoveArtistFromFavorite(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveArtistFromFavorite", reflect.TypeOf((*MockIService)(nil).RemoveArtistFromFavorite), ctx, req)
 }
 
 // RemoveTrackFromPlaylist mocks base method.

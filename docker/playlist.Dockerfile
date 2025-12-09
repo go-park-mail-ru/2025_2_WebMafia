@@ -9,7 +9,14 @@ COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o /bin/playlist ./cmd/playlist/main.go
 
+# ------------------------------
+
 FROM alpine:latest
+
+RUN apk --no-cache add ca-certificates
+
+COPY certs/sber-ca.pem /usr/local/share/ca-certificates/sber-ca.pem
+RUN update-ca-certificates
 
 WORKDIR /
 

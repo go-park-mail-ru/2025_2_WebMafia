@@ -40,7 +40,7 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 	}
 
 	var sb strings.Builder
-	sb.WriteString("Вот список треков:\n")
+	sb.WriteString("У меня есть плейлист. Ниже список треков:\\n")
 	for i := 0; i < max; i++ {
 		t := tracks[i]
 		sb.WriteString(fmt.Sprintf("%d. %s — ", i+1, t.Title))
@@ -53,8 +53,14 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 		sb.WriteString("\n")
 	}
 
-	sb.WriteString("\nСгенерируй короткое название (до 80 символов) и короткое описание (до 200 символов). Формат:\n")
-	sb.WriteString("title: ...\ndescription: ...")
+	sb.WriteString("\nНа основе этих треков придумай:\n")
+	sb.WriteString("1) красивое, короткое и цепляющее название плейлиста\n")
+	sb.WriteString("2) атмосферное, чуть более подробное описание\n\n")
+
+	sb.WriteString("Верни результат строго в виде JSON без комментариев, без markdown и без лишних пояснений.\n")
+	sb.WriteString("Структура должна быть такой:\n")
+	sb.WriteString("{\"title\": \"...\"," +
+		"\"description\": \"...\"}\n")
 
 	token, err := g.tm.getToken(ctx)
 	if err != nil {
@@ -99,16 +105,26 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 
 	raw := out.Choices[0].Message.Content
 
-	var title, desc string
-	lines := strings.Split(raw, "\n")
-	for _, line := range lines {
-		line = strings.TrimSpace(line)
-		if strings.HasPrefix(line, "title:") {
-			title = strings.TrimSpace(strings.TrimPrefix(line, "title:"))
-		} else if strings.HasPrefix(line, "description:") {
-			desc = strings.TrimSpace(strings.TrimPrefix(line, "description:"))
-		}
+	fmt.Println("=== RAW GIGACHAT RESPONSE START ===")
+	fmt.Println(raw)
+	fmt.Println("=== RAW GIGACHAT RESPONSE END ===")
+
+	clean := strings.TrimSpace(raw)
+	clean = strings.TrimPrefix(clean, "```json")
+	clean = strings.TrimPrefix(clean, "```")
+	clean = strings.TrimSuffix(clean, "```")
+	clean = strings.TrimSpace(clean)
+
+	type Meta struct {
+		Title       string `json:"title"`
+		Description string `json:"description"`
 	}
 
-	return title, desc, nil
+	var meta Meta
+
+	if err := json.Unmarshal([]byte(clean), &meta); err != nil {
+		return "", "", fmt.Errorf("failed to parse json: %w; raw=%s", err, clean)
+	}
+
+	return meta.Title, meta.Description, nil
 }

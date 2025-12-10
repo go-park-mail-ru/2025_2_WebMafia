@@ -57,9 +57,14 @@ func LoadConfig(path string) (*Config, error) {
 	}
 
 	var cfg Config
+
 	if err := v.Unmarshal(&cfg); err != nil {
 		return nil, fmt.Errorf("cannot unmarshal playlist config: %w", err)
 	}
+
+	fmt.Println("CONFIG USED =", v.ConfigFileUsed())
+	fmt.Println("PLAYLIST AUTH KEY =", cfg.Playlist.AI.AuthKey)
+	fmt.Println("PLAYLIST AUTH LEN =", len(cfg.Playlist.AI.AuthKey))
 
 	return &cfg, nil
 }

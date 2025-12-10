@@ -43,6 +43,20 @@ func (m *MockIRepository) EXPECT() *MockIRepositoryMockRecorder {
 	return m.recorder
 }
 
+// CreateComment mocks base method.
+func (m *MockIRepository) CreateComment(ctx context.Context, comment model.Comment) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateComment", ctx, comment)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CreateComment indicates an expected call of CreateComment.
+func (mr *MockIRepositoryMockRecorder) CreateComment(ctx, comment any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateComment", reflect.TypeOf((*MockIRepository)(nil).CreateComment), ctx, comment)
+}
+
 // GetAlbumByID mocks base method.
 func (m *MockIRepository) GetAlbumByID(ctx context.Context, id uuid.UUID) (*model.Album, error) {
 	m.ctrl.T.Helper()
@@ -191,6 +205,21 @@ func (m *MockIRepository) GetArtistsByIDs(ctx context.Context, ids []uuid.UUID) 
 func (mr *MockIRepositoryMockRecorder) GetArtistsByIDs(ctx, ids any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetArtistsByIDs", reflect.TypeOf((*MockIRepository)(nil).GetArtistsByIDs), ctx, ids)
+}
+
+// GetCommentsByTrackID mocks base method.
+func (m *MockIRepository) GetCommentsByTrackID(ctx context.Context, trackID uuid.UUID, limit, offset uint64) ([]model.Comment, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetCommentsByTrackID", ctx, trackID, limit, offset)
+	ret0, _ := ret[0].([]model.Comment)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCommentsByTrackID indicates an expected call of GetCommentsByTrackID.
+func (mr *MockIRepositoryMockRecorder) GetCommentsByTrackID(ctx, trackID, limit, offset any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCommentsByTrackID", reflect.TypeOf((*MockIRepository)(nil).GetCommentsByTrackID), ctx, trackID, limit, offset)
 }
 
 // GetGenresForTracks mocks base method.

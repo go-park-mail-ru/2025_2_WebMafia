@@ -62,7 +62,6 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	}
 
 	repo := repository.New(db)
-	catalogService := service.New(repo)
 
 	grpc_prometheus.EnableClientHandlingTimeHistogram()
 
@@ -80,7 +79,16 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	authClient := pbAuth.NewAuthServiceClient(authConn)
 	authMiddleware := middleware.NewAuthGrpcMiddleware(authClient)
 
-	httpHandler := httpDelivery.NewHandler(catalogService)
+	catalogService := service.New(repo, authClient)
+
+	hub := httpDelivery.NewHub()
+	go hub.Run()
+
+	httpHandler := httpDelivery.NewHandler(
+		catalogService,
+		hub,
+		cfg.Catalog.HTTP.CORS.AllowedOrigins,
+	)
 
 	router := mux.NewRouter()
 

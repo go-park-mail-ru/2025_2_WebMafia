@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"spotify/pkg/jwtmanager"
 	"spotify/pkg/response"
+	"strings"
 
 	pb "spotify/proto/auth"
 )
@@ -11,6 +12,7 @@ import (
 const (
 	grpcTokenCookie string = "session_token"
 	csrfHeader      string = "X-CSRF-Token"
+	csrfQueryParam  string = "csrf_token"
 )
 
 //go:generate mockgen -destination=../mocks/auth_client_mock.go -package=mocks spotify/proto/auth AuthServiceClient
@@ -58,10 +60,19 @@ func (m *AuthGrpcMiddleware) Handle(next http.Handler) http.Handler {
 
 		ctx := ContextWithClaims(r.Context(), claims)
 
-		if r.Method != http.MethodGet && r.Method != http.MethodHead && r.Method != http.MethodOptions {
-			csrfToken := r.Header.Get(csrfHeader)
+		isWebSocket := strings.EqualFold(r.Header.Get("Upgrade"), "websocket")
+
+		if (r.Method != http.MethodGet && r.Method != http.MethodHead && r.Method != http.MethodOptions) || isWebSocket {
+			var csrfToken string
+
+			if isWebSocket {
+				csrfToken = r.URL.Query().Get(csrfQueryParam)
+			} else {
+				csrfToken = r.Header.Get(csrfHeader)
+			}
+
 			if csrfToken == "" {
-				log.Warnf("[%s]: missing csrf header", op)
+				log.Warnf("[%s]: missing csrf token (ws_handshake=%v)", op, isWebSocket)
 				response.ForbiddenJSON(w)
 				return
 			}

@@ -4,6 +4,7 @@ import (
 	"context"
 	"spotify/internal/model"
 	"spotify/microservices/catalog/dto"
+	pbAuth "spotify/proto/auth"
 
 	"github.com/google/uuid"
 )
@@ -34,14 +35,19 @@ type IRepository interface {
 	GetArtistIDsForTracks(ctx context.Context, trackIDs []uuid.UUID) (map[uuid.UUID][]uuid.UUID, error)
 	GetGenresForTracks(ctx context.Context, trackIDs []uuid.UUID) (map[uuid.UUID][]model.Genre, error)
 	GetTracksByIDs(ctx context.Context, ids []uuid.UUID) ([]model.Track, error)
+
+	CreateComment(ctx context.Context, comment model.Comment) error
+	GetCommentsByTrackID(ctx context.Context, trackID uuid.UUID, limit, offset uint64) ([]model.Comment, error)
 }
 
 type Service struct {
-	repo IRepository
+	repo       IRepository
+	authClient pbAuth.AuthServiceClient
 }
 
-func New(repo IRepository) *Service {
+func New(repo IRepository, authClient pbAuth.AuthServiceClient) *Service {
 	return &Service{
-		repo: repo,
+		repo:       repo,
+		authClient: authClient,
 	}
 }

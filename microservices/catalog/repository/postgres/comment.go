@@ -24,7 +24,6 @@ func (r *Repository) CreateComment(ctx context.Context, comment model.Comment) e
 		comment.CreatedAt,
 		comment.UpdatedAt,
 	)
-
 	if err != nil {
 		return fmt.Errorf("[%s]: %w", op, mapErrors(err))
 	}

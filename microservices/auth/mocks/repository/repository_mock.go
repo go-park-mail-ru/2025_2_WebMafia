@@ -100,6 +100,21 @@ func (mr *MockIRepositoryMockRecorder) GetUserByLogin(ctx, login any) *gomock.Ca
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserByLogin", reflect.TypeOf((*MockIRepository)(nil).GetUserByLogin), ctx, login)
 }
 
+// GetUsersByIDs mocks base method.
+func (m *MockIRepository) GetUsersByIDs(ctx context.Context, ids []string) ([]model.User, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUsersByIDs", ctx, ids)
+	ret0, _ := ret[0].([]model.User)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUsersByIDs indicates an expected call of GetUsersByIDs.
+func (mr *MockIRepositoryMockRecorder) GetUsersByIDs(ctx, ids any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUsersByIDs", reflect.TypeOf((*MockIRepository)(nil).GetUsersByIDs), ctx, ids)
+}
+
 // UpdateUserAvatar mocks base method.
 func (m *MockIRepository) UpdateUserAvatar(ctx context.Context, userID, avatarPath string) error {
 	m.ctrl.T.Helper()

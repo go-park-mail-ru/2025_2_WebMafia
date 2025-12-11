@@ -2,14 +2,13 @@ package http
 
 import (
 	"context"
+	"spotify/microservices/catalog/dto"
+	"spotify/pkg/logger"
 	"time"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
 	"github.com/mailru/easyjson"
-
-	"spotify/microservices/catalog/dto"
-	"spotify/pkg/logger"
 )
 
 const (

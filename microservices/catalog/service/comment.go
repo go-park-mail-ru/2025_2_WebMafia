@@ -35,7 +35,6 @@ func (s *Service) PostComment(ctx context.Context, userID uuid.UUID, req dto.Pos
 	resp, err := s.authClient.GetUsers(ctx, &pbAuth.GetUsersRequest{
 		UserIds: []string{userID.String()},
 	})
-
 	if err != nil {
 		return nil, fmt.Errorf("%s: auth batch error: %w", op, err)
 	}

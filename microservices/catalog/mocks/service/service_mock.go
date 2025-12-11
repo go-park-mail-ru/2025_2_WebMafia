@@ -132,6 +132,21 @@ func (mr *MockIServiceMockRecorder) GetArtistByID(ctx, id any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetArtistByID", reflect.TypeOf((*MockIService)(nil).GetArtistByID), ctx, id)
 }
 
+// GetCommentsByTrackID mocks base method.
+func (m *MockIService) GetCommentsByTrackID(ctx context.Context, trackID uuid.UUID, limit, offset uint64) ([]dto.Comment, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetCommentsByTrackID", ctx, trackID, limit, offset)
+	ret0, _ := ret[0].([]dto.Comment)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetCommentsByTrackID indicates an expected call of GetCommentsByTrackID.
+func (mr *MockIServiceMockRecorder) GetCommentsByTrackID(ctx, trackID, limit, offset any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetCommentsByTrackID", reflect.TypeOf((*MockIService)(nil).GetCommentsByTrackID), ctx, trackID, limit, offset)
+}
+
 // GetTrackByID mocks base method.
 func (m *MockIService) GetTrackByID(ctx context.Context, id uuid.UUID) (*dto.Track, error) {
 	m.ctrl.T.Helper()
@@ -190,6 +205,21 @@ func (m *MockIService) GetTracksByGenreID(ctx context.Context, genreID uuid.UUID
 func (mr *MockIServiceMockRecorder) GetTracksByGenreID(ctx, genreID, limit, offset any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTracksByGenreID", reflect.TypeOf((*MockIService)(nil).GetTracksByGenreID), ctx, genreID, limit, offset)
+}
+
+// PostComment mocks base method.
+func (m *MockIService) PostComment(ctx context.Context, userID uuid.UUID, req dto.PostCommentRequest) (*dto.Comment, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "PostComment", ctx, userID, req)
+	ret0, _ := ret[0].(*dto.Comment)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// PostComment indicates an expected call of PostComment.
+func (mr *MockIServiceMockRecorder) PostComment(ctx, userID, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "PostComment", reflect.TypeOf((*MockIService)(nil).PostComment), ctx, userID, req)
 }
 
 // RegisterPlay mocks base method.

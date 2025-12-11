@@ -2,10 +2,11 @@ package grpc
 
 import (
 	"context"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 	"spotify/internal/middleware"
 	pb "spotify/proto/auth"
+
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 func (h *Handler) ValidateToken(ctx context.Context, req *pb.ValidateTokenRequest) (*pb.ValidateTokenResponse, error) {
@@ -47,7 +48,6 @@ func (h *Handler) GetUsers(ctx context.Context, req *pb.GetUsersRequest) (*pb.Ge
 	}
 
 	profiles, err := h.userService.GetUsersBatch(ctx, req.UserIds)
-
 	if err != nil {
 		log.Errorf("[%s]: service error: %v", op, err)
 		return nil, status.Errorf(codes.Internal, "failed to fetch users: %v", err)

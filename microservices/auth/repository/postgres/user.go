@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"github.com/lib/pq"
 	"spotify/internal/model"
 
 	"github.com/jackc/pgx/v5/pgconn"
@@ -130,7 +131,7 @@ func (m *Repository) GetUsersByIDs(ctx context.Context, ids []string) ([]model.U
 
 	query := `SELECT user_id, login, email, password_hash, avatar_url, created_at, updated_at FROM "user" WHERE user_id = ANY($1)`
 
-	rows, err := m.Conn.QueryContext(ctx, query, ids)
+	rows, err := m.Conn.QueryContext(ctx, query, pq.Array(ids))
 	if err != nil {
 		return nil, fmt.Errorf("%s query failed: %w", op, err)
 	}

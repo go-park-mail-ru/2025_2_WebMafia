@@ -100,7 +100,7 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 
 	httpServer := server.NewHTTPServer(&cfg.Auth.HTTP, router, appLogger)
 
-	grpcHandler := grpcDelivery.NewHandler(jwtManager, csrfManager)
+	grpcHandler := grpcDelivery.NewHandler(jwtManager, csrfManager, userSvc)
 	grpcServer := server.NewGRPCServer(&cfg.Auth.GRPC, appLogger, func(s *grpc.Server) {
 		pb.RegisterAuthServiceServer(s, grpcHandler)
 	})

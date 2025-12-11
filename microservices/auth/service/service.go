@@ -14,6 +14,7 @@ type IRepository interface {
 	GetUserByID(ctx context.Context, userID string) (*model.User, error)
 	UpdateUserAvatar(ctx context.Context, userID string, avatarPath string) error
 	UpdateUserProfile(ctx context.Context, user model.User) error
+	GetUsersByIDs(ctx context.Context, ids []string) ([]model.User, error)
 }
 
 //go:generate mockgen -destination=../mocks/storage/storage_mock.go -package=storage_mock spotify/microservices/auth/service IStorage

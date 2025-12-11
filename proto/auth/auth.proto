@@ -7,6 +7,7 @@ option go_package = "spotify/proto/auth";
 service AuthService {
   rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse) {}
   rpc CheckCSRF(CheckCSRFRequest) returns (CheckCSRFResponse) {}
+  rpc GetUsers(GetUsersRequest) returns (GetUsersResponse) {}
 }
 
 message ValidateTokenRequest {
@@ -27,4 +28,18 @@ message CheckCSRFRequest {
 
 message CheckCSRFResponse {
   bool is_valid = 1;
+}
+
+message GetUsersRequest {
+  repeated string user_ids = 1;
+}
+
+message UserInfo {
+  string user_id = 1;
+  string login = 2;
+  string avatar_url = 3;
+}
+
+message GetUsersResponse {
+  repeated UserInfo users = 1;
 }

@@ -121,6 +121,45 @@ func (m *Repository) selectUser(ctx context.Context, query string, args ...inter
 	return user, nil
 }
 
+func (m *Repository) GetUsersByIDs(ctx context.Context, ids []string) ([]model.User, error) {
+	const op = "repository.GetUsersByIDs"
+
+	if len(ids) == 0 {
+		return []model.User{}, nil
+	}
+
+	query := `SELECT user_id, login, email, password_hash, avatar_url, created_at, updated_at FROM "user" WHERE user_id = ANY($1)`
+
+	rows, err := m.Conn.QueryContext(ctx, query, ids)
+	if err != nil {
+		return nil, fmt.Errorf("%s query failed: %w", op, err)
+	}
+
+	defer rows.Close()
+
+	users := make([]model.User, 0, len(ids))
+	for rows.Next() {
+		var u model.User
+		if err := rows.Scan(
+			&u.ID,
+			&u.Login,
+			&u.Email,
+			&u.PasswordHash,
+			&u.AvatarURL,
+			&u.CreatedAt,
+			&u.UpdatedAt,
+		); err != nil {
+			return nil, fmt.Errorf("%s scan failed: %w", op, err)
+		}
+		users = append(users, u)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("%s rows iteration failed: %w", op, err)
+	}
+	return users, nil
+}
+
 func handlePostgresError(err error) error {
 	if err == nil {
 		return nil

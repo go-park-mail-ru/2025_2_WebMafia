@@ -39,10 +39,12 @@ func (c *Client) readPump() {
 	}()
 
 	c.conn.SetReadLimit(maxMessageSize)
-	c.conn.SetReadDeadline(time.Now().Add(pongWait))
+	if err := c.conn.SetReadDeadline(time.Now().Add(pongWait)); err != nil {
+		c.logger.Errorf("[%s]: failed to set read deadline: %v", op, err)
+		return
+	}
 	c.conn.SetPongHandler(func(string) error {
-		c.conn.SetReadDeadline(time.Now().Add(pongWait))
-		return nil
+		return c.conn.SetReadDeadline(time.Now().Add(pongWait))
 	})
 
 	for {
@@ -101,9 +103,14 @@ func (c *Client) writePump() {
 	for {
 		select {
 		case message, ok := <-c.send:
-			c.conn.SetWriteDeadline(time.Now().Add(writeWait))
+			if err := c.conn.SetWriteDeadline(time.Now().Add(writeWait)); err != nil {
+				c.logger.Errorf("[%s]: failed to set write deadline: %v", op, err)
+				return
+			}
 			if !ok {
-				c.conn.WriteMessage(websocket.CloseMessage, []byte{})
+				if err := c.conn.WriteMessage(websocket.CloseMessage, []byte{}); err != nil {
+					c.logger.Warnf("[%s]: failed to write close message: %v", op, err)
+				}
 				return
 			}
 
@@ -112,12 +119,21 @@ func (c *Client) writePump() {
 				c.logger.Errorf("[%s]: NextWriter error: %v", op, err)
 				return
 			}
-			w.Write(message)
+			if _, err := w.Write(message); err != nil {
+				c.logger.Errorf("[%s]: failed to write message: %v", op, err)
+				return
+			}
 
 			n := len(c.send)
 			for i := 0; i < n; i++ {
-				w.Write([]byte{'\n'})
-				w.Write(<-c.send)
+				if _, err := w.Write([]byte{'\n'}); err != nil {
+					c.logger.Errorf("[%s]: failed to write delimiter: %v", op, err)
+					return
+				}
+				if _, err := w.Write(<-c.send); err != nil {
+					c.logger.Errorf("[%s]: failed to write buffered message: %v", op, err)
+					return
+				}
 			}
 
 			if err := w.Close(); err != nil {
@@ -126,7 +142,10 @@ func (c *Client) writePump() {
 			}
 
 		case <-ticker.C:
-			c.conn.SetWriteDeadline(time.Now().Add(writeWait))
+			if err := c.conn.SetWriteDeadline(time.Now().Add(writeWait)); err != nil {
+				c.logger.Errorf("[%s]: failed to set write deadline (ping): %v", op, err)
+				return
+			}
 			if err := c.conn.WriteMessage(websocket.PingMessage, nil); err != nil {
 				c.logger.Warnf("[%s]: ping failed: %v", op, err)
 				return

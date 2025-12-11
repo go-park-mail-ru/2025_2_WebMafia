@@ -21,7 +21,7 @@ func TestHandler_GetTrackByID(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, nil)
 
 	id := uuid.New()
 	dtoTrack := &dto.Track{ID: id.String(), Title: "Track"}
@@ -75,7 +75,7 @@ func TestHandler_GetAllTracks(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, nil)
 
 	t.Run("success", func(t *testing.T) {
 		mockSvc.EXPECT().GetAllTracks(gomock.Any(), uint64(100), uint64(0)).Return([]dto.Track{}, nil)
@@ -99,7 +99,7 @@ func TestHandler_GetTracksByArtist(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, nil)
 	id := uuid.New()
 
 	t.Run("success", func(t *testing.T) {
@@ -141,7 +141,7 @@ func TestHandler_GetTracksByAlbum(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, nil)
 	id := uuid.New()
 
 	t.Run("success", func(t *testing.T) {
@@ -183,7 +183,7 @@ func TestHandler_GetTracksByGenre(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, nil)
 	id := uuid.New()
 
 	t.Run("success", func(t *testing.T) {
@@ -225,7 +225,7 @@ func TestHandler_RegisterPlay(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, nil)
 	id := uuid.New()
 
 	t.Run("success", func(t *testing.T) {
@@ -268,7 +268,7 @@ func TestHandler_SearchTracks(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, nil)
 
 	t.Run("success", func(t *testing.T) {
 		mockSvc.EXPECT().SearchTracks(gomock.Any(), "query", uint64(50)).

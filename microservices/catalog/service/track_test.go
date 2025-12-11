@@ -12,6 +12,9 @@ import (
 
 	"spotify/internal/model"
 	"spotify/microservices/catalog/dto"
+
+	"spotify/internal/mocks"
+
 	repository_mock "spotify/microservices/catalog/mocks/repository"
 )
 
@@ -20,7 +23,8 @@ func TestService_GetTrackByID(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo)
+	mockAuth := mocks.NewMockAuthServiceClient(ctrl)
+	svc := New(mockRepo, mockAuth)
 
 	trackID := uuid.New()
 	albumID := uuid.New()
@@ -107,7 +111,8 @@ func TestService_RegisterPlay(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo)
+	mockAuth := mocks.NewMockAuthServiceClient(ctrl)
+	svc := New(mockRepo, mockAuth)
 	trackID := uuid.New()
 
 	t.Run("success", func(t *testing.T) {
@@ -122,7 +127,8 @@ func TestService_GetTotalPlays(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo)
+	mockAuth := mocks.NewMockAuthServiceClient(ctrl)
+	svc := New(mockRepo, mockAuth)
 	artistID := uuid.New()
 
 	t.Run("GetTotalPlaysByArtistID", func(t *testing.T) {
@@ -146,7 +152,8 @@ func TestService_GetTracksByReferences(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo)
+	mockAuth := mocks.NewMockAuthServiceClient(ctrl)
+	svc := New(mockRepo, mockAuth)
 
 	id := uuid.New()
 	trackModel := model.Track{ID: uuid.New(), Title: "T1"}
@@ -196,7 +203,8 @@ func TestService_GetAllTracks(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo)
+	mockAuth := mocks.NewMockAuthServiceClient(ctrl)
+	svc := New(mockRepo, mockAuth)
 
 	t.Run("success", func(t *testing.T) {
 		mockRepo.EXPECT().GetAllTracks(gomock.Any(), uint64(10), uint64(0)).
@@ -213,7 +221,8 @@ func TestService_SearchTracks(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo)
+	mockAuth := mocks.NewMockAuthServiceClient(ctrl)
+	svc := New(mockRepo, mockAuth)
 
 	t.Run("success empty", func(t *testing.T) {
 		mockRepo.EXPECT().SearchTracks(gomock.Any(), "query", uint64(10)).
@@ -222,5 +231,39 @@ func TestService_SearchTracks(t *testing.T) {
 		res, err := svc.SearchTracks(context.Background(), "query", 10)
 		assert.NoError(t, err)
 		assert.Empty(t, res)
+	})
+}
+
+func TestService_GetTracksByIDs(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	mockRepo := repository_mock.NewMockIRepository(ctrl)
+	mockAuth := mocks.NewMockAuthServiceClient(ctrl)
+	svc := New(mockRepo, mockAuth)
+
+	t.Run("empty input", func(t *testing.T) {
+		res, err := svc.GetTracksByIDs(context.Background(), []uuid.UUID{})
+		assert.NoError(t, err)
+		assert.Empty(t, res)
+	})
+
+	t.Run("success", func(t *testing.T) {
+		id := uuid.New()
+		track := model.Track{ID: id, Title: "T"}
+		mockRepo.EXPECT().GetTracksByIDs(gomock.Any(), []uuid.UUID{id}).Return([]model.Track{track}, nil)
+		mockRepo.EXPECT().GetAlbumIDsForTracks(gomock.Any(), gomock.Any()).Return(nil, nil)
+		mockRepo.EXPECT().GetArtistIDsForTracks(gomock.Any(), gomock.Any()).Return(nil, nil)
+		mockRepo.EXPECT().GetGenresForTracks(gomock.Any(), gomock.Any()).Return(nil, nil)
+
+		res, err := svc.GetTracksByIDs(context.Background(), []uuid.UUID{id})
+		assert.NoError(t, err)
+		assert.Empty(t, res)
+	})
+
+	t.Run("repo error", func(t *testing.T) {
+		mockRepo.EXPECT().GetTracksByIDs(gomock.Any(), gomock.Any()).Return(nil, errors.New("db fail"))
+		_, err := svc.GetTracksByIDs(context.Background(), []uuid.UUID{uuid.New()})
+		assert.Error(t, err)
 	})
 }

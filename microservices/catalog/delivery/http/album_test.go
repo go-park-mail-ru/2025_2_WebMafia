@@ -21,7 +21,7 @@ func TestHandler_GetAlbumByID(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, nil)
 
 	id := uuid.New()
 	dtoAlbum := &dto.Album{ID: id.String(), Title: "Album"}
@@ -75,7 +75,7 @@ func TestHandler_GetAllAlbums(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, nil)
 
 	t.Run("success", func(t *testing.T) {
 		mockSvc.EXPECT().GetAllAlbums(gomock.Any(), uint64(100), uint64(0)).Return([]dto.Album{}, nil)
@@ -99,7 +99,7 @@ func TestHandler_GetAlbumsByArtistID(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, nil)
 
 	id := uuid.New()
 
@@ -154,7 +154,7 @@ func TestHandler_SearchAlbums(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, nil)
 
 	t.Run("success", func(t *testing.T) {
 		mockSvc.EXPECT().SearchAlbums(gomock.Any(), "query", uint64(50)).

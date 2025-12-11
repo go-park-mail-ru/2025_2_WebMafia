@@ -21,7 +21,7 @@ func TestHandler_GetArtistByID(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, nil)
 
 	artistID := uuid.New()
 	dtoArtist := &dto.Artist{ID: artistID.String(), Name: "Artist"}
@@ -88,7 +88,7 @@ func TestHandler_GetAllArtists(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, nil)
 
 	t.Run("success", func(t *testing.T) {
 		mockSvc.EXPECT().GetAllArtists(gomock.Any(), uint64(100), uint64(0)).
@@ -120,7 +120,7 @@ func TestHandler_SearchArtists(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, nil)
 
 	t.Run("success", func(t *testing.T) {
 		mockSvc.EXPECT().SearchArtists(gomock.Any(), "query", uint64(50)).

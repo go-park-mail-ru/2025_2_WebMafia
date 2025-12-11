@@ -5,8 +5,9 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"github.com/lib/pq"
 	"spotify/internal/model"
+
+	"github.com/lib/pq"
 
 	"github.com/jackc/pgx/v5/pgconn"
 )

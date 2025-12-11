@@ -62,6 +62,26 @@ func (mr *MockAuthServiceClientMockRecorder) CheckCSRF(ctx, in any, opts ...any)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CheckCSRF", reflect.TypeOf((*MockAuthServiceClient)(nil).CheckCSRF), varargs...)
 }
 
+// GetUsers mocks base method.
+func (m *MockAuthServiceClient) GetUsers(ctx context.Context, in *auth.GetUsersRequest, opts ...grpc.CallOption) (*auth.GetUsersResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, in}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetUsers", varargs...)
+	ret0, _ := ret[0].(*auth.GetUsersResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUsers indicates an expected call of GetUsers.
+func (mr *MockAuthServiceClientMockRecorder) GetUsers(ctx, in any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, in}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUsers", reflect.TypeOf((*MockAuthServiceClient)(nil).GetUsers), varargs...)
+}
+
 // ValidateToken mocks base method.
 func (m *MockAuthServiceClient) ValidateToken(ctx context.Context, in *auth.ValidateTokenRequest, opts ...grpc.CallOption) (*auth.ValidateTokenResponse, error) {
 	m.ctrl.T.Helper()

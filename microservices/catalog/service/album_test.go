@@ -10,6 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
+	"spotify/internal/mocks"
 	"spotify/internal/model"
 	repository_mock "spotify/microservices/catalog/mocks/repository"
 )
@@ -19,7 +20,8 @@ func TestService_GetAlbumByID(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo)
+	mockAuth := mocks.NewMockAuthServiceClient(ctrl)
+	svc := New(mockRepo, mockAuth)
 
 	albumID := uuid.New()
 	artistID := uuid.New()

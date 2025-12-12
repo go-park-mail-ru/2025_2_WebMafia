@@ -2,11 +2,12 @@ package app
 
 import (
 	"fmt"
-	"github.com/spf13/viper"
 	"os"
 	"spotify/internal/app"
 	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
+
+	"github.com/spf13/viper"
 )
 
 type Config struct {

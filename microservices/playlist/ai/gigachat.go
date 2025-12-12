@@ -6,10 +6,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"spotify/microservices/playlist/dto"
 	"strings"
 	"time"
-
-	"spotify/microservices/playlist/dto"
 )
 
 const chatURL = "https://gigachat.devices.sberbank.ru/api/v1/chat/completions"

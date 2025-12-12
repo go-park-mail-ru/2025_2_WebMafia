@@ -107,7 +107,6 @@ playlist:
     auth: "auth:9001"
 
   ai:
-    auth_key: "MDE5YjAwNDgtNWY4MS03MzQ1LTg0MDUtOGE1NjI5YjkyZjlhOjRlMDEzMjI2LTY2Y2MtNDYwZi04OTJiLTgyYTRjZGVkOGIzZA=="
     model: "GigaChat"
 
 db:

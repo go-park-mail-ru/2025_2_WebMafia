@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"os"
 	"spotify/internal/metrics"
 	"spotify/internal/middleware"
 	"spotify/internal/server"
@@ -85,8 +86,13 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 
 	catalogClient := pbCatalog.NewCatalogServiceClient(catalogConn)
 
+	authKey := cfg.Playlist.AI.AuthKey
+	if authKey == "" {
+		authKey = os.Getenv("AI_AUTH_KEY")
+	}
+
 	aiClient := ai.NewGigaChat(ai.GigaChatConfig{
-		AuthKey: cfg.Playlist.AI.AuthKey,
+		AuthKey: authKey,
 		Model:   cfg.Playlist.AI.Model,
 	})
 	playlistService := service.New(repo, stor, catalogClient, aiClient)

@@ -90,7 +90,7 @@ playlist:
         secretKey: "dev-csrf-secret"
         tokenTTL: 15m
     ai:
-      auth_key: "Basic <base64 key>"
+      auth_key: "MDE5YjAwNDgtNWY4MS03MzQ1LTg0MDUtOGE1NjI5YjkyZjlhOjRlMDEzMjI2LTY2Y2MtNDYwZi04OTJiLTgyYTRjZGVkOGIzZA=="
       model: "GigaChat"
 
   logger:

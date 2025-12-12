@@ -164,4 +164,11 @@ type RemoveAlbumFromFavoriteRequest struct {
 type GeneratedMeta struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
+	Source      string `json:"source"`
+}
+
+//easyjson:json
+type ConfirmGeneratedMetaRequest struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
 }

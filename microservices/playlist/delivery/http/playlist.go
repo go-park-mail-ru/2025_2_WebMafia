@@ -678,3 +678,37 @@ func (h *Handler) GeneratePlaylistMeta(w http.ResponseWriter, r *http.Request) {
 
 	response.JSON(w, http.StatusOK, meta)
 }
+
+func (h *Handler) ConfirmPlaylistMeta(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.ConfirmPlaylistMeta"
+	log := middleware.LoggerFromContext(r.Context())
+	defer r.Body.Close()
+
+	rawID := mux.Vars(r)["id"]
+	if rawID == "" {
+		log.Errorf("[%s]: missing playlist id", op)
+		response.InternalErrorJSON(w)
+		return
+	}
+
+	playlistID, err := uuid.Parse(rawID)
+	if err != nil {
+		log.Errorf("[%s]: invalid playlist id: %v", op, err)
+		response.InternalErrorJSON(w)
+		return
+	}
+
+	var req dto.ConfirmGeneratedMetaRequest
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
+		log.Errorf("[%s]: invalid body: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	if err := h.service.ConfirmPlaylistMeta(r.Context(), playlistID, req.Title, req.Description); err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+}

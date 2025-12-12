@@ -3,6 +3,8 @@ package service
 import (
 	"context"
 	"errors"
+	"spotify/microservices/playlist/ai"
+	ai_mock "spotify/microservices/playlist/mocks/ai"
 	"testing"
 	"time"
 
@@ -24,7 +26,7 @@ func TestService_CreatePlaylist(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo, nil, nil)
+	svc := New(mockRepo, nil, nil, nil)
 
 	userID := uuid.New()
 	req := dto.CreatePlaylistRequest{
@@ -51,7 +53,7 @@ func TestService_GetPlaylistsByUser(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo, nil, nil)
+	svc := New(mockRepo, nil, nil, nil)
 	uid := uuid.New()
 
 	t.Run("success", func(t *testing.T) {
@@ -67,7 +69,7 @@ func TestService_UpdatePlaylist(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo, nil, nil)
+	svc := New(mockRepo, nil, nil, nil)
 	id := uuid.New()
 	title := "New"
 
@@ -85,7 +87,7 @@ func TestService_DeletePlaylist(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo, nil, nil)
+	svc := New(mockRepo, nil, nil, nil)
 	id := uuid.New()
 
 	mockRepo.EXPECT().DeletePlaylist(gomock.Any(), id).Return(nil)
@@ -98,7 +100,7 @@ func TestService_UploadPlaylistAvatar(t *testing.T) {
 	defer ctrl.Finish()
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
 	mockStorage := storage_mock.NewMockIStorage(ctrl)
-	svc := New(mockRepo, mockStorage, nil)
+	svc := New(mockRepo, mockStorage, nil, nil)
 	id := uuid.New()
 
 	t.Run("success", func(t *testing.T) {
@@ -121,7 +123,7 @@ func TestService_DeletePlaylistAvatar(t *testing.T) {
 	defer ctrl.Finish()
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
 	mockStorage := storage_mock.NewMockIStorage(ctrl)
-	svc := New(mockRepo, mockStorage, nil)
+	svc := New(mockRepo, mockStorage, nil, nil)
 	id := uuid.New()
 
 	mockRepo.EXPECT().GetByID(gomock.Any(), id).Return(&model.Playlist{
@@ -139,7 +141,7 @@ func TestService_RemoveTrack(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo, nil, nil)
+	svc := New(mockRepo, nil, nil, nil)
 	id := uuid.New()
 
 	t.Run("success", func(t *testing.T) {
@@ -164,7 +166,7 @@ func TestService_AddTrackToPlaylist(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo, nil, nil)
+	svc := New(mockRepo, nil, nil, nil)
 	id := uuid.New()
 
 	t.Run("success", func(t *testing.T) {
@@ -181,7 +183,7 @@ func TestService_GetFavoritePlaylist(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo, nil, nil)
+	svc := New(mockRepo, nil, nil, nil)
 	uid := uuid.New()
 
 	t.Run("exists", func(t *testing.T) {
@@ -209,7 +211,7 @@ func TestService_AddTrackToFavorite(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo, nil, nil)
+	svc := New(mockRepo, nil, nil, nil)
 	uid := uuid.New()
 
 	favPlaylistID := uuid.New()
@@ -235,7 +237,7 @@ func TestService_GetPlaylistWithTracks(t *testing.T) {
 
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
 	mockCatalog := catalog_mock.NewMockCatalogServiceClient(ctrl)
-	svc := New(mockRepo, nil, mockCatalog)
+	svc := New(mockRepo, nil, mockCatalog, nil)
 	id := uuid.New()
 
 	mockRepo.EXPECT().
@@ -284,7 +286,7 @@ func TestService_AddAlbumToFavorite(t *testing.T) {
 	defer ctrl.Finish()
 
 	repo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(repo, nil, nil)
+	svc := New(repo, nil, nil, nil)
 
 	uid := uuid.New()
 
@@ -304,7 +306,7 @@ func TestService_RemoveAlbumFromFavorite(t *testing.T) {
 	defer ctrl.Finish()
 
 	repo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(repo, nil, nil)
+	svc := New(repo, nil, nil, nil)
 
 	uid := uuid.New()
 
@@ -324,7 +326,7 @@ func TestService_AddArtistToFavorite(t *testing.T) {
 	defer ctrl.Finish()
 
 	repo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(repo, nil, nil)
+	svc := New(repo, nil, nil, nil)
 
 	uid := uuid.New()
 
@@ -344,7 +346,7 @@ func TestService_RemoveArtistFromFavorite_Success(t *testing.T) {
 	defer ctrl.Finish()
 
 	repo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(repo, nil, nil)
+	svc := New(repo, nil, nil, nil)
 
 	uid := uuid.New()
 
@@ -365,7 +367,7 @@ func TestService_GetFavoriteArtists(t *testing.T) {
 
 	repo := repository_mock.NewMockIRepository(ctrl)
 	cat := catalog_mock.NewMockCatalogServiceClient(ctrl)
-	svc := New(repo, nil, cat)
+	svc := New(repo, nil, cat, nil)
 
 	uid := uuid.New()
 
@@ -405,7 +407,7 @@ func TestService_AddAlbumToFavorite_Error(t *testing.T) {
 	defer ctrl.Finish()
 
 	repo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(repo, nil, nil)
+	svc := New(repo, nil, nil, nil)
 	uid := uuid.New()
 
 	repo.EXPECT().
@@ -425,7 +427,7 @@ func TestService_GetFavoriteAlbums_CatalogError(t *testing.T) {
 
 	repo := repository_mock.NewMockIRepository(ctrl)
 	cat := catalog_mock.NewMockCatalogServiceClient(ctrl)
-	svc := New(repo, nil, cat)
+	svc := New(repo, nil, cat, nil)
 
 	uid := uuid.New()
 	albumID := uuid.MustParse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")
@@ -451,7 +453,7 @@ func TestService_GetFavoriteArtists_RepoError(t *testing.T) {
 	defer ctrl.Finish()
 
 	repo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(repo, nil, nil)
+	svc := New(repo, nil, nil, nil)
 	uid := uuid.New()
 
 	repo.EXPECT().
@@ -468,7 +470,7 @@ func TestService_GetFavoriteArtists_CatalogError(t *testing.T) {
 
 	repo := repository_mock.NewMockIRepository(ctrl)
 	cat := catalog_mock.NewMockCatalogServiceClient(ctrl)
-	svc := New(repo, nil, cat)
+	svc := New(repo, nil, cat, nil)
 
 	uid := uuid.New()
 	artistID := uuid.New()
@@ -494,7 +496,7 @@ func TestService_UpdatePlaylist_GetByID_Error(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo, nil, nil)
+	svc := New(mockRepo, nil, nil, nil)
 	id := uuid.New()
 
 	mockRepo.EXPECT().
@@ -510,7 +512,7 @@ func TestService_UpdatePlaylist_Update_Error(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
-	svc := New(mockRepo, nil, nil)
+	svc := New(mockRepo, nil, nil, nil)
 	id := uuid.New()
 	title := "X"
 
@@ -532,7 +534,7 @@ func TestService_UploadPlaylistAvatar_GetByID_Error(t *testing.T) {
 
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
 	mockStorage := storage_mock.NewMockIStorage(ctrl)
-	svc := New(mockRepo, mockStorage, nil)
+	svc := New(mockRepo, mockStorage, nil, nil)
 
 	id := uuid.New()
 
@@ -553,7 +555,7 @@ func TestService_UploadPlaylistAvatar_Upload_Error(t *testing.T) {
 
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
 	mockStorage := storage_mock.NewMockIStorage(ctrl)
-	svc := New(mockRepo, mockStorage, nil)
+	svc := New(mockRepo, mockStorage, nil, nil)
 	id := uuid.New()
 
 	mockRepo.EXPECT().GetByID(gomock.Any(), id).
@@ -577,7 +579,7 @@ func TestService_GetPlaylistWithTracks_GetTracks_Error(t *testing.T) {
 
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
 	mockCatalog := catalog_mock.NewMockCatalogServiceClient(ctrl)
-	svc := New(mockRepo, nil, mockCatalog)
+	svc := New(mockRepo, nil, mockCatalog, nil)
 
 	id := uuid.New()
 
@@ -597,7 +599,7 @@ func TestService_GetFavoriteAlbums_RepoError(t *testing.T) {
 
 	mockRepo := repository_mock.NewMockIRepository(ctrl)
 	mockCatalog := catalog_mock.NewMockCatalogServiceClient(ctrl)
-	svc := New(mockRepo, nil, mockCatalog)
+	svc := New(mockRepo, nil, mockCatalog, nil)
 
 	uid := uuid.New()
 
@@ -606,5 +608,242 @@ func TestService_GetFavoriteAlbums_RepoError(t *testing.T) {
 		Return(nil, errors.New("db err"))
 
 	_, err := svc.GetFavoriteAlbums(context.Background(), uid)
+	assert.Error(t, err)
+}
+
+func TestService_GeneratePlaylistMeta_AI_Success(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	repo := repository_mock.NewMockIRepository(ctrl)
+	cat := catalog_mock.NewMockCatalogServiceClient(ctrl)
+	aiMock := ai_mock.NewMockIAIGenerator(ctrl)
+
+	svc := New(repo, nil, cat, aiMock)
+
+	pid := uuid.New()
+
+	repo.EXPECT().
+		GetByID(gomock.Any(), pid).
+		Return(&model.Playlist{ID: pid, Title: "Old"}, nil)
+
+	repo.EXPECT().
+		GetTracksByPlaylist(gomock.Any(), pid).
+		Return([]string{"t1"}, nil)
+
+	cat.EXPECT().
+		GetTracksByIDs(gomock.Any(), gomock.Any()).
+		Return(&pbCatalog.GetTracksByIDsResponse{
+			Tracks: []*pbCatalog.Track{
+				{
+					Id:    "t1",
+					Title: "Song",
+					Album: &pbCatalog.AlbumForTrack{
+						Id:    "a1",
+						Title: "Album",
+					},
+					Artists: []*pbCatalog.ArtistForTrack{
+						{
+							Id:   "art1",
+							Name: "Artist",
+						},
+					},
+				},
+			},
+		}, nil)
+
+	aiMock.EXPECT().
+		GeneratePlaylistMeta(gomock.Any(), gomock.Any()).
+		Return("AI title", "AI desc", nil)
+
+	meta, err := svc.GeneratePlaylistMeta(context.Background(), pid)
+
+	assert.NoError(t, err)
+	assert.Equal(t, "AI title", meta.Title)
+	assert.Equal(t, "ai", meta.Source)
+}
+
+func TestService_GeneratePlaylistMeta_Fallback(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	repo := repository_mock.NewMockIRepository(ctrl)
+	cat := catalog_mock.NewMockCatalogServiceClient(ctrl)
+	aiMock := ai_mock.NewMockIAIGenerator(ctrl)
+
+	svc := New(repo, nil, cat, aiMock)
+
+	pid := uuid.New()
+
+	repo.EXPECT().
+		GetByID(gomock.Any(), pid).
+		Return(&model.Playlist{ID: pid}, nil)
+
+	repo.EXPECT().
+		GetTracksByPlaylist(gomock.Any(), pid).
+		Return([]string{"t1"}, nil)
+
+	cat.EXPECT().
+		GetTracksByIDs(gomock.Any(), gomock.Any()).
+		Return(&pbCatalog.GetTracksByIDsResponse{
+			Tracks: []*pbCatalog.Track{
+				{
+					Id:    "t1",
+					Title: "Song",
+					Album: &pbCatalog.AlbumForTrack{
+						Id:    "a1",
+						Title: "Album",
+					},
+					Artists: []*pbCatalog.ArtistForTrack{
+						{
+							Id:   "art1",
+							Name: "Artist",
+						},
+					},
+				},
+			},
+		}, nil)
+
+	aiMock.EXPECT().
+		GeneratePlaylistMeta(gomock.Any(), gomock.Any()).
+		Return("", "", ai.ErrAIRateLimit)
+
+	meta, err := svc.GeneratePlaylistMeta(context.Background(), pid)
+
+	assert.NoError(t, err)
+	assert.Equal(t, "fallback", meta.Source)
+}
+
+func TestService_ConfirmPlaylistMeta_Success(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	repo := repository_mock.NewMockIRepository(ctrl)
+	svc := New(repo, nil, nil, nil)
+
+	pid := uuid.New()
+
+	repo.EXPECT().
+		UpdatePlaylist(gomock.Any(), pid, gomock.Any()).
+		Return(nil)
+
+	err := svc.ConfirmPlaylistMeta(
+		context.Background(),
+		pid,
+		"title",
+		"desc",
+	)
+
+	assert.NoError(t, err)
+}
+
+func TestService_ConfirmPlaylistMeta_Error(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	repo := repository_mock.NewMockIRepository(ctrl)
+	svc := New(repo, nil, nil, nil)
+
+	pid := uuid.New()
+
+	repo.EXPECT().
+		UpdatePlaylist(gomock.Any(), pid, gomock.Any()).
+		Return(errors.New("db err"))
+
+	err := svc.ConfirmPlaylistMeta(
+		context.Background(),
+		pid,
+		"title",
+		"desc",
+	)
+
+	assert.Error(t, err)
+}
+
+func TestService_GeneratePlaylistMeta_EmptyTracks(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	repo := repository_mock.NewMockIRepository(ctrl)
+	svc := New(repo, nil, nil, nil)
+
+	pid := uuid.New()
+
+	repo.EXPECT().
+		GetByID(gomock.Any(), pid).
+		Return(&model.Playlist{
+			ID:          pid,
+			Title:       "My",
+			Description: "Desc",
+		}, nil)
+
+	repo.EXPECT().
+		GetTracksByPlaylist(gomock.Any(), pid).
+		Return([]string{}, nil)
+
+	meta, err := svc.GeneratePlaylistMeta(context.Background(), pid)
+
+	assert.NoError(t, err)
+	assert.Equal(t, "My", meta.Title)
+	assert.Equal(t, "Desc", meta.Description)
+}
+
+func TestService_GeneratePlaylistMeta_CatalogError(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	repo := repository_mock.NewMockIRepository(ctrl)
+	cat := catalog_mock.NewMockCatalogServiceClient(ctrl)
+
+	svc := New(repo, nil, cat, nil)
+
+	pid := uuid.New()
+
+	repo.EXPECT().
+		GetByID(gomock.Any(), pid).
+		Return(&model.Playlist{ID: pid}, nil)
+
+	repo.EXPECT().
+		GetTracksByPlaylist(gomock.Any(), pid).
+		Return([]string{"t1"}, nil)
+
+	cat.EXPECT().
+		GetTracksByIDs(gomock.Any(), gomock.Any()).
+		Return(nil, errors.New("catalog down"))
+
+	_, err := svc.GeneratePlaylistMeta(context.Background(), pid)
+
+	assert.Error(t, err)
+}
+
+func TestService_GeneratePlaylistMeta_AIAuthError(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	repo := repository_mock.NewMockIRepository(ctrl)
+	cat := catalog_mock.NewMockCatalogServiceClient(ctrl)
+	aiMock := ai_mock.NewMockIAIGenerator(ctrl)
+
+	svc := New(repo, nil, cat, aiMock)
+
+	pid := uuid.New()
+
+	repo.EXPECT().GetByID(gomock.Any(), pid).
+		Return(&model.Playlist{ID: pid}, nil)
+
+	repo.EXPECT().GetTracksByPlaylist(gomock.Any(), pid).
+		Return([]string{"t1"}, nil)
+
+	cat.EXPECT().GetTracksByIDs(gomock.Any(), gomock.Any()).
+		Return(&pbCatalog.GetTracksByIDsResponse{
+			Tracks: []*pbCatalog.Track{{Id: "t1", Title: "Song"}},
+		}, nil)
+
+	aiMock.EXPECT().
+		GeneratePlaylistMeta(gomock.Any(), gomock.Any()).
+		Return("", "", ai.ErrAIAuth)
+
+	_, err := svc.GeneratePlaylistMeta(context.Background(), pid)
+
 	assert.Error(t, err)
 }

@@ -40,7 +40,7 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 	}
 
 	var sb strings.Builder
-	sb.WriteString("У меня есть плейлист. Ниже список треков:\\n")
+	sb.WriteString("Список треков:\\n")
 	for i := 0; i < max; i++ {
 		t := tracks[i]
 		sb.WriteString(fmt.Sprintf("%d. %s — ", i+1, t.Title))
@@ -53,18 +53,17 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 		sb.WriteString("\n")
 	}
 
-	sb.WriteString("\nНа основе этих треков придумай:\n")
-	sb.WriteString("1) красивое, короткое и цепляющее название плейлиста\n")
-	sb.WriteString("2) атмосферное, чуть более подробное описание\n\n")
+	sb.WriteString("\nЗадача:\n")
+	sb.WriteString("Сгенерируй название и описание плейлиста на основе этих треков.\n")
+	sb.WriteString("Название: до 80 символов.\n")
+	sb.WriteString("Описание: до 200 символов, атмосферное, без перечисления всех треков.\n")
 
-	sb.WriteString("Верни результат строго в виде JSON без комментариев, без markdown и без лишних пояснений.\n")
-	sb.WriteString("Структура должна быть такой:\n")
-	sb.WriteString("{\"title\": \"...\"," +
-		"\"description\": \"...\"}\n")
+	sb.WriteString("Ответ верни строго в JSON без markdown и комментариев:\n")
+	sb.WriteString("{\"title\":\"...\",\"description\":\"...\"}")
 
 	token, err := g.tm.getToken(ctx)
 	if err != nil {
-		return "", "", err
+		return "", "", ErrAIAuth
 	}
 
 	reqBody := ChatRequest{
@@ -114,10 +113,6 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 	}
 
 	raw := out.Choices[0].Message.Content
-
-	fmt.Println("RESPONSE START:")
-	fmt.Println(raw)
-	fmt.Println("RESPONSE END:")
 
 	clean := strings.TrimSpace(raw)
 	clean = strings.TrimPrefix(clean, "```json")

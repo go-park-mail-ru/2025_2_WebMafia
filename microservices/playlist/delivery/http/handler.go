@@ -27,6 +27,7 @@ type IService interface {
 	RemoveArtistFromFavorite(ctx context.Context, req dto.RemoveArtistFromFavoriteRequest) error
 	GetFavoriteArtists(ctx context.Context, userID uuid.UUID) ([]dto.FavoriteArtist, error)
 	GeneratePlaylistMeta(ctx context.Context, playlistID uuid.UUID) (*dto.GeneratedMeta, error)
+	ConfirmPlaylistMeta(ctx context.Context, playlistID uuid.UUID, title, description string) error
 }
 
 type Handler struct {

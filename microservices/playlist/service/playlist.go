@@ -16,6 +16,8 @@ import (
 	"github.com/google/uuid"
 )
 
+const fallbackMaxTracks = 5
+
 func (s *Service) CreatePlaylist(ctx context.Context, req dto.CreatePlaylistRequest) (*dto.Playlist, error) {
 	const op = "service.CreatePlaylist"
 
@@ -469,11 +471,13 @@ func (s *Service) GeneratePlaylistMeta(ctx context.Context, playlistID uuid.UUID
 			Title:     t.Title,
 			DurationS: int(t.DurationS),
 			FileURL:   t.FileUrl,
-			Album: dto.Album{
+		}
+		if t.Album != nil {
+			track.Album = dto.Album{
 				ID:        t.Album.Id,
 				Title:     t.Album.Title,
 				AvatarURL: t.Album.AvatarUrl,
-			},
+			}
 		}
 		for _, a := range t.Artists {
 			track.Artists = append(track.Artists, dto.Artist{
@@ -486,15 +490,17 @@ func (s *Service) GeneratePlaylistMeta(ctx context.Context, playlistID uuid.UUID
 
 	title, desc, err := s.ai.GeneratePlaylistMeta(ctx, tracks)
 	if err != nil {
-
 		switch {
-		case errors.Is(err, ai.ErrAIRateLimit), errors.Is(err, ai.ErrAIUnavailable):
+		case errors.Is(err, ai.ErrAIRateLimit):
 			return &dto.GeneratedMeta{
 				Title:       fallbackTitle(tracks),
 				Description: fallbackDescription(tracks),
+				Source:      "fallback",
 			}, nil
+
 		case errors.Is(err, ai.ErrAIAuth):
 			return nil, fmt.Errorf("%s: ai auth error: %w", op, err)
+
 		default:
 			return nil, fmt.Errorf("%s: ai error: %w", op, err)
 		}
@@ -503,6 +509,7 @@ func (s *Service) GeneratePlaylistMeta(ctx context.Context, playlistID uuid.UUID
 	return &dto.GeneratedMeta{
 		Title:       title,
 		Description: desc,
+		Source:      "ai",
 	}, nil
 }
 
@@ -511,20 +518,19 @@ func fallbackTitle(tracks []dto.Track) string {
 		return "Мой плейлист"
 	}
 
-	main := tracks[0].Title
-
 	if len(tracks) == 1 {
-		return main
+		return tracks[0].Title
 	}
 
-	return fmt.Sprintf("%s и другое", main)
+	return fmt.Sprintf("%s и другие треки", tracks[0].Title)
 }
 
 func fallbackDescription(tracks []dto.Track) string {
 	if len(tracks) == 0 {
 		return ""
 	}
-	max := 5
+
+	max := fallbackMaxTracks
 	if len(tracks) < max {
 		max = len(tracks)
 	}
@@ -532,8 +538,30 @@ func fallbackDescription(tracks []dto.Track) string {
 	for i := 0; i < max; i++ {
 		names = append(names, tracks[i].Title)
 	}
+
+	if len(tracks) <= max {
+		return fmt.Sprintf(
+			"Плейлист на основе треков: %s.",
+			strings.Join(names, ", "),
+		)
+	}
 	return fmt.Sprintf(
 		"Плейлист на основе треков: %s и других.",
 		strings.Join(names, ", "),
 	)
+}
+
+func (s *Service) ConfirmPlaylistMeta(ctx context.Context, playlistID uuid.UUID, title string, description string) error {
+	const op = "service.ConfirmPlaylistMeta"
+
+	upd := postgres.PlaylistUpdate{
+		Title:       &title,
+		Description: &description,
+	}
+
+	if err := s.repo.UpdatePlaylist(ctx, playlistID, upd); err != nil {
+		return fmt.Errorf("%s: update: %w", op, mapRepositoryError(err))
+	}
+
+	return nil
 }

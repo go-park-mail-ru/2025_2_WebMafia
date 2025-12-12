@@ -86,12 +86,22 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 
 	resp, err := g.http.Do(req)
 	if err != nil {
-		return "", "", err
+		return "", "", ErrAIUnavailable
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != 200 {
-		return "", "", fmt.Errorf("gigachat error: %s", resp.Status)
+	if resp.StatusCode != http.StatusOK {
+		switch resp.StatusCode {
+		case http.StatusUnauthorized, http.StatusForbidden:
+			return "", "", ErrAIAuth
+		case http.StatusTooManyRequests:
+			return "", "", ErrAIRateLimit
+		default:
+			if resp.StatusCode >= 500 {
+				return "", "", ErrAIUnavailable
+			}
+			return "", "", ErrAIUnavailable
+		}
 	}
 
 	var out ChatResponse
@@ -105,9 +115,9 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 
 	raw := out.Choices[0].Message.Content
 
-	fmt.Println("=== RAW GIGACHAT RESPONSE START ===")
+	fmt.Println("RESPONSE START:")
 	fmt.Println(raw)
-	fmt.Println("=== RAW GIGACHAT RESPONSE END ===")
+	fmt.Println("RESPONSE END:")
 
 	clean := strings.TrimSpace(raw)
 	clean = strings.TrimPrefix(clean, "```json")
@@ -123,7 +133,7 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 	var meta Meta
 
 	if err := json.Unmarshal([]byte(clean), &meta); err != nil {
-		return "", "", fmt.Errorf("failed to parse json: %w; raw=%s", err, clean)
+		return "", "", ErrAIUnavailable
 	}
 
 	return meta.Title, meta.Description, nil

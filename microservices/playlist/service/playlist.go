@@ -5,8 +5,10 @@ import (
 	"errors"
 	"fmt"
 	"spotify/internal/model"
+	"spotify/microservices/playlist/ai"
 	"spotify/microservices/playlist/dto"
 	"spotify/microservices/playlist/repository/postgres"
+	"strings"
 	"time"
 
 	pbCatalog "spotify/proto/catalog"
@@ -484,11 +486,54 @@ func (s *Service) GeneratePlaylistMeta(ctx context.Context, playlistID uuid.UUID
 
 	title, desc, err := s.ai.GeneratePlaylistMeta(ctx, tracks)
 	if err != nil {
-		return nil, fmt.Errorf("%s: ai error: %w", op, err)
+
+		switch {
+		case errors.Is(err, ai.ErrAIRateLimit), errors.Is(err, ai.ErrAIUnavailable):
+			return &dto.GeneratedMeta{
+				Title:       fallbackTitle(tracks),
+				Description: fallbackDescription(tracks),
+			}, nil
+		case errors.Is(err, ai.ErrAIAuth):
+			return nil, fmt.Errorf("%s: ai auth error: %w", op, err)
+		default:
+			return nil, fmt.Errorf("%s: ai error: %w", op, err)
+		}
 	}
 
 	return &dto.GeneratedMeta{
 		Title:       title,
 		Description: desc,
 	}, nil
+}
+
+func fallbackTitle(tracks []dto.Track) string {
+	if len(tracks) == 0 {
+		return "Мой плейлист"
+	}
+
+	main := tracks[0].Title
+
+	if len(tracks) == 1 {
+		return main
+	}
+
+	return fmt.Sprintf("%s и другое", main)
+}
+
+func fallbackDescription(tracks []dto.Track) string {
+	if len(tracks) == 0 {
+		return ""
+	}
+	max := 5
+	if len(tracks) < max {
+		max = len(tracks)
+	}
+	names := make([]string, 0, max)
+	for i := 0; i < max; i++ {
+		names = append(names, tracks[i].Title)
+	}
+	return fmt.Sprintf(
+		"Плейлист на основе треков: %s и других.",
+		strings.Join(names, ", "),
+	)
 }

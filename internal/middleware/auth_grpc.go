@@ -9,7 +9,8 @@ import (
 )
 
 const (
-	csrfHeader = "X-CSRF-Token"
+	grpcTokenCookie string = "session_token"
+	csrfHeader      string = "X-CSRF-Token"
 )
 
 //go:generate mockgen -destination=../mocks/auth_client_mock.go -package=mocks spotify/proto/auth AuthServiceClient
@@ -29,7 +30,7 @@ func (m *AuthGrpcMiddleware) Handle(next http.Handler) http.Handler {
 
 		log := LoggerFromContext(r.Context())
 
-		cookie, err := r.Cookie(sessionTokenCookie)
+		cookie, err := r.Cookie(grpcTokenCookie)
 		if err != nil {
 			log.Warnf("[%s]: no session cookie", op)
 			response.UnauthorizedJSON(w)

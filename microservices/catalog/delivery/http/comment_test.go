@@ -4,6 +4,7 @@ import (
 	"errors"
 	"net/http"
 	"net/http/httptest"
+	"spotify/pkg/ws"
 	"testing"
 	"time"
 
@@ -13,8 +14,8 @@ import (
 	"go.uber.org/mock/gomock"
 
 	"spotify/microservices/catalog/dto"
-	service_mock "spotify/microservices/catalog/mocks/service"
 	"spotify/microservices/catalog/service"
+	service_mock "spotify/mocks/catalog/service/http"
 )
 
 func TestHandler_GetTrackComments(t *testing.T) {
@@ -22,7 +23,7 @@ func TestHandler_GetTrackComments(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc, nil, nil)
+	handler := NewHandler(mockSvc, nil, ws.Config{}, nil)
 
 	trackID := uuid.New()
 	comment := dto.Comment{

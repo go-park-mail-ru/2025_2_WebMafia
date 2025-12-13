@@ -10,10 +10,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
 
-	"spotify/internal/mocks"
 	"spotify/internal/model"
 	"spotify/microservices/catalog/dto"
-	repository_mock "spotify/microservices/catalog/mocks/repository"
+	repository_mock "spotify/mocks/catalog/repository"
+	mocks "spotify/mocks/proto/auth"
 	pbAuth "spotify/proto/auth"
 )
 

@@ -9,10 +9,9 @@ import (
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"go.uber.org/mock/gomock"
-
-	"spotify/internal/mocks"
 	"spotify/internal/model"
-	repository_mock "spotify/microservices/catalog/mocks/repository"
+	repository_mock "spotify/mocks/catalog/repository"
+	mocks "spotify/mocks/proto/auth"
 )
 
 func TestService_GetAlbumByID(t *testing.T) {

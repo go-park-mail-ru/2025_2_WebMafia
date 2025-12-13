@@ -11,7 +11,7 @@ import (
 	"go.uber.org/mock/gomock"
 
 	"spotify/microservices/auth/dto"
-	authmocks "spotify/microservices/auth/mocks/grpc_service"
+	authmocks "spotify/mocks/auth/service"
 	"spotify/pkg/csrfmanager"
 	"spotify/pkg/jwtmanager"
 	pb "spotify/proto/auth"

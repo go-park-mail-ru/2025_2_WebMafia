@@ -12,10 +12,10 @@ import (
 
 	"spotify/internal/model"
 	"spotify/microservices/playlist/dto"
-	catalog_mock "spotify/microservices/playlist/mocks/catalog"
-	repository_mock "spotify/microservices/playlist/mocks/repository"
-	storage_mock "spotify/microservices/playlist/mocks/storage"
 	"spotify/microservices/playlist/repository/postgres"
+	storage_mock "spotify/mocks/pkg/storage"
+	repository_mock "spotify/mocks/playlist/repository"
+	catalog_mock "spotify/mocks/proto/catalog"
 	pbCatalog "spotify/proto/catalog"
 )
 

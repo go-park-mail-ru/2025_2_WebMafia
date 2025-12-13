@@ -2,10 +2,9 @@ package ws
 
 import (
 	"context"
-	"time"
-
 	"spotify/internal/middleware"
 	"spotify/pkg/logger"
+	"time"
 
 	"github.com/gorilla/websocket"
 )

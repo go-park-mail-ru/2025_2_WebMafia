@@ -9,7 +9,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-//go:generate mockgen -destination=../../../../mocks/catalog/service/service_mock.go -package=mock_catalog_service spotify/microservices/catalog/delivery/http IService
+//go:generate mockgen -destination=../../../../mocks/catalog/service/http/service_mock.go -package=mock_catalog_service spotify/microservices/catalog/delivery/http IService
 type IService interface {
 	GetArtistByID(ctx context.Context, id uuid.UUID) (*dto.Artist, error)
 	GetAllArtists(ctx context.Context, limit, offset uint64) ([]dto.Artist, error)

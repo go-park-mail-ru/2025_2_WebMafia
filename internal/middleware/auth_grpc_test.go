@@ -11,7 +11,7 @@ import (
 	"go.uber.org/mock/gomock"
 	"google.golang.org/grpc"
 
-	"spotify/internal/mocks"
+	mocks "spotify/mocks/proto/auth"
 	pb "spotify/proto/auth"
 )
 

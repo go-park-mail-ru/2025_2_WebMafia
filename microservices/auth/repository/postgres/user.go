@@ -6,8 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"spotify/internal/model"
-
-	"github.com/lib/pq"
+	"strings"
 
 	"github.com/jackc/pgx/v5/pgconn"
 )
@@ -130,16 +129,25 @@ func (m *Repository) GetUsersByIDs(ctx context.Context, ids []string) ([]model.U
 		return []model.User{}, nil
 	}
 
-	query := `SELECT user_id, login, email, password_hash, avatar_url, created_at, updated_at FROM "user" WHERE user_id = ANY($1)`
+	placeholders := make([]string, len(ids))
+	args := make([]any, len(ids))
 
-	rows, err := m.Conn.QueryContext(ctx, query, pq.Array(ids))
+	for i, id := range ids {
+		placeholders[i] = fmt.Sprintf("$%d", i+1)
+		args[i] = id
+	}
+
+	query := fmt.Sprintf(`
+		SELECT user_id, login, email, password_hash, avatar_url, created_at, updated_at FROM "user"
+		WHERE user_id IN (%s)`, strings.Join(placeholders, ","))
+
+	rows, err := m.Conn.QueryContext(ctx, query, args...)
 	if err != nil {
 		return nil, fmt.Errorf("%s query failed: %w", op, err)
 	}
-
 	defer rows.Close()
 
-	users := make([]model.User, 0, len(ids))
+	var users []model.User
 	for rows.Next() {
 		var u model.User
 		if err := rows.Scan(
@@ -159,11 +167,9 @@ func (m *Repository) GetUsersByIDs(ctx context.Context, ids []string) ([]model.U
 	if err := rows.Err(); err != nil {
 		return nil, fmt.Errorf("%s rows iteration failed: %w", op, err)
 	}
-
-	if len(users) == 0 && len(ids) > 0 {
-		return nil, fmt.Errorf("no users found for requested ids: %w", ErrNotFound)
+	if len(users) == 0 {
+		return nil, fmt.Errorf("no users found: %w", ErrNotFound)
 	}
-
 	return users, nil
 }
 

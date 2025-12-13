@@ -12,8 +12,8 @@ import (
 	"github.com/stretchr/testify/require"
 	"go.uber.org/mock/gomock"
 
-	repository_mock "spotify/microservices/auth/mocks/repository"
-	storage_mock "spotify/microservices/auth/mocks/storage"
+	repository_mock "spotify/mocks/auth/repository"
+	storage_mock "spotify/mocks/pkg/storage"
 
 	"spotify/internal/model"
 	"spotify/microservices/auth/dto"

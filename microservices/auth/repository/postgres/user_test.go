@@ -236,7 +236,6 @@ func TestRepository_UpdateUserProfile(t *testing.T) {
 		require.NoError(t, mock.ExpectationsWereMet())
 	})
 }
-
 func TestRepository_GetUsersByIDs(t *testing.T) {
 	db, mock, err := sqlmock.New()
 	require.NoError(t, err)
@@ -250,9 +249,11 @@ func TestRepository_GetUsersByIDs(t *testing.T) {
 		uid1 := uuid.New()
 		uid2 := uuid.New()
 
-		query := regexp.QuoteMeta(
-			`SELECT user_id, login, email, password_hash, avatar_url, created_at, updated_at FROM "user" WHERE user_id = ANY($1)`,
-		)
+		query := regexp.QuoteMeta(`
+			SELECT user_id, login, email, password_hash, avatar_url, created_at, updated_at
+			FROM "user"
+			WHERE user_id IN ($1,$2)
+		`)
 
 		rows := sqlmock.NewRows([]string{
 			"user_id", "login", "email", "password_hash", "avatar_url", "created_at", "updated_at",
@@ -261,7 +262,7 @@ func TestRepository_GetUsersByIDs(t *testing.T) {
 			AddRow(uid2, "bob", "b@example.com", "h2", "", time.Now(), time.Now())
 
 		mock.ExpectQuery(query).
-			WithArgs(ids).
+			WithArgs("id1", "id2").
 			WillReturnRows(rows)
 
 		users, err := repo.GetUsersByIDs(context.Background(), ids)

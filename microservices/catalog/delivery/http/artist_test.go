@@ -4,6 +4,7 @@ import (
 	"errors"
 	"net/http"
 	"net/http/httptest"
+	"spotify/pkg/ws"
 	"testing"
 
 	"github.com/google/uuid"
@@ -12,8 +13,8 @@ import (
 	"go.uber.org/mock/gomock"
 
 	"spotify/microservices/catalog/dto"
-	service_mock "spotify/microservices/catalog/mocks/service"
 	"spotify/microservices/catalog/service"
+	service_mock "spotify/mocks/catalog/service/http"
 )
 
 func TestHandler_GetArtistByID(t *testing.T) {
@@ -21,7 +22,7 @@ func TestHandler_GetArtistByID(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc, nil, nil)
+	handler := NewHandler(mockSvc, nil, ws.Config{}, nil)
 
 	artistID := uuid.New()
 	dtoArtist := &dto.Artist{ID: artistID.String(), Name: "Artist"}
@@ -88,7 +89,7 @@ func TestHandler_GetAllArtists(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc, nil, nil)
+	handler := NewHandler(mockSvc, nil, ws.Config{}, nil)
 
 	t.Run("success", func(t *testing.T) {
 		mockSvc.EXPECT().GetAllArtists(gomock.Any(), uint64(100), uint64(0)).
@@ -120,7 +121,7 @@ func TestHandler_SearchArtists(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc, nil, nil)
+	handler := NewHandler(mockSvc, nil, ws.Config{}, nil)
 
 	t.Run("success", func(t *testing.T) {
 		mockSvc.EXPECT().SearchArtists(gomock.Any(), "query", uint64(50)).

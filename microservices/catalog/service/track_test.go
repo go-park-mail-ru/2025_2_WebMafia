@@ -13,9 +13,9 @@ import (
 	"spotify/internal/model"
 	"spotify/microservices/catalog/dto"
 
-	"spotify/internal/mocks"
+	mocks "spotify/mocks/proto/auth"
 
-	repository_mock "spotify/microservices/catalog/mocks/repository"
+	repository_mock "spotify/mocks/catalog/repository"
 )
 
 func TestService_GetTrackByID(t *testing.T) {

@@ -34,8 +34,6 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-    env:
-      AI_AUTH_KEY: ${{ secrets.AI_AUTH_KEY }}
     steps:
       - name: Check out code
         uses: actions/checkout@v4

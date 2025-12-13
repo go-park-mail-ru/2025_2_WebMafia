@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - dev
       - deploy
       - task-33-proxy
 
@@ -81,7 +80,9 @@ jobs:
             cd ${{ secrets.DEPLOY_PATH }}
 
             echo "${{ secrets.PROD_ENV_FILE }}" > .env
-
+            
+            echo "AI_AUTH_KEY=${{ secrets.AI_AUTH_KEY }}" >> .env
+            
             chmod +x scripts/deploy.sh
 
             ./scripts/deploy.sh $GITHUB_ACTOR $GITHUB_TOKEN

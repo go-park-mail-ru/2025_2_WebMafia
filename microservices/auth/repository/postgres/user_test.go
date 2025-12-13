@@ -3,7 +3,6 @@ package postgres
 import (
 	"context"
 	"database/sql"
-	"github.com/lib/pq"
 	"regexp"
 	"testing"
 	"time"
@@ -262,7 +261,7 @@ func TestRepository_GetUsersByIDs(t *testing.T) {
 			AddRow(uid2, "bob", "b@example.com", "h2", "", time.Now(), time.Now())
 
 		mock.ExpectQuery(query).
-			WithArgs(pq.Array(ids)).
+			WithArgs(ids).
 			WillReturnRows(rows)
 
 		users, err := repo.GetUsersByIDs(context.Background(), ids)

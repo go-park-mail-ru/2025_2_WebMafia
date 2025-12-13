@@ -6,7 +6,7 @@ import (
 	"spotify/internal/model"
 )
 
-//go:generate mockgen -destination=../mocks/repository/repository_mock.go -package=repository_mock spotify/microservices/auth/service IRepository
+//go:generate mockgen -destination=../../../mocks/auth/repository/repository_mock.go -package=mock_auth_repo spotify/microservices/auth/service IRepository
 type IRepository interface {
 	CreateUser(ctx context.Context, user model.User) error
 	GetUserByEmail(ctx context.Context, email string) (*model.User, error)
@@ -17,7 +17,7 @@ type IRepository interface {
 	GetUsersByIDs(ctx context.Context, ids []string) ([]model.User, error)
 }
 
-//go:generate mockgen -destination=../mocks/storage/storage_mock.go -package=storage_mock spotify/microservices/auth/service IStorage
+//go:generate mockgen -destination=../../../mocks/pkg/storage/storage_mock.go -package=mock_storage spotify/microservices/auth/service IStorage
 type IStorage interface {
 	UploadAvatar(ctx context.Context, file io.Reader, size int64, contentType string) (string, error)
 	DeleteAvatar(ctx context.Context, objectName string) error

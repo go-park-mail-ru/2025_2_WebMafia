@@ -267,7 +267,7 @@ func TestUserService_GetUsersBatch(t *testing.T) {
 	userService := NewUserService(mockRepo, mockStorage)
 
 	t.Run("empty input -> empty output", func(t *testing.T) {
-		resp, err := userService.GetUsersBatch(context.Background(), []string{})
+		resp, err := userService.GetUsersByIDs(context.Background(), []string{})
 		require.NoError(t, err)
 		assert.Empty(t, resp)
 	})
@@ -295,7 +295,7 @@ func TestUserService_GetUsersBatch(t *testing.T) {
 			Return(usersFromDB, nil).
 			Times(1)
 
-		resp, err := userService.GetUsersBatch(context.Background(), ids)
+		resp, err := userService.GetUsersByIDs(context.Background(), ids)
 
 		require.NoError(t, err)
 		require.Len(t, resp, 2)
@@ -319,7 +319,7 @@ func TestUserService_GetUsersBatch(t *testing.T) {
 			Return(nil, errors.New("db error")).
 			Times(1)
 
-		resp, err := userService.GetUsersBatch(context.Background(), ids)
+		resp, err := userService.GetUsersByIDs(context.Background(), ids)
 
 		require.Nil(t, resp)
 		require.Error(t, err)

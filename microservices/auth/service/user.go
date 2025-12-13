@@ -56,8 +56,8 @@ func (s *Service) Login(ctx context.Context, req dto.LoginRequest) (*dto.LoginRe
 	}, nil
 }
 
-func (s *Service) GetUsersBatch(ctx context.Context, ids []string) ([]dto.GetProfileResponse, error) {
-	const op = "service.GetUsersBatch"
+func (s *Service) GetUsersByIDs(ctx context.Context, ids []string) ([]dto.GetProfileResponse, error) {
+	const op = "service.GetUsersByIDs"
 
 	if len(ids) == 0 {
 		return []dto.GetProfileResponse{}, nil

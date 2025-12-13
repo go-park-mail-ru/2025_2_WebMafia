@@ -8,9 +8,9 @@ import (
 	pb "spotify/proto/auth"
 )
 
-//go:generate mockgen -destination=../../mocks/grpc_service/user_service_mock.go -package=auth_mocks spotify/microservices/auth/delivery/grpc IUserService
+//go:generate mockgen -destination=../../../../mocks/auth/service/user_service_mock.go -package=mock_auth_service spotify/microservices/auth/delivery/grpc IUserService
 type IUserService interface {
-	GetUsersBatch(ctx context.Context, ids []string) ([]dto.GetProfileResponse, error)
+	GetUsersByIDs(ctx context.Context, ids []string) ([]dto.GetProfileResponse, error)
 }
 
 type Handler struct {

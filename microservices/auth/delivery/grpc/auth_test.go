@@ -105,7 +105,7 @@ func TestHandler_GetUsers(t *testing.T) {
 		input := []string{"u1", "u2"}
 
 		mockSvc.EXPECT().
-			GetUsersBatch(gomock.Any(), input).
+			GetUsersByIDs(gomock.Any(), input).
 			Return([]dto.GetProfileResponse{
 				{ID: "u1", Login: "alice", AvatarURL: "a.png"},
 				{ID: "u2", Login: "bob", AvatarURL: "b.png"},
@@ -129,7 +129,7 @@ func TestHandler_GetUsers(t *testing.T) {
 		input := []string{"broken"}
 
 		mockSvc.EXPECT().
-			GetUsersBatch(gomock.Any(), input).
+			GetUsersByIDs(gomock.Any(), input).
 			Return(nil, errors.New("db error"))
 
 		resp, err := handler.GetUsers(context.Background(),

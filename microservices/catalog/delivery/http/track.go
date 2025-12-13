@@ -15,8 +15,7 @@ func (h *Handler) GetTrackByID(w http.ResponseWriter, r *http.Request) {
 	const op = "handler.GetTrackByID"
 	log := middleware.LoggerFromContext(r.Context())
 
-	vars := mux.Vars(r)
-	idStr, ok := vars["id"]
+	idStr, ok := mux.Vars(r)["id"]
 	if !ok {
 		log.Errorf("[%s]: id is missing in URL vars", op)
 		response.BadRequestJSON(w)
@@ -167,8 +166,7 @@ func (h *Handler) RegisterPlay(w http.ResponseWriter, r *http.Request) {
 	const op = "handler.RegisterPlay"
 	log := middleware.LoggerFromContext(r.Context())
 
-	vars := mux.Vars(r)
-	idStr, ok := vars["id"]
+	idStr, ok := mux.Vars(r)["id"]
 	if !ok {
 		log.Errorf("[%s]: id is missing in URL vars", op)
 		response.BadRequestJSON(w)

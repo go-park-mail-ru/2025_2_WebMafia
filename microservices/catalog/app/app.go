@@ -11,6 +11,7 @@ import (
 	"spotify/internal/server"
 	"spotify/pkg/logger"
 	"spotify/pkg/postgres"
+	"spotify/pkg/ws"
 	"sync"
 
 	grpcDelivery "spotify/microservices/catalog/delivery/grpc"
@@ -36,6 +37,7 @@ type App struct {
 	httpServer *server.Server
 	grpcServer *server.GRPCServer
 	authConn   *grpc.ClientConn
+	hub        *ws.Hub
 }
 
 func NewApp(ctx context.Context, configPath string) (*App, error) {
@@ -81,12 +83,12 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 
 	catalogService := service.New(repo, authClient)
 
-	hub := httpDelivery.NewHub()
-	go hub.Run()
+	hub := ws.NewHub()
 
 	httpHandler := httpDelivery.NewHandler(
 		catalogService,
 		hub,
+		cfg.Catalog.WebSocket,
 		cfg.Catalog.HTTP.CORS.AllowedOrigins,
 	)
 
@@ -119,12 +121,13 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 		httpServer: httpServer,
 		grpcServer: grpcServer,
 		authConn:   authConn,
+		hub:        hub,
 	}, nil
 }
 
 func (a *App) Run(ctx context.Context) error {
 	var wg sync.WaitGroup
-	serverErrors := make(chan error, 2)
+	serverErrors := make(chan error, 3)
 
 	wg.Add(1)
 	go func() {
@@ -140,6 +143,12 @@ func (a *App) Run(ctx context.Context) error {
 		if err := a.grpcServer.Run(); err != nil {
 			serverErrors <- fmt.Errorf("grpc server error: %w", err)
 		}
+	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		a.hub.Run(ctx)
 	}()
 
 	a.logger.Infof("Catalog microservice is running...")

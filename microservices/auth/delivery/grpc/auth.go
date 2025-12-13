@@ -47,7 +47,7 @@ func (h *Handler) GetUsers(ctx context.Context, req *pb.GetUsersRequest) (*pb.Ge
 		return &pb.GetUsersResponse{Users: []*pb.UserInfo{}}, nil
 	}
 
-	profiles, err := h.userService.GetUsersBatch(ctx, req.UserIds)
+	profiles, err := h.userService.GetUsersByIDs(ctx, req.UserIds)
 	if err != nil {
 		log.Errorf("[%s]: service error: %v", op, err)
 		return nil, status.Errorf(codes.Internal, "failed to fetch users: %v", err)

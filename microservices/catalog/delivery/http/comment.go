@@ -1,26 +1,31 @@
 package http
 
 import (
+	"context"
 	"errors"
 	"net/http"
 	"spotify/internal/middleware"
+	"spotify/microservices/catalog/dto"
 	"spotify/microservices/catalog/service"
 	"spotify/pkg/response"
+	"spotify/pkg/ws"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
+	"github.com/mailru/easyjson"
 )
 
 const (
-	wsSendBufferSize = 256
+	maxTextLength      = 1000
+	saveCommentTimeout = 5 * time.Second
 )
 
 func (h *Handler) GetTrackComments(w http.ResponseWriter, r *http.Request) {
 	const op = "handler.GetTrackComments"
 	log := middleware.LoggerFromContext(r.Context())
 
-	vars := mux.Vars(r)
-	idStr, ok := vars["id"]
+	idStr, ok := mux.Vars(r)["id"]
 	if !ok {
 		log.Errorf("[%s]: id is missing in URL vars", op)
 		response.BadRequestJSON(w)
@@ -54,15 +59,14 @@ func (h *Handler) ServeWS(w http.ResponseWriter, r *http.Request) {
 	const op = "handler.ServeWS"
 	log := middleware.LoggerFromContext(r.Context())
 
-	vars := mux.Vars(r)
-	idStr, ok := vars["id"]
+	idStr, ok := mux.Vars(r)["id"]
 	if !ok {
 		log.Errorf("[%s]: id is missing in URL vars", op)
 		response.BadRequestJSON(w)
 		return
 	}
 
-	trackID, err := uuid.Parse(idStr)
+	trackUUID, err := uuid.Parse(idStr)
 	if err != nil {
 		log.Warnf("[%s]: Failed to parse track ID from URL: %v", op, err)
 		response.BadRequestJSON(w)
@@ -71,35 +75,80 @@ func (h *Handler) ServeWS(w http.ResponseWriter, r *http.Request) {
 
 	rawUserID, ok := middleware.GetUserID(r.Context())
 	if !ok {
-		log.Warnf("[%s]: unauthorized ws attempt", op)
-		response.UnauthorizedJSON(w)
-		return
-	}
-	userID, err := uuid.Parse(rawUserID)
-	if err != nil {
-		log.Errorf("[%s]: invalid userID in context: %v", op, err)
+		log.Errorf("[%s]: userID missing in context", op)
 		response.InternalErrorJSON(w)
 		return
 	}
 
-	conn, err := h.wsUpgrader.Upgrade(w, r, nil)
+	responseHeader := http.Header{}
+	if protocol := r.Header.Get("Sec-WebSocket-Protocol"); protocol != "" {
+		responseHeader.Add("Sec-WebSocket-Protocol", protocol)
+	}
+	conn, err := h.wsUpgrader.Upgrade(w, r, responseHeader)
 	if err != nil {
 		log.Errorf("[%s]: failed to upgrade connection: %v", op, err)
 		return
 	}
 
-	client := &Client{
-		hub:     h.hub,
-		conn:    conn,
-		send:    make(chan []byte, wsSendBufferSize),
-		service: h.service,
-		logger:  log,
-		trackID: trackID,
-		userID:  userID,
+	client := ws.NewClient(
+		trackUUID.String(),
+		rawUserID,
+		h.hub,
+		conn,
+		log,
+		h,
+		h.wsConfig,
+	)
+
+	h.hub.Register(client)
+
+	go client.WritePump()
+	client.ReadPump()
+}
+
+func (h *Handler) HandleMessage(ctx context.Context, client *ws.Client, message []byte) {
+	const op = "handler.HandleMessage"
+	log := middleware.LoggerFromContext(ctx)
+
+	var req dto.PostCommentRequest
+	if err := easyjson.Unmarshal(message, &req); err != nil {
+		log.Warnf("[%s]: invalid json format from client %s: %v", op, client.ID(), err)
+		h.sendErrorJSON(client, response.ErrBadRequest)
+		return
 	}
 
-	h.hub.register <- client
+	if len(req.Text) == 0 || len(req.Text) > maxTextLength {
+		log.Warnf("[%s]: invalid text length from client %s: %d", op, client.ID(), len(req.Text))
+		h.sendErrorJSON(client, response.ErrBadRequest)
+		return
+	}
 
-	go client.writePump()
-	client.readPump()
+	req.TrackID = client.Topic()
+	userID, _ := uuid.Parse(client.ID())
+
+	saveCtx, cancel := context.WithTimeout(ctx, saveCommentTimeout)
+	defer cancel()
+
+	createdComment, err := h.service.PostComment(saveCtx, userID, req)
+	if err != nil {
+		log.Errorf("[%s]: failed to save comment: %v", op, err)
+		h.sendErrorJSON(client, response.ErrInternalServer)
+		return
+	}
+
+	responseBytes, err := easyjson.Marshal(createdComment)
+	if err != nil {
+		log.Errorf("[%s]: failed to marshal response: %v", op, err)
+		return
+	}
+
+	h.hub.BroadcastTo(client.Topic(), responseBytes)
+}
+
+func (h *Handler) sendErrorJSON(client *ws.Client, errResp response.ErrorResponse) {
+	data, err := easyjson.Marshal(errResp)
+	if err != nil {
+		return
+	}
+	client.SendMessage(data)
 }

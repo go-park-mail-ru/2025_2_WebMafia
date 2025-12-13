@@ -2,19 +2,14 @@ package http
 
 import (
 	"context"
-	"net/http"
 	"spotify/microservices/catalog/dto"
+	"spotify/pkg/ws"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
 )
 
-const (
-	wsReadBufferSize  = 1024
-	wsWriteBufferSize = 1024
-)
-
-//go:generate mockgen -destination=../../mocks/service/service_mock.go -package=service_mock spotify/microservices/catalog/delivery/http IService
+//go:generate mockgen -destination=../../../../mocks/catalog/service/service_mock.go -package=mock_catalog_service spotify/microservices/catalog/delivery/http IService
 type IService interface {
 	GetArtistByID(ctx context.Context, id uuid.UUID) (*dto.Artist, error)
 	GetAllArtists(ctx context.Context, limit, offset uint64) ([]dto.Artist, error)
@@ -39,28 +34,18 @@ type IService interface {
 
 type Handler struct {
 	service    IService
-	hub        *Hub
+	hub        *ws.Hub
 	wsUpgrader websocket.Upgrader
+	wsConfig   ws.Config
 }
 
-func NewHandler(service IService, hub *Hub, allowedOrigins []string) *Handler {
-	upgrader := websocket.Upgrader{
-		ReadBufferSize:  wsReadBufferSize,
-		WriteBufferSize: wsWriteBufferSize,
-		CheckOrigin: func(r *http.Request) bool {
-			origin := r.Header.Get("Origin")
-			for _, allowed := range allowedOrigins {
-				if allowed == origin {
-					return true
-				}
-			}
-			return false
-		},
-	}
+func NewHandler(service IService, hub *ws.Hub, wsConfig ws.Config, allowedOrigins []string) *Handler {
+	upgrader := ws.NewUpgrader(allowedOrigins, wsConfig)
 
 	return &Handler{
 		service:    service,
 		hub:        hub,
 		wsUpgrader: upgrader,
+		wsConfig:   wsConfig,
 	}
 }

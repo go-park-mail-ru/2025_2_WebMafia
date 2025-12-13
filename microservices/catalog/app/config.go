@@ -5,6 +5,7 @@ import (
 	"os"
 	"spotify/internal/app"
 	"spotify/pkg/postgres"
+	"spotify/pkg/ws"
 
 	"github.com/spf13/viper"
 )
@@ -15,9 +16,10 @@ type Config struct {
 }
 
 type CatalogConfig struct {
-	HTTP   app.HTTPConfig   `mapstructure:"http"`
-	GRPC   GRPCConfig       `mapstructure:"grpc"`
-	Logger app.LoggerConfig `mapstructure:"logger"`
+	HTTP      app.HTTPConfig   `mapstructure:"http"`
+	GRPC      GRPCConfig       `mapstructure:"grpc"`
+	Logger    app.LoggerConfig `mapstructure:"logger"`
+	WebSocket ws.Config        `mapstructure:"websocket"`
 }
 
 type GRPCConfig struct {

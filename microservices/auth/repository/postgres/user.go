@@ -159,6 +159,11 @@ func (m *Repository) GetUsersByIDs(ctx context.Context, ids []string) ([]model.U
 	if err := rows.Err(); err != nil {
 		return nil, fmt.Errorf("%s rows iteration failed: %w", op, err)
 	}
+
+	if len(users) == 0 && len(ids) > 0 {
+		return nil, fmt.Errorf("no users found for requested ids: %w", ErrNotFound)
+	}
+
 	return users, nil
 }
 

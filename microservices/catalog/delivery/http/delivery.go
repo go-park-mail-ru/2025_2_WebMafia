@@ -3,11 +3,13 @@ package http
 import (
 	"context"
 	"spotify/microservices/catalog/dto"
+	"spotify/pkg/ws"
 
 	"github.com/google/uuid"
+	"github.com/gorilla/websocket"
 )
 
-//go:generate mockgen -destination=../../mocks/service/service_mock.go -package=service_mock spotify/microservices/catalog/delivery/http IService
+//go:generate mockgen -destination=../../../../mocks/catalog/service/http/service_mock.go -package=mock_catalog_service spotify/microservices/catalog/delivery/http IService
 type IService interface {
 	GetArtistByID(ctx context.Context, id uuid.UUID) (*dto.Artist, error)
 	GetAllArtists(ctx context.Context, limit, offset uint64) ([]dto.Artist, error)
@@ -25,14 +27,25 @@ type IService interface {
 	GetTracksByGenreID(ctx context.Context, genreID uuid.UUID, limit, offset uint64) ([]dto.Track, error)
 	RegisterPlay(ctx context.Context, trackID uuid.UUID) error
 	SearchTracks(ctx context.Context, query string, limit uint64) ([]dto.TrackSearch, error)
+
+	PostComment(ctx context.Context, userID uuid.UUID, req dto.PostCommentRequest) (*dto.Comment, error)
+	GetCommentsByTrackID(ctx context.Context, trackID uuid.UUID, limit, offset uint64) ([]dto.Comment, error)
 }
 
 type Handler struct {
-	service IService
+	service    IService
+	hub        *ws.Hub
+	wsUpgrader websocket.Upgrader
+	wsConfig   ws.Config
 }
 
-func NewHandler(service IService) *Handler {
+func NewHandler(service IService, hub *ws.Hub, wsConfig ws.Config, allowedOrigins []string) *Handler {
+	upgrader := ws.NewUpgrader(allowedOrigins, wsConfig)
+
 	return &Handler{
-		service: service,
+		service:    service,
+		hub:        hub,
+		wsUpgrader: upgrader,
+		wsConfig:   wsConfig,
 	}
 }

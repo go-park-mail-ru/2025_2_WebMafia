@@ -26,4 +26,7 @@ func (h *Handler) RegisterRoutes(public *mux.Router, protected *mux.Router) {
 	public.HandleFunc("/artists/{artistId}/tracks", h.GetTracksByArtist).Methods(http.MethodGet, http.MethodOptions)
 	public.HandleFunc("/albums/{albumId}/tracks", h.GetTracksByAlbum).Methods(http.MethodGet, http.MethodOptions)
 	public.HandleFunc("/genres/{genreId}/tracks", h.GetTracksByGenre).Methods(http.MethodGet, http.MethodOptions)
+
+	public.HandleFunc("/comments/tracks/{id}", h.GetTrackComments).Methods(http.MethodGet, http.MethodOptions)
+	protected.HandleFunc("/ws/comments/tracks/{id}", h.ServeWS).Methods(http.MethodGet, http.MethodOptions)
 }

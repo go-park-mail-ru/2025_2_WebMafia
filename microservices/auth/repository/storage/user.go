@@ -28,11 +28,3 @@ func (s *Storage) DeleteAvatar(ctx context.Context, objectName string) error {
 	}
 	return nil
 }
-
-func (s *Storage) GetAvatarURL(ctx context.Context, objectName string) (string, error) {
-	url, err := s.client.GetFileURL(ctx, s.bucket, objectName)
-	if err != nil {
-		return "", fmt.Errorf("get avatar url: %w", ErrURLFailed)
-	}
-	return url, nil
-}

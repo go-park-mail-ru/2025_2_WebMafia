@@ -11,6 +11,7 @@ import (
 	"spotify/internal/server"
 	"spotify/pkg/logger"
 	"spotify/pkg/postgres"
+	"spotify/pkg/ws"
 	"sync"
 
 	grpcDelivery "spotify/microservices/catalog/delivery/grpc"
@@ -36,6 +37,7 @@ type App struct {
 	httpServer *server.Server
 	grpcServer *server.GRPCServer
 	authConn   *grpc.ClientConn
+	hub        *ws.Hub
 }
 
 func NewApp(ctx context.Context, configPath string) (*App, error) {
@@ -62,7 +64,6 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	}
 
 	repo := repository.New(db)
-	catalogService := service.New(repo)
 
 	grpc_prometheus.EnableClientHandlingTimeHistogram()
 
@@ -80,7 +81,16 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	authClient := pbAuth.NewAuthServiceClient(authConn)
 	authMiddleware := middleware.NewAuthGrpcMiddleware(authClient)
 
-	httpHandler := httpDelivery.NewHandler(catalogService)
+	catalogService := service.New(repo, authClient)
+
+	hub := ws.NewHub()
+
+	httpHandler := httpDelivery.NewHandler(
+		catalogService,
+		hub,
+		cfg.Catalog.WebSocket,
+		cfg.Catalog.HTTP.CORS.AllowedOrigins,
+	)
 
 	router := mux.NewRouter()
 
@@ -111,17 +121,19 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 		httpServer: httpServer,
 		grpcServer: grpcServer,
 		authConn:   authConn,
+		hub:        hub,
 	}, nil
 }
 
 func (a *App) Run(ctx context.Context) error {
 	var wg sync.WaitGroup
-	serverErrors := make(chan error, 2)
+	serverErrors := make(chan error, 3)
 
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
 		if err := a.httpServer.Run(); err != nil && err != http.ErrServerClosed {
+			a.logger.Errorf("HTTP server failed: %v", err)
 			serverErrors <- fmt.Errorf("http server error: %w", err)
 		}
 	}()
@@ -130,14 +142,22 @@ func (a *App) Run(ctx context.Context) error {
 	go func() {
 		defer wg.Done()
 		if err := a.grpcServer.Run(); err != nil {
+			a.logger.Errorf("gRPC server failed: %v", err)
 			serverErrors <- fmt.Errorf("grpc server error: %w", err)
 		}
+	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		a.hub.Run(ctx)
 	}()
 
 	a.logger.Infof("Catalog microservice is running...")
 
 	select {
 	case err := <-serverErrors:
+		a.logger.Errorf("Fatal error: %v", err)
 		return fmt.Errorf("server run failed: %w", err)
 	case <-ctx.Done():
 		a.logger.Infof("shutting down servers due to context cancellation...")

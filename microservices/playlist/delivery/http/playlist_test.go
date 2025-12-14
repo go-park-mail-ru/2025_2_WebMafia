@@ -20,8 +20,8 @@ import (
 
 	"spotify/internal/middleware"
 	"spotify/microservices/playlist/dto"
-	service_mock "spotify/microservices/playlist/mocks/service"
 	"spotify/microservices/playlist/service"
+	service_mock "spotify/mocks/playlist/service"
 	"spotify/pkg/jwtmanager"
 )
 

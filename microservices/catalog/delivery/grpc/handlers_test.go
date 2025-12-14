@@ -3,6 +3,7 @@ package grpc
 import (
 	"context"
 	"errors"
+	service_mock "spotify/mocks/catalog/service/grpc"
 	"testing"
 
 	"github.com/google/uuid"
@@ -12,7 +13,6 @@ import (
 	"google.golang.org/grpc/status"
 
 	"spotify/microservices/catalog/dto"
-	service_mock "spotify/microservices/catalog/mocks/grpc_service"
 	pb "spotify/proto/catalog"
 )
 

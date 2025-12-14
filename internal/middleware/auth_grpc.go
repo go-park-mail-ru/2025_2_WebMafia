@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"spotify/pkg/jwtmanager"
 	"spotify/pkg/response"
+	"strings"
 
 	pb "spotify/proto/auth"
 )
@@ -13,7 +14,7 @@ const (
 	csrfHeader      string = "X-CSRF-Token"
 )
 
-//go:generate mockgen -destination=../mocks/auth_client_mock.go -package=mocks spotify/proto/auth AuthServiceClient
+//go:generate mockgen -destination=../../mocks/proto/auth/auth_client_mock.go -package=mock_auth_client spotify/proto/auth AuthServiceClient
 type AuthGrpcMiddleware struct {
 	authClient pb.AuthServiceClient
 }
@@ -58,10 +59,25 @@ func (m *AuthGrpcMiddleware) Handle(next http.Handler) http.Handler {
 
 		ctx := ContextWithClaims(r.Context(), claims)
 
-		if r.Method != http.MethodGet && r.Method != http.MethodHead && r.Method != http.MethodOptions {
-			csrfToken := r.Header.Get(csrfHeader)
+		isWebSocket := strings.EqualFold(r.Header.Get("Upgrade"), "websocket")
+
+		isSafeMethod := r.Method == http.MethodGet || r.Method == http.MethodHead || r.Method == http.MethodOptions
+
+		if !isSafeMethod || isWebSocket {
+			var csrfToken string
+
+			if isWebSocket {
+				protocolHeader := r.Header.Get("Sec-WebSocket-Protocol")
+				parts := strings.Split(protocolHeader, ",")
+				if len(parts) > 0 {
+					csrfToken = strings.TrimSpace(parts[0])
+				}
+			} else {
+				csrfToken = r.Header.Get(csrfHeader)
+			}
+
 			if csrfToken == "" {
-				log.Warnf("[%s]: missing csrf header", op)
+				log.Warnf("[%s]: missing csrf token (ws_handshake=%t)", op, isWebSocket)
 				response.ForbiddenJSON(w)
 				return
 			}

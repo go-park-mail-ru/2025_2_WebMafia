@@ -91,6 +91,7 @@ playlist:
         tokenTTL: 15m
     ai:
       model: "GigaChat"
+      timeout: 20s
 
   logger:
     level: "info"

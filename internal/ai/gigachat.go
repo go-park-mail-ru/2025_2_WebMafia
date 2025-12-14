@@ -3,74 +3,87 @@ package ai
 import (
 	"bytes"
 	"context"
-	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"os"
 	"spotify/microservices/playlist/dto"
 	"strings"
 	"time"
 )
 
-const chatURL = "https://gigachat.devices.sberbank.ru/api/v1/chat/completions"
+const (
+	baseURL      = "https://gigachat.devices.sberbank.ru/api/v1"
+	chatEndpoint = "/chat/completions"
+	prompt       = `
+	Задача:
+	Сгенерируй название и описание плейлиста на основе этих треков.
+	Название: до 80 символов.
+	Описание: до 200 символов, атмосферное, без перечисления всех треков.
+	
+	Ответ верни строго в JSON без markdown и комментариев:
+	{"title":"...","description":"..."}`
+)
 
 type GigaChat struct {
-	http  *http.Client
-	tm    *tokenManager
-	model string
+	http      *http.Client
+	tm        *tokenManager
+	model     string
+	maxTracks int
 }
 
 type GigaChatConfig struct {
-	AuthKey string
-	Model   string
+	AuthKey   string
+	Model     string
+	Timeout   time.Duration
+	MaxTracks int
 }
 
 func NewGigaChat(cfg GigaChatConfig) *GigaChat {
-	client := &http.Client{Timeout: 20 * time.Second}
+	timeout := cfg.Timeout
+	if timeout == 0 {
+		timeout = 20 * time.Second
+	}
 
-	if os.Getenv("AI_INSECURE_SKIP_VERIFY") == "1" {
-		client.Transport = &http.Transport{
-			TLSClientConfig: &tls.Config{
-				InsecureSkipVerify: true,
-			},
-		}
+	maxTracks := cfg.MaxTracks
+	if maxTracks <= 0 {
+		maxTracks = 10
+	}
+
+	client := &http.Client{
+		Timeout: timeout,
 	}
 
 	return &GigaChat{
-		http:  client,
-		tm:    newTokenManager(cfg.AuthKey),
-		model: cfg.Model,
+		http:      client,
+		tm:        newTokenManager(cfg.AuthKey),
+		model:     cfg.Model,
+		maxTracks: maxTracks,
 	}
 }
 
 func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track) (string, string, error) {
-	max := 10
-	if len(tracks) < 10 {
+	max := g.maxTracks
+	if len(tracks) < max {
 		max = len(tracks)
 	}
 
 	var sb strings.Builder
-	sb.WriteString("Список треков:\\n")
+	sb.WriteString("Список треков:\n")
+
 	for i := 0; i < max; i++ {
 		t := tracks[i]
 		sb.WriteString(fmt.Sprintf("%d. %s — ", i+1, t.Title))
+
+		names := make([]string, len(t.Artists))
 		for j, a := range t.Artists {
-			if j > 0 {
-				sb.WriteString(", ")
-			}
-			sb.WriteString(a.Name)
+			names[j] = a.Name
 		}
+		sb.WriteString(strings.Join(names, ", "))
 		sb.WriteString("\n")
 	}
 
-	sb.WriteString("\nЗадача:\n")
-	sb.WriteString("Сгенерируй название и описание плейлиста на основе этих треков.\n")
-	sb.WriteString("Название: до 80 символов.\n")
-	sb.WriteString("Описание: до 200 символов, атмосферное, без перечисления всех треков.\n")
-
-	sb.WriteString("Ответ верни строго в JSON без markdown и комментариев:\n")
-	sb.WriteString("{\"title\":\"...\",\"description\":\"...\"}")
+	sb.WriteString("\n")
+	sb.WriteString(prompt)
 
 	token, err := g.tm.getToken(ctx)
 	if err != nil {
@@ -86,13 +99,14 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 
 	body, _ := json.Marshal(reqBody)
 
-	req, err := http.NewRequestWithContext(ctx, "POST", chatURL, bytes.NewBuffer(body))
+	url := baseURL + chatEndpoint
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, url, bytes.NewBuffer(body))
 	if err != nil {
 		return "", "", err
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", "Bearer "+token)
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", token))
 
 	resp, err := g.http.Do(req)
 	if err != nil {
@@ -107,9 +121,6 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 		case http.StatusTooManyRequests:
 			return "", "", ErrAIRateLimit
 		default:
-			if resp.StatusCode >= 500 {
-				return "", "", ErrAIUnavailable
-			}
 			return "", "", ErrAIUnavailable
 		}
 	}
@@ -137,7 +148,6 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 	}
 
 	var meta Meta
-
 	if err := json.Unmarshal([]byte(clean), &meta); err != nil {
 		return "", "", ErrAIUnavailable
 	}

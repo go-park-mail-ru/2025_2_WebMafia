@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"errors"
-	"spotify/microservices/playlist/ai"
+	"spotify/internal/ai"
 	ai_mock "spotify/microservices/playlist/mocks/ai"
 	"testing"
 	"time"

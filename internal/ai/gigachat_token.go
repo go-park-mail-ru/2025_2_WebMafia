@@ -1,22 +1,24 @@
 package ai
 
 import (
-	"bytes"
 	"context"
-	"crypto/tls"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
 	"net/http"
-	"os"
+	"net/url"
+	"strings"
 	"sync"
 	"time"
 
 	"github.com/google/uuid"
 )
 
-const tokenURL = "https://ngw.devices.sberbank.ru:9443/api/v2/oauth"
+const (
+	gigaChatAuthBaseURL = "https://ngw.devices.sberbank.ru:9443/api/v2"
+	gigaChatAuthRoute   = "/oauth"
+)
 
 type tokenManager struct {
 	authKey string
@@ -37,8 +39,17 @@ func (tm *tokenManager) getToken(ctx context.Context) (string, error) {
 		return tm.token, nil
 	}
 
-	reqBody := []byte("scope=GIGACHAT_API_PERS")
-	req, err := http.NewRequestWithContext(ctx, "POST", tokenURL, bytes.NewBuffer(reqBody))
+	values := url.Values{}
+	values.Set("scope", "GIGACHAT_API_PERS")
+
+	tokenURL := gigaChatAuthBaseURL + gigaChatAuthRoute
+
+	req, err := http.NewRequestWithContext(
+		ctx,
+		http.MethodPost,
+		tokenURL,
+		strings.NewReader(values.Encode()),
+	)
 	if err != nil {
 		return "", err
 	}
@@ -48,20 +59,7 @@ func (tm *tokenManager) getToken(ctx context.Context) (string, error) {
 	req.Header.Set("RqUID", uuid.NewString())
 	req.Header.Set("Authorization", "Basic "+tm.authKey)
 
-	client := http.DefaultClient
-	if os.Getenv("AI_INSECURE_SKIP_VERIFY") == "1" {
-		tr := &http.Transport{
-			TLSClientConfig: &tls.Config{
-				InsecureSkipVerify: true,
-			},
-		}
-		client = &http.Client{
-			Transport: tr,
-			Timeout:   20 * time.Second,
-		}
-	}
-
-	resp, err := client.Do(req)
+	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return "", err
 	}

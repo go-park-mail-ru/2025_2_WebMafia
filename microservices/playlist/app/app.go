@@ -5,10 +5,10 @@ import (
 	"database/sql"
 	"fmt"
 	"os"
+	"spotify/internal/ai"
 	"spotify/internal/metrics"
 	"spotify/internal/middleware"
 	"spotify/internal/server"
-	"spotify/microservices/playlist/ai"
 	"spotify/pkg/logger"
 	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
@@ -94,6 +94,7 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	aiClient := ai.NewGigaChat(ai.GigaChatConfig{
 		AuthKey: authKey,
 		Model:   cfg.Playlist.AI.Model,
+		Timeout: cfg.Playlist.AI.Timeout,
 	})
 	playlistService := service.New(repo, stor, catalogClient, aiClient)
 

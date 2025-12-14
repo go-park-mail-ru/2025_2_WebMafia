@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"spotify/internal/ai"
 	"spotify/internal/model"
-	"spotify/microservices/playlist/ai"
 	"spotify/microservices/playlist/dto"
 	"spotify/microservices/playlist/repository/postgres"
 	"strings"
@@ -496,6 +496,7 @@ func (s *Service) GeneratePlaylistMeta(ctx context.Context, playlistID uuid.UUID
 				Title:       fallbackTitle(tracks),
 				Description: fallbackDescription(tracks),
 				Source:      "fallback",
+				Warning:     "ai_rate_limit",
 			}, nil
 
 		case errors.Is(err, ai.ErrAIAuth):

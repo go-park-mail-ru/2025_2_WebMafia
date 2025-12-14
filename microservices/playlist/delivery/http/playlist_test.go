@@ -358,7 +358,7 @@ func TestHandler_GeneratePlaylistMeta(t *testing.T) {
 		rr := httptest.NewRecorder()
 		handler.GeneratePlaylistMeta(rr, req)
 
-		assert.Equal(t, http.StatusInternalServerError, rr.Code)
+		assert.Equal(t, http.StatusBadRequest, rr.Code)
 	})
 
 	t.Run("service error", func(t *testing.T) {
@@ -418,7 +418,7 @@ func TestHandler_ConfirmPlaylistMeta(t *testing.T) {
 		rr := httptest.NewRecorder()
 		handler.ConfirmPlaylistMeta(rr, req)
 
-		assert.Equal(t, http.StatusInternalServerError, rr.Code)
+		assert.Equal(t, http.StatusBadRequest, rr.Code)
 	})
 
 	t.Run("invalid body", func(t *testing.T) {

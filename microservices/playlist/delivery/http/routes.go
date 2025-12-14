@@ -26,6 +26,6 @@ func (h *Handler) RegisterRoutes(public, protected, csrfProtected *mux.Router) {
 	csrfProtected.HandleFunc("/favorite/albums/{id}", h.RemoveAlbumFromFavorite).Methods(http.MethodDelete, http.MethodOptions)
 	csrfProtected.HandleFunc("/favorite/artists/{id}", h.AddArtistToFavorite).Methods(http.MethodPost, http.MethodOptions)
 	csrfProtected.HandleFunc("/favorite/artists/{id}", h.RemoveArtistFromFavorite).Methods(http.MethodDelete, http.MethodOptions)
-	csrfProtected.HandleFunc("/playlist/{id}/generate-meta", h.GeneratePlaylistMeta).Methods(http.MethodPost, http.MethodOptions)
-	csrfProtected.HandleFunc("/playlist/{id}/confirm-meta", h.ConfirmPlaylistMeta).Methods(http.MethodPost, http.MethodOptions)
+	csrfProtected.HandleFunc("/playlist/{id}/generate", h.GeneratePlaylistMeta).Methods(http.MethodPost, http.MethodOptions)
+	csrfProtected.HandleFunc("/playlist/{id}/confirm", h.ConfirmPlaylistMeta).Methods(http.MethodPost, http.MethodOptions)
 }

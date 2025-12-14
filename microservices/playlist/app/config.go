@@ -6,6 +6,7 @@ import (
 	"spotify/internal/app"
 	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
+	"time"
 
 	"github.com/spf13/viper"
 )
@@ -35,8 +36,9 @@ type BucketsConfig struct {
 }
 
 type PlaylistAI struct {
-	AuthKey string `mapstructure:"auth_key"`
-	Model   string `mapstructure:"model"`
+	AuthKey string        `mapstructure:"auth_key"`
+	Model   string        `mapstructure:"model"`
+	Timeout time.Duration `mapstructure:"timeout"`
 }
 
 func LoadConfig(path string) (*Config, error) {

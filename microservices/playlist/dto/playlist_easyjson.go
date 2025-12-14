@@ -638,6 +638,12 @@ func easyjson3b1bf41aDecodeSpotifyMicroservicesPlaylistDto5(in *jlexer.Lexer, ou
 			} else {
 				out.Source = string(in.String())
 			}
+		case "warning":
+			if in.IsNull() {
+				in.Skip()
+			} else {
+				out.Warning = string(in.String())
+			}
 		default:
 			in.SkipRecursive()
 		}
@@ -666,6 +672,11 @@ func easyjson3b1bf41aEncodeSpotifyMicroservicesPlaylistDto5(out *jwriter.Writer,
 		const prefix string = ",\"source\":"
 		out.RawString(prefix)
 		out.String(string(in.Source))
+	}
+	if in.Warning != "" {
+		const prefix string = ",\"warning\":"
+		out.RawString(prefix)
+		out.String(string(in.Warning))
 	}
 	out.RawByte('}')
 }

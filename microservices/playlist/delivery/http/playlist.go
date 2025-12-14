@@ -658,14 +658,14 @@ func (h *Handler) GeneratePlaylistMeta(w http.ResponseWriter, r *http.Request) {
 	rawID := mux.Vars(r)["id"]
 	if rawID == "" {
 		log.Errorf("[%s]: missing playlist id", op)
-		response.InternalErrorJSON(w)
+		response.BadRequestJSON(w)
 		return
 	}
 
 	id, err := uuid.Parse(rawID)
 	if err != nil {
 		log.Errorf("[%s]: invalid playlist id: %v", op, err)
-		response.InternalErrorJSON(w)
+		response.BadRequestJSON(w)
 		return
 	}
 
@@ -687,14 +687,14 @@ func (h *Handler) ConfirmPlaylistMeta(w http.ResponseWriter, r *http.Request) {
 	rawID := mux.Vars(r)["id"]
 	if rawID == "" {
 		log.Errorf("[%s]: missing playlist id", op)
-		response.InternalErrorJSON(w)
+		response.BadRequestJSON(w)
 		return
 	}
 
 	playlistID, err := uuid.Parse(rawID)
 	if err != nil {
 		log.Errorf("[%s]: invalid playlist id: %v", op, err)
-		response.InternalErrorJSON(w)
+		response.BadRequestJSON(w)
 		return
 	}
 

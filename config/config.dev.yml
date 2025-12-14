@@ -108,6 +108,7 @@ playlist:
 
   ai:
     model: "GigaChat"
+    timeout: 20s
 
 db:
   host: "db"

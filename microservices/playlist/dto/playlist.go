@@ -165,6 +165,7 @@ type GeneratedMeta struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
 	Source      string `json:"source"`
+	Warning     string `json:"warning,omitempty"`
 }
 
 //easyjson:json

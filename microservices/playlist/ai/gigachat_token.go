@@ -3,11 +3,13 @@ package ai
 import (
 	"bytes"
 	"context"
+	"crypto/tls"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"sync"
 	"time"
 
@@ -46,13 +48,26 @@ func (tm *tokenManager) getToken(ctx context.Context) (string, error) {
 	req.Header.Set("RqUID", uuid.NewString())
 	req.Header.Set("Authorization", "Basic "+tm.authKey)
 
-	resp, err := http.DefaultClient.Do(req)
+	client := http.DefaultClient
+	if os.Getenv("AI_INSECURE_SKIP_VERIFY") == "1" {
+		tr := &http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true,
+			},
+		}
+		client = &http.Client{
+			Transport: tr,
+			Timeout:   20 * time.Second,
+		}
+	}
+
+	resp, err := client.Do(req)
 	if err != nil {
 		return "", err
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != 200 {
+	if resp.StatusCode != http.StatusOK {
 		body, _ := io.ReadAll(resp.Body)
 		return "", fmt.Errorf("token request failed: %s", string(body))
 	}

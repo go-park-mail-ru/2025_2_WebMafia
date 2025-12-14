@@ -3,9 +3,11 @@ package ai
 import (
 	"bytes"
 	"context"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 	"spotify/microservices/playlist/dto"
 	"strings"
 	"time"
@@ -25,8 +27,18 @@ type GigaChatConfig struct {
 }
 
 func NewGigaChat(cfg GigaChatConfig) *GigaChat {
+	client := &http.Client{Timeout: 20 * time.Second}
+
+	if os.Getenv("AI_INSECURE_SKIP_VERIFY") == "1" {
+		client.Transport = &http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true,
+			},
+		}
+	}
+
 	return &GigaChat{
-		http:  &http.Client{Timeout: 20 * time.Second},
+		http:  client,
 		tm:    newTokenManager(cfg.AuthKey),
 		model: cfg.Model,
 	}

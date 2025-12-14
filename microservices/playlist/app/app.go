@@ -92,9 +92,11 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	}
 
 	aiClient := ai.NewGigaChat(ai.GigaChatConfig{
-		AuthKey: authKey,
-		Model:   cfg.Playlist.AI.Model,
-		Timeout: cfg.Playlist.AI.Timeout,
+		AuthKey:            authKey,
+		Model:              cfg.Playlist.AI.Model,
+		Timeout:            cfg.Playlist.AI.Timeout,
+		MaxTracks:          cfg.Playlist.AI.MaxTracks,
+		InsecureSkipVerify: cfg.Playlist.AI.InsecureSkipVerify,
 	})
 	playlistService := service.New(repo, stor, catalogClient, aiClient)
 

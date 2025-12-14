@@ -109,6 +109,8 @@ playlist:
   ai:
     model: "GigaChat"
     timeout: 20s
+    maxTracks: 10
+    insecureSkipVerify: true
 
 db:
   host: "db"

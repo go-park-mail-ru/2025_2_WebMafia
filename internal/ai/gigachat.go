@@ -3,6 +3,7 @@ package ai
 import (
 	"bytes"
 	"context"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -32,10 +33,11 @@ type GigaChat struct {
 }
 
 type GigaChatConfig struct {
-	AuthKey   string
-	Model     string
-	Timeout   time.Duration
-	MaxTracks int
+	AuthKey            string
+	Model              string
+	Timeout            time.Duration
+	MaxTracks          int
+	InsecureSkipVerify bool
 }
 
 func NewGigaChat(cfg GigaChatConfig) *GigaChat {
@@ -49,13 +51,24 @@ func NewGigaChat(cfg GigaChatConfig) *GigaChat {
 		maxTracks = 10
 	}
 
-	client := &http.Client{
-		Timeout: timeout,
+	transport := http.DefaultTransport.(*http.Transport).Clone()
+
+	if cfg.InsecureSkipVerify {
+		transport.TLSClientConfig = &tls.Config{
+			InsecureSkipVerify: true,
+		}
 	}
+
+	client := &http.Client{
+		Timeout:   timeout,
+		Transport: transport,
+	}
+
+	tm := newTokenManager(cfg.AuthKey, client)
 
 	return &GigaChat{
 		http:      client,
-		tm:        newTokenManager(cfg.AuthKey),
+		tm:        tm,
 		model:     cfg.Model,
 		maxTracks: maxTracks,
 	}

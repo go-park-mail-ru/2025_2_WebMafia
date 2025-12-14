@@ -22,13 +22,17 @@ const (
 
 type tokenManager struct {
 	authKey string
+	client  *http.Client
 	token   string
 	exp     time.Time
 	mu      sync.Mutex
 }
 
-func newTokenManager(authKey string) *tokenManager {
-	return &tokenManager{authKey: authKey}
+func newTokenManager(authKey string, client *http.Client) *tokenManager {
+	return &tokenManager{
+		authKey: authKey,
+		client:  client,
+	}
 }
 
 func (tm *tokenManager) getToken(ctx context.Context) (string, error) {
@@ -59,7 +63,7 @@ func (tm *tokenManager) getToken(ctx context.Context) (string, error) {
 	req.Header.Set("RqUID", uuid.NewString())
 	req.Header.Set("Authorization", "Basic "+tm.authKey)
 
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := tm.client.Do(req)
 	if err != nil {
 		return "", err
 	}
@@ -78,9 +82,7 @@ func (tm *tokenManager) getToken(ctx context.Context) (string, error) {
 	if tr.AccessToken == "" {
 		return "", errors.New("empty access token")
 	}
-
 	tm.token = tr.AccessToken
 	tm.exp = time.UnixMilli(tr.ExpiresAt)
-
 	return tm.token, nil
 }

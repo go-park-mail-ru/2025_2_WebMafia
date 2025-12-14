@@ -36,9 +36,11 @@ type BucketsConfig struct {
 }
 
 type PlaylistAI struct {
-	AuthKey string        `mapstructure:"auth_key"`
-	Model   string        `mapstructure:"model"`
-	Timeout time.Duration `mapstructure:"timeout"`
+	AuthKey            string        `mapstructure:"auth_key"`
+	Model              string        `mapstructure:"model"`
+	Timeout            time.Duration `mapstructure:"timeout"`
+	MaxTracks          int           `mapstructure:"maxTracks"`
+	InsecureSkipVerify bool          `mapstructure:"insecureSkipVerify"`
 }
 
 func LoadConfig(path string) (*Config, error) {

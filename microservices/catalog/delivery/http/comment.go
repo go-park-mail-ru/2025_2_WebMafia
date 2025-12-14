@@ -17,7 +17,7 @@ import (
 )
 
 const (
-	maxTextLength      = 1000
+	maxTextLength      = 200
 	saveCommentTimeout = 5 * time.Second
 )
 

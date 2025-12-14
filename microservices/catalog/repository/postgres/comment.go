@@ -68,5 +68,9 @@ func (r *Repository) GetCommentsByTrackID(ctx context.Context, trackID uuid.UUID
 		return nil, fmt.Errorf("[%s]: rows iteration failed: %w", op, mapErrors(err))
 	}
 
+	if len(comments) == 0 {
+		return nil, fmt.Errorf("[%s]: no comments found: %w", op, ErrNotFound)
+	}
+
 	return comments, nil
 }

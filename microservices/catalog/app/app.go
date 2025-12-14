@@ -133,6 +133,7 @@ func (a *App) Run(ctx context.Context) error {
 	go func() {
 		defer wg.Done()
 		if err := a.httpServer.Run(); err != nil && err != http.ErrServerClosed {
+			a.logger.Errorf("HTTP server failed: %v", err)
 			serverErrors <- fmt.Errorf("http server error: %w", err)
 		}
 	}()
@@ -141,6 +142,7 @@ func (a *App) Run(ctx context.Context) error {
 	go func() {
 		defer wg.Done()
 		if err := a.grpcServer.Run(); err != nil {
+			a.logger.Errorf("gRPC server failed: %v", err)
 			serverErrors <- fmt.Errorf("grpc server error: %w", err)
 		}
 	}()
@@ -155,6 +157,7 @@ func (a *App) Run(ctx context.Context) error {
 
 	select {
 	case err := <-serverErrors:
+		a.logger.Errorf("Fatal error: %v", err)
 		return fmt.Errorf("server run failed: %w", err)
 	case <-ctx.Done():
 		a.logger.Infof("shutting down servers due to context cancellation...")

@@ -102,7 +102,14 @@ func (h *Handler) ServeWS(w http.ResponseWriter, r *http.Request) {
 
 	h.hub.Register(client)
 
-	go client.WritePump()
+	go func() {
+		defer func() {
+			if r := recover(); r != nil {
+				log.Errorf("WritePump panic: %v", r)
+			}
+		}()
+		client.WritePump()
+	}()
 	client.ReadPump()
 }
 

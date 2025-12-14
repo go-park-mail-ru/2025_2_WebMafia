@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"io"
+	"spotify/internal/ai"
 	"spotify/internal/model"
 	"spotify/microservices/playlist/dto"
 	"spotify/microservices/playlist/repository/postgres"
@@ -38,9 +39,9 @@ type IStorage interface {
 	DeleteAvatar(ctx context.Context, objectName string) error
 }
 
-//go:generate mockgen -source=ai.go -destination=../mocks/ai/ai_mock.go -package=ai_mock
+//go:generate mockgen -destination=../mocks/ai/ai_mock.go -package=ai_mock spotify/microservices/playlist/service IAIGenerator
 type IAIGenerator interface {
-	GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track) (title string, description string, err error)
+	GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track) ([]ai.Meta, error)
 }
 
 //go:generate mockgen -destination=../mocks/catalog/catalog_mock.go -package=catalog_mock spotify/proto/catalog CatalogServiceClient

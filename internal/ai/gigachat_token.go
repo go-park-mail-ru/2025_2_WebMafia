@@ -46,7 +46,10 @@ func (tm *tokenManager) getToken(ctx context.Context) (string, error) {
 	values := url.Values{}
 	values.Set("scope", "GIGACHAT_API_PERS")
 
-	tokenURL := gigaChatAuthBaseURL + gigaChatAuthRoute
+	tokenURL, err := url.JoinPath(gigaChatAuthBaseURL, gigaChatAuthRoute)
+	if err != nil {
+		return "", err
+	}
 
 	req, err := http.NewRequestWithContext(
 		ctx,

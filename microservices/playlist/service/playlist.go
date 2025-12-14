@@ -459,7 +459,10 @@ func (s *Service) GeneratePlaylistMeta(ctx context.Context, playlistID uuid.UUID
 		}, nil
 	}
 
-	resp, err := s.catalog.GetTracksByIDs(ctx, &pbCatalog.GetTracksByIDsRequest{Ids: trackIDs})
+	resp, err := s.catalog.GetTracksByIDs(
+		ctx,
+		&pbCatalog.GetTracksByIDsRequest{Ids: trackIDs},
+	)
 	if err != nil {
 		return nil, fmt.Errorf("%s: load tracks: %w", op, err)
 	}
@@ -472,6 +475,7 @@ func (s *Service) GeneratePlaylistMeta(ctx context.Context, playlistID uuid.UUID
 			DurationS: int(t.DurationS),
 			FileURL:   t.FileUrl,
 		}
+
 		if t.Album != nil {
 			track.Album = dto.Album{
 				ID:        t.Album.Id,
@@ -479,16 +483,18 @@ func (s *Service) GeneratePlaylistMeta(ctx context.Context, playlistID uuid.UUID
 				AvatarURL: t.Album.AvatarUrl,
 			}
 		}
+
 		for _, a := range t.Artists {
 			track.Artists = append(track.Artists, dto.Artist{
 				ID:   a.Id,
 				Name: a.Name,
 			})
 		}
+
 		tracks = append(tracks, track)
 	}
 
-	title, desc, err := s.ai.GeneratePlaylistMeta(ctx, tracks)
+	metas, err := s.ai.GeneratePlaylistMeta(ctx, tracks)
 	if err != nil {
 		switch {
 		case errors.Is(err, ai.ErrAIRateLimit):
@@ -506,10 +512,11 @@ func (s *Service) GeneratePlaylistMeta(ctx context.Context, playlistID uuid.UUID
 			return nil, fmt.Errorf("%s: ai error: %w", op, err)
 		}
 	}
+	meta := metas[0]
 
 	return &dto.GeneratedMeta{
-		Title:       title,
-		Description: desc,
+		Title:       meta.Title,
+		Description: meta.Description,
 		Source:      "ai",
 	}, nil
 }

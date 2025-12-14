@@ -2,20 +2,18 @@ package ai
 
 import (
 	"context"
-	"github.com/stretchr/testify/require"
 	"io"
 	"net/http"
 	"spotify/microservices/playlist/dto"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestTokenManager_GetToken_Success(t *testing.T) {
-	oldClient := http.DefaultClient
-	defer func() { http.DefaultClient = oldClient }()
-
-	http.DefaultClient = &http.Client{
+	client := &http.Client{
 		Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
 			body := io.NopCloser(strings.NewReader(`{
 				"access_token": "token123",
@@ -30,7 +28,7 @@ func TestTokenManager_GetToken_Success(t *testing.T) {
 		}),
 	}
 
-	tm := newTokenManager("key")
+	tm := newTokenManager("key", client)
 
 	token, err := tm.getToken(context.Background())
 	require.NoError(t, err)
@@ -63,17 +61,19 @@ func TestGigaChat_GeneratePlaylistMeta_Success(t *testing.T) {
 			token: "token",
 			exp:   time.Now().Add(time.Hour),
 		},
-		model: "test",
+		model:     "test",
+		maxTracks: 10,
 	}
 
-	title, desc, err := g.GeneratePlaylistMeta(
+	metas, err := g.GeneratePlaylistMeta(
 		context.Background(),
 		[]dto.Track{{Title: "Song"}},
 	)
 
 	require.NoError(t, err)
-	require.Equal(t, "My playlist", title)
-	require.Equal(t, "Nice vibes", desc)
+	require.Len(t, metas, 1)
+	require.Equal(t, "My playlist", metas[0].Title)
+	require.Equal(t, "Nice vibes", metas[0].Description)
 }
 
 type roundTripFunc func(*http.Request) (*http.Response, error)

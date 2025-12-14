@@ -654,7 +654,12 @@ func TestService_GeneratePlaylistMeta_AI_Success(t *testing.T) {
 
 	aiMock.EXPECT().
 		GeneratePlaylistMeta(gomock.Any(), gomock.Any()).
-		Return("AI title", "AI desc", nil)
+		Return([]ai.Meta{
+			{
+				Title:       "AI title",
+				Description: "AI desc",
+			},
+		}, nil)
 
 	meta, err := svc.GeneratePlaylistMeta(context.Background(), pid)
 
@@ -706,7 +711,7 @@ func TestService_GeneratePlaylistMeta_Fallback(t *testing.T) {
 
 	aiMock.EXPECT().
 		GeneratePlaylistMeta(gomock.Any(), gomock.Any()).
-		Return("", "", ai.ErrAIRateLimit)
+		Return(nil, ai.ErrAIRateLimit)
 
 	meta, err := svc.GeneratePlaylistMeta(context.Background(), pid)
 
@@ -841,7 +846,7 @@ func TestService_GeneratePlaylistMeta_AIAuthError(t *testing.T) {
 
 	aiMock.EXPECT().
 		GeneratePlaylistMeta(gomock.Any(), gomock.Any()).
-		Return("", "", ai.ErrAIAuth)
+		Return(nil, ai.ErrAIAuth)
 
 	_, err := svc.GeneratePlaylistMeta(context.Background(), pid)
 

@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 	"spotify/microservices/playlist/dto"
 	"strings"
 	"time"
@@ -38,6 +39,11 @@ type GigaChatConfig struct {
 	Timeout            time.Duration
 	MaxTracks          int
 	InsecureSkipVerify bool
+}
+
+type Meta struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
 }
 
 func NewGigaChat(cfg GigaChatConfig) *GigaChat {
@@ -74,7 +80,7 @@ func NewGigaChat(cfg GigaChatConfig) *GigaChat {
 	}
 }
 
-func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track) (string, string, error) {
+func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track) ([]Meta, error) {
 	max := g.maxTracks
 	if len(tracks) < max {
 		max = len(tracks)
@@ -100,7 +106,7 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 
 	token, err := g.tm.getToken(ctx)
 	if err != nil {
-		return "", "", ErrAIAuth
+		return nil, ErrAIAuth
 	}
 
 	reqBody := ChatRequest{
@@ -110,12 +116,24 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 		},
 	}
 
-	body, _ := json.Marshal(reqBody)
-
-	url := baseURL + chatEndpoint
-	req, err := http.NewRequestWithContext(ctx, http.MethodPost, url, bytes.NewBuffer(body))
+	body, err := json.Marshal(reqBody)
 	if err != nil {
-		return "", "", err
+		return nil, err
+	}
+
+	chatURL, err := url.JoinPath(baseURL, chatEndpoint)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequestWithContext(
+		ctx,
+		http.MethodPost,
+		chatURL,
+		bytes.NewBuffer(body),
+	)
+	if err != nil {
+		return nil, err
 	}
 
 	req.Header.Set("Content-Type", "application/json")
@@ -123,47 +141,50 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 
 	resp, err := g.http.Do(req)
 	if err != nil {
-		return "", "", ErrAIUnavailable
+		return nil, ErrAIUnavailable
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
 		switch resp.StatusCode {
 		case http.StatusUnauthorized, http.StatusForbidden:
-			return "", "", ErrAIAuth
+			return nil, ErrAIAuth
 		case http.StatusTooManyRequests:
-			return "", "", ErrAIRateLimit
+			return nil, ErrAIRateLimit
 		default:
-			return "", "", ErrAIUnavailable
+			return nil, ErrAIUnavailable
 		}
 	}
 
 	var out ChatResponse
 	if err := json.NewDecoder(resp.Body).Decode(&out); err != nil {
-		return "", "", err
+		return nil, err
 	}
 
 	if len(out.Choices) == 0 {
-		return "", "", fmt.Errorf("empty response")
+		return nil, ErrAIUnavailable
 	}
 
-	raw := out.Choices[0].Message.Content
+	metas := make([]Meta, 0, len(out.Choices))
 
-	clean := strings.TrimSpace(raw)
-	clean = strings.TrimPrefix(clean, "```json")
-	clean = strings.TrimPrefix(clean, "```")
-	clean = strings.TrimSuffix(clean, "```")
-	clean = strings.TrimSpace(clean)
+	for _, choice := range out.Choices {
+		raw := strings.TrimSpace(choice.Message.Content)
 
-	type Meta struct {
-		Title       string `json:"title"`
-		Description string `json:"description"`
+		clean := strings.TrimPrefix(raw, "```json")
+		clean = strings.TrimPrefix(clean, "```")
+		clean = strings.TrimSuffix(clean, "```")
+		clean = strings.TrimSpace(clean)
+
+		var meta Meta
+		if err := json.Unmarshal([]byte(clean), &meta); err != nil {
+			continue
+		}
+
+		metas = append(metas, meta)
 	}
 
-	var meta Meta
-	if err := json.Unmarshal([]byte(clean), &meta); err != nil {
-		return "", "", ErrAIUnavailable
+	if len(metas) == 0 {
+		return nil, ErrAIUnavailable
 	}
-
-	return meta.Title, meta.Description, nil
+	return metas, nil
 }

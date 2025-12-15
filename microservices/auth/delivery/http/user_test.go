@@ -21,8 +21,8 @@ import (
 
 	"spotify/internal/middleware"
 	"spotify/microservices/auth/dto"
-	service_mock "spotify/microservices/auth/mocks/service"
 	"spotify/microservices/auth/service"
+	service_mock "spotify/mocks/auth/service"
 	"spotify/pkg/jwtmanager"
 )
 

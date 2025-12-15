@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/textproto"
+	"net/url"
 	"strings"
 	"testing"
 
@@ -452,4 +453,140 @@ func TestHandler_ConfirmPlaylistMeta(t *testing.T) {
 
 		assert.Equal(t, http.StatusInternalServerError, rr.Code)
 	})
+}
+
+func Test_parsePagination(t *testing.T) {
+	t.Run("empty query", func(t *testing.T) {
+		limit, offset := parsePagination(url.Values{})
+		assert.Equal(t, uint64(defaultLimit), limit)
+		assert.Equal(t, uint64(defaultOffset), offset)
+	})
+
+	t.Run("invalid values", func(t *testing.T) {
+		q := url.Values{
+			"limit":  []string{"bad"},
+			"offset": []string{"bad"},
+		}
+		limit, offset := parsePagination(q)
+		assert.Equal(t, uint64(defaultLimit), limit)
+		assert.Equal(t, uint64(defaultOffset), offset)
+	})
+
+	t.Run("limit too large", func(t *testing.T) {
+		q := url.Values{
+			"limit": []string{"999999"},
+		}
+		limit, _ := parsePagination(q)
+		assert.Equal(t, uint64(maxLimit), limit)
+	})
+}
+
+func TestHandler_GetMyPlaylists(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	mockSvc := service_mock.NewMockIService(ctrl)
+	handler := NewHandler(mockSvc, nil)
+
+	uid := uuid.New()
+
+	mockSvc.EXPECT().
+		GetPlaylistsByUser(gomock.Any(), gomock.Any()).
+		Return([]dto.Playlist{
+			{ID: uuid.New().String()},
+		}, nil)
+
+	mockSvc.EXPECT().
+		GetPlaylistWithTracks(gomock.Any(), gomock.Any()).
+		Return(&dto.Playlist{}, nil)
+
+	req := httptest.NewRequest("GET", "/playlists/my", nil)
+	ctx := middleware.ContextWithClaims(req.Context(), &jwtmanager.Claims{
+		UserID: uid.String(),
+	})
+
+	rr := httptest.NewRecorder()
+	handler.GetMyPlaylists(rr, req.WithContext(ctx))
+
+	assert.Equal(t, http.StatusOK, rr.Code)
+}
+
+func TestHandler_GetMyPlaylists_NoUser(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	mockSvc := service_mock.NewMockIService(ctrl)
+	handler := NewHandler(mockSvc, nil)
+
+	req := httptest.NewRequest("GET", "/playlists/my", nil)
+	rr := httptest.NewRecorder()
+
+	handler.GetMyPlaylists(rr, req)
+
+	assert.Equal(t, http.StatusInternalServerError, rr.Code)
+}
+
+func TestHandler_GetMyPlaylists_ServiceError(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	mockSvc := service_mock.NewMockIService(ctrl)
+	handler := NewHandler(mockSvc, nil)
+
+	uid := uuid.New()
+
+	mockSvc.EXPECT().
+		GetPlaylistsByUser(gomock.Any(), gomock.Any()).
+		Return(nil, errors.New("err"))
+
+	req := httptest.NewRequest("GET", "/playlists/my", nil)
+	ctx := middleware.ContextWithClaims(req.Context(), &jwtmanager.Claims{
+		UserID: uid.String(),
+	})
+
+	rr := httptest.NewRecorder()
+	handler.GetMyPlaylists(rr, req.WithContext(ctx))
+
+	assert.Equal(t, http.StatusInternalServerError, rr.Code)
+}
+
+func TestValidatePlaylistAvatar(t *testing.T) {
+	h := &Handler{
+		allowedAvatarTypes: []string{"image/png"},
+	}
+
+	t.Run("empty file", func(t *testing.T) {
+		err := h.validatePlaylistAvatar("image/png", 0)
+		assert.Error(t, err)
+	})
+
+	t.Run("too large", func(t *testing.T) {
+		err := h.validatePlaylistAvatar("image/png", maxPlaylistAvatarSize+1)
+		assert.Error(t, err)
+	})
+
+	t.Run("unsupported type", func(t *testing.T) {
+		err := h.validatePlaylistAvatar("image/jpeg", 10)
+		assert.Error(t, err)
+	})
+
+	t.Run("ok", func(t *testing.T) {
+		err := h.validatePlaylistAvatar("image/png", 10)
+		assert.NoError(t, err)
+	})
+}
+
+func TestHandler_AddArtistToFavorite_NoUser(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	handler := NewHandler(service_mock.NewMockIService(ctrl), nil)
+
+	req := httptest.NewRequest("POST", "/artists/a1/favorite", nil)
+	req = mux.SetURLVars(req, map[string]string{"id": "a1"})
+
+	rr := httptest.NewRecorder()
+	handler.AddArtistToFavorite(rr, req)
+
+	assert.Equal(t, http.StatusInternalServerError, rr.Code)
 }

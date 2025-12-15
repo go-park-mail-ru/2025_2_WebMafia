@@ -852,3 +852,20 @@ func TestService_GeneratePlaylistMeta_AIAuthError(t *testing.T) {
 
 	assert.Error(t, err)
 }
+
+func TestFallbackTitle(t *testing.T) {
+	assert.Equal(t, "Мой плейлист", fallbackTitle(nil))
+	assert.Equal(t, "Song", fallbackTitle([]dto.Track{{Title: "Song"}}))
+	assert.Contains(t, fallbackTitle([]dto.Track{
+		{Title: "Song1"},
+		{Title: "Song2"},
+	}), "Song1")
+}
+
+func TestFallbackDescription(t *testing.T) {
+	assert.Equal(t, "", fallbackDescription(nil))
+	assert.Contains(t,
+		fallbackDescription([]dto.Track{{Title: "Song"}}),
+		"Song",
+	)
+}

@@ -184,7 +184,7 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 	}
 
 	if len(metas) == 0 {
-		return nil, ErrAIUnavailable
+		return nil, ErrAINoChoices
 	}
 	return metas, nil
 }

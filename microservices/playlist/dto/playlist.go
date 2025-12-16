@@ -155,3 +155,17 @@ type RemoveAlbumFromFavoriteRequest struct {
 	UserID  uuid.UUID `json:"-"`
 	AlbumID string    `json:"album_id"`
 }
+
+//easyjson:json
+type GeneratedMeta struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Source      string `json:"source"`
+	Warning     string `json:"warning,omitempty"`
+}
+
+//easyjson:json
+type ConfirmGeneratedMetaRequest struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+}

@@ -18,3 +18,9 @@ type Album struct {
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 }
+
+type FavoriteAlbum struct {
+	UserID    uuid.UUID
+	AlbumID   uuid.UUID
+	CreatedAt time.Time
+}

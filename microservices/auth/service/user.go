@@ -56,6 +56,29 @@ func (s *Service) Login(ctx context.Context, req dto.LoginRequest) (*dto.LoginRe
 	}, nil
 }
 
+func (s *Service) GetUsersByIDs(ctx context.Context, ids []string) ([]dto.GetProfileResponse, error) {
+	const op = "service.GetUsersByIDs"
+
+	if len(ids) == 0 {
+		return []dto.GetProfileResponse{}, nil
+	}
+	users, err := s.repo.GetUsersByIDs(ctx, ids)
+	if err != nil {
+		return nil, fmt.Errorf("%s: repo error: %w", op, err)
+	}
+
+	out := make([]dto.GetProfileResponse, 0, len(users))
+	for _, u := range users {
+		out = append(out, dto.GetProfileResponse{
+			ID:        u.ID.String(),
+			Login:     u.Login,
+			Email:     u.Email,
+			AvatarURL: u.AvatarURL,
+		})
+	}
+	return out, nil
+}
+
 // Avatar Upload
 func (s *Service) UploadAvatar(ctx context.Context, req dto.UploadAvatarRequest) (*dto.UploadAvatarResponse, error) {
 	const op = "service.UpdateAvatar"

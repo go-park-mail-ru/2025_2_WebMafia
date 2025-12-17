@@ -1,0 +1,139 @@
+auth:
+  http:
+    port: "8080"
+    readTimeout: 5s
+    writeTimeout: 10s
+    idleTimeout: 60s
+    shutdownTimeout: 15s
+    cors:
+      allowedOrigins:
+        - "http://localhost:8090"
+        - "http://217.16.17.173:8090"
+        - "https://wave-music.ru"
+        - "https://www.wave-music.ru"
+      allowedMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
+      allowedHeaders:
+        ["Content-Type", "Authorization", "X-Requested-With", "X-CSRF-Token"]
+      allowCredentials: true
+    allowedAvatarTypes:
+      - "image/png"
+      - "image/jpeg"
+      - "image/webp"
+      - "image/jpg"
+      - "image/gif"
+      - "image/bmp"
+      - "image/svg"
+      - "image/avif"
+      - "image/heic"
+      - "image/heif"
+      - "image/ico"
+    auth:
+      jwt:
+        secretKey: "dev-jwt-secret"
+        accessTokenTTL: 720h
+      csrf:
+        secretKey: "dev-csrf-secret"
+        tokenTTL: 15m
+  grpc:
+    port: "9001"
+  logger:
+    level: "debug"
+    mode: "dev"
+
+catalog:
+  http:
+    port: "8081"
+    readTimeout: 5s
+    writeTimeout: 10s
+    idleTimeout: 60s
+    shutdownTimeout: 15s
+    cors:
+      allowedOrigins:
+        - "http://localhost:8090"
+        - "http://217.16.17.173:8090"
+        - "https://wave-music.ru"
+        - "https://www.wave-music.ru"
+      allowedMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
+      allowedHeaders:
+        ["Content-Type", "Authorization", "X-Requested-With", "X-CSRF-Token"]
+      allowCredentials: true
+  grpc:
+    port: "9000"
+    clients:
+      auth: "auth:9001"
+  logger:
+    level: "debug"
+    mode: "dev"
+  websocket:
+    writeWait: 10s
+    pongWait: 60s
+    pingPeriod: 54s
+    maxMessageSize: 2048
+    readBufferSize: 1024
+    writeBufferSize: 1024
+    sendBufferSize: 256
+
+playlist:
+  http:
+    port: "8082"
+    readTimeout: 5s
+    writeTimeout: 10s
+    idleTimeout: 60s
+    shutdownTimeout: 15s
+    cors:
+      allowedOrigins:
+        - "http://localhost:8090"
+        - "http://217.16.17.173:8090"
+        - "https://wave-music.ru"
+        - "https://www.wave-music.ru"
+      allowedMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
+      allowedHeaders:
+        ["Content-Type", "Authorization", "X-Requested-With", "X-CSRF-Token"]
+      allowCredentials: true
+  logger:
+    level: "debug"
+    mode: "dev"
+
+  allowed_avatar_types:
+    - "image/png"
+    - "image/jpeg"
+    - "image/webp"
+    - "image/jpg"
+    - "image/gif"
+    - "image/bmp"
+    - "image/svg"
+    - "image/avif"
+    - "image/heic"
+    - "image/heif"
+    - "image/ico"
+
+  buckets:
+    avatars: "avatars"
+
+  clients:
+    catalog: "catalog:9000"
+    auth: "auth:9001"
+
+  ai:
+    model: "GigaChat"
+    timeout: 20s
+    maxTracks: 10
+    insecureSkipVerify: true
+
+db:
+  host: "db"
+  port: 5432
+  user: "myuser"
+  password: "mypassword"
+  dbName: "mydb"
+  sslmode: "disable"
+  maxOpenConns: 25
+  maxIdleConns: 25
+  connMaxLifetime: 5m
+
+minio:
+  endpoint: "minio:9000"
+  accessKey: "miniouser"
+  secretKey: "miniopassword"
+  bucket: "avatars"
+  useSSL: false

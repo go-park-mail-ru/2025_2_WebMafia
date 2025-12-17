@@ -5,9 +5,7 @@ import (
 	"errors"
 )
 
-var (
-	ErrNotFound = errors.New("entity not found in postgres repository")
-)
+var ErrNotFound = errors.New("entity not found in postgres repository")
 
 func mapErrors(err error) error {
 	switch {

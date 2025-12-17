@@ -4,6 +4,9 @@ import (
 	"context"
 	"spotify/internal/middleware"
 	pb "spotify/proto/auth"
+
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 func (h *Handler) ValidateToken(ctx context.Context, req *pb.ValidateTokenRequest) (*pb.ValidateTokenResponse, error) {
@@ -34,4 +37,28 @@ func (h *Handler) CheckCSRF(ctx context.Context, req *pb.CheckCSRFRequest) (*pb.
 	}
 
 	return &pb.CheckCSRFResponse{IsValid: isValid}, nil
+}
+
+func (h *Handler) GetUsers(ctx context.Context, req *pb.GetUsersRequest) (*pb.GetUsersResponse, error) {
+	const op = "grpc.GetUsers"
+	log := middleware.LoggerFromContext(ctx)
+
+	if len(req.UserIds) == 0 {
+		return &pb.GetUsersResponse{Users: []*pb.UserInfo{}}, nil
+	}
+
+	profiles, err := h.userService.GetUsersByIDs(ctx, req.UserIds)
+	if err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		return nil, status.Errorf(codes.Internal, "failed to fetch users: %v", err)
+	}
+	out := make([]*pb.UserInfo, 0, len(profiles))
+	for _, p := range profiles {
+		out = append(out, &pb.UserInfo{
+			UserId:    p.ID,
+			Login:     p.Login,
+			AvatarUrl: p.AvatarURL,
+		})
+	}
+	return &pb.GetUsersResponse{Users: out}, nil
 }

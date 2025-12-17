@@ -3,14 +3,17 @@ package service
 import (
 	"context"
 	"io"
+	"spotify/internal/ai"
 	"spotify/internal/model"
+	"spotify/microservices/playlist/dto"
 	"spotify/microservices/playlist/repository/postgres"
+
 	pbCatalog "spotify/proto/catalog"
 
 	"github.com/google/uuid"
 )
 
-//go:generate mockgen -destination=../mocks/repository/repository_mock.go -package=repository_mock spotify/microservices/playlist/service IRepository
+//go:generate mockgen -destination=../../../mocks/playlist/repository/repository_mock.go -package=mock_playlist_repo spotify/microservices/playlist/service IRepository
 type IRepository interface {
 	CreatePlaylist(ctx context.Context, playlist model.Playlist, userID uuid.UUID) error
 	GetByID(ctx context.Context, id uuid.UUID) (*model.Playlist, error)
@@ -22,21 +25,33 @@ type IRepository interface {
 	UpdatePlaylistAvatar(ctx context.Context, id uuid.UUID, avatar string) error
 	GetTracksByPlaylist(ctx context.Context, playlistID uuid.UUID) ([]string, error)
 	RemoveTrackFromPlaylist(ctx context.Context, playlistID uuid.UUID, trackID string) error
+	AddAlbumToFavorite(ctx context.Context, userID uuid.UUID, albumID string) error
+	RemoveAlbumFromFavorite(ctx context.Context, userID uuid.UUID, albumID string) error
+	GetFavoriteAlbumIDs(ctx context.Context, userID uuid.UUID) ([]model.FavoriteAlbum, error)
+	AddArtistToFavorite(ctx context.Context, userID uuid.UUID, artistID string) error
+	RemoveArtistFromFavorite(ctx context.Context, userID uuid.UUID, artistID string) error
+	GetFavoriteArtistIDs(ctx context.Context, userID uuid.UUID) ([]model.FavoriteArtist, error)
 }
 
-//go:generate mockgen -destination=../mocks/storage/storage_mock.go -package=storage_mock spotify/microservices/playlist/service IStorage
+//go:generate mockgen -destination=../../../mocks/pkg/storage/storage_mock.go -package=mock_storage spotify/microservices/playlist/service IStorage
 type IStorage interface {
 	UploadAvatar(ctx context.Context, file io.Reader, size int64, contentType string) (string, error)
 	DeleteAvatar(ctx context.Context, objectName string) error
 }
 
-//go:generate mockgen -destination=../mocks/catalog/catalog_mock.go -package=catalog_mock spotify/proto/catalog CatalogServiceClient
+//go:generate mockgen -destination=../../../mocks/playlist/ai/ai_mock.go -package=mock_ai spotify/microservices/playlist/service IAIGenerator
+type IAIGenerator interface {
+	GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track) ([]ai.Meta, error)
+}
+
+//go:generate mockgen -destination=../../../mocks/proto/catalog/catalog_client_mock.go -package=mock_catalog_client spotify/proto/catalog CatalogServiceClient
 type Service struct {
 	repo    IRepository
 	storage IStorage
 	catalog pbCatalog.CatalogServiceClient
+	ai      IAIGenerator
 }
 
-func New(repo IRepository, storage IStorage, catalog pbCatalog.CatalogServiceClient) *Service {
-	return &Service{repo: repo, storage: storage, catalog: catalog}
+func New(repo IRepository, storage IStorage, catalog pbCatalog.CatalogServiceClient, ai IAIGenerator) *Service {
+	return &Service{repo: repo, storage: storage, catalog: catalog, ai: ai}
 }

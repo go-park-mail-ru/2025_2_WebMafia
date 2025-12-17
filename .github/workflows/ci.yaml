@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+      - deploy
+  pull_request:
+    branches:
+      - main
+      - dev
+      - deploy
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.24
+
+      - name: Run linter
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: latest
+          args: -c .golangci.yaml
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.24
+
+      - name: Run tests
+        run: make test
+
+      - name: Check coverage threshold
+        run: |
+          TOTAL_COVERAGE=$(go tool cover -func=coverage.out | grep total | grep -oE '[0-9]+\.[0-9]+')
+          echo "Total coverage: $TOTAL_COVERAGE%"
+
+          if (( $(echo "$TOTAL_COVERAGE < 60.0" | bc -l) )); then
+            echo "Coverage is below 60%!"
+            exit 1
+          else
+            echo "Coverage passed!"
+          fi

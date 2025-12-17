@@ -13,6 +13,8 @@ func handleServiceError(w http.ResponseWriter, err error) {
 		response.BadRequestJSON(w)
 	case errors.Is(err, service.ErrConflict):
 		response.ConflictJSON(w)
+	case errors.Is(err, service.ErrNotFound):
+		response.NotFoundJSON(w)
 	default:
 		response.InternalErrorJSON(w)
 	}

@@ -1,11 +1,13 @@
 package middleware
 
 import (
+	"bufio"
 	"context"
+	"errors"
+	"net"
 	"net/http"
-	"time"
-
 	"spotify/pkg/logger"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -23,7 +25,6 @@ type responseWriter struct {
 func RequestLoggerMiddleware(log logger.Logger) func(next http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-
 			requestID := uuid.New().String()
 			contextLogger := log.With("request_id", requestID)
 
@@ -51,6 +52,14 @@ func RequestLoggerMiddleware(log logger.Logger) func(next http.Handler) http.Han
 func (rw *responseWriter) WriteHeader(statusCode int) {
 	rw.statusCode = statusCode
 	rw.ResponseWriter.WriteHeader(statusCode)
+}
+
+func (rw *responseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
+	hijacker, ok := rw.ResponseWriter.(http.Hijacker)
+	if !ok {
+		return nil, nil, errors.New("response writer does not support hijacking")
+	}
+	return hijacker.Hijack()
 }
 
 func LoggerFromContext(ctx context.Context) logger.Logger {

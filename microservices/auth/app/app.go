@@ -14,8 +14,9 @@ import (
 	"spotify/pkg/logger"
 	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
-	pb "spotify/proto/auth"
 	"sync"
+
+	pb "spotify/proto/auth"
 
 	grpcDelivery "spotify/microservices/auth/delivery/grpc"
 	httpDelivery "spotify/microservices/auth/delivery/http"
@@ -99,7 +100,7 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 
 	httpServer := server.NewHTTPServer(&cfg.Auth.HTTP, router, appLogger)
 
-	grpcHandler := grpcDelivery.NewHandler(jwtManager, csrfManager)
+	grpcHandler := grpcDelivery.NewHandler(jwtManager, csrfManager, userSvc)
 	grpcServer := server.NewGRPCServer(&cfg.Auth.GRPC, appLogger, func(s *grpc.Server) {
 		pb.RegisterAuthServiceServer(s, grpcHandler)
 	})

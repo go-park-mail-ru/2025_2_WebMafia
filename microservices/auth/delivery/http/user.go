@@ -1,7 +1,8 @@
 package http
 
+//go:generate easyjson $GOFILE
+
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"spotify/internal/middleware"
@@ -9,6 +10,8 @@ import (
 	"spotify/pkg/response"
 	"strings"
 	"time"
+
+	easyjson "github.com/mailru/easyjson"
 )
 
 const (
@@ -16,6 +19,7 @@ const (
 	maxAvatarSize      = 5 << 20
 )
 
+//easyjson:json
 type registerRequest struct {
 	Login    string `json:"login"`
 	Email    string `json:"email"`
@@ -35,9 +39,12 @@ func (i *registerRequest) validate() error {
 	return nil
 }
 
+//easyjson:json
 type registerResponse struct {
 	ID string `json:"id"`
 }
+
+//easyjson:json
 type loginRequest struct {
 	Login    string `json:"login"`
 	Password string `json:"password"`
@@ -53,17 +60,14 @@ func (i *loginRequest) validate() error {
 	return nil
 }
 
+//easyjson:json
 type loginResponse struct {
 	ID string `json:"id"`
 }
 
+//easyjson:json
 type logoutResponse struct {
 	Status string `json:"status"`
-}
-
-type uploadAvatarRequest struct {
-	ContentType string
-	Size        int64
 }
 
 func (h *Handler) validateAvatar(contentType string, size int64) error {
@@ -81,13 +85,17 @@ func (h *Handler) validateAvatar(contentType string, size int64) error {
 	return fmt.Errorf("unsupported content type: %s", contentType)
 }
 
+//easyjson:json
 type uploadAvatarResponse struct {
 	URL string `json:"avatar_url"`
 }
+
+//easyjson:json
 type deleteAvatarResponse struct {
 	Status string `json:"status"`
 }
 
+//easyjson:json
 type updateProfileRequest struct {
 	Login    string `json:"login,omitempty"`
 	Email    string `json:"email,omitempty"`
@@ -115,7 +123,7 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 
 	var req registerRequest
 
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
 		log.Errorf("[%s]: Invalid request body: %v", op, err)
 		response.BadRequestJSON(w)
 		return
@@ -132,7 +140,6 @@ func (h *Handler) Register(w http.ResponseWriter, r *http.Request) {
 		Email:    req.Email,
 		Password: req.Password,
 	})
-
 	if err != nil {
 		log.Errorf("[%s]: Service error: %v", op, err)
 		handleServiceError(w, err)
@@ -166,7 +173,7 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 
 	var req loginRequest
 
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
 		log.Errorf("[%s]: Invalid request body: %v", op, err)
 		response.BadRequestJSON(w)
 		return
@@ -182,7 +189,6 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 		Login:    req.Login,
 		Password: req.Password,
 	})
-
 	if err != nil {
 		log.Errorf("[%s]: Service error: %v", op, err)
 		handleServiceError(w, err)
@@ -220,7 +226,7 @@ func (h *Handler) Logout(w http.ResponseWriter, r *http.Request) {
 		Path:     "/",
 	})
 
-	log.Infof("[%s]: User logout successfull", op)
+	log.Infof("[%s]: User logout successful", op)
 	response.JSON(w, http.StatusOK, logoutResponse{Status: "ok"})
 }
 
@@ -303,7 +309,7 @@ func (h *Handler) UpdateProfile(w http.ResponseWriter, r *http.Request) {
 	log := middleware.LoggerFromContext(r.Context())
 
 	var req updateProfileRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
 		log.Errorf("[%s]: Invalid request body: %v", op, err)
 		response.BadRequestJSON(w)
 		return

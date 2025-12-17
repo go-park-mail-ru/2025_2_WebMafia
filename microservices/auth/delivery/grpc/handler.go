@@ -1,20 +1,29 @@
 package grpc
 
 import (
+	"context"
+	"spotify/microservices/auth/dto"
 	"spotify/pkg/csrfmanager"
 	"spotify/pkg/jwtmanager"
 	pb "spotify/proto/auth"
 )
 
+//go:generate mockgen -destination=../../../../mocks/auth/service/user_service_mock.go -package=mock_auth_service spotify/microservices/auth/delivery/grpc IUserService
+type IUserService interface {
+	GetUsersByIDs(ctx context.Context, ids []string) ([]dto.GetProfileResponse, error)
+}
+
 type Handler struct {
 	pb.UnimplementedAuthServiceServer
 	jwtManager  *jwtmanager.Manager
 	csrfManager *csrfmanager.Manager
+	userService IUserService
 }
 
-func NewHandler(jwtManager *jwtmanager.Manager, csrfManager *csrfmanager.Manager) *Handler {
+func NewHandler(jwtManager *jwtmanager.Manager, csrfManager *csrfmanager.Manager, us IUserService) *Handler {
 	return &Handler{
 		jwtManager:  jwtManager,
 		csrfManager: csrfManager,
+		userService: us,
 	}
 }

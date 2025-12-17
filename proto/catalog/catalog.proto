@@ -8,6 +8,8 @@ service CatalogService {
   rpc GetArtistByID(GetArtistByIDRequest) returns (Artist) {}
   rpc GetAllArtists(GetAllArtistsRequest) returns (GetAllArtistsResponse) {}
   rpc SearchArtists(SearchArtistsRequest) returns (SearchArtistsResponse) {}
+  rpc GetArtistsByIDs(GetArtistsByIDsRequest) returns (GetArtistsByIDsResponse) {}
+
   rpc GetTracksByIDs(GetTracksByIDsRequest) returns (GetTracksByIDsResponse);
   
   rpc GetAlbumByID(GetAlbumByIDRequest) returns (Album) {}

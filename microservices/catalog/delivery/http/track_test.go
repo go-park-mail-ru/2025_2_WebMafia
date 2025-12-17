@@ -4,6 +4,7 @@ import (
 	"errors"
 	"net/http"
 	"net/http/httptest"
+	"spotify/pkg/ws"
 	"testing"
 
 	"github.com/google/uuid"
@@ -12,8 +13,8 @@ import (
 	"go.uber.org/mock/gomock"
 
 	"spotify/microservices/catalog/dto"
-	service_mock "spotify/microservices/catalog/mocks/service"
 	"spotify/microservices/catalog/service"
+	service_mock "spotify/mocks/catalog/service/http"
 )
 
 func TestHandler_GetTrackByID(t *testing.T) {
@@ -21,7 +22,7 @@ func TestHandler_GetTrackByID(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, ws.Config{}, nil)
 
 	id := uuid.New()
 	dtoTrack := &dto.Track{ID: id.String(), Title: "Track"}
@@ -75,7 +76,7 @@ func TestHandler_GetAllTracks(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, ws.Config{}, nil)
 
 	t.Run("success", func(t *testing.T) {
 		mockSvc.EXPECT().GetAllTracks(gomock.Any(), uint64(100), uint64(0)).Return([]dto.Track{}, nil)
@@ -99,7 +100,7 @@ func TestHandler_GetTracksByArtist(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, ws.Config{}, nil)
 	id := uuid.New()
 
 	t.Run("success", func(t *testing.T) {
@@ -141,7 +142,7 @@ func TestHandler_GetTracksByAlbum(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, ws.Config{}, nil)
 	id := uuid.New()
 
 	t.Run("success", func(t *testing.T) {
@@ -183,7 +184,7 @@ func TestHandler_GetTracksByGenre(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, ws.Config{}, nil)
 	id := uuid.New()
 
 	t.Run("success", func(t *testing.T) {
@@ -225,7 +226,7 @@ func TestHandler_RegisterPlay(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, ws.Config{}, nil)
 	id := uuid.New()
 
 	t.Run("success", func(t *testing.T) {
@@ -268,7 +269,7 @@ func TestHandler_SearchTracks(t *testing.T) {
 	defer ctrl.Finish()
 
 	mockSvc := service_mock.NewMockIService(ctrl)
-	handler := NewHandler(mockSvc)
+	handler := NewHandler(mockSvc, nil, ws.Config{}, nil)
 
 	t.Run("success", func(t *testing.T) {
 		mockSvc.EXPECT().SearchTracks(gomock.Any(), "query", uint64(50)).

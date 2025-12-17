@@ -2,9 +2,8 @@ package middleware
 
 import (
 	"net/http"
-	"time"
-
 	"spotify/internal/metrics"
+	"time"
 
 	"github.com/gorilla/mux"
 )

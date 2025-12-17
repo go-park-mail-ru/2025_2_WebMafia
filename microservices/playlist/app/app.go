@@ -4,26 +4,27 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-
-	"google.golang.org/grpc/credentials/insecure"
-
-	"spotify/pkg/csrfmanager"
-	"spotify/pkg/jwtmanager"
-
+	"os"
+	"spotify/internal/ai"
 	"spotify/internal/metrics"
 	"spotify/internal/middleware"
 	"spotify/internal/server"
+	"spotify/pkg/logger"
+	"spotify/pkg/minio"
+	"spotify/pkg/postgres"
+
+	pbAuth "spotify/proto/auth"
+
+	"google.golang.org/grpc/credentials/insecure"
 
 	httpDelivery "spotify/microservices/playlist/delivery/http"
 	repository "spotify/microservices/playlist/repository/postgres"
 	storageRepo "spotify/microservices/playlist/repository/storage"
 	service "spotify/microservices/playlist/service"
-	"spotify/pkg/logger"
-	"spotify/pkg/minio"
-	"spotify/pkg/postgres"
+
+	pbCatalog "spotify/proto/catalog"
 
 	"github.com/gorilla/mux"
-	pbCatalog "spotify/proto/catalog"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -74,7 +75,7 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 		appLogger.Warnf("grpc client metrics already registered: %v", err)
 	}
 
-	catalogConn, err := grpc.Dial(
+	catalogConn, err := grpc.NewClient(
 		cfg.Playlist.Clients.Catalog,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 		grpc.WithUnaryInterceptor(grpcprometheus.UnaryClientInterceptor),
@@ -85,7 +86,19 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 
 	catalogClient := pbCatalog.NewCatalogServiceClient(catalogConn)
 
-	playlistService := service.New(repo, stor, catalogClient)
+	authKey := cfg.Playlist.AI.AuthKey
+	if authKey == "" {
+		authKey = os.Getenv("AI_AUTH_KEY")
+	}
+
+	aiClient := ai.NewGigaChat(ai.GigaChatConfig{
+		AuthKey:            authKey,
+		Model:              cfg.Playlist.AI.Model,
+		Timeout:            cfg.Playlist.AI.Timeout,
+		MaxTracks:          cfg.Playlist.AI.MaxTracks,
+		InsecureSkipVerify: cfg.Playlist.AI.InsecureSkipVerify,
+	})
+	playlistService := service.New(repo, stor, catalogClient, aiClient)
 
 	mtr := metrics.New("playlist")
 
@@ -103,23 +116,21 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 	api.Use(middleware.MetricsMiddleware(mtr))
 	api.Use(middleware.CORS(cfg.Playlist.HTTP.CORS))
 
-	jwtManager := jwtmanager.NewManager(
-		cfg.Playlist.HTTP.Auth.JWT.SecretKey,
-		cfg.Playlist.HTTP.Auth.JWT.AccessTokenTTL,
+	authConn, err := grpc.NewClient(
+		cfg.Playlist.Clients.Auth,
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
-	csrfManager := csrfmanager.NewManager(
-		cfg.Playlist.HTTP.Auth.CSRF.SecretKey,
-		cfg.Playlist.HTTP.Auth.CSRF.TokenTTL,
-	)
-
-	authMiddleware := middleware.NewAuthMiddleware(jwtManager)
-	csrfMiddleware := middleware.NewCSRFMiddleware(csrfManager)
+	if err != nil {
+		return nil, fmt.Errorf("failed to connect to auth: %w", err)
+	}
+	authClient := pbAuth.NewAuthServiceClient(authConn)
+	authMiddleware := middleware.NewAuthGrpcMiddleware(authClient)
 
 	protected := api.PathPrefix("").Subrouter()
-	protected.Use(authMiddleware.AuthMiddleware)
+	protected.Use(authMiddleware.Handle)
 
 	csrfProtected := protected.PathPrefix("").Subrouter()
-	csrfProtected.Use(csrfMiddleware.CSRFMiddleware)
+	csrfProtected.Use(authMiddleware.Handle)
 	public := api.PathPrefix("").Subrouter()
 
 	httpHandler.RegisterRoutes(public, protected, csrfProtected)

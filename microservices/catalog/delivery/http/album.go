@@ -15,8 +15,7 @@ func (h *Handler) GetAlbumByID(w http.ResponseWriter, r *http.Request) {
 	const op = "handler.GetAlbumByID"
 	log := middleware.LoggerFromContext(r.Context())
 
-	vars := mux.Vars(r)
-	idStr, ok := vars["id"]
+	idStr, ok := mux.Vars(r)["id"]
 	if !ok {
 		log.Errorf("[%s]: id is missing in URL vars", op)
 		response.BadRequestJSON(w)

@@ -1,15 +1,16 @@
 package http
 
 import (
-	"encoding/json"
 	"fmt"
-	"github.com/google/uuid"
 	"net/http"
 	"net/url"
 	"spotify/internal/middleware"
 	"spotify/microservices/playlist/dto"
 	"spotify/pkg/response"
 	"strconv"
+
+	"github.com/google/uuid"
+	"github.com/mailru/easyjson"
 
 	"github.com/gorilla/mux"
 )
@@ -45,7 +46,7 @@ func (h *Handler) CreatePlaylist(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req dto.CreatePlaylistRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
 		log.Errorf("[%s]: invalid request body: %v", op, err)
 		response.BadRequestJSON(w)
 		return
@@ -110,7 +111,7 @@ func (h *Handler) UpdatePlaylist(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req dto.UpdatePlaylistRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
 		log.Errorf("[%s]: invalid request body: %v", op, err)
 		response.BadRequestJSON(w)
 		return
@@ -176,7 +177,7 @@ func (h *Handler) AddTrackToFavorite(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req dto.AddTrackToFavoriteRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
 		log.Errorf("[%s]: invalid request body: %v", op, err)
 		response.BadRequestJSON(w)
 		return
@@ -336,7 +337,7 @@ func (h *Handler) GetMyPlaylists(w http.ResponseWriter, r *http.Request) {
 	rawUserID, ok := middleware.GetUserID(r.Context())
 	if !ok || rawUserID == "" {
 		log.Errorf("[%s]: missing userId", op)
-		response.UnauthorizedJSON(w)
+		response.InternalErrorJSON(w)
 		return
 	}
 
@@ -385,7 +386,7 @@ func (h *Handler) AddTrackToPlaylist(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var req dto.AddTrackToPlaylistRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
 		log.Errorf("[%s]: invalid body: %v", op, err)
 		response.BadRequestJSON(w)
 		return
@@ -414,7 +415,7 @@ func (h *Handler) RemoveTrackFromPlaylist(w http.ResponseWriter, r *http.Request
 	}
 
 	var req dto.RemoveTrackFromPlaylistRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
 		log.Errorf("[%s]: invalid body: %v", op, err)
 		response.BadRequestJSON(w)
 		return
@@ -448,4 +449,266 @@ func parsePagination(query url.Values) (uint64, uint64) {
 	}
 
 	return limit, offset
+}
+
+func (h *Handler) AddAlbumToFavorite(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.AddAlbumToFavorite"
+	log := middleware.LoggerFromContext(r.Context())
+
+	rawUserID, ok := middleware.GetUserID(r.Context())
+	if !ok {
+		log.Errorf("[%s]: missing userId", op)
+		response.InternalErrorJSON(w)
+		return
+	}
+
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.InternalErrorJSON(w)
+		return
+	}
+
+	albumID := mux.Vars(r)["id"]
+	if albumID == "" {
+		response.BadRequestJSON(w)
+		return
+	}
+
+	req := dto.AddAlbumToFavoriteRequest{
+		UserID:  userID,
+		AlbumID: albumID,
+	}
+
+	if err := h.service.AddAlbumToFavorite(r.Context(), req); err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *Handler) RemoveAlbumFromFavorite(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.RemoveAlbumFromFavorite"
+	log := middleware.LoggerFromContext(r.Context())
+
+	rawUserID, ok := middleware.GetUserID(r.Context())
+	if !ok {
+		log.Errorf("[%s]: missing userId", op)
+		response.InternalErrorJSON(w)
+		return
+	}
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.InternalErrorJSON(w)
+		return
+	}
+
+	albumID := mux.Vars(r)["id"]
+	if albumID == "" {
+		response.BadRequestJSON(w)
+		return
+	}
+
+	req := dto.RemoveAlbumFromFavoriteRequest{
+		UserID:  userID,
+		AlbumID: albumID,
+	}
+
+	if err := h.service.RemoveAlbumFromFavorite(r.Context(), req); err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *Handler) GetFavoriteAlbums(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.GetFavoriteAlbums"
+	log := middleware.LoggerFromContext(r.Context())
+
+	rawUserID, ok := middleware.GetUserID(r.Context())
+	if !ok {
+		log.Errorf("[%s]: missing userId", op)
+		response.InternalErrorJSON(w)
+		return
+	}
+
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.InternalErrorJSON(w)
+		return
+	}
+
+	albums, err := h.service.GetFavoriteAlbums(r.Context(), userID)
+	if err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+	response.JSON(w, http.StatusOK, albums)
+}
+
+func (h *Handler) AddArtistToFavorite(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.AddArtistToFavorite"
+	log := middleware.LoggerFromContext(r.Context())
+
+	rawUserID, ok := middleware.GetUserID(r.Context())
+	if !ok {
+		log.Errorf("[%s]: missing userId", op)
+		response.InternalErrorJSON(w)
+		return
+	}
+
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.InternalErrorJSON(w)
+		return
+	}
+	artistID := mux.Vars(r)["id"]
+	if artistID == "" {
+		response.BadRequestJSON(w)
+		return
+	}
+
+	req := dto.AddArtistToFavoriteRequest{
+		UserID:   userID,
+		ArtistID: artistID,
+	}
+
+	if err := h.service.AddArtistToFavorite(r.Context(), req); err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *Handler) RemoveArtistFromFavorite(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.RemoveArtistFromFavorite"
+	log := middleware.LoggerFromContext(r.Context())
+
+	rawUserID, ok := middleware.GetUserID(r.Context())
+	if !ok {
+		log.Errorf("[%s]: missing userId", op)
+		response.InternalErrorJSON(w)
+		return
+	}
+
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.InternalErrorJSON(w)
+		return
+	}
+
+	artistID := mux.Vars(r)["id"]
+	if artistID == "" {
+		response.BadRequestJSON(w)
+		return
+	}
+
+	req := dto.RemoveArtistFromFavoriteRequest{
+		UserID:   userID,
+		ArtistID: artistID,
+	}
+	if err := h.service.RemoveArtistFromFavorite(r.Context(), req); err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *Handler) GetFavoriteArtists(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.GetFavoriteArtists"
+	log := middleware.LoggerFromContext(r.Context())
+
+	rawUserID, ok := middleware.GetUserID(r.Context())
+	if !ok {
+		log.Errorf("[%s]: missing userId", op)
+		response.InternalErrorJSON(w)
+		return
+	}
+
+	userID, err := uuid.Parse(rawUserID)
+	if err != nil {
+		log.Errorf("[%s]: invalid userId: %v", op, err)
+		response.InternalErrorJSON(w)
+		return
+	}
+
+	artists, err := h.service.GetFavoriteArtists(r.Context(), userID)
+	if err != nil {
+		log.Errorf("[%s]: service: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, artists)
+}
+
+func (h *Handler) GeneratePlaylistMeta(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.GeneratePlaylistMeta"
+	log := middleware.LoggerFromContext(r.Context())
+
+	rawID := mux.Vars(r)["id"]
+	if rawID == "" {
+		log.Errorf("[%s]: missing playlist id", op)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	id, err := uuid.Parse(rawID)
+	if err != nil {
+		log.Errorf("[%s]: invalid playlist id: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	meta, err := h.service.GeneratePlaylistMeta(r.Context(), id)
+	if err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		response.InternalErrorJSON(w)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, meta)
+}
+
+func (h *Handler) ConfirmPlaylistMeta(w http.ResponseWriter, r *http.Request) {
+	const op = "handler.ConfirmPlaylistMeta"
+	log := middleware.LoggerFromContext(r.Context())
+	defer r.Body.Close()
+
+	rawID := mux.Vars(r)["id"]
+	if rawID == "" {
+		log.Errorf("[%s]: missing playlist id", op)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	playlistID, err := uuid.Parse(rawID)
+	if err != nil {
+		log.Errorf("[%s]: invalid playlist id: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	var req dto.ConfirmGeneratedMetaRequest
+	if err := easyjson.UnmarshalFromReader(r.Body, &req); err != nil {
+		log.Errorf("[%s]: invalid body: %v", op, err)
+		response.BadRequestJSON(w)
+		return
+	}
+
+	if err := h.service.ConfirmPlaylistMeta(r.Context(), playlistID, req.Title, req.Description); err != nil {
+		log.Errorf("[%s]: service error: %v", op, err)
+		h.handleError(w, err)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
 }

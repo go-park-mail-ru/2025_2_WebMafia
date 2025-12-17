@@ -12,8 +12,8 @@ import (
 	"github.com/stretchr/testify/require"
 	"go.uber.org/mock/gomock"
 
-	repository_mock "spotify/microservices/auth/mocks/repository"
-	storage_mock "spotify/microservices/auth/mocks/storage"
+	repository_mock "spotify/mocks/auth/repository"
+	storage_mock "spotify/mocks/pkg/storage"
 
 	"spotify/internal/model"
 	"spotify/microservices/auth/dto"
@@ -255,5 +255,74 @@ func TestUserService_UpdateProfile(t *testing.T) {
 		_, err := userService.UpdateProfile(context.Background(), updateRequest)
 		assert.Error(t, err)
 		assert.Contains(t, err.Error(), expectedErr.Error())
+	})
+}
+
+func TestUserService_GetUsersBatch(t *testing.T) {
+	ctrl := gomock.NewController(t)
+	defer ctrl.Finish()
+
+	mockRepo := repository_mock.NewMockIRepository(ctrl)
+	mockStorage := storage_mock.NewMockIStorage(ctrl)
+	userService := NewUserService(mockRepo, mockStorage)
+
+	t.Run("empty input -> empty output", func(t *testing.T) {
+		resp, err := userService.GetUsersByIDs(context.Background(), []string{})
+		require.NoError(t, err)
+		assert.Empty(t, resp)
+	})
+
+	t.Run("repo returns users successfully", func(t *testing.T) {
+		ids := []string{"u1", "u2"}
+
+		usersFromDB := []model.User{
+			{
+				ID:        uuid.MustParse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+				Login:     "alice",
+				Email:     "a@example.com",
+				AvatarURL: "a.png",
+			},
+			{
+				ID:        uuid.MustParse("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
+				Login:     "bob",
+				Email:     "b@example.com",
+				AvatarURL: "b.png",
+			},
+		}
+
+		mockRepo.EXPECT().
+			GetUsersByIDs(gomock.Any(), ids).
+			Return(usersFromDB, nil).
+			Times(1)
+
+		resp, err := userService.GetUsersByIDs(context.Background(), ids)
+
+		require.NoError(t, err)
+		require.Len(t, resp, 2)
+
+		assert.Equal(t, "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", resp[0].ID)
+		assert.Equal(t, "alice", resp[0].Login)
+		assert.Equal(t, "a@example.com", resp[0].Email)
+		assert.Equal(t, "a.png", resp[0].AvatarURL)
+
+		assert.Equal(t, "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb", resp[1].ID)
+		assert.Equal(t, "bob", resp[1].Login)
+		assert.Equal(t, "b@example.com", resp[1].Email)
+		assert.Equal(t, "b.png", resp[1].AvatarURL)
+	})
+
+	t.Run("repo returns error", func(t *testing.T) {
+		ids := []string{"u1"}
+
+		mockRepo.EXPECT().
+			GetUsersByIDs(gomock.Any(), ids).
+			Return(nil, errors.New("db error")).
+			Times(1)
+
+		resp, err := userService.GetUsersByIDs(context.Background(), ids)
+
+		require.Nil(t, resp)
+		require.Error(t, err)
+		assert.Contains(t, err.Error(), "repo error")
 	})
 }

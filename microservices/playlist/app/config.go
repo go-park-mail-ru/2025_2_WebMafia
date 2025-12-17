@@ -6,6 +6,7 @@ import (
 	"spotify/internal/app"
 	"spotify/pkg/minio"
 	"spotify/pkg/postgres"
+	"time"
 
 	"github.com/spf13/viper"
 )
@@ -27,10 +28,19 @@ type PlaylistConfig struct {
 	AllowedAvatarTypes []string         `mapstructure:"allowed_avatar_types"`
 	Buckets            BucketsConfig    `mapstructure:"buckets"`
 	Clients            ClientsConfig    `mapstructure:"clients"`
+	AI                 PlaylistAI       `mapstructure:"ai"`
 }
 
 type BucketsConfig struct {
 	Avatars string `mapstructure:"avatars"`
+}
+
+type PlaylistAI struct {
+	AuthKey            string        `mapstructure:"auth_key"`
+	Model              string        `mapstructure:"model"`
+	Timeout            time.Duration `mapstructure:"timeout"`
+	MaxTracks          int           `mapstructure:"maxTracks"`
+	InsecureSkipVerify bool          `mapstructure:"insecureSkipVerify"`
 }
 
 func LoadConfig(path string) (*Config, error) {
@@ -52,9 +62,14 @@ func LoadConfig(path string) (*Config, error) {
 	}
 
 	var cfg Config
+
 	if err := v.Unmarshal(&cfg); err != nil {
 		return nil, fmt.Errorf("cannot unmarshal playlist config: %w", err)
 	}
+
+	fmt.Println("CONFIG USED =", v.ConfigFileUsed())
+	fmt.Println("PLAYLIST AUTH KEY =", cfg.Playlist.AI.AuthKey)
+	fmt.Println("PLAYLIST AUTH LEN =", len(cfg.Playlist.AI.AuthKey))
 
 	return &cfg, nil
 }

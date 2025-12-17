@@ -90,14 +90,6 @@ playlist:
       allowedHeaders:
         ["Content-Type", "Authorization", "X-Requested-With", "X-CSRF-Token"]
       allowCredentials: true
-    auth:
-      jwt:
-        secretKey: "dev-jwt-secret"
-        accessTokenTTL: 720h
-      csrf:
-        secretKey: "dev-csrf-secret"
-        tokenTTL: 15m
-
   logger:
     level: "debug"
     mode: "dev"
@@ -121,6 +113,12 @@ playlist:
   clients:
     catalog: "catalog:9000"
     auth: "auth:9001"
+
+  ai:
+    model: "GigaChat"
+    timeout: 20s
+    maxTracks: 10
+    insecureSkipVerify: true
 
 db:
   host: "db"

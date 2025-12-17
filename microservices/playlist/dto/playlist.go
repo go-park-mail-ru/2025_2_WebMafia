@@ -111,8 +111,6 @@ type RemoveTrackFromPlaylistRequest struct {
 	TrackID    string    `json:"track_id"`
 }
 
-// любимые артисты
-
 //easyjson:json
 type FavoriteArtist struct {
 	ID        string    `json:"id"`
@@ -130,8 +128,6 @@ type RemoveArtistFromFavoriteRequest struct {
 	UserID   uuid.UUID `json:"-"`
 	ArtistID string    `json:"artist_id"`
 }
-
-// любимые альбомы
 
 //easyjson:json
 type FavoriteAlbum struct {
@@ -158,4 +154,18 @@ type AddAlbumToFavoriteRequest struct {
 type RemoveAlbumFromFavoriteRequest struct {
 	UserID  uuid.UUID `json:"-"`
 	AlbumID string    `json:"album_id"`
+}
+
+//easyjson:json
+type GeneratedMeta struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	Source      string `json:"source"`
+	Warning     string `json:"warning,omitempty"`
+}
+
+//easyjson:json
+type ConfirmGeneratedMetaRequest struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
 }

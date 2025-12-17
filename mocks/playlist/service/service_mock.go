@@ -98,6 +98,20 @@ func (mr *MockIServiceMockRecorder) AddTrackToPlaylist(ctx, req any) *gomock.Cal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddTrackToPlaylist", reflect.TypeOf((*MockIService)(nil).AddTrackToPlaylist), ctx, req)
 }
 
+// ConfirmPlaylistMeta mocks base method.
+func (m *MockIService) ConfirmPlaylistMeta(ctx context.Context, playlistID uuid.UUID, title, description string) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "ConfirmPlaylistMeta", ctx, playlistID, title, description)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// ConfirmPlaylistMeta indicates an expected call of ConfirmPlaylistMeta.
+func (mr *MockIServiceMockRecorder) ConfirmPlaylistMeta(ctx, playlistID, title, description any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ConfirmPlaylistMeta", reflect.TypeOf((*MockIService)(nil).ConfirmPlaylistMeta), ctx, playlistID, title, description)
+}
+
 // CreatePlaylist mocks base method.
 func (m *MockIService) CreatePlaylist(ctx context.Context, req dto.CreatePlaylistRequest) (*dto.Playlist, error) {
 	m.ctrl.T.Helper()
@@ -139,6 +153,21 @@ func (m *MockIService) DeletePlaylistAvatar(ctx context.Context, req dto.DeleteP
 func (mr *MockIServiceMockRecorder) DeletePlaylistAvatar(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeletePlaylistAvatar", reflect.TypeOf((*MockIService)(nil).DeletePlaylistAvatar), ctx, req)
+}
+
+// GeneratePlaylistMeta mocks base method.
+func (m *MockIService) GeneratePlaylistMeta(ctx context.Context, playlistID uuid.UUID) (*dto.GeneratedMeta, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GeneratePlaylistMeta", ctx, playlistID)
+	ret0, _ := ret[0].(*dto.GeneratedMeta)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GeneratePlaylistMeta indicates an expected call of GeneratePlaylistMeta.
+func (mr *MockIServiceMockRecorder) GeneratePlaylistMeta(ctx, playlistID any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GeneratePlaylistMeta", reflect.TypeOf((*MockIService)(nil).GeneratePlaylistMeta), ctx, playlistID)
 }
 
 // GetFavoriteAlbums mocks base method.

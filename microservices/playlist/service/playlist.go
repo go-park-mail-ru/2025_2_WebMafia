@@ -4,15 +4,19 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"spotify/internal/ai"
 	"spotify/internal/model"
 	"spotify/microservices/playlist/dto"
 	"spotify/microservices/playlist/repository/postgres"
+	"strings"
 	"time"
 
 	pbCatalog "spotify/proto/catalog"
 
 	"github.com/google/uuid"
 )
+
+const fallbackMaxTracks = 5
 
 func (s *Service) CreatePlaylist(ctx context.Context, req dto.CreatePlaylistRequest) (*dto.Playlist, error) {
 	const op = "service.CreatePlaylist"
@@ -433,4 +437,139 @@ func (s *Service) GetFavoriteArtists(ctx context.Context, userID uuid.UUID) ([]d
 		})
 	}
 	return out, nil
+}
+
+func (s *Service) GeneratePlaylistMeta(ctx context.Context, playlistID uuid.UUID) (*dto.GeneratedMeta, error) {
+	const op = "service.GeneratePlaylistMeta"
+
+	p, err := s.repo.GetByID(ctx, playlistID)
+	if err != nil {
+		return nil, fmt.Errorf("%s: load playlist: %w", op, mapRepositoryError(err))
+	}
+
+	trackIDs, err := s.repo.GetTracksByPlaylist(ctx, playlistID)
+	if err != nil {
+		return nil, fmt.Errorf("%s: get tracks: %w", op, mapRepositoryError(err))
+	}
+
+	if len(trackIDs) == 0 {
+		return &dto.GeneratedMeta{
+			Title:       p.Title,
+			Description: p.Description,
+		}, nil
+	}
+
+	resp, err := s.catalog.GetTracksByIDs(
+		ctx,
+		&pbCatalog.GetTracksByIDsRequest{Ids: trackIDs},
+	)
+	if err != nil {
+		return nil, fmt.Errorf("%s: load tracks: %w", op, err)
+	}
+
+	tracks := make([]dto.Track, 0, len(resp.Tracks))
+	for _, t := range resp.Tracks {
+		track := dto.Track{
+			ID:        t.Id,
+			Title:     t.Title,
+			DurationS: int(t.DurationS),
+			FileURL:   t.FileUrl,
+		}
+
+		if t.Album != nil {
+			track.Album = dto.Album{
+				ID:        t.Album.Id,
+				Title:     t.Album.Title,
+				AvatarURL: t.Album.AvatarUrl,
+			}
+		}
+
+		for _, a := range t.Artists {
+			track.Artists = append(track.Artists, dto.Artist{
+				ID:   a.Id,
+				Name: a.Name,
+			})
+		}
+
+		tracks = append(tracks, track)
+	}
+
+	metas, err := s.ai.GeneratePlaylistMeta(ctx, tracks)
+	if err != nil {
+		switch {
+		case errors.Is(err, ai.ErrAIRateLimit):
+			return &dto.GeneratedMeta{
+				Title:       fallbackTitle(tracks),
+				Description: fallbackDescription(tracks),
+				Source:      "fallback",
+				Warning:     "ai_rate_limit",
+			}, nil
+
+		case errors.Is(err, ai.ErrAIAuth):
+			return nil, fmt.Errorf("%s: ai auth error: %w", op, err)
+
+		default:
+			return nil, fmt.Errorf("%s: ai error: %w", op, err)
+		}
+	}
+	meta := metas[0]
+
+	return &dto.GeneratedMeta{
+		Title:       meta.Title,
+		Description: meta.Description,
+		Source:      "ai",
+	}, nil
+}
+
+func fallbackTitle(tracks []dto.Track) string {
+	if len(tracks) == 0 {
+		return "Мой плейлист"
+	}
+
+	if len(tracks) == 1 {
+		return tracks[0].Title
+	}
+
+	return fmt.Sprintf("%s и другие треки", tracks[0].Title)
+}
+
+func fallbackDescription(tracks []dto.Track) string {
+	if len(tracks) == 0 {
+		return ""
+	}
+
+	max := fallbackMaxTracks
+	if len(tracks) < max {
+		max = len(tracks)
+	}
+	names := make([]string, 0, max)
+	for i := 0; i < max; i++ {
+		names = append(names, tracks[i].Title)
+	}
+
+	if len(tracks) <= max {
+		return fmt.Sprintf(
+			"Плейлист на основе треков: %s.",
+			strings.Join(names, ", "),
+		)
+	}
+	return fmt.Sprintf(
+		"Плейлист на основе треков: %s и других.",
+		strings.Join(names, ", "),
+	)
+}
+
+func (s *Service) ConfirmPlaylistMeta(ctx context.Context, playlistID uuid.UUID, title string, description string) error {
+	const op = "service.ConfirmPlaylistMeta"
+
+	upd := postgres.PlaylistUpdate{
+		Title:       &title,
+		Description: &description,
+	}
+
+	if err := s.repo.UpdatePlaylist(ctx, playlistID, upd); err != nil {
+		return fmt.Errorf("%s: update: %w", op, mapRepositoryError(err))
+	}
+
+	return nil
 }

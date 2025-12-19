@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"os"
 	"spotify/internal/ai"
 	"spotify/internal/metrics"
 	"spotify/internal/middleware"
@@ -85,7 +86,11 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 
 	catalogClient := pbCatalog.NewCatalogServiceClient(catalogConn)
 
-	authKey := "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"
+	authKey := cfg.Playlist.AI.AuthKey
+	if authKey == "" {
+		authKey = os.Getenv("AI_AUTH_KEY")
+	}
+
 	var aiClient service.IAIGenerator
 
 	switch cfg.Playlist.AI.Model {

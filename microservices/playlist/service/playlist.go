@@ -494,10 +494,19 @@ func (s *Service) GeneratePlaylistMeta(ctx context.Context, playlistID uuid.UUID
 		tracks = append(tracks, track)
 	}
 
+	select {
+	case s.aiSem <- struct{}{}:
+		defer func() { <-s.aiSem }()
+	case <-ctx.Done():
+		return nil, ctx.Err()
+	}
+
 	metas, err := s.ai.GeneratePlaylistMeta(ctx, tracks)
 	if err != nil {
 		switch {
-		case errors.Is(err, ai.ErrAIRateLimit):
+		case errors.Is(err, ai.ErrAIRateLimit),
+			errors.Is(err, ai.ErrAIUnavailable),
+			errors.Is(err, ai.ErrAINoChoices):
 			return &dto.GeneratedMeta{
 				Title:       fallbackTitle(tracks),
 				Description: fallbackDescription(tracks),

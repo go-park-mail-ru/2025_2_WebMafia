@@ -502,7 +502,6 @@ func (s *Service) GeneratePlaylistMeta(ctx context.Context, playlistID uuid.UUID
 	}
 
 	metas, err := s.ai.GeneratePlaylistMeta(ctx, tracks)
-
 	if err != nil {
 		switch {
 		case errors.Is(err, ai.ErrAIRateLimit),

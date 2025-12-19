@@ -67,11 +67,7 @@ func (m *AuthGrpcMiddleware) Handle(next http.Handler) http.Handler {
 			var csrfToken string
 
 			if isWebSocket {
-				protocolHeader := r.Header.Get("Sec-WebSocket-Protocol")
-				parts := strings.Split(protocolHeader, ",")
-				if len(parts) > 0 {
-					csrfToken = strings.TrimSpace(parts[0])
-				}
+				csrfToken = r.URL.Query().Get("csrf_token")
 			} else {
 				csrfToken = r.Header.Get(csrfHeader)
 			}

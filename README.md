@@ -23,7 +23,7 @@ Backend-часть для музыкального сервиса Wave Music.
 - **Frontend-часть:** [Wave Music Frontend](https://github.com/frontend-park-mail-ru/2025_2_WebMafia/)
 
 ## Реализация
-- [Ссылка на deploy](http://217.16.17.173:8090/)
+- [Ссылка на deploy](https://wave-music.ru/)
 
 ### Зачем мы разработали этот проект?
 

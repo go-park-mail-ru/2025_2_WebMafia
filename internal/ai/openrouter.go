@@ -109,6 +109,7 @@ func (o *OpenRouter) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Trac
 	req.Header.Set("Authorization", "Bearer "+o.authKey)
 	req.Header.Set("HTTP-Referer", "wave-music.ru")
 	req.Header.Set("X-Title", "WaveMusic")
+	req.Header.Set("User-Agent", "WaveMusic/1.0")
 
 	resp, err := o.http.Do(req)
 	if err != nil {

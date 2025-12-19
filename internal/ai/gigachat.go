@@ -59,6 +59,15 @@ func NewGigaChat(cfg GigaChatConfig) *GigaChat {
 
 	transport := http.DefaultTransport.(*http.Transport).Clone()
 
+	if transport.TLSClientConfig == nil {
+		transport.TLSClientConfig = &tls.Config{}
+	}
+
+	if cfg.InsecureSkipVerify {
+		transport.TLSClientConfig.InsecureSkipVerify = true
+		transport.TLSClientConfig.MinVersion = tls.VersionTLS12
+	}
+
 	if cfg.InsecureSkipVerify {
 		transport.TLSClientConfig = &tls.Config{
 			InsecureSkipVerify: true,

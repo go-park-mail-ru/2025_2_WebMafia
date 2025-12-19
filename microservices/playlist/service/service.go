@@ -50,8 +50,9 @@ type Service struct {
 	storage IStorage
 	catalog pbCatalog.CatalogServiceClient
 	ai      IAIGenerator
+	aiSem   chan struct{}
 }
 
 func New(repo IRepository, storage IStorage, catalog pbCatalog.CatalogServiceClient, ai IAIGenerator) *Service {
-	return &Service{repo: repo, storage: storage, catalog: catalog, ai: ai}
+	return &Service{repo: repo, storage: storage, catalog: catalog, ai: ai, aiSem: make(chan struct{}, 1)}
 }

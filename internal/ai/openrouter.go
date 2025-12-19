@@ -3,7 +3,6 @@ package ai
 import (
 	"bytes"
 	"context"
-	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -14,39 +13,25 @@ import (
 )
 
 const (
-	baseURL      = "https://gigachat.devices.sberbank.ru/api/v1"
-	chatEndpoint = "/chat/completions"
-	prompt       = `
-	Задача:
-	Сгенерируй название и описание плейлиста на русском языке на основе этих треков.
-	Название: до 80 символов.
-	Описание: до 200 символов, атмосферное, без перечисления всех треков.
-	
-	Ответ верни строго в JSON без markdown и комментариев:
-	{"title":"...","description":"..."}`
+	openRouterBaseURL      = "https://openrouter.ai/api/v1"
+	openRouterChatEndpoint = "/chat/completions"
 )
 
-type GigaChat struct {
+type OpenRouter struct {
 	http      *http.Client
-	tm        *tokenManager
+	authKey   string
 	model     string
 	maxTracks int
 }
 
-type GigaChatConfig struct {
-	AuthKey            string
-	Model              string
-	Timeout            time.Duration
-	MaxTracks          int
-	InsecureSkipVerify bool
+type OpenRouterConfig struct {
+	AuthKey   string
+	Model     string
+	Timeout   time.Duration
+	MaxTracks int
 }
 
-type Meta struct {
-	Title       string `json:"title"`
-	Description string `json:"description"`
-}
-
-func NewGigaChat(cfg GigaChatConfig) *GigaChat {
+func NewOpenRouter(cfg OpenRouterConfig) *OpenRouter {
 	timeout := cfg.Timeout
 	if timeout == 0 {
 		timeout = 20 * time.Second
@@ -57,40 +42,20 @@ func NewGigaChat(cfg GigaChatConfig) *GigaChat {
 		maxTracks = 10
 	}
 
-	transport := http.DefaultTransport.(*http.Transport).Clone()
-
-	if transport.TLSClientConfig == nil {
-		transport.TLSClientConfig = &tls.Config{}
-	}
-
-	if cfg.InsecureSkipVerify {
-		transport.TLSClientConfig.InsecureSkipVerify = true
-		transport.TLSClientConfig.MinVersion = tls.VersionTLS12
-	}
-
-	if cfg.InsecureSkipVerify {
-		transport.TLSClientConfig = &tls.Config{
-			InsecureSkipVerify: true,
-		}
-	}
-
 	client := &http.Client{
-		Timeout:   timeout,
-		Transport: transport,
+		Timeout: timeout,
 	}
 
-	tm := newTokenManager(cfg.AuthKey, client)
-
-	return &GigaChat{
+	return &OpenRouter{
 		http:      client,
-		tm:        tm,
+		authKey:   cfg.AuthKey,
 		model:     cfg.Model,
 		maxTracks: maxTracks,
 	}
 }
 
-func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track) ([]Meta, error) {
-	max := g.maxTracks
+func (o *OpenRouter) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track) ([]Meta, error) {
+	max := o.maxTracks
 	if len(tracks) < max {
 		max = len(tracks)
 	}
@@ -113,13 +78,8 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 	sb.WriteString("\n")
 	sb.WriteString(prompt)
 
-	token, err := g.tm.getToken(ctx)
-	if err != nil {
-		return nil, ErrAIAuth
-	}
-
 	reqBody := ChatRequest{
-		Model: g.model,
+		Model: o.model,
 		Messages: []ChatMessage{
 			{Role: "user", Content: sb.String()},
 		},
@@ -130,7 +90,7 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 		return nil, err
 	}
 
-	chatURL, err := url.JoinPath(baseURL, chatEndpoint)
+	chatURL, err := url.JoinPath(openRouterBaseURL, openRouterChatEndpoint)
 	if err != nil {
 		return nil, err
 	}
@@ -146,9 +106,12 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", token))
+	req.Header.Set("Authorization", "Bearer "+o.authKey)
+	req.Header.Set("HTTP-Referer", "wave-music.ru")
+	req.Header.Set("X-Title", "WaveMusic")
+	req.Header.Set("User-Agent", "WaveMusic/1.0")
 
-	resp, err := g.http.Do(req)
+	resp, err := o.http.Do(req)
 	if err != nil {
 		return nil, ErrAIUnavailable
 	}
@@ -167,11 +130,11 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 
 	var out ChatResponse
 	if err := json.NewDecoder(resp.Body).Decode(&out); err != nil {
-		return nil, err
+		return nil, ErrAIUnavailable
 	}
 
 	if len(out.Choices) == 0 {
-		return nil, ErrAIUnavailable
+		return nil, ErrAINoChoices
 	}
 
 	metas := make([]Meta, 0, len(out.Choices))
@@ -195,5 +158,6 @@ func (g *GigaChat) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Track)
 	if len(metas) == 0 {
 		return nil, ErrAINoChoices
 	}
+
 	return metas, nil
 }

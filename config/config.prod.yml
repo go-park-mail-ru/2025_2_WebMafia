@@ -98,7 +98,7 @@ playlist:
         secretKey: "dev-csrf-secret"
         tokenTTL: 15m
     ai:
-      model: "GigaChat"
+      model: "openrouter"
       timeout: 20s
       maxTracks: 10
       insecureSkipVerify: true

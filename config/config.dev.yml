@@ -115,7 +115,7 @@ playlist:
     auth: "auth:9001"
 
   ai:
-    model: "GigaChat"
+    model: "openrouter"
     timeout: 20s
     maxTracks: 10
     insecureSkipVerify: true

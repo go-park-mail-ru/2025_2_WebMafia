@@ -91,13 +91,27 @@ func NewApp(ctx context.Context, configPath string) (*App, error) {
 		authKey = os.Getenv("AI_AUTH_KEY")
 	}
 
-	aiClient := ai.NewGigaChat(ai.GigaChatConfig{
-		AuthKey:            authKey,
-		Model:              cfg.Playlist.AI.Model,
-		Timeout:            cfg.Playlist.AI.Timeout,
-		MaxTracks:          cfg.Playlist.AI.MaxTracks,
-		InsecureSkipVerify: cfg.Playlist.AI.InsecureSkipVerify,
-	})
+	var aiClient service.IAIGenerator
+
+	switch cfg.Playlist.AI.Model {
+	case "openrouter":
+		aiClient = ai.NewOpenRouter(ai.OpenRouterConfig{
+			AuthKey:   authKey,
+			Model:     "nex-agi/deepseek-v3.1-nex-n1:free",
+			Timeout:   cfg.Playlist.AI.Timeout,
+			MaxTracks: cfg.Playlist.AI.MaxTracks,
+		})
+
+	default:
+		aiClient = ai.NewGigaChat(ai.GigaChatConfig{
+			AuthKey:            authKey,
+			Model:              cfg.Playlist.AI.Model,
+			Timeout:            cfg.Playlist.AI.Timeout,
+			MaxTracks:          cfg.Playlist.AI.MaxTracks,
+			InsecureSkipVerify: cfg.Playlist.AI.InsecureSkipVerify,
+		})
+	}
+
 	playlistService := service.New(repo, stor, catalogClient, aiClient)
 
 	mtr := metrics.New("playlist")

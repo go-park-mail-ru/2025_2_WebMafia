@@ -494,7 +494,15 @@ func (s *Service) GeneratePlaylistMeta(ctx context.Context, playlistID uuid.UUID
 		tracks = append(tracks, track)
 	}
 
+	select {
+	case s.aiSem <- struct{}{}:
+		defer func() { <-s.aiSem }()
+	case <-ctx.Done():
+		return nil, ctx.Err()
+	}
+
 	metas, err := s.ai.GeneratePlaylistMeta(ctx, tracks)
+
 	if err != nil {
 		switch {
 		case errors.Is(err, ai.ErrAIRateLimit),

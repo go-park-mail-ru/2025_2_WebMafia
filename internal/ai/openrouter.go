@@ -130,7 +130,7 @@ func (o *OpenRouter) GeneratePlaylistMeta(ctx context.Context, tracks []dto.Trac
 
 	var out ChatResponse
 	if err := json.NewDecoder(resp.Body).Decode(&out); err != nil {
-		return nil, err
+		return nil, ErrAIUnavailable
 	}
 
 	if len(out.Choices) == 0 {

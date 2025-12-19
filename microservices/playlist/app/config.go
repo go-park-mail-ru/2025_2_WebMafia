@@ -36,7 +36,7 @@ type BucketsConfig struct {
 }
 
 type PlaylistAI struct {
-	AuthKey            string        `mapstructure:"auth_key"`
+	AuthKey            string
 	Model              string        `mapstructure:"model"`
 	Timeout            time.Duration `mapstructure:"timeout"`
 	MaxTracks          int           `mapstructure:"maxTracks"`

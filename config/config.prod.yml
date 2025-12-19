@@ -97,12 +97,6 @@ playlist:
       csrf:
         secretKey: "dev-csrf-secret"
         tokenTTL: 15m
-    ai:
-      model: "openrouter"
-      timeout: 20s
-      maxTracks: 10
-      insecureSkipVerify: true
-
   logger:
     level: "info"
     mode: "prod"
@@ -126,6 +120,12 @@ playlist:
   clients:
     catalog: "catalog:9000"
     auth: "auth:9001"
+
+  ai:
+    model: "openrouter"
+    timeout: 20s
+    maxTracks: 10
+    insecureSkipVerify: true
 
 db:
   host: "db"
